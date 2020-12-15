@@ -16,9 +16,7 @@ describe('<NavLink />', () => {
         }}
       />,
     );
-    const component = await axe(screen);
     expect(screen.getByRole('link', 'About')).toHaveAttribute('href', '/about');
-    expect(results).toHaveNoViolations()
   });
   test('Renders a link if http protocol in url', () => {
     render(
