@@ -4,3 +4,4 @@ dist
 .idea
 .docz
 docs
+.DS_Store
