@@ -1,12 +1,12 @@
 {
-  "name": "cmsds-open-data-components",
+  "name": "@civicactions/cmsds-open-data-components",
   "version": "0.0.1",
   "description": "Components for the open data catalog frontend using CMS Design System",
   "main": "lib/index.js",
   "scripts": {
     "clean": "rm -rf lib && mkdir lib",
     "lib:watch": "babel src -d lib --watch",
-    "lib": "npm run clean && babel src -d lib && node-sass --omit-source-map-url src/theme/styles/index.scss dist/index.css",
+    "lib": "npm run clean && babel src -d lib",
     "test": "jest --verbose",
     "test:watch": "npm run test -- --watch"
   },
