@@ -85,7 +85,7 @@ const Footer = ({
                   <span className="ds-u-visibility--screen-reader">opens in new window</span>
                 </a>
               </div>
-                <p>A federal government website managed and paid for by the U.S. Centers for Medicare &amp; Medicaid Services.</p>
+                <p>!!A federal government website managed and paid for by the U.S. Centers for Medicare &amp; Medicaid Services.</p>
                 <p>7500 Security Boulevard, Baltimore, MD 21244</p>
                 {socialMediaLinks
                   && (
