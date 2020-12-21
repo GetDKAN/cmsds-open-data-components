@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react';
-import { ResourceDispatch, transformTableFilterToQueryCondition, transformTableFilterToSQLCondition } from '@civicactions/data-catalog-services';
+import { ResourceDispatch, transformTableFilterToQueryCondition, transformTableFilterToSQLCondition, transformTableSortToQuerySort } from '@civicactions/data-catalog-services';
 import { useTable, usePagination, useSortBy, useFilters } from 'react-table';
 import { TextField } from '@cmsgov/design-system';
 import DataTablePagination from '../DataTablePagination';
 
 
-const DataTable = ({dispatch, density, canFilter, tablePadding, useSql}) => {
+const DataTable = ({dispatch, density, canFilter, tablePadding, useSql, icons}) => {
   const {
     loading,
     items: data,
@@ -15,7 +15,7 @@ const DataTable = ({dispatch, density, canFilter, tablePadding, useSql}) => {
     limit,
     currentPage,
   } = useContext(ResourceDispatch);
-  const { setOffset, setCurrentPage, setConditions } = actions;
+  const { setOffset, setCurrentPage, setConditions, setSort } = actions;
 
   if(columns.length === 0) {
     return null;
@@ -78,7 +78,7 @@ const DataTable = ({dispatch, density, canFilter, tablePadding, useSql}) => {
     rows,
     headerGroups,
     pageCount,
-    state: { pageIndex, pageSize, filters, },
+    state: { pageIndex, pageSize, filters, sortBy },
     setPageSize
   } = useTable(
     {
@@ -88,13 +88,19 @@ const DataTable = ({dispatch, density, canFilter, tablePadding, useSql}) => {
       initialState: { pageIndex: currentPage },
       manualPagination: true,
       manualFilters: true,
+      manualSortBy: true,
       pageCount: Math.ceil(totalRows / limit),
       filterTypes,
       defaultColumn,
     },
     useFilters,
-    usePagination
+    useSortBy,
+    usePagination,
   )
+
+  useEffect(() => {
+    setSort(transformTableSortToQuerySort(sortBy));
+  }, [sortBy])
 
   useEffect(() => {
     setPageSize(Number(limit))
@@ -118,21 +124,6 @@ const DataTable = ({dispatch, density, canFilter, tablePadding, useSql}) => {
 
   return(
     <div className="dc-c-datatable ds-u-border--dark ds-u-border-x--1">
-      <pre>
-        <code>
-          {JSON.stringify(
-            {
-              pageIndex,
-              pageSize,
-              pageCount,
-              canNextPage,
-              canPreviousPage,
-            },
-            null,
-            2
-          )}
-        </code>
-      </pre>
       <table
         {...getTableProps()}
         className="ds-c-table ds-c-table--striped ds-c-table--borderless"
@@ -144,15 +135,18 @@ const DataTable = ({dispatch, density, canFilter, tablePadding, useSql}) => {
                 {...headerGroup.getHeaderGroupProps()}
                 className=""
               >
-                {headerGroup.headers.map((column, index) => (
+                {headerGroup.headers.map((column, index) => {console.log(column.getHeaderProps); return(
                   <th 
-                    className={`${tablePadding} ds-u-border--dark ds-u-fill--white ${index + 1 === columns.length ? '' : 'ds-u-border-right--1'}`}
+                    className={`ds-u-border--dark ds-u-fill--white ${index + 1 === columns.length ? '' : 'ds-u-border-right--1'}`}
                     scope="col" 
-                    // {...column.getHeaderProps(column.getSortByToggleProps())}
+                    {...column.getHeaderProps(column.getSortByToggleProps({
+                      title: column.canSort ? `Sort by ${column.Header}` : undefined,
+                    }))}
                   >
                     {column.render('Header')}
+                    <span className={`dc-c-sort ${column.isSorted ? column.isSortedDesc ? 'dc-c-sort--desc' : 'dc-c-sort--asc' : 'dc-c-sort--default'}`} />
                   </th>
-                ))}
+                )})}
               </tr>
               {canFilter &&
                 (
@@ -168,7 +162,7 @@ const DataTable = ({dispatch, density, canFilter, tablePadding, useSql}) => {
                     <tr>
                       {headerGroup.headers.map((column) => {
                         return (
-                          <th className={`${tablePadding}`} {...column.getHeaderProps()}>
+                          <th {...column.getHeaderProps()}>
                             {column.canFilter ? column.render('Filter') : null}
                             
                           </th>
