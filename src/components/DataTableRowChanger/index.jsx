@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from '@cmsgov/design-system';
 
-const DataTableRowChanger = ({ setLimit }) => {
-  const rowOptions = [10, 25, 50, 100];
+const DataTableRowChanger = ({ setLimit, rowOptions }) => {
   return (
     <div>
       <span>Rows per page:</span>
@@ -20,6 +20,15 @@ const DataTableRowChanger = ({ setLimit }) => {
       ))}
     </div>
   )
+}
+
+DataTableRowChanger.defaultProps = {
+  rowOptions: [10, 25, 50, 100],
+}
+
+DataTableRowChanger.propTypes = {
+  rowOptions: PropTypes.arrayOf(PropTypes.number),
+  setLimit: PropTypes.func.isRequired,
 }
 
 export default DataTableRowChanger;

@@ -1,0 +1,17 @@
+---
+name: Data Table Row Changer
+route: /components/data-table-row-changer
+---
+
+import { Playground, Props } from 'docz'
+import DataTableRowChanger from './'
+
+# Data Table Row Changer
+
+<Props of={DataTableRowChanger} />
+
+## Basic usage
+
+<Playground>
+  <DataTableRowChanger setLimit={(x) => console.log(x)} rowOptions={[5, 10, 25, 50, 100]} />
+</Playground>
