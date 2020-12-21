@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from '@cmsgov/design-system';
 
 const DataTableDensity = ({ setTablePadding }) => {
@@ -28,6 +29,10 @@ const DataTableDensity = ({ setTablePadding }) => {
       </Button>
     </div>
   )
+}
+
+DataTableDensity.propTypes = {
+  setTablePadding: PropTypes.func.isRequired,
 }
 
 export default DataTableDensity;
