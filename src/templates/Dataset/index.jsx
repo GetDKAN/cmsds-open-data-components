@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from '@reach/router';
-import { useMetastoreDataset, Resource, SQLResource } from '@civicactions/data-catalog-services';
+import { useMetastoreDataset, Resource, prepareColumns } from '@civicactions/data-catalog-services';
 import { Badge } from '@cmsgov/design-system';
 import DataTable from '../../components/DataTable'
 import DataTableHeader from '../../components/DataTableHeader';
 
-const Dataset = ({ id, rootUrl, setItem, useSQL }) => {
+const Dataset = ({ id, rootUrl }) => {
   const resourceOptions = {
     limit: 25,
-    prepareColumns: true
+    prepareColumns: prepareColumns
   }
   const [tablePadding, setTablePadding] = useState('ds-u-padding-y--1')
   const { dataset, } = useMetastoreDataset(id, rootUrl);
@@ -25,7 +26,7 @@ const Dataset = ({ id, rootUrl, setItem, useSQL }) => {
           </div>
           <p>{dataset.description}</p>
           <h2>Dataset Explorer</h2>
-          {!useSQL && dataset.distribution
+          {dataset.distribution
             && (
               <Resource
                 distribution={dataset.distribution[0]}
@@ -35,18 +36,6 @@ const Dataset = ({ id, rootUrl, setItem, useSQL }) => {
                 <DataTableHeader setTablePadding={setTablePadding} />
                 <DataTable tablePadding={tablePadding} currentPage={0} />
               </Resource>
-            )
-          }
-          {useSQL && dataset.distribution
-            && (
-              <SQLResource
-                distribution={dataset.distribution[0]}
-                rootUrl={rootUrl}
-                options={resourceOptions}
-              >
-                <DataTableHeader setTablePadding={setTablePadding} />
-                <DataTable tablePadding={tablePadding} currentPage={0} useSql />
-              </SQLResource>
             )
           }
         </div>
@@ -72,8 +61,9 @@ const Dataset = ({ id, rootUrl, setItem, useSQL }) => {
   );
 }
 
-Dataset.defaultProps = {
-  useSQL: false
+Dataset.propTypes = {
+  id: PropTypes.string.isRequired,
+  rootUrl: PropTypes.string.isRequired,
 }
 
 export default Dataset;
