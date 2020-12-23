@@ -5,6 +5,8 @@ import { useMetastoreDataset, Resource, prepareColumns } from '@civicactions/dat
 import { Badge } from '@cmsgov/design-system';
 import DataTable from '../../components/DataTable'
 import DataTableHeader from '../../components/DataTableHeader';
+import DatasetTags from '../../components/DatasetTags';
+import DatasetDownloads from '../../components/DatasetDownloads';
 
 const Dataset = ({ id, rootUrl }) => {
   const resourceOptions = {
@@ -42,18 +44,9 @@ const Dataset = ({ id, rootUrl }) => {
         <div className="ds-l-col--4">
         {dataset.distribution
           && (
-            <div className="ds-u-margin-bottom--3 ds-u-padding--2 ds-u-border--dark ds-u-border--1">
-              <h2 className="ds-u-margin-y--0 ds-u-padding-bottom--2 ds-u-border--dark ds-u-border-bottom--1">Downloads</h2>
-              <p>Dataset</p>
-              <a href={dataset.distribution[0].data.downloadURL}>Download this dataset (CSV)</a>
-            </div>
+            <DatasetDownloads downloadURL={dataset.distribution[0].data.downloadURL} />
           )}
-          <div className="ds-u-margin-bottom--3 ds-u-padding--2 ds-u-border--dark ds-u-border--1">
-            <h2 className="ds-u-margin-y--0 ds-u-padding-bottom--2 ds-u-border--dark ds-u-border-bottom--1">Tags</h2>
-            {dataset.keyword
-              && dataset.keyword.map((k) => <Link to={`/search?keyword=${k.data}`}>{k.data}</Link>)
-            }
-          </div>
+          <DatasetTags keywords={dataset.keyword} />
           {/* <h2>API</h2> */}
         </div>
       </div>
