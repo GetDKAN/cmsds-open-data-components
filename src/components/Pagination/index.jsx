@@ -14,12 +14,12 @@ const Pagination = ({
     goToNext,
     goToPrevious,
   } = usePagination(currentPage, totalItems, itemsPerPage);
-  const pageButtons = buildPageArray(pageIndex, 3, pages);
+  const pageButtons = buildPageArray(pageIndex, 2, pages);
   useEffect(()=> {
     if (pageIndex !== currentPage) {
       gotoPage(pageIndex)
     }
-  }, [pageIndex])
+  }, [pageIndex, itemsPerPage])
   return (
     <div className="dc-pagination ds-u-display--flex ds-u-flex-direction--row ds-u-justify-content--between ds-u-align-items--center">
       <Button

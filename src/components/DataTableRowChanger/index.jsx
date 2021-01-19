@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@cmsgov/design-system';
 
-const DataTableRowChanger = ({ setLimit, setOffset, rowOptions }) => {
+const DataTableRowChanger = ({ setLimit, rowOptions }) => {
   return (
     <div>
       <span>Rows per page:</span>

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { ResourceDispatch, transformTableFilterToQueryCondition, transformTableFilterToSQLCondition, transformTableSortToQuerySort } from '@civicactions/data-catalog-services';
 import { useTable, usePagination, useSortBy, useFilters } from 'react-table';
 import { TextField } from '@cmsgov/design-system';
-import DataTablePagination from '../DataTablePagination';
 import Pagination from '../Pagination';
 
 const DataTable = ({ canFilter, tablePadding }) => {
@@ -16,7 +15,7 @@ const DataTable = ({ canFilter, tablePadding }) => {
     limit,
     currentPage,
   } = useContext(ResourceDispatch);
-  const { setOffset, setCurrentPage, setConditions, setSort } = actions;
+  const { setCurrentPage, setConditions, setSort } = actions;
 
   if(columns.length === 0) {
     return null;
@@ -70,21 +69,15 @@ const DataTable = ({ canFilter, tablePadding }) => {
     getTableProps,
     getTableBodyProps,
     prepareRow,
-    gotoPage,
-    canPreviousPage,
-    canNextPage,
-    nextPage,
-    previousPage,
     rows,
     headerGroups,
-    state: { pageIndex, filters, sortBy },
-    setPageSize
+    state: { filters, sortBy },
   } = useTable(
     {
       columns,
       data,
       filterTypes,
-      initialState: { pageIndex: currentPage },
+      initialState: {  },
       manualPagination: true,
       manualFilters: true,
       manualSortBy: true,
@@ -100,15 +93,6 @@ const DataTable = ({ canFilter, tablePadding }) => {
   useEffect(() => {
     setSort(transformTableSortToQuerySort(sortBy));
   }, [sortBy])
-
-  useEffect(() => {
-    setPageSize(Number(limit))
-  }, [limit]);
-
-  useEffect(() => {
-    setCurrentPage(pageIndex);
-    setOffset((Number(pageIndex)) * limit)
-  }, [pageIndex])
 
   useEffect(() => {
     let timerFunc = setTimeout(() => {
@@ -199,7 +183,7 @@ const DataTable = ({ canFilter, tablePadding }) => {
         </table>
       </div>
       <Pagination
-        gotoPage={gotoPage}
+        gotoPage={setCurrentPage}
         currentPage={currentPage}
         totalItems={totalRows}
         itemsPerPage={limit}
