@@ -1,0 +1,51 @@
+@import "~@cmsgov/design-system/dist/scss/settings/variables/color";
+
+.dc-pagination {
+  ol {
+    list-style: none;
+  }
+  button {
+    text-decoration: none;
+  }
+  .dc-pagination-current {
+    font-weight: bold;
+    color: $color-base;
+    text-decoration: underline;
+  }
+  .dc-pagination--previous,
+  .dc-pagination--next {
+    height: 100%;
+    &:disabled {
+      background: transparent!important;
+      &::before,
+      &::after {
+        color: $color-base;
+      }
+    }
+    &::before,
+    &::after {
+      font-family: 'FontAwesome';
+      color: $color-primary;
+      font-size: 16px;
+      padding-right: 10px;
+      display: inline-block;
+      line-height: 16px;
+      height: 16px;
+      width: 16px;
+      margin-left: 10px;
+      text-align: center;
+      vertical-align: middle;
+      font-weight: lighter;
+    }
+  }
+  .dc-pagination--previous {
+    &::before {
+      content: '\f053';
+    }
+  }
+  .dc-pagination--next {
+    &::after {
+      content: '\f054';
+    }
+  }
+}

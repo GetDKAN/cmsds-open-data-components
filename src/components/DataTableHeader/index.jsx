@@ -12,7 +12,7 @@ const DataTableHeader = ({ setTablePadding }) => {
     totalRows,
     currentPage,
     actions } = React.useContext(ResourceDispatch);
-  const { setLimit } = actions;
+  const { setLimit, setOffset } = actions;
   return (
     <div>
       <div className="ds-l-row">
@@ -26,14 +26,13 @@ const DataTableHeader = ({ setTablePadding }) => {
       <div className="ds-l-row">
         <div className="ds-l-col--6">
           <DataTableRowDetails
-            currentPage={currentPage}
             limit={limit}
             offset={offset}
             totalRows={totalRows}
           />
         </div>
         <div className="ds-l-col--6">
-          <DataTableRowChanger setLimit={setLimit} />
+          <DataTableRowChanger setLimit={setLimit} setOffset={setOffset} />
         </div>
       </div>
     </div>
