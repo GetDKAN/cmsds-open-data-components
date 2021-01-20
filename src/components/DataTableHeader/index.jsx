@@ -26,7 +26,6 @@ const DataTableHeader = ({ setTablePadding }) => {
       <div className="ds-l-row">
         <div className="ds-l-col--6">
           <DataTableRowDetails
-            currentPage={currentPage}
             limit={limit}
             offset={offset}
             totalRows={totalRows}

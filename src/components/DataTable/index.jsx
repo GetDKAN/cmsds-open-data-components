@@ -13,9 +13,9 @@ const DataTable = ({ canFilter, tablePadding }) => {
     columns,
     totalRows,
     limit,
-    currentPage,
+    offset
   } = useContext(ResourceDispatch);
-  const { setCurrentPage, setConditions, setSort } = actions;
+  const { setConditions, setSort, setOffset } = actions;
 
   if(columns.length === 0) {
     return null;
@@ -183,8 +183,8 @@ const DataTable = ({ canFilter, tablePadding }) => {
         </table>
       </div>
       <Pagination
-        gotoPage={setCurrentPage}
-        currentPage={currentPage}
+        gotoPage={setOffset}
+        currentPage={offset / limit}
         totalItems={totalRows}
         itemsPerPage={limit}
       />
