@@ -13,9 +13,12 @@ const Pagination = ({
     canGoToNext,
     goToNext,
     goToPrevious,
+    setTotalItems,
   } = usePagination(0, totalItems, itemsPerPage);
   const pageButtons = buildPageArray(pageIndex, 2, pages);
-
+  useEffect(()=> {
+    setTotalItems(totalItems)
+  })
   useEffect(()=> {
     gotoPage((Number(pageIndex)) * itemsPerPage)
   }, [pageIndex])
