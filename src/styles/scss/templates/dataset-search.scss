@@ -1,3 +1,28 @@
+@import "~@cmsgov/design-system/dist/scss/settings/variables/color";
+
 .dc-dataset-search-list {
   list-style: none;
+}
+
+.dc-fulltext--input-container {
+  width: 100%;
+  input {
+    max-width: inherit;
+  }
+}
+
+.dc-search-header {
+  display: relative;
+  &::after {
+    content: "";
+    display: block;
+    width: 48px;
+    height: 4px;
+    margin: 8px 0;
+    background-color: $color-primary-alt-light;
+  }
+}
+
+.dataset-results-count {
+  font-weight: bold;
 }
