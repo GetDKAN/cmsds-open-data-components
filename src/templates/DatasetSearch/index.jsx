@@ -6,7 +6,7 @@ import DatasetSearchListItem from '../../components/DatasetSearchListItem';
 import Pagination from '../../components/Pagination';
 import DatasetSearchFacets from '../../components/DatasetSearchFacets';
 
-function selectedFacetsMessage(facets, alternateTitles) {
+export function selectedFacetsMessage(facets, alternateTitles) {
   let message = [];
   const keys = Object.keys(facets);
   keys.forEach((k) => {
