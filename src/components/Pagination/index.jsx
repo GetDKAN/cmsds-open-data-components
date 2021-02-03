@@ -3,7 +3,7 @@ import { Button } from '@cmsgov/design-system';
 import { usePagination, buildPageArray } from '@civicactions/data-catalog-services';
 
 const Pagination = ({
-  currentPage, totalItems, itemsPerPage, gotoPage,
+  currentPage, totalItems, itemsPerPage, gotoPage, calcByOffset
 }) => {
   const {
     pageIndex,
@@ -13,11 +13,20 @@ const Pagination = ({
     canGoToNext,
     goToNext,
     goToPrevious,
-  } = usePagination(0, totalItems, itemsPerPage);
+    setTotalItems,
+  } = usePagination(currentPage, totalItems, itemsPerPage);
   const pageButtons = buildPageArray(pageIndex, 2, pages);
 
+  useEffect(() => {
+    setTotalItems(totalItems)
+  }, [totalItems])
+
   useEffect(()=> {
-    gotoPage((Number(pageIndex)) * itemsPerPage)
+    if (calcByOffset) {
+      gotoPage((Number(pageIndex)) * itemsPerPage)
+    } else {
+      gotoPage((Number(pageIndex)))
+    }
   }, [pageIndex])
   return (
     <div className="dc-pagination ds-u-display--flex ds-u-flex-direction--row ds-u-justify-content--between ds-u-align-items--center">
