@@ -8,3 +8,4 @@ export { default as Pagination } from './components/Pagination';
 // Templates
 export { default as Footer } from './templates/Footer';
 export { default as Dataset } from './templates/Dataset';
+export { default as DrupalPage } from './templates/DrupalPage';
