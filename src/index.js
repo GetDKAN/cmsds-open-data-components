@@ -9,3 +9,4 @@ export { default as Pagination } from './components/Pagination';
 export { default as Footer } from './templates/Footer';
 export { default as Dataset } from './templates/Dataset';
 export { default as DatasetSearch } from './templates/DatasetSearch';
+export { default as DrupalPage } from './templates/DrupalPage';
