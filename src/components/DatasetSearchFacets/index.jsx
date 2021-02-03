@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Choice, Button } from '@cmsgov/design-system'
 
-function isSelected(currentFacet, selectedFacets) {
+export function isSelected(currentFacet, selectedFacets) {
   let isSelected = -1;
   if(selectedFacets) {
     isSelected = selectedFacets.findIndex((s) => s === currentFacet);
