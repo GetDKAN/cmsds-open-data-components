@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, TextField } from '@cmsgov/design-system';
 
-const Hero = ({title, description, searchUrl, inverse}) => {
+const Hero = ({title, description, searchUrl}) => {
   const [searchValue, setSearchValue] = React.useState('');
   return (
     <section className={`dc-c-hero ds-base ds-u-padding--2`}>
