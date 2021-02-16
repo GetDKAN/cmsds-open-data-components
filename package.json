@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "lib:watch": "babel src -d lib --watch",
-    "lib": "npm run clean && babel src -d lib && cp -R src/styles/scss dist/",
+    "lib": "npm run clean && babel src -d lib && cp -R src/styles/scss dist/ && cp -R src/assets lib/",
     "clean": "rm -rf lib && mkdir lib && rm -rf dist && mkdir dist",
     "prepublish": "npm run lib",
     "test": "jest --verbose",
