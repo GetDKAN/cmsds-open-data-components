@@ -6,7 +6,6 @@ const DatasetSearchListItem = ({item, updateFacets}) => {
   const { title, modified, description, theme, keyword, identifier } = item;
   const updatedDate = new Date(modified)
   const dateOptions = {month: 'long', year: 'numeric', day: 'numeric'}
-  console.log(updatedDate);
   return(
     <div className="dc-dataset-searchlist-item ds-u-border-top--1 ds-u-margin-bottom--5">
       <div className="ds-u-display--flex ds-u-flex-direction--row ds-u-justify-content--between ds-u-padding-top--5">

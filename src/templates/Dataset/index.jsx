@@ -15,6 +15,9 @@ const Dataset = ({ id, rootUrl }) => {
   }
   const [tablePadding, setTablePadding] = useState('ds-u-padding-y--1')
   const { dataset, } = useMetastoreDataset(id, rootUrl);
+  const updatedDate = new Date(dataset.modified);
+  const dateOptions = {month: 'long', year: 'numeric', day: 'numeric'};
+
   return (
     <section className="ds-l-container">
       <div className="ds-l-row ds-u-padding-top--3">
@@ -24,7 +27,7 @@ const Dataset = ({ id, rootUrl }) => {
             <p className="ds-l-col--8">
               {dataset.theme ? <Badge>{dataset.theme[0].data}</Badge> : null}
             </p>
-            <p className="ds-l-col--4">Updated {dataset.modified}</p>
+            <p className="ds-l-col--4">Updated {`${updatedDate.toLocaleDateString(undefined, dateOptions)}`}</p>
           </div>
           <p>{dataset.description}</p>
           <h2>Dataset Explorer</h2>
