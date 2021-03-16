@@ -7,7 +7,9 @@ import NavBar from '../../components/NavBar';
 import cmsLogo from '../../assets/images/CMSGovLogo-O.png'
 import cmsLogoWhite from '../../assets/images/CMSgov@2x-white-O.png';
 
-const MobileHeader = ({siteName, links}) => {
+const MobileHeader = ({siteName, links, org}) => {
+  const { url, logo, urlTitle, logoAltText, inverseLogo } = org;
+
   const [menuOpen, setMenuOpen] = useState(false);
   const mobile = useMediaQuery({ minWidth: 0, maxWidth: 543});
   const tablet = useMediaQuery({ minWidth: 544, maxWidth: 1023});
@@ -16,10 +18,10 @@ const MobileHeader = ({siteName, links}) => {
       <div className={`dc-c-cmsheader ds-u-display--flex ds-u-padding-x--1 ds-u-align-items--center ${mobile ? 'ds-u-justify-content--center' : 'ds-u-justify-content--between'}`}>
         <div className="cms-link-container">
           <a
-            href="https://cms.gov" 
-            title="CMS.gov Centers for Medicare &amp; Medicaid Services"
+            href={url}
+            title={urlTitle}
           >
-            <img src={menuOpen ? cmsLogoWhite : cmsLogo} alt="CMS.gov Centers for Medicare &amp; Medicaid Services" />
+            <img src={menuOpen ? inverseLogo : logo} alt={logoAltText} />
           </a>
         </div>
         {tablet
@@ -101,6 +103,17 @@ const MobileHeader = ({siteName, links}) => {
         </div>
     </header>
   )
+}
+
+MobileHeader.defaultProps = {
+  org: {
+    tagline: 'The Centers for Medicare and Medicaid Services',
+    url: 'https://cms.gov',
+    urlTitle: 'CMS.gov Centers for Medicare &amp; Medicaid Services',
+    logo: cmsLogo,
+    logoAltText: 'CMS.gov Centers for Medicare &amp; Medicaid Services',
+    inverseLogo: cmsLogoWhite,
+  }
 }
 
 export default MobileHeader;
