@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import { Link } from '@reach/router';
 import { useMetastoreDataset, Resource, prepareColumns } from '@civicactions/data-catalog-services';
 import { Badge } from '@cmsgov/design-system';
-import DataTable from '../../components/DataTable'
-import DataTableHeader from '../../components/DataTableHeader';
+import ResourceContent from './ResourceContent'
 import DatasetTags from '../../components/DatasetTags';
 import DatasetDownloads from '../../components/DatasetDownloads';
+import ResourceFooter from './ResourceFooter';
+import ResourceHeader from './ResourceHeader';
 
 const Dataset = ({ id, rootUrl }) => {
   const resourceOptions = {
     limit: 25,
-    prepareColumns: prepareColumns
+    // prepareColumns: prepareColumns
   }
   const [tablePadding, setTablePadding] = useState('ds-u-padding-y--1')
   const { dataset, } = useMetastoreDataset(id, rootUrl);
@@ -35,8 +36,11 @@ const Dataset = ({ id, rootUrl }) => {
                 rootUrl={rootUrl}
                 options={resourceOptions}
               >
-                <DataTableHeader setTablePadding={setTablePadding} />
-                <DataTable tablePadding={tablePadding} currentPage={0} />
+                {/* <DataTableHeader setTablePadding={setTablePadding} /> */}
+                {/* <DataTable tablePadding={tablePadding} currentPage={0} /> */}
+                <ResourceHeader setTablePadding={setTablePadding} />
+                <ResourceContent tablePadding={tablePadding} id={dataset.distribution[0].identifier}/>
+                <ResourceFooter />
               </Resource>
             )
           }
