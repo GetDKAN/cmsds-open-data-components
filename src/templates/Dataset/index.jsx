@@ -3,18 +3,24 @@ import PropTypes from 'prop-types';
 import { Link } from '@reach/router';
 import { useMetastoreDataset, Resource, prepareColumns } from '@civicactions/data-catalog-services';
 import { Badge } from '@cmsgov/design-system';
-import DataTable from '../../components/DataTable'
-import DataTableHeader from '../../components/DataTableHeader';
+import ResourcePreview from '../../components/ResourcePreview';
+import ResourceHeader from '../../components/ResourceHeader';
 import DatasetTags from '../../components/DatasetTags';
 import DatasetDownloads from '../../components/DatasetDownloads';
 
 const Dataset = ({ id, rootUrl }) => {
   const resourceOptions = {
     limit: 25,
-    prepareColumns: prepareColumns
+    // prepareColumns: prepareColumns
   }
   const [tablePadding, setTablePadding] = useState('ds-u-padding-y--1')
   const { dataset, } = useMetastoreDataset(id, rootUrl);
+  const rawDate = new Date(dataset.modified);
+  let modifiedDate = '';
+  let options = { year: 'numeric', month: 'long', day: 'numeric' };
+  if(rawDate) {
+    modifiedDate = rawDate.toLocaleDateString('en-US', options);
+  }
   return (
     <section className="ds-l-container">
       <div className="ds-l-row ds-u-padding-top--3">
@@ -24,7 +30,7 @@ const Dataset = ({ id, rootUrl }) => {
             <p className="ds-l-col--8">
               {dataset.theme ? <Badge>{dataset.theme[0].data}</Badge> : null}
             </p>
-            <p className="ds-l-col--4">Updated {dataset.modified}</p>
+            <p className="ds-l-col--4">Updated {modifiedDate}</p>
           </div>
           <p>{dataset.description}</p>
           <h2>Dataset Explorer</h2>
@@ -35,8 +41,14 @@ const Dataset = ({ id, rootUrl }) => {
                 rootUrl={rootUrl}
                 options={resourceOptions}
               >
-                <DataTableHeader setTablePadding={setTablePadding} />
-                <DataTable tablePadding={tablePadding} currentPage={0} />
+                <ResourceHeader
+                  setTablePadding={setTablePadding}
+                  id={id}
+                  distribution={dataset.distribution[0]}
+                  includeFiltered
+                />
+                <ResourcePreview tablePadding={tablePadding} id={dataset.distribution[0].identifier}/>
+                {/* <ResourceFooter /> */}
               </Resource>
             )
           }

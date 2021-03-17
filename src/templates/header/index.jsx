@@ -5,21 +5,22 @@ import NavBar from '../../components/NavBar';
 import SearchModal from '../../components/SearchModal';
 import cmsLogo from '../../assets/images/CMSGovLogo-O.png';
 
-const Header = ({siteName, links}) => {
+const Header = ({siteName, links, org}) => {
+  const { url, tagline, logo, urlTitle, logoAltText } = org;
   return (
     <header className="dc-c-header ds-base" aria-label="Site header">
       <div className="dc-c-cmsheader ds-u-display--flex ds-u-padding-x--5 ds-u-align-items--center">
         <div className="ds-l-sm-col--12 ds-l-lg-col--8">
           <div className="cms-link-container">
             <a
-              href="https://cms.gov" 
-              title="CMS.gov Centers for Medicare &amp; Medicaid Services"
+              href={url} 
+              title={urlTitle}
             >
-              <img src={cmsLogo} alt="CMS.gov Centers for Medicare &amp; Medicaid Services" />
+              <img src={logo} alt={logoAltText} />
             </a>
           </div>
           <div>
-            <span className="cms-text-container">The Centers for Medicare and Medicaid Services</span>
+            <span className="cms-text-container">{tagline}</span>
           </div>
         </div>
         <div className="ds-u-margin-left--auto">
@@ -57,6 +58,16 @@ const Header = ({siteName, links}) => {
     </header>
   );
 };
+
+Header.defaultProps = {
+  org: {
+    tagline: 'The Centers for Medicare and Medicaid Services',
+    url: 'https://cms.gov',
+    urlTitle: 'CMS.gov Centers for Medicare &amp; Medicaid Services',
+    logo: cmsLogo,
+    logoAltText: 'CMS.gov Centers for Medicare &amp; Medicaid Services',
+  }
+}
 
 Header.propTypes = {
   siteName: PropTypes.string.isRequired,

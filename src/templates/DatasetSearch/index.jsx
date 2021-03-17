@@ -74,11 +74,11 @@ const DatasetSearch = ({rootUrl}) => {
             </Button>
           </form>
           
-          <SearchPaginationResults
+          {/* <SearchPaginationResults
             total={Number(totalItems)}
             pageSize={Number(pageSize)}
             currentPage={Number(page + 1)}
-          />
+          /> */}
           <p className="ds-u-margin-top--0">
             {selectedFacetsMessage(selectedFacets, {theme: 'Categories', keyword: 'Tags'})}
           </p>
@@ -137,7 +137,7 @@ const DatasetSearch = ({rootUrl}) => {
                 />
               )
               : (<Spinner className="ds-u-valign--middle" />)
-            }
+            } 
           </div>
         </div>
       </div>
