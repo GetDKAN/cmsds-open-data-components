@@ -28,11 +28,11 @@ const ResourceContent = ({tablePadding, id, options}) => {
   const value = React.useContext(ResourceDispatch);
   const tableClasses = {
     tableContainerClassName: '',
-    headerCellClassName: 'ds-u-border--dark ds-u-padding--2 ds-u-border-y--2 ds-u-border-right--1 ds-u-text-align--right ds-u-font-weight--bold ds-u-display--flex ds-u-justify-content--end',
+    headerCellClassName: 'ds-u-border--dark ds-u-padding--2 ds-u-border-y--2 ds-u-border-right--1 ds-u-font-weight--bold',
     headerGroupClassName: '',
     headerCellTextClassName: 'ds-u-truncate ds-u-display--inline-block',
     cellEvenRowClassName: 'ds-u-fill--gray-lightest',
-    cellClassName: `${tablePadding} ds-u-text-align--right`,
+    cellClassName: `${tablePadding} ds-u-truncate ds-u-padding-x--1`,
     filterTitleClassName: 'ds-u-font-weight--bold ds-u-padding-left--2  ds-u-fill--gray-lightest ds-u-display--block',
     headerFilterClassName: 'ds-u-padding-top--1 ds-u-fill--gray-lightest',
     headerFilterCellClassName: 'ds-u-padding-x--1 ds-u-padding-bottom--0 ds-u-border-bottom--0 ds-u-fill--gray-lightest',
@@ -41,7 +41,7 @@ const ResourceContent = ({tablePadding, id, options}) => {
     columnIsSortedDecClassName: 'dc-c-sort dc-c-sort--desc',
   }
   return(
-    <div>
+    <div className="ds-u-overflow--scroll ds-u-border-x--1 ds-u-border-bottom--1">
       <DataTable
         filterTitle="Filter columns"
         data={value.items}
@@ -56,7 +56,7 @@ const ResourceContent = ({tablePadding, id, options}) => {
         conditionsTransform={transformTableFilterToQueryCondition}
         sortTransform={transformTableSortToQuerySort}
         tableClasses={tableClasses}
-        className="dc-c-datatable ds-u-border--dark ds-u-border-x--1"
+        className="dc-c-datatable"
         columnDefaults={{
           width: 200,
           maxWidth: 300,

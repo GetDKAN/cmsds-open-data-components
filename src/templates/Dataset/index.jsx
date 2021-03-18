@@ -24,13 +24,13 @@ const Dataset = ({ id, rootUrl }) => {
   return (
     <section className="ds-l-container">
       <div className="ds-l-row ds-u-padding-top--3">
-        <div className="ds-l-col--8">
+        <div className="ds-l-col--9">
           <h1 className="ds-title">{dataset.title}</h1>
           <div className="ds-l-row">
             <p className="ds-l-col--8">
               {dataset.theme ? <Badge>{dataset.theme[0].data}</Badge> : null}
             </p>
-            <p className="ds-l-col--4">Updated {modifiedDate}</p>
+            <p className="ds-l-col--4 ds-u-text-align--right">Updated {modifiedDate}</p>
           </div>
           <p>{dataset.description}</p>
           <h2>Dataset Explorer</h2>
@@ -53,7 +53,7 @@ const Dataset = ({ id, rootUrl }) => {
             )
           }
         </div>
-        <div className="ds-l-col--4">
+        <div className="ds-l-col--3">
         {dataset.distribution
           && (
             <DatasetDownloads downloadURL={dataset.distribution[0].data.downloadURL} />
