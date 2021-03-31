@@ -13,8 +13,6 @@ export function isSelected(currentFacet, selectedFacets) {
 const DatasetSearchFacets = ({ title, facets, onclickFunction, selectedFacets }) => {
   const [isOpen, setIsOpen] = useState(true);
   const filteredFacets = facets.filter((f) => (f.total > 0));
-  
-  
   return (
     <div className="ds-u-margin-bottom--4">
       <Button
