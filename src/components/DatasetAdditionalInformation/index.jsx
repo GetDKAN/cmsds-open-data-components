@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from '@reach/router';
 import { Table, TableHead, TableRow, TableCell, TableBody } from '@cmsgov/design-system';
+import TransformedDate from '../TransformedDate';
 
 const DatasetAdditionalInformation = ({ datasetInfo }) => {
   const {
@@ -37,11 +38,11 @@ const DatasetAdditionalInformation = ({ datasetInfo }) => {
         <TableBody>
           <TableRow>
             <TableCell>Last Update</TableCell>
-            <TableCell>{modified}</TableCell>
+            <TableCell><TransformedDate date={modified} /></TableCell>
           </TableRow>
           <TableRow>
             <TableCell>Issued</TableCell>
-            <TableCell>{issued}</TableCell>
+            <TableCell><TransformedDate date={issued} /></TableCell>
           </TableRow>
           <TableRow>
             <TableCell>Publisher</TableCell>

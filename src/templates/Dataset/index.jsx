@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from '@reach/router';
 import { useMetastoreDataset, Resource, prepareColumns } from '@civicactions/data-catalog-services';
 import { Badge } from '@cmsgov/design-system';
 import ResourcePreview from '../../components/ResourcePreview';
@@ -8,6 +7,7 @@ import ResourceHeader from '../../components/ResourceHeader';
 import DatasetTags from '../../components/DatasetTags';
 import DatasetDownloads from '../../components/DatasetDownloads';
 import DatasetAdditionalInformation from '../../components/DatasetAdditionalInformation';
+import TransformedDate from '../../components/TransformedDate';
 
 const Dataset = ({ id, rootUrl }) => {
   const resourceOptions = {
@@ -31,7 +31,7 @@ const Dataset = ({ id, rootUrl }) => {
             <p className="ds-l-col--8">
               {dataset.theme ? <Badge>{dataset.theme[0].data}</Badge> : null}
             </p>
-            <p className="ds-l-col--4">Updated {modifiedDate}</p>
+            <p className="ds-l-col--4">Updated <TransformedDate date={modifiedDate} /></p>
           </div>
           <p>{dataset.description}</p>
           <h2>Resource Preview</h2>
