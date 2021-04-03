@@ -7,7 +7,7 @@ import NavBar from '../../components/NavBar';
 import cmsLogo from '../../assets/images/CMSGovLogo-O.png'
 import cmsLogoWhite from '../../assets/images/CMSgov@2x-white-O.png';
 
-const MobileHeader = ({siteName, links, org}) => {
+const MobileHeader = ({siteName, links, org, searchModalText}) => {
   const { url, logo, urlTitle, logoAltText, inverseLogo } = org;
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -53,7 +53,7 @@ const MobileHeader = ({siteName, links, org}) => {
           <SearchModal
             buttonSize="small"
             searchFunc={(e) => {e.preventDefault(); console.log(e.target.value);}}
-            informationText="Search Open Payments for payments made by drug and medical device companies to physicians and teaching hospitals."
+            searchModalText="Search Open Payments for payments made by drug and medical device companies to physicians and teaching hospitals."
           />
         </div>
         
@@ -74,7 +74,7 @@ const MobileHeader = ({siteName, links, org}) => {
                   <SearchModal
                     buttonSize="small"
                     searchFunc={(e) => {e.preventDefault(); console.log(e.target.value);}}
-                    informationText="Search Open Payments for payments made by drug and medical device companies to physicians and teaching hospitals."
+                    searchModalText={searchModalText}
                   />
                 </div>
               )}
