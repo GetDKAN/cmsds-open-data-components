@@ -1,10 +1,22 @@
 import React, { useState } from 'react';
+import qs from 'qs';
 import { SearchPaginationResults } from '@civicactions/data-catalog-components';
 import { useSearchAPI, separateFacets } from '@civicactions/data-catalog-services';
 import { TextField, Dropdown, Spinner, Button } from '@cmsgov/design-system'
 import DatasetSearchListItem from '../../components/DatasetSearchListItem';
 import Pagination from '../../components/Pagination';
 import DatasetSearchFacets from '../../components/DatasetSearchFacets';
+
+function updateUrl(selectedFacets, fulltext, sort) {
+  let newParams = {...selectedFacets}
+  if(fulltext) {
+    newParams.fulltext = fulltext;
+  }
+  if(sort) {
+    newParams.sort = sort;
+  }
+  return qs.stringify(newParams, {addQueryPrefix: true, encode: false})
+}
 
 export function selectedFacetsMessage(facets, alternateTitles) {
   let message = [];
@@ -17,13 +29,28 @@ export function selectedFacetsMessage(facets, alternateTitles) {
   return message.join(' & ');
 }
 
+export function transformUrlParamsToSearchObject(searchParams, facetList) {
+  const params = qs.parse(searchParams, { ignoreQueryPrefix: true })
+  const selectedFacets = {}
+  facetList.forEach((facet) => {
+    selectedFacets[facet] = params[facet] ? params[facet] : [];
+  })
+  return {
+    selectedFacets: selectedFacets,
+    fulltext: params.fulltext,
+    sort: params.sort
+  }
+}
 
-const DatasetSearch = ({rootUrl}) => {
+
+const DatasetSearch = ({rootUrl, location}) => {
+  console.log(decodeURI(location.search))
   const {
     fulltext,
     selectedFacets,
     loading,
     items,
+    sort,
     totalItems,
     facets,
     updateSelectedFacets,
@@ -32,8 +59,8 @@ const DatasetSearch = ({rootUrl}) => {
     setPage,
     pageSize,
     page,
-    resetFilters
-  } = useSearchAPI(rootUrl, {})
+    resetFilters,
+  } = useSearchAPI(rootUrl, {...transformUrlParamsToSearchObject(decodeURI(location.search), ['theme', 'keyword'])})
   const { theme, keyword } = separateFacets(facets);
   const [filterText, setFilterText] = useState('');
   React.useEffect(() => {
@@ -41,6 +68,11 @@ const DatasetSearch = ({rootUrl}) => {
       setFilterText(fulltext)
     }
   }, [fulltext])
+  React.useEffect(() => {
+    const url = new URL(window.location);
+    const searchParams = updateUrl(selectedFacets, fulltext, sort)
+    window.history.pushState({}, '', `${url.origin}${url.pathname}${searchParams}`);
+  },[fulltext, selectedFacets, sort])
 
 
   return(
@@ -108,7 +140,7 @@ const DatasetSearch = ({rootUrl}) => {
           <div className="ds-u-padding--2 ds-u-margin-bottom--4 ds-u-border--1">
             <Dropdown
               options={[{ label: 'Recently Updated', value: 'modified' },{ label: 'Alphabetical', value: 'title' }]}
-              defaultValue="modified"
+              value={sort}
               label="Sort by"
               labelClassName="ds-u-margin-top--0"
               name="dataset_search_sort"
