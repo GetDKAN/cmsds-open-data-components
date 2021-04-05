@@ -5,7 +5,7 @@ import NavBar from '../../components/NavBar';
 import SearchModal from '../../components/SearchModal';
 import cmsLogo from '../../assets/images/CMSGovLogo-O.png';
 
-const Header = ({siteName, links, org}) => {
+const Header = ({siteName, links, org, searchModalText}) => {
   const { url, tagline, logo, urlTitle, logoAltText } = org;
   return (
     <header className="dc-c-header ds-base" aria-label="Site header">
@@ -49,7 +49,7 @@ const Header = ({siteName, links, org}) => {
             <div className="dc-c-main-navigation--search ds-u-margin-left--auto ds-u-padding-left--3">
               <SearchModal
                 searchFunc={(e) => {e.preventDefault(); console.log(e.target.value);}}
-                informationText="Search Open Payments for payments made by drug and medical device companies to physicians and teaching hospitals."
+                searchModalText={searchModalText}
               />
             </div>
           </div>
