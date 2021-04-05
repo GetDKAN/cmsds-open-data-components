@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+// import { ApiDocs } from "@civicactions/data-catalog-components";
 import { useMetastoreDataset, Resource, prepareColumns } from '@civicactions/data-catalog-services';
 import { Badge } from '@cmsgov/design-system';
 import ResourcePreview from '../../components/ResourcePreview';
@@ -8,6 +9,7 @@ import DatasetTags from '../../components/DatasetTags';
 import DatasetDownloads from '../../components/DatasetDownloads';
 import DatasetAdditionalInformation from '../../components/DatasetAdditionalInformation';
 import TransformedDate from '../../components/TransformedDate';
+import ApiDocumentation from '../../components/ApiDocumentation';
 
 const Dataset = ({ id, rootUrl }) => {
   const resourceOptions = {
@@ -56,6 +58,13 @@ const Dataset = ({ id, rootUrl }) => {
           {dataset.identifier &&
             <DatasetAdditionalInformation datasetInfo={dataset} />
           }
+          {dataset.identifier &&
+            <div>
+              <h2>Try out the API</h2>
+              <ApiDocumentation endpoint={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${dataset.identifier}/docs`} />
+            </div>
+          }
+          
         </div>
         <div className="ds-l-col--3">
         {dataset.distribution
@@ -63,7 +72,7 @@ const Dataset = ({ id, rootUrl }) => {
             <DatasetDownloads downloadURL={dataset.distribution[0].data.downloadURL} />
           )}
           <DatasetTags keywords={dataset.keyword} />
-          {/* <h2>API</h2> */}
+          <h2>API</h2>
         </div>
       </div>
     </section>

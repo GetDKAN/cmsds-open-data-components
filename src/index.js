@@ -11,6 +11,8 @@ export { default as SearchModal } from './components/SearchModal';
 export { default as DatasetSearchListItem } from './components/DatasetSearchListItem';
 export { default as SubMenu } from './components/SubMenu';
 
+export { default as ApiDocumentation } from './components/ApiDocumentation';
+
 export { default as ResourceConditionField } from './components/ResourceConditionField';
 export { default as ResourceFilter } from './components/ResourceFilter';
 

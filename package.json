@@ -27,7 +27,8 @@
     "enzyme-adapter-react-16": "^1.14.0",
     "prop-types": "^15.7.2",
     "qs": "^6.10.1",
-    "react-table": "^7.6.2"
+    "react-table": "^7.6.2",
+    "swagger-ui-react": "^3.46.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
