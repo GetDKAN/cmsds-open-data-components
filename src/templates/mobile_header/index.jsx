@@ -7,7 +7,7 @@ import NavBar from '../../components/NavBar';
 import cmsLogo from '../../assets/images/CMSGovLogo-O.png'
 import cmsLogoWhite from '../../assets/images/CMSgov@2x-white-O.png';
 
-const MobileHeader = ({siteName, links, org, searchModalText}) => {
+const MobileHeader = ({siteName, links, org, searchModalText, customSearch = false}) => {
   const { url, logo, urlTitle, logoAltText, inverseLogo } = org;
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -71,11 +71,15 @@ const MobileHeader = ({siteName, links, org, searchModalText}) => {
             {tablet
               && (
                 <div className="dc-c-mobile-menu--search">
+                {customSearch ? (
+                  customSearch
+                ) : (
                   <SearchModal
-                    buttonSize="small"
                     searchFunc={(e) => {e.preventDefault(); console.log(e.target.value);}}
                     searchModalText={searchModalText}
+                    buttonSize={small}
                   />
+                )}
                 </div>
               )}
           </div>
