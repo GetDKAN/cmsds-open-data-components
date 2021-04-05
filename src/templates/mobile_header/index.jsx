@@ -50,11 +50,15 @@ const MobileHeader = ({siteName, links, org, searchModalText, customSearch = fal
           <Link to="/"><span className="ds-h1">{siteName}</span></Link>
         </div>
         <div className="dc-c-mobile-menu--search">
-          <SearchModal
-            buttonSize="small"
-            searchFunc={(e) => {e.preventDefault(); console.log(e.target.value);}}
-            searchModalText="Search Open Payments for payments made by drug and medical device companies to physicians and teaching hospitals."
-          />
+          {customSearch ? (
+            customSearch
+          ) : (
+            <SearchModal
+              searchFunc={(e) => {e.preventDefault(); console.log(e.target.value);}}
+              searchModalText={searchModalText}
+              buttonSize={"small"}
+            />
+          )}
         </div>
         
       </div>
@@ -77,7 +81,7 @@ const MobileHeader = ({siteName, links, org, searchModalText, customSearch = fal
                   <SearchModal
                     searchFunc={(e) => {e.preventDefault(); console.log(e.target.value);}}
                     searchModalText={searchModalText}
-                    buttonSize={small}
+                    buttonSize={"small"}
                   />
                 )}
                 </div>
