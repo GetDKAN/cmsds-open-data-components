@@ -44,6 +44,7 @@ export function transformUrlParamsToSearchObject(searchParams, facetList) {
 
 
 const DatasetSearch = ({rootUrl, location}) => {
+  console.log(decodeURI(location.search))
   const {
     fulltext,
     selectedFacets,
@@ -59,7 +60,7 @@ const DatasetSearch = ({rootUrl, location}) => {
     pageSize,
     page,
     resetFilters,
-  } = useSearchAPI(rootUrl, {...transformUrlParamsToSearchObject(location.search, ['theme', 'keyword'])})
+  } = useSearchAPI(rootUrl, {...transformUrlParamsToSearchObject(decodeURI(location.search), ['theme', 'keyword'])})
   const { theme, keyword } = separateFacets(facets);
   const [filterText, setFilterText] = useState('');
   React.useEffect(() => {
