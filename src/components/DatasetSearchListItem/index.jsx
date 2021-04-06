@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from '@reach/router';
 import { Button, Badge } from '@cmsgov/design-system';
+import TransformedDate from '../TransformedDate';
 
 const DatasetSearchListItem = ({item, updateFacets}) => {
   const { title, modified, description, theme, keyword, identifier } = item;
@@ -19,7 +20,7 @@ const DatasetSearchListItem = ({item, updateFacets}) => {
           </ul>
         }
         <span className="ds-u-color--gray">
-          Updated {`${updatedDate.toLocaleDateString(undefined, dateOptions)}`}
+          Updated <TransformedDate date={modified} />
         </span>
       </div>
       <h3>
