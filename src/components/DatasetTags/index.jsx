@@ -5,7 +5,7 @@ import { Link } from '@reach/router';
 const DatasetTags = ({ keywords }) => {
   return (
     <div className="dc-c-dataset-tags ds-u-margin-bottom--3 ds-u-padding--2 ds-u-border ds-u-border--1">
-      <h2 className="ds-u-font-size--h3 ds-u-margin-top--0 ds-u-margin-bottom--2">Tags</h2>
+      <h2 className="ds-u-font-size--h2 ds-u-margin-bottom--2 ds-u-margin-top--0">Tags</h2>
       {keywords
         && keywords.map(
           (k) => (

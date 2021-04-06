@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useMediaQuery } from 'react-responsive'
 import { Button, Dialog, TextField } from '@cmsgov/design-system';
 
-const SearchModal = ({ searchFunc, appNodeId, informationText, buttonSize }) => {
+const SearchModal = ({ searchFunc, appNodeId, searchModalText, buttonSize }) => {
   const [modalSearchTerm, setModalSearchTerm] = useState('');
   const [modalSearch, setModalSearch] = useState(false)
   const mobile = useMediaQuery({ minWidth: 0, maxWidth: 543});
@@ -26,7 +26,7 @@ const SearchModal = ({ searchFunc, appNodeId, informationText, buttonSize }) => 
             closeButtonVariation="primary"
             closeText={<>Close</>}
           >
-            <p>{informationText}</p>
+            <p>{searchModalText}</p>
             <form className="ds-l-row" onSubmit={searchFunc}>
               <TextField
                 className="ds-l-sm-col--12 ds-l-lg-col--9"

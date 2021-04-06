@@ -1,3 +1,5 @@
+import { from } from 'core-js/fn/array';
+
 // Components
 export { default as NavLink } from './components/NavLink';
 export { default as DatasetTags } from './components/DatasetTags';
@@ -6,6 +8,7 @@ export { default as Pagination } from './components/Pagination';
 export { default as Hero } from './components/Hero';
 export { default as NavBar } from './components/NavBar';
 export { default as SearchModal } from './components/SearchModal';
+export { default as DatasetSearchListItem } from './components/DatasetSearchListItem';
 export { default as SubMenu } from './components/SubMenu';
 
 export { default as ResourceConditionField } from './components/ResourceConditionField';
