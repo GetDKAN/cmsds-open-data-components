@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from '@reach/router';
+import { ApiDocs } from '@civicactions/data-catalog-components';
 import { Resource, useMetastoreDataset, transformURLtoDatastoreQuery } from '@civicactions/data-catalog-services';
 import { HelpDrawerToggle, Button } from '@cmsgov/design-system';
 import ResourceFilter from '../../components/ResourceFilter';
@@ -77,6 +78,15 @@ const FilteredResource = ({id, dist_id, location}) => {
                 && ( <ResourceFilter id={dist_id} filterOpen={filtersOpen} setFilterOpen={setFiltersOpen} helpDrawerButton={buttonRef} /> )
               }
             </Resource>
+            {dataset.identifier &&
+              <div id="api-docs">
+                <h2>Try out the API</h2>
+                <ApiDocs 
+                  endpoint={`${process.env.REACT_APP_ROOT_URL}`}
+                  datasetID={dataset.identifier}
+                />
+              </div>
+            }
           </>
         )
       }

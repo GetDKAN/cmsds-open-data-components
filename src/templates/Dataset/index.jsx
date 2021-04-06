@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-// import { ApiDocs } from "@civicactions/data-catalog-components";
+import { ApiDocs } from "@civicactions/data-catalog-components";
 import { useMetastoreDataset, Resource, prepareColumns } from '@civicactions/data-catalog-services';
 import { Badge } from '@cmsgov/design-system';
 import ResourcePreview from '../../components/ResourcePreview';
@@ -9,7 +9,6 @@ import DatasetTags from '../../components/DatasetTags';
 import DatasetDownloads from '../../components/DatasetDownloads';
 import DatasetAdditionalInformation from '../../components/DatasetAdditionalInformation';
 import TransformedDate from '../../components/TransformedDate';
-import ApiDocumentation from '../../components/ApiDocumentation';
 
 const Dataset = ({ id, rootUrl }) => {
   const resourceOptions = {
@@ -59,9 +58,12 @@ const Dataset = ({ id, rootUrl }) => {
             <DatasetAdditionalInformation datasetInfo={dataset} />
           }
           {dataset.identifier &&
-            <div>
+            <div id="api-docs">
               <h2>Try out the API</h2>
-              <ApiDocumentation endpoint={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${dataset.identifier}/docs`} />
+              <ApiDocs 
+                endpoint={`${process.env.REACT_APP_ROOT_URL}`}
+                datasetID={dataset.identifier}
+              />
             </div>
           }
           
