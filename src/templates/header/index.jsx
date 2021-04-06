@@ -5,7 +5,7 @@ import NavBar from '../../components/NavBar';
 import SearchModal from '../../components/SearchModal';
 import cmsLogo from '../../assets/images/CMSGovLogo-O.png';
 
-const Header = ({siteName, links, org, searchModalText}) => {
+const Header = ({siteName, links, org, searchModalText, customSearch = false}) => {
   const { url, tagline, logo, urlTitle, logoAltText } = org;
   return (
     <header className="dc-c-header ds-base" aria-label="Site header">
@@ -47,10 +47,14 @@ const Header = ({siteName, links, org, searchModalText}) => {
               linkClasses="ds-u-margin-right--5 ds-u-padding-y--3"
             />
             <div className="dc-c-main-navigation--search ds-u-margin-left--auto ds-u-padding-left--3">
-              <SearchModal
-                searchFunc={(e) => {e.preventDefault(); console.log(e.target.value);}}
-                searchModalText={searchModalText}
-              />
+              {customSearch ? (
+                customSearch
+              ) : (
+                <SearchModal
+                  searchFunc={(e) => {e.preventDefault(); console.log(e.target.value);}}
+                  searchModalText={searchModalText}
+                />
+              )}
             </div>
           </div>
         </div>
