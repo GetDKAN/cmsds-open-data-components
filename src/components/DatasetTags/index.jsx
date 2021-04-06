@@ -11,8 +11,8 @@ const DatasetTags = ({ keywords }) => {
           (k) => (
             <Link
               key={k.identifier}
-              to={`/search?keyword=${k.data}`}
-              className="dc-c-dataset-tags--tag ds-u-color--base ds-u-font-size--small ds-u-text-decoration--none ds-u-margin-right--1 ds-u-margin-bottom--1 ds-u-padding-x--2 ds-u-radius"
+              to={`/datasets?keyword=${k.data}`}
+              className="dc-c-dataset-tags--tag ds-u-color--base ds-u-font-size--small ds-u-text-decoration--none ds-u-margin-right--1 ds-u-margin-bottom--1 ds-u-padding-x--2 ds-u-padding-y--1 ds-u-radius"
             >
               {k.data}
             </Link>
