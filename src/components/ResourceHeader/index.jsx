@@ -20,6 +20,7 @@ const ResourceHeader = ({ setTablePadding, id, distribution, includeFiltered }) 
           {includeFiltered
             && (
               <Link
+                className="ds-c-button ds-c-button--primary"
                 to={`/dataset/${id}/${distribution.identifier}`}
               >
                 View and filter data
@@ -31,7 +32,7 @@ const ResourceHeader = ({ setTablePadding, id, distribution, includeFiltered }) 
           <DataTableDensity setTablePadding={setTablePadding} />
         </div> */}
       </div>
-      <div className="ds-l-row">
+      <div className="ds-l-row ds-u-align-items--center">
         <div className="ds-l-col--6">
           <DataTablePageResults
             totalRows={totalRows}

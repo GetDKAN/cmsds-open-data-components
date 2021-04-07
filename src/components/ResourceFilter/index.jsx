@@ -16,7 +16,7 @@ export function transformDatastoreQueryToURL(query) {
   return queryURL.join('&');
 }
 
-const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition}) => {
+const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, helpDrawerButton}) => {
   const {
     loading,
     items,
@@ -70,11 +70,11 @@ const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition}) => {
           className="ds-u-margin-right--1"
           onClick={(e) => submitFilters(e, formConditions)}
         >
-          Update filters
+          Update table
         </Button>
       }
       heading="Add filters"
-      onCloseClick={() => setFilterOpen(!filterOpen)}
+      onCloseClick={() => {setFilterOpen(!filterOpen);}}
     >
       <form onSubmit={(e) => submitFilters(e, formConditions)}>
         {Object.keys(schema).length

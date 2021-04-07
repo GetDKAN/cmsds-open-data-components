@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Dropdown, TextField } from '@cmsgov/design-system';
+import CloseIcon from '../../assets/icons/close';
 
 function buildOperatorOptions(type) {
   switch(type) {
@@ -20,7 +21,7 @@ const ResourceConditionField = ({data, index, remove, schema, update}) => {
   }
   return(
     <fieldset>
-      <div className="ds-u-display--flex">
+      <div className="ds-l-form-row">
         <Dropdown
           options={[
             { label: 'Select column', value: '' },
@@ -28,10 +29,10 @@ const ResourceConditionField = ({data, index, remove, schema, update}) => {
           ]}
           value={data.property}
           onChange={(e) => (update(index, 'property', e.target.value))}
-          label="Dropdown example"
-          labelClassName="ds-u-margin-top--0"
-          name="dropdown_field"
-          size="medium"
+          label='Filter column'
+          labelClassName="ds-u-margin-top--0 ds-u-visibility--screen-reader"
+          name={`column_name_${index}`}
+          className="ds-l-col--6"
         />
         <Dropdown
           options={[
@@ -41,31 +42,35 @@ const ResourceConditionField = ({data, index, remove, schema, update}) => {
           value={data.operator}
           disabled={!data.property ? true : false}
           onChange={(e) => (update(index, 'operator', e.target.value))}
-          labelClassName="ds-u-margin-top--0"
+          labelClassName="ds-u-margin-top--0 ds-u-visibility--screen-reader"
           size="small"
-          label="Small size example"
-          name="small_dropdown_field"
+          label="Filter Operator"
+          name={`filter_operator_${index}`}
+          className="ds-l-col--3"
         />
       </div>
-      <div>
+      <div className="ds-l-form-row">
         <TextField
           value={data.value}
           disabled={!data.property || !data.operator ? true : false}
           onChange={(e) => (update(index, 'value', e.target.value))}
-          label="Single line field"
-          labelClassName="ds-u-margin-top--0"
-          name="single_example"
+          label="Filter value"
+          labelClassName="ds-u-margin-top--0 ds-u-visibility--screen-reader"
+          name={`filter_value_${index}`}
+          className="ds-l-col--11"
         />
         <Button
-          className="ds-u-margin-right--1"
+          className="ds-l-col--1"
+          variation="transparent"
           onClick={(e) => {
             e.preventDefault();
             remove(index)
           }}
         >
-          <span>Remove filter</span>
+          <CloseIcon />
         </Button>
       </div>
+      
     </fieldset>
   );
 };

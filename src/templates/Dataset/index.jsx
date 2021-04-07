@@ -25,7 +25,7 @@ const Dataset = ({ id, rootUrl }) => {
   return (
     <section className="ds-l-container">
       <div className="ds-l-row ds-u-padding-top--3">
-        <div className="ds-l-col--8">
+        <div className="ds-l-col--9">
           <h1 className="ds-title">{dataset.title}</h1>
           <div className="ds-l-row">
             <p className="ds-l-col--8">
@@ -57,7 +57,7 @@ const Dataset = ({ id, rootUrl }) => {
             <DatasetAdditionalInformation datasetInfo={dataset} />
           }
         </div>
-        <div className="ds-l-col--4">
+        <div className="ds-l-col--3">
         {dataset.distribution
           && (
             <DatasetDownloads downloadURL={dataset.distribution[0].data.downloadURL} />
