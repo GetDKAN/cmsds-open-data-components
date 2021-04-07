@@ -11,6 +11,8 @@ export { default as SearchModal } from './components/SearchModal';
 export { default as DatasetSearchListItem } from './components/DatasetSearchListItem';
 export { default as SubMenu } from './components/SubMenu';
 
+export { default as ApiDocumentation } from './components/ApiDocumentation';
+
 export { default as ResourceConditionField } from './components/ResourceConditionField';
 export { default as ResourceFilter } from './components/ResourceFilter';
 
@@ -23,3 +25,4 @@ export { default as Header } from './templates/header';
 export { default as MobileHeader } from './templates/mobile_header';
 
 export { default as FilteredResource } from './templates/FilteredResource';
+export { default as APIPage } from './templates/APIPage';
