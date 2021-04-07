@@ -7,7 +7,7 @@ const Hero = ({title, description, searchUrl, searchKey}) => {
 
   function submitHero(e) {
     e.preventDefault();
-    navigate(`${searchUrl}?${searchKey}=${searchValue}`)
+    navigate(`/${searchUrl}?${searchKey}=${searchValue}`)
   }
 
   return (
