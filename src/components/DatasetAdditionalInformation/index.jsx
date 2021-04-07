@@ -16,14 +16,21 @@ const DatasetAdditionalInformation = ({ datasetInfo }) => {
     bureauCode,
     publisher
   } = datasetInfo;
-
-  const tags = keyword.map((k, index) => {
-    if(index === 0) {
-      return (<Link key={k.data} to={`/datasets?keyword[]=${k.data}`}>{k.data}</Link>);
-    } else {
-      return (<>, <Link key={k.data} to={`/datasets?keyword[]=${k.data}`}>{k.data}</Link></>);
-    }
-  })
+  let tags = [];
+  let themes = []
+  if(keyword && keyword.length) {
+    tags = keyword.map((k, index) => {
+      if(index === 0) {
+        return (<Link key={k.data} to={`/datasets?keyword[]=${k.data}`}>{k.data}</Link>);
+      } else {
+        return (<>, <Link key={k.data} to={`/datasets?keyword[]=${k.data}`}>{k.data}</Link></>);
+      }
+    })
+  }
+  if(theme && theme.length) {
+    themes = theme;
+  }
+  
 
   return(
     <div className="dc-c-additional-info-table ds-u-margin-bottom--3">
@@ -70,7 +77,7 @@ const DatasetAdditionalInformation = ({ datasetInfo }) => {
           </TableRow>
           <TableRow>
             <TableCell>Category</TableCell>
-            <TableCell>{theme.map(t => t.data).join(',')}</TableCell>
+            <TableCell>{themes.map(t => t.data).join(',')}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell>Tags</TableCell>
