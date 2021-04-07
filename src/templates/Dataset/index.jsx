@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { ApiDocs } from "@civicactions/data-catalog-components";
 import { useMetastoreDataset, Resource, prepareColumns } from '@civicactions/data-catalog-services';
-import { Badge } from '@cmsgov/design-system';
+import { Badge, Button } from '@cmsgov/design-system';
 import ResourcePreview from '../../components/ResourcePreview';
 import ResourceHeader from '../../components/ResourceHeader';
 import DatasetTags from '../../components/DatasetTags';
@@ -11,6 +11,7 @@ import DatasetAdditionalInformation from '../../components/DatasetAdditionalInfo
 import TransformedDate from '../../components/TransformedDate';
 
 const Dataset = ({ id, rootUrl }) => {
+  let apiDocs = useRef()
   const resourceOptions = {
     limit: 25,
     // prepareColumns: prepareColumns
@@ -58,7 +59,7 @@ const Dataset = ({ id, rootUrl }) => {
             <DatasetAdditionalInformation datasetInfo={dataset} />
           }
           {dataset.identifier &&
-            <div id="api-docs">
+            <div ref={apiDocs}>
               <h2>Try out the API</h2>
               <ApiDocs 
                 endpoint={`${process.env.REACT_APP_ROOT_URL}`}
@@ -74,7 +75,17 @@ const Dataset = ({ id, rootUrl }) => {
             <DatasetDownloads downloadURL={dataset.distribution[0].data.downloadURL} />
           )}
           <DatasetTags keywords={dataset.keyword} />
-          <h2>API</h2>
+          <div className="dc-c-dataset-tags ds-u-margin-bottom--3 ds-u-padding--2 ds-u-border ds-u-border--1">
+            <h2 className="ds-u-font-size--h2 ds-u-margin-bottom--2 ds-u-margin-top--0">API</h2>
+            <Button
+              variation="transparent"
+              onClick={
+                () => window.scrollTo({ behavior: 'smooth', top: apiDocs.current.offsetTop })
+              }
+              >
+                Scroll to dataset API
+              </Button>
+          </div>
         </div>
       </div>
     </section>
