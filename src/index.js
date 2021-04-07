@@ -13,6 +13,7 @@ export { default as SubMenu } from './components/SubMenu';
 
 export { default as ResourceConditionField } from './components/ResourceConditionField';
 export { default as ResourceFilter } from './components/ResourceFilter';
+export { default as Breadcrumb } from './components/Breadcrumb';
 
 // Templates
 export { default as Footer } from './templates/Footer';
