@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from '@reach/router';
+import { ApiDocs } from '@civicactions/data-catalog-components';
 import { Resource, useMetastoreDataset, transformURLtoDatastoreQuery } from '@civicactions/data-catalog-services';
 import { HelpDrawerToggle, Button } from '@cmsgov/design-system';
 import ResourceFilter from '../../components/ResourceFilter';
@@ -8,6 +9,7 @@ import ResourcePreview from '../../components/ResourcePreview';
 
 const FilteredResource = ({id, dist_id, location}) => {
   const [tablePadding, setTablePadding] = React.useState('ds-u-padding-y--1')
+  let apiDocs = useRef();
   const [filtersOpen, setFiltersOpen] = React.useState(false)
   const {dataset} = useMetastoreDataset(id, process.env.REACT_APP_ROOT_URL);
   let distribution = dataset.distribution ? dataset.distribution : [];
@@ -57,7 +59,7 @@ const FilteredResource = ({id, dist_id, location}) => {
               <div className="ds-l-col--4">
                 <div class=" ds-u-border--1 ds-u-radius">
                   <h2 className="ds-u-padding-left--3">Try API</h2>
-                  <Button variation="transparent">
+                  <Button variation="transparent" onClick={() => window.scrollTo({ behavior: 'smooth', top: apiDocs.current.offsetTop })}>
                     Scroll to filtered view API
                   </Button>
                   <Button variation="transparent">
@@ -77,6 +79,15 @@ const FilteredResource = ({id, dist_id, location}) => {
                 && ( <ResourceFilter id={dist_id} filterOpen={filtersOpen} setFilterOpen={setFiltersOpen} helpDrawerButton={buttonRef} /> )
               }
             </Resource>
+            {dataset.identifier &&
+              <div ref={apiDocs}>
+                <h2>Try out the API</h2>
+                <ApiDocs 
+                  endpoint={`${process.env.REACT_APP_ROOT_URL}`}
+                  datasetID={dataset.identifier}
+                />
+              </div>
+            }
           </>
         )
       }
