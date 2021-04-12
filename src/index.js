@@ -10,12 +10,11 @@ export { default as NavBar } from './components/NavBar';
 export { default as SearchModal } from './components/SearchModal';
 export { default as DatasetSearchListItem } from './components/DatasetSearchListItem';
 export { default as SubMenu } from './components/SubMenu';
-
 export { default as ApiDocumentation } from './components/ApiDocumentation';
-
 export { default as ResourceConditionField } from './components/ResourceConditionField';
 export { default as ResourceFilter } from './components/ResourceFilter';
 export { default as Breadcrumb } from './components/Breadcrumb';
+export { default as TransformedDate } from './components/TransformedDate';
 
 // Templates
 export { default as Footer } from './templates/Footer';
