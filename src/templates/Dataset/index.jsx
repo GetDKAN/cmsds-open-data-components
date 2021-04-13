@@ -9,12 +9,12 @@ import DatasetTags from '../../components/DatasetTags';
 import DatasetDownloads from '../../components/DatasetDownloads';
 import DatasetAdditionalInformation from '../../components/DatasetAdditionalInformation';
 import TransformedDate from '../../components/TransformedDate';
+import ResourceFooter from '../../components/ResourceFooter';
 
 const Dataset = ({ id, rootUrl }) => {
   let apiDocs = useRef()
   const resourceOptions = {
-    limit: 25,
-    // prepareColumns: prepareColumns
+    limit: 25
   }
   const [tablePadding, setTablePadding] = useState('ds-u-padding-y--1')
   const { dataset, } = useMetastoreDataset(id, rootUrl);
@@ -31,12 +31,12 @@ const Dataset = ({ id, rootUrl }) => {
           <h1 className="ds-title">{dataset.title}</h1>
           <div className="ds-l-row">
             <p className="ds-l-col--8">
-              {dataset.theme ? <Badge>{dataset.theme[0].data}</Badge> : null}
+              {dataset.theme ? <Badge variation="info">{dataset.theme[0].data}</Badge> : null}
             </p>
-            <p className="ds-l-col--4">Updated <TransformedDate date={modifiedDate} /></p>
+            <p className="ds-l-col--4 ds-u-color--gray ds-u-text-align--right">Updated <TransformedDate date={modifiedDate} /></p>
           </div>
           <p>{dataset.description}</p>
-          <h2>Resource Preview</h2>
+          <h2 className="dc-resource-header">Resource Preview</h2>
           {dataset.distribution
             && (
               <Resource
@@ -51,7 +51,7 @@ const Dataset = ({ id, rootUrl }) => {
                   includeFiltered
                 />
                 <ResourcePreview tablePadding={tablePadding} id={dataset.distribution[0].identifier}/>
-                {/* <ResourceFooter /> */}
+                <ResourceFooter />
               </Resource>
             )
           }
@@ -76,7 +76,7 @@ const Dataset = ({ id, rootUrl }) => {
           )}
           <DatasetTags keywords={dataset.keyword} />
           <div className="dc-c-dataset-tags ds-u-margin-bottom--3 ds-u-padding--2 ds-u-border ds-u-border--1">
-            <h2 className="ds-u-font-size--h2 ds-u-margin-bottom--2 ds-u-margin-top--0">API</h2>
+            <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-top--0 ds-u-margin-bottom--2 ds-u-padding-bottom--2">API</h2>
             <Button
               variation="transparent"
               onClick={

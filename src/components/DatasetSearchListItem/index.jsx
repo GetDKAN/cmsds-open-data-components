@@ -9,17 +9,19 @@ const DatasetSearchListItem = ({item, updateFacets}) => {
   const dateOptions = {month: 'long', year: 'numeric', day: 'numeric'}
   return(
     <div className="dc-dataset-searchlist-item ds-u-border-top--1 ds-u-margin-bottom--5">
-      <div className="ds-u-display--flex ds-u-flex-direction--row ds-u-justify-content--between ds-u-padding-top--5">
-        {theme &&
-          <ul className="ds-u-padding--0 ds-u-display--flex ds-u-flex-direction--row">
-            {theme.map((t) => (
-              <li key={t} className="ds-u-margin-right--1">
-                <Badge variation="info">{t}</Badge>
-              </li>
-            ))}
-          </ul>
-        }
-        <span className="ds-u-color--gray">
+      <div className="ds-l-row ds-u-padding-top--5">
+        <div className="ds-l-col--7">
+          {theme &&
+            <ul className="ds-u-padding--0 ds-u-display--flex ds-u-flex-direction--row ds-u-flex-wrap--wrap">
+              {theme.map((t) => (
+                <li key={t} className="ds-u-margin-right--1 ds-u-margin-bottom--1">
+                  <Badge variation="info">{t}</Badge>
+                </li>
+              ))}
+            </ul>
+          }
+        </div>
+        <span className="ds-l-col--5 ds-u-color--gray ds-u-text-align--right">
           Updated <TransformedDate date={modified} />
         </span>
       </div>
@@ -35,10 +37,10 @@ const DatasetSearchListItem = ({item, updateFacets}) => {
       <p className="ds-u-margin-top--0">{description}</p>
       <div>
         {keyword &&
-          <ul className="ds-u-padding--0 ds-u-display--flex">
+          <ul className="ds-u-padding--0 ds-u-display--flex ds-u-flex-wrap--wrap">
             {keyword.map((k) => (
               <li key={k}>
-                <Badge className="ds-u-radius ds-u-fill--primary-alt-lightest ds-u-color--base ds-u-margin-right--1" variation="info">{k}</Badge>
+                <Badge className="ds-u-radius ds-u-fill--primary-alt-lightest ds-u-color--base ds-u-margin-right--1 ds-u-margin-bottom--2" variation="info">{k}</Badge>
               </li>
             ))}
           </ul>

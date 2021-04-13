@@ -1,45 +1,26 @@
 import React from 'react';
+import qs from 'qs';
 import { Button, HelpDrawer } from '@cmsgov/design-system';
 import { ResourceDispatch } from '@civicactions/data-catalog-services';
 import ResourceConditionField from '../ResourceConditionField';
 
-export function transformDatastoreQueryToURL(query) {
-  let queryURL = [];
-  if (query.conditions) {
-    query.conditions.forEach((condition) => {
-      queryURL.push(`${condition.property}[conditions]=${condition.value}`);
-      if(condition.operator !== '=') {
-        queryURL.push(`${condition.property}[operator]=${condition.operator}`);
-      }
-    })
-  }
-  return queryURL.join('&');
-}
-
 const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, helpDrawerButton}) => {
   const {
-    loading,
-    items,
     actions,
-    columns,
-    totalRows,
-    limit,
     schema,
-    offset,
     conditions,
     searchParams
   } = React.useContext(ResourceDispatch);
 
-  const { setConditions, setSort, setOffset } = actions;
+  const { setConditions } = actions;
   const [formConditions, setFormConditions] = React.useState(conditions && conditions.length ? conditions : [{...defaultCondition}]);
 
   React.useEffect(() => {
     const url = new URL(window.location);
-    const urlString = `?${transformDatastoreQueryToURL({conditions: conditions})}`;
+    const urlString = qs.stringify({conditions: conditions}, {encodeValuesOnly: true, addQueryPrefix: true })
     if(urlString !== searchParams) {
       window.history.pushState({}, '', `${url.origin}${url.pathname}${urlString}`);
     }
-    console.log('kdok')
   }, [conditions])
 
 

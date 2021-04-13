@@ -2,16 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@cmsgov/design-system';
 
-const DataTableRowChanger = ({ setLimit, rowOptions }) => {
+const DataTableRowChanger = ({ setLimit, rowOptions, limit }) => {
   return (
     <div className="ds-u-text-align--right">
-      <span>Rows per page:</span>
+      <span className="ds-u-margin-right--2">Rows per page:</span>
       {rowOptions.map((r) => (
         <Button
           key={`buttonFor${r}`}
           onClick={() => setLimit(r)}
           size="small"
           variation="transparent"
+          className={`${limit === r ? 'ds-u-font-weight--bold ds-u-border-bottom--2' : '' } ds-u-text-decoration--none ds-u-padding--0 ds-u-margin-right--1`}
         >
           {r}
           {' '}
