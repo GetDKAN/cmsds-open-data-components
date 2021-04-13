@@ -23,11 +23,21 @@ const Pagination = ({
 
   useEffect(()=> {
     if (calcByOffset) {
+      // console.log(Number(pageIndex), itemsPerPage)
       gotoPage((Number(pageIndex)) * itemsPerPage)
     } else {
       gotoPage((Number(pageIndex)))
     }
   }, [pageIndex])
+
+  function isCurrentPage(p) {
+    if(calcByOffset) {
+      return p * itemsPerPage === currentPage ? "dc-pagination-current" : "";
+    } else {
+      return p === currentPage ? "dc-pagination-current" : "";
+    }
+  }
+
   return (
     <div className="dc-pagination ds-u-display--flex ds-u-flex-direction--row ds-u-justify-content--between ds-u-align-items--center">
       <Button
@@ -45,7 +55,7 @@ const Pagination = ({
             return (
               <li key={p}>
                 <Button
-                  className={p === currentPage ? "dc-pagination-current" : ""}
+                  className={isCurrentPage(p)}
                   size="small"
                   variation="transparent"
                   onClick={() => setPageIndex(pages - 1)}
@@ -58,7 +68,7 @@ const Pagination = ({
             return (
               <li key={p}>
                 <Button
-                  className={p === currentPage ? "dc-pagination-current" : ""}
+                  className={isCurrentPage(p)}
                   size="small"
                   variation="transparent"
                   onClick={() => setPageIndex(0)}
@@ -77,7 +87,7 @@ const Pagination = ({
             return (
               <li key={p}>
                 <Button
-                  className={p === currentPage ? "dc-pagination-current" : ""}
+                  className={isCurrentPage(p)}
                   size="small"
                   variation="transparent"
                   onClick={() => setPageIndex(p)}

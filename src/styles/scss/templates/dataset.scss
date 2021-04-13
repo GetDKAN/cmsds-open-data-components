@@ -1,0 +1,10 @@
+.dc-resource-header {
+  &::before {
+    content: "";
+    display: block;
+    width: 48px;
+    height: 4px;
+    margin: 8px 0;
+    background-color: $color-primary-alt-light;
+  }
+}

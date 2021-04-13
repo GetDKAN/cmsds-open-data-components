@@ -21,7 +21,7 @@
   "dependencies": {
     "@civicactions/data-catalog-components": "^2.0.0-alpha.6",
     "@civicactions/data-catalog-services": "^1.0.0-alpha.4",
-    "@cmsgov/design-system": "2.0.4",
+    "@cmsgov/design-system": "^2.4.1",
     "@reach/router": "^1.3.3",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
