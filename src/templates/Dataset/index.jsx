@@ -14,7 +14,7 @@ import ResourceFooter from '../../components/ResourceFooter';
 const Dataset = ({ id, rootUrl }) => {
   let apiDocs = useRef()
   const resourceOptions = {
-    limit: 25
+    limit: 10
   }
   const [tablePadding, setTablePadding] = useState('ds-u-padding-y--1')
   const { dataset, } = useMetastoreDataset(id, rootUrl);
@@ -60,7 +60,7 @@ const Dataset = ({ id, rootUrl }) => {
           }
           {dataset.identifier &&
             <div ref={apiDocs}>
-              <h2>Try out the API</h2>
+              <h2>Try the API</h2>
               <ApiDocs 
                 endpoint={`${process.env.REACT_APP_ROOT_URL}`}
                 datasetID={dataset.identifier}

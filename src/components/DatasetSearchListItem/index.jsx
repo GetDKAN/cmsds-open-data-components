@@ -25,7 +25,7 @@ const DatasetSearchListItem = ({item, updateFacets}) => {
           Updated <TransformedDate date={modified} />
         </span>
       </div>
-      <h3>
+      <h3 className="ds-u-margin-y--1">
         <Link
           className="ds-u-color--base"
           to={`/dataset/${identifier}`}
