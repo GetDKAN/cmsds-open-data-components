@@ -14,7 +14,7 @@ import ResourceFooter from '../../components/ResourceFooter';
 const Dataset = ({ id, rootUrl }) => {
   let apiDocs = useRef()
   const resourceOptions = {
-    limit: 25
+    limit: 10
   }
   const [tablePadding, setTablePadding] = useState('ds-u-padding-y--1')
   const { dataset, } = useMetastoreDataset(id, rootUrl);
@@ -27,15 +27,15 @@ const Dataset = ({ id, rootUrl }) => {
   return (
     <section className="ds-l-container">
       <div className="ds-l-row ds-u-padding-top--3">
-        <div className="ds-l-col--9">
+        <div className="ds-l-md-col--9 ds-l-sm-col--12">
           <h1 className="ds-title">{dataset.title}</h1>
           <div className="ds-l-row">
-            <p className="ds-l-col--8">
+            <p className="ds-l-col--6">
               {dataset.theme ? <Badge variation="info">{dataset.theme[0].data}</Badge> : null}
             </p>
-            <p className="ds-l-col--4 ds-u-color--gray ds-u-text-align--right">Updated <TransformedDate date={modifiedDate} /></p>
+            <p className="ds-l-col--6 ds-u-color--gray ds-u-text-align--right">Updated <TransformedDate date={modifiedDate} /></p>
           </div>
-          <p>{dataset.description}</p>
+          <p dangerouslySetInnerHTML={{__html: dataset.description}} />
           <h2 className="dc-resource-header">Resource Preview</h2>
           {dataset.distribution
             && (
@@ -60,7 +60,7 @@ const Dataset = ({ id, rootUrl }) => {
           }
           {dataset.identifier &&
             <div ref={apiDocs}>
-              <h2>Try out the API</h2>
+              <h2>Try the API</h2>
               <ApiDocs 
                 endpoint={`${process.env.REACT_APP_ROOT_URL}`}
                 datasetID={dataset.identifier}
@@ -69,7 +69,7 @@ const Dataset = ({ id, rootUrl }) => {
           }
           
         </div>
-        <div className="ds-l-col--3">
+        <div className="ds-l-md-col--3 ds-l-sm-col--12">
         {dataset.distribution
           && (
             <DatasetDownloads downloadURL={dataset.distribution[0].data.downloadURL} />

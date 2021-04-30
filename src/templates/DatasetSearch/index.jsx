@@ -77,11 +77,11 @@ const DatasetSearch = ({rootUrl, location}) => {
 
   return(
     <section className="ds-l-container">
-      <h1 className="dc-search-header">
+      <h1 className="dc-search-header ds-title ds-u-margin-y--3">
         Datasets
       </h1>
       <div className="ds-l-row">
-        <div className="ds-l-col--8">
+        <div className="ds-l-md-col--8 ds-l-sm-col--12ds-u-margin-bottom--3">
           <form
             onSubmit={(e) => {e.preventDefault(); () => setFulltext(filterText);}}
             className="ds-u-display--flex ds-u-justify-content--between ds-u-margin-bottom--2 "
@@ -105,20 +105,25 @@ const DatasetSearch = ({rootUrl, location}) => {
               Search
             </Button>
           </form>
-          
+          <div className="ds-u-display--flex ds-u-justify-content--between">
+            <p className="ds-u-margin-y--0">
+              {selectedFacetsMessage(selectedFacets, {theme: 'Categories', keyword: 'Tags'})}
+            </p>
+            <Button
+              className="ds-u-padding--0 dc-c-clear-filters"
+              variation="transparent"
+              onClick={() => resetFilters()}
+            >
+              Clear all filters
+            </Button>
+          </div>
+          {/* <p className="ds-u-text-align--center ds-u-color--gray">{`[${items.length} ${items.length === 1 ? 'entry' : 'entries'} total on page]`}</p> */}
           {/* <SearchPaginationResults
             total={Number(totalItems)}
             pageSize={Number(pageSize)}
             currentPage={Number(page + 1)}
           /> */}
-          <p className="ds-u-margin-top--0">
-            {selectedFacetsMessage(selectedFacets, {theme: 'Categories', keyword: 'Tags'})}
-          </p>
-          <Button
-            onClick={() => resetFilters()}
-          >
-            Clear all filters
-          </Button>
+          
           <ol className="dc-dataset-search-list ds-u-padding--0">
             {items.map((item) => (
               <li className="ds-u-padding--0">
@@ -126,7 +131,6 @@ const DatasetSearch = ({rootUrl, location}) => {
               </li>
             ))}
           </ol>
-          <p className="ds-u-text-align--center ds-u-color--gray">{`[${items.length} ${items.length === 1 ? 'entry' : 'entries'} total on page]`}</p>
           {totalItems &&
             (<Pagination
               currentPage={page}
@@ -136,7 +140,7 @@ const DatasetSearch = ({rootUrl, location}) => {
             />)
           }
         </div>
-        <div className="ds-l-col--4">
+        <div className="ds-l-md-col--4 ds-l-sm-col--12">
           <div className="ds-u-padding--2 ds-u-margin-bottom--4 ds-u-border--1">
             <Dropdown
               options={[{ label: 'Recently Updated', value: 'modified' },{ label: 'Alphabetical', value: 'title' }]}

@@ -25,7 +25,7 @@ const DatasetSearchListItem = ({item, updateFacets}) => {
           Updated <TransformedDate date={modified} />
         </span>
       </div>
-      <h3>
+      <h3 className="ds-u-margin-y--1">
         <Link
           className="ds-u-color--base"
           to={`/dataset/${identifier}`}
@@ -34,7 +34,7 @@ const DatasetSearchListItem = ({item, updateFacets}) => {
         </Link>
       </h3>
       {/* 215 average character limit */}
-      <p className="ds-u-margin-top--0">{description}</p>
+      <p className="ds-u-margin-top--0" dangerouslySetInnerHTML={{__html: description}} />
       <div>
         {keyword &&
           <ul className="ds-u-padding--0 ds-u-display--flex ds-u-flex-wrap--wrap">

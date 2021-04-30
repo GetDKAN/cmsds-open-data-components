@@ -33,7 +33,7 @@ const DatasetAdditionalInformation = ({ datasetInfo }) => {
   
 
   return(
-    <div className="dc-c-additional-info-table ds-u-margin-bottom--3">
+    <div className="dc-c-additional-info-table ds-u-margin-bottom--6">
       <h2>Additional Information</h2>
       <Table compact striped>
         <TableHead>

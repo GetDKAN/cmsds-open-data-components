@@ -22,7 +22,7 @@ const FilteredResource = ({id, dist_id, location}) => {
   let buttonRef = null;
   const options = location.search ? {...qs.parse(location.search)} : {conditions: []}
   return (
-    <section className="ds-l-container ds-u-padding-bottom--3">
+    <section className="ds-l-container ds-u-padding-bottom--3 ds-u-margin-bottom--2">
       {Object.keys(resource).length
         && (
           <>
@@ -33,9 +33,9 @@ const FilteredResource = ({id, dist_id, location}) => {
               Back to {dataset.title}
             </Link>
             <h1 className="ds-title">{resource.data.title}</h1>
-            <p>{resource.data.description}</p>
-            <div className="ds-l-row ds-u-align-items--stretch ds-u-margin-bottom--3">
-              <div className="ds-l-col--4">
+            <p className="ds-u-margin-top--0" dangerouslySetInnerHTML={{__html: resource.data.description}} />
+            <div className="ds-l-row ds-u-align-items--stretch">
+              <div className="ds-l-md-col--4 ds-l-sm-col--12 ds-u-margin-bottom--3">
                 <div class="dc-c-resource-action ds-u-border--1 ds-u-radius ds-u-display--flex ds-u-flex-direction--column ds-u-text-align--center">
                   <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-bottom--2 ds-u-padding-bottom--0 ds-u-padding-left--3 ds-u-padding-left--3  ds-u-text-align--left">Create</h2>
                   <div className="dc-filtered-resource-toggle">
@@ -51,7 +51,7 @@ const FilteredResource = ({id, dist_id, location}) => {
                   
                 </div>
               </div>
-              <div className="ds-l-col--4">
+              <div className="ds-l-md-col--4 ds-l-sm-col--12 ds-u-margin-bottom--3">
                 <div class="ds-u-border--1 ds-u-radius">
                   <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-bottom--0 ds-u-padding-bottom--0 ds-u-padding-left--3">Access</h2>
                   <Button variation="transparent" className="ds-u-text-align--left ds-u-font-weight--normal">
@@ -72,9 +72,9 @@ const FilteredResource = ({id, dist_id, location}) => {
                   </Tooltip>
                 </div>
               </div>
-              <div className="ds-l-col--4">
+              <div className="ds-l-md-col--4 ds-l-sm-col--12 ds-u-margin-bottom--3">
                 <div class=" ds-u-border--1 ds-u-radius">
-                  <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-bottom--0 ds-u-padding-bottom--0 ds-u-padding-left--3 ds-u-padding-left--3">Try API</h2>
+                  <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-y--0 ds-u-padding-bottom--0 ds-u-padding-left--3 ds-u-padding-left--3">Try API</h2>
                   <Button
                     variation="transparent"
                     className="ds-u-text-align--left ds-u-font-weight--normal" 
