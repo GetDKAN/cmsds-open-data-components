@@ -81,7 +81,7 @@ const DatasetSearch = ({rootUrl, location}) => {
         Datasets
       </h1>
       <div className="ds-l-row">
-        <div className="ds-l-col--8 ds-u-margin-bottom--3">
+        <div className="ds-l-md-col--8 ds-l-sm-col--12ds-u-margin-bottom--3">
           <form
             onSubmit={(e) => {e.preventDefault(); () => setFulltext(filterText);}}
             className="ds-u-display--flex ds-u-justify-content--between ds-u-margin-bottom--2 "
@@ -140,7 +140,7 @@ const DatasetSearch = ({rootUrl, location}) => {
             />)
           }
         </div>
-        <div className="ds-l-col--4">
+        <div className="ds-l-md-col--4 ds-l-sm-col--12">
           <div className="ds-u-padding--2 ds-u-margin-bottom--4 ds-u-border--1">
             <Dropdown
               options={[{ label: 'Recently Updated', value: 'modified' },{ label: 'Alphabetical', value: 'title' }]}
