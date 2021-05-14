@@ -5,33 +5,37 @@ import NavBar from '../../components/NavBar';
 import SearchModal from '../../components/SearchModal';
 import cmsLogo from '../../assets/images/CMSGovLogo-O.png';
 
-const Header = ({siteName, links, org, searchModalText, customSearch = false}) => {
+const Header = ({siteName, links, org, searchModalText, customSearch, includeTopNav}) => {
   const { url, tagline, logo, urlTitle, logoAltText } = org;
   return (
     <header className="dc-c-header ds-base" aria-label="Site header">
-      <div className="dc-c-cmsheader ds-u-display--flex ds-u-padding-x--5 ds-u-align-items--center">
-        <div className="ds-l-sm-col--12 ds-l-lg-col--8">
-          <div className="cms-link-container">
-            <a
-              href={url} 
-              title={urlTitle}
-            >
-              <img src={logo} alt={logoAltText} />
-            </a>
+      {includeTopNav
+        && (
+          <div className="dc-c-cmsheader ds-u-display--flex ds-u-padding-x--5 ds-u-align-items--center">
+            <div className="ds-l-sm-col--12 ds-l-lg-col--8">
+              <div className="cms-link-container">
+                <a
+                  href={url} 
+                  title={urlTitle}
+                >
+                  <img src={logo} alt={logoAltText} />
+                </a>
+              </div>
+              <div>
+                <span className="cms-text-container">{tagline}</span>
+              </div>
+            </div>
+            <div className="ds-u-margin-left--auto">
+              <NavBar
+                links={links.topnav}
+                menuName="CMS Main Header"
+                menuId="cmsheader"
+                menuClasses="ds-u-display--flex dc-c-header--links ds-u-font-size--small"
+              />
+            </div>
           </div>
-          <div>
-            <span className="cms-text-container">{tagline}</span>
-          </div>
-        </div>
-        <div className="ds-u-margin-left--auto">
-          <NavBar
-            links={links.topnav}
-            menuName="CMS Main Header"
-            menuId="cmsheader"
-            menuClasses="ds-u-display--flex dc-c-header--links ds-u-font-size--small"
-          />
-        </div>
-      </div>
+        )
+      }
       <div className="dc-c-main-navigation">
         <div className="ds-l-container">
           <div className="ds-l-row ds-u-align-items--center">
@@ -70,11 +74,14 @@ Header.defaultProps = {
     urlTitle: 'CMS.gov Centers for Medicare &amp; Medicaid Services',
     logo: cmsLogo,
     logoAltText: 'CMS.gov Centers for Medicare &amp; Medicaid Services',
-  }
+  },
+  includeTopNav: true,
+  customSearch: false,
 }
 
 Header.propTypes = {
   siteName: PropTypes.string.isRequired,
+  includeTopNav: PropTypes.bool,
 }
 
 export default Header;
