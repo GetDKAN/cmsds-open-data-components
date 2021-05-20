@@ -17,6 +17,7 @@ export { default as Breadcrumb } from './components/Breadcrumb';
 export { default as TransformedDate } from './components/TransformedDate';
 
 // Templates
+export { default as PageNotFound } from './templates/PageNotFound';
 export { default as Footer } from './templates/Footer';
 export { default as Dataset } from './templates/Dataset';
 export { default as DatasetSearch } from './templates/DatasetSearch';
