@@ -61,7 +61,7 @@ const Dataset = ({ id, rootUrl }) => {
           {dataset.identifier &&
             <div ref={apiDocs}>
               <h2>Try the API</h2>
-              <SwaggerUI url={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${dataset.identifier}/docs`} docExpansion={'list'} />;
+              <SwaggerUI url={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${dataset.identifier}/docs`} docExpansion={'list'} />
             </div>
           }
           
