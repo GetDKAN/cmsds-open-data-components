@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { ApiDocs } from "@civicactions/data-catalog-components";
-import { useMetastoreDataset, Resource, prepareColumns } from '@civicactions/data-catalog-services';
+import SwaggerUI from 'swagger-ui-react';
+import { useMetastoreDataset, Resource } from '@civicactions/data-catalog-services';
 import { Badge, Button } from '@cmsgov/design-system';
 import ResourcePreview from '../../components/ResourcePreview';
 import ResourceHeader from '../../components/ResourceHeader';
@@ -61,10 +61,7 @@ const Dataset = ({ id, rootUrl }) => {
           {dataset.identifier &&
             <div ref={apiDocs}>
               <h2>Try the API</h2>
-              <ApiDocs 
-                endpoint={`${process.env.REACT_APP_ROOT_URL}`}
-                datasetID={dataset.identifier}
-              />
+              <SwaggerUI url={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${dataset.identifier}/docs`} docExpansion={'list'} />;
             </div>
           }
           
