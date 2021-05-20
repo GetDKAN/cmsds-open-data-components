@@ -114,10 +114,18 @@ const DatasetSearch = ({rootUrl, location}) => {
               Search
             </Button>
           </form>
-          <div className="ds-u-display--flex ds-u-justify-content--between">
-            <p className="ds-u-margin-y--0">
-              {selectedFacetsMessage(selectedFacets, {theme: 'Categories', keyword: 'Tags'})}
-            </p>
+          <div className="ds-u-display--flex ds-u-justify-content--between ds-u-align-items--end">
+            <div>
+              {currentResultNumbers
+                && (
+                  <p className="ds-u-margin-y--0">Showing {currentResultNumbers.startingNumber} - {currentResultNumbers.endingNumber} of {currentResultNumbers.total} datasets</p>
+                )
+              }
+              <p className="ds-u-margin-y--0">
+                {selectedFacetsMessage(selectedFacets, {theme: 'Categories', keyword: 'Tags'})}
+              </p>
+            </div>
+            
             <Button
               className="ds-u-padding--0 dc-c-clear-filters"
               variation="transparent"
@@ -126,11 +134,6 @@ const DatasetSearch = ({rootUrl, location}) => {
               Clear all filters
             </Button>
           </div>
-          {currentResultNumbers
-            && (
-              <p>Showing {currentResultNumbers.startingNumber} - {currentResultNumbers.endingNumber} of {currentResultNumbers.total} datasets</p>
-            )
-          }
           <ol className="dc-dataset-search-list ds-u-padding--0">
             {items.map((item) => (
               <li className="ds-u-padding--0">
