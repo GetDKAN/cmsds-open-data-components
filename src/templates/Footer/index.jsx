@@ -31,7 +31,7 @@ const Footer = ({
                   <p>{emailBody}</p>
                 </div>
                 <div className="ds-l-md-col--4 ds-u-padding-left--7">
-                  {/* <Button href={emailLink}>{emailButton}</Button> */}
+                  <Button href={emailLink}>{emailButton}</Button>
                 </div>
               </div>
             </div>

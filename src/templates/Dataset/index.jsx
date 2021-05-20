@@ -17,7 +17,11 @@ const Dataset = ({ id, rootUrl }) => {
     limit: 10
   }
   const [tablePadding, setTablePadding] = useState('ds-u-padding-y--1')
-  const { dataset, } = useMetastoreDataset(id, rootUrl);
+  const metastore = useMetastoreDataset(id, rootUrl);
+  const { dataset, } = metastore;
+
+  console.log(metastore)
+
   const rawDate = new Date(dataset.modified);
   let modifiedDate = '';
   let options = { year: 'numeric', month: 'long', day: 'numeric' };
