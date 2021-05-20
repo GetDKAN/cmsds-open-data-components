@@ -226,9 +226,18 @@ Footer.propTypes = {
     )
   }).isRequired,
   socialMediaLinks: PropTypes.shape({
-    facebook: PropTypes.string,
-    twitter: PropTypes.string,
-    linkedin: PropTypes.string,
+    facebook: PropTypes.shape({
+      title: PropTypes.string,
+      url: PropTypes.string,
+    }),
+    twitter: PropTypes.shape({
+      title: PropTypes.string,
+      url: PropTypes.string,
+    }),
+    linkedin: PropTypes.shape({
+      title: PropTypes.string,
+      url: PropTypes.string,
+    }),
   }),
   hhsLogo: PropTypes.string.isRequired,
   cmsLogo: PropTypes.string.isRequired,

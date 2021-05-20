@@ -39,7 +39,7 @@ const ResourceHeader = ({ setTablePadding, id, distribution, includeFiltered, in
       <div className="ds-l-row ds-u-align-items--center">
         <div className="ds-l-col--6">
           <DataTablePageResults
-            totalRows={totalRows}
+            totalRows={parseInt(totalRows)}
             limit={limit}
             offset={offset}
           />
