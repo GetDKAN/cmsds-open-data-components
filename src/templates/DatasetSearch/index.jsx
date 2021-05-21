@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import qs from 'qs';
 import { SearchPaginationResults } from '@civicactions/data-catalog-components';
 import { useSearchAPI, separateFacets } from '@civicactions/data-catalog-services';
@@ -44,7 +44,7 @@ export function transformUrlParamsToSearchObject(searchParams, facetList) {
 
 
 const DatasetSearch = ({rootUrl, location}) => {
-  console.log(decodeURI(location.search))
+  const [currentResultNumbers, setCurrentResultNumbers] = useState(null) 
   const {
     fulltext,
     selectedFacets,
@@ -73,7 +73,16 @@ const DatasetSearch = ({rootUrl, location}) => {
     const searchParams = updateUrl(selectedFacets, fulltext, sort)
     window.history.pushState({}, '', `${url.origin}${url.pathname}${searchParams}`);
   },[fulltext, selectedFacets, sort])
-
+  useEffect(() => {
+    const baseNumber = Number(totalItems) > 0 ? 1 : 0;
+    const startingNumber = baseNumber + ((Number(pageSize) * Number(page + 1)) - Number(pageSize))
+    const endingNumber = (Number(pageSize) * Number(page + 1)); 
+    setCurrentResultNumbers({
+      total: Number(totalItems),
+      startingNumber: startingNumber,
+      endingNumber: endingNumber
+    })
+  }, [totalItems, pageSize, page])
 
   return(
     <section className="ds-l-container">
@@ -105,10 +114,18 @@ const DatasetSearch = ({rootUrl, location}) => {
               Search
             </Button>
           </form>
-          <div className="ds-u-display--flex ds-u-justify-content--between">
-            <p className="ds-u-margin-y--0">
-              {selectedFacetsMessage(selectedFacets, {theme: 'Categories', keyword: 'Tags'})}
-            </p>
+          <div className="ds-u-display--flex ds-u-justify-content--between ds-u-align-items--end">
+            <div>
+              {currentResultNumbers
+                && (
+                  <p className="ds-u-margin-y--0">Showing {currentResultNumbers.startingNumber} - {currentResultNumbers.endingNumber} of {currentResultNumbers.total} datasets</p>
+                )
+              }
+              <p className="ds-u-margin-y--0">
+                {selectedFacetsMessage(selectedFacets, {theme: 'Categories', keyword: 'Tags'})}
+              </p>
+            </div>
+            
             <Button
               className="ds-u-padding--0 dc-c-clear-filters"
               variation="transparent"
@@ -117,13 +134,6 @@ const DatasetSearch = ({rootUrl, location}) => {
               Clear all filters
             </Button>
           </div>
-          {/* <p className="ds-u-text-align--center ds-u-color--gray">{`[${items.length} ${items.length === 1 ? 'entry' : 'entries'} total on page]`}</p> */}
-          {/* <SearchPaginationResults
-            total={Number(totalItems)}
-            pageSize={Number(pageSize)}
-            currentPage={Number(page + 1)}
-          /> */}
-          
           <ol className="dc-dataset-search-list ds-u-padding--0">
             {items.map((item) => (
               <li className="ds-u-padding--0">

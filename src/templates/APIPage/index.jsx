@@ -1,9 +1,9 @@
 import React from 'react';
-import { ApiDocs } from "@civicactions/data-catalog-components";
+import SwaggerUI from 'swagger-ui-react';
 
 const APIPage = () => (
   <section className="ds-l-container">
-    <ApiDocs endpoint={process.env.REACT_APP_ROOT_URL} />
+    <SwaggerUI url={`${process.env.REACT_APP_ROOT_URL}?authentication=false`} docExpansion={'list'} />;
   </section>
 );
 
