@@ -11,6 +11,7 @@ const DatasetAdditionalInformation = ({ datasetInfo }) => {
     modified,
     keyword,
     identifier,
+    license,
     theme,
     contactPoint,
     bureauCode,
@@ -85,7 +86,7 @@ const DatasetAdditionalInformation = ({ datasetInfo }) => {
           </TableRow>
           <TableRow>
             <TableCell>License</TableCell>
-            <TableCell></TableCell>
+            <TableCell><a href={license} target="_blank" rel="nofollow">{license}</a></TableCell>
           </TableRow>
           <TableRow>
             <TableCell>Public Access Level</TableCell>
