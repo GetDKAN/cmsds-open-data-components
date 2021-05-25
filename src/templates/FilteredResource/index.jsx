@@ -1,9 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import qs from 'qs';
 import { Link } from '@reach/router';
 import { ApiDocs } from '@civicactions/data-catalog-components';
-import { Resource, useMetastoreDataset, transformURLtoDatastoreQuery } from '@civicactions/data-catalog-services';
-import { HelpDrawerToggle, Button, Tooltip } from '@cmsgov/design-system';
+import { Resource, useMetastoreDataset, transformURLtoDatastoreQuery, useDatastore } from '@civicactions/data-catalog-services';
+import { HelpDrawerToggle, Button, Tooltip, Spinner } from '@cmsgov/design-system';
 import ResourceFilter from '../../components/ResourceFilter';
 import ResourceHeader from '../../components/ResourceHeader';
 import ResourcePreview from '../../components/ResourcePreview';
@@ -14,16 +14,28 @@ const FilteredResource = ({id, dist_id, location}) => {
   let apiDocs = useRef();
   const [filtersOpen, setFiltersOpen] = React.useState(false)
   const {dataset} = useMetastoreDataset(id, process.env.REACT_APP_ROOT_URL);
-  let distribution = dataset.distribution ? dataset.distribution : [];
-  let resource = {};
-  if(distribution.length) {
-    resource = distribution.find((dist) => dist.identifier === dist_id);
+  let distribution = {};
+  let distribution_array = dataset.distribution ? dataset.distribution : [];
+  if(distribution_array.length) {
+    distribution = distribution_array.find((dist) => dist.identifier === dist_id);
   }
   let buttonRef = null;
-  const options = location.search ? {...qs.parse(location.search)} : {conditions: []}
+  const options = location.search ? {...qs.parse(location.search)} : {conditions: []};
+  const resource = useDatastore('', process.env.REACT_APP_ROOT_URL, {
+    ...options,
+    manual: true,
+  })
+  useEffect(() => {
+    if(distribution.identifier) {
+      resource.setResource(distribution.identifier);
+      resource.setManual(false)
+    }
+  }, [distribution])
+  const downloadUrl = `${process.env.REACT_APP_ROOT_URL}/datastore/query/${distribution.identifier}/download?${qs.stringify({conditions: resource.conditions}, { encode: false })}&format=csv`;
+
   return (
     <section className="ds-l-container ds-u-padding-bottom--3 ds-u-margin-bottom--2">
-      {Object.keys(resource).length
+      {Object.keys(distribution).length
         && (
           <>
             <Link
@@ -32,11 +44,11 @@ const FilteredResource = ({id, dist_id, location}) => {
             >
               Back to {dataset.title}
             </Link>
-            <h1 className="ds-title">{resource.data.title}</h1>
-            <p className="ds-u-margin-top--0" dangerouslySetInnerHTML={{__html: resource.data.description}} />
+            <h1 className="ds-title">{distribution.data.title}</h1>
+            <p className="ds-u-margin-top--0" dangerouslySetInnerHTML={{__html: distribution.data.description}} />
             <div className="ds-l-row ds-u-align-items--stretch">
               <div className="ds-l-md-col--4 ds-l-sm-col--12 ds-u-margin-bottom--3">
-                <div class="dc-c-resource-action ds-u-border--1 ds-u-radius ds-u-display--flex ds-u-flex-direction--column ds-u-text-align--center">
+                <div className="dc-c-resource-action ds-u-border--1 ds-u-radius ds-u-display--flex ds-u-flex-direction--column ds-u-text-align--center">
                   <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-bottom--2 ds-u-padding-bottom--0 ds-u-padding-left--3 ds-u-padding-left--3  ds-u-text-align--left">Create</h2>
                   <div className="dc-filtered-resource-toggle">
                     <HelpDrawerToggle
@@ -52,28 +64,28 @@ const FilteredResource = ({id, dist_id, location}) => {
                 </div>
               </div>
               <div className="ds-l-md-col--4 ds-l-sm-col--12 ds-u-margin-bottom--3">
-                <div class="ds-u-border--1 ds-u-radius">
+                <div className="ds-u-border--1 ds-u-radius">
                   <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-bottom--0 ds-u-padding-bottom--0 ds-u-padding-left--3">Access</h2>
-                  <Button variation="transparent" className="ds-u-text-align--left ds-u-font-weight--normal">
+                  <Button
+                    variation="transparent"
+                    className="ds-u-text-align--left ds-u-font-weight--normal"
+                    href={downloadUrl}
+                  >
                     Download filtered view (CSV)
                   </Button>
                   <Tooltip
                     onOpen={() => {navigator.clipboard.writeText(window.location.href);}}
-                    dialog
-                    triggerContent="Copy link to filtered view"
-                    triggerClassName="ds-c-button ds-c-button--transparent ds-u-text-align--left"
+                    className="ds-c-button ds-c-button--transparent ds-u-text-align--left"
                     placement="bottom"
+                    dialog
+                    title="Link copied to clipboard"
                   >
-                    <>
-                      <p className="ds-u-margin--0">
-                        Link copied to clipboard
-                      </p>
-                    </>
+                    Copy link to filtered view
                   </Tooltip>
                 </div>
               </div>
               <div className="ds-l-md-col--4 ds-l-sm-col--12 ds-u-margin-bottom--3">
-                <div class=" ds-u-border--1 ds-u-radius">
+                <div className=" ds-u-border--1 ds-u-radius">
                   <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-y--0 ds-u-padding-bottom--0 ds-u-padding-left--3 ds-u-padding-left--3">Try API</h2>
                   <Button
                     variation="transparent"
@@ -91,22 +103,28 @@ const FilteredResource = ({id, dist_id, location}) => {
                 </div>
               </div>
             </div>
-            <Resource
-              distribution={resource}
-              rootUrl={process.env.REACT_APP_ROOT_URL}
-              options={{
-                ...options,
-                limit: 25,
-              }}
-            >
-              <ResourceHeader includeDensity={true} setTablePadding={setTablePadding} />
-              <ResourcePreview id={dist_id} tablePadding={tablePadding} />
-              <ResourceFooter />
-              {filtersOpen
-                && ( <ResourceFilter id={dist_id} filterOpen={filtersOpen} setFilterOpen={setFiltersOpen} helpDrawerButton={buttonRef} /> )
-              }
-              
-            </Resource>
+            {resource.columns
+              ? (
+                <div>
+                  <ResourceHeader includeDensity={true} setTablePadding={setTablePadding} distribution={distribution} resource={resource} />
+                  <ResourcePreview id={dist_id} tablePadding={tablePadding} resource={resource} />
+                  <ResourceFooter resource={resource} />
+                  {filtersOpen
+                    && (<ResourceFilter
+                          id={dist_id}
+                          resource={resource}
+                          filterOpen={filtersOpen}
+                          setFilterOpen={setFiltersOpen}
+                          helpDrawerButton={buttonRef}
+                        />)
+                  }
+                </div>
+                
+              )
+              : (
+                <Spinner />
+              )
+            }
             {dataset.identifier &&
               <div ref={apiDocs}>
                 <h2>Try out the API</h2>

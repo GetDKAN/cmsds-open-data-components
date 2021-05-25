@@ -1,21 +1,20 @@
 import React from 'react';
-import { ResourceDispatch } from '@civicactions/data-catalog-services';
 import Pagination from '../Pagination';
  
-const ResourceFooter = ({}) => {
+const ResourceFooter = ({resource}) => {
   const {
     limit,
-    items,
+    values,
     offset, 
-    totalRows,
-    actions } = React.useContext(ResourceDispatch);
-  const { setLimit, setOffset } = actions;
+    count,
+    setOffset
+   } = resource;
   return(
     <div>
-      {items.length > 0 &&
+      {values.length > 0 &&
         (<Pagination
           currentPage={offset}
-          totalItems={Number(totalRows)}
+          totalItems={Number(count)}
           itemsPerPage={limit}
           gotoPage={setOffset}
           calcByOffset
