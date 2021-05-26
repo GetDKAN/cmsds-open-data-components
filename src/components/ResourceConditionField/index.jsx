@@ -5,10 +5,27 @@ import CloseIcon from '../../assets/icons/close';
 function buildOperatorOptions(type) {
   switch(type) {
     case 'text':
-      return ['LIKE', '=']
+      return [
+        {label: "Is", value: "="},
+        {label: "Contains", value: "like"}
+      ]
     default:
       return []
   }
+}
+
+function cleanText(value, operator) {
+  let newValue = value;
+  
+  if(operator.toLowerCase() === 'like') {
+    if(newValue.substring(0,1) === "%") {
+      newValue = newValue.substring(1);
+    }
+    if(newValue.substring(newValue.length - 1) === "%") {
+      newValue = newValue.slice(0, -1)
+    }
+  }
+  return newValue;
 }
 
 const ResourceConditionField = ({data, index, remove, schema, update}) => {
@@ -17,7 +34,7 @@ const ResourceConditionField = ({data, index, remove, schema, update}) => {
   let operatorOptions = []
   const columnOptions = Object.keys(fields).map((key) => { return {label: fields[key].description ? fields[key].description : key, value: key}});
   if(data.property) {
-    operatorOptions = buildOperatorOptions(fields[data.property].type).map((opt) => { return {label: opt, value: opt}});
+    operatorOptions = buildOperatorOptions(fields[data.property].type).map((opt) => { return {label: opt.label, value: opt.value}});
   }
   return(
     <fieldset>
@@ -51,7 +68,7 @@ const ResourceConditionField = ({data, index, remove, schema, update}) => {
       </div>
       <div className="ds-l-form-row">
         <TextField
-          value={data.value}
+          value={cleanText(data.value, data.operator)}
           disabled={!data.property || !data.operator ? true : false}
           onChange={(e) => (update(index, 'value', e.target.value))}
           label="Filter value"

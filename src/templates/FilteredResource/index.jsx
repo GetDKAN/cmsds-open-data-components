@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import qs from 'qs';
 import { Link } from '@reach/router';
 import { ApiDocs } from '@civicactions/data-catalog-components';
-import { Resource, useMetastoreDataset, transformURLtoDatastoreQuery, useDatastore } from '@civicactions/data-catalog-services';
+import { useMetastoreDataset, useDatastore } from '@civicactions/data-catalog-services';
 import { HelpDrawerToggle, Button, Tooltip, Spinner } from '@cmsgov/design-system';
 import ResourceFilter from '../../components/ResourceFilter';
 import ResourceHeader from '../../components/ResourceHeader';
@@ -23,6 +23,7 @@ const FilteredResource = ({id, dist_id, location}) => {
   const options = location.search ? {...qs.parse(location.search)} : {conditions: []};
   const resource = useDatastore('', process.env.REACT_APP_ROOT_URL, {
     ...options,
+    limit: 25,
     manual: true,
   })
   useEffect(() => {

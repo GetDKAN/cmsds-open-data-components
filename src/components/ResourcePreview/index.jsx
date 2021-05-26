@@ -24,7 +24,7 @@ function DefaultColumnFilter({
   );
 }
 
-const ResourceContent = ({tablePadding, id, options, resource}) => {
+const ResourceContent = ({tablePadding, id, options, resource, customColumns}) => {
   const tableClasses = {
     tableContainerClassName: '',
     headerCellClassName: 'ds-u-border--dark ds-u-padding--2 ds-u-border-y--2 ds-u-border-right--1 ds-u-font-weight--bold',
@@ -44,7 +44,7 @@ const ResourceContent = ({tablePadding, id, options, resource}) => {
       <DataTable
         filterTitle="Filter columns"
         data={resource.values}
-        columns={prepareColumns(resource.columns, resource.schema[id])}
+        columns={customColumns ? customColumns : prepareColumns(resource.columns, resource.schema[id])}
         schema={resource.schema}
         totalRows={parseInt(resource.totalRows)}
         limit={resource.limit}
