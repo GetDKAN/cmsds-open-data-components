@@ -7,7 +7,7 @@ import NavBar from '../../components/NavBar';
 import cmsLogo from '../../assets/images/CMSGovLogo-O.png'
 import cmsLogoWhite from '../../assets/images/CMSgov@2x-white-O.png';
 
-const MobileHeader = ({siteName, links, org, searchModalText, customSearch = false}) => {
+const MobileHeader = ({siteName, links, org, searchModalText, customSearch = false, includeTopNav}) => {
   const { url, logo, urlTitle, logoAltText, inverseLogo } = org;
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -15,28 +15,33 @@ const MobileHeader = ({siteName, links, org, searchModalText, customSearch = fal
   const tablet = useMediaQuery({ minWidth: 544, maxWidth: 1023});
   return (
     <header className={`dc-c-header dc-c-mobile-header ${menuOpen ? 'menu-open' : ''}`} aria-label="Site header">
-      <div className={`dc-c-cmsheader ds-u-display--flex ds-u-padding-x--1 ds-u-align-items--center ${mobile ? 'ds-u-justify-content--center' : 'ds-u-justify-content--between'}`}>
-        <div className="cms-link-container">
-          <a
-            href={url}
-            title={urlTitle}
-          >
-            <img src={menuOpen ? inverseLogo : logo} alt={logoAltText} />
-          </a>
-        </div>
-        {tablet
-          && (
-            <div className="ds-u-margin-left--auto">
-              <NavBar
-                links={links.topnav}
-                menuName="CMS Main Header"
-                menuId="cmsheader"
-                menuClasses="ds-u-display--flex dc-c-header--links ds-u-font-size--small"
-              />
-            </div>
-          )
-        }
-      </div>
+      {includeTopNav
+       && (
+        <div className={`dc-c-cmsheader ds-u-display--flex ds-u-padding-x--1 ds-u-align-items--center ${mobile ? 'ds-u-justify-content--center' : 'ds-u-justify-content--between'}`}>
+          <div className="cms-link-container">
+            <a
+              href={url}
+              title={urlTitle}
+            >
+              <img src={menuOpen ? inverseLogo : logo} alt={logoAltText} />
+            </a>
+          </div>
+          
+          {tablet
+            && (
+              <div className="ds-u-margin-left--auto">
+                <NavBar
+                  links={links.topnav}
+                  menuName="CMS Main Header"
+                  menuId="cmsheader"
+                  menuClasses="ds-u-display--flex dc-c-header--links ds-u-font-size--small"
+                />
+              </div>
+            )
+          }
+          </div>
+        )
+      }
       <div className="dc-c-main-navigation ds-u-display--flex ds-u-justify-content--between ds-u-align-items--center">
         <Button
           variation="transparent"
@@ -121,7 +126,8 @@ MobileHeader.defaultProps = {
     logo: cmsLogo,
     logoAltText: 'CMS.gov Centers for Medicare &amp; Medicaid Services',
     inverseLogo: cmsLogoWhite,
-  }
+  },
+  includeTopNav: true
 }
 
 export default MobileHeader;
