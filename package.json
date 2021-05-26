@@ -1,6 +1,6 @@
 {
   "name": "@civicactions/cmsds-open-data-components",
-  "version": "0.7.2",
+  "version": "0.8.2",
   "description": "Components for the open data catalog frontend using CMS Design System",
   "main": "lib/index.js",
   "scripts": {
@@ -80,13 +80,13 @@
     "jest-axe": "^4.1.0",
     "node-sass": "^4.13.1",
     "prettier": "^1.16.0",
-    "react-test-renderer": "^16.13.1",
+    "react-test-renderer": "^17.0.2",
     "sass-loader": "^7.1.0",
     "url-loader": "^1.1.2"
   },
   "peerDependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "files": [
     "lib",

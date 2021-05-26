@@ -47,7 +47,7 @@ const ResourceContent = ({tablePadding, id, options}) => {
         data={value.items}
         columns={prepareColumns(value.columns, value.schema[id])}
         schema={value.schema}
-        totalRows={value.totalRows}
+        totalRows={parseInt(value.totalRows)}
         limit={value.limit}
         offset={value.offset}
         loading={value.loading}
