@@ -43,7 +43,6 @@ const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, resour
         }
         return cond
       })
-      console.log(updatedConditions)
       setConditions(updatedConditions);
     }
   }
