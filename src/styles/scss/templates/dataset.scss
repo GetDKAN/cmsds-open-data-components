@@ -8,3 +8,10 @@
     background-color: $color-primary-alt-light;
   }
 }
+
+.dc-truncate {
+  max-width: 85%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

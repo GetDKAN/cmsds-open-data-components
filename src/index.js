@@ -13,6 +13,9 @@ export { default as SubMenu } from './components/SubMenu';
 export { default as ApiDocumentation } from './components/ApiDocumentation';
 export { default as ResourceConditionField } from './components/ResourceConditionField';
 export { default as ResourceFilter } from './components/ResourceFilter';
+export { default as ResourceHeader } from './components/ResourceHeader';
+export { default as ResourcePreview } from './components/ResourcePreview';
+export { default as ResourceFooter } from './components/ResourceFooter';
 export { default as Breadcrumb } from './components/Breadcrumb';
 export { default as TransformedDate } from './components/TransformedDate';
 

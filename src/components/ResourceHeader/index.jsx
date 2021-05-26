@@ -1,18 +1,19 @@
 import React from 'react';
 import { Link } from '@reach/router';
-import { ResourceDispatch } from '@civicactions/data-catalog-services';
 import { DataTablePageResults } from '@civicactions/data-catalog-components';
 import DataTableDensity from '../../components/DataTableDensity';
 import ManageColumns from '../../components/ManageColumns';
 import DataTableRowChanger from '../../components/DataTableRowChanger';
 
-const ResourceHeader = ({ setTablePadding, id, distribution, includeFiltered, includeDensity }) => {
+const ResourceHeader = ({ setTablePadding, id, distribution, includeFiltered, includeDensity, resource }) => {
   const {
     limit,
     offset, 
-    totalRows,
-    actions } = React.useContext(ResourceDispatch);
-  const { setLimit, setOffset } = actions;
+    count,
+    setLimit,
+    setOffset,
+   } = resource;
+
   return(
     <div>
       <div className="ds-l-row">
@@ -38,11 +39,15 @@ const ResourceHeader = ({ setTablePadding, id, distribution, includeFiltered, in
       </div>
       <div className="ds-l-row ds-u-align-items--center">
         <div className="ds-l-col--6">
-          <DataTablePageResults
-            totalRows={parseInt(totalRows)}
-            limit={limit}
-            offset={offset}
-          />
+          {count
+            && (
+              <DataTablePageResults
+                totalRows={parseInt(count)}
+                limit={limit}
+                offset={offset}
+              />
+            )
+          }
         </div>
         <div className="ds-l-col--6">
           <DataTableRowChanger limit={limit} setLimit={setLimit} setOffset={setOffset} />

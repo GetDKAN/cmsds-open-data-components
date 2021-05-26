@@ -1,6 +1,6 @@
 import React from 'react';
 import { DataTable } from '@civicactions/data-catalog-components';
-import { ResourceDispatch, transformTableFilterToQueryCondition, transformTableSortToQuerySort } from '@civicactions/data-catalog-services';
+import { transformTableFilterToQueryCondition, transformTableSortToQuerySort } from '@civicactions/data-catalog-services';
 import { TextField } from '@cmsgov/design-system';
 
 export function prepareColumns(columns, schema) {
@@ -24,15 +24,14 @@ function DefaultColumnFilter({
   );
 }
 
-const ResourceContent = ({tablePadding, id, options}) => {
-  const value = React.useContext(ResourceDispatch);
+const ResourceContent = ({tablePadding, id, options, resource, customColumns}) => {
   const tableClasses = {
     tableContainerClassName: '',
     headerCellClassName: 'ds-u-border--dark ds-u-padding--2 ds-u-border-y--2 ds-u-border-right--1 ds-u-font-weight--bold',
     headerGroupClassName: '',
-    headerCellTextClassName: 'ds-u-truncate ds-u-display--inline-block',
+    headerCellTextClassName: 'dc-truncate ds-u-display--inline-block',
     cellEvenRowClassName: 'ds-u-fill--gray-lightest',
-    cellClassName: `${tablePadding} ds-u-truncate ds-u-padding-x--1`,
+    cellClassName: `${tablePadding} dc-truncate ds-u-padding-x--1`,
     filterTitleClassName: 'ds-u-font-weight--bold ds-u-padding-left--2  ds-u-fill--gray-lightest ds-u-display--block',
     headerFilterClassName: 'ds-u-padding-top--1 ds-u-fill--gray-lightest',
     headerFilterCellClassName: 'ds-u-padding-x--1 ds-u-padding-bottom--0 ds-u-border-bottom--0 ds-u-fill--gray-lightest',
@@ -44,15 +43,15 @@ const ResourceContent = ({tablePadding, id, options}) => {
     <div className="ds-u-overflow--scroll ds-u-border-x--1 ds-u-border-bottom--1">
       <DataTable
         filterTitle="Filter columns"
-        data={value.items}
-        columns={prepareColumns(value.columns, value.schema[id])}
-        schema={value.schema}
-        totalRows={parseInt(value.totalRows)}
-        limit={value.limit}
-        offset={value.offset}
-        loading={value.loading}
-        setSort={value.actions.setSort}
-        setConditions={value.actions.setConditions}
+        data={resource.values}
+        columns={customColumns ? customColumns : prepareColumns(resource.columns, resource.schema[id])}
+        schema={resource.schema}
+        totalRows={parseInt(resource.totalRows)}
+        limit={resource.limit}
+        offset={resource.offset}
+        loading={resource.loading}
+        setSort={resource.setSort}
+        setConditions={resource.setConditions}
         conditionsTransform={transformTableFilterToQueryCondition}
         sortTransform={transformTableSortToQuerySort}
         tableClasses={tableClasses}

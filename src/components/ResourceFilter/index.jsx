@@ -1,24 +1,21 @@
 import React from 'react';
 import qs from 'qs';
 import { Button, HelpDrawer } from '@cmsgov/design-system';
-import { ResourceDispatch } from '@civicactions/data-catalog-services';
 import ResourceConditionField from '../ResourceConditionField';
 
-const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, helpDrawerButton}) => {
+const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, resource, includeSearchParams}) => {
   const {
-    actions,
+    setConditions,
     schema,
     conditions,
-    searchParams
-  } = React.useContext(ResourceDispatch);
+    // searchParams
+  } = resource;
 
-  const { setConditions } = actions;
   const [formConditions, setFormConditions] = React.useState(conditions && conditions.length ? conditions : [{...defaultCondition}]);
-
   React.useEffect(() => {
-    const url = new URL(window.location);
-    const urlString = qs.stringify({conditions: conditions}, {encodeValuesOnly: true, addQueryPrefix: true })
-    if(urlString !== searchParams) {
+    if(includeSearchParams) {
+      const url = new URL(window.location);
+      const urlString = qs.stringify({conditions: conditions}, {encodeValuesOnly: true, addQueryPrefix: true })
       window.history.pushState({}, '', `${url.origin}${url.pathname}${urlString}`);
     }
   }, [conditions])
@@ -40,7 +37,13 @@ const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, helpDr
   function submitFilters(e) {
     e.preventDefault();
     if(formConditions.length) {
-      setConditions(formConditions);
+      const updatedConditions = formConditions.map((cond) => {
+        if(cond.operator.toLowerCase() === 'like') {
+          cond.value = `%${cond.value}%`;
+        }
+        return cond
+      })
+      setConditions(updatedConditions);
     }
   }
   return(
@@ -93,7 +96,8 @@ ResourceFilter.defaultProps = {
     property: '',
     value: '',
     operator: ''
-  }
+  },
+  includeSearchParams: true,
 }
 
 export default ResourceFilter;
