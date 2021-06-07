@@ -5,7 +5,16 @@ import NavBar from '../../components/NavBar';
 import SearchModal from '../../components/SearchModal';
 import cmsLogo from '../../assets/images/CMSGovLogo-O.png';
 
-const Header = ({siteName, links, org, searchModalText, customSearch, includeTopNav}) => {
+const Header = ({
+  siteName,
+  links,
+  org,
+  searchModalText,
+  customSearch, 
+  includeTopNav,
+  inversedModalButton,
+  inversedSearchButton,
+}) => {
   const { url, tagline, logo, urlTitle, logoAltText } = org;
   return (
     <header className="dc-c-header ds-base" aria-label="Site header">
@@ -55,8 +64,9 @@ const Header = ({siteName, links, org, searchModalText, customSearch, includeTop
                 customSearch
               ) : (
                 <SearchModal
-                  searchFunc={(e) => {e.preventDefault(); console.log(e.target.value);}}
                   searchModalText={searchModalText}
+                  inversedModalButton={inversedModalButton}
+                  inversedSearchButton={inversedSearchButton}
                 />
               )}
             </div>
