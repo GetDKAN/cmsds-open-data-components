@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { navigate } from '@reach/router';
 import { useMediaQuery } from 'react-responsive'
 import { Button, Dialog, TextField } from '@cmsgov/design-system';
 
-const SearchModal = ({ searchFunc, appNodeId, searchModalText, buttonSize }) => {
+const SearchModal = ({ searchFunc, appNodeId, searchModalText, buttonSize, inversedModalButton, inversedSearchButton }) => {
   const [modalSearchTerm, setModalSearchTerm] = useState('');
   const [modalSearch, setModalSearch] = useState(false)
   const mobile = useMediaQuery({ minWidth: 0, maxWidth: 543});
@@ -10,7 +11,7 @@ const SearchModal = ({ searchFunc, appNodeId, searchModalText, buttonSize }) => 
     <>
       <Button
         variation="transparent"
-        inversed
+        inversed={inversedSearchButton}
         size={buttonSize}
         className="ds-u-border--0 dc-c-search-modal--button"
         onClick={() => setModalSearch(true)}
@@ -27,9 +28,11 @@ const SearchModal = ({ searchFunc, appNodeId, searchModalText, buttonSize }) => 
             closeText={<>Close</>}
           >
             <p>{searchModalText}</p>
-            <form className="ds-l-row" onSubmit={searchFunc}>
+            <form className="ds-u-display--flex ds-u-align-items--stretch ds-u-flex-wrap--nowrap" onSubmit={(e) => {e.preventDefault(); navigate(`/datasets?fulltext=${modalSearchTerm}`)}}>
               <TextField
-                className="ds-l-sm-col--12 ds-l-lg-col--9"
+                value={modalSearchTerm}
+                fieldClassName="ds-u-display--inline-block"
+                className="ds-l-col--9"
                 label="Search Term"
                 name="search-modal"
                 labelClassName="ds-u-visibility--screen-reader"
@@ -37,7 +40,8 @@ const SearchModal = ({ searchFunc, appNodeId, searchModalText, buttonSize }) => 
               />
               <Button
                 type="submit"
-                inversed
+                inversed={inversedModalButton}
+                className="ds-l-col--3"
               >
                 Search
               </Button>
@@ -51,7 +55,9 @@ const SearchModal = ({ searchFunc, appNodeId, searchModalText, buttonSize }) => 
 
 SearchModal.defaultProps = {
   appNodeId: 'App',
-  buttonSize: ''
+  buttonSize: '',
+  inversedModalButton: true,
+  inversedSearchButton: true,
 }
 
 export default SearchModal;
