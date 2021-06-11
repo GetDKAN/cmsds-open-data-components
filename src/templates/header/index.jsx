@@ -79,11 +79,11 @@ const Header = ({
 
 Header.defaultProps = {
   org: {
-    tagline: 'The Centers for Medicare and Medicaid Services',
+    tagline: 'The Centers for Medicare & Medicaid Services',
     url: 'https://cms.gov',
-    urlTitle: 'CMS.gov Centers for Medicare &amp; Medicaid Services',
+    urlTitle: 'CMS.gov Centers for Medicare & Medicaid Services',
     logo: cmsLogo,
-    logoAltText: 'CMS.gov Centers for Medicare &amp; Medicaid Services',
+    logoAltText: 'CMS.gov Centers for Medicare & Medicaid Services',
   },
   includeTopNav: true,
   customSearch: false,

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useMediaQuery } from 'react-responsive'
 import { Button } from '@cmsgov/design-system';
-import { Link } from "@reach/router";
+import { NavLink } from '../../components/NavLink';
 
 const Footer = ({
   links,
@@ -49,12 +49,12 @@ const Footer = ({
                     <ul className="ds-u-font-size--small ds-u-margin-bottom--3">
                       {footerOpenDataToolLinks.map((link) => (
                         <li className="ds-u-margin-bottom--1" key={link.id}>
-                          <Link 
+                          <NavLink 
                             to={link.url} 
                             target={link.target} 
                             className="dc-menu-item">
                               {link.label}
-                          </Link>
+                          </NavLink>
                         </li>
                       ))}
                     </ul>
@@ -64,12 +64,12 @@ const Footer = ({
                     <ul className="ds-u-font-size--small">
                       {footerAdditionalResourcesLinks.map((link) => (
                         <li className="ds-u-margin-bottom--1" key={link.id}>
-                          <Link 
+                          <NavLink 
                             to={link.url} 
                             target={link.target} 
                             className="dc-menu-item">
                               {link.label}
-                          </Link>
+                          </NavLink>
                         </li>
                       ))}
                     </ul>
