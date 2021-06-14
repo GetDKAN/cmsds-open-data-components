@@ -107,7 +107,7 @@ const FilteredResourceBody = ({id, dataset, dist_id, location, apiDocPage}) => {
             {resource.columns
               ? (
                 <div>
-                  <ResourceHeader includeDensity={true} setTablePadding={setTablePadding} distribution={distribution} resource={resource} />
+                  <ResourceHeader includeDensity={true} setTablePadding={setTablePadding} distribution={distribution} resource={resource} tablePadding={tablePadding} />
                   <ResourcePreview id={dist_id} tablePadding={tablePadding} resource={resource} />
                   <ResourceFooter resource={resource} />
                   {filtersOpen
