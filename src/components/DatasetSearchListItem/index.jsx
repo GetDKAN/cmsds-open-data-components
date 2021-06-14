@@ -1,12 +1,28 @@
 import React from 'react';
 import { Link } from '@reach/router';
+import TextTruncate from 'react-text-truncate';
+
 import { Button, Badge } from '@cmsgov/design-system';
 import TransformedDate from '../TransformedDate';
 
+const dangerousDescriptionElement = ({children}) => (<span dangerouslySetInnerHTML={{__html: children}} />)
+
 const DatasetSearchListItem = ({item, updateFacets}) => {
   const { title, modified, description, theme, keyword, identifier } = item;
-  const updatedDate = new Date(modified)
-  const dateOptions = {month: 'long', year: 'numeric', day: 'numeric'}
+  
+  const truncatedDescription = (
+    <TextTruncate
+        line={3}
+        element={'p'}
+        containerClassName="ds-u-margin-top--0"
+        truncateText="…"
+        textElement={dangerousDescriptionElement}
+        text={description}
+        appendTextTruncateChild={true}
+        textTruncateChild={<span><Link to={`/dataset/${identifier}`}>View dataset</Link></span>}
+    />
+  )
+    console.log(truncatedDescription)
   return(
     <div className="dc-dataset-searchlist-item ds-u-border-top--1 ds-u-margin-bottom--5">
       <div className="ds-l-row ds-u-padding-top--5">
@@ -33,8 +49,7 @@ const DatasetSearchListItem = ({item, updateFacets}) => {
           {title}
         </Link>
       </h3>
-      {/* 215 average character limit */}
-      <p className="ds-u-margin-top--0" dangerouslySetInnerHTML={{__html: description}} />
+      {truncatedDescription}
       <div>
         {keyword &&
           <ul className="ds-u-padding--0 ds-u-display--flex ds-u-flex-wrap--wrap">

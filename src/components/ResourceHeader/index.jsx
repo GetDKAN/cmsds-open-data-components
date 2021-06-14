@@ -5,7 +5,7 @@ import DataTableDensity from '../../components/DataTableDensity';
 import ManageColumns from '../../components/ManageColumns';
 import DataTableRowChanger from '../../components/DataTableRowChanger';
 
-const ResourceHeader = ({ setTablePadding, id, distribution, includeFiltered, includeDensity, resource }) => {
+const ResourceHeader = ({ setTablePadding, id, distribution, includeFiltered, includeDensity, resource, tablePadding }) => {
   const {
     limit,
     offset, 
@@ -32,7 +32,7 @@ const ResourceHeader = ({ setTablePadding, id, distribution, includeFiltered, in
         {includeDensity
           && (
             <div className="ds-u-text-align--right ds-u-margin-left--auto ds-l-col--6">
-              <DataTableDensity setTablePadding={setTablePadding} />
+              <DataTableDensity setTablePadding={setTablePadding} tablePadding={tablePadding} />
             </div>
           )
         }

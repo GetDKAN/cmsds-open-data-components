@@ -3,7 +3,7 @@ import { useMetastoreDataset } from '@civicactions/data-catalog-services';
 import PageNotFound from '../PageNotFound';
 import FilteredResourceBody from './FilteredResourceBody';
 
-const FilteredResource = ({id, dist_id, location}) => {
+const FilteredResource = ({id, dist_id, location, apiDocPage}) => {
   const [ready, setReady] = useState(false);
   const [error, setError] = useState(false);
   const {dataset} = useMetastoreDataset(id, process.env.REACT_APP_ROOT_URL);
@@ -36,7 +36,7 @@ const FilteredResource = ({id, dist_id, location}) => {
       <PageNotFound content={notFoundContent} />
       ) : (
         <>
-          { ready && (<FilteredResourceBody id={id} dataset={dataset} dist_id={dist_id} location={location} />)}
+          { ready && (<FilteredResourceBody id={id} dataset={dataset} dist_id={dist_id} location={location} apiDocPage={apiDocPage} />)}
         </>
       )
     }

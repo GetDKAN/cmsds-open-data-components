@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import qs from 'qs';
-import { Link } from '@reach/router';
+import { Link, navigate } from '@reach/router';
 import SwaggerUI from 'swagger-ui-react';
 import { useDatastore } from '@civicactions/data-catalog-services';
 import { HelpDrawerToggle, Button, Tooltip, Spinner } from '@cmsgov/design-system';
@@ -9,7 +9,7 @@ import ResourceHeader from '../../components/ResourceHeader';
 import ResourcePreview from '../../components/ResourcePreview';
 import ResourceFooter from '../../components/ResourceFooter';
 
-const FilteredResourceBody = ({id, dataset, dist_id, location}) => {
+const FilteredResourceBody = ({id, dataset, dist_id, location, apiDocPage}) => {
   const [tablePadding, setTablePadding] = React.useState('ds-u-padding-y--1')
   let apiDocs = useRef();
   const [filtersOpen, setFiltersOpen] = React.useState(false)
@@ -49,7 +49,7 @@ const FilteredResourceBody = ({id, dataset, dist_id, location}) => {
             <div className="ds-l-row ds-u-align-items--stretch">
               <div className="ds-l-md-col--4 ds-l-sm-col--12 ds-u-margin-bottom--3">
                 <div className="dc-c-resource-action ds-u-border--1 ds-u-radius ds-u-display--flex ds-u-flex-direction--column ds-u-text-align--center">
-                  <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-bottom--2 ds-u-padding-bottom--0 ds-u-padding-left--3 ds-u-padding-left--3  ds-u-text-align--left">Create</h2>
+                  <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-bottom--2 ds-u-padding-bottom--0 ds-u-padding-left--3 ds-u-padding-left--3  ds-u-text-align--left">Create a filter</h2>
                   <div className="dc-filtered-resource-toggle">
                     <HelpDrawerToggle
                       helpDrawerOpen={filtersOpen}
@@ -86,7 +86,7 @@ const FilteredResourceBody = ({id, dataset, dist_id, location}) => {
               </div>
               <div className="ds-l-md-col--4 ds-l-sm-col--12 ds-u-margin-bottom--3">
                 <div className=" ds-u-border--1 ds-u-radius">
-                  <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-y--0 ds-u-padding-bottom--0 ds-u-padding-left--3 ds-u-padding-left--3">Try API</h2>
+                  <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-bottom--0 ds-u-padding-bottom--0 ds-u-padding-left--3 ds-u-padding-left--3">Try API</h2>
                   <Button
                     variation="transparent"
                     className="ds-u-text-align--left ds-u-font-weight--normal" 
@@ -97,6 +97,7 @@ const FilteredResourceBody = ({id, dataset, dist_id, location}) => {
                   <Button
                     variation="transparent"
                     className="ds-u-text-align--left ds-u-font-weight--normal"
+                    onClick={() => navigate(apiDocPage)}
                   >
                     View API documentation
                   </Button>
@@ -106,7 +107,7 @@ const FilteredResourceBody = ({id, dataset, dist_id, location}) => {
             {resource.columns
               ? (
                 <div>
-                  <ResourceHeader includeDensity={true} setTablePadding={setTablePadding} distribution={distribution} resource={resource} />
+                  <ResourceHeader includeDensity={true} setTablePadding={setTablePadding} distribution={distribution} resource={resource} tablePadding={tablePadding} />
                   <ResourcePreview id={dist_id} tablePadding={tablePadding} resource={resource} />
                   <ResourceFooter resource={resource} />
                   {filtersOpen
@@ -136,6 +137,10 @@ const FilteredResourceBody = ({id, dataset, dist_id, location}) => {
       }
     </section>
   )
+}
+
+FilteredResourceBody.defaultProps = {
+  apiDocPage: '/api'
 }
 
 export default FilteredResourceBody;
