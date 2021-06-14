@@ -1248,7 +1248,7 @@
     swagger-ui-react "3.25.0"
     validator "^12.2.0"
 
-"@civicactions/data-catalog-components@^2.0.0-alpha.6":
+"@civicactions/data-catalog-components@^2.0.0-alpha.9":
   version "2.0.0-alpha.9"
   resolved "https://registry.yarnpkg.com/@civicactions/data-catalog-components/-/data-catalog-components-2.0.0-alpha.9.tgz#be591ebc65085e8bc888d277074d1cd4e5b8449f"
   integrity sha512-DaoDv78BL9r4lF/Ud5N5nG/4QReEaK1x09E0vVyGS8C3p9LUD1htUGvkyIeHRSiebGIRGanFleReYF2X9yPukg==
@@ -1278,10 +1278,10 @@
     validator "^12.2.0"
     web-vitals "^1.0.1"
 
-"@civicactions/data-catalog-services@^1.0.0-alpha.4":
-  version "1.0.0-alpha.5"
-  resolved "https://registry.yarnpkg.com/@civicactions/data-catalog-services/-/data-catalog-services-1.0.0-alpha.5.tgz#49a667071b9b0de670b79f35adca94b6955aa830"
-  integrity sha512-1GBIB6lKPvo4C9KWC58V7Zy5K6imlwYtIJP00D6NJfD5LJDfQIWIFHeSbbLO1yc/+wmVWR7nYoOPsRyqHBF2UA==
+"@civicactions/data-catalog-services@^1.0.0-alpha.9":
+  version "1.0.0-alpha.11"
+  resolved "https://registry.yarnpkg.com/@civicactions/data-catalog-services/-/data-catalog-services-1.0.0-alpha.11.tgz#a0080924381abad38ca5ba5bb726de57d1b57e67"
+  integrity sha512-gYkwJtI/Eo4xq0TggzFGYgQ5ypNbLuYlLardu6vVJP1oAmHKOWK1l4BtnmBDY4friQu4ZUisovHdRf4+P79VLg==
   dependencies:
     "@civicactions/data-catalog-components" "^1.7.0"
     "@fortawesome/fontawesome-svg-core" "^1.2.34"
