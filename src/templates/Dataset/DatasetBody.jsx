@@ -41,7 +41,7 @@ const DatasetBody = ({ id, dataset }) => {
     <section className="ds-l-container">
       <div className="ds-l-row ds-u-padding-top--3">
         <div className="ds-l-md-col--9 ds-l-sm-col--12">
-          <h1 className="ds-title">{dataset.title}</h1>
+          <h1 className="ds-title ds-u-word-break">{dataset.title}</h1>
           <div className="ds-l-row">
             <p className="ds-l-col--6">
               {dataset.theme ? <Badge variation="info">{dataset.theme[0].data}</Badge> : null}
@@ -53,7 +53,7 @@ const DatasetBody = ({ id, dataset }) => {
           {resource.columns
               ? (
                 <div>
-                  <ResourceHeader id={id} includeFiltered includeDensity={true} setTablePadding={setTablePadding} distribution={distribution} resource={resource} />
+                  <ResourceHeader id={id} includeFiltered includeDensity={true} tablePadding={tablePadding} setTablePadding={setTablePadding} distribution={distribution} resource={resource} />
                   <ResourcePreview id={distribution.identifier} tablePadding={tablePadding} resource={resource} />
                   <ResourceFooter resource={resource} />
                 </div>
