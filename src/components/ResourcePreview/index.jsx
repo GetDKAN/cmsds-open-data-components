@@ -38,6 +38,7 @@ const ResourceContent = ({tablePadding, id, options, resource, customColumns}) =
     columnIsSortedClassName: 'dc-c-sort dc-c-sort--default',
     columnIsSortedAscClassName: 'dc-c-sort dc-c-sort--asc',
     columnIsSortedDecClassName: 'dc-c-sort dc-c-sort--desc',
+    tableColumnResizer: 'dc-c-resize-handle'
   }
   return(
     <div className="ds-u-overflow--scroll ds-u-border-x--1 ds-u-border-bottom--1">
