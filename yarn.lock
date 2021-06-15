@@ -1248,10 +1248,10 @@
     swagger-ui-react "3.25.0"
     validator "^12.2.0"
 
-"@civicactions/data-catalog-components@^2.0.0-alpha.9":
-  version "2.0.0-alpha.9"
-  resolved "https://registry.yarnpkg.com/@civicactions/data-catalog-components/-/data-catalog-components-2.0.0-alpha.9.tgz#be591ebc65085e8bc888d277074d1cd4e5b8449f"
-  integrity sha512-DaoDv78BL9r4lF/Ud5N5nG/4QReEaK1x09E0vVyGS8C3p9LUD1htUGvkyIeHRSiebGIRGanFleReYF2X9yPukg==
+"@civicactions/data-catalog-components@^2.0.0-alpha.10":
+  version "2.0.0-alpha.10"
+  resolved "https://registry.yarnpkg.com/@civicactions/data-catalog-components/-/data-catalog-components-2.0.0-alpha.10.tgz#3063f855805cca2ca409cac0dd5a628229410e53"
+  integrity sha512-1F1fFvZGZbpipZftlr0voOaIceXrHrUKLIkz5sgQzqGwzwD2S40uc9q+nlT0eLO/XV8bQ7qLp51ws8/HM9ucGg==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.25"
     "@fortawesome/free-brands-svg-icons" "^5.11.2"

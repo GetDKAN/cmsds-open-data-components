@@ -1,4 +1,21 @@
 .dc-c-datatable {
   width: 100%;
   overflow: scroll;
+  .dc-c-resize-handle {
+    display: inline-block;
+    width: 10px;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateX(50%);
+    z-index: 1;
+    touch-action:none;
+    &:hover {
+      background: #d6d7d9;
+    }
+    &.isResizing {
+      background: #adb0b5;
+    }
+  }
 }
