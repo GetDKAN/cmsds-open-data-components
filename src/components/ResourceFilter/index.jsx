@@ -29,7 +29,7 @@ const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, resour
   }
 
   function removeAll() {
-    setFormConditions([]);
+    setFormConditions([{...defaultCondition}]);
     setConditions([])
   }
 
@@ -91,15 +91,17 @@ const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, resour
           + Add another filter
         </Button>
       </form>
-      <Button 
-        variation="transparent"
-        onClick={(e) => {
-          e.preventDefault();
-          removeAll();
-        }}
-      >
+      {formConditions.length > 1 ? (
+        <Button 
+          variation="transparent"
+          onClick={(e) => {
+            e.preventDefault();
+            removeAll();
+          }}
+        >
         Remove all filters
       </Button>
+      ) : ''}
     </HelpDrawer>
   );
 };
