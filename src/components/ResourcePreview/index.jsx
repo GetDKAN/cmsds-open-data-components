@@ -27,8 +27,8 @@ function DefaultColumnFilter({
 const ResourceContent = ({tablePadding, id, options, resource, customColumns}) => {
   const tableClasses = {
     tableContainerClassName: 'dc-c-table-container',
-    headerCellClassName: 'ds-u-border--dark ds-u-padding--2 ds-u-border-y--2 ds-u-border-right--1 ds-u-font-weight--bold',
-    headerGroupClassName: 'dc-c-header-group',
+    headerCellClassName: 'ds-u-border--dark ds-u-padding--2 ds-u-border-y--2 ds-u-border-right--1 ds-u-font-weight--bold dc-c-table-header-cell',
+    headerGroupClassName: 'dc-c-table-header-group',
     headerCellTextClassName: 'dc-truncate ds-u-display--inline-block',
     cellEvenRowClassName: 'ds-u-fill--gray-lightest',
     cellClassName: `${tablePadding} dc-truncate ds-u-padding-x--1`,
