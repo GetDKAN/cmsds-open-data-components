@@ -26,9 +26,9 @@ function DefaultColumnFilter({
 
 const ResourceContent = ({tablePadding, id, options, resource, customColumns}) => {
   const tableClasses = {
-    tableContainerClassName: '',
-    headerCellClassName: 'ds-u-border--dark ds-u-padding--2 ds-u-border-y--2 ds-u-border-right--1 ds-u-font-weight--bold',
-    headerGroupClassName: '',
+    tableContainerClassName: 'dc-c-table-container',
+    headerCellClassName: 'ds-u-border--dark ds-u-padding--2 ds-u-border-y--2 ds-u-border-right--1 ds-u-font-weight--bold dc-c-table-header-cell',
+    headerGroupClassName: 'dc-c-table-header-group',
     headerCellTextClassName: 'dc-truncate ds-u-display--inline-block',
     cellEvenRowClassName: 'ds-u-fill--gray-lightest',
     cellClassName: `${tablePadding} dc-truncate ds-u-padding-x--1`,
@@ -38,6 +38,8 @@ const ResourceContent = ({tablePadding, id, options, resource, customColumns}) =
     columnIsSortedClassName: 'dc-c-sort dc-c-sort--default',
     columnIsSortedAscClassName: 'dc-c-sort dc-c-sort--asc',
     columnIsSortedDecClassName: 'dc-c-sort dc-c-sort--desc',
+    tableColumnResizer: 'dc-c-resize-handle',
+    tableColumnIsResizing: 'isResizing'
   }
   return(
     <div className="ds-u-overflow--scroll ds-u-border-x--1 ds-u-border-bottom--1">
