@@ -16,9 +16,11 @@ const Breadcrumb = ({ currentPage, pageTrail = [] }) => {
     <nav class="dc-c-breadcrumb ds-u-margin-top--6" aria-label="Breadcrumbs">
       <ol class="dc-c-breadcrumb__list">
         {pageTrailContent}
-        <li class="dc-c-breadcrumb__list-item dc-c-current" aria-current="page">
-          <span>{currentPage}</span>
-        </li>
+        {currentPage ? (
+          <li class="dc-c-breadcrumb__list-item dc-c-current" aria-current="page">
+            <span>{currentPage}</span>
+          </li>
+        ) : ''}
       </ol>
     </nav>
   );
