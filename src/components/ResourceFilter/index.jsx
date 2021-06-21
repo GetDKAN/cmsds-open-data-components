@@ -28,6 +28,11 @@ const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, resour
     setConditions(newConditions)
   }
 
+  function removeAll() {
+    setFormConditions([{...defaultCondition}]);
+    setConditions([])
+  }
+
   function updateByIndex(index, key, value) {
     let newConditions = [...formConditions]
     newConditions[index][key] = value
@@ -86,6 +91,17 @@ const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, resour
           + Add another filter
         </Button>
       </form>
+      {formConditions.length > 1 ? (
+        <Button 
+          variation="transparent"
+          onClick={(e) => {
+            e.preventDefault();
+            removeAll();
+          }}
+        >
+        Remove all filters
+      </Button>
+      ) : ''}
     </HelpDrawer>
   );
 };
