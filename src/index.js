@@ -30,3 +30,6 @@ export { default as MobileHeader } from './templates/mobile_header';
 
 export { default as FilteredResource } from './templates/FilteredResource';
 export { default as APIPage } from './templates/APIPage';
+
+// Hooks
+export { default as useAddLoginLink } from './components/useAddLoginLink';
