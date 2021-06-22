@@ -181,7 +181,7 @@ const Footer = ({
 Footer.defaultProps = {
   showEmail: true,
   emailTitle: 'Get Email Updates',
-  emailBody: 'Sign up to get the latest information about your choice of CMS topics in your inbox. Also, determine how frequently you wish to receive updates.',
+  emailBody: 'Sign up to get the latest information from CMS by choosing the topics and frequency of emails that are best for you.',
   emailLink: '',
   emailButton: 'Sign up for email updates',
   socialMediaLinks: null,
