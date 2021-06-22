@@ -1,0 +1,11 @@
+// Swagger overrides 
+.swagger-ui .opblock .opblock-summary-path {
+  flex-shrink: 1 !important;
+  max-width: calc(100% - 110px) !important;
+}
+.swagger-ui .opblock .opblock-summary-method {
+  min-width: auto !important;
+  @media (min-width: 765px) {
+    min-width: 80px !important;
+  }
+}
