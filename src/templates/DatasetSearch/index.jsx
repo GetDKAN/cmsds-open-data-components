@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import qs from 'qs';
-import { SearchPaginationResults } from '@civicactions/data-catalog-components';
 import { useSearchAPI, separateFacets } from '@civicactions/data-catalog-services';
 import { TextField, Dropdown, Spinner, Button } from '@cmsgov/design-system'
 import DatasetSearchListItem from '../../components/DatasetSearchListItem';
@@ -43,7 +42,15 @@ export function transformUrlParamsToSearchObject(searchParams, facetList) {
 }
 
 
-const DatasetSearch = ({rootUrl, location}) => {
+const DatasetSearch = ({
+  rootUrl,
+  location,
+  introText,
+  fulltextLabel,
+  fulltextLabelClassName,
+  fulltextPlaceholder,
+  formClassName
+}) => {
   const [currentResultNumbers, setCurrentResultNumbers] = useState(null) 
   const {
     fulltext,
@@ -91,17 +98,21 @@ const DatasetSearch = ({rootUrl, location}) => {
       </h1>
       <div className="ds-l-row">
         <div className="ds-l-md-col--8 ds-l-sm-col--12ds-u-margin-bottom--3">
+          {introText
+            ? introText
+            : null
+          }
           <form
             onSubmit={(e) => {e.preventDefault(); () => setFulltext(filterText);}}
-            className="ds-u-display--flex ds-u-justify-content--between ds-u-margin-bottom--2 "
+            className={formClassName}
           >
             <TextField
               fieldClassName="ds-u-margin--0"
               value={filterText}
               className="dc-fulltext--input-container ds-u-padding-right--2"
-              label="Search term"
-              labelClassName="ds-u-visibility--screen-reader"
-              placeholder="Type search term here"
+              label={fulltextLabel}
+              labelClassName={fulltextLabelClassName}
+              placeholder={fulltextPlaceholder}
               name="dataset_fulltext_search"
               onChange={(e) => setFilterText(e.target.value)}
             />
@@ -189,6 +200,14 @@ const DatasetSearch = ({rootUrl, location}) => {
       </div>
     </section>
   );
+}
+
+DatasetSearch.defaultProps = {
+  introText: "",
+  fulltextLabel: "Search term",
+  fulltextLabelClassName: "ds-u-visibility--screen-reader",
+  fulltextPlaceholder: "Type search term here",
+  formClassName: "ds-u-display--flex ds-u-justify-content--between ds-u-margin-bottom--2"
 }
 
 export default DatasetSearch;
