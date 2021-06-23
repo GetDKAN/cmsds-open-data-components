@@ -13,7 +13,8 @@ const Footer = ({
   emailButton,
   socialMediaLinks,
   hhsLogo,
-  cmsLogo
+  cmsLogo,
+  trademarkContent
 }) => {
   const xs = useMediaQuery({ minWidth: 0, maxWidth: 544});
   const sm = useMediaQuery({ minWidth: 544, maxWidth: 768});
@@ -83,8 +84,7 @@ const Footer = ({
                   <span className="ds-u-visibility--screen-reader">opens in new window</span>
                 </a>
               </div>
-                <p>A federal government website managed and paid for by the U.S. Centers for Medicare &amp; Medicaid Services.</p>
-                <p>7500 Security Boulevard, Baltimore, MD 21244</p>
+                {trademarkContent}
                 {socialMediaLinks
                   && (
                     <ul className="ds-u-display--flex">
@@ -185,6 +185,12 @@ Footer.defaultProps = {
   emailLink: '',
   emailButton: 'Sign up for email updates',
   socialMediaLinks: null,
+  trademarkContent: (
+    <div>
+      <p>A federal government website managed and paid for by the U.S. Centers for Medicare &amp; Medicaid Services.</p>
+      <p>7500 Security Boulevard, Baltimore, MD 21244</p>
+    </div>
+  )
 }
 
 Footer.propTypes = {
