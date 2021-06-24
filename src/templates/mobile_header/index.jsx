@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useMediaQuery } from 'react-responsive'
 import { Button } from '@cmsgov/design-system';
 import { Link } from '@reach/router';
@@ -13,6 +13,20 @@ const MobileHeader = ({siteName, links, org, searchModalText, customSearch = fal
   const [menuOpen, setMenuOpen] = useState(false);
   const mobile = useMediaQuery({ minWidth: 0, maxWidth: 543});
   const tablet = useMediaQuery({ minWidth: 544, maxWidth: 1023});
+  const menu = useRef(null);
+  useEffect(() => {
+    function handleFocusOut(event) {
+      if (!menu.current.contains(event.relatedTarget)) {
+        setMenuOpen(false);
+      }
+    }
+    if (menu.current) {
+      menu.current.addEventListener("focusout", handleFocusOut);
+      return () => {
+        menu.current.removeEventListener("focusout", handleFocusOut);
+      };
+    }
+  }, [menu, menuOpen]);
   return (
     <header className={`dc-c-header dc-c-mobile-header ${menuOpen ? 'menu-open' : ''}`} aria-label="Site header">
       {includeTopNav
@@ -69,7 +83,7 @@ const MobileHeader = ({siteName, links, org, searchModalText, customSearch = fal
         </div>
         
       </div>
-      <div className="dc-c-mobile-header--menu">
+      <div className="dc-c-mobile-header--menu" ref={menu}>
           <div className="ds-u-display--flex dc-c-mobile-header--menu-close ds-u-justify-content--between">
             <Button
               variation="transparent"
