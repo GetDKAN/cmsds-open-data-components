@@ -31,12 +31,6 @@ const DatasetBody = ({ id, dataset }) => {
     }
   }, [distribution])
 
-  const rawDate = new Date(dataset.modified);
-  let modifiedDate = '';
-  let options = { year: 'numeric', month: 'long', day: 'numeric' };
-  if(rawDate) {
-    modifiedDate = rawDate.toLocaleDateString('en-US', options);
-  }
   return (
     <section className="ds-l-container">
       <div className="ds-l-row ds-u-padding-top--3">
@@ -46,7 +40,7 @@ const DatasetBody = ({ id, dataset }) => {
             <p className="ds-l-col--6">
               {dataset.theme ? <Badge variation="info">{dataset.theme[0].data}</Badge> : null}
             </p>
-            <p className="ds-l-col--6 ds-u-color--gray ds-u-text-align--right">Updated <TransformedDate date={modifiedDate} /></p>
+            <p className="ds-l-col--6 ds-u-color--gray ds-u-text-align--right">Updated <TransformedDate date={dataset.modified} /></p>
           </div>
           <p dangerouslySetInnerHTML={{__html: dataset.description}} />
           <h2 className="dc-resource-header">Resource Preview</h2>
