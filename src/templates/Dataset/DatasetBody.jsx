@@ -30,10 +30,11 @@ const DatasetBody = ({ id, dataset, additionalParams }) => {
     additionalParams
   )
   useEffect(() => {
-    console.log(distribution.identifier, resource)
     if(distribution.identifier) {
-      resource.setResource(distribution.identifier);
-      resource.setManual(false)
+      if (distribution.data.format.toUpperCase() === 'CSV') {
+        resource.setResource(distribution.identifier);
+        resource.setManual(false);
+      }
     }
   }, [distribution])
 
@@ -85,6 +86,7 @@ const DatasetBody = ({ id, dataset, additionalParams }) => {
             <DatasetDownloads downloadURL={distribution.data.downloadURL} type={distribution.data.format} />
           ) : ''}
           <DatasetTags keywords={dataset.keyword} />
+          {Object.keys(distribution).length && distribution.data.format.toUpperCase() === 'CSV' ? (
           <div className="dc-c-dataset-tags ds-u-margin-bottom--3 ds-u-padding--2 ds-u-border ds-u-border--1">
             <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-top--0 ds-u-margin-bottom--2 ds-u-padding-bottom--2">API</h2>
             <Button
@@ -96,6 +98,7 @@ const DatasetBody = ({ id, dataset, additionalParams }) => {
                 Scroll to dataset API
               </Button>
           </div>
+          ) : ''}
         </div>
       </div>
     </section>
