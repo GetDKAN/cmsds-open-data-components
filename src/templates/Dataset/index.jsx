@@ -5,11 +5,7 @@ import DatasetBody from './DatasetBody';
 import PageNotFound from '../PageNotFound';
 
 const Dataset = ({ id, rootUrl, additionalParams }) => {
-  let acaParamString = '';
-  if(additionalParams && additionalParams.ACA) {
-    acaParamString = `&ACA=${additionalParams.ACA}&redirect=false`;
-  }
-  const metastore = useMetastoreDataset(id, rootUrl, acaParamString);
+  const metastore = useMetastoreDataset(id, rootUrl, additionalParams);
   const { dataset } = metastore;
   const notFoundContent = (
     <>

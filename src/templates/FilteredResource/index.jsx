@@ -4,13 +4,9 @@ import PageNotFound from '../PageNotFound';
 import FilteredResourceBody from './FilteredResourceBody';
 
 const FilteredResource = ({id, dist_id, location, apiDocPage, additionalParams}) => {
-  let acaParamString = '';
-  if(additionalParams && additionalParams.ACA) {
-    acaParamString = `&ACA=${additionalParams.ACA}&redirect=false`;
-  }
   const [ready, setReady] = useState(false);
   const [error, setError] = useState(false);
-  const {dataset} = useMetastoreDataset(id, process.env.REACT_APP_ROOT_URL, acaParamString);
+  const {dataset} = useMetastoreDataset(id, process.env.REACT_APP_ROOT_URL, additionalParams);
   const distIndex = dist_id === 'data' ? 0 : dist_id;
   useEffect(() => {
     if (dataset.error) {
