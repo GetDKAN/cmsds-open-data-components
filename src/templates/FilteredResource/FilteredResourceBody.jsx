@@ -9,14 +9,14 @@ import ResourceHeader from '../../components/ResourceHeader';
 import ResourcePreview from '../../components/ResourcePreview';
 import ResourceFooter from '../../components/ResourceFooter';
 
-const FilteredResourceBody = ({id, dataset, dist_id, location, apiDocPage}) => {
+const FilteredResourceBody = ({id, dataset, distIndex, location, apiDocPage}) => {
   const [tablePadding, setTablePadding] = React.useState('ds-u-padding-y--1')
   let apiDocs = useRef();
   const [filtersOpen, setFiltersOpen] = React.useState(false)
   let distribution = {};
   let distribution_array = dataset.distribution ? dataset.distribution : [];
   if(distribution_array.length) {
-    distribution = distribution_array.find((dist) => dist.identifier === dist_id);
+    distribution = distribution_array.find((dist) => dist.identifier === distribution_array[distIndex].identifier);
   }
   let buttonRef = null;
   const options = location.search ? {...qs.parse(location.search)} : {conditions: []};
@@ -108,11 +108,11 @@ const FilteredResourceBody = ({id, dataset, dist_id, location, apiDocPage}) => {
               ? (
                 <div>
                   <ResourceHeader includeDensity={true} setTablePadding={setTablePadding} distribution={distribution} resource={resource} tablePadding={tablePadding} />
-                  <ResourcePreview id={dist_id} tablePadding={tablePadding} resource={resource} />
+                  <ResourcePreview id={distribution.identifier} tablePadding={tablePadding} resource={resource} />
                   <ResourceFooter resource={resource} />
                   {filtersOpen
                     && (<ResourceFilter
-                          id={dist_id}
+                          id={distribution.identifier}
                           resource={resource}
                           filterOpen={filtersOpen}
                           setFilterOpen={setFiltersOpen}

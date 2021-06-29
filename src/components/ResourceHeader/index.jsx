@@ -22,7 +22,7 @@ const ResourceHeader = ({ setTablePadding, id, distribution, includeFiltered, in
             && (
               <Link
                 className="ds-c-button ds-c-button--primary"
-                to={`/dataset/${id}/${distribution.identifier}`}
+                to={`/dataset/${id}/data`}
               >
                 View and filter data
               </Link>
