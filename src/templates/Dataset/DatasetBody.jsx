@@ -60,17 +60,18 @@ const DatasetBody = ({ id, dataset }) => {
                     <Spinner />
                   )
                 }
-              {dataset.identifier &&
-                <DatasetAdditionalInformation datasetInfo={dataset} />
-              }
-              {dataset.identifier &&
-                <div ref={apiDocs}>
-                  <h2>Try the API</h2>
-                  <SwaggerUI url={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${dataset.identifier}/docs`} docExpansion={'list'} />
-                </div>
-              }
             </>
           ):''}
+          {dataset.identifier &&
+            <DatasetAdditionalInformation datasetInfo={dataset} />
+          }
+          {Object.keys(distribution).length && distribution.data.format.toUpperCase() === 'CSV' && dataset.identifier ? (
+            <div ref={apiDocs}>
+              <h2>Try the API</h2>
+              <SwaggerUI url={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${dataset.identifier}/docs`} docExpansion={'list'} />
+            </div>
+            ) : ''
+          }
         </div>
         <div className="ds-l-md-col--3 ds-l-sm-col--12">
         {Object.keys(distribution).length
