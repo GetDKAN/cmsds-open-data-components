@@ -4,8 +4,8 @@ import { useMetastoreDataset } from '@civicactions/data-catalog-services';
 import DatasetBody from './DatasetBody';
 import PageNotFound from '../PageNotFound';
 
-const Dataset = ({ id, rootUrl }) => {
-  const metastore = useMetastoreDataset(id, rootUrl);
+const Dataset = ({ id, rootUrl, additionalParams }) => {
+  const metastore = useMetastoreDataset(id, rootUrl, additionalParams);
   const { dataset } = metastore;
   const notFoundContent = (
     <>
@@ -23,7 +23,7 @@ const Dataset = ({ id, rootUrl }) => {
     { dataset.error ? (
       <PageNotFound content={notFoundContent} />
       ) : (
-      <DatasetBody id={id} dataset={dataset} />
+      <DatasetBody id={id} dataset={dataset} additionalParams={additionalParams} />
       )
     }
     </>

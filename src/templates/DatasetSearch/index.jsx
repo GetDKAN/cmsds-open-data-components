@@ -49,7 +49,8 @@ const DatasetSearch = ({
   fulltextLabel,
   fulltextLabelClassName,
   fulltextPlaceholder,
-  formClassName
+  formClassName,
+  additionalParams
 }) => {
   const [currentResultNumbers, setCurrentResultNumbers] = useState(null) 
   const {
@@ -67,7 +68,7 @@ const DatasetSearch = ({
     pageSize,
     page,
     resetFilters,
-  } = useSearchAPI(rootUrl, {...transformUrlParamsToSearchObject(decodeURI(location.search), ['theme', 'keyword'])})
+  } = useSearchAPI(rootUrl, {...transformUrlParamsToSearchObject(decodeURI(location.search), ['theme', 'keyword'])}, additionalParams)
   const { theme, keyword } = separateFacets(facets);
   const [filterText, setFilterText] = useState('');
   React.useEffect(() => {
