@@ -9,7 +9,7 @@ import ResourceHeader from '../../components/ResourceHeader';
 import ResourcePreview from '../../components/ResourcePreview';
 import ResourceFooter from '../../components/ResourceFooter';
 
-const FilteredResourceBody = ({id, dataset, distIndex, location, apiDocPage}) => {
+const FilteredResourceBody = ({id, dataset, distIndex, location, apiDocPage, additionalParams}) => {
   const [tablePadding, setTablePadding] = React.useState('ds-u-padding-y--1')
   let apiDocs = useRef();
   const [filtersOpen, setFiltersOpen] = React.useState(false)
@@ -20,11 +20,16 @@ const FilteredResourceBody = ({id, dataset, distIndex, location, apiDocPage}) =>
   }
   let buttonRef = null;
   const options = location.search ? {...qs.parse(location.search)} : {conditions: []};
-  const resource = useDatastore('', process.env.REACT_APP_ROOT_URL, {
-    ...options,
-    limit: 25,
-    manual: true,
-  })
+  const resource = useDatastore(
+    '',
+    process.env.REACT_APP_ROOT_URL,
+    {
+      ...options,
+      limit: 25,
+      manual: true,
+    },
+    additionalParams
+  )
   useEffect(() => {
     if(distribution.identifier) {
       resource.setResource(distribution.identifier);
@@ -129,7 +134,7 @@ const FilteredResourceBody = ({id, dataset, distIndex, location, apiDocPage}) =>
             {dataset.identifier &&
               <div ref={apiDocs}>
                 <h2>Try the API</h2>
-                <SwaggerUI url={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${dataset.identifier}/docs`} docExpansion={'list'} />
+                <SwaggerUI url={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${dataset.identifier}/docs${additionalParams.ACA ? '?ACA=' + additionalParams.ACA + '&redirect=false' : ''}`} docExpansion={'list'} />
               </div>
             }
           </>

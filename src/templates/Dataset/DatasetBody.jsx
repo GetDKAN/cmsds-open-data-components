@@ -11,7 +11,7 @@ import DatasetAdditionalInformation from '../../components/DatasetAdditionalInfo
 import TransformedDate from '../../components/TransformedDate';
 import ResourceFooter from '../../components/ResourceFooter';
 
-const DatasetBody = ({ id, dataset }) => {
+const DatasetBody = ({ id, dataset, additionalParams }) => {
   let apiDocs = useRef()
   const [tablePadding, setTablePadding] = useState('ds-u-padding-y--1')
 
@@ -20,11 +20,17 @@ const DatasetBody = ({ id, dataset }) => {
   if(distribution_array.length) {
     distribution = distribution_array[0];
   }
-  const resource = useDatastore('', process.env.REACT_APP_ROOT_URL, {
-    limit: 10,
-    manual: true,
-  })
+  const resource = useDatastore(
+    '',
+    process.env.REACT_APP_ROOT_URL,
+    {
+      limit: 10,
+      manual: true,
+    },
+    additionalParams
+  )
   useEffect(() => {
+    console.log(distribution.identifier, resource)
     if(distribution.identifier) {
       resource.setResource(distribution.identifier);
       resource.setManual(false)
@@ -68,7 +74,7 @@ const DatasetBody = ({ id, dataset }) => {
           {Object.keys(distribution).length && distribution.data.format.toUpperCase() === 'CSV' && dataset.identifier ? (
             <div ref={apiDocs}>
               <h2>Try the API</h2>
-              <SwaggerUI url={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${dataset.identifier}/docs`} docExpansion={'list'} />
+              <SwaggerUI url={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${dataset.identifier}/docs${additionalParams.ACA ? '?ACA=' + additionalParams.ACA + '&redirect=false' : ''}`} docExpansion={'list'} />
             </div>
             ) : ''
           }
