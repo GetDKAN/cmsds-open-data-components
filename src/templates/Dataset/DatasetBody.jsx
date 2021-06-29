@@ -40,38 +40,43 @@ const DatasetBody = ({ id, dataset }) => {
             <p className="ds-l-col--6">
               {dataset.theme ? <Badge variation="info">{dataset.theme[0].data}</Badge> : null}
             </p>
-            <p className="ds-l-col--6 ds-u-color--gray ds-u-text-align--right">Updated <TransformedDate date={dataset.modified} /></p>
+            {dataset.modified && (
+              <p className="ds-l-col--6 ds-u-color--gray ds-u-text-align--right">Updated <TransformedDate date={dataset.modified} /></p>
+            )}
           </div>
           <p dangerouslySetInnerHTML={{__html: dataset.description}} />
-          <h2 className="dc-resource-header">Resource Preview</h2>
-          {resource.columns
-              ? (
-                <div>
-                  <ResourceHeader id={id} includeFiltered includeDensity={true} tablePadding={tablePadding} setTablePadding={setTablePadding} distribution={distribution} resource={resource} />
-                  <ResourcePreview id={distribution.identifier} tablePadding={tablePadding} resource={resource} />
-                  <ResourceFooter resource={resource} />
+          {Object.keys(distribution).length && distribution.data.format === 'csv' ? (
+            <>
+              <h2 className="dc-resource-header">Resource Preview</h2>
+              {resource.columns
+                  ? (
+                    <div>
+                      <ResourceHeader id={id} includeFiltered includeDensity={true} tablePadding={tablePadding} setTablePadding={setTablePadding} distribution={distribution} resource={resource} />
+                      <ResourcePreview id={distribution.identifier} tablePadding={tablePadding} resource={resource} />
+                      <ResourceFooter resource={resource} />
+                    </div>
+                  )
+                  : (
+                    <Spinner />
+                  )
+                }
+              {dataset.identifier &&
+                <DatasetAdditionalInformation datasetInfo={dataset} />
+              }
+              {dataset.identifier &&
+                <div ref={apiDocs}>
+                  <h2>Try the API</h2>
+                  <SwaggerUI url={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${dataset.identifier}/docs`} docExpansion={'list'} />
                 </div>
-              )
-              : (
-                <Spinner />
-              )
-            }
-          {dataset.identifier &&
-            <DatasetAdditionalInformation datasetInfo={dataset} />
-          }
-          {dataset.identifier &&
-            <div ref={apiDocs}>
-              <h2>Try the API</h2>
-              <SwaggerUI url={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${dataset.identifier}/docs`} docExpansion={'list'} />
-            </div>
-          }
-          
+              }
+            </>
+          ):''}
         </div>
         <div className="ds-l-md-col--3 ds-l-sm-col--12">
-        {dataset.distribution
-          && (
-            <DatasetDownloads downloadURL={dataset.distribution[0].data.downloadURL} />
-          )}
+        {Object.keys(distribution).length
+          ? (
+            <DatasetDownloads downloadURL={distribution.data.downloadURL} type={distribution.data.format} />
+          ) : ''}
           <DatasetTags keywords={dataset.keyword} />
           <div className="dc-c-dataset-tags ds-u-margin-bottom--3 ds-u-padding--2 ds-u-border ds-u-border--1">
             <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-top--0 ds-u-margin-bottom--2 ds-u-padding-bottom--2">API</h2>
