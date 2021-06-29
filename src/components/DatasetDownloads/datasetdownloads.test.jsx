@@ -7,7 +7,7 @@ import DatasetDownloads from './index';
 describe('<DatasetDownloads />', () => {
   test('Renders a download URL link and title', () => {
     render(
-      <DatasetDownloads downloadURL="http://dkan.com/download.csv" />,
+      <DatasetDownloads downloadURL="http://dkan.com/download.csv" type="csv" />,
     );
     expect(screen.getByRole('heading', { name: 'Downloads'})).toBeTruthy();
     expect(screen.getByText('Dataset')).toBeTruthy();
