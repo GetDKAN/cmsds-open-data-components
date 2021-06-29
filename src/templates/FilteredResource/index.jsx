@@ -7,17 +7,18 @@ const FilteredResource = ({id, dist_id, location, apiDocPage}) => {
   const [ready, setReady] = useState(false);
   const [error, setError] = useState(false);
   const {dataset} = useMetastoreDataset(id, process.env.REACT_APP_ROOT_URL);
+  const distIndex = dist_id === 'data' ? 0 : dist_id;
   useEffect(() => {
     if (dataset.error) {
       setError(true);
     }
     if (dataset.distribution && dataset.distribution.length) {
       setReady(true);
-      if (!dataset.distribution.filter(dist => dist.identifier === dist_id).length > 0) {
+      if (!dataset.distribution[distIndex]) {
         setError(true);
       }
     }
-  }, [dataset.distribution, dataset.error, dist_id]);
+  }, [dataset.distribution, dataset.error, distIndex]);
   const notFoundContent = (
     <>
       <h1>Error: Dataset not found</h1>
@@ -36,7 +37,7 @@ const FilteredResource = ({id, dist_id, location, apiDocPage}) => {
       <PageNotFound content={notFoundContent} />
       ) : (
         <>
-          { ready && (<FilteredResourceBody id={id} dataset={dataset} dist_id={dist_id} location={location} apiDocPage={apiDocPage} />)}
+          { ready && (<FilteredResourceBody id={id} dataset={dataset} distIndex={distIndex} location={location} apiDocPage={apiDocPage} />)}
         </>
       )
     }
