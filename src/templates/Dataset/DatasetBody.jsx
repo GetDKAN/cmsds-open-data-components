@@ -45,7 +45,7 @@ const DatasetBody = ({ id, dataset }) => {
             )}
           </div>
           <p dangerouslySetInnerHTML={{__html: dataset.description}} />
-          {Object.keys(distribution).length && distribution.data.format === 'csv' ? (
+          {Object.keys(distribution).length && distribution.data.format.toUpperCase() === 'CSV' ? (
             <>
               <h2 className="dc-resource-header">Resource Preview</h2>
               {resource.columns
