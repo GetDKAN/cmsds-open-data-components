@@ -74,7 +74,7 @@ const DatasetBody = ({ id, dataset, additionalParams }) => {
           {Object.keys(distribution).length && distribution.data.format.toUpperCase() === 'CSV' && dataset.identifier ? (
             <div ref={apiDocs}>
               <h2>Try the API</h2>
-              <SwaggerUI url={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${dataset.identifier}/docs${additionalParams.ACA ? '?ACA=' + additionalParams.ACA + '&redirect=false' : ''}`} docExpansion={'list'} />
+              <SwaggerUI url={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${dataset.identifier}/docs${additionalParams && additionalParams.ACA ? '?ACA=' + additionalParams.ACA + '&redirect=false' : ''}`} docExpansion={'list'} />
             </div>
             ) : ''
           }

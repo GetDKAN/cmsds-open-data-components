@@ -5,7 +5,7 @@ import FilteredResourceBody from './FilteredResourceBody';
 
 const FilteredResource = ({id, dist_id, location, apiDocPage, additionalParams}) => {
   let acaParamString = '';
-  if(additionalParams.ACA) {
+  if(additionalParams && additionalParams.ACA) {
     acaParamString = `&ACA=${additionalParams.ACA}&redirect=false`;
   }
   const [ready, setReady] = useState(false);

@@ -134,7 +134,7 @@ const FilteredResourceBody = ({id, dataset, distIndex, location, apiDocPage, add
             {dataset.identifier &&
               <div ref={apiDocs}>
                 <h2>Try the API</h2>
-                <SwaggerUI url={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${dataset.identifier}/docs${additionalParams.ACA ? '?ACA=' + additionalParams.ACA + '&redirect=false' : ''}`} docExpansion={'list'} />
+                <SwaggerUI url={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${dataset.identifier}/docs${additionalParams && additionalParams.ACA ? '?ACA=' + additionalParams.ACA + '&redirect=false' : ''}`} docExpansion={'list'} />
               </div>
             }
           </>
