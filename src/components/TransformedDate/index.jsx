@@ -18,6 +18,7 @@ TransformedDate.defaultProps = {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
+    timeZone: "UTC"
   }
 }
 
