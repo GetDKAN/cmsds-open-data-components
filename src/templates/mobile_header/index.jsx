@@ -16,17 +16,17 @@ const MobileHeader = ({siteName, links, org, searchModalText, customSearch = fal
   const menu = useRef(null);
   useEffect(() => {
     function handleFocusOut(event) {
-      if (!menu.current.contains(event.relatedTarget)) {
+      if (menu.current && !menu.current.contains(event.relatedTarget)) {
         setMenuOpen(false);
       }
     }
-    if (menu.current) {
-      menu.current.addEventListener("focusout", handleFocusOut);
-      return () => {
+    menu.current.addEventListener("focusout", handleFocusOut);
+    return () => {
+      if (menu.current) {
         menu.current.removeEventListener("focusout", handleFocusOut);
-      };
-    }
-  }, [menu, menuOpen]);
+      }
+    };
+  }, [menu.current, menuOpen]);
   return (
     <header className={`dc-c-header dc-c-mobile-header ${menuOpen ? 'menu-open' : ''}`} aria-label="Site header">
       {includeTopNav
