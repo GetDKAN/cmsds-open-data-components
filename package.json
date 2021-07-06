@@ -1,6 +1,6 @@
 {
   "name": "@civicactions/cmsds-open-data-components",
-  "version": "0.14.0-alpha.3",
+  "version": "0.15.0",
   "description": "Components for the open data catalog frontend using CMS Design System",
   "main": "lib/index.js",
   "scripts": {
@@ -21,7 +21,7 @@
   "dependencies": {
     "@civicactions/data-catalog-components": "^2.0.0-alpha.10",
     "@civicactions/data-catalog-services": "^1.0.0-alpha.13",
-    "@cmsgov/design-system": "^2.6.1",
+    "@cmsgov/design-system": "^2.7.0",
     "@reach/router": "^1.3.3",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",

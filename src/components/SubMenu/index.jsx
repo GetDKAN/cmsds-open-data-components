@@ -33,6 +33,7 @@ const SubMenu = ({link, linkClasses, wrapLabel}) => {
       <Button
         size="small"
         variation="transparent"
+        inverse={true}
         className={linkClasses}
         aria-haspopup="true"
         aria-expanded={isExpanded}
