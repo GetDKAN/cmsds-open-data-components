@@ -14,6 +14,7 @@ import ResourceFooter from '../../components/ResourceFooter';
 const DatasetBody = ({ id, dataset, additionalParams }) => {
   let apiDocs = useRef()
   const [tablePadding, setTablePadding] = useState('ds-u-padding-y--1')
+  const [fileFormat, setFileFormat] = useState('')
 
   let distribution = {};
   let distribution_array = dataset.distribution ? dataset.distribution : [];
@@ -31,7 +32,18 @@ const DatasetBody = ({ id, dataset, additionalParams }) => {
   )
   useEffect(() => {
     if(distribution.identifier) {
-      if (distribution.data.format.toUpperCase() === 'CSV') {
+      let localFileFormat = '';
+      if(distribution.data.format) {
+        localFileFormat = distribution.data.format.toUpperCase()
+        
+      } else if(distribution.data.mediaType) {
+        const mediaType = distribution.data.mediaType.split('/');
+        if (mediaType.length && mediaType[1]) {
+          localFileFormat = mediaType[1].toUpperCase();
+        }
+      }
+      setFileFormat(localFileFormat);
+      if (localFileFormat === "CSV") {
         resource.setResource(distribution.identifier);
         resource.setManual(false);
       }
@@ -52,7 +64,7 @@ const DatasetBody = ({ id, dataset, additionalParams }) => {
             )}
           </div>
           <p dangerouslySetInnerHTML={{__html: dataset.description}} />
-          {Object.keys(distribution).length && distribution.data.format.toUpperCase() === 'CSV' ? (
+          {Object.keys(distribution).length && fileFormat === "CSV" ? (
             <>
               <h2 className="dc-resource-header">Resource Preview</h2>
               {resource.columns
@@ -72,7 +84,7 @@ const DatasetBody = ({ id, dataset, additionalParams }) => {
           {dataset.identifier &&
             <DatasetAdditionalInformation datasetInfo={dataset} />
           }
-          {Object.keys(distribution).length && distribution.data.format.toUpperCase() === 'CSV' && dataset.identifier ? (
+          {Object.keys(distribution).length && fileFormat === "CSV" && dataset.identifier ? (
             <div ref={apiDocs}>
               <h2>Try the API</h2>
               <SwaggerUI url={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${dataset.identifier}/docs${additionalParams && additionalParams.ACA ? '?ACA=' + additionalParams.ACA + '&redirect=false' : ''}`} docExpansion={'list'} />
@@ -83,10 +95,10 @@ const DatasetBody = ({ id, dataset, additionalParams }) => {
         <div className="ds-l-md-col--3 ds-l-sm-col--12">
         {Object.keys(distribution).length
           ? (
-            <DatasetDownloads downloadURL={distribution.data.downloadURL} type={distribution.data.format} />
+            <DatasetDownloads downloadURL={distribution.data.downloadURL} type={fileFormat} />
           ) : ''}
           <DatasetTags keywords={dataset.keyword} />
-          {Object.keys(distribution).length && distribution.data.format.toUpperCase() === 'CSV' ? (
+          {Object.keys(distribution).length && fileFormat === "CSV" ? (
           <div className="dc-c-dataset-tags ds-u-margin-bottom--3 ds-u-padding--2 ds-u-border ds-u-border--1">
             <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-top--0 ds-u-margin-bottom--2 ds-u-padding-bottom--2">API</h2>
             <Button
