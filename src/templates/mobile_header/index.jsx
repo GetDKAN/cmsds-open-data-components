@@ -20,8 +20,24 @@ const MobileHeader = ({siteName, links, org, searchModalText, customSearch = fal
         setMenuOpen(false);
       }
     }
+    function handleClick(event) {
+      // Links are wrapped in spans, this checks if the parent is an A, also check if in the search modal.
+      if (event.target.parentElement.nodeName === 'A' || event.target.closest('.dc-c-search-dialog')) {
+        setMenuOpen(false);
+      }
+    }
+    function handleSearchEnter(event) {
+      // Close upon user hiting enter on search.
+      if (event.keyCode === 13) {
+        setMenuOpen(false);
+      }
+    }
     menu.current.addEventListener("focusout", handleFocusOut);
+    document.addEventListener("mousedown", handleClick);
+    document.addEventListener("keyup", handleSearchEnter);
     return () => {
+      document.removeEventListener("keyup", handleSearchEnter);
+      document.removeEventListener("mousedown", handleClick);
       if (menu.current) {
         menu.current.removeEventListener("focusout", handleFocusOut);
       }
