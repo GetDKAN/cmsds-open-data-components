@@ -46,6 +46,9 @@ const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, resour
         if(cond.operator.toLowerCase() === 'like') {
           cond.value = `%${cond.value}%`;
         }
+        if(cond.operator.toLowerCase() === 'in') {
+          cond.value = cond.value.split(',');
+        }
         return cond
       })
       setConditions(updatedConditions);

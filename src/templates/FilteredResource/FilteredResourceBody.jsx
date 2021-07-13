@@ -19,7 +19,7 @@ const FilteredResourceBody = ({id, dataset, distIndex, location, apiDocPage, add
     distribution = distribution_array.find((dist) => dist.identifier === distribution_array[distIndex].identifier);
   }
   let buttonRef = null;
-  const options = location.search ? {...qs.parse(location.search)} : {conditions: []};
+  const options = location.search ? {...qs.parse(location.search, { ignoreQueryPrefix: true })} : {conditions: []};
   const resource = useDatastore(
     '',
     process.env.REACT_APP_ROOT_URL,
