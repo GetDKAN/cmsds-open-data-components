@@ -15,7 +15,8 @@ const DatasetAdditionalInformation = ({ datasetInfo }) => {
     theme,
     contactPoint,
     bureauCode,
-    publisher
+    publisher,
+    references
   } = datasetInfo;
   let tags = [];
   let themes = []
@@ -148,6 +149,23 @@ const DatasetAdditionalInformation = ({ datasetInfo }) => {
               <TableRow>
                 <TableCell>Public Access Level</TableCell>
                 <TableCell>{accessLevel}</TableCell>
+              </TableRow>
+            )
+            : (null)
+          }
+          {references
+            ? (
+              <TableRow>
+                <TableCell>Related Documents</TableCell>
+                <TableCell>
+                  <ul className="ds-u-margin--0 ds-u-padding-y--0 ds-u-padding-left--2 ds-u-padding-right--0">
+                  {references.map((r, index) => (
+                    <li key={`${r}_${index}`}>
+                      <a href={r}>{r}</a>
+                    </li>
+                  ))}
+                  </ul>
+                </TableCell>
               </TableRow>
             )
             : (null)
