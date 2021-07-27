@@ -44,7 +44,8 @@ const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, resour
     if(formConditions.length) {
       const updatedConditions = formConditions.map((cond) => {
         if(cond.operator.toLowerCase() === 'like') {
-          cond.value = `%${cond.value}%`;
+          const cleanedValue = cond.value.replace(/(^\%+|\%+$)/mg, '');
+          cond.value = `%${cleanedValue}%`;
         }
         if(cond.operator.toLowerCase() === 'in') {
           cond.value = cond.value.split(',');

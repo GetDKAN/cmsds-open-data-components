@@ -17,18 +17,11 @@ function buildOperatorOptions(type) {
 }
 
 function cleanText(value, operator) {
-  let newValue = value;
-  
-  if(operator.toLowerCase() === 'like') {
-    if(newValue.substring(0,1) === "%") {
-      newValue = newValue.substring(1);
-    }
-    if(newValue.substring(newValue.length - 1) === "%") {
-      newValue = newValue.slice(0, -1)
-    }
-  }
+  let newValue = value.replace(/(^\%+|\%+$)/mg, '');
   if(operator.toLowerCase() === 'in') {
-    newValue = newValue.join(',')
+    if(Array.isArray(newValue)) {
+      newValue = newValue.join(',')
+    }
   }
   return newValue;
 }
