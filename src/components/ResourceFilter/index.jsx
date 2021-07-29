@@ -53,7 +53,7 @@ const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, resour
   }
   return(
     <HelpDrawer
-      // footerTitle="Footer Title"
+      footerTitle="Update Actions"
       footerBody={
         <Button
           className="ds-u-margin-right--1"
@@ -63,6 +63,7 @@ const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, resour
         </Button>
       }
       heading="Add filters"
+      className='dc-c-filterd-resouce-drawer'
       onCloseClick={() => {setFilterOpen(!filterOpen);}}
     >
       <form onSubmit={(e) => submitFilters(e, formConditions)}>
