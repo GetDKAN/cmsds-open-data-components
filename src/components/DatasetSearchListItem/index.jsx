@@ -22,7 +22,6 @@ const DatasetSearchListItem = ({item, updateFacets}) => {
         textTruncateChild={<span><Link to={`/dataset/${identifier}`}>View dataset</Link></span>}
     />
   )
-    console.log(truncatedDescription)
   return(
     <div className="dc-dataset-searchlist-item ds-u-border-top--1 ds-u-margin-bottom--5">
       <div className="ds-l-row ds-u-padding-top--5">
@@ -41,14 +40,14 @@ const DatasetSearchListItem = ({item, updateFacets}) => {
           Updated <TransformedDate date={modified} />
         </span>
       </div>
-      <h3 className="ds-u-margin-y--1">
+      <h2 className="ds-u-margin-y--1 ds-text-heading--xl">
         <Link
           className="ds-u-color--base"
           to={`/dataset/${identifier}`}
         >
           {title}
         </Link>
-      </h3>
+      </h2>
       {truncatedDescription}
       <div>
         {keyword &&
