@@ -19,7 +19,7 @@ const DatasetSearchListItem = ({item, updateFacets}) => {
         textElement={dangerousDescriptionElement}
         text={description}
         appendTextTruncateChild={true}
-        textTruncateChild={<span><Link to={`/dataset/${identifier}`}>View dataset</Link></span>}
+        textTruncateChild=''
     />
   )
   return(
