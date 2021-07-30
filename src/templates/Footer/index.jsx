@@ -96,7 +96,7 @@ const Footer = ({
                                 <svg className="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" role="presentation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
                                   <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
                                 </svg>
-                                <svg title={socialMediaLinks.facebook.title ? socialMediaLinks.facebook.title : "CMS Facebook"} className="svg-inline--fa fa-facebook-f fa-w-10 fa-inverse" data-fa-transform="shrink-3.5" aria-labelledby="svg-inline--fa-title-iRCARP7h6Kp3" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="" >
+                                <svg title="Facebook Icon" className="svg-inline--fa fa-facebook-f fa-w-10 fa-inverse" data-fa-transform="shrink-3.5" aria-labelledby="svg-inline--fa-title-iRCARP7h6Kp3" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="" >
                                   <title id="svg-inline--fa-title-iRCARP7h6Kp3">{socialMediaLinks.facebook.title ? socialMediaLinks.facebook.title : "CMS Facebook"}</title>
                                   <g transform="translate(160 256)">
                                     <g transform="translate(0, 0)  scale(0.78125, 0.78125)  rotate(0 0 0)">
@@ -117,7 +117,7 @@ const Footer = ({
                                 <svg className="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" role="presentation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
                                   <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
                                 </svg>
-                                <svg title={socialMediaLinks.twitter.title ? socialMediaLinks.twitter.title : "CMS Twitter"} className="svg-inline--fa fa-twitter fa-w-16 fa-inverse" data-fa-transform="shrink-3.5" aria-labelledby="svg-inline--fa-title-4z03ITiPPTVF" data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                                <svg title="Twitter Icon" className="svg-inline--fa fa-twitter fa-w-16 fa-inverse" data-fa-transform="shrink-3.5" aria-labelledby="svg-inline--fa-title-4z03ITiPPTVF" data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
                                   <title id="svg-inline--fa-title-4z03ITiPPTVF">{socialMediaLinks.twitter.title ? socialMediaLinks.twitter.title : "CMS Twitter"}</title>
                                   <g transform="translate(256 256)">
                                     <g transform="translate(0, 0)  scale(0.78125, 0.78125)  rotate(0 0 0)">
@@ -138,7 +138,7 @@ const Footer = ({
                                 <svg className="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" role="presentation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
                                   <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
                                 </svg>
-                                <svg title={socialMediaLinks.linkedin.title ? socialMediaLinks.linkedin.title : "CMS LinkedIn"} className="svg-inline--fa fa-linkedin-in fa-w-14 fa-inverse" data-fa-transform="shrink-3.5" aria-labelledby="svg-inline--fa-title-Nm2qsuSKvuRZ" data-prefix="fab" data-icon="linkedin-in" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                                <svg title="LinkedIn Icon" className="svg-inline--fa fa-linkedin-in fa-w-14 fa-inverse" data-fa-transform="shrink-3.5" aria-labelledby="svg-inline--fa-title-Nm2qsuSKvuRZ" data-prefix="fab" data-icon="linkedin-in" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
                                   <title id="svg-inline--fa-title-Nm2qsuSKvuRZ">{socialMediaLinks.linkedin.title ? socialMediaLinks.linkedin.title : "CMS LinkedIn"}</title>
                                   <g transform="translate(224 256)">
                                     <g transform="translate(0, 0)  scale(0.78125, 0.78125)  rotate(0 0 0)">
