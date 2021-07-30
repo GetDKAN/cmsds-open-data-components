@@ -57,7 +57,7 @@ const Header = ({
               menuName="CMS Site Main Nav"
               menuId="site"
               menuClasses="ds-u-display--flex dc-c-header--links ds-u-align-items--center"
-              linkClasses="ds-u-margin-right--5 ds-u-padding-y--3"
+              linkClasses="ds-u-margin-right--4 ds-u-padding-y--3"
             />
             <div className="dc-c-main-navigation--search ds-u-margin-left--auto ds-u-padding-left--3">
               {customSearch ? (
