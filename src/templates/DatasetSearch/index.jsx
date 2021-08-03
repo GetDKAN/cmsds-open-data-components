@@ -68,7 +68,7 @@ const DatasetSearch = ({
     pageSize,
     page,
     resetFilters,
-  } = useSearchAPI(rootUrl, {...transformUrlParamsToSearchObject(decodeURI(location.search), ['theme', 'keyword'])}, additionalParams)
+  } = useSearchAPI(rootUrl, {...transformUrlParamsToSearchObject(location.search, ['theme', 'keyword'])}, additionalParams)
   const { theme, keyword } = separateFacets(facets);
   const [filterText, setFilterText] = useState('');
   React.useEffect(() => {
