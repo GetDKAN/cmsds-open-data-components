@@ -11,7 +11,9 @@ export function isSelected(currentFacet, selectedFacets) {
 }
 
 const DatasetSearchFacets = ({ title, facets, onclickFunction, selectedFacets }) => {
+  const showLimit = 25;
   const [isOpen, setIsOpen] = useState(true);
+  const [showMore, setShowMore] = useState(false);
   const filteredFacets = facets.filter((f) => (f.total > 0));
   return (
     <div className="ds-u-margin-bottom--4">
@@ -24,21 +26,53 @@ const DatasetSearchFacets = ({ title, facets, onclickFunction, selectedFacets })
       </Button>
       {isOpen
         &&(
-          <ul className="dc-dataset-search--facets ds-u-padding--0 ds-u-margin--0">
-            {facets.map((f) => {
-              return (<li key={f.name}>
-                <Choice
-                  checked={isSelected(f.name, selectedFacets) > -1 ? true : false}
-                  name={`facet_theme_${f.name}`}
-                  type="checkbox"
-                  label={`${f.name} (${f.total})`}
-                  value={f.name}
-                  onClick={(e) => onclickFunction({key: f.type, value: e.target.value})}
-                />
-              </li>)
-            })}
-          </ul>
+          <div>
+            <ul className="dc-dataset-search--facets ds-u-padding--0 ds-u-margin--0">
+              {filteredFacets.filter((facet, index) => {
+                if(!showMore) {
+                  if(index <= showLimit) {
+                    return facet;
+                  } else {
+                    return false;
+                  }
+                }
+                return facet;
+              }).map((f) => {
+                  return (<li key={f.name}>
+                    <Choice
+                      checked={isSelected(f.name, selectedFacets) > -1 ? true : false}
+                      name={`facet_theme_${f.name}`}
+                      type="checkbox"
+                      label={`${f.name} (${f.total})`}
+                      value={f.name}
+                      onClick={(e) => onclickFunction({key: f.type, value: e.target.value})}
+                    />
+                  </li>)
+              })}
+            </ul>
+            {!showMore && filteredFacets.length > showLimit
+              && (
+                <Button
+                  variation="transparent"
+                  onClick={() => setShowMore(true)}
+                >
+                  Show more
+                </Button>
+              )
+            }
+            {showMore && filteredFacets.length > showLimit
+              && (
+                <Button
+                  variation="transparent"
+                  onClick={() => setShowMore(false)}
+                >
+                  Show less
+                </Button>
+              )
+            }
+          </div>
         )
+        
       }
     </div>
   );

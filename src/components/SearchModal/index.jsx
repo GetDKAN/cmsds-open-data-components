@@ -7,6 +7,19 @@ const SearchModal = ({ searchFunc, appNodeId, searchModalText, buttonSize, inver
   const [modalSearchTerm, setModalSearchTerm] = useState('');
   const [modalSearch, setModalSearch] = useState(false)
   const mobile = useMediaQuery({ minWidth: 0, maxWidth: 543});
+
+  function searchForDataset(e) {
+    e.preventDefault();
+    if (window) {
+      if (window.location.pathname !== '/datasets') {
+        navigate(`/datasets?fulltext=${modalSearchTerm}`)
+      } else {
+        window.location.search = `fulltext=${modalSearchTerm}`;
+        setModalSearch(false);
+      }
+    }
+  }
+
   return (
     <>
       <Button
@@ -28,7 +41,7 @@ const SearchModal = ({ searchFunc, appNodeId, searchModalText, buttonSize, inver
             closeText={<>Close</>}
           >
             <p>{searchModalText}</p>
-            <form className="ds-u-display--flex ds-u-align-items--stretch ds-u-flex-wrap--nowrap" onSubmit={(e) => {e.preventDefault(); navigate(`/datasets?fulltext=${modalSearchTerm}`)}}>
+            <form className="ds-u-display--flex ds-u-align-items--stretch ds-u-flex-wrap--nowrap" onSubmit={(e) => {searchForDataset(e)}}>
               <TextField
                 value={modalSearchTerm}
                 fieldClassName="ds-u-display--inline-block"

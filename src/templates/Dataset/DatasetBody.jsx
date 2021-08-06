@@ -10,6 +10,7 @@ import DatasetDownloads from '../../components/DatasetDownloads';
 import DatasetAdditionalInformation from '../../components/DatasetAdditionalInformation';
 import TransformedDate from '../../components/TransformedDate';
 import ResourceFooter from '../../components/ResourceFooter';
+import ResourceInformation from '../../components/ResourceInformation';
 
 const DatasetBody = ({ id, dataset, additionalParams }) => {
   let apiDocs = useRef()
@@ -73,6 +74,7 @@ const DatasetBody = ({ id, dataset, additionalParams }) => {
                       <ResourceHeader id={id} includeFiltered includeDensity={true} tablePadding={tablePadding} setTablePadding={setTablePadding} distribution={distribution} resource={resource} />
                       <ResourcePreview id={distribution.identifier} tablePadding={tablePadding} resource={resource} />
                       <ResourceFooter resource={resource} />
+                      <ResourceInformation resource={resource}/>
                     </div>
                   )
                   : (
