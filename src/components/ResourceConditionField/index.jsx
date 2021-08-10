@@ -17,18 +17,17 @@ function buildOperatorOptions(type) {
 }
 
 function cleanText(value, operator) {
-  let newValue = value.replace(/(^\%+|\%+$)/mg, '');
+  let newValue = value;
   if(operator.toLowerCase() === 'in') {
     if(Array.isArray(newValue)) {
       newValue = newValue.join(',')
     }
   }
-  return newValue;
+  return newValue.replace(/(^\%+|\%+$)/mg, '');
 }
 
 const ResourceConditionField = ({data, index, remove, schema, update}) => {
   const { fields } = schema;
-  
   let operatorOptions = []
   const columnOptions = Object.keys(fields).map((key) => { return {label: fields[key].description ? fields[key].description : key, value: key}});
   if(data.property) {

@@ -48,9 +48,11 @@ const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, resour
           cond.value = `%${cleanedValue}%`;
         }
         if(cond.operator.toLowerCase() === 'in') {
-          cond.value = cond.value.split(',');
+          if(!Array.isArray(cond.value)) {
+            cond.value = cond.value.split(',');
+          }
         }
-        return cond
+        return cond;
       })
       setConditions(updatedConditions);
     }
