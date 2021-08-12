@@ -18,10 +18,8 @@ function buildOperatorOptions(type) {
 
 function cleanText(value, operator) {
   let newValue = value;
-  if(operator.toLowerCase() === 'in') {
-    if(Array.isArray(newValue)) {
-      newValue = newValue.join(',')
-    }
+  if(Array.isArray(newValue)) {
+    newValue = newValue.join(',')
   }
   return newValue.replace(/(^\%+|\%+$)/mg, '');
 }
