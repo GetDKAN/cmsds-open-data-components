@@ -44,9 +44,20 @@ const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, resour
     if(formConditions.length) {
       const updatedConditions = formConditions.map((cond) => {
         if(cond.operator.toLowerCase() === 'like') {
-          cond.value = `%${cond.value}%`;
+          const cleanedValue = cond.value.replace(/(^\%+|\%+$)/mg, '');
+          cond.value = `%${cleanedValue}%`;
         }
-        return cond
+        if(cond.operator.toLowerCase() === 'in') {
+          if(!Array.isArray(cond.value)) {
+            cond.value = cond.value.split(',');
+          }
+        }
+        if(Array.isArray(cond.value)) {
+          cond.value = cond.value.map((v) => v.trim());
+        } else {
+          cond.value = cond.value.trim();
+        }
+        return cond;
       })
       setConditions(updatedConditions);
     }
@@ -109,7 +120,6 @@ const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, resour
 
 ResourceFilter.defaultProps = {
   defaultCondition: {
-    resource: 't',
     property: '',
     value: '',
     operator: ''

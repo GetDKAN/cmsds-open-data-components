@@ -7,7 +7,9 @@ function buildOperatorOptions(type) {
     case 'text':
       return [
         {label: "Is", value: "="},
-        {label: "Contains", value: "like"}
+        {label: "Contains", value: "like"},
+        {label: "Is Not", value: "<>"},
+        {label: "Or", value: "in"}
       ]
     default:
       return []
@@ -16,21 +18,14 @@ function buildOperatorOptions(type) {
 
 function cleanText(value, operator) {
   let newValue = value;
-  
-  if(operator.toLowerCase() === 'like') {
-    if(newValue.substring(0,1) === "%") {
-      newValue = newValue.substring(1);
-    }
-    if(newValue.substring(newValue.length - 1) === "%") {
-      newValue = newValue.slice(0, -1)
-    }
+  if(Array.isArray(newValue)) {
+    newValue = newValue.join(',')
   }
-  return newValue;
+  return newValue.replace(/(^\%+|\%+$)/mg, '');
 }
 
 const ResourceConditionField = ({data, index, remove, schema, update}) => {
   const { fields } = schema;
-  
   let operatorOptions = []
   const columnOptions = Object.keys(fields).map((key) => { return {label: fields[key].description ? fields[key].description : key, value: key}});
   if(data.property) {
@@ -68,11 +63,12 @@ const ResourceConditionField = ({data, index, remove, schema, update}) => {
       </div>
       <div className="ds-l-form-row">
         <TextField
+          hint={data.operator.toLowerCase() === 'in' ? `Separate values with a comma.` : ''}
           value={cleanText(data.value, data.operator)}
           disabled={!data.property || !data.operator ? true : false}
           onChange={(e) => (update(index, 'value', e.target.value))}
           label="Filter value"
-          labelClassName="ds-u-margin-top--0 ds-u-visibility--screen-reader"
+          labelClassName="ds-u-margin-top--0"
           name={`filter_value_${index}`}
           className="ds-l-col--11"
         />

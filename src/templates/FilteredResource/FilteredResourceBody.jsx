@@ -19,7 +19,7 @@ const FilteredResourceBody = ({id, dataset, distIndex, location, apiDocPage, add
     distribution = distribution_array.find((dist) => dist.identifier === distribution_array[distIndex].identifier);
   }
   let buttonRef = null;
-  const options = location.search ? {...qs.parse(location.search)} : {conditions: []};
+  const options = location.search ? {...qs.parse(location.search, { ignoreQueryPrefix: true })} : {conditions: []};
   const resource = useDatastore(
     '',
     process.env.REACT_APP_ROOT_URL,
@@ -36,7 +36,7 @@ const FilteredResourceBody = ({id, dataset, distIndex, location, apiDocPage, add
       resource.setManual(false)
     }
   }, [distribution])
-  const downloadUrl = `${process.env.REACT_APP_ROOT_URL}/datastore/query/${distribution.identifier}/download?${qs.stringify({conditions: resource.conditions}, { encode: false })}&format=csv`;
+  const downloadUrl = `${process.env.REACT_APP_ROOT_URL}/datastore/query/${distribution.identifier}/download?${qs.stringify({conditions: resource.conditions}, { encode: true })}&format=csv`;
 
   return (
     <section className="ds-l-container ds-u-padding-bottom--3 ds-u-margin-bottom--2">
