@@ -52,6 +52,11 @@ const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, resour
             cond.value = cond.value.split(',');
           }
         }
+        if(Array.isArray(cond.value)) {
+          cond.value = cond.value.map((v) => v.trim());
+        } else {
+          cond.value = cond.value.trim();
+        }
         return cond;
       })
       setConditions(updatedConditions);
@@ -115,7 +120,6 @@ const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, resour
 
 ResourceFilter.defaultProps = {
   defaultCondition: {
-    resource: 't',
     property: '',
     value: '',
     operator: ''
