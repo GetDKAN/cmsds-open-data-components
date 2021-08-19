@@ -42,7 +42,7 @@ const ResourceContent = ({tablePadding, id, options, resource, customColumns}) =
     tableColumnIsResizing: 'isResizing'
   }
   return(
-    <div className="ds-u-overflow--scroll ds-u-border-x--1 ds-u-border-bottom--1">
+    <div className="ds-u-overflow--auto ds-u-border-x--1 ds-u-border-bottom--1">
       <DataTable
         filterTitle="Filter columns"
         data={resource.values}
