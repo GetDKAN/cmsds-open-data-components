@@ -24,12 +24,12 @@ function DefaultColumnFilter({
   );
 }
 
-const ResourceContent = ({tablePadding, id, options, resource, customColumns}) => {
+const ResourcePreview = ({tablePadding, id, options, resource, customColumns, truncateCellHeader}) => {
   const tableClasses = {
     tableContainerClassName: 'dc-c-table-container',
     headerCellClassName: 'ds-u-border--dark ds-u-padding--2 ds-u-border-y--2 ds-u-border-right--1 ds-u-font-weight--bold dc-c-table-header-cell',
     headerGroupClassName: 'dc-c-table-header-group',
-    headerCellTextClassName: 'dc-truncate ds-u-display--inline-block',
+    headerCellTextClassName: `${truncateCellHeader ? "dc-truncate" : ""} ds-u-display--inline-block`,
     cellEvenRowClassName: 'ds-u-fill--gray-lightest',
     cellClassName: `${tablePadding} dc-truncate ds-u-padding-x--1`,
     filterTitleClassName: 'ds-u-font-weight--bold ds-u-padding-left--2  ds-u-fill--gray-lightest ds-u-display--block',
@@ -71,13 +71,14 @@ const ResourceContent = ({tablePadding, id, options, resource, customColumns}) =
   )
 }
 
-ResourceContent.defaultProps = {
+ResourcePreview.defaultProps = {
   options: {
     layout: 'flex',
     columnFilter: false,
     columnSort: true,
     columnResize: true,
   },
+  truncateCellHeader: true
 }
 
-export default ResourceContent;
+export default ResourcePreview;
