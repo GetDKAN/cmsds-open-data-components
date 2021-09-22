@@ -7,13 +7,13 @@
   button {
     text-decoration: none;
   }
-  .dc-pagination-current {
+  .dc-pagination-current__button {
     font-weight: bold;
     color: $color-base;
     text-decoration: underline;
   }
-  .dc-pagination--previous,
-  .dc-pagination--next {
+  .dc-pagination--previous__button,
+  .dc-pagination--next__button {
     height: 100%;
     &:disabled {
       background: transparent!important;
@@ -38,12 +38,20 @@
       font-weight: lighter;
     }
   }
+
   .dc-pagination--previous {
+    margin-right: auto;
+  }
+  .dc-pagination--next {
+    margin-left: auto;
+  }
+
+  .dc-pagination--previous__button {
     &::before {
       content: '\f053';
     }
   }
-  .dc-pagination--next {
+  .dc-pagination--next__button {
     &::after {
       content: '\f054';
     }
