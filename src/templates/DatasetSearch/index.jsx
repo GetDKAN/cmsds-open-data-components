@@ -88,7 +88,6 @@ const DatasetSearch = ({
     setCurrentResultNumbers({
       total: Number(totalItems),
       startingNumber: startingNumber,
-      //????
       endingNumber: Number(totalItems) < endingNumber ? Number(totalItems) : endingNumber
     })
   }, [totalItems, pageSize, page])
