@@ -83,14 +83,19 @@ const DatasetSearch = ({
   },[fulltext, selectedFacets, sort])
   useEffect(() => {
     const baseNumber = Number(totalItems) > 0 ? 1 : 0;
-    const startingNumber = baseNumber + ((Number(pageSize) * Number(page + 1)) - Number(pageSize))
-    const endingNumber = (Number(pageSize) * Number(page + 1)); 
+    const startingNumber = baseNumber + ((Number(pageSize) * Number(page)) - Number(pageSize))
+    const endingNumber = (Number(pageSize) * Number(page)); 
     setCurrentResultNumbers({
       total: Number(totalItems),
       startingNumber: startingNumber,
-      endingNumber: endingNumber
+      endingNumber: Number(totalItems) < endingNumber ? Number(totalItems) : endingNumber
     })
   }, [totalItems, pageSize, page])
+
+  function changePage(page) {
+    setPage(page);
+    window.scroll(0,0);
+  }
 
   return(
     <section className="ds-l-container">
@@ -155,10 +160,9 @@ const DatasetSearch = ({
           </ol>
           {totalItems &&
             (<Pagination
+              totalPages={Math.ceil(Number(totalItems) / pageSize)}
               currentPage={page}
-              totalItems={Number(totalItems)}
-              itemsPerPage={pageSize}
-              gotoPage={setPage}
+              buttonAction={changePage}
             />)
           }
         </div>
