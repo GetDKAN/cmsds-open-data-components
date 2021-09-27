@@ -22,13 +22,6 @@ const ResourceFooter = ({resource}) => {
           currentPage={(Number(offset) / limit) + 1}
           buttonAction={calcPageByOffset}
         />)
-        // (<Pagination
-        //   currentPage={offset}
-        //   totalItems={Number(count)}
-        //   itemsPerPage={limit}
-        //   gotoPage={}
-        //   calcByOffset
-        // />)
       }
     </div>
   )
