@@ -37,7 +37,8 @@ export function transformUrlParamsToSearchObject(searchParams, facetList) {
   return {
     selectedFacets: selectedFacets,
     fulltext: params.fulltext,
-    sort: params.sort
+    sort: !params.sort ? "modified" : params.sort,
+    sortOrder: !params.sort || params.sort === "modified" ? "desc" : "asc"
   }
 }
 
@@ -64,6 +65,7 @@ const DatasetSearch = ({
     updateSelectedFacets,
     setFulltext, 
     setSort,
+    setSortOrder,
     setPage,
     pageSize,
     page,
@@ -95,6 +97,16 @@ const DatasetSearch = ({
   function changePage(page) {
     setPage(page);
     window.scroll(0,0);
+  }
+
+  function updateSort(value) {
+    if(value === 'modified') {
+      setSortOrder('desc')
+    } else if(value === 'title') {
+      setSortOrder('asc')
+    }
+    
+    setSort(value)
   }
 
   return(
@@ -174,7 +186,7 @@ const DatasetSearch = ({
               label="Sort by"
               labelClassName="ds-u-margin-top--0"
               name="dataset_search_sort"
-              onChange={(e) => setSort(e.target.value)}
+              onChange={(e) => updateSort(e.target.value)}
             />
           </div>
           <div className="ds-u-padding--2 ds-u-margin-bottom--4 ds-u-border--1">
