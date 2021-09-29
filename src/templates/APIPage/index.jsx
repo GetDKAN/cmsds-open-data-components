@@ -12,7 +12,7 @@ const APIPage = ({hideAuth, additionalParams}) => (
 );
 
 APIPage.defaultProps = {
-  hideAuth: false,
+  hideAuth: true,
 }
 
 export default APIPage;
