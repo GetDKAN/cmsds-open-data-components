@@ -43,6 +43,7 @@ const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, resour
     e.preventDefault();
     if(formConditions.length) {
       const updatedConditions = formConditions.map((cond) => {
+        cond.value = cond.value.replace(/(^\%+|\%+$)/mg, '');
         if(cond.operator.toLowerCase() === 'like') {
           const cleanedValue = cond.value.replace(/(^\%+|\%+$)/mg, '');
           cond.value = `%${cleanedValue}%`;
