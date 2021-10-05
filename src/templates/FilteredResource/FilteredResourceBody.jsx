@@ -9,7 +9,21 @@ import ResourceHeader from '../../components/ResourceHeader';
 import ResourcePreview from '../../components/ResourcePreview';
 import ResourceFooter from '../../components/ResourceFooter';
 
-const FilteredResourceBody = ({id, dataset, distIndex, location, apiDocPage, additionalParams}) => {
+export function buildCustomColHeaders(customHeaders, columns, schema) {
+  return columns.map((column) => {
+    const customHeaderIndex = customHeaders.findIndex((header) => header.id === column);
+    if(customHeaderIndex > -1) {
+      return customHeaders[customHeaderIndex]
+    }
+    return {
+      Header: schema && schema.fields[column].description ? schema.fields[column].description : column,
+      accessor: column,
+    }
+  });
+}
+
+const FilteredResourceBody = ({id, dataset, distIndex, location, apiDocPage, additionalParams, customColumns}) => {
+
   const [tablePadding, setTablePadding] = React.useState('ds-u-padding-y--1')
   let apiDocs = useRef();
   const [filtersOpen, setFiltersOpen] = React.useState(false)
@@ -37,7 +51,6 @@ const FilteredResourceBody = ({id, dataset, distIndex, location, apiDocPage, add
     }
   }, [distribution])
   const downloadUrl = `${process.env.REACT_APP_ROOT_URL}/datastore/query/${distribution.identifier}/download?${qs.stringify({conditions: resource.conditions}, { encode: true })}&format=csv`;
-
   return (
     <section className="ds-l-container ds-u-padding-bottom--3 ds-u-margin-bottom--2">
       {Object.keys(distribution).length
@@ -109,11 +122,11 @@ const FilteredResourceBody = ({id, dataset, distIndex, location, apiDocPage, add
                 </div>
               </div>
             </div>
-            {resource.columns
+            {(resource.columns && Object.keys(resource.schema).length)
               ? (
                 <div>
                   <ResourceHeader includeDensity={true} setTablePadding={setTablePadding} distribution={distribution} resource={resource} tablePadding={tablePadding} />
-                  <ResourcePreview id={distribution.identifier} tablePadding={tablePadding} resource={resource} />
+                  <ResourcePreview id={distribution.identifier} tablePadding={tablePadding} resource={resource} customColumns={buildCustomColHeaders(customColumns, resource.columns, resource.schema[distribution_array[distIndex].identifier])} />
                   <ResourceFooter resource={resource} />
                   {filtersOpen
                     && (<ResourceFilter
