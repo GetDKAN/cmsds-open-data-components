@@ -1,0 +1,21 @@
+version: 2
+jobs:
+  build:
+    parallelism: 1
+    machine:
+      image: circleci/classic:latest
+    environment:
+      TEST_RESULTS: /tmp/test-results
+      DRUPAL_VERSION: V8
+    steps:
+      - checkout
+      - run:
+          name: "Setup variables"
+          command: |
+            echo $CIRCLE_BRANCH
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: Run Jest Tests
+          command: npm test

@@ -5,9 +5,9 @@
  import React from 'react';
  import { render, screen } from '@testing-library/react';
  import '@testing-library/jest-dom/extend-expect';
- import Footer from './index';
+ import Dataset from './index';
  
- describe('<Footer />', () => {
+ describe('<Dataset />', () => {
   test('Placeholder', () => {
     expect(true).toBeTruthy();
   });

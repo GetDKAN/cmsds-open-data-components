@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event'
@@ -93,7 +97,7 @@ describe('<Pagination />', () => {
     const {container} = render(
       <TestComponent total={7} current={1}/>
     );
-    expect(screen.queryByText('Previous')).not.toBeInTheDocument();
+    expect(screen.queryByText('Previous')).toHaveAttribute('disabled');
     expect(screen.getByText('1')).toBeInTheDocument();
     expect(screen.getByText('2')).toBeInTheDocument();
     expect(screen.getByText('3')).toBeInTheDocument();
@@ -121,9 +125,9 @@ describe('<Pagination />', () => {
     const {container} = render(
       <TestComponent total={1} current={1}/>
     );
-    expect(screen.queryByText('Previous')).not.toBeInTheDocument();
+    expect(screen.queryByText('Previous')).toHaveAttribute('disabled');
     expect(screen.getByText('1')).toBeInTheDocument();
-    expect(screen.queryByText('Next')).not.toBeInTheDocument();
+    expect(screen.queryByText('Next')).toHaveAttribute('disabled');
     await act(async () => {
       userEvent.click(screen.getByText('1'));
     });
@@ -151,7 +155,7 @@ describe('<Pagination />', () => {
       <TestComponent total={10} current={1}/>
     );
     // INITIAL STATE ON PAGE 1
-    expect(screen.queryByText('Previous')).not.toBeInTheDocument();
+    expect(screen.queryByText('Previous')).toHaveAttribute('disabled');
     expect(screen.getByText('Next')).toBeInTheDocument();
     // CLICK NEXT TO PAGE 2
     await act(async () => {
@@ -163,14 +167,14 @@ describe('<Pagination />', () => {
     await act(async () => {
       userEvent.click(screen.getByText('Previous'));
     });
-    expect(screen.queryByText('Previous')).not.toBeInTheDocument();
+    expect(screen.queryByText('Previous')).toHaveAttribute('disabled');
     expect(screen.getByText('Next')).toBeInTheDocument();
     // JUMP TO LAST PAGE
     await act(async () => {
       userEvent.click(screen.getByText('10'));
     });
     expect(screen.getByText('Previous')).toBeInTheDocument();
-    expect(screen.queryByText('Next')).not.toBeInTheDocument();
+    expect(screen.queryByText('Next')).toHaveAttribute('disabled');
     // CLICK PREVIOUS TO PAGE 9
     await act(async () => {
       userEvent.click(screen.getByText('Previous'));
@@ -182,7 +186,7 @@ describe('<Pagination />', () => {
       userEvent.click(screen.getByText('Next'));
     });
     expect(screen.getByText('Previous')).toBeInTheDocument();
-    expect(screen.queryByText('Next')).not.toBeInTheDocument();
+    expect(screen.queryByText('Next')).toHaveAttribute('disabled');
   });
 
 });

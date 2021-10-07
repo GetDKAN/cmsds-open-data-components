@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
@@ -10,8 +14,8 @@ describe('<DatasetDownloads />', () => {
       <DatasetDownloads downloadURL="http://dkan.com/download.csv" type="csv" />,
     );
     expect(screen.getByRole('heading', { name: 'Downloads'})).toBeTruthy();
-    expect(screen.getByText('Dataset')).toBeTruthy();
-    expect(screen.getByRole('link', { name: 'Download this dataset (CSV)'})).toBeTruthy();
-    expect(screen.getByRole('link', { name: 'Download this dataset (CSV)'})).toHaveAttribute('href', 'http://dkan.com/download.csv');
+    expect(screen.getByText('Downloads')).toBeTruthy();
+    expect(screen.getByRole('link', { name: 'Download this resource (csv)'})).toBeTruthy();
+    expect(screen.getByRole('link', { name: 'Download this resource (csv)'})).toHaveAttribute('href', 'http://dkan.com/download.csv');
   });
 });

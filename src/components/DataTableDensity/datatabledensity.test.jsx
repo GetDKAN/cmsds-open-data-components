@@ -1,9 +1,13 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import DataTableDensity from './index';
 
-describe('<DataTableRowDetails />', () => {
+describe('<DataTableRowDensity />', () => {
   test('Renders 3 buttons', () => {
     render(
       <DataTableDensity setTablePadding={(p) => (console.log(p))} />,

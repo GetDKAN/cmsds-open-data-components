@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
@@ -17,7 +21,7 @@ describe('<DatasetTags />', () => {
     expect(screen.getByRole('heading', { name: 'Tags'})).toBeTruthy();
     tagList.forEach(tag => {
       expect(screen.getByRole('link', { name: tag.data})).toBeTruthy();
-      expect(screen.getByRole('link', { name: tag.data})).toHaveAttribute('href', `/search?keyword=${tag.data}`);
+      expect(screen.getByRole('link', { name: tag.data})).toHaveAttribute('href', `/datasets?keyword[]=${tag.data}`);
     });
   });
 });

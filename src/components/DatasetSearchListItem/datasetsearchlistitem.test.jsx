@@ -1,7 +1,16 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import React from 'react';
 import { render, screen, within } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import DatasetSearchListItem from './index';
+import TextTruncate from 'react-text-truncate';
+
+jest.mock('react-text-truncate', () => {
+  return ({ text }) => <span>{text}</span>
+})
 
 const singleItem = {
   title: "Dataset Title",

@@ -5,9 +5,9 @@
  import React from 'react';
  import { render, screen } from '@testing-library/react';
  import '@testing-library/jest-dom/extend-expect';
- import Footer from './index';
+ import SubMenu from './index';
  
- describe('<Footer />', () => {
+ describe('<SubMenu />', () => {
   test('Placeholder', () => {
     expect(true).toBeTruthy();
   });

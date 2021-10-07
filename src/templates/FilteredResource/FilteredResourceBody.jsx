@@ -37,7 +37,7 @@ const FilteredResourceBody = ({id, dataset, distIndex, location, apiDocPage, add
     }
   }, [distribution])
   const downloadUrl = `${process.env.REACT_APP_ROOT_URL}/datastore/query/${distribution.identifier}/download?${qs.stringify({conditions: resource.conditions}, { encode: true })}&format=csv`;
-
+  console.log('resource', resource)
   return (
     <section className="ds-l-container ds-u-padding-bottom--3 ds-u-margin-bottom--2">
       {Object.keys(distribution).length
