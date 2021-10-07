@@ -10,7 +10,7 @@ const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, resour
     conditions,
     // searchParams
   } = resource;
-
+  
   const [formConditions, setFormConditions] = React.useState(conditions && conditions.length ? conditions : [{...defaultCondition}]);
   React.useEffect(() => {
     if(includeSearchParams) {
@@ -28,23 +28,37 @@ const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, resour
     setConditions(newConditions)
   }
 
-  function removeAll() {
-    setFormConditions([{...defaultCondition}]);
-    setConditions([])
-  }
-
   function updateByIndex(index, key, value) {
     let newConditions = [...formConditions]
     newConditions[index][key] = value
     setFormConditions(newConditions)
   }
 
+  function removeAll() {
+    setFormConditions([]);
+    setConditions([])
+  }
+  
+
   function submitFilters(e) {
     e.preventDefault();
     if(formConditions.length) {
-      const updatedConditions = formConditions.map((cond) => {
-        cond.value = cond.value.replace(/(^\%+|\%+$)/mg, '');
+      const updatedConditions = formConditions.filter((cond) => {
+        if(cond.property) {
+          return cond;
+        }
+        return false;
+      }).map((cond) => {
+        if(cond.operator === '=' || cond.operator === '<>') {
+          if(Array.isArray(cond.value)) {
+            cond.value = cond.value.join();
+          }
+          cond.value = cond.value.replace(/(^\%+|\%+$)/mg, '');
+        }
         if(cond.operator.toLowerCase() === 'like') {
+          if(Array.isArray(cond.value)) {
+            cond.value = cond.value.join();
+          }
           const cleanedValue = cond.value.replace(/(^\%+|\%+$)/mg, '');
           cond.value = `%${cleanedValue}%`;
         }
@@ -54,9 +68,7 @@ const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, resour
           }
         }
         if(Array.isArray(cond.value)) {
-          cond.value = cond.value.map((v) => v.trim());
-        } else {
-          cond.value = cond.value.trim();
+          cond.value = cond.value.map((v) => v.trim().replace(/(^\%+|\%+$)/mg, ''));
         }
         return cond;
       })
@@ -65,7 +77,7 @@ const ResourceFilter = ({id, filterOpen, setFilterOpen, defaultCondition, resour
   }
   return(
     <HelpDrawer
-      footerTitle="Update Actions"
+      footerTitle="Update actions"
       footerBody={
         <Button
           className="ds-u-margin-right--1"
