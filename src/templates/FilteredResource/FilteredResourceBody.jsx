@@ -8,8 +8,9 @@ import ResourceFilter from '../../components/ResourceFilter';
 import ResourceHeader from '../../components/ResourceHeader';
 import ResourcePreview from '../../components/ResourcePreview';
 import ResourceFooter from '../../components/ResourceFooter';
+import { buildCustomColHeaders } from './functions';
 
-const FilteredResourceBody = ({id, dataset, distIndex, location, apiDocPage, additionalParams}) => {
+const FilteredResourceBody = ({id, dataset, distIndex, location, apiDocPage, additionalParams, customColumns}) => {
   const [tablePadding, setTablePadding] = React.useState('ds-u-padding-y--1')
   let apiDocs = useRef();
   const [filtersOpen, setFiltersOpen] = React.useState(false)
@@ -109,11 +110,16 @@ const FilteredResourceBody = ({id, dataset, distIndex, location, apiDocPage, add
                 </div>
               </div>
             </div>
-            {resource.columns
+            {(resource.columns && Object.keys(resource.schema).length)
               ? (
                 <div>
                   <ResourceHeader includeDensity={true} setTablePadding={setTablePadding} distribution={distribution} resource={resource} tablePadding={tablePadding} />
-                  <ResourcePreview id={distribution.identifier} tablePadding={tablePadding} resource={resource} />
+                  <ResourcePreview
+                    id={distribution.identifier}
+                    tablePadding={tablePadding}
+                    resource={resource}
+                    customColumns={buildCustomColHeaders(customColumns, resource.columns, resource.schema[distribution_array[distIndex].identifier])}
+                  />
                   <ResourceFooter resource={resource} />
                   {filtersOpen
                     && (<ResourceFilter
