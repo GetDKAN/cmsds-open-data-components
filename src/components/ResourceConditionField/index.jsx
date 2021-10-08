@@ -118,7 +118,7 @@ const ResourceConditionField = ({data, index, remove, schema, update}) => {
         />
       </div>
       <div className="ds-l-form-row">
-        {property && (fields[property].mysql_type.toLowerCase() === 'date' || fields[property].type.toLowerCase() === 'date')
+        {property && (fields[property].mysql_type === 'date' || fields[property].type === 'date')
           ? (
             <div className="ds-u-clearfix ds-l-col--11">
               <DatePicker
