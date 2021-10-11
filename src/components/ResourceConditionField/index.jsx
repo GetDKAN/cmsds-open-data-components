@@ -48,7 +48,7 @@ function cleanText(value, operator) {
 
 const ResourceConditionField = ({data, index, remove, schema, update}) => {
   const { fields } = schema;
-  const [startDate, setStartDate] = React.useState(data.value ? new Date(data.value) : new Date(Date.now()));
+  const [startDate, setStartDate] = React.useState(data.value ? new Date(data.value) : new Date());
   const [propertyOptions, setPropertyOptions] = React.useState(Object.keys(fields).map((key) => { return {label: fields[key].description ? fields[key].description : key, value: key}}))
   const [property, setProperty] = React.useState(data.property);
   const [operator, setOperator] = React.useState(data.operator);
@@ -63,6 +63,9 @@ const ResourceConditionField = ({data, index, remove, schema, update}) => {
         setOperator(opOptions[0].value);
       }
       setOperatorOptions(opOptions);
+      if((fields[property].mysql_type && fields[property].mysql_type === 'date') || fields[property].type === 'date') {
+        setValue(startDate.toJSON().slice(0, 10));
+      }
     } else {
       update(index, 'property', property);
       setOperator('');
@@ -81,7 +84,6 @@ const ResourceConditionField = ({data, index, remove, schema, update}) => {
 
   React.useEffect(() => {
     if(value) {
-      console.log(value)
       update(index, 'value', value);
     } else {
       update(index, 'value', '');
@@ -123,7 +125,7 @@ const ResourceConditionField = ({data, index, remove, schema, update}) => {
             <div className="ds-u-clearfix ds-l-col--11">
               <DatePicker
                 selected={convertUTCToLocalDate(startDate)}
-                onChange={(date) => {console.log(date); setStartDate(date); setValue(date.toJSON().slice(0, 10));}}
+                onChange={(date) => {setStartDate(date); setValue(date.toJSON().slice(0, 10));}}
                 showMonthDropdown
                 showYearDropdown
                 dropdownMode="select"
