@@ -15,7 +15,7 @@ const Header = ({
   inversedModalButton,
   inversedSearchButton,
 }) => {
-  const { url, tagline, logo, urlTitle, logoAltText } = org;
+  const { url, tagline, logo, urlTitle, logoAltText, linkClasses } = org;
   return (
     <header className="dc-c-header ds-base" aria-label="Site header">
       {includeTopNav
