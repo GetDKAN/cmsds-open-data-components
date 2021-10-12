@@ -11,8 +11,9 @@ import DatasetAdditionalInformation from '../../components/DatasetAdditionalInfo
 import TransformedDate from '../../components/TransformedDate';
 import ResourceFooter from '../../components/ResourceFooter';
 import ResourceInformation from '../../components/ResourceInformation';
+import { buildCustomColHeaders } from '../FilteredResource/functions';
 
-const DatasetBody = ({ id, dataset, additionalParams }) => {
+const DatasetBody = ({ id, dataset, additionalParams, customColumns }) => {
   let apiDocs = useRef()
   const [tablePadding, setTablePadding] = useState('ds-u-padding-y--1')
   const [fileFormat, setFileFormat] = useState('')
@@ -72,7 +73,12 @@ const DatasetBody = ({ id, dataset, additionalParams }) => {
                   ? (
                     <div>
                       <ResourceHeader id={id} includeFiltered includeDensity={true} tablePadding={tablePadding} setTablePadding={setTablePadding} distribution={distribution} resource={resource} />
-                      <ResourcePreview id={distribution.identifier} tablePadding={tablePadding} resource={resource} />
+                      <ResourcePreview
+                        id={distribution.identifier}
+                        tablePadding={tablePadding}
+                        resource={resource}
+                        customColumns={buildCustomColHeaders(customColumns, resource.columns, resource.schema[distribution_array[0].identifier])}
+                      />
                       <ResourceFooter resource={resource} />
                       <ResourceInformation resource={resource}/>
                     </div>
