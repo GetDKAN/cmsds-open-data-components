@@ -7,6 +7,7 @@ import cmsLogo from '../../assets/images/CMSGovLogo-O.png';
 
 const Header = ({
   siteName,
+  linkClasses,
   links,
   org,
   searchModalText,
@@ -15,7 +16,7 @@ const Header = ({
   inversedModalButton,
   inversedSearchButton,
 }) => {
-  const { url, tagline, logo, urlTitle, logoAltText, linkClasses } = org;
+  const { url, tagline, logo, urlTitle, logoAltText } = org;
   return (
     <header className="dc-c-header ds-base" aria-label="Site header">
       {includeTopNav
@@ -84,15 +85,16 @@ Header.defaultProps = {
     urlTitle: 'CMS.gov Centers for Medicare & Medicaid Services',
     logo: cmsLogo,
     logoAltText: 'CMS.gov Centers for Medicare & Medicaid Services',
-    linkClasses: 'ds-u-xl-margin-right--4 ds-u-margin-right--3 ds-u-padding-y--3',
   },
   includeTopNav: true,
   customSearch: false,
+  linkClasses: 'ds-u-xl-margin-right--4 ds-u-margin-right--3 ds-u-padding-y--3',
 }
 
 Header.propTypes = {
   siteName: PropTypes.string.isRequired,
   includeTopNav: PropTypes.bool,
+  linkClasses: PropTypes.string,
 }
 
 export default Header;
