@@ -17,10 +17,7 @@ const Hero = ({title, description, searchUrl, searchKey, textfieldLabel, searchB
           <h1 className="ds-text-heading--5xl ds-u-color--white ds-u-margin-y--1">{title}</h1>
           <p className="ds-u-color--white ds-u-measure--wide">{description}</p>
         </div>
-        <form
-          onSubmit={(e) => submitHero(e)}
-          className="ds-l-row ds-u-align-items--stretch ds-u-margin-y--4 ds-u-md-flex-wrap--nowrap ds-u-flex-wrap--wrap"
-        >
+        <form onSubmit={(e) => submitHero(e)}>
           <div style={{position: 'relative'}} className="ds-l-row ds-u-align-items--stretch ds-u-margin-y--4 ds-u-flex-wrap--nowrap">
             <div className="ds-u-padding--0 ds-u-margin-right--1" style={{flex: "1 1 100%", maxWidth: "100%"}}>
               <TextField
