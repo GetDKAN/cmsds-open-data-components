@@ -1,7 +1,7 @@
 import React from 'react';
 import { DataTable } from '@civicactions/data-catalog-components';
 import { transformTableFilterToQueryCondition, transformTableSortToQuerySort } from '@civicactions/data-catalog-services';
-import { TextField } from '@cmsgov/design-system';
+import { TextField, Spinner } from '@cmsgov/design-system';
 
 export function prepareColumns(columns, schema) {
   return columns.map((column) => ({
@@ -65,6 +65,12 @@ const ResourcePreview = ({tablePadding, id, options, resource, customColumns, tr
         }}
         customColumnFilter={DefaultColumnFilter}
         options= {options}
+        CustomLoadingComponent={<div className="ds-u-display--flex ds-u-justify-content--center ds-u-padding--3">
+        <Spinner className="ds-u-valign--middle" />
+      </div>}
+        CustomNoResults={<div className="ds-u-display--flex ds-u-justify-content--center ds-u-padding--3">
+        <p>No results returned.</p>
+      </div>}
       />
       
     </div>
