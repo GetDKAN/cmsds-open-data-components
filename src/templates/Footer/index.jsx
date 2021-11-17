@@ -60,13 +60,33 @@ const Footer = ({
                   <div>
                     <h3 className="ds-h6 dc-footer--heading ds-u-margin-bottom--2">Additional resources</h3>
                     <ul className="ds-u-font-size--small">
-                      {footerAdditionalResourcesLinks.map((link) => (
-                        <li className="ds-u-margin-bottom--1" key={link.id}>
-                          <NavLink 
-                            link={link} 
-                            className="dc-menu-item"/>
-                        </li>
-                      ))}
+                      {footerAdditionalResourcesLinks.filter((link) => {
+                        const noOnClick = Object.keys(link).findIndex((l) => (l === "onClick"));
+                        if(noOnClick === -1 || (link.onClick && link.dataTag)) {
+                          return link;
+                        }
+                      }).map((link) => {
+                        if(link.onClick && link.dataTag) {
+                          return(
+                            <li className="ds-u-margin-bottom--1" key={link.id}>
+                              <a 
+                                href={link.url}
+                                {...{['data-' + link.dataTag.name]: link.dataTag.value}}
+                                onClick={link.onClick}
+                              >
+                                {link.label}
+                              </a>
+                            </li>
+                          )
+                        }
+                        return(
+                          <li className="ds-u-margin-bottom--1" key={link.id}>
+                            <NavLink 
+                              link={link} 
+                              className="dc-menu-item"/>
+                          </li>
+                        )
+                      })}
                     </ul>
                   </div>
                 </div>

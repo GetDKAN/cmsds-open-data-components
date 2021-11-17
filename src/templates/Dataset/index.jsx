@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useMetastoreDataset } from '@civicactions/data-catalog-services';
 import DatasetBody from './DatasetBody';
 import PageNotFound from '../PageNotFound';
 
 
-const Dataset = ({ id, rootUrl, additionalParams, customColumns }) => {
+const Dataset = ({ id, rootUrl, additionalParams, customColumns, setDatasetTitle }) => {
   const metastore = useMetastoreDataset(id, rootUrl, additionalParams);
   const { dataset } = metastore;
+  const title = dataset.title ? dataset.title : "";
+  useEffect(() => {
+    if(title) {
+      if(setDatasetTitle) {
+        setDatasetTitle(title);
+      }
+    }
+  }, [title])
   const notFoundContent = (
     <>
       <h1>Error: Dataset not found</h1>
