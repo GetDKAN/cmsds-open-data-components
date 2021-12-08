@@ -65,10 +65,10 @@ const ResourcePreview = ({tablePadding, id, options, resource, customColumns, tr
         }}
         customColumnFilter={DefaultColumnFilter}
         options= {options}
-        CustomLoadingComponent={<div className="ds-u-display--flex ds-u-justify-content--center ds-u-padding--3">
+        CustomLoadingComponent={<div className="ds-u-display--flex ds-u-padding--3">
         <Spinner className="ds-u-valign--middle" />
       </div>}
-        CustomNoResults={<div className="ds-u-display--flex ds-u-justify-content--center ds-u-padding--3">
+        CustomNoResults={<div className="ds-u-display--flex ds-u-padding--3">
         <p>No results returned.</p>
       </div>}
       />
