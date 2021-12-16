@@ -13,7 +13,7 @@ const ResourceHeader = ({ setTablePadding, id, distribution, includeFiltered, in
     setLimit,
     setOffset,
    } = resource;
-
+  const intCount = count ? parseInt(count) : 0;
   return(
     <div>
       <div className="ds-l-row">
@@ -39,15 +39,11 @@ const ResourceHeader = ({ setTablePadding, id, distribution, includeFiltered, in
       </div>
       <div className="ds-l-row ds-u-align-items--center">
         <div className="ds-l-col--6">
-          {count
-            && (
-              <DataTablePageResults
-                totalRows={parseInt(count)}
-                limit={limit}
-                offset={offset}
-              />
-            )
-          }
+          <DataTablePageResults
+            totalRows={intCount}
+            limit={limit}
+            offset={offset}
+          />
         </div>
         <div className="ds-l-col--6">
           <DataTableRowChanger limit={limit} setLimit={setLimit} setOffset={setOffset} />
