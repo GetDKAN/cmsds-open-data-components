@@ -46,6 +46,7 @@ export function transformUrlParamsToSearchObject(searchParams, facetList) {
 const DatasetSearch = ({
   rootUrl,
   location,
+  pageTitle,
   introText,
   fulltextLabel,
   fulltextLabelClassName,
@@ -112,7 +113,7 @@ const DatasetSearch = ({
   return(
     <section className="ds-l-container">
       <h1 className="dc-search-header ds-title ds-u-margin-y--3">
-        Datasets
+        {pageTitle}
       </h1>
       <div className="ds-l-row">
         <div className="ds-l-md-col--8 ds-l-sm-col--12ds-u-margin-bottom--3">
@@ -220,6 +221,7 @@ const DatasetSearch = ({
 }
 
 DatasetSearch.defaultProps = {
+  pageTitle: "Datasets",
   introText: "",
   fulltextLabel: "Search term",
   fulltextLabelClassName: "ds-u-visibility--screen-reader",
