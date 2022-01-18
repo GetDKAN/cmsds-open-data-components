@@ -2,7 +2,7 @@ import React from "react";
 
 const PageNotFound = ({ siteUrl, content }) => {
   return (
-    <section className="ds-l-container">
+    <section className="ds-l-container ds-u-padding-top--3">
       {content ? (
         content
       ) : (

@@ -22,7 +22,7 @@ const Dataset = ({
     }
   }, [title]);
   const notFoundContent = (
-    <>
+    <div className="ds-u-padding-top--3">
       <h1 className="ds-title">Error: Dataset not found</h1>
       <p>
         We're sorry, but there is no dataset ID that matches your entry. You may
@@ -36,7 +36,7 @@ const Dataset = ({
         <span className="ds-u-font-weight--bold">Note:</span> If you were using
         a bookmark, please reset it once you find the correct dataset.
       </p>
-    </>
+    </div>
   );
   return (
     <>
