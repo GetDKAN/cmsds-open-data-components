@@ -143,7 +143,6 @@ const MobileHeader = ({
                 <SearchModal
                   searchFunc={(e) => {
                     e.preventDefault();
-                    console.log(e.target.value);
                   }}
                   searchModalText={searchModalText}
                   buttonSize={"small"}
