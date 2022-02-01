@@ -12,7 +12,7 @@ import DatasetSearchFacets from "../../components/DatasetSearchFacets";
 const defaultSort = {
   modified: "desc",
   title: "asc",
-  default: "desc",
+  default: "modified",
 };
 
 function updateUrl(selectedFacets, fulltext, sort) {
@@ -50,8 +50,10 @@ export function transformUrlParamsToSearchObject(
   return {
     selectedFacets: selectedFacets,
     fulltext: params.fulltext,
-    sort: !params.sort ? "modified" : params.sort,
-    sortOrder: !params.sort ? sortOptions.default : sortOptions[params.sort],
+    sort: !params.sort ? sortOptions.default : params.sort,
+    sortOrder: !params.sort
+      ? sortOptions[sortOptions.default]
+      : sortOptions[params.sort],
   };
 }
 
