@@ -1,18 +1,27 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useMediaQuery } from 'react-responsive'
-import { Button } from '@cmsgov/design-system';
-import { Link } from '@reach/router';
-import SearchModal from '../../components/SearchModal';
-import NavBar from '../../components/NavBar';
-import cmsLogo from '../../assets/images/CMSGovLogo-O.png'
-import cmsLogoWhite from '../../assets/images/CMSgov@2x-white-O.png';
+import React, { useState, useEffect, useRef } from "react";
+import { useMediaQuery } from "react-responsive";
+import { Button } from "@cmsgov/design-system";
+import { Link } from "@reach/router";
+import SearchModal from "../../components/SearchModal";
+import NavBar from "../../components/NavBar";
+import cmsLogo from "../../assets/images/CMSGovLogo-O.png";
+import cmsLogoWhite from "../../assets/images/CMSgov@2x-white-O.png";
 
-const MobileHeader = ({siteName, links, org, searchModalText, customSearch = false, includeTopNav, inversedModalButton, inversedSearchButton}) => {
+const MobileHeader = ({
+  siteName,
+  links,
+  org,
+  searchModalText,
+  customSearch = false,
+  includeTopNav,
+  inversedModalButton,
+  inversedSearchButton,
+}) => {
   const { url, logo, urlTitle, logoAltText, inverseLogo } = org;
 
   const [menuOpen, setMenuOpen] = useState(false);
-  const mobile = useMediaQuery({ minWidth: 0, maxWidth: 543});
-  const tablet = useMediaQuery({ minWidth: 544, maxWidth: 1023});
+  const mobile = useMediaQuery({ minWidth: 0, maxWidth: 543 });
+  const tablet = useMediaQuery({ minWidth: 544, maxWidth: 1023 });
   const menu = useRef(null);
   useEffect(() => {
     function handleFocusOut(event) {
@@ -22,7 +31,10 @@ const MobileHeader = ({siteName, links, org, searchModalText, customSearch = fal
     }
     function handleClick(event) {
       // Links are wrapped in spans, this checks if the parent is an A, also check if in the search modal.
-      if (event.target.parentElement.nodeName === 'A' || event.target.closest('.dc-c-search-dialog')) {
+      if (
+        event.target.parentElement.nodeName === "A" ||
+        event.target.closest(".dc-c-search-dialog")
+      ) {
         setMenuOpen(false);
       }
     }
@@ -44,34 +56,38 @@ const MobileHeader = ({siteName, links, org, searchModalText, customSearch = fal
     };
   }, [menu.current, menuOpen]);
   return (
-    <header className={`dc-c-header dc-c-mobile-header ${menuOpen ? 'menu-open' : ''}`} aria-label="Site header">
-      {includeTopNav
-       && (
-        <div className={`dc-c-cmsheader ds-u-display--flex ds-u-padding-x--1 ds-u-align-items--center ${mobile ? 'ds-u-justify-content--center' : 'ds-u-justify-content--between'}`}>
+    <header
+      className={`dc-c-header dc-c-mobile-header ${
+        menuOpen ? "menu-open" : ""
+      }`}
+      aria-label="Site header"
+    >
+      {includeTopNav && (
+        <div
+          className={`dc-c-cmsheader ds-u-display--flex ds-u-padding-x--1 ds-u-align-items--center ${
+            mobile
+              ? "ds-u-justify-content--center"
+              : "ds-u-justify-content--between"
+          }`}
+        >
           <div className="cms-link-container">
-            <a
-              href={url}
-              title={urlTitle}
-            >
+            <a href={url} title={urlTitle}>
               <img src={menuOpen ? inverseLogo : logo} alt={logoAltText} />
             </a>
           </div>
-          
-          {tablet
-            && (
-              <div className="ds-u-margin-left--auto">
-                <NavBar
-                  links={links.topnav}
-                  menuName="CMS Main Header"
-                  menuId="cmsheader"
-                  menuClasses="ds-u-display--flex dc-c-header--links ds-u-font-size--small"
-                />
-              </div>
-            )
-          }
-          </div>
-        )
-      }
+
+          {tablet && (
+            <div className="ds-u-margin-left--auto">
+              <NavBar
+                links={links.topnav}
+                menuName="CMS Main Header"
+                menuId="cmsheader"
+                menuClasses="ds-u-display--flex dc-c-header--links ds-u-font-size--small"
+              />
+            </div>
+          )}
+        </div>
+      )}
       <div className="dc-c-main-navigation ds-u-display--flex ds-u-justify-content--between ds-u-align-items--center">
         <Button
           variation="transparent"
@@ -80,17 +96,26 @@ const MobileHeader = ({siteName, links, org, searchModalText, customSearch = fal
           className="dc-c-mobile-menu--open"
           onClick={() => setMenuOpen(true)}
         >
-          {mobile ? <span className="ds-u-visibility--screen-reader">Menu</span> : <>Menu</>}
+          {mobile ? (
+            <span className="ds-u-visibility--screen-reader">Menu</span>
+          ) : (
+            <>Menu</>
+          )}
         </Button>
         <div className="ds-u-padding-y--3 dc-c-site-title">
-          <Link to="/"><span className="ds-h1">{siteName}</span></Link>
+          <Link to="/">
+            <span className="ds-h1">{siteName}</span>
+          </Link>
         </div>
         <div className="dc-c-mobile-menu--search">
           {customSearch ? (
             customSearch
           ) : (
             <SearchModal
-              searchFunc={(e) => {e.preventDefault(); console.log(e.target.value);}}
+              searchFunc={(e) => {
+                e.preventDefault();
+                console.log(e.target.value);
+              }}
               searchModalText={searchModalText}
               buttonSize={"small"}
               inversedModalButton={inversedModalButton}
@@ -98,70 +123,70 @@ const MobileHeader = ({siteName, links, org, searchModalText, customSearch = fal
             />
           )}
         </div>
-        
       </div>
       <div className="dc-c-mobile-header--menu" ref={menu}>
-          <div className="ds-u-display--flex dc-c-mobile-header--menu-close ds-u-justify-content--between">
-            <Button
-              variation="transparent"
-              inversed
-              size="small"
-              className="dc-c-mobile-menu--close ds-u-margin-left--1 ds-u-padding-left--0"
-              onClick={() => setMenuOpen(false)}
-            >
-              Close
-            </Button>
-            {tablet
-              && (
-                <div className="dc-c-mobile-menu--search">
-                {customSearch ? (
-                  customSearch
-                ) : (
-                  <SearchModal
-                    searchFunc={(e) => {e.preventDefault(); console.log(e.target.value);}}
-                    searchModalText={searchModalText}
-                    buttonSize={"small"}
-                  />
-                )}
-                </div>
+        <div className="ds-u-display--flex dc-c-mobile-header--menu-close ds-u-justify-content--between">
+          <Button
+            variation="transparent"
+            inversed
+            size="small"
+            className="dc-c-mobile-menu--close ds-u-margin-left--1 ds-u-padding-left--0"
+            onClick={() => setMenuOpen(false)}
+          >
+            Close
+          </Button>
+          {tablet && (
+            <div className="dc-c-mobile-menu--search">
+              {customSearch ? (
+                customSearch
+              ) : (
+                <SearchModal
+                  searchFunc={(e) => {
+                    e.preventDefault();
+                    console.log(e.target.value);
+                  }}
+                  searchModalText={searchModalText}
+                  buttonSize={"small"}
+                />
               )}
-          </div>
-          <NavBar
-            links={links.main}
-            wrapLabel
-            menuName="CMS Site Main Nav"
-            menuId="site"
-            menuClasses="dc-c-header--links dc-c-header--mobile-links"
-            linkClasses="ds-u-margin-left--1 ds-u-padding-bottom--2 ds-h5"
-          />
-          {mobile
-          && (
-            <div className="cms-mobile-header--container">
-              <span></span>
-              <NavBar
-                links={links.topnav}
-                menuName="CMS Main Header"
-                menuId="cms-mobile-header"
-                linkClasses="ds-u-margin-left--1 ds-u-padding-bottom--2"
-                menuClasses="dc-c-header--links ds-u-font-size--small"
-              />
             </div>
           )}
         </div>
+        <NavBar
+          links={links.main}
+          wrapLabel
+          menuName="CMS Site Main Nav"
+          menuId="site"
+          menuClasses="dc-c-header--links dc-c-header--mobile-links"
+          linkClasses="ds-u-margin-left--1 ds-u-padding-bottom--2 ds-h5"
+        />
+        {mobile && (
+          <div className="cms-mobile-header--container">
+            <span></span>
+            <NavBar
+              links={links.topnav}
+              menuName="CMS Main Header"
+              menuId="cms-mobile-header"
+              linkClasses="ds-u-margin-left--1 ds-u-margin-bottom--2"
+              menuClasses="dc-c-header--links ds-u-font-size--small"
+            />
+          </div>
+        )}
+      </div>
     </header>
-  )
-}
+  );
+};
 
 MobileHeader.defaultProps = {
   org: {
-    tagline: 'The Centers for Medicare and Medicaid Services',
-    url: 'https://cms.gov',
-    urlTitle: 'CMS.gov Centers for Medicare &amp; Medicaid Services',
+    tagline: "The Centers for Medicare and Medicaid Services",
+    url: "https://cms.gov",
+    urlTitle: "CMS.gov Centers for Medicare &amp; Medicaid Services",
     logo: cmsLogo,
-    logoAltText: 'CMS.gov Centers for Medicare &amp; Medicaid Services',
+    logoAltText: "CMS.gov Centers for Medicare &amp; Medicaid Services",
     inverseLogo: cmsLogoWhite,
   },
-  includeTopNav: true
-}
+  includeTopNav: true,
+};
 
 export default MobileHeader;
