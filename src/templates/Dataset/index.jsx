@@ -10,6 +10,7 @@ const Dataset = ({
   additionalParams,
   customColumns,
   setDatasetTitle,
+  columnSettings,
 }) => {
   const metastore = useMetastoreDataset(id, rootUrl, additionalParams);
   const { dataset } = metastore;
@@ -48,6 +49,7 @@ const Dataset = ({
           dataset={dataset}
           additionalParams={additionalParams}
           customColumns={customColumns ? customColumns : []}
+          columnSettings={columnSettings}
         />
       )}
     </>
