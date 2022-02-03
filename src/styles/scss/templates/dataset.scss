@@ -17,20 +17,13 @@
 }
 
 .dc-c-resize-handle {
-  height: 57px;
+  height: 61px;
   background-color: $color-primary-darkest;
   width: 10px;
   min-width: 10px;
   display: block;
   margin-left: -10px;
-  // position: absolute;
-  // right: 0;
-  // top: 0;
-  // padding: 10px;
   z-index: 1000;
-  border-top: 2px solid rgb(50, 58, 69);
-  border-bottom: 2px solid rgb(50, 58, 69);
-  // border-right: 1px solid rgb(50, 58, 69) !important;
   &.isResizing,
   &:hover {
     background-color: $color-primary-darker;
