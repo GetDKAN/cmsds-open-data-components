@@ -24,6 +24,7 @@ const FilteredResourceBody = ({
   additionalParams,
   customColumns,
   columnSettings,
+  columnWidths,
 }) => {
   const [tablePadding, setTablePadding] = React.useState("ds-u-padding-y--1");
   let apiDocs = useRef();
@@ -171,6 +172,7 @@ const FilteredResourceBody = ({
                   columnSort: true,
                   columnResize: true,
                 }}
+                columnWidths={columnWidths}
               />
               <ResourceFooter resource={resource} />
               {filtersOpen && (

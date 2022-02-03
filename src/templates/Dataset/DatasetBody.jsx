@@ -19,6 +19,7 @@ const DatasetBody = ({
   additionalParams,
   customColumns,
   columnSettings,
+  columnWidths,
 }) => {
   let apiDocs = useRef();
   const [tablePadding, setTablePadding] = useState("ds-u-padding-y--1");
@@ -105,6 +106,7 @@ const DatasetBody = ({
                       columnSort: true,
                       columnResize: true,
                     }}
+                    columnWidths={columnWidths}
                   />
                   <ResourceFooter resource={resource} />
                   <ResourceInformation resource={resource} />

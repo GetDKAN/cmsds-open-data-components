@@ -44,6 +44,7 @@ const ResourcePreview = ({
   customColumns,
   truncateCellHeader,
   columnSettings,
+  columnWidths,
 }) => {
   const previewContainer = React.useRef(null);
   const columnDefaults = {
@@ -51,12 +52,9 @@ const ResourcePreview = ({
     maxWidth: previewContainer.current
       ? calculateMaxWidth(previewContainer.current.offsetWidth)
       : 300,
-    minWidth: 50,
+    minWidth: 100,
+    ...columnWidths,
   };
-  console.log(
-    previewContainer.current ? previewContainer.current.offsetWidth : "loading",
-    columnDefaults
-  );
   const tableClasses = {
     tableContainerClassName: "dc-c-table-container",
     headerCellClassName:
