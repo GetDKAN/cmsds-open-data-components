@@ -10,9 +10,8 @@ import Pagination from "../../components/Pagination";
 import DatasetSearchFacets from "../../components/DatasetSearchFacets";
 
 const defaultSort = {
-  modified: "desc",
-  title: "asc",
-  default: "modified",
+  defaultSort: "modified",
+  defaultOrder: "desc",
 };
 
 function updateUrl(selectedFacets, fulltext, sort) {
@@ -50,9 +49,9 @@ export function transformUrlParamsToSearchObject(
   return {
     selectedFacets: selectedFacets,
     fulltext: params.fulltext,
-    sort: !params.sort ? sortOptions.default : params.sort,
+    sort: !params.sort ? sortOptions.defaultSort : params.sort,
     sortOrder: !params.sort
-      ? sortOptions[sortOptions.default]
+      ? sortOptions.defaultOrder
       : sortOptions[params.sort],
   };
 }
@@ -86,6 +85,7 @@ const DatasetSearch = ({
     updateSelectedFacets,
     setFulltext,
     setSort,
+    sortOrder,
     setSortOrder,
     setPage,
     pageSize,
@@ -136,10 +136,10 @@ const DatasetSearch = ({
     window.scroll(0, 0);
   }
 
-  function updateSort(value) {
-    setSortOrder(sortOpt[value]);
-    setSort(value);
-  }
+  // function updateSort(value) {
+  //   setSortOrder(value);
+  //   setSort(value);
+  // }
 
   return (
     <section className="ds-l-container">
@@ -223,13 +223,26 @@ const DatasetSearch = ({
             <Dropdown
               options={[
                 { label: "Recently Updated", value: "modified" },
-                { label: "Alphabetical", value: "title" },
+                { label: "Title", value: "title" },
               ]}
               value={sort}
               label="Sort by"
               labelClassName="ds-u-margin-top--0"
               name="dataset_search_sort"
-              onChange={(e) => updateSort(e.target.value)}
+              onChange={(e) => setSort(e.target.value)}
+            />
+          </div>
+          <div className="ds-u-padding--2 ds-u-margin-bottom--4 ds-u-border--1">
+            <Dropdown
+              options={[
+                { label: "Ascending", value: "asc" },
+                { label: "Descending", value: "desc" },
+              ]}
+              value={sortOrder}
+              label="Sort Order"
+              labelClassName="ds-u-margin-top--0"
+              name="dataset_search_sort_order"
+              onChange={(e) => setSortOrder(e.target.value)}
             />
           </div>
           <div className="ds-u-padding--2 ds-u-margin-bottom--4 ds-u-border--1">
