@@ -50,9 +50,7 @@ export function transformUrlParamsToSearchObject(
     selectedFacets: selectedFacets,
     fulltext: params.fulltext,
     sort: !params.sort ? sortOptions.defaultSort : params.sort,
-    sortOrder: !params.sort
-      ? sortOptions.defaultOrder
-      : sortOptions[params.sort],
+    sortOrder: sortOptions.defaultOrder,
   };
 }
 
