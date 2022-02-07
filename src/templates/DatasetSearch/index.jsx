@@ -229,8 +229,6 @@ const DatasetSearch = ({
               name="dataset_search_sort"
               onChange={(e) => setSort(e.target.value)}
             />
-          </div>
-          <div className="ds-u-padding--2 ds-u-margin-bottom--4 ds-u-border--1">
             <Dropdown
               options={[
                 { label: "Ascending", value: "asc" },
