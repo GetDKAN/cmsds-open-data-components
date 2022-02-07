@@ -237,7 +237,7 @@ const DatasetSearch = ({
                 { label: "Descending", value: "desc" },
               ]}
               value={sortOrder}
-              label="Sort Order"
+              label="Sort order"
               labelClassName="ds-u-margin-top--0"
               name="dataset_search_sort_order"
               onChange={(e) => setSortOrder(e.target.value)}
