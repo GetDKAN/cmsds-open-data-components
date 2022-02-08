@@ -4,8 +4,8 @@
   color: $color-white;
   text-decoration: none;
   &::before {
-    font-family: 'Font Awesome 5 Pro';
-    content: '\f0c9';
+    font-family: "Font Awesome 5 Pro";
+    content: "\f0c9";
     color: $color-white;
     font-size: 18px;
     padding-right: 10px;
@@ -26,8 +26,8 @@
   padding-left: 0;
   padding-bottom: 16px;
   &::before {
-    font-family: 'Font Awesome 5 Pro';
-    content: '\f00d';
+    font-family: "Font Awesome 5 Pro";
+    content: "\f00d";
     color: $color-white;
     font-size: 18px;
     padding-right: 10px;
@@ -50,7 +50,7 @@
   z-index: 500;
   height: 100%;
   width: 100%;
-  transition: left .7s;
+  transition: left 0.7s;
   padding: 50px 0;
 }
 
@@ -78,21 +78,30 @@
     width: 48px;
     height: 2px;
     background: $color-primary-alt-light;
-    content: '';
+    content: "";
   }
   ul {
     list-style: none;
     margin: 0;
     padding: 0;
   }
-  a {
-    display: block;
+  a,
+  a:hover,
+  a:focus,
+  a:visited {
+    display: inline-block;
     color: $color-white;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+  }
+  a:hover,
+  a:active {
+    border-bottom: 2px solid $color-primary-alt-light;
   }
 }
 .has-submenu > button::after {
-  font-family: 'Font Awesome 5 Pro';
-  content: '\f105';
+  font-family: "Font Awesome 5 Pro";
+  content: "\f105";
   color: $color-white;
   font-size: 18px;
   padding-right: 10px;
@@ -106,7 +115,7 @@
   font-weight: lighter;
 }
 .has-submenu.open > button::after {
-  content: '\f107';
+  content: "\f107";
 }
 .dc-c-header--mobile-links {
   button {
@@ -123,15 +132,19 @@
     z-index: 501;
     background-color: transparent;
   }
-  .dc-c-cmsheader-menu a, button { color: $color-white;}
-  .cms-link-container a::before { color: $color-white; }
+  .dc-c-cmsheader-menu a,
+  button {
+    color: $color-white;
+  }
+  .cms-link-container a::before {
+    color: $color-white;
+  }
   .dc-c-mobile-header--menu {
     left: 0;
   }
 }
 
 .cms-link-container {
-  
   display: block;
   margin-right: 20px;
   // margin-top: -5px;
@@ -139,14 +152,14 @@
   a {
     text-decoration: none;
     border-bottom: none;
-    
+
     margin-right: 20px;
     display: inline-block;
   }
   a::before {
-    font-family: 'Font Awesome 5 Pro';
-    content: '\f33e';
-    color: #323A45;
+    font-family: "Font Awesome 5 Pro";
+    content: "\f33e";
+    color: #323a45;
     font-size: 18px;
     padding-right: 10px;
     display: inline-block;
@@ -166,12 +179,10 @@
   }
 }
 
-
-
 .cms-text-container {
   display: block;
   padding-top: 28px;
-  color: #6F757C;
+  color: #6f757c;
 }
 
 .dc-c-cmsheader-menu {
@@ -183,15 +194,15 @@
   a {
     margin: 3px 7px;
     padding: 0;
-    color: #323A45;
+    color: #323a45;
     text-decoration: none;
     border-bottom: 1px solid;
     border-bottom-color: #eee;
-    border-bottom-color: rgba(255,255,255,0.2);
+    border-bottom-color: rgba(255, 255, 255, 0.2);
   }
   a:hover,
   a:active {
-    border-bottom: 2px solid #323A45;
+    border-bottom: 2px solid #323a45;
   }
 }
 
@@ -207,7 +218,7 @@
     height: 85px;
     width: 240px;
     float: left;
-    border-right: 1px solid #D6D7D9;
+    border-right: 1px solid #d6d7d9;
     a {
       margin-top: 28px;
       margin-bottom: 20px;
@@ -270,9 +281,13 @@ nav.dc-c-site-menu {
   }
 }
 
-nav > ul li       ul { display: none; }
+nav > ul li ul {
+  display: none;
+}
 
-nav > ul li.open ul { display: block; }
+nav > ul li.open ul {
+  display: block;
+}
 li.has-submenu {
   position: relative;
 }
@@ -304,7 +319,7 @@ li.has-submenu {
 }
 
 div.ds-c-dialog-wrap {
-  background-color: rgba(0,113,188,0.9);
+  background-color: rgba(0, 113, 188, 0.9);
 }
 
 div.ds-c-dialog {
@@ -325,8 +340,8 @@ div.ds-c-dialog button {
   top: 24px;
   right: 24px;
   &::after {
-    font-family: 'Font Awesome 5 Pro';
-    content: '\f00d';
+    font-family: "Font Awesome 5 Pro";
+    content: "\f00d";
     height: 22px;
     font-size: 20px;
     line-height: 20px;
@@ -342,8 +357,8 @@ div.ds-c-dialog button {
 
 .dc-c-search-modal--button {
   &::before {
-    font-family: 'Font Awesome 5 Pro';
-    content: '\f002';
+    font-family: "Font Awesome 5 Pro";
+    content: "\f002";
     color: $color-white;
     font-size: 18px;
     padding-right: 10px;
@@ -357,4 +372,3 @@ div.ds-c-dialog button {
     font-weight: lighter;
   }
 }
-

@@ -11,6 +11,8 @@ const FilteredResource = ({
   additionalParams,
   customColumns,
   setDatasetTitle,
+  columnSettings,
+  columnWidths,
 }) => {
   const [ready, setReady] = useState(false);
   const [error, setError] = useState(false);
@@ -67,6 +69,8 @@ const FilteredResource = ({
               apiDocPage={apiDocPage}
               additionalParams={additionalParams}
               customColumns={customColumns ? customColumns : []}
+              columnSettings={columnSettings}
+              columnWidths={columnWidths}
             />
           )}
         </>
