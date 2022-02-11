@@ -23,7 +23,7 @@
   min-width: 10px;
   display: block;
   margin-left: -10px;
-  z-index: 1000;
+  z-index: 1;
   &.isResizing,
   &:hover {
     background-color: $color-primary-darker;
