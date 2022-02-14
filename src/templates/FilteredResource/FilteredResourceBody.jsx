@@ -188,7 +188,7 @@ const FilteredResourceBody = ({
               )}
             </div>
           ) : (
-            <Spinner />
+            <Spinner role="status" aria-valuetext="Resource loading" />
           )}
           {dataset.identifier && (
             <div ref={apiDocs}>

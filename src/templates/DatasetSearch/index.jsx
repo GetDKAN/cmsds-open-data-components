@@ -250,7 +250,11 @@ const DatasetSearch = ({
                 selectedFacets={selectedFacets.theme}
               />
             ) : (
-              <Spinner className="ds-u-valign--middle" />
+              <Spinner
+                className="ds-u-valign--middle"
+                aria-valuetext="Categories loading"
+                role="status"
+              />
             )}
             {keyword ? (
               <DatasetSearchFacets
@@ -260,7 +264,11 @@ const DatasetSearch = ({
                 selectedFacets={selectedFacets.keyword}
               />
             ) : (
-              <Spinner className="ds-u-valign--middle" />
+              <Spinner
+                className="ds-u-valign--middle"
+                aria-valuetext="Tags loading"
+                role="status"
+              />
             )}
           </div>
         </div>
