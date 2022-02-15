@@ -112,7 +112,7 @@ const DatasetBody = ({
                   <ResourceInformation resource={resource} />
                 </div>
               ) : (
-                <Spinner />
+                <Spinner aria-valuetext="Dataset loading" role="status" />
               )}
             </>
           ) : (

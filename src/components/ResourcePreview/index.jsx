@@ -107,7 +107,11 @@ const ResourcePreview = ({
           options={options}
           CustomLoadingComponent={
             <div className="ds-u-display--flex ds-u-padding--3">
-              <Spinner className="ds-u-valign--middle" />
+              <Spinner
+                className="ds-u-valign--middle"
+                role="status"
+                aria-valuetext="Datatable loading"
+              />
             </div>
           }
           CustomNoResults={
