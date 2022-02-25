@@ -1,11 +1,11 @@
-@import "~@cmsgov/design-system/dist/scss/settings/variables/color";
+@import '~@cmsgov/design-system/dist/scss/settings/variables/color';
 
 .dc-c-mobile-menu--open {
   color: $color-white;
   text-decoration: none;
   &::before {
-    font-family: "Font Awesome 5 Pro";
-    content: "\f0c9";
+    font-family: 'Font Awesome 5 Pro';
+    content: '\f0c9';
     color: $color-white;
     font-size: 18px;
     padding-right: 10px;
@@ -26,8 +26,8 @@
   padding-left: 0;
   padding-bottom: 16px;
   &::before {
-    font-family: "Font Awesome 5 Pro";
-    content: "\f00d";
+    font-family: 'Font Awesome 5 Pro';
+    content: '\f00d';
     color: $color-white;
     font-size: 18px;
     padding-right: 10px;
@@ -78,7 +78,7 @@
     width: 48px;
     height: 2px;
     background: $color-primary-alt-light;
-    content: "";
+    content: '';
   }
   ul {
     list-style: none;
@@ -100,8 +100,8 @@
   }
 }
 .has-submenu > button::after {
-  font-family: "Font Awesome 5 Pro";
-  content: "\f105";
+  font-family: 'Font Awesome 5 Pro';
+  content: '\f105';
   color: $color-white;
   font-size: 18px;
   padding-right: 10px;
@@ -115,7 +115,7 @@
   font-weight: lighter;
 }
 .has-submenu.open > button::after {
-  content: "\f107";
+  content: '\f107';
 }
 .dc-c-header--mobile-links {
   button {
@@ -157,8 +157,8 @@
     display: inline-block;
   }
   a::before {
-    font-family: "Font Awesome 5 Pro";
-    content: "\f33e";
+    font-family: 'Font Awesome 5 Pro';
+    content: '\f33e';
     color: #323a45;
     font-size: 18px;
     padding-right: 10px;
@@ -340,8 +340,8 @@ div.ds-c-dialog button {
   top: 24px;
   right: 24px;
   &::after {
-    font-family: "Font Awesome 5 Pro";
-    content: "\f00d";
+    font-family: 'Font Awesome 5 Pro';
+    content: '\f00d';
     height: 22px;
     font-size: 20px;
     line-height: 20px;
@@ -357,8 +357,8 @@ div.ds-c-dialog button {
 
 .dc-c-search-modal--button {
   &::before {
-    font-family: "Font Awesome 5 Pro";
-    content: "\f002";
+    font-family: 'Font Awesome 5 Pro';
+    content: '\f002';
     color: $color-white;
     font-size: 18px;
     padding-right: 10px;

@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
-import { useMetastoreDataset } from "@civicactions/data-catalog-services";
-import DatasetBody from "./DatasetBody";
-import PageNotFound from "../PageNotFound";
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { useMetastoreDataset } from '@civicactions/data-catalog-services';
+import DatasetBody from './DatasetBody';
+import PageNotFound from '../PageNotFound';
 
 const Dataset = ({
   id,
@@ -15,7 +15,7 @@ const Dataset = ({
 }) => {
   const metastore = useMetastoreDataset(id, rootUrl, additionalParams);
   const { dataset } = metastore;
-  const title = dataset.title ? dataset.title : "";
+  const title = dataset.title ? dataset.title : '';
   useEffect(() => {
     if (title) {
       if (setDatasetTitle) {
@@ -27,16 +27,16 @@ const Dataset = ({
     <div className="ds-u-padding-top--3">
       <h1 className="ds-title">Error: Dataset not found</h1>
       <p>
-        We're sorry, but there is no dataset ID that matches your entry. You may
-        have been directed here because:
+        We're sorry, but there is no dataset ID that matches your entry. You may have been directed
+        here because:
       </p>
       <ol>
         <li>The address you typed contains a typo;</li>
         <li>The requested dataset no longer exists.</li>
       </ol>
       <p>
-        <span className="ds-u-font-weight--bold">Note:</span> If you were using
-        a bookmark, please reset it once you find the correct dataset.
+        <span className="ds-u-font-weight--bold">Note:</span> If you were using a bookmark, please
+        reset it once you find the correct dataset.
       </p>
     </div>
   );

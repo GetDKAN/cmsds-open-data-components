@@ -1,4 +1,4 @@
-@import "~@cmsgov/design-system/dist/scss/settings/variables/color";
+@import '~@cmsgov/design-system/dist/scss/settings/variables/color';
 
 .dc-pagination {
   ol {
@@ -16,7 +16,7 @@
   .dc-pagination--next__button {
     height: 100%;
     &:disabled {
-      background: transparent!important;
+      background: transparent !important;
       &::before,
       &::after {
         color: $color-base;

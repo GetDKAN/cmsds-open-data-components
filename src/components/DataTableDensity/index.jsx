@@ -31,11 +31,11 @@ const DataTableDensity = ({ setTablePadding, tablePadding }) => {
         <span className="ds-u-visibility--screen-reader">Table padding</span> Expanded
       </Button>
     </div>
-  )
-}
+  );
+};
 
 DataTableDensity.propTypes = {
   setTablePadding: PropTypes.func.isRequired,
-}
+};
 
 export default DataTableDensity;

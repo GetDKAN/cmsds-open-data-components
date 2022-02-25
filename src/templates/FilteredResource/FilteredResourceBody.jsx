@@ -1,19 +1,14 @@
-import React, { useEffect, useRef } from "react";
-import qs from "qs";
-import { Link, navigate } from "@reach/router";
-import SwaggerUI from "swagger-ui-react";
-import { useDatastore } from "@civicactions/data-catalog-services";
-import {
-  HelpDrawerToggle,
-  Button,
-  Tooltip,
-  Spinner,
-} from "@cmsgov/design-system";
-import ResourceFilter from "../../components/ResourceFilter";
-import ResourceHeader from "../../components/ResourceHeader";
-import ResourcePreview from "../../components/ResourcePreview";
-import ResourceFooter from "../../components/ResourceFooter";
-import { buildCustomColHeaders } from "./functions";
+import React, { useEffect, useRef } from 'react';
+import qs from 'qs';
+import { Link, navigate } from '@reach/router';
+import SwaggerUI from 'swagger-ui-react';
+import { useDatastore } from '@civicactions/data-catalog-services';
+import { HelpDrawerToggle, Button, Tooltip, Spinner } from '@cmsgov/design-system';
+import ResourceFilter from '../../components/ResourceFilter';
+import ResourceHeader from '../../components/ResourceHeader';
+import ResourcePreview from '../../components/ResourcePreview';
+import ResourceFooter from '../../components/ResourceFooter';
+import { buildCustomColHeaders } from './functions';
 
 const FilteredResourceBody = ({
   id,
@@ -26,7 +21,7 @@ const FilteredResourceBody = ({
   columnSettings,
   columnWidths,
 }) => {
-  const [tablePadding, setTablePadding] = React.useState("ds-u-padding-y--1");
+  const [tablePadding, setTablePadding] = React.useState('ds-u-padding-y--1');
   let apiDocs = useRef();
   const [filtersOpen, setFiltersOpen] = React.useState(false);
   let distribution = {};
@@ -41,7 +36,7 @@ const FilteredResourceBody = ({
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
     : { conditions: [] };
   const resource = useDatastore(
-    "",
+    '',
     process.env.REACT_APP_ROOT_URL,
     {
       ...options,
@@ -62,17 +57,12 @@ const FilteredResourceBody = ({
     { conditions: resource.conditions },
     { encode: true }
   )}&format=csv`;
-  const pageTitle = distribution.data.title
-    ? distribution.data.title
-    : dataset.title;
+  const pageTitle = distribution.data.title ? distribution.data.title : dataset.title;
   return (
     <section className="ds-l-container ds-u-padding-bottom--3 ds-u-margin-bottom--2">
       {Object.keys(distribution).length && (
         <>
-          <Link
-            to={`/dataset/${id}`}
-            className="ds-u-padding-y--3 ds-u-display--block"
-          >
+          <Link to={`/dataset/${id}`} className="ds-u-padding-y--3 ds-u-display--block">
             Back to {dataset.title}
           </Link>
           <h1 className="ds-title">{pageTitle}</h1>
@@ -132,7 +122,7 @@ const FilteredResourceBody = ({
                   className="ds-u-text-align--left ds-u-font-weight--normal"
                   onClick={() =>
                     window.scrollTo({
-                      behavior: "smooth",
+                      behavior: 'smooth',
                       top: apiDocs.current.offsetTop,
                     })
                   }
@@ -169,7 +159,7 @@ const FilteredResourceBody = ({
                 )}
                 columnSettings={columnSettings}
                 options={{
-                  layout: "flex",
+                  layout: 'flex',
                   columnFilter: false,
                   columnSort: true,
                   columnResize: true,
@@ -194,14 +184,14 @@ const FilteredResourceBody = ({
             <div ref={apiDocs}>
               <h2>Try the API</h2>
               <SwaggerUI
-                url={`${
-                  process.env.REACT_APP_ROOT_URL
-                }/metastore/schemas/dataset/items/${dataset.identifier}/docs${
+                url={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${
+                  dataset.identifier
+                }/docs${
                   additionalParams && additionalParams.ACA
-                    ? "?ACA=" + additionalParams.ACA + "&redirect=false"
-                    : ""
+                    ? '?ACA=' + additionalParams.ACA + '&redirect=false'
+                    : ''
                 }`}
-                docExpansion={"list"}
+                docExpansion={'list'}
                 defaultModelsExpandDepth={-1}
               />
             </div>
@@ -213,7 +203,7 @@ const FilteredResourceBody = ({
 };
 
 FilteredResourceBody.defaultProps = {
-  apiDocPage: "/api",
+  apiDocPage: '/api',
 };
 
 export default FilteredResourceBody;

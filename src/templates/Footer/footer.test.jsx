@@ -15,9 +15,6 @@ describe('<Footer />', () => {
   // See copyright
   // see address
   // see social media
-
-
-
   // test('Renders a relative link if no http protocol in url', () => {
   //   render(
   //     <NavLink
