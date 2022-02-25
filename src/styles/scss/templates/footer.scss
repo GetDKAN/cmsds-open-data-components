@@ -1,4 +1,4 @@
-@import "~@cmsgov/design-system/dist/scss/settings/variables/color";
+@import '~@cmsgov/design-system/dist/scss/settings/variables/color';
 
 .dc-c-footer {
   background-color: white;
@@ -43,7 +43,12 @@
 }
 
 .dc-c-emailupdates {
-  background-image: linear-gradient(35deg,$color-primary-darkest, $color-primary-darker, $color-primary);
+  background-image: linear-gradient(
+    35deg,
+    $color-primary-darkest,
+    $color-primary-darker,
+    $color-primary
+  );
   color: $color-white;
 }
 .dc-c-footer--svg-icon {
@@ -60,15 +65,14 @@
   }
 
   .fa-circle {
-    fill: #6F757C;
+    fill: #6f757c;
   }
 
   .fa-inverse {
     font-size: 25px;
     padding-left: 2px;
-    fill:$color-white;
+    fill: $color-white;
   }
-
 }
 .svg-inline--fa {
   bottom: 0;

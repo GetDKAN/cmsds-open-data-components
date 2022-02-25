@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from "react";
-import qs from "qs";
-import {
-  useSearchAPI,
-  separateFacets,
-} from "@civicactions/data-catalog-services";
-import { TextField, Dropdown, Spinner, Button } from "@cmsgov/design-system";
-import DatasetSearchListItem from "../../components/DatasetSearchListItem";
-import Pagination from "../../components/Pagination";
-import DatasetSearchFacets from "../../components/DatasetSearchFacets";
+import React, { useEffect, useState } from 'react';
+import qs from 'qs';
+import { useSearchAPI, separateFacets } from '@civicactions/data-catalog-services';
+import { TextField, Dropdown, Spinner, Button } from '@cmsgov/design-system';
+import DatasetSearchListItem from '../../components/DatasetSearchListItem';
+import Pagination from '../../components/Pagination';
+import DatasetSearchFacets from '../../components/DatasetSearchFacets';
 
 const defaultSort = {
-  defaultSort: "modified",
-  defaultOrder: "desc",
+  defaultSort: 'modified',
+  defaultOrder: 'desc',
 };
 
 function updateUrl(selectedFacets, fulltext, sort) {
@@ -30,17 +27,13 @@ export function selectedFacetsMessage(facets, alternateTitles) {
   const keys = Object.keys(facets);
   keys.forEach((k) => {
     if (facets[k].length) {
-      message.push(`${alternateTitles[k]}: ${facets[k].join(", ")}`);
+      message.push(`${alternateTitles[k]}: ${facets[k].join(', ')}`);
     }
   });
-  return message.join(" & ");
+  return message.join(' & ');
 }
 
-export function transformUrlParamsToSearchObject(
-  searchParams,
-  facetList,
-  sortOptions
-) {
+export function transformUrlParamsToSearchObject(searchParams, facetList, sortOptions) {
   const params = qs.parse(searchParams, { ignoreQueryPrefix: true });
   const selectedFacets = {};
   facetList.forEach((facet) => {
@@ -92,16 +85,12 @@ const DatasetSearch = ({
   } = useSearchAPI(
     rootUrl,
     {
-      ...transformUrlParamsToSearchObject(
-        location.search,
-        ["theme", "keyword"],
-        sortOpt
-      ),
+      ...transformUrlParamsToSearchObject(location.search, ['theme', 'keyword'], sortOpt),
     },
     additionalParams
   );
   const { theme, keyword } = separateFacets(facets);
-  const [filterText, setFilterText] = useState("");
+  const [filterText, setFilterText] = useState('');
   React.useEffect(() => {
     if (fulltext !== filterText) {
       setFilterText(fulltext);
@@ -110,22 +99,16 @@ const DatasetSearch = ({
   React.useEffect(() => {
     const url = new URL(window.location);
     const searchParams = updateUrl(selectedFacets, fulltext, sort);
-    window.history.pushState(
-      {},
-      "",
-      `${url.origin}${url.pathname}${searchParams}`
-    );
+    window.history.pushState({}, '', `${url.origin}${url.pathname}${searchParams}`);
   }, [fulltext, selectedFacets, sort]);
   useEffect(() => {
     const baseNumber = Number(totalItems) > 0 ? 1 : 0;
-    const startingNumber =
-      baseNumber + (Number(pageSize) * Number(page) - Number(pageSize));
+    const startingNumber = baseNumber + (Number(pageSize) * Number(page) - Number(pageSize));
     const endingNumber = Number(pageSize) * Number(page);
     setCurrentResultNumbers({
       total: Number(totalItems),
       startingNumber: startingNumber,
-      endingNumber:
-        Number(totalItems) < endingNumber ? Number(totalItems) : endingNumber,
+      endingNumber: Number(totalItems) < endingNumber ? Number(totalItems) : endingNumber,
     });
   }, [totalItems, pageSize, page]);
 
@@ -141,9 +124,7 @@ const DatasetSearch = ({
 
   return (
     <section className="ds-l-container">
-      <h1 className="dc-search-header ds-title ds-u-margin-y--3">
-        {pageTitle}
-      </h1>
+      <h1 className="dc-search-header ds-title ds-u-margin-y--3">{pageTitle}</h1>
       <div className="ds-l-row">
         <div className="ds-l-md-col--8 ds-l-sm-col--12ds-u-margin-bottom--3">
           {introText ? introText : null}
@@ -177,15 +158,14 @@ const DatasetSearch = ({
             <div>
               {currentResultNumbers && (
                 <p className="ds-u-margin-y--0">
-                  Showing {currentResultNumbers.startingNumber} -{" "}
-                  {currentResultNumbers.endingNumber} of{" "}
-                  {currentResultNumbers.total} datasets
+                  Showing {currentResultNumbers.startingNumber} -{' '}
+                  {currentResultNumbers.endingNumber} of {currentResultNumbers.total} datasets
                 </p>
               )}
               <p className="ds-u-margin-y--0">
                 {selectedFacetsMessage(selectedFacets, {
-                  theme: "Categories",
-                  keyword: "Tags",
+                  theme: 'Categories',
+                  keyword: 'Tags',
                 })}
               </p>
             </div>
@@ -201,10 +181,7 @@ const DatasetSearch = ({
           <ol className="dc-dataset-search-list ds-u-padding--0">
             {items.map((item) => (
               <li className="ds-u-padding--0">
-                <DatasetSearchListItem
-                  item={item}
-                  updateFacets={updateSelectedFacets}
-                />
+                <DatasetSearchListItem item={item} updateFacets={updateSelectedFacets} />
               </li>
             ))}
           </ol>
@@ -220,8 +197,8 @@ const DatasetSearch = ({
           <div className="ds-u-padding--2 ds-u-margin-bottom--4 ds-u-border--1">
             <Dropdown
               options={[
-                { label: "Recently Updated", value: "modified" },
-                { label: "Title", value: "title" },
+                { label: 'Recently Updated', value: 'modified' },
+                { label: 'Title', value: 'title' },
               ]}
               value={sort}
               label="Sort by"
@@ -231,8 +208,8 @@ const DatasetSearch = ({
             />
             <Dropdown
               options={[
-                { label: "Ascending", value: "asc" },
-                { label: "Descending", value: "desc" },
+                { label: 'Ascending', value: 'asc' },
+                { label: 'Descending', value: 'desc' },
               ]}
               value={sortOrder}
               label="Sort order"
@@ -278,13 +255,12 @@ const DatasetSearch = ({
 };
 
 DatasetSearch.defaultProps = {
-  pageTitle: "Datasets",
-  introText: "",
-  fulltextLabel: "Search term",
-  fulltextLabelClassName: "ds-u-visibility--screen-reader",
-  fulltextPlaceholder: "Type search term here",
-  formClassName:
-    "ds-u-display--flex ds-u-justify-content--between ds-u-margin-bottom--2",
+  pageTitle: 'Datasets',
+  introText: '',
+  fulltextLabel: 'Search term',
+  fulltextLabelClassName: 'ds-u-visibility--screen-reader',
+  fulltextPlaceholder: 'Type search term here',
+  formClassName: 'ds-u-display--flex ds-u-justify-content--between ds-u-margin-bottom--2',
 };
 
 export default DatasetSearch;

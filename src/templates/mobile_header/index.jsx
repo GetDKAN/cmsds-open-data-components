@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useMediaQuery } from "react-responsive";
-import { Button } from "@cmsgov/design-system";
-import { Link } from "@reach/router";
-import SearchModal from "../../components/SearchModal";
-import NavBar from "../../components/NavBar";
-import cmsLogo from "../../assets/images/CMSGovLogo-O.png";
-import cmsLogoWhite from "../../assets/images/CMSgov@2x-white-O.png";
+import React, { useState, useEffect, useRef } from 'react';
+import { useMediaQuery } from 'react-responsive';
+import { Button } from '@cmsgov/design-system';
+import { Link } from '@reach/router';
+import SearchModal from '../../components/SearchModal';
+import NavBar from '../../components/NavBar';
+import cmsLogo from '../../assets/images/CMSGovLogo-O.png';
+import cmsLogoWhite from '../../assets/images/CMSgov@2x-white-O.png';
 
 const MobileHeader = ({
   siteName,
@@ -32,8 +32,8 @@ const MobileHeader = ({
     function handleClick(event) {
       // Links are wrapped in spans, this checks if the parent is an A, also check if in the search modal.
       if (
-        event.target.parentElement.nodeName === "A" ||
-        event.target.closest(".dc-c-search-dialog")
+        event.target.parentElement.nodeName === 'A' ||
+        event.target.closest('.dc-c-search-dialog')
       ) {
         setMenuOpen(false);
       }
@@ -44,30 +44,26 @@ const MobileHeader = ({
         setMenuOpen(false);
       }
     }
-    menu.current.addEventListener("focusout", handleFocusOut);
-    document.addEventListener("mousedown", handleClick);
-    document.addEventListener("keyup", handleSearchEnter);
+    menu.current.addEventListener('focusout', handleFocusOut);
+    document.addEventListener('mousedown', handleClick);
+    document.addEventListener('keyup', handleSearchEnter);
     return () => {
-      document.removeEventListener("keyup", handleSearchEnter);
-      document.removeEventListener("mousedown", handleClick);
+      document.removeEventListener('keyup', handleSearchEnter);
+      document.removeEventListener('mousedown', handleClick);
       if (menu.current) {
-        menu.current.removeEventListener("focusout", handleFocusOut);
+        menu.current.removeEventListener('focusout', handleFocusOut);
       }
     };
   }, [menu.current, menuOpen]);
   return (
     <header
-      className={`dc-c-header dc-c-mobile-header ${
-        menuOpen ? "menu-open" : ""
-      }`}
+      className={`dc-c-header dc-c-mobile-header ${menuOpen ? 'menu-open' : ''}`}
       aria-label="Site header"
     >
       {includeTopNav && (
         <div
           className={`dc-c-cmsheader ds-u-display--flex ds-u-padding-x--1 ds-u-align-items--center ${
-            mobile
-              ? "ds-u-justify-content--center"
-              : "ds-u-justify-content--between"
+            mobile ? 'ds-u-justify-content--center' : 'ds-u-justify-content--between'
           }`}
         >
           <div className="cms-link-container">
@@ -96,11 +92,7 @@ const MobileHeader = ({
           className="dc-c-mobile-menu--open"
           onClick={() => setMenuOpen(true)}
         >
-          {mobile ? (
-            <span className="ds-u-visibility--screen-reader">Menu</span>
-          ) : (
-            <>Menu</>
-          )}
+          {mobile ? <span className="ds-u-visibility--screen-reader">Menu</span> : <>Menu</>}
         </Button>
         <div className="ds-u-padding-y--3 dc-c-site-title">
           <Link to="/">
@@ -116,7 +108,7 @@ const MobileHeader = ({
                 e.preventDefault();
               }}
               searchModalText={searchModalText}
-              buttonSize={"small"}
+              buttonSize={'small'}
               inversedModalButton={inversedModalButton}
               inversedSearchButton={inversedSearchButton}
             />
@@ -144,7 +136,7 @@ const MobileHeader = ({
                     e.preventDefault();
                   }}
                   searchModalText={searchModalText}
-                  buttonSize={"small"}
+                  buttonSize={'small'}
                 />
               )}
             </div>
@@ -177,11 +169,11 @@ const MobileHeader = ({
 
 MobileHeader.defaultProps = {
   org: {
-    tagline: "The Centers for Medicare and Medicaid Services",
-    url: "https://cms.gov",
-    urlTitle: "CMS.gov Centers for Medicare &amp; Medicaid Services",
+    tagline: 'The Centers for Medicare and Medicaid Services',
+    url: 'https://cms.gov',
+    urlTitle: 'CMS.gov Centers for Medicare &amp; Medicaid Services',
     logo: cmsLogo,
-    logoAltText: "CMS.gov Centers for Medicare &amp; Medicaid Services",
+    logoAltText: 'CMS.gov Centers for Medicare &amp; Medicaid Services',
     inverseLogo: cmsLogoWhite,
   },
   includeTopNav: true,

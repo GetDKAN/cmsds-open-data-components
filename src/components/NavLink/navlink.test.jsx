@@ -12,9 +12,9 @@ describe('<NavLink />', () => {
       <NavLink
         link={{
           url: '/about',
-          label: 'About'
+          label: 'About',
         }}
-      />,
+      />
     );
     expect(screen.getByRole('link', 'About')).toHaveAttribute('href', '/about');
   });
@@ -23,10 +23,13 @@ describe('<NavLink />', () => {
       <NavLink
         link={{
           url: 'https://demo.getdkan.com',
-          label: 'DKAN Demo'
+          label: 'DKAN Demo',
         }}
-      />,
+      />
     );
-    expect(screen.getByRole('link', 'DKAN Demo')).toHaveAttribute('href', 'https://demo.getdkan.com');
+    expect(screen.getByRole('link', 'DKAN Demo')).toHaveAttribute(
+      'href',
+      'https://demo.getdkan.com'
+    );
   });
 });

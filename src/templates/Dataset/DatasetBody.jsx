@@ -1,17 +1,17 @@
-import React, { useState, useRef, useEffect } from "react";
-import PropTypes from "prop-types";
-import SwaggerUI from "swagger-ui-react";
-import { useDatastore } from "@civicactions/data-catalog-services";
-import { Badge, Button } from "@cmsgov/design-system";
-import ResourcePreview from "../../components/ResourcePreview";
-import ResourceHeader from "../../components/ResourceHeader";
-import DatasetTags from "../../components/DatasetTags";
-import DatasetDownloads from "../../components/DatasetDownloads";
-import DatasetAdditionalInformation from "../../components/DatasetAdditionalInformation";
-import TransformedDate from "../../components/TransformedDate";
-import ResourceFooter from "../../components/ResourceFooter";
-import ResourceInformation from "../../components/ResourceInformation";
-import { buildCustomColHeaders } from "../FilteredResource/functions";
+import React, { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import SwaggerUI from 'swagger-ui-react';
+import { useDatastore } from '@civicactions/data-catalog-services';
+import { Badge, Button } from '@cmsgov/design-system';
+import ResourcePreview from '../../components/ResourcePreview';
+import ResourceHeader from '../../components/ResourceHeader';
+import DatasetTags from '../../components/DatasetTags';
+import DatasetDownloads from '../../components/DatasetDownloads';
+import DatasetAdditionalInformation from '../../components/DatasetAdditionalInformation';
+import TransformedDate from '../../components/TransformedDate';
+import ResourceFooter from '../../components/ResourceFooter';
+import ResourceInformation from '../../components/ResourceInformation';
+import { buildCustomColHeaders } from '../FilteredResource/functions';
 
 const DatasetBody = ({
   id,
@@ -22,8 +22,8 @@ const DatasetBody = ({
   columnWidths,
 }) => {
   let apiDocs = useRef();
-  const [tablePadding, setTablePadding] = useState("ds-u-padding-y--1");
-  const [fileFormat, setFileFormat] = useState("");
+  const [tablePadding, setTablePadding] = useState('ds-u-padding-y--1');
+  const [fileFormat, setFileFormat] = useState('');
 
   let distribution = {};
   let distribution_array = dataset.distribution ? dataset.distribution : [];
@@ -31,7 +31,7 @@ const DatasetBody = ({
     distribution = distribution_array[0];
   }
   const resource = useDatastore(
-    "",
+    '',
     process.env.REACT_APP_ROOT_URL,
     {
       limit: 10,
@@ -41,17 +41,17 @@ const DatasetBody = ({
   );
   useEffect(() => {
     if (distribution.identifier) {
-      let localFileFormat = "";
+      let localFileFormat = '';
       if (distribution.data.format) {
         localFileFormat = distribution.data.format.toUpperCase();
       } else if (distribution.data.mediaType) {
-        const mediaType = distribution.data.mediaType.split("/");
+        const mediaType = distribution.data.mediaType.split('/');
         if (mediaType.length && mediaType[1]) {
           localFileFormat = mediaType[1].toUpperCase();
         }
       }
       setFileFormat(localFileFormat);
-      if (localFileFormat === "CSV") {
+      if (localFileFormat === 'CSV') {
         resource.setResource(distribution.identifier);
         resource.setManual(false);
       }
@@ -65,9 +65,7 @@ const DatasetBody = ({
           <h1 className="ds-title ds-u-word-break">{dataset.title}</h1>
           <div className="ds-l-row">
             <p className="ds-l-col--6">
-              {dataset.theme ? (
-                <Badge variation="info">{dataset.theme[0].data}</Badge>
-              ) : null}
+              {dataset.theme ? <Badge variation="info">{dataset.theme[0].data}</Badge> : null}
             </p>
             {dataset.modified && (
               <p className="ds-l-col--6 ds-u-color--gray ds-u-text-align--right">
@@ -76,7 +74,7 @@ const DatasetBody = ({
             )}
           </div>
           <p dangerouslySetInnerHTML={{ __html: dataset.description }} />
-          {Object.keys(distribution).length && fileFormat === "CSV" ? (
+          {Object.keys(distribution).length && fileFormat === 'CSV' ? (
             <>
               <h2 className="dc-resource-header">Resource Preview</h2>
               {resource.columns ? (
@@ -101,7 +99,7 @@ const DatasetBody = ({
                     )}
                     columnSettings={columnSettings}
                     options={{
-                      layout: "flex",
+                      layout: 'flex',
                       columnFilter: false,
                       columnSort: true,
                       columnResize: true,
@@ -116,43 +114,36 @@ const DatasetBody = ({
               )}
             </>
           ) : (
-            ""
+            ''
           )}
-          {dataset.identifier && (
-            <DatasetAdditionalInformation datasetInfo={dataset} />
-          )}
-          {Object.keys(distribution).length &&
-          fileFormat === "CSV" &&
-          dataset.identifier ? (
+          {dataset.identifier && <DatasetAdditionalInformation datasetInfo={dataset} />}
+          {Object.keys(distribution).length && fileFormat === 'CSV' && dataset.identifier ? (
             <div ref={apiDocs}>
               <h2>Try the API</h2>
               <SwaggerUI
-                url={`${
-                  process.env.REACT_APP_ROOT_URL
-                }/metastore/schemas/dataset/items/${dataset.identifier}/docs${
+                url={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${
+                  dataset.identifier
+                }/docs${
                   additionalParams && additionalParams.ACA
-                    ? "?ACA=" + additionalParams.ACA + "&redirect=false"
-                    : ""
+                    ? '?ACA=' + additionalParams.ACA + '&redirect=false'
+                    : ''
                 }`}
-                docExpansion={"list"}
+                docExpansion={'list'}
                 defaultModelsExpandDepth={-1}
               />
             </div>
           ) : (
-            ""
+            ''
           )}
         </div>
         <div className="ds-l-md-col--3 ds-l-sm-col--12">
           {Object.keys(distribution).length ? (
-            <DatasetDownloads
-              downloadURL={distribution.data.downloadURL}
-              type={fileFormat}
-            />
+            <DatasetDownloads downloadURL={distribution.data.downloadURL} type={fileFormat} />
           ) : (
-            ""
+            ''
           )}
           <DatasetTags keywords={dataset.keyword} />
-          {Object.keys(distribution).length && fileFormat === "CSV" ? (
+          {Object.keys(distribution).length && fileFormat === 'CSV' ? (
             <div className="dc-c-dataset-tags ds-u-margin-bottom--3 ds-u-padding--2 ds-u-border ds-u-border--1">
               <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-top--0 ds-u-margin-bottom--2 ds-u-padding-bottom--2">
                 API
@@ -161,7 +152,7 @@ const DatasetBody = ({
                 variation="transparent"
                 onClick={() =>
                   window.scrollTo({
-                    behavior: "smooth",
+                    behavior: 'smooth',
                     top: apiDocs.current.offsetTop,
                   })
                 }
@@ -170,7 +161,7 @@ const DatasetBody = ({
               </Button>
             </div>
           ) : (
-            ""
+            ''
           )}
         </div>
       </div>

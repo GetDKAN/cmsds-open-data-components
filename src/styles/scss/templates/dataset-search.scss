@@ -1,4 +1,4 @@
-@import "~@cmsgov/design-system/dist/scss/settings/variables/color";
+@import '~@cmsgov/design-system/dist/scss/settings/variables/color';
 
 .dc-dataset-search-list {
   list-style: none;
@@ -18,7 +18,7 @@
 .dc-search-header {
   display: relative;
   &::after {
-    content: "";
+    content: '';
     display: block;
     width: 48px;
     height: 4px;
