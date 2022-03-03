@@ -13,6 +13,7 @@ const FilteredResource = ({
   setDatasetTitle,
   columnSettings,
   columnWidths,
+  customTitle,
 }) => {
   const [ready, setReady] = useState(false);
   const [error, setError] = useState(false);
@@ -67,6 +68,7 @@ const FilteredResource = ({
               customColumns={customColumns ? customColumns : []}
               columnSettings={columnSettings}
               columnWidths={columnWidths}
+              customTitle={customTitle}
             />
           )}
         </>
