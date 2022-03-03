@@ -41,6 +41,7 @@ const ResourcePreview = ({
   truncateCellHeader,
   columnSettings,
   columnWidths,
+  customClasses,
 }) => {
   const previewContainer = React.useRef(null);
   const columnDefaults = {
@@ -71,6 +72,7 @@ const ResourcePreview = ({
     columnIsSortedDecClassName: 'dc-c-sort dc-c-sort--desc',
     tableColumnResizer: 'dc-c-resize-handle',
     tableColumnIsResizing: 'isResizing',
+    ...customClasses,
   };
   return (
     <div
