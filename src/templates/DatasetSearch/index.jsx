@@ -6,11 +6,6 @@ import DatasetSearchListItem from '../../components/DatasetSearchListItem';
 import Pagination from '../../components/Pagination';
 import DatasetSearchFacets from '../../components/DatasetSearchFacets';
 
-const defaultSort = {
-  defaultSort: 'modified',
-  defaultOrder: 'desc',
-};
-
 function updateUrl(selectedFacets, fulltext, sort) {
   let newParams = { ...selectedFacets };
   if (fulltext) {
@@ -58,12 +53,9 @@ const DatasetSearch = ({
   formClassName,
   additionalParams,
   sortOptions,
+  defaultSort,
+  showSort,
 }) => {
-  const sortOpt = {
-    ...defaultSort,
-    ...sortOptions,
-  };
-
   const [currentResultNumbers, setCurrentResultNumbers] = useState(null);
   const {
     fulltext,
@@ -85,7 +77,7 @@ const DatasetSearch = ({
   } = useSearchAPI(
     rootUrl,
     {
-      ...transformUrlParamsToSearchObject(location.search, ['theme', 'keyword'], sortOpt),
+      ...transformUrlParamsToSearchObject(location.search, ['theme', 'keyword'], defaultSort),
     },
     additionalParams
   );
@@ -116,11 +108,6 @@ const DatasetSearch = ({
     setPage(page);
     window.scroll(0, 0);
   }
-
-  // function updateSort(value) {
-  //   setSortOrder(value);
-  //   setSort(value);
-  // }
 
   return (
     <section className="ds-l-container">
@@ -194,30 +181,29 @@ const DatasetSearch = ({
           )}
         </div>
         <div className="ds-l-md-col--4 ds-l-sm-col--12">
-          <div className="ds-u-padding--2 ds-u-margin-bottom--4 ds-u-border--1">
-            <Dropdown
-              options={[
-                { label: 'Recently Updated', value: 'modified' },
-                { label: 'Title', value: 'title' },
-              ]}
-              value={sort}
-              label="Sort by"
-              labelClassName="ds-u-margin-top--0"
-              name="dataset_search_sort"
-              onChange={(e) => setSort(e.target.value)}
-            />
-            <Dropdown
-              options={[
-                { label: 'Ascending', value: 'asc' },
-                { label: 'Descending', value: 'desc' },
-              ]}
-              value={sortOrder}
-              label="Sort order"
-              labelClassName="ds-u-margin-top--0"
-              name="dataset_search_sort_order"
-              onChange={(e) => setSortOrder(e.target.value)}
-            />
-          </div>
+          {showSort && (
+            <div className="ds-u-padding--2 ds-u-margin-bottom--4 ds-u-border--1">
+              <Dropdown
+                options={sortOptions}
+                value={sort}
+                label="Sort by"
+                labelClassName="ds-u-margin-top--0"
+                name="dataset_search_sort"
+                onChange={(e) => setSort(e.target.value)}
+              />
+              <Dropdown
+                options={[
+                  { label: 'Ascending', value: 'asc' },
+                  { label: 'Descending', value: 'desc' },
+                ]}
+                value={sortOrder}
+                label="Sort order"
+                labelClassName="ds-u-margin-top--0"
+                name="dataset_search_sort_order"
+                onChange={(e) => setSortOrder(e.target.value)}
+              />
+            </div>
+          )}
           <div className="ds-u-padding--2 ds-u-margin-bottom--4 ds-u-border--1">
             {theme ? (
               <DatasetSearchFacets
@@ -261,6 +247,12 @@ DatasetSearch.defaultProps = {
   fulltextLabelClassName: 'ds-u-visibility--screen-reader',
   fulltextPlaceholder: 'Type search term here',
   formClassName: 'ds-u-display--flex ds-u-justify-content--between ds-u-margin-bottom--2',
+  showSort: true,
+  sortOptions: [
+    { label: 'Recently Updated', value: 'modified' },
+    { label: 'Title', value: 'title' },
+  ],
+  defaultSort: { defaultSort: 'modified', defaultOrder: 'desc' },
 };
 
 export default DatasetSearch;
