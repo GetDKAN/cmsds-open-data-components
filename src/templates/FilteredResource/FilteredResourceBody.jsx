@@ -20,6 +20,7 @@ const FilteredResourceBody = ({
   customColumns,
   columnSettings,
   columnWidths,
+  customTitle,
 }) => {
   const [tablePadding, setTablePadding] = React.useState('ds-u-padding-y--1');
   let apiDocs = useRef();
@@ -58,6 +59,7 @@ const FilteredResourceBody = ({
     { encode: true }
   )}&format=csv`;
   const pageTitle = distribution.data.title ? distribution.data.title : dataset.title;
+
   return (
     <section className="ds-l-container ds-u-padding-bottom--3 ds-u-margin-bottom--2">
       {Object.keys(distribution).length && (
@@ -65,7 +67,7 @@ const FilteredResourceBody = ({
           <Link to={`/dataset/${id}`} className="ds-u-padding-y--3 ds-u-display--block">
             Back to {dataset.title}
           </Link>
-          <h1 className="ds-title">{pageTitle}</h1>
+          <h1 className="ds-title">{customTitle ? customTitle : pageTitle}</h1>
           <p
             className="ds-u-margin-top--0"
             dangerouslySetInnerHTML={{ __html: distribution.data.description }}
