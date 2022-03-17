@@ -17,15 +17,17 @@
 }
 
 .dc-c-resize-handle {
-  height: 61px;
-  background-color: $color-primary-darkest;
+  height: auto;
+  background-color: $color-gray-light;
   width: 10px;
   min-width: 10px;
   display: block;
   margin-left: -10px;
+  border-bottom: 2px solid #323a45;
+  border-top: 2px solid #323a45;
   z-index: 1;
   &.isResizing,
   &:hover {
-    background-color: $color-primary-darker;
+    background-color: $color-primary;
   }
 }

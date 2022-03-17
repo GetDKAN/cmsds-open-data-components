@@ -16,3 +16,57 @@ export function buildCustomColHeaders(customHeaders, columns, schema) {
     };
   });
 }
+
+export function convertUTCToLocalDate(date) {
+  if (!date) {
+    return date;
+  }
+  date = new Date(date);
+  date = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+  return date;
+}
+
+export function cleanText(value, operator) {
+  let newValue = value;
+  if (Array.isArray(newValue)) {
+    newValue = newValue.join(',');
+  }
+  return newValue.replace(/(^\%+|\%+$)/gm, '');
+}
+
+export const operatorMapping = [
+  { label: 'Is', value: '=' },
+  { label: 'Contains', value: 'like' },
+  { label: 'Is Not', value: '<>' },
+  { label: 'Or', value: 'in' },
+  { label: 'Is', value: '=' },
+  { label: 'Is Not', value: '<>' },
+  { label: 'Greater Than', value: '>' },
+  { label: 'Less Than', value: '<' },
+];
+
+export function buildOperatorOptions(type) {
+  switch (type) {
+    case 'text': // Will change from text to string in future update
+    case 'string':
+      return [
+        { label: 'Is', value: '=' },
+        { label: 'Contains', value: 'like' },
+        { label: 'Is Not', value: '<>' },
+        { label: 'Or', value: 'in' },
+      ];
+    case 'date':
+      return [
+        { label: 'Is', value: '=' },
+        { label: 'Is Not', value: '<>' },
+        { label: 'Greater Than', value: '>' },
+        { label: 'Less Than', value: '<' },
+      ];
+    default:
+      // These 2 should be safe for all data types
+      return [
+        { label: 'Is', value: '=' },
+        { label: 'Is Not', value: '<>' },
+      ];
+  }
+}

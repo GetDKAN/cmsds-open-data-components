@@ -4,7 +4,7 @@ import { Button } from '@cmsgov/design-system';
 
 const DataTableRowChanger = ({ setLimit, rowOptions, limit }) => {
   return (
-    <div className="ds-u-text-align--right">
+    <div>
       <span className="ds-u-margin-right--2">Rows per page:</span>
       {rowOptions.map((r) => (
         <Button

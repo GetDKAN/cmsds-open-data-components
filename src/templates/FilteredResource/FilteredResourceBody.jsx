@@ -3,12 +3,20 @@ import qs from 'qs';
 import { Link, useNavigate } from 'react-router-dom';
 import SwaggerUI from 'swagger-ui-react';
 import { useDatastore } from '@civicactions/data-catalog-services';
-import { HelpDrawerToggle, Button, Tooltip, Spinner } from '@cmsgov/design-system';
+import {
+  HelpDrawerToggle,
+  Button,
+  Tooltip,
+  Spinner,
+  Accordion,
+  AccordionItem,
+} from '@cmsgov/design-system';
 import ResourceFilter from '../../components/ResourceFilter';
 import ResourceHeader from '../../components/ResourceHeader';
 import ResourcePreview from '../../components/ResourcePreview';
 import ResourceFooter from '../../components/ResourceFooter';
 import { buildCustomColHeaders } from './functions';
+import QueryBuilder from './QueryBuilder';
 
 const FilteredResourceBody = ({
   id,
@@ -37,6 +45,7 @@ const FilteredResourceBody = ({
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
     : { conditions: [] };
+  let conditions = options.conditions.length ? options.conditions : [];
   const resource = useDatastore(
     '',
     process.env.REACT_APP_ROOT_URL,
@@ -47,6 +56,7 @@ const FilteredResourceBody = ({
     },
     additionalParams
   );
+
   useEffect(() => {
     if (distribution.identifier) {
       resource.setResource(distribution.identifier);
@@ -73,7 +83,11 @@ const FilteredResourceBody = ({
             className="ds-u-margin-top--0"
             dangerouslySetInnerHTML={{ __html: distribution.data.description }}
           />
-          <div className="ds-l-row ds-u-align-items--stretch">
+          {resource.columns && Object.keys(resource.schema).length && (
+            <QueryBuilder resource={resource} id={distribution.identifier} />
+          )}
+
+          {/* <div className="ds-l-row ds-u-align-items--stretch">
             <div className="ds-l-md-col--4 ds-l-sm-col--12 ds-u-margin-bottom--3">
               <div className="dc-c-resource-action ds-u-border--1 ds-u-radius ds-u-display--flex ds-u-flex-direction--column ds-u-text-align--center">
                 <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-bottom--2 ds-u-padding-bottom--0 ds-u-padding-left--3 ds-u-padding-left--3  ds-u-text-align--left">
@@ -141,7 +155,7 @@ const FilteredResourceBody = ({
                 </Button>
               </div>
             </div>
-          </div>
+          </div> */}
           {resource.columns && Object.keys(resource.schema).length ? (
             <div>
               <ResourceHeader
@@ -149,6 +163,7 @@ const FilteredResourceBody = ({
                 setTablePadding={setTablePadding}
                 distribution={distribution}
                 resource={resource}
+                downloadUrl={downloadUrl}
                 tablePadding={tablePadding}
               />
               <ResourcePreview
@@ -170,7 +185,7 @@ const FilteredResourceBody = ({
                 columnWidths={columnWidths}
               />
               <ResourceFooter resource={resource} />
-              {filtersOpen && (
+              {/* {filtersOpen && (
                 <ResourceFilter
                   id={distribution.identifier}
                   resource={resource}
@@ -178,7 +193,7 @@ const FilteredResourceBody = ({
                   setFilterOpen={setFiltersOpen}
                   helpDrawerButton={buttonRef}
                 />
-              )}
+              )} */}
             </div>
           ) : (
             <Spinner role="status" aria-valuetext="Resource loading" />
