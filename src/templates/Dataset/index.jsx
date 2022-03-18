@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useMetastoreDataset } from '@civicactions/data-catalog-services';
 import DatasetBody from './DatasetBody';
 import PageNotFound from '../PageNotFound';
+import { defaultMetadataMapping } from '../../assets/metadataMapping';
 
 const Dataset = ({
   id,
@@ -12,10 +13,15 @@ const Dataset = ({
   setDatasetTitle,
   columnSettings,
   columnWidths,
+  customMetadataMapping,
 }) => {
   const metastore = useMetastoreDataset(id, rootUrl, additionalParams);
   const { dataset } = metastore;
   const title = dataset.title ? dataset.title : '';
+  const metadataMapping = {
+    ...defaultMetadataMapping,
+    ...customMetadataMapping,
+  };
   useEffect(() => {
     if (title) {
       if (setDatasetTitle) {
@@ -52,6 +58,7 @@ const Dataset = ({
           customColumns={customColumns ? customColumns : []}
           columnSettings={columnSettings}
           columnWidths={columnWidths}
+          metadataMapping={metadataMapping}
         />
       )}
     </>
