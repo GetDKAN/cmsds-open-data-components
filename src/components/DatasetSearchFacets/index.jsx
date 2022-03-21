@@ -22,7 +22,7 @@ const DatasetSearchFacets = ({ title, facets, onclickFunction, selectedFacets, l
     <div className="ds-u-margin-bottom--4 dc-dataset-search--facets-container">
       <Accordion>
         <AccordionItem heading={`${title} (${filteredFacets.length})`} defaultOpen>
-          <div>
+          <>
             {filteredFacets.length ? (
               <ul className="dc-dataset-search--facets ds-u-padding--0 ds-u-margin--0">
                 {filteredFacets.map((f) => {
@@ -43,7 +43,7 @@ const DatasetSearchFacets = ({ title, facets, onclickFunction, selectedFacets, l
             ) : (
               <p className="ds-h5">No matching facets found.</p>
             )}
-          </div>
+          </>
         </AccordionItem>
       </Accordion>
     </div>

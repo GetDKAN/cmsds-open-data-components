@@ -1,7 +1,12 @@
 .dc-dataset-search--facets-container .ds-c-accordion__content {
   max-height: 32rem;
+  display: block;
 }
 
 .dc-dataset-search--facets {
+  display: block;
   list-style: none;
+  position: relative;
+  max-height: 32rem;
+  overflow: scroll;
 }
