@@ -1,2 +1,6 @@
 @import './components';
 @import './templates';
+
+.dc-c-word-break--all {
+  word-break: break-all;
+}

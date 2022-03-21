@@ -20,6 +20,7 @@ const DatasetBody = ({
   customColumns,
   columnSettings,
   columnWidths,
+  metadataMapping,
 }) => {
   let apiDocs = useRef();
   const [tablePadding, setTablePadding] = useState('ds-u-padding-y--1');
@@ -116,7 +117,13 @@ const DatasetBody = ({
           ) : (
             ''
           )}
-          {dataset.identifier && <DatasetAdditionalInformation datasetInfo={dataset} />}
+          {dataset.identifier && (
+            <DatasetAdditionalInformation
+              datasetInfo={dataset}
+              id={dataset.identifier}
+              metadataMapping={metadataMapping}
+            />
+          )}
           {Object.keys(distribution).length && fileFormat === 'CSV' && dataset.identifier ? (
             <div ref={apiDocs}>
               <h2>Try the API</h2>
