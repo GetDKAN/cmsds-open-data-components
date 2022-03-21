@@ -10,6 +10,14 @@ export const defaultMetadataMapping = {
   issued: (data) => {
     return [{ label: 'Issued', value: <TransformedDate date={data} /> }];
   },
+  accrualPeriodicity: (data) => {
+    return [
+      {
+        label: 'Frequency',
+        value: frequencyMap[data].name,
+      },
+    ];
+  },
   publisher: (data) => {
     if (data.data && data.data.name) {
       return [{ label: 'Publisher', value: data.data.name }];
@@ -45,7 +53,11 @@ export const defaultMetadataMapping = {
       {
         label: 'Category',
         value: data
-          .map((theme) => <span key={theme.data}>{theme.data}</span>)
+          .map((theme) => (
+            <Link key={theme.data} to={`/datasets?theme[]=${theme.data}`}>
+              {theme.data}
+            </Link>
+          ))
           .reduce((prev, curr) => [prev, ', ', curr]),
       },
     ];
@@ -65,10 +77,19 @@ export const defaultMetadataMapping = {
     ];
   },
   license: (data) => {
-    return [{ label: 'License', value: data }];
+    return [{ label: 'License', value: <a href={data}>{data}</a> }];
   },
   accessLevel: (data) => {
     return [{ label: 'Public Access Level', value: data }];
+  },
+
+  temporal: (data) => {
+    return [
+      { label: 'Temporal Coverage', value: <span className="dc-c-word-break--all">{data}</span> },
+    ];
+  },
+  spatial: (data) => {
+    return [{ label: 'Spacial/Geographical Coverage', value: data }];
   },
   references: (data) => {
     return [
@@ -83,20 +104,6 @@ export const defaultMetadataMapping = {
             ))}
           </ul>
         ),
-      },
-    ];
-  },
-  temporal: (data) => {
-    return [{ label: 'Temporal Coverage', value: data }];
-  },
-  spatial: (data) => {
-    return [{ label: 'Spacial/Geographical Coverage', value: data }];
-  },
-  accrualPeriodicity: (data) => {
-    return [
-      {
-        label: 'Frequency',
-        value: frequencyMap[data].name,
       },
     ];
   },
