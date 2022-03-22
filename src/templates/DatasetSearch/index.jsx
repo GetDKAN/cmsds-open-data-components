@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import qs from 'qs';
 import { useSearchAPI, separateFacets } from '@civicactions/data-catalog-services';
-import { TextField, Dropdown, Spinner, Button } from '@cmsgov/design-system';
+import { TextField, Dropdown, Spinner, Button, Alert } from '@cmsgov/design-system';
 import DatasetSearchListItem from '../../components/DatasetSearchListItem';
 import Pagination from '../../components/Pagination';
 import DatasetSearchFacets from '../../components/DatasetSearchFacets';
@@ -57,6 +57,7 @@ const DatasetSearch = ({
   showSort,
 }) => {
   const [currentResultNumbers, setCurrentResultNumbers] = useState(null);
+  const [noResults, setNoResults] = useState(false);
   const {
     fulltext,
     selectedFacets,
@@ -102,13 +103,17 @@ const DatasetSearch = ({
       startingNumber: startingNumber,
       endingNumber: Number(totalItems) < endingNumber ? Number(totalItems) : endingNumber,
     });
+    if (totalItems <= 0 && currentResultNumbers !== null) {
+      setNoResults(true);
+    } else {
+      setNoResults(false);
+    }
   }, [totalItems, pageSize, page]);
 
   function changePage(page) {
     setPage(page);
     window.scroll(0, 0);
   }
-
   return (
     <section className="ds-l-container">
       <h1 className="dc-search-header ds-title ds-u-margin-y--3">{pageTitle}</h1>
@@ -166,6 +171,7 @@ const DatasetSearch = ({
             </Button>
           </div>
           <ol className="dc-dataset-search-list ds-u-padding--0">
+            {noResults && <Alert variation="error" heading="No results found." />}
             {items.map((item) => (
               <li className="ds-u-padding--0">
                 <DatasetSearchListItem item={item} updateFacets={updateSelectedFacets} />
@@ -211,6 +217,7 @@ const DatasetSearch = ({
                 facets={theme}
                 onclickFunction={updateSelectedFacets}
                 selectedFacets={selectedFacets.theme}
+                loading={loading}
               />
             ) : (
               <Spinner
@@ -225,6 +232,7 @@ const DatasetSearch = ({
                 facets={keyword}
                 onclickFunction={updateSelectedFacets}
                 selectedFacets={selectedFacets.keyword}
+                loading={loading}
               />
             ) : (
               <Spinner
