@@ -117,7 +117,7 @@ const QueryBuilder = ({ resource, id, includeSearchParams }) => {
   };
 
   return (
-    <div className="dc-query-builder">
+    <div className="dc-query-builder ds-u-margin-bottom--3">
       <Accordion bordered>
         <AccordionItem
           heading={<QueryTitle schema={schema[id]} conditions={titleConditions} />}
@@ -141,10 +141,10 @@ const QueryBuilder = ({ resource, id, includeSearchParams }) => {
 
             <div className="dc-query-bulder--form-buttons ds-u-padding-y--2">
               <Button variation="transparent" onClick={() => addCondition(null)}>
-                + Add condition
+                + Add filter
               </Button>
               <Button disabled={!conditionsChanged} className="ds-u-float--right" type="submit">
-                Apply conditions
+                Apply filters
               </Button>
             </div>
           </form>

@@ -5,7 +5,7 @@ import { operatorMapping, cleanText } from './functions';
 const QueryTitle = ({ conditions, schema }) => {
   const { fields } = schema;
   if (!conditions.length) {
-    return 'Create a filter';
+    return 'Add a filter';
   }
 
   function buildTitle() {

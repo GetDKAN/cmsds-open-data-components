@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 import { usePopper } from 'react-popper';
 import {
   HelpDrawerToggle,
@@ -13,6 +14,9 @@ import { DataTablePageResults } from '@civicactions/data-catalog-components';
 import DataTableDensity from '../../components/DataTableDensity';
 import ManageColumns from '../../components/ManageColumns';
 import DataTableRowChanger from '../../components/DataTableRowChanger';
+import DownloadIcon from '../../assets/icons/download';
+import CopyIcon from '../../assets/icons/copy';
+import SettingsIcon from '../../assets/icons/settings';
 
 const ResourceHeader = ({
   setTablePadding,
@@ -24,6 +28,7 @@ const ResourceHeader = ({
   tablePadding,
   downloadUrl,
 }) => {
+  const md = useMediaQuery({ minWidth: 0, maxWidth: 768 });
   const { limit, offset, count, setLimit, setOffset } = resource;
   const intCount = count ? parseInt(count) : 0;
   const [referenceElement, setReferenceElement] = useState(null);
@@ -34,7 +39,7 @@ const ResourceHeader = ({
   });
 
   return (
-    <div>
+    <div className="dc-c-resource-header">
       <div className="ds-l-row">
         <div className="ds-l-col--12">
           {includeFiltered && (
@@ -46,33 +51,52 @@ const ResourceHeader = ({
       </div>
       <div className="ds-l-row ds-u-align-items--center">
         <div className="ds-l-col--12 ds-u-display--flex ds-u-justify-content--between ds-u-align-items--center">
-          <DataTablePageResults totalRows={intCount} limit={limit} offset={offset} />
+          <div className="ds-u-font-weight--bold">
+            <DataTablePageResults totalRows={intCount} limit={limit} offset={offset} />
+          </div>
           <div>
-            <Button
-              size="small"
-              className="ds-u-text-align--left ds-u-font-weight--normal"
-              href={downloadUrl}
-            >
-              Download filtered data (CSV)
-            </Button>
-            <Tooltip
-              onOpen={() => {
-                navigator.clipboard.writeText(window.location.href);
-              }}
-              className="ds-c-button ds-c-button--small ds-u-text-align--left"
-              placement="bottom"
-              dialog
-              title="Link copied to clipboard"
-            >
-              Copy link to filtered data
-            </Tooltip>
+            {!includeFiltered && (
+              <>
+                <Button
+                  size="small"
+                  className="ds-u-text-align--left ds-u-font-weight--normal ds-u-font-size--base ds-u-margin-right--1"
+                  href={downloadUrl}
+                  aria-label="Download filtered data as CSV"
+                >
+                  <DownloadIcon />
+                  {!md && (
+                    <span className="ds-u-font-weight--semibold ds-u-margin-left--1">
+                      Download filtered data (CSV)
+                    </span>
+                  )}
+                </Button>
 
+                <Tooltip
+                  onOpen={() => {
+                    navigator.clipboard.writeText(window.location.href);
+                  }}
+                  className="ds-c-button ds-c-button--small ds-u-text-align--left ds-u-margin-right--1"
+                  placement="bottom"
+                  dialog
+                  ariaLabel="Copy link to filtered data"
+                  title="Link copied to clipboard"
+                >
+                  <CopyIcon />
+                  {!md && (
+                    <span className="ds-u-font-weight--semibold ds-u-margin-left--1">
+                      Copy link to filtered data
+                    </span>
+                  )}
+                </Tooltip>
+              </>
+            )}
             <Tooltip
               className="ds-c-button ds-c-button--small ds-u-text-align--left"
               placement="bottom"
               dialog
+              ariaLabel="Display settings"
               title={
-                <div>
+                <div className="dc-c-display-settings">
                   <DataTableRowChanger limit={limit} setLimit={setLimit} setOffset={setOffset} />
                   {includeDensity && (
                     <DataTableDensity
@@ -83,7 +107,12 @@ const ResourceHeader = ({
                 </div>
               }
             >
-              Display settings
+              <SettingsIcon />
+              {!md && (
+                <span className="ds-u-font-weight--semibold ds-u-margin-left--1">
+                  Display settings
+                </span>
+              )}
             </Tooltip>
           </div>
         </div>

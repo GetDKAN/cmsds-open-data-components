@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
+import { useMediaQuery } from 'react-responsive';
 import { Accordion, AccordionItem, Button, Dropdown, TextField } from '@cmsgov/design-system';
 import { buildOperatorOptions, convertUTCToLocalDate } from './functions';
 import 'react-datepicker/dist/react-datepicker.css';
+import CloseIcon from '../../assets/icons/close';
 
 function getStartDate(condition, schema, id) {
   if (schema[id].fields[condition.property].mysql_type === 'date') {
@@ -15,6 +17,7 @@ function getStartDate(condition, schema, id) {
 }
 
 const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schema }) => {
+  const md = useMediaQuery({ minWidth: 0, maxWidth: 768 });
   const [operator, setOperator] = useState(condition.operator);
   const [property, setProperty] = useState(condition.property);
   const [value, setValue] = useState(condition.value);
@@ -55,22 +58,28 @@ const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schem
         options={propertyOptions}
         value={property}
         label="Property"
-        name={'something'}
+        name={`${condition.key}_property`}
         onChange={(e) => setProperty(e.target.value)}
       />
       <Dropdown
         options={buildOperatorOptions(schema[id].fields[property].mysql_type)}
         value={operator}
+        size="small"
         label="Operator"
-        name={'something_operatior'}
+        name={`${condition.key}_operator`}
         onChange={(e) => setOperator(e.target.value)}
       />
       {schema[id].fields[property].mysql_type === 'date' ? (
         <div>
-          <label class="ds-c-label" for="field_10" id="field_10-label">
-            <span class="">Property</span>
+          <label
+            className="ds-c-label"
+            htmlFor={`${condition.key}_date_value`}
+            id={`${condition.key}_date_value-label`}
+          >
+            <span>Value</span>
           </label>
           <DatePicker
+            name={`${condition.key}_date_value`}
             selected={convertUTCToLocalDate(startDate)}
             onChange={(date) => {
               setStartDate(date);
@@ -82,12 +91,6 @@ const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schem
             className="ds-c-field"
             popperPlacement="top-end"
             popperModifiers={[
-              // {
-              //   name: 'offset',
-              //   options: {
-              //     offset: [5, 10],
-              //   },
-              // },
               {
                 name: 'preventOverflow',
                 options: {
@@ -102,14 +105,26 @@ const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schem
       ) : (
         <TextField
           label="Value"
-          name="value_something"
+          name={`${condition.key}_value`}
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
       )}
 
-      <Button size="small" className="ds-u-margin-top--3" onClick={() => remove(index)}>
-        Delete filter
+      <Button
+        variation={md ? 'transparent' : null}
+        size="small"
+        className="ds-u-margin-top--3"
+        aria-label="Delete filter"
+        onClick={() => remove(index)}
+      >
+        {!md ? (
+          <>Delete filter</>
+        ) : (
+          <>
+            <CloseIcon />{' '}
+          </>
+        )}
       </Button>
     </fieldset>
   );
