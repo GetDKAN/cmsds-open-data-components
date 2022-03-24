@@ -8,7 +8,9 @@ const DatasetDownloads = ({ downloadURL, type }) => {
         Downloads
       </h2>
       <p className="ds-u-margin-bottom--1 ds-u-color--gray">Resource</p>
-      <a href={downloadURL}>Download this resource ({type})</a>
+      <a href={downloadURL} className="ds-u-word-break">
+        Download this resource ({type})
+      </a>
     </div>
   );
 };
