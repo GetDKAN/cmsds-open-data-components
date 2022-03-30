@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { navigate } from '@reach/router';
+import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import { Button, Dialog, TextField } from '@cmsgov/design-system';
 
@@ -11,6 +11,7 @@ const SearchModal = ({
   inversedModalButton,
   inversedSearchButton,
 }) => {
+  const navigate = useNavigate();
   const [modalSearchTerm, setModalSearchTerm] = useState('');
   const [modalSearch, setModalSearch] = useState(false);
   const mobile = useMediaQuery({ minWidth: 0, maxWidth: 543 });
@@ -74,7 +75,7 @@ const SearchModal = ({
 
 SearchModal.defaultProps = {
   appNodeId: 'App',
-  buttonSize: '',
+  buttonSize: null,
   inversedModalButton: true,
   inversedSearchButton: true,
 };

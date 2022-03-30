@@ -1,8 +1,9 @@
 import React from 'react';
-import { navigate } from '@reach/router';
+import { useNavigate } from 'react-router-dom';
 import { Button, TextField } from '@cmsgov/design-system';
 
 const Hero = ({ title, description, searchUrl, searchKey, textfieldLabel, searchButtonText }) => {
+  const navigate = useNavigate();
   const [searchValue, setSearchValue] = React.useState('');
 
   function submitHero(e) {
