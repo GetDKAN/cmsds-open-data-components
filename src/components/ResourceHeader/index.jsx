@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from '@reach/router';
+import { Link } from 'react-router-dom';
 import { DataTablePageResults } from '@civicactions/data-catalog-components';
 import DataTableDensity from '../../components/DataTableDensity';
 import ManageColumns from '../../components/ManageColumns';

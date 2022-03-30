@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from '@reach/router';
+import { NavLink } from 'react-router-dom';
 import NavBar from '../../components/NavBar';
 import SearchModal from '../../components/SearchModal';
 import cmsLogo from '../../assets/images/CMSGovLogo-O.png';
@@ -45,9 +45,9 @@ const Header = ({
         <div className="ds-l-container">
           <div className="ds-l-row ds-u-align-items--center">
             <div className="ds-u-margin-right--5 ds-u-padding-y--3 dc-c-site-title">
-              <Link to="/">
+              <NavLink to="/">
                 <span className="ds-h1">{siteName}</span>
-              </Link>
+              </NavLink>
             </div>
             <NavBar
               links={links.main}
@@ -89,7 +89,7 @@ Header.defaultProps = {
 };
 
 Header.propTypes = {
-  siteName: PropTypes.string.isRequired,
+  siteName: PropTypes.node.isRequired,
   includeTopNav: PropTypes.bool,
   linkClasses: PropTypes.string,
 };

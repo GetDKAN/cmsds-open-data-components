@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from '@reach/router';
 import { Table, TableHead, TableRow, TableCell, TableBody } from '@cmsgov/design-system';
-import TransformedDate from '../TransformedDate';
 
 export function buildRows(metadataMapping, datasetInfo) {
   const rows = [];
