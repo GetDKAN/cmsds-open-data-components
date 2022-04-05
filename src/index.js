@@ -1,5 +1,3 @@
-import { from } from 'core-js/fn/array';
-
 // Components
 export { default as NavLink } from './components/NavLink';
 export { default as DatasetTags } from './components/DatasetTags';
