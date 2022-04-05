@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import qs from 'qs';
-import { Link, navigate } from '@reach/router';
+import { Link, useNavigate } from 'react-router-dom';
 import SwaggerUI from 'swagger-ui-react';
 import { useDatastore } from '@civicactions/data-catalog-services';
 import { HelpDrawerToggle, Button, Tooltip, Spinner } from '@cmsgov/design-system';
@@ -22,6 +22,7 @@ const FilteredResourceBody = ({
   columnWidths,
   customTitle,
 }) => {
+  const navigate = useNavigate();
   const [tablePadding, setTablePadding] = React.useState('ds-u-padding-y--1');
   let apiDocs = useRef();
   const [filtersOpen, setFiltersOpen] = React.useState(false);

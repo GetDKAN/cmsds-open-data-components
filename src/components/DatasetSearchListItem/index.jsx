@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from '@reach/router';
+import { Link } from 'react-router-dom';
 import TextTruncate from 'react-text-truncate';
 
 import { Button, Badge } from '@cmsgov/design-system';
