@@ -32,7 +32,7 @@ function updateQueryForDatastore(condition) {
   return cond;
 }
 
-const QueryBuilder = ({ resource, id, includeSearchParams }) => {
+const QueryBuilder = ({ resource, id, includeSearchParams, customColumns }) => {
   const { conditions, schema, setConditions } = resource;
   const fields = Object.keys(schema[id].fields);
   const hasConditions = conditions.length > 0;
@@ -97,7 +97,6 @@ const QueryBuilder = ({ resource, id, includeSearchParams }) => {
         { conditions: submitConditions },
         { encodeValuesOnly: true, addQueryPrefix: true }
       );
-      console.log(urlString);
       window.history.pushState({}, '', `${url.origin}${url.pathname}${urlString}`);
     }
   };
@@ -120,7 +119,13 @@ const QueryBuilder = ({ resource, id, includeSearchParams }) => {
     <div className="dc-query-builder ds-u-margin-bottom--3">
       <Accordion bordered>
         <AccordionItem
-          heading={<QueryTitle schema={schema[id]} conditions={titleConditions} />}
+          heading={
+            <QueryTitle
+              schema={schema[id]}
+              conditions={titleConditions}
+              customColumns={customColumns}
+            />
+          }
           defaultOpen={false}
         >
           <form onSubmit={(e) => submitConditions(e)}>

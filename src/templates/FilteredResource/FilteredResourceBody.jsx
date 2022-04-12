@@ -69,7 +69,10 @@ const FilteredResourceBody = ({
     { conditions: resource.conditions },
     { encode: true }
   )}&format=csv`;
-  const pageTitle = distribution.data.title ? distribution.data.title : dataset.title;
+  const pageTitle =
+    distribution.data.title && distribution.data.title.toLowerCase() !== 'csv'
+      ? distribution.data.title
+      : dataset.title;
 
   return (
     <section className="ds-l-container ds-u-padding-bottom--3 ds-u-margin-bottom--2">
@@ -84,7 +87,11 @@ const FilteredResourceBody = ({
             dangerouslySetInnerHTML={{ __html: distribution.data.description }}
           />
           {resource.columns && Object.keys(resource.schema).length && (
-            <QueryBuilder resource={resource} id={distribution.identifier} />
+            <QueryBuilder
+              resource={resource}
+              id={distribution.identifier}
+              customColumns={customColumns}
+            />
           )}
 
           {/* <div className="ds-l-row ds-u-align-items--stretch">

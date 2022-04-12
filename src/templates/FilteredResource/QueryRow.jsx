@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { useMediaQuery } from 'react-responsive';
 import { Accordion, AccordionItem, Button, Dropdown, TextField } from '@cmsgov/design-system';
-import { buildOperatorOptions, convertUTCToLocalDate } from './functions';
+import { buildOperatorOptions, convertUTCToLocalDate, cleanText } from './functions';
 import 'react-datepicker/dist/react-datepicker.css';
 import CloseIcon from '../../assets/icons/close';
 
@@ -89,24 +89,25 @@ const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schem
             showYearDropdown
             dropdownMode="select"
             className="ds-c-field"
-            popperPlacement="top-end"
-            popperModifiers={[
-              {
-                name: 'preventOverflow',
-                options: {
-                  rootBoundary: 'viewport',
-                  // tether: true,
-                  altAxis: true,
-                },
-              },
-            ]}
+            withPortal
+            // popperPlacement="top-end"
+            // popperModifiers={[
+            //   {
+            //     name: 'preventOverflow',
+            //     options: {
+            //       rootBoundary: 'viewport',
+            //       // tether: true,
+            //       altAxis: true,
+            //     },
+            //   },
+            // ]}
           />
         </div>
       ) : (
         <TextField
           label="Value"
           name={`${condition.key}_value`}
-          value={value}
+          value={cleanText(value, operator)}
           onChange={(e) => setValue(e.target.value)}
         />
       )}
