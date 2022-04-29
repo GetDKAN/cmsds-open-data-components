@@ -5,7 +5,7 @@ import NavLink from '../NavLink';
 const SubMenu = ({ link, linkClasses, wrapLabel }) => {
   const [isExpanded, setIsExapanded] = useState(false);
   const innerHtml = wrapLabel ? <span>{link.label}</span> : link.label;
-  const menu = useRef(null);
+  const menu = useRef();
   useEffect(() => {
     function handleClickOutside(event) {
       if (menu.current && !menu.current.contains(event.target)) {
@@ -13,7 +13,7 @@ const SubMenu = ({ link, linkClasses, wrapLabel }) => {
       }
     }
     function handleFocusOut(event) {
-      if (!menu.current.contains(event.relatedTarget)) {
+      if (menu.current && !menu.current.contains(event.relatedTarget)) {
         setIsExapanded(false);
       }
     }
@@ -21,7 +21,9 @@ const SubMenu = ({ link, linkClasses, wrapLabel }) => {
     menu.current.addEventListener('focusout', handleFocusOut);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
-      menu.current.removeEventListener('focusout', handleFocusOut);
+      if (menu.current) {
+        menu.current.removeEventListener('focusout', handleFocusOut);
+      }
     };
   }, [menu, isExpanded]);
 
@@ -30,7 +32,7 @@ const SubMenu = ({ link, linkClasses, wrapLabel }) => {
       <Button
         size="small"
         variation="transparent"
-        inverse={true}
+        inversed={true}
         className={linkClasses}
         aria-haspopup="true"
         aria-expanded={isExpanded}

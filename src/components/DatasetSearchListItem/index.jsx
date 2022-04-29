@@ -20,7 +20,6 @@ const DatasetSearchListItem = ({ item, updateFacets }) => {
       truncateText="…"
       textElement={dangerousDescriptionElement}
       text={description}
-      appendTextTruncateChild={true}
       textTruncateChild=""
     />
   );

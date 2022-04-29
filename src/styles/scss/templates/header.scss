@@ -89,6 +89,7 @@
   a:hover,
   a:focus,
   a:visited {
+    background-color: transparent;
     display: inline-block;
     color: $color-white;
     text-decoration: none;
@@ -245,6 +246,18 @@
 //   background-image: linear-gradient(90deg, $color-primary-darkest 10%,$color-primary 90%);
 // }
 
+header.dc-c-header .dc-c-main-navigation--search {
+  button {
+    &:focus {
+      background-color: transparent;
+      outline: 3px solid #bd13b8;
+      box-shadow: none;
+      outline-offset: inherit;
+      border-radius: 0px;
+    }
+  }
+}
+
 nav.dc-c-site-menu {
   .dc-c-header--links {
     padding: 0;
@@ -267,6 +280,19 @@ nav.dc-c-site-menu {
       color: $color-white;
       span {
         border-bottom: 2px solid transparent;
+      }
+      &:focus {
+        background-color: transparent;
+        outline: 3px solid #bd13b8;
+      }
+    }
+    button {
+      &:focus {
+        background-color: transparent;
+        outline: 3px solid #bd13b8;
+        box-shadow: none;
+        outline-offset: inherit;
+        border-radius: 0px;
       }
     }
     > li:hover > button span,
@@ -316,6 +342,7 @@ li.has-submenu {
 .dc-c-site-title a {
   text-decoration: none;
   color: $color-white;
+  display: inline-block;
 }
 
 div.ds-c-dialog-wrap {
@@ -339,16 +366,6 @@ div.ds-c-dialog button {
   position: absolute;
   top: 24px;
   right: 24px;
-  &::after {
-    font-family: 'Font Awesome 5 Pro';
-    content: '\f00d';
-    height: 22px;
-    font-size: 20px;
-    line-height: 20px;
-    margin-left: 8px;
-    vertical-align: middle;
-    display: inline-block;
-  }
 }
 
 .dc-c-mobile-menu--search {

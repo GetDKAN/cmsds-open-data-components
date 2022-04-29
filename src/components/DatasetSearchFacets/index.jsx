@@ -33,6 +33,7 @@ const DatasetSearchFacets = ({ title, facets, onclickFunction, selectedFacets, l
                   return (
                     <li key={f.name}>
                       <Choice
+                        className="ds-u-margin-y--1"
                         checked={isSelected(f.name, selectedFacets) > -1 ? true : false}
                         name={`facet_theme_${f.name}`}
                         type="checkbox"
@@ -64,7 +65,7 @@ DatasetSearchFacets.propTypes = {
     PropTypes.shape({
       type: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      total: PropTypes.string.isRequired,
+      total: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     })
   ).isRequired,
   onclickFunction: PropTypes.func.isRequired,

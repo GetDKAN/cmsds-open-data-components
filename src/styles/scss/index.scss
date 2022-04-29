@@ -8,3 +8,17 @@ main {
 .dc-c-word-break--all {
   word-break: break-all;
 }
+
+html a:focus {
+  background-color: transparent;
+}
+
+button.ds-c-dialog__close {
+  &:focus {
+    background-color: transparent;
+    outline: 3px solid #bd13b8;
+    box-shadow: none;
+    outline-offset: inherit;
+    border-radius: 0px;
+  }
+}
