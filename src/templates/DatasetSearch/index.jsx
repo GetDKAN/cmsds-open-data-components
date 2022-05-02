@@ -89,10 +89,10 @@ const DatasetSearch = ({
   const { theme, keyword } = separateFacets(facets);
   function buildSearchParams(includePage) {
     let newParams = {};
-    if (Number(page) !== 1) {
+    if (Number(page) !== 1 && includePage) {
       newParams.page = page;
     }
-    if (sort !== defaultSort.defaultSort && includePage) {
+    if (sort !== defaultSort.defaultSort) {
       newParams.sort = sort;
     }
     if (sortOrder !== defaultSort.defaultOrder) {
@@ -106,7 +106,7 @@ const DatasetSearch = ({
         newParams[key] = selectedFacets[key];
       });
     }
-    return qs.stringify(newParams, { addQueryPrefix: true, encode: true });
+    return qs.stringify(newParams, { addQueryPrefix: includePage, encode: true });
   }
 
   useEffect(() => {
@@ -209,7 +209,11 @@ const DatasetSearch = ({
                 window.scroll(0, 0);
                 setPage(page);
               }}
-              renderHref={(page) => `/datasets?page=${page}&${buildSearchParams(false)}`}
+              renderHref={(page) => {
+                const searchParams = buildSearchParams(false);
+                const includeAnd = searchParams ? '&' : '';
+                return `/datasets?page=${page}${includeAnd}${searchParams}`;
+              }}
             />
           )}
         </div>
