@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import qs from 'qs';
 import { useSearchAPI, separateFacets } from '@civicactions/data-catalog-services';
-import { TextField, Dropdown, Spinner, Button, Alert } from '@cmsgov/design-system';
+import { TextField, Dropdown, Spinner, Button, Alert, Pagination } from '@cmsgov/design-system';
 import DatasetSearchListItem from '../../components/DatasetSearchListItem';
-import Pagination from '../../components/Pagination';
 import DatasetSearchFacets from '../../components/DatasetSearchFacets';
 
-function updateUrl(selectedFacets, fulltext, sort) {
-  let newParams = { ...selectedFacets };
-  if (fulltext) {
-    newParams.fulltext = fulltext;
-  }
-  if (sort) {
-    newParams.sort = sort;
-  }
-  return qs.stringify(newParams, { addQueryPrefix: true, encode: false });
-}
+// function updateUrl(selectedFacets, fulltext, sort) {
+//   let newParams = { ...selectedFacets };
+//   if (fulltext) {
+//     newParams.fulltext = fulltext;
+//   }
+//   if (sort) {
+//     newParams.sort = sort;
+//   }
+//   return qs.stringify(newParams, { addQueryPrefix: true, encode: false });
+// }
 
 export function selectedFacetsMessage(facets, alternateTitles) {
   let message = [];
@@ -28,23 +28,23 @@ export function selectedFacetsMessage(facets, alternateTitles) {
   return message.join(' & ');
 }
 
-export function transformUrlParamsToSearchObject(searchParams, facetList, sortOptions) {
+export function transformUrlParamsToSearchObject(searchParams, facetList, defaultSortOptions) {
   const params = qs.parse(searchParams, { ignoreQueryPrefix: true });
   const selectedFacets = {};
   facetList.forEach((facet) => {
     selectedFacets[facet] = params[facet] ? params[facet] : [];
   });
   return {
-    selectedFacets: selectedFacets,
+    page: params.page,
+    sort: !params.sort ? defaultSortOptions.defaultSort : params.sort,
+    sortOrder: !params.sortOrder ? defaultSortOptions.defaultOrder : params.sortOrder,
     fulltext: params.fulltext,
-    sort: !params.sort ? sortOptions.defaultSort : params.sort,
-    sortOrder: sortOptions.defaultOrder,
+    selectedFacets: selectedFacets,
   };
 }
 
 const DatasetSearch = ({
   rootUrl,
-  location,
   pageTitle,
   introText,
   fulltextLabel,
@@ -58,6 +58,10 @@ const DatasetSearch = ({
 }) => {
   const [currentResultNumbers, setCurrentResultNumbers] = useState(null);
   const [noResults, setNoResults] = useState(false);
+  const location = useLocation();
+  let [searchParams, setSearchParams] = useSearchParams();
+  const [filterText, setFilterText] = useState('');
+
   const {
     fulltext,
     selectedFacets,
@@ -83,24 +87,45 @@ const DatasetSearch = ({
     additionalParams
   );
   const { theme, keyword } = separateFacets(facets);
-  const [filterText, setFilterText] = useState('');
-  React.useEffect(() => {
+  function buildSearchParams(includePage) {
+    let newParams = {};
+    if (Number(page) !== 1 && includePage) {
+      newParams.page = page;
+    }
+    if (sort !== defaultSort.defaultSort) {
+      newParams.sort = sort;
+    }
+    if (sortOrder !== defaultSort.defaultOrder) {
+      newParams.sortOrder = sortOrder;
+    }
+    if (fulltext !== '') {
+      newParams.fulltext = fulltext;
+    }
+    if (Object.keys(selectedFacets).length) {
+      Object.keys(selectedFacets).forEach((key) => {
+        newParams[key] = selectedFacets[key];
+      });
+    }
+    return qs.stringify(newParams, { addQueryPrefix: includePage, encode: true });
+  }
+
+  useEffect(() => {
     if (fulltext !== filterText) {
       setFilterText(fulltext);
     }
   }, [fulltext]);
-  React.useEffect(() => {
-    const url = new URL(window.location);
-    const searchParams = updateUrl(selectedFacets, fulltext, sort);
-    window.history.pushState({}, '', `${url.origin}${url.pathname}${searchParams}`);
-  }, [fulltext, selectedFacets, sort]);
+
+  useEffect(() => {
+    setSearchParams(buildSearchParams(true));
+  }, [page, sort, sortOrder, fulltext, selectedFacets]);
+
   useEffect(() => {
     const baseNumber = Number(totalItems) > 0 ? 1 : 0;
     const startingNumber = baseNumber + (Number(pageSize) * Number(page) - Number(pageSize));
     const endingNumber = Number(pageSize) * Number(page);
     setCurrentResultNumbers({
       total: Number(totalItems),
-      startingNumber: startingNumber,
+      startingNumber: Number(totalItems) >= startingNumber ? startingNumber : 0,
       endingNumber: Number(totalItems) < endingNumber ? Number(totalItems) : endingNumber,
     });
     if (totalItems <= 0 && currentResultNumbers !== null) {
@@ -110,10 +135,6 @@ const DatasetSearch = ({
     }
   }, [totalItems, pageSize, page]);
 
-  function changePage(page) {
-    setPage(page);
-    window.scroll(0, 0);
-  }
   return (
     <section className="ds-l-container">
       <h1 className="dc-search-header ds-title ds-u-margin-y--3">{pageTitle}</h1>
@@ -173,16 +194,26 @@ const DatasetSearch = ({
           <ol className="dc-dataset-search-list ds-u-padding--0">
             {noResults && <Alert variation="error" heading="No results found." />}
             {items.map((item) => (
-              <li className="ds-u-padding--0">
+              <li className="ds-u-padding--0" key={item.identifier}>
                 <DatasetSearchListItem item={item} updateFacets={updateSelectedFacets} />
               </li>
             ))}
           </ol>
           {totalItems && (
             <Pagination
+              id="test-default"
+              currentPage={Number(page)}
               totalPages={Math.ceil(Number(totalItems) / pageSize)}
-              currentPage={page}
-              buttonAction={changePage}
+              onPageChange={(evt, page) => {
+                evt.preventDefault();
+                window.scroll(0, 0);
+                setPage(page);
+              }}
+              renderHref={(page) => {
+                const searchParams = buildSearchParams(false);
+                const includeAnd = searchParams ? '&' : '';
+                return `/datasets?page=${page}${includeAnd}${searchParams}`;
+              }}
             />
           )}
         </div>

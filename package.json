@@ -1,6 +1,6 @@
 {
   "name": "@civicactions/cmsds-open-data-components",
-  "version": "1.10.1",
+  "version": "1.11.0-beta.2",
   "description": "Components for the open data catalog frontend using CMS Design System",
   "main": "lib/index.js",
   "scripts": {
@@ -19,9 +19,9 @@
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
-    "@civicactions/data-catalog-components": "2.0.0-beta.4",
-    "@civicactions/data-catalog-services": "1.4.0",
-    "@cmsgov/design-system": "~2.6.1",
+    "@civicactions/data-catalog-components": "2.0.0-beta.5",
+    "@civicactions/data-catalog-services": "1.5.0-alpha.1",
+    "@cmsgov/design-system": "~3.3.0",
     "prop-types": "^15.7.2",
     "qs": "^6.10.1",
     "react-datepicker": "^4.2.1",
@@ -69,18 +69,16 @@
     "babel-preset-stage-0": "^6.24.1",
     "core-js": "^2.6.5",
     "css-loader": "^2.1.0",
-    "eslint": "^6.2.1",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.14.3",
-    "eslint-plugin-react-hooks": "^1.7.0",
     "jest": "26.6.0",
     "jest-axe": "^4.1.0",
     "prettier": "^2.5.1",
+    "react-scripts": "^4.0.3",
     "react-test-renderer": "^17.0.2",
     "sass-loader": "^7.1.0",
     "url-loader": "^1.1.2"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "peerDependencies": {
     "react": "^17.0.2",
