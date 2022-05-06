@@ -4,7 +4,7 @@
   color: $color-white;
   text-decoration: none;
   &::before {
-    font-family: 'Font Awesome 5 Pro';
+    font-family: 'Font Awesome 5 Pro', sans-serif;
     content: '\f0c9';
     color: $color-white;
     font-size: 18px;
@@ -26,7 +26,7 @@
   padding-left: 0;
   padding-bottom: 16px;
   &::before {
-    font-family: 'Font Awesome 5 Pro';
+    font-family: 'Font Awesome 5 Pro', sans-serif;
     content: '\f00d';
     color: $color-white;
     font-size: 18px;
@@ -101,7 +101,7 @@
   }
 }
 .has-submenu > button::after {
-  font-family: 'Font Awesome 5 Pro';
+  font-family: 'Font Awesome 5 Pro', sans-serif;
   content: '\f105';
   color: $color-white;
   font-size: 18px;
@@ -158,7 +158,7 @@
     display: inline-block;
   }
   a::before {
-    font-family: 'Font Awesome 5 Pro';
+    font-family: 'Font Awesome 5 Pro', sans-serif;
     content: '\f33e';
     color: #323a45;
     font-size: 18px;
@@ -374,7 +374,7 @@ div.ds-c-dialog button {
 
 .dc-c-search-modal--button {
   &::before {
-    font-family: 'Font Awesome 5 Pro';
+    font-family: 'Font Awesome 5 Pro', sans-serif;
     content: '\f002';
     color: $color-white;
     font-size: 18px;
