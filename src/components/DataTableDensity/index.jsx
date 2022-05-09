@@ -15,7 +15,7 @@ const DataTableDensity = ({ setTablePadding, tablePadding }) => {
         label="Display density:"
         labelClassName="ds-u-margin-top--0"
         name="datatable_display_density"
-        onChange={(e) => setLimit(e.target.value)}
+        onChange={(e) => setTablePadding(e.target.value)}
         defaultValue={'ds-u-padding-y--1'}
       />
     </div>
