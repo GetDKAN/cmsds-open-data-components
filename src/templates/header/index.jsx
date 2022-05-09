@@ -7,6 +7,7 @@ import cmsLogo from '../../assets/images/CMSGovLogo-O.png';
 
 const Header = ({
   siteName,
+  headerClasses,
   linkClasses,
   links,
   org,
@@ -17,8 +18,9 @@ const Header = ({
   inversedSearchButton,
 }) => {
   const { url, tagline, logo, urlTitle, logoAltText } = org;
+  const headerClassString = headerClasses ?? 'dc-c-header ds-base';
   return (
-    <header className="dc-c-header ds-base" aria-label="Site header">
+    <header className={headerClassString} aria-label="Site header">
       {includeTopNav && (
         <div className="dc-c-cmsheader ds-u-display--flex ds-u-padding-x--5 ds-u-align-items--center">
           <div className="ds-l-sm-col--12 ds-l-lg-col--8">
