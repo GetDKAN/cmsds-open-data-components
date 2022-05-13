@@ -24,6 +24,7 @@ const ResourceHeader = ({
   distribution,
   includeFiltered,
   includeDensity,
+  includeDownload,
   resource,
   tablePadding,
   downloadUrl,
@@ -55,7 +56,7 @@ const ResourceHeader = ({
             <DataTablePageResults totalRows={intCount} limit={limit} offset={offset} />
           </div>
           <div>
-            {!includeFiltered && (
+            {includeDownload && (
               <>
                 <Button
                   size="small"
