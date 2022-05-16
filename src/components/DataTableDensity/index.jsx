@@ -1,35 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '@cmsgov/design-system';
+import { Dropdown } from '@cmsgov/design-system';
 
 const DataTableDensity = ({ setTablePadding, tablePadding }) => {
   return (
-    <div>
-      <span>Display density:</span>
-      <Button
-        onClick={() => setTablePadding('ds-u-padding-y--0')}
+    <div className="ds-u-display--flex">
+      <Dropdown
+        options={[
+          { label: 'Tight', value: 'ds-u-padding-y--0' },
+          { label: 'Normal', value: 'ds-u-padding-y--1' },
+          { label: 'Expanded', value: 'ds-u-padding-y--2' },
+        ]}
         size="small"
-        variation="transparent"
-        className={tablePadding === 'ds-u-padding-y--0' ? 'ds-u-font-weight--bold' : ''}
-      >
-        <span className="ds-u-visibility--screen-reader">Table padding</span> Tight
-      </Button>
-      <Button
-        onClick={() => setTablePadding('ds-u-padding-y--1')}
-        size="small"
-        variation="transparent"
-        className={tablePadding === 'ds-u-padding-y--1' ? 'ds-u-font-weight--bold' : ''}
-      >
-        <span className="ds-u-visibility--screen-reader">Table padding</span> Normal
-      </Button>
-      <Button
-        onClick={() => setTablePadding('ds-u-padding-y--2')}
-        size="small"
-        variation="transparent"
-        className={tablePadding === 'ds-u-padding-y--2' ? 'ds-u-font-weight--bold' : ''}
-      >
-        <span className="ds-u-visibility--screen-reader">Table padding</span> Expanded
-      </Button>
+        label="Display density:"
+        labelClassName="ds-u-margin-top--0"
+        name="datatable_display_density"
+        onChange={(e) => setTablePadding(e.target.value)}
+        defaultValue={'ds-u-padding-y--1'}
+      />
     </div>
   );
 };

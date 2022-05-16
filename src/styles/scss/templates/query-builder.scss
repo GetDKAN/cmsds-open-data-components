@@ -1,0 +1,15 @@
+.dc-query-builder .ds-c-accordion__content {
+  padding-bottom: 0 !important;
+  max-height: 24rem;
+}
+.dc-query-builder form {
+  position: relative;
+}
+
+.dc-query-bulder--form-buttons {
+  position: sticky;
+  position: -webkit-sticky;
+  width: 100%;
+  bottom: 0;
+  background-color: white;
+}
