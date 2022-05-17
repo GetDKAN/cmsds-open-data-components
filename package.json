@@ -1,6 +1,6 @@
 {
   "name": "@civicactions/cmsds-open-data-components",
-  "version": "1.12.0-alpha.2",
+  "version": "1.12.0",
   "description": "Components for the open data catalog frontend using CMS Design System",
   "main": "lib/index.js",
   "scripts": {
@@ -10,11 +10,7 @@
     "prepublish": "npm run lib",
     "test": "jest --verbose",
     "test:watch": "npm run test -- --watch",
-    "test:coverage": "npm run test -- --coverage",
-    "docz:dev": "docz dev",
-    "docz:build": "docz build",
-    "docz:serve": "docz build && docz serve",
-    "docz:publish": "docz build && gh-pages -d ./docs"
+    "test:coverage": "npm run test -- --coverage"
   },
   "author": "",
   "license": "GPL-3.0",
