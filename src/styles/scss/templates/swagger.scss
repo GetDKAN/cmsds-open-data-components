@@ -9,3 +9,13 @@
     min-width: 80px !important;
   }
 }
+
+.swagger-ui .opblock-tag-section {
+  min-width: 300px;
+}
+
+@media (max-width: 544px) {
+  .swagger-ui .opblock-tag small {
+    flex: initial;
+  }
+}
