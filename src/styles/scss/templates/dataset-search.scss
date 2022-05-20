@@ -30,3 +30,9 @@
 .dataset-results-count {
   font-weight: bold;
 }
+
+.dc-dataset-search--facets-container .ds-c-accordion__button {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 24px 16px 24px;
+}

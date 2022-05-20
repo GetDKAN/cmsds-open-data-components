@@ -1,5 +1,14 @@
 @import '~@cmsgov/design-system/dist/scss/settings/variables/color';
 
+.ds-c-usa-banner__button-text {
+  &::after {
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
 .dc-c-mobile-menu--open {
   color: $color-white;
   text-decoration: none;

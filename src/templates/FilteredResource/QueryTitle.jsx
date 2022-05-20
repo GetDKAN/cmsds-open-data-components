@@ -32,7 +32,7 @@ const QueryTitle = ({ conditions, schema, customColumns }) => {
   }
 
   return (
-    <>
+    <span className="dc-querybuilder-title">
       {conditions
         .map((c) => {
           const field = fields[c.property];
@@ -55,7 +55,7 @@ const QueryTitle = ({ conditions, schema, customColumns }) => {
           </Badge>,
           curr,
         ])}
-    </>
+    </span>
   );
 };
 
