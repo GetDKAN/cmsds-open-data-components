@@ -13,3 +13,10 @@
   bottom: 0;
   background-color: white;
 }
+
+.dc-query-builder .ds-c-accordion__heading > .ds-c-accordion__button {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 24px 16px 24px;
+}

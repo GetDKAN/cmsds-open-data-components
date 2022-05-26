@@ -55,7 +55,7 @@ const ResourceHeader = ({
           <div className="ds-u-font-weight--bold">
             <DataTablePageResults totalRows={intCount} limit={limit} offset={offset} />
           </div>
-          <div>
+          <div className="dc-c-resource-header--buttons">
             {includeDownload && (
               <>
                 <Button
