@@ -1,19 +1,29 @@
+// Example custom column headers, where only effective date has an ! at the end
+// [{schema: 'date', Cell: ({ value }) => localeDate(value),},{accessor: 'effective_date',Cell: ({ value }) => localeDate(value) + '!',},]
+
 export function buildCustomColHeaders(customHeaders, columns, schema) {
   return columns.map((column) => {
-    const customHeaderIndex = customHeaders.findIndex((header) => header.accessor === column);
-    if (customHeaderIndex > -1) {
-      return {
-        Header:
-          schema && schema.fields[column].description ? schema.fields[column].description : column,
-        accessor: column,
-        ...customHeaders[customHeaderIndex],
-      };
+    const customAccessorIndex = customHeaders.findIndex((header) => header.accessor === column);
+    const customSchemaIndex = customHeaders.findIndex(
+      (header) => header.schema === schema.fields[column].mysql_type
+    );
+    let newColumn = {};
+    // If specific accessor is passed, this will override a general mysql_type Cell rewrite.
+    if (customAccessorIndex > -1) {
+      newColumn.Header =
+        schema && schema.fields[column].description ? schema.fields[column].description : column;
+      newColumn.accessor = column;
+      newColumn.Cell = customHeaders[customAccessorIndex].Cell;
+    } else {
+      newColumn.Header =
+        schema && schema.fields[column].description ? schema.fields[column].description : column;
+      newColumn.accessor = column;
+      if (customSchemaIndex > -1) {
+        newColumn.Cell = customHeaders[customSchemaIndex].Cell;
+      }
     }
-    return {
-      Header:
-        schema && schema.fields[column].description ? schema.fields[column].description : column,
-      accessor: column,
-    };
+
+    return newColumn;
   });
 }
 
