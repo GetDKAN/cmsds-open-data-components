@@ -75,7 +75,7 @@ const DatasetBody = ({
             )}
           </div>
           <p dangerouslySetInnerHTML={{ __html: dataset.description }} />
-          {Object.keys(distribution).length && fileFormat === 'CSV' ? (
+          {resource.columns && Object.keys(resource.schema).length ? (
             <>
               <h2 className="dc-resource-header">Resource Preview</h2>
               {resource.columns ? (
