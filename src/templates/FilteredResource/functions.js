@@ -1,5 +1,8 @@
 // Example custom column headers, where only effective date has an ! at the end
-// [{schema: 'date', Cell: ({ value }) => localeDate(value),},{accessor: 'effective_date',Cell: ({ value }) => localeDate(value) + '!',},]
+// [
+//  {schema: 'date', Cell: ({ value }) => localeDate(value),},
+//  {accessor: 'effective_date',Cell: ({ value }) => localeDate(value) + '!',},
+// ]
 
 export function buildCustomColHeaders(customHeaders, columns, schema) {
   return columns.map((column) => {
