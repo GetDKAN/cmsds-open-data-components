@@ -74,7 +74,7 @@ const DatasetBody = ({
               </p>
             )}
           </div>
-          <p dangerouslySetInnerHTML={{ __html: dataset.description }} />
+          <p className="dc-c-metadata-description" dangerouslySetInnerHTML={{ __html: dataset.description }} />
           {resource.columns && Object.keys(resource.schema).length ? (
             <>
               <h2 className="dc-resource-header">Resource Preview</h2>
