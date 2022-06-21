@@ -37,6 +37,7 @@ const ResourcePreview = ({
   id,
   options,
   resource,
+  defaultSort,
   customColumns,
   truncateCellHeader,
   columnSettings,
@@ -84,6 +85,7 @@ const ResourcePreview = ({
         <DataTable
           filterTitle="Filter columns"
           data={resource.values}
+          sortDefaults={defaultSort}
           columns={
             customColumns ? customColumns : prepareColumns(resource.columns, resource.schema[id])
           }
@@ -129,6 +131,7 @@ ResourcePreview.defaultProps = {
     columnResize: true,
   },
   truncateCellHeader: true,
+  defaultSort: [],
 };
 
 export default ResourcePreview;
