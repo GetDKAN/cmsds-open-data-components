@@ -31,6 +31,7 @@ export { default as APIPage } from './templates/APIPage';
 
 // Hooks
 export { default as useAddLoginLink } from './components/useAddLoginLink';
+export { default as useScrollToTop } from './components/useScrollToTop';
 
 // Assets
 export { default as frequencyMap } from './assets/frequencyMap';
