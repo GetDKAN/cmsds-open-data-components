@@ -83,7 +83,7 @@ const FilteredResourceBody = ({
           </Link>
           <h1 className="ds-title">{customTitle ? customTitle : pageTitle}</h1>
           <p
-            className="ds-u-margin-top--0"
+            className="ds-u-margin-top--0 dc-c-metadata-description"
             dangerouslySetInnerHTML={{ __html: distribution.data.description }}
           />
           {resource.columns && Object.keys(resource.schema).length && (

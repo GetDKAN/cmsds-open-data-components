@@ -1,6 +1,6 @@
 {
   "name": "@civicactions/cmsds-open-data-components",
-  "version": "1.13.0",
+  "version": "1.14.0",
   "description": "Components for the open data catalog frontend using CMS Design System",
   "main": "lib/index.js",
   "scripts": {
@@ -15,7 +15,7 @@
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
-    "@civicactions/data-catalog-components": "2.0.0-beta.5",
+    "@civicactions/data-catalog-components": "2.0.1",
     "@civicactions/data-catalog-services": "~1.5.0",
     "@cmsgov/design-system": "~3.3.0",
     "@popperjs/core": "^2.11.4",
@@ -24,6 +24,7 @@
     "react-datepicker": "^4.2.1",
     "react-popper": "^2.2.5",
     "react-responsive": "^8.2.0",
+    "react-router-dom": "^6.2.2",
     "react-table": "^7.6.2",
     "react-text-truncate": "^0.18.0",
     "swagger-ui-react": "^4.1.3"
