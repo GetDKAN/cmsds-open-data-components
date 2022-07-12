@@ -57,14 +57,17 @@ const SearchModal = ({
             <TextField
               value={modalSearchTerm}
               fieldClassName="ds-u-display--inline-block"
-              className="ds-l-col--8"
+              className="ds-l-col--9"
               label="Search Term"
               name="search-modal"
               labelClassName="ds-u-visibility--screen-reader"
               onChange={(e) => setModalSearchTerm(e.target.value)}
             />
-            <Button type="submit" inversed={inversedModalButton} className="ds-l-col--4">
-              Search
+            <Button type="submit" inversed={inversedModalButton} className="ds-l-col--3">
+              <span className="fas fa-search small-text ds-u-sm-display--none" />
+              <span className="full-text ds-u-display--none ds-u-sm-display--inline-block">
+                Search
+              </span>
             </Button>
           </form>
         </Dialog>
