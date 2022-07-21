@@ -27,6 +27,7 @@ export { default as Header } from './templates/header';
 export { default as MobileHeader } from './templates/mobile_header';
 
 export { default as FilteredResource } from './templates/FilteredResource';
+export { default as QueryBuilder } from './templates/FilteredResource/QueryBuilder';
 export { default as APIPage } from './templates/APIPage';
 
 // Hooks

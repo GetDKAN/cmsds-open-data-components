@@ -44,12 +44,14 @@ export function cleanText(value, operator) {
   if (Array.isArray(newValue)) {
     newValue = newValue.join(',');
   }
-  return newValue.replace(/(^\%+|\%+$)/gm, '');
+  // return newValue.replace(/(^\%+|\%+$)/gm, '');
+  return newValue
 }
 
 export const operatorMapping = [
   { label: 'Is', value: '=' },
-  { label: 'Contains', value: 'like' },
+  { label: 'Starts With', value: 'starts with' },
+  { label: 'Contains', value: 'contains' },
   { label: 'Is Not', value: '<>' },
   { label: 'Or', value: 'in' },
   { label: 'Is', value: '=' },
@@ -64,7 +66,8 @@ export function buildOperatorOptions(type) {
     case 'string':
       return [
         { label: 'Is', value: '=' },
-        { label: 'Contains', value: 'like' },
+        { label: 'Starts With', value: 'starts with' },
+        { label: 'Contains', value: 'contains' },
         { label: 'Is Not', value: '<>' },
         { label: 'Or', value: 'in' },
       ];
