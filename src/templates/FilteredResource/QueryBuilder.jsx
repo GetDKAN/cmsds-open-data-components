@@ -90,7 +90,6 @@ const QueryBuilder = ({ resource, id, includeSearchParams, customColumns }) => {
     setConditions(submitConditions);
     setTitleConditions(queryConditions.map((oc) => Object.assign({}, oc)));
     setConditionsChanged(false);
-    console.log(includeSearchParams);
     if (includeSearchParams) {
       const url = new URL(window.location);
       const urlString = qs.stringify(

@@ -29,8 +29,13 @@ const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schem
       } else {
         update(index, 'property', '');
       }
+      if (schema[id].fields[condition.property].mysql_type === 'date') {
+        if(!value) {
+          setValue(startDate.toJSON().slice(0, 10));
+        }
+      }
     }
-  }, [property]);
+  }, [property, value, startDate, schema, id, condition]);
 
   useEffect(() => {
     if (operator !== condition.operator) {
