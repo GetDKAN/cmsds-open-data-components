@@ -16,8 +16,15 @@
   white-space: nowrap;
 }
 
+.dc-c-table-header-group > div {
+  position: relative;
+}
+
 .dc-c-resize-handle {
-  height: auto;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
   background-color: $color-gray-light;
   width: 10px;
   min-width: 10px;
