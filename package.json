@@ -1,6 +1,6 @@
 {
   "name": "@civicactions/cmsds-open-data-components",
-  "version": "1.15.0",
+  "version": "1.15.1",
   "description": "Components for the open data catalog frontend using CMS Design System",
   "main": "lib/index.js",
   "scripts": {
@@ -15,7 +15,7 @@
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
-    "@civicactions/data-catalog-components": "2.0.1",
+    "@civicactions/data-catalog-components": "~2.1.0",
     "@civicactions/data-catalog-services": "~1.5.0",
     "@cmsgov/design-system": "~3.3.0",
     "@popperjs/core": "^2.11.4",
