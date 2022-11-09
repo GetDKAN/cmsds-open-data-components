@@ -6,17 +6,6 @@ import { TextField, Dropdown, Spinner, Button, Alert, Pagination } from '@cmsgov
 import DatasetSearchListItem from '../../components/DatasetSearchListItem';
 import DatasetSearchFacets from '../../components/DatasetSearchFacets';
 
-// function updateUrl(selectedFacets, fulltext, sort) {
-//   let newParams = { ...selectedFacets };
-//   if (fulltext) {
-//     newParams.fulltext = fulltext;
-//   }
-//   if (sort) {
-//     newParams.sort = sort;
-//   }
-//   return qs.stringify(newParams, { addQueryPrefix: true, encode: false });
-// }
-
 export function selectedFacetsMessage(facets, alternateTitles) {
   let message = [];
   const keys = Object.keys(facets);
@@ -116,7 +105,10 @@ const DatasetSearch = ({
   }, [fulltext]);
 
   useEffect(() => {
-    setSearchParams(buildSearchParams(true));
+    var params = buildSearchParams(true);
+    if (params !== location.search) {
+      setSearchParams(params);
+    }
   }, [page, sort, sortOrder, fulltext, selectedFacets]);
 
   useEffect(() => {
