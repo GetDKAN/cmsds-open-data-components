@@ -61,6 +61,7 @@
   width: 100%;
   transition: left 0.7s;
   padding: 50px 0;
+  visibility: hidden;
 }
 
 .dc-c-mobile-header .dc-c-site-menu--sub-menu {
@@ -151,6 +152,7 @@
   }
   .dc-c-mobile-header--menu {
     left: 0;
+    visibility: visible;
   }
 }
 
