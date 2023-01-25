@@ -6,11 +6,11 @@ Cypress.Commands.add('testFooterGetUpdates', (title, description, link) => {
 
 Cypress.Commands.add('testFooterCMSInfo', () => {
   cy.findByRole('link', {
-    name: 'U.S. Department of Health & Human Services',
+    name: 'HHS Logo opens in new window',
   }).should('have.attr', 'href', 'http://www.hhs.gov/'); //change to https when moving upstream
   cy.findByAltText('HHS Logo').should('exist');
   cy.findByRole('link', {
-    name: 'CMS.gov Centers for Medicare & Medicaid Services',
+    name: 'CMS Logo opens in new window',
   }).should('have.attr', 'href', 'http://www.cms.gov/'); //change to https when moving upstream
   cy.findByAltText('CMS Logo').should('exist');
   cy.findByText(
