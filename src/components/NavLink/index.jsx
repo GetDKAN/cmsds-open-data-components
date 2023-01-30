@@ -6,7 +6,7 @@ import validator from 'validator';
 const NavLink = ({ link, className, wrapLabel }) => {
   const innerHtml = wrapLabel ? <span>{link.label}</span> : link.label;
 
-  if (validator.isURL(link.url, { require_protocol: true })) {
+  if (validator.isURL(link.url, { require_protocol: true }) || link.nonReactLink) {
     return (
       <a className={className} href={link.url}>
         {innerHtml}
@@ -33,6 +33,7 @@ NavLink.propTypes = {
   link: PropTypes.shape({
     url: PropTypes.string,
     label: PropTypes.string,
+    nonReactLink: PropTypes.bool,
   }).isRequired,
   className: PropTypes.string,
   /**
