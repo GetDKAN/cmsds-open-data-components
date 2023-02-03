@@ -1,14 +1,15 @@
 import React from 'react';
-import SubMenu from '../SubMenu';
-import NavLink from '../NavLink';
+import { NavbarProps } from './Navbar.types';
+// import SubMenu from '../SubMenu';
+// import NavLink from '../NavLink';
 
-const NavBar = ({ links, menuName, menuId, menuClasses, linkClasses, wrapLabel }) => {
+const NavBar = ({ links, menuName, menuId, menuClasses, linkClasses, wrapLabel }: NavbarProps) => {
   return (
     <nav className={`dc-c-${menuId}-menu`} aria-labelledby={`dc-c-${menuId}-menu--heading`}>
       <h2 id={`dc-c-${menuId}-menu--heading`} className="ds-u-visibility--screen-reader">
         {menuName}
       </h2>
-      <ul className={menuClasses}>
+      {/* <ul className={menuClasses}>
         {links.map((link) => {
           if (link.submenu) {
             return (
@@ -22,7 +23,7 @@ const NavBar = ({ links, menuName, menuId, menuClasses, linkClasses, wrapLabel }
             );
           }
         })}
-      </ul>
+      </ul> */}
     </nav>
   );
 };
