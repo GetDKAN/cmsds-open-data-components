@@ -3,7 +3,7 @@ import { useMediaQuery } from 'react-responsive';
 import { Button } from '@cmsgov/design-system';
 import { Link } from 'react-router-dom';
 import SearchModal from '../../components/SearchModal';
-import NavBar from '../../components/NavBar';
+import NavBar from '../../components/NavBar/Navbar';
 import cmsLogo from '../../assets/images/CMSGovLogo-O.png';
 import cmsLogoWhite from '../../assets/images/CMSgov@2x-white-O.png';
 
