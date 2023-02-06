@@ -33,7 +33,7 @@ const MobileHeader = ({
     function handleClick(event) {
       // Links are wrapped in spans, this checks if the parent is an A, also check if in the search modal.
       if (
-        event.target.parentElement.nodeName === 'A' ||
+        // event.target.parentElement.nodeName === 'A' ||
         event.target.closest('.dc-c-search-dialog')
       ) {
         setMenuOpen(false);
