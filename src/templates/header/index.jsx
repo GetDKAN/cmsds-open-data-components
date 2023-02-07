@@ -16,6 +16,7 @@ const Header = ({
   includeTopNav,
   inversedModalButton,
   inversedSearchButton,
+  includeSearch,
 }) => {
   const { url, tagline, logo, urlTitle, logoAltText } = org;
   const headerClassString = headerClasses ?? 'dc-c-header ds-base';
@@ -59,17 +60,19 @@ const Header = ({
               menuClasses="ds-u-display--flex dc-c-header--links ds-u-align-items--center"
               linkClasses={linkClasses}
             />
-            <div className="dc-c-main-navigation--search ds-u-margin-left--auto ds-u-lg-padding-left--1 ds-u-xl-padding-left--3">
-              {customSearch ? (
-                customSearch
-              ) : (
-                <SearchModal
-                  searchModalText={searchModalText}
-                  inversedModalButton={inversedModalButton}
-                  inversedSearchButton={inversedSearchButton}
-                />
-              )}
-            </div>
+            {includeSearch && (
+              <div className="dc-c-main-navigation--search ds-u-margin-left--auto ds-u-lg-padding-left--1 ds-u-xl-padding-left--3">
+                {customSearch ? (
+                  customSearch
+                ) : (
+                  <SearchModal
+                    searchModalText={searchModalText}
+                    inversedModalButton={inversedModalButton}
+                    inversedSearchButton={inversedSearchButton}
+                  />
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -88,12 +91,14 @@ Header.defaultProps = {
   includeTopNav: true,
   customSearch: false,
   linkClasses: 'ds-u-xl-margin-right--4 ds-u-margin-right--3 ds-u-padding-y--3',
+  includeSearch: true,
 };
 
 Header.propTypes = {
   siteName: PropTypes.node.isRequired,
   includeTopNav: PropTypes.bool,
   linkClasses: PropTypes.string,
+  includeSearch: PropTypes.bool,
 };
 
 export default Header;

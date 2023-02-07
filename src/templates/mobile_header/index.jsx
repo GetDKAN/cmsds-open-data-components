@@ -16,6 +16,7 @@ const MobileHeader = ({
   includeTopNav,
   inversedModalButton,
   inversedSearchButton,
+  includeSearch,
 }) => {
   const { url, logo, urlTitle, logoAltText, inverseLogo } = org;
 
@@ -32,7 +33,7 @@ const MobileHeader = ({
     function handleClick(event) {
       // Links are wrapped in spans, this checks if the parent is an A, also check if in the search modal.
       if (
-        event.target.parentElement.nodeName === 'A' ||
+        // event.target.parentElement.nodeName === 'A' ||
         event.target.closest('.dc-c-search-dialog')
       ) {
         setMenuOpen(false);
@@ -99,21 +100,23 @@ const MobileHeader = ({
             <span className="ds-h1">{siteName}</span>
           </Link>
         </div>
-        <div className="dc-c-mobile-menu--search">
-          {customSearch ? (
-            customSearch
-          ) : (
-            <SearchModal
-              searchFunc={(e) => {
-                e.preventDefault();
-              }}
-              searchModalText={searchModalText}
-              buttonSize={'small'}
-              inversedModalButton={inversedModalButton}
-              inversedSearchButton={inversedSearchButton}
-            />
-          )}
-        </div>
+        {includeSearch && (
+          <div className="dc-c-mobile-menu--search">
+            {customSearch ? (
+              customSearch
+            ) : (
+              <SearchModal
+                searchFunc={(e) => {
+                  e.preventDefault();
+                }}
+                searchModalText={searchModalText}
+                buttonSize={'small'}
+                inversedModalButton={inversedModalButton}
+                inversedSearchButton={inversedSearchButton}
+              />
+            )}
+          </div>
+        )}
       </div>
       <div className="dc-c-mobile-header--menu" ref={menu}>
         <div className="ds-u-display--flex dc-c-mobile-header--menu-close ds-u-justify-content--between">
@@ -126,7 +129,7 @@ const MobileHeader = ({
           >
             Close
           </Button>
-          {tablet && (
+          {tablet && includeSearch && (
             <div className="dc-c-mobile-menu--search">
               {customSearch ? (
                 customSearch
@@ -177,6 +180,7 @@ MobileHeader.defaultProps = {
     inverseLogo: cmsLogoWhite,
   },
   includeTopNav: true,
+  includeSearch: true,
 };
 
 export default MobileHeader;
