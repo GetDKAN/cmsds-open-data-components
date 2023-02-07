@@ -51,6 +51,7 @@ Cypress.Commands.add('mobileCMSHeader', (mainLink, tagline, cmsLinks) => {
   });
   cy.findByText(tagline).should('not.exist');
   cy.get('.dc-c-cmsheader-menu').should('not.exist');
+  cy.findByRole('button', {name: "Menu"}).click();
   cmsLinks.forEach((link) => {
     cy.findByRole('link', { name: link.label }).should('not.be.visible');
   });
