@@ -105,6 +105,13 @@ const DatasetSearch = ({
   }, [fulltext]);
 
   useEffect(() => {
+    // update search on browser back button press
+    const updatedFullText = location.search.indexOf("=") !== -1 ? location.search.split("=")[1] : "";
+    if (updatedFullText !== fulltext)
+      setFulltext(updatedFullText);
+  }, [location.search])
+
+  useEffect(() => {
     var params = buildSearchParams(true);
     if (params !== location.search) {
       setSearchParams(params);
