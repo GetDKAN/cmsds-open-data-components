@@ -1,5 +1,10 @@
 // Components
-export * from './components';
+export { default as NavBar } from './components/NavBar';
+export { default as Header } from './components/Header';
+
+// Templates
+export { default as PageNotFound } from './templates/PageNotFound';
+
 
 // export { default as NavLink } from './components/NavLink';
 // export { default as DatasetTags } from './components/DatasetTags';
@@ -19,7 +24,6 @@ export * from './components';
 // export { default as TransformedDate } from './components/TransformedDate';
 
 // Templates
-// export { default as PageNotFound } from './templates/PageNotFound';
 // export { default as Footer } from './templates/Footer';
 // export { default as Dataset } from './templates/Dataset';
 // export { default as DatasetSearch } from './templates/DatasetSearch';

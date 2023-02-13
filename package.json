@@ -8,6 +8,7 @@
   "type": "module",
   "scripts": {
     "build": "parcel build",
+    "watch": "parcel watch",
     "test": "jest --verbose",
     "test:watch": "npm run test -- --watch",
     "test:coverage": "npm run test -- --coverage"
@@ -28,6 +29,7 @@
     "react-text-truncate": "^0.19.0"
   },
   "devDependencies": {
+    "@parcel/packager-ts": "^2.8.3",
     "@parcel/transformer-typescript-types": "^2.8.3",
     "@storybook/react": "^6.5.16",
     "@testing-library/dom": "^8.20.0",
