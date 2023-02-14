@@ -106,9 +106,20 @@ const DatasetSearch = ({
 
   useEffect(() => {
     // update search on browser back button press
-    const updatedFullText = location.search.indexOf("=") !== -1 ? location.search.split("=")[1] : "";
-    if (updatedFullText !== fulltext)
-      setFulltext(updatedFullText);
+    // parse params to get fulltext
+    const urlParams = location.search.split("?")[1];
+    if (urlParams) {
+      const paramArray = urlParams.indexOf("&") != -1 ? urlParams.split("&") : [urlParams]
+      
+      let updatedFullText = fulltext;
+      paramArray.forEach((query) => {
+        let param = query.split("=");
+        if (param[0] === "fulltext")
+          updatedFullText = param[1];
+      });
+      if (updatedFullText !== fulltext)
+        setFulltext(updatedFullText);
+    }
   }, [location.search])
 
   useEffect(() => {
