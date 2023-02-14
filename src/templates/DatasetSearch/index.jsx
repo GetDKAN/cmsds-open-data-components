@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import qs from 'qs';
 import { useSearchAPI, separateFacets } from '@civicactions/data-catalog-services';
@@ -47,6 +47,8 @@ const DatasetSearch = ({
 }) => {
   const [currentResultNumbers, setCurrentResultNumbers] = useState(null);
   const [noResults, setNoResults] = useState(false);
+  const [loadingData, setLoadingData] = useState(true);
+  const loadingRef = useRef();
   const location = useLocation();
   let [searchParams, setSearchParams] = useSearchParams();
   const [filterText, setFilterText] = useState('');
@@ -112,6 +114,14 @@ const DatasetSearch = ({
   }, [page, sort, sortOrder, fulltext, selectedFacets]);
 
   useEffect(() => {
+    // when loading state was previously true and is now false, display data
+    if (!loading && loadingRef.current === true) {
+      setLoadingData(false)
+    }
+    loadingRef.current = loading;
+  }, [loading])
+
+  useEffect(() => {
     const baseNumber = Number(totalItems) > 0 ? 1 : 0;
     const startingNumber = baseNumber + (Number(pageSize) * Number(page) - Number(pageSize));
     const endingNumber = Number(pageSize) * Number(page);
@@ -136,7 +146,10 @@ const DatasetSearch = ({
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              () => setFulltext(filterText);
+              () => {
+                if (filterText !== fulltext) setLoadingData(true);
+                setFulltext(filterText)
+              };
             }}
             className={formClassName}
           >
@@ -154,59 +167,72 @@ const DatasetSearch = ({
               type="submit"
               htmlFor="dataset_fulltext_search"
               variation="primary"
-              onClick={() => setFulltext(filterText)}
+              onClick={() => {
+                if (filterText !== fulltext) setLoadingData(true);
+                setFulltext(filterText)
+              }}
             >
               Search
             </Button>
           </form>
-          <div className="ds-u-display--flex ds-u-justify-content--between ds-u-align-items--end">
-            <div>
-              {currentResultNumbers && (
-                <p className="ds-u-margin-y--0">
-                  Showing {currentResultNumbers.startingNumber} -{' '}
-                  {currentResultNumbers.endingNumber} of {currentResultNumbers.total} datasets
-                </p>
-              )}
-              <p className="ds-u-margin-y--0">
-                {selectedFacetsMessage(selectedFacets, {
-                  theme: 'Categories',
-                  keyword: 'Tags',
-                })}
-              </p>
-            </div>
-
-            <Button
-              className="ds-u-padding--0 dc-c-clear-filters"
-              variation="transparent"
-              onClick={() => resetFilters()}
-            >
-              Clear all filters
-            </Button>
-          </div>
-          <ol className="dc-dataset-search-list ds-u-padding--0">
-            {noResults && <Alert variation="error" heading="No results found." />}
-            {items.map((item) => (
-              <li className="ds-u-padding--0" key={item.identifier}>
-                <DatasetSearchListItem item={item} updateFacets={updateSelectedFacets} />
-              </li>
-            ))}
-          </ol>
-          {totalItems && (
-            <Pagination
-              id="test-default"
-              currentPage={Number(page)}
-              totalPages={Math.ceil(Number(totalItems) / pageSize)}
-              onPageChange={(evt, page) => {
-                evt.preventDefault();
-                window.scroll(0, 0);
-                setPage(page);
-              }}
-              renderHref={(page) => {
-                const searchParams = buildSearchParams(false);
-                const includeAnd = searchParams ? '&' : '';
-                return `/datasets?page=${page}${includeAnd}${searchParams}`;
-              }}
+          {loadingData ? (
+            <Spinner
+              className="ds-u-valign--middle"
+              aria-valuetext="Dataset Search loading"
+              role="status"
             />
+          ) : (
+            <>
+              <div className="ds-u-display--flex ds-u-justify-content--between ds-u-align-items--end">
+              <div>
+                {currentResultNumbers && (
+                  <p className="ds-u-margin-y--0">
+                    Showing {currentResultNumbers.startingNumber} -{' '}
+                    {currentResultNumbers.endingNumber} of {currentResultNumbers.total} datasets
+                  </p>
+                )}
+                <p className="ds-u-margin-y--0">
+                  {selectedFacetsMessage(selectedFacets, {
+                    theme: 'Categories',
+                    keyword: 'Tags',
+                  })}
+                </p>
+              </div>
+
+              <Button
+                className="ds-u-padding--0 dc-c-clear-filters"
+                variation="transparent"
+                onClick={() => resetFilters()}
+              >
+                Clear all filters
+              </Button>
+              </div>
+              <ol className="dc-dataset-search-list ds-u-padding--0">
+                {noResults && <Alert variation="error" heading="No results found." />}
+                  {items.map((item) => (
+                    <li className="ds-u-padding--0" key={item.identifier}>
+                      <DatasetSearchListItem item={item} updateFacets={updateSelectedFacets} />
+                    </li>
+                  ))}
+              </ol>
+              {totalItems && (
+                <Pagination
+                  id="test-default"
+                  currentPage={Number(page)}
+                  totalPages={Math.ceil(Number(totalItems) / pageSize)}
+                  onPageChange={(evt, page) => {
+                    evt.preventDefault();
+                    window.scroll(0, 0);
+                    setPage(page);
+                  }}
+                  renderHref={(page) => {
+                    const searchParams = buildSearchParams(false);
+                    const includeAnd = searchParams ? '&' : '';
+                    return `/datasets?page=${page}${includeAnd}${searchParams}`;
+                  }}
+                />
+              )}
+              </>
           )}
         </div>
         <div className="ds-l-md-col--4 ds-l-sm-col--12">
