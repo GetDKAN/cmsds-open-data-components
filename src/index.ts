@@ -3,8 +3,13 @@ export { default as NavBar } from './components/NavBar';
 export { default as Header } from './components/Header';
 
 // Templates
+export { default as APIPage } from './templates/APIPage';
 export { default as PageNotFound } from './templates/PageNotFound';
+export { default as DatasetSearch } from './templates/DatasetSearch';
+export { default as Dataset } from './templates/Dataset';
 
+// Services
+export { default as useSearchAPI } from './services/useSearchAPI';
 
 // export { default as NavLink } from './components/NavLink';
 // export { default as DatasetTags } from './components/DatasetTags';

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import NavBar from '../NavBar/Navbar';
+import NavBar from '../NavBar';
 import SearchModal from '../SearchModal';
 import cmsLogo from '../../assets/images/CMSGovLogo-O.png';
 
@@ -35,12 +35,12 @@ const Header = ({
             </div>
           </div>
           <div className="ds-u-margin-left--auto">
-            {/* <NavBar
+            <NavBar
               links={links.topnav}
               menuName="CMS Main Header"
               menuId="cmsheader"
               menuClasses="ds-u-display--flex dc-c-header--links ds-u-font-size--small"
-            /> */}
+            />
           </div>
         </div>
       )}
@@ -52,15 +52,15 @@ const Header = ({
                 <span className="ds-h1">{siteName}</span>
               </NavLink>
             </div>
-            {/* <NavBar
+            <NavBar
               links={links.main}
               wrapLabel
               menuName="CMS Site Main Nav"
               menuId="site"
               menuClasses="ds-u-display--flex dc-c-header--links ds-u-align-items--center"
               linkClasses={linkClasses}
-            /> */}
-            {/* <div className="dc-c-main-navigation--search ds-u-margin-left--auto ds-u-lg-padding-left--1 ds-u-xl-padding-left--3">
+            />
+            <div className="dc-c-main-navigation--search ds-u-margin-left--auto ds-u-lg-padding-left--1 ds-u-xl-padding-left--3">
               {customSearch ? (
                 customSearch
               ) : (
@@ -70,7 +70,7 @@ const Header = ({
                   inversedSearchButton={inversedSearchButton}
                 />
               )}
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

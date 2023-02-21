@@ -4,5 +4,5 @@ export interface NavbarProps {
   menuId: string;
   menuClasses: string;
   linkClasses: string;
-  wrapLabel: string;
+  wrapLabel: boolean;
 }

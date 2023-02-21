@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import SwaggerUI from 'swagger-ui-react';
-import { useDatastore } from '@civicactions/data-catalog-services';
 import { Badge, Button } from '@cmsgov/design-system';
+import useDatastore from '../../services/useDatastore';
 import ResourcePreview from '../../components/ResourcePreview';
 import ResourceHeader from '../../components/ResourceHeader';
 import DatasetTags from '../../components/DatasetTags';
@@ -14,6 +14,7 @@ import ResourceInformation from '../../components/ResourceInformation';
 import { buildCustomColHeaders } from '../FilteredResource/functions';
 
 const DatasetBody = ({
+  rootUrl,
   id,
   dataset,
   additionalParams,
@@ -33,7 +34,7 @@ const DatasetBody = ({
   }
   const resource = useDatastore(
     '',
-    process.env.REACT_APP_ROOT_URL,
+    rootUrl,
     {
       limit: 10,
       manual: true,
