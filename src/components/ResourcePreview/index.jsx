@@ -1,10 +1,11 @@
 import React from 'react';
-import { DataTable } from '@civicactions/data-catalog-components';
-import {
-  transformTableFilterToQueryCondition,
-  transformTableSortToQuerySort,
-} from '@civicactions/data-catalog-services';
+// import { DataTable } from '@civicactions/data-catalog-components';
+
 import { TextField, Spinner } from '@cmsgov/design-system';
+import { transformTableFilterToQueryCondition } from '../../services/useDatastore/transformConditions';
+import { transformTableSortToQuerySort} from '../../services/useDatastore/transformSorts';
+import DataTable from '../Datatable';
+
 
 function calculateMaxWidth(previewSize) {
   return Math.floor(previewSize * 0.84);
@@ -83,40 +84,40 @@ const ResourcePreview = ({
     >
       {previewContainer.current && (
         <DataTable
-          filterTitle="Filter columns"
-          data={resource.values}
-          sortDefaults={defaultSort}
-          columns={
-            customColumns ? customColumns : prepareColumns(resource.columns, resource.schema[id])
-          }
-          schema={resource.schema}
-          totalRows={parseInt(resource.totalRows)}
-          limit={resource.limit}
-          offset={resource.offset}
-          loading={resource.loading}
-          setSort={resource.setSort}
-          setConditions={resource.setConditions}
-          conditionsTransform={transformTableFilterToQueryCondition}
-          sortTransform={transformTableSortToQuerySort}
-          tableClasses={tableClasses}
+          // filterTitle="Filter columns"
+          // data={resource.values}
+          // sortDefaults={defaultSort}
+          // columns={
+          //   customColumns ? customColumns : prepareColumns(resource.columns, resource.schema[id])
+          // }
+          // schema={resource.schema}
+          // totalRows={parseInt(resource.totalRows)}
+          // limit={resource.limit}
+          // offset={resource.offset}
+          // loading={resource.loading}
+          // setSort={resource.setSort}
+          // setConditions={resource.setConditions}
+          // conditionsTransform={transformTableFilterToQueryCondition}
+          // sortTransform={transformTableSortToQuerySort}
+          // tableClasses={tableClasses}
           className="dc-c-datatable"
-          columnDefaults={columnDefaults}
-          customColumnFilter={DefaultColumnFilter}
-          options={options}
-          CustomLoadingComponent={
-            <div className="ds-u-display--flex ds-u-padding--3">
-              <Spinner
-                className="ds-u-valign--middle"
-                role="status"
-                aria-valuetext="Datatable loading"
-              />
-            </div>
-          }
-          CustomNoResults={
-            <div className="ds-u-display--flex ds-u-padding--3">
-              <p>No results returned.</p>
-            </div>
-          }
+          // columnDefaults={columnDefaults}
+          // customColumnFilter={DefaultColumnFilter}
+          // options={options}
+          // CustomLoadingComponent={
+          //   <div className="ds-u-display--flex ds-u-padding--3">
+          //     <Spinner
+          //       className="ds-u-valign--middle"
+          //       role="status"
+          //       aria-valuetext="Datatable loading"
+          //     />
+          //   </div>
+          // }
+          // CustomNoResults={
+          //   <div className="ds-u-display--flex ds-u-padding--3">
+          //     <p>No results returned.</p>
+          //   </div>
+          // }
         />
       )}
     </div>

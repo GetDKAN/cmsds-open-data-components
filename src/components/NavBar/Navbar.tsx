@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavbarProps } from './Navbar.types';
-// import SubMenu from '../SubMenu';
-// import NavLink from '../NavLink';
+import SubMenu from '../SubMenu';
+import NavLink from '../NavLink';
 
 const NavBar = ({ links, menuName, menuId, menuClasses, linkClasses, wrapLabel }: NavbarProps) => {
   return (
@@ -9,7 +9,7 @@ const NavBar = ({ links, menuName, menuId, menuClasses, linkClasses, wrapLabel }
       <h2 id={`dc-c-${menuId}-menu--heading`} className="ds-u-visibility--screen-reader">
         {menuName}
       </h2>
-      {/* <ul className={menuClasses}>
+      <ul className={menuClasses}>
         {links.map((link) => {
           if (link.submenu) {
             return (
@@ -23,7 +23,7 @@ const NavBar = ({ links, menuName, menuId, menuClasses, linkClasses, wrapLabel }
             );
           }
         })}
-      </ul> */}
+      </ul>
     </nav>
   );
 };
