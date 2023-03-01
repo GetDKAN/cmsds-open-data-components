@@ -4,6 +4,7 @@ import TextTruncate from 'react-text-truncate';
 
 import { Button, Badge } from '@cmsgov/design-system';
 import TransformedDate from '../TransformedDate';
+import './dataset-search-list-item.scss';
 
 const dangerousDescriptionElement = ({ children }) => (
   <span dangerouslySetInnerHTML={{ __html: children }} />

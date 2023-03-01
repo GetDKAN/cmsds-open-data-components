@@ -1,5 +1,3 @@
-@import '~@cmsgov/design-system/dist/scss/settings/variables/color';
-
 .ds-c-usa-banner__button-text {
   &::after {
     width: 0 !important;
@@ -10,12 +8,12 @@
 }
 
 .dc-c-mobile-menu--open {
-  color: $color-white;
+  color: #{var(--color-white)};
   text-decoration: none;
   &::before {
     font-family: 'Font Awesome 5 Pro';
     content: '\f0c9';
-    color: $color-white;
+    color: #{var(--color-white)};
     font-size: 18px;
     padding-right: 10px;
     display: inline-block;
@@ -30,14 +28,14 @@
 }
 
 .dc-c-mobile-menu--close {
-  color: $color-white;
+  color: #{var(--color-white)};
   text-decoration: none;
   padding-left: 0;
   padding-bottom: 16px;
   &::before {
     font-family: 'Font Awesome 5 Pro';
     content: '\f00d';
-    color: $color-white;
+    color: #{var(--color-white)};
     font-size: 18px;
     padding-right: 10px;
     display: inline-block;
@@ -52,7 +50,7 @@
 
 .dc-c-mobile-header--menu {
   position: fixed;
-  background-color: $color-gray-dark;
+  background-color: #{var(--color-gray-dark)};
   top: 0;
   bottom: 0;
   left: -100%;
@@ -87,7 +85,7 @@
     margin-bottom: 16px;
     width: 48px;
     height: 2px;
-    background: $color-primary-alt-light;
+    background: #{var(--color-primary-alt-light)};
     content: '';
   }
   ul {
@@ -101,19 +99,19 @@
   a:visited {
     background-color: transparent;
     display: inline-block;
-    color: $color-white;
+    color: #{var(--color-white)};
     text-decoration: none;
     border-bottom: 2px solid transparent;
   }
   a:hover,
   a:active {
-    border-bottom: 2px solid $color-primary-alt-light;
+    border-bottom: 2px solid #{var(--color-primary-alt-light)};
   }
 }
 .has-submenu > button::after {
   font-family: 'Font Awesome 5 Pro';
   content: '\f105';
-  color: $color-white;
+  color: #{var(--color-white)};
   font-size: 18px;
   padding-right: 10px;
   display: inline-block;
@@ -145,10 +143,10 @@
   }
   .dc-c-cmsheader-menu a,
   button {
-    color: $color-white;
+    color: #{var(--color-white)};
   }
   .cms-link-container a::before {
-    color: $color-white;
+    color: #{var(--color-white)};
   }
   .dc-c-mobile-header--menu {
     left: 0;
@@ -221,7 +219,7 @@
 @media (min-width: 544px) {
   .dc-c-main-navigation--search,
   .dc-c-mobile-menu--search {
-    border-left: 1px solid $color-white;
+    border-left: 1px solid #{var(--color-white)};
   }
 }
 
@@ -313,7 +311,7 @@ nav.dc-c-site-menu {
     > li:focus > a span,
     > li a:hover span,
     > li a:focus span {
-      border-bottom: 2px solid $color-primary-alt-light;
+      border-bottom: 2px solid #{var(--color-primary-alt-light)};
     }
   }
 }
@@ -330,7 +328,7 @@ li.has-submenu {
 }
 
 .dc-c-site-menu--sub-menu {
-  background: $color-primary;
+  background: #{var(--color-primary)};
   position: absolute;
   left: 0;
   top: 48px;
@@ -346,13 +344,13 @@ li.has-submenu {
   }
   a:hover span,
   a:focus span {
-    border-bottom: 2px solid $color-primary-alt-light;
+    border-bottom: 2px solid #{var(--color-primary-alt-light)};
   }
 }
 
 .dc-c-site-title a {
   text-decoration: none;
-  color: $color-white;
+  color: #{var(--color-white)};
   display: inline-block;
 }
 
@@ -363,7 +361,7 @@ div.ds-c-dialog-wrap {
 div.ds-c-dialog {
   background-color: transparent;
   box-shadow: none;
-  color: $color-white;
+  color: #{var(--color-white)};
   width: 100%;
   height: 100%;
 }
@@ -372,7 +370,7 @@ div.ds-c-dialog button {
   background-color: transparent;
 }
 .ds-c-dialog__header .ds-c-dialog__close {
-  color: $color-white;
+  color: #{var(--color-white)};
   background: none;
   position: absolute;
   top: 24px;
@@ -387,7 +385,7 @@ div.ds-c-dialog button {
   &::before {
     font-family: 'Font Awesome 5 Pro';
     content: '\f002';
-    color: $color-white;
+    color: #{var(--color-white)};
     font-size: 18px;
     padding-right: 10px;
     display: inline-block;

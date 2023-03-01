@@ -1,20 +1,23 @@
 import React from 'react';
-import Pagination from '../Pagination';
+import { Pagination } from '@cmsgov/design-system';
 
 const ResourceFooter = ({ resource }) => {
   const { limit, values, offset, count, setOffset } = resource;
-
-  function calcPageByOffset(page) {
-    setOffset((page - 1) * limit);
-  }
 
   return (
     <div>
       {values.length > 0 && (
         <Pagination
-          totalPages={Math.ceil(Number(count) / limit)}
+          id="test-default"
           currentPage={Number(offset) / limit + 1}
-          buttonAction={calcPageByOffset}
+          totalPages={Math.ceil(Number(count) / limit)}
+          onPageChange={(evt, page) => {
+            evt.preventDefault();
+            setOffset((page - 1) * limit);
+          }}
+          renderHref={(page) => {
+            return null
+          }}
         />
       )}
     </div>
