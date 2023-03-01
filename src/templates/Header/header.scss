@@ -75,7 +75,7 @@
 
 .dc-c-cmsheader {
   position: relative;
-  background: white;
+  background: #{var(--color-white)};
 }
 
 .dc-c-cms-mobile-header-menu {
@@ -276,7 +276,7 @@ nav.dc-c-site-menu {
       height: 100%;
     }
     button {
-      color: $color-white;
+      color: #{var(--color-white)};
       text-decoration: none;
       font-size: 16px;
       border: none;
@@ -286,7 +286,7 @@ nav.dc-c-site-menu {
     }
     a {
       text-decoration: none;
-      color: $color-white;
+      color: #{var(--color-white)};
       span {
         border-bottom: 2px solid transparent;
       }
