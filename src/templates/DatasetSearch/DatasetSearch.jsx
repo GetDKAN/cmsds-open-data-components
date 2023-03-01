@@ -5,7 +5,8 @@ import { TextField, Dropdown, Spinner, Button, Alert, Pagination } from '@cmsgov
 import DatasetSearchListItem from '../../components/DatasetSearchListItem';
 import DatasetSearchFacets from '../../components/DatasetSearchFacets';
 import useSearchAPI from '../../services/useSearchAPI';
-import { separateFacets } from '../../services/useSearchAPI/helpers';
+import { useQuery } from '@tanstack/react-query';
+import { fetchDatasets, separateFacets } from '../../services/useSearchAPI/helpers';
 
 export function selectedFacetsMessage(facets, alternateTitles) {
   let message = [];
@@ -76,6 +77,29 @@ const DatasetSearch = ({
     },
     additionalParams
   );
+
+  const options = {
+    fulltext: fulltext,
+    selectedFacets: selectedFacets,
+    sort: sort,
+    sortOrder: sortOrder,
+    page: Number(page),
+    pageSize: pageSize,
+  };
+
+  const {data, status, error} = useQuery("datasets", () =>
+    fetchDatasets(rootUrl, options, additionalParams)
+  );
+
+  if (status === "loading") {
+    return <p>Loading...</p>;
+  }
+  if (status === "error") {
+    return <p>Error :(</p>;
+  }
+
+
+
   const { theme, keyword } = separateFacets(facets);
   function buildSearchParams(includePage) {
     let newParams = {};

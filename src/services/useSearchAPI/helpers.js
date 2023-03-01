@@ -1,5 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
+import { useQuery } from '@tanstack/react-query';
 
 export function separateFacets(facets) {
   let facetObj = {};
