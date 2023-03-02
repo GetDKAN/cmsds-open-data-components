@@ -157,7 +157,7 @@ const DatasetBody = ({
                 API
               </h2>
               <Button
-                variation="transparent"
+                variation="ghost"
                 onClick={() =>
                   window.scrollTo({
                     behavior: 'smooth',

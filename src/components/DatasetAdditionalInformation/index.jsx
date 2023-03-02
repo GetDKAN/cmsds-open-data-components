@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Table, TableHead, TableRow, TableCell, TableBody } from '@cmsgov/design-system';
+import './additional-information-table.scss';
 
 export function buildRows(metadataMapping, datasetInfo) {
   const rows = [];

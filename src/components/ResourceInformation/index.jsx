@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table, TableHead, TableRow, TableCell, TableBody } from '@cmsgov/design-system';
+import './resource-information-table.scss';
 
 const ResourceInformation = ({ resource }) => {
   const { count, columns } = resource;

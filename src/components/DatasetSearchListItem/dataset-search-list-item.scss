@@ -1,5 +1,3 @@
-@import '~@cmsgov/design-system/dist/scss/settings/variables/color';
-
 .dc-dataset-searchlist-item {
   h2 a {
     text-decoration: none;
@@ -13,8 +11,8 @@
   }
 
   .dc-dataset-searchlist-item--keyword {
-    background: $color-primary-alt-lightest;
+    background: #{var(--color-primary-alt-lightest)};
     border: none;
-    color: $color-base;
+    color: #{var(--color-base)};
   }
 }
