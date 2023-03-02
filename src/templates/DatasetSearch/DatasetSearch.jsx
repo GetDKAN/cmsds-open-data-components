@@ -7,6 +7,8 @@ import DatasetSearchFacets from '../../components/DatasetSearchFacets';
 import useSearchAPI from '../../services/useSearchAPI';
 import { separateFacets } from '../../services/useSearchAPI/helpers';
 
+import './dataset-search.scss';
+
 export function selectedFacetsMessage(facets, alternateTitles) {
   let message = [];
   const keys = Object.keys(facets);
@@ -153,8 +155,8 @@ const DatasetSearch = ({
             />
             <Button
               type="submit"
+              variation="solid"
               htmlFor="dataset_fulltext_search"
-              variation="primary"
               onClick={() => setFulltext(filterText)}
             >
               Search
@@ -178,7 +180,7 @@ const DatasetSearch = ({
 
             <Button
               className="ds-u-padding--0 dc-c-clear-filters"
-              variation="transparent"
+              variation="ghost"
               onClick={() => resetFilters()}
             >
               Clear all filters
