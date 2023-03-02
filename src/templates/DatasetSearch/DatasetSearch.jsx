@@ -9,7 +9,6 @@ import { useQuery } from '@tanstack/react-query';
 import { separateFacets, updateSelectedFacetObject, selectedFacetsMessage, transformUrlParamsToSearchObject } from '../../services/useSearchAPI/helpers';
 
 import axios from 'axios';
-
 import './dataset-search.scss';
 
 const DatasetSearch = ({
@@ -167,7 +166,7 @@ const DatasetSearch = ({
                 setFullText(filterText);
                 setPage(defaultPage)
               }}
-            >
+
               Search
             </Button>
           </form>
@@ -195,7 +194,6 @@ const DatasetSearch = ({
                   })}
                 </p>
               </div>
-
               <Button
                 className="ds-u-padding--0 dc-c-clear-filters"
                 variation="ghost"
@@ -232,9 +230,6 @@ const DatasetSearch = ({
               />
             )}
           </>
-          
-          )}
-
         </div>
         <div className="ds-l-md-col--4 ds-l-sm-col--12">
           {showSort && (
