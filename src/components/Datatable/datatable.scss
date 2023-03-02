@@ -22,3 +22,7 @@
     }
   }
 }
+
+.dc-c-datatable--even-row td {
+  background-color: #{var(--table-striped__background-color)};
+}

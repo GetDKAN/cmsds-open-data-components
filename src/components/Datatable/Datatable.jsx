@@ -1,22 +1,12 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-  // usePagination,
-  // useResizeColumns,
-  // useSortBy,
-  // useFilters,
-  // useFlexLayout,
-  // useBlockLayout,
-} from "@tanstack/react-table";
+import { useReactTable, flexRender, getCoreRowModel, createColumnHelper } from "@tanstack/react-table";
+import "./datatable.scss";
 
 const DataTable = ({
-  // data,
+  data,
   // filterTitle,
-  // columns,
+  columns,
   // totalRows,
   // limit,
   // loading,
@@ -34,6 +24,109 @@ const DataTable = ({
   // CustomLoadingComponent,
   // CustomNoResults,
 }) => {
+
+  const columnHelper = createColumnHelper()
+
+
+  const stuff = ['hcpc']
+  const my_columns = columns.map((col) => (
+      columnHelper.accessor(col.accessor, {
+        header: <span>{col.Header}</span>
+      })
+    ))
+  const my_col = [
+    columnHelper.accessor('hcpc', {
+      header: <span>HCPC</span>
+    })
+  ]
+  const options = {
+    data: data,
+    columns: my_columns,
+    getCoreRowModel: getCoreRowModel()
+  }
+  const table = useReactTable(options);
+  console.log(columns, data)
+  return(
+    <div>
+      <table>
+        <thead>
+          {table.getHeaderGroups().map(headerGroup => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map(header => (
+                <th key={header.id}>
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          {table.getRowModel().rows.map((row, index) => {
+            const even = (index + 1) % 2 === 0;
+            return(
+              <tr key={row.id} className={`${even ? "dc-c-datatable--even-row" : ""}`}>
+                {row.getVisibleCells().map((cell) => {
+                  let classList = "dc-truncate ds-u-padding-x--1"
+                  return (
+                    <td
+                      key={cell.id}
+                      className={classList}
+                    >
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </td>
+                  );
+                })}
+              </tr>
+            )
+            })}
+        </tbody>
+      </table>
+    </div>
+  )
+
+
+
+
+
+
+
+
+
+
+  // const tableClasses = {
+  //   tableContainerClassName: 'dc-c-table-container',
+  //   headerCellClassName:
+  //     'ds-u-border--dark ds-u-padding--2 ds-u-border-y--2 ds-u-font-weight--bold dc-c-table-header-cell',
+  //   headerGroupClassName: 'dc-c-table-header-group',
+  //   headerCellTextClassName: `${
+  //     truncateCellHeader ? 'dc-truncate' : ''
+  //   } ds-u-display--inline-block`,
+  //   cellEvenRowClassName: 'ds-u-fill--gray-lightest',
+  //   cellClassName: `${tablePadding} dc-truncate ds-u-padding-x--1`,
+  //   filterTitleClassName:
+  //     'ds-u-font-weight--bold ds-u-padding-left--2  ds-u-fill--gray-lightest ds-u-display--block',
+  //   headerFilterClassName: 'ds-u-padding-top--1 ds-u-fill--gray-lightest',
+  //   headerFilterCellClassName:
+  //     'ds-u-padding-x--1 ds-u-padding-bottom--0 ds-u-border-bottom--0 ds-u-fill--gray-lightest',
+  //   columnIsSortedClassName: 'dc-c-sort dc-c-sort--default',
+  //   columnIsSortedAscClassName: 'dc-c-sort dc-c-sort--asc',
+  //   columnIsSortedDecClassName: 'dc-c-sort dc-c-sort--desc',
+  //   tableColumnResizer: 'dc-c-resize-handle',
+  //   tableColumnIsResizing: 'isResizing',
+  //   ...customClasses,
+  // };
+
+
+
+
+
+
+
   // const { layout, columnFilter, columnSort, columnResize } = options;
   // const { minWidth, maxWidth, width } = columnDefaults;
   // const {
@@ -160,10 +253,10 @@ const DataTable = ({
   //   }, 1000);
   //   return () => clearTimeout(timerFunc);
   // }, [filters]);
-  return (
-    <div className={className} tabIndex="0">
-      TABLE
-    </div>
+  // return (
+  //   <div className={className} tabIndex="0">
+  //     TABLE
+  //   </div>
     // <div {...getTableProps()} className={className} tabIndex="0">
     //   <div className={tableContainerClassName}>
     //     {headerGroups.map((headerGroup) => {
@@ -276,7 +369,7 @@ const DataTable = ({
     //     )}
     //   </div>
     // </div>
-  );
+  // );
 };
 
 // DataTable.defaultProps = {

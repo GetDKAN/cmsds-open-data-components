@@ -76,6 +76,7 @@ const ResourcePreview = ({
     tableColumnIsResizing: 'isResizing',
     ...customClasses,
   };
+  console.log(resource)
   return (
     <div
       ref={previewContainer}
@@ -85,11 +86,11 @@ const ResourcePreview = ({
       {previewContainer.current && (
         <DataTable
           // filterTitle="Filter columns"
-          // data={resource.values}
+          data={resource.values}
           // sortDefaults={defaultSort}
-          // columns={
-          //   customColumns ? customColumns : prepareColumns(resource.columns, resource.schema[id])
-          // }
+          columns={
+            customColumns ? customColumns : prepareColumns(resource.columns, resource.schema[id])
+          }
           // schema={resource.schema}
           // totalRows={parseInt(resource.totalRows)}
           // limit={resource.limit}
