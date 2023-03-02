@@ -3,42 +3,14 @@ import qs from 'qs';
 
 export function separateFacets(facets) {
   let facetObj = {};
-  if (facets) {
-    facets.forEach((f) => {
-      if(facetObj[f.type]) {
-        facetObj[f.type] = [...facetObj[f.type], f]
-      } else {
-        facetObj[f.type] = [f]
-      }
-    })
-    return facetObj;
-  }
-}
-
-export function selectedFacetsMessage(facets, alternateTitles) {
-  let message = [];
-  const keys = Object.keys(facets);
-  keys.forEach((k) => {
-    if (facets[k].length) {
-      message.push(`${alternateTitles[k]}: ${facets[k].join(', ')}`);
+  facets.forEach((f) => {
+    if(facetObj[f.type]) {
+      facetObj[f.type] = [...facetObj[f.type], f]
+    } else {
+      facetObj[f.type] = [f]
     }
-  });
-  return message.join(' & ');
-}
-
-export function transformUrlParamsToSearchObject(searchParams, facetList, defaultSortOptions) {
-  const params = qs.parse(searchParams, { ignoreQueryPrefix: true });
-  const selectedFacets = {};
-  facetList.forEach((facet) => {
-    selectedFacets[facet] = params[facet] ? params[facet] : [];
-  });
-  return {
-    page: params.page,
-    sort: !params.sort ? defaultSortOptions.defaultSort : params.sort,
-    sortOrder: !params.sortOrder ? defaultSortOptions.defaultOrder : params.sortOrder,
-    fulltext: params.fulltext,
-    selectedFacets: selectedFacets,
-  };
+  })
+  return facetObj;
 }
 
 export function isSelectedFacet(currentFacet, selectedFacets) {
