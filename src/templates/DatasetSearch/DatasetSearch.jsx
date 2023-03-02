@@ -166,7 +166,7 @@ const DatasetSearch = ({
                 setFullText(filterText);
                 setPage(defaultPage)
               }}
-
+            >
               Search
             </Button>
           </form>
@@ -177,7 +177,6 @@ const DatasetSearch = ({
               role="status"
             />
           ) : (
-            
             <>
               <div className="ds-u-display--flex ds-u-justify-content--between ds-u-align-items--end">
               <div>
@@ -229,7 +228,9 @@ const DatasetSearch = ({
                 }}
               />
             )}
+
           </>
+          )}
         </div>
         <div className="ds-l-md-col--4 ds-l-sm-col--12">
           {showSort && (
