@@ -4,6 +4,7 @@ import useMetastoreDataset from '../../services/useMetastoreDataset';
 import DatasetBody from './DatasetBody';
 import PageNotFound from '../PageNotFound';
 import { defaultMetadataMapping } from '../../assets/metadataMapping';
+import './dataset.scss';
 
 const Dataset = ({
   id,

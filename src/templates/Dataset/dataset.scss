@@ -5,7 +5,7 @@
     width: 48px;
     height: 4px;
     margin: 8px 0;
-    background-color: $color-primary-alt-light;
+    background-color: #{var(--color-primary-alt-light)};
   }
 }
 
@@ -25,7 +25,7 @@
   bottom: 0;
   right: 0;
   position: absolute;
-  background-color: $color-gray-light;
+  background-color: #{var(--color-gray-light)};
   width: 10px;
   min-width: 10px;
   display: block;
@@ -35,7 +35,7 @@
   z-index: 1;
   &.isResizing,
   &:hover {
-    background-color: $color-primary;
+    background-color: #{var(--color-primary)};
   }
 }
 

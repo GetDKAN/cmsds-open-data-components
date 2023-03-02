@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Choice, Button, Accordion, AccordionItem } from '@cmsgov/design-system';
+import './dataset-search-facets.scss';
 
 export function isSelected(currentFacet, selectedFacets) {
   let isSelected = -1;

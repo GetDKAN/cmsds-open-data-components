@@ -5,7 +5,7 @@ import NavBar from '../NavBar';
 import SearchModal from '../SearchModal';
 import cmsLogo from '../../assets/images/CMSGovLogo-O.png';
 
-const Header = ({
+const DesktopHeader = ({
   siteName,
   headerClasses,
   linkClasses,
@@ -78,7 +78,7 @@ const Header = ({
   );
 };
 
-Header.defaultProps = {
+DesktopHeader.defaultProps = {
   org: {
     tagline: 'The Centers for Medicare & Medicaid Services',
     url: 'https://cms.gov',
@@ -92,11 +92,11 @@ Header.defaultProps = {
   includeSearch: true,
 };
 
-Header.propTypes = {
+DesktopHeader.propTypes = {
   siteName: PropTypes.node.isRequired,
   includeTopNav: PropTypes.bool,
   linkClasses: PropTypes.string,
   includeSearch: PropTypes.bool,
 };
 
-export default Header;
+export default DesktopHeader;
