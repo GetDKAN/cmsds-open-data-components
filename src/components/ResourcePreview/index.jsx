@@ -76,7 +76,6 @@ const ResourcePreview = ({
     tableColumnIsResizing: 'isResizing',
     ...customClasses,
   };
-  console.log(resource)
   return (
     <div
       ref={previewContainer}
@@ -87,7 +86,7 @@ const ResourcePreview = ({
         <DataTable
           // filterTitle="Filter columns"
           data={resource.values}
-          // sortDefaults={defaultSort}
+          sortDefaults={defaultSort}
           columns={
             customColumns ? customColumns : prepareColumns(resource.columns, resource.schema[id])
           }
@@ -96,11 +95,11 @@ const ResourcePreview = ({
           // limit={resource.limit}
           // offset={resource.offset}
           // loading={resource.loading}
-          // setSort={resource.setSort}
+          setSort={resource.setSort}
           // setConditions={resource.setConditions}
           // conditionsTransform={transformTableFilterToQueryCondition}
           // sortTransform={transformTableSortToQuerySort}
-          // tableClasses={tableClasses}
+          tablePadding={tablePadding}
           className="dc-c-datatable"
           // columnDefaults={columnDefaults}
           // customColumnFilter={DefaultColumnFilter}

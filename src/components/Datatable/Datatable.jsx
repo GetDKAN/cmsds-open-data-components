@@ -1,7 +1,21 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { useReactTable, flexRender, getCoreRowModel, createColumnHelper } from "@tanstack/react-table";
+import {
+  useReactTable,
+  flexRender,
+  getCoreRowModel,
+  createColumnHelper,
+  ColumnResizeMode,
+  ColumnDef,
+  getSortedRowModel,
+  SortingState,
+} from "@tanstack/react-table";
 import "./datatable.scss";
+
+const MyCell = ({children}) => {
+  return <span>{children}</span>
+}
+
 
 const DataTable = ({
   data,
@@ -12,54 +26,114 @@ const DataTable = ({
   // loading,
   // options,
   // columnDefaults,
-  // sortDefaults,
-  // setSort,
+  sortDefaults,
+  setSort,
   // setConditions,
   // conditionsTransform,
-  // sortTransform,
+  sortTransform,
   className,
-  // tableClasses,
+  tablePadding,
   // customColumnFilter,
   // cellTextClassName,
   // CustomLoadingComponent,
   // CustomNoResults,
 }) => {
-
+  const [ sorting, setSorting ] = React.useState([])
   const columnHelper = createColumnHelper()
-
-
-  const stuff = ['hcpc']
-  const my_columns = columns.map((col) => (
+  const table_columns = columns.map((col) => (
       columnHelper.accessor(col.accessor, {
-        header: <span>{col.Header}</span>
+        header: <span>{col.Header}</span>,
+        // cell: <MyCell>{info => info.getValue()}</MyCell>
       })
     ))
-  const my_col = [
-    columnHelper.accessor('hcpc', {
-      header: <span>HCPC</span>
-    })
-  ]
   const options = {
-    data: data,
-    columns: my_columns,
-    getCoreRowModel: getCoreRowModel()
+
   }
-  const table = useReactTable(options);
-  console.log(columns, data)
+
+
+
+
+  const sortElement = (isSorted, onClickFn) => {
+    if(isSorted === 'asc') {
+      return <span>' 🔼'</span>
+    }
+    if(isSorted === 'desc') {
+      return <span>' 🔽'</span>
+    }
+    return <span>' a'</span>
+  }
+  const table = useReactTable({
+    data: data,
+    columns: table_columns,
+    state: {
+      sorting,
+    },
+    columnResizeMode: 'onChange',
+    onSortingChange: setSorting,
+
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    debugTable: true,
+  });
+
+  //  useEffect(() => {
+  //   if (columnSort) {
+  //     const normalizedSort = sortTransform ? sortTransform(sortBy) : filters;
+  //     setSort(normalizedSort);
+  //   }
+  // }, [sortBy]);
+  console.log(sorting)
   return(
     <div>
-      <table>
+      <table
+        {...{
+          style: {
+            width: table.getCenterTotalSize(),
+          },
+        }}
+        className="dc-c-datatable"
+      >
         <thead>
           {table.getHeaderGroups().map(headerGroup => (
-            <tr key={headerGroup.id}>
+            <tr key={headerGroup.id} className="">
               {headerGroup.headers.map(header => (
-                <th key={header.id}>
+                <th {
+                  ...{
+                    key: header.id,
+                    style: {
+                      width: header.getSize(),
+                    },
+                  }
+                }
+                className="ds-u-padding--2 ds-u-border-y--2 ds-u-border--dark  ds-u-font-weight--bold dc-c-table-header-cell"
+                >
                   {header.isPlaceholder
                     ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
+                    : (
+                       <div
+                        {...{
+                          className: header.column.getCanSort()
+                            ? 'cursor-pointer select-none'
+                            : '',
+                          onClick: header.column.getToggleSortingHandler(),
+                        }}
+                        >
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                          {sortElement(header.column.getIsSorted())}
+                          <span
+                            {...{
+                              onMouseDown: header.getResizeHandler(),
+                              onTouchStart: header.getResizeHandler(),
+                              className: `dc-c-resize-handle ${
+                                header.column.getIsResizing() ? 'isResizing' : ''
+                              }`,
+                            }}
+                          />
+                        </div>
+                  )}
                 </th>
               ))}
             </tr>
@@ -75,7 +149,7 @@ const DataTable = ({
                   return (
                     <td
                       key={cell.id}
-                      className={classList}
+                      className={`${classList} ${tablePadding}`}
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </td>
@@ -235,12 +309,7 @@ const DataTable = ({
   //   // usePagination,
   //   // layout === "block" ? useBlockLayout : useFlexLayout
   // );
-  // useEffect(() => {
-  //   if (columnSort) {
-  //     const normalizedSort = sortTransform ? sortTransform(sortBy) : filters;
-  //     setSort(normalizedSort);
-  //   }
-  // }, [sortBy]);
+
 
   // useEffect(() => {
   //   let timerFunc = setTimeout(() => {

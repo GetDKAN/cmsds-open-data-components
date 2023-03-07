@@ -109,7 +109,7 @@ const DatasetBody = ({
                     columnWidths={columnWidths}
                   />
                   <ResourceFooter resource={resource} />
-                  <ResourceInformation resource={resource} />
+                  {/* <ResourceInformation resource={resource} /> */}
                 </div>
               ) : (
                 <Spinner aria-valuetext="Dataset loading" role="status" />
@@ -118,13 +118,13 @@ const DatasetBody = ({
           ) : (
             ''
           )}
-          {dataset.identifier && (
+          {/* {dataset.identifier && (
             <DatasetAdditionalInformation
               datasetInfo={dataset}
               id={dataset.identifier}
               metadataMapping={metadataMapping}
             />
-          )}
+          )} */}
           {Object.keys(distribution).length && fileFormat === 'CSV' && dataset.identifier ? (
             <div ref={apiDocs}>
               <h2>Try the API</h2>
