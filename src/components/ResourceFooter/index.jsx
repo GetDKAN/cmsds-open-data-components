@@ -16,7 +16,7 @@ const ResourceFooter = ({ resource }) => {
             setOffset((page - 1) * limit);
           }}
           renderHref={(page) => {
-            return null
+            return "";
           }}
         />
       )}

@@ -4,16 +4,16 @@ import DesktopHeader from '../../components/DesktopHeader';
 import MobileHeader from '../../components/MobileHeader';
 import './header.scss';
 
-const Header = ({mobileMaxWidth, desktopMinWidth, siteName, links}) => {
+const Header = ({mobileMaxWidth, desktopMinWidth, siteName, links, org}) => {
   const mobile = useMediaQuery({ minWidth: 0, maxWidth: mobileMaxWidth});
   const desktop = useMediaQuery({ minWidth: desktopMinWidth});
   return(
     <>
       {desktop && (
-        <DesktopHeader siteName={siteName} links={links} />
+        <DesktopHeader siteName={siteName} links={links} org={org} />
       )}
       {mobile && (
-        <MobileHeader siteName={siteName} links={links} />
+        <MobileHeader siteName={siteName} links={links} org={org} />
       )}
     </>
   );

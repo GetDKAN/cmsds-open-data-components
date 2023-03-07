@@ -10,7 +10,7 @@ import {
   Accordion,
   AccordionItem,
 } from '@cmsgov/design-system';
-// import { DataTablePageResults } from '@civicactions/data-catalog-components';
+import { DataTablePageResults } from '@civicactions/data-catalog-components';
 import DataTableDensity from '../../components/DataTableDensity';
 import ManageColumns from '../../components/ManageColumns';
 import DataTableRowChanger from '../../components/DataTableRowChanger';
@@ -53,11 +53,11 @@ const ResourceHeader = ({
       <div className="ds-l-row ds-u-align-items--center">
         <div className="ds-l-col--12 ds-u-display--flex ds-u-justify-content--between ds-u-align-items--center">
           <div className="ds-u-font-weight--bold">
-            {/* <DataTablePageResults
+            {<DataTablePageResults
               totalRows={parseInt(intCount)}
               limit={parseInt(limit)}
               offset={parseInt(offset)}
-            /> */}
+            />}
           </div>
           <div className="dc-c-resource-header--buttons">
             {includeDownload && (

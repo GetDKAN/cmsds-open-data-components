@@ -5,7 +5,6 @@ import { DatasetSearchReqTypes } from './datasetSearchReq.types';
 function datasetSearchReq (
   {rootUrl, selectedTags, selectedTopics, fulltext}: DatasetSearchReqTypes
   ) {
-    console.log(rootUrl)
   return axios({
     method: "GET",
     url: `${rootUrl}/search`,

@@ -16,6 +16,8 @@
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
+    "@civicactions/data-catalog-services": "1.5.0",
+    "@civicactions/data-catalog-components": "~2.1.0",
     "@popperjs/core": "^2.11.6",
     "@tanstack/react-query": "^4.24.4",
     "@tanstack/react-table": "^8.7.9",

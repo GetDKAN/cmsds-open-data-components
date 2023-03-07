@@ -31,8 +31,8 @@ const SearchModal = ({
   return (
     <>
       <Button
-        variation="transparent"
-        inversed={inversedSearchButton}
+        variation="ghost"
+        onDark={inversedSearchButton}
         size={buttonSize}
         className="ds-u-border--0 dc-c-search-modal--button"
         onClick={() => setModalSearch(true)}
@@ -63,7 +63,7 @@ const SearchModal = ({
               labelClassName="ds-u-visibility--screen-reader"
               onChange={(e) => setModalSearchTerm(e.target.value)}
             />
-            <Button type="submit" inversed={inversedModalButton} className="ds-l-col--3">
+            <Button type="submit" onDark={inversedModalButton} className="ds-l-col--3">
               <span className="fas fa-search small-text ds-u-sm-display--none" />
               <span className="full-text ds-u-display--none ds-u-sm-display--inline-block">
                 Search

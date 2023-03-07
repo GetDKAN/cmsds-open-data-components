@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useMetastoreDataset } from '@civicactions/data-catalog-services';
 import PageNotFound from '../PageNotFound';
 import FilteredResourceBody from './FilteredResourceBody';
+import "./filtered-resource.scss";
 
 const FilteredResource = ({
   id,
@@ -14,10 +15,11 @@ const FilteredResource = ({
   columnSettings,
   columnWidths,
   customTitle,
+  rootUrl
 }) => {
   const [ready, setReady] = useState(false);
   const [error, setError] = useState(false);
-  const { dataset } = useMetastoreDataset(id, process.env.REACT_APP_ROOT_URL, additionalParams);
+  const { dataset } = useMetastoreDataset(id, rootUrl, additionalParams);
   const distIndex = dist_id === 'data' ? 0 : dist_id;
   useEffect(() => {
     if (dataset.error) {
@@ -69,6 +71,7 @@ const FilteredResource = ({
               columnSettings={columnSettings}
               columnWidths={columnWidths}
               customTitle={customTitle}
+              rootUrl={rootUrl}
             />
           )}
         </>

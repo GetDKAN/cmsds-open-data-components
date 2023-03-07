@@ -31,8 +31,8 @@ const SubMenu = ({ link, linkClasses, wrapLabel }) => {
     <li className={`has-submenu ${isExpanded ? 'open' : ''}`} ref={menu}>
       <Button
         size="small"
-        variation="transparent"
-        inversed={true}
+        variation="ghost"
+        onDark
         className={linkClasses}
         aria-haspopup="true"
         aria-expanded={isExpanded}

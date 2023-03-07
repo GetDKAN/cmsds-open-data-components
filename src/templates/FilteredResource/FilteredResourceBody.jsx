@@ -17,6 +17,7 @@ import ResourcePreview from '../../components/ResourcePreview';
 import ResourceFooter from '../../components/ResourceFooter';
 import { buildCustomColHeaders } from './functions';
 import QueryBuilder from './QueryBuilder';
+import 'swagger-ui-react/swagger-ui.css';
 
 const FilteredResourceBody = ({
   id,
@@ -29,6 +30,7 @@ const FilteredResourceBody = ({
   columnSettings,
   columnWidths,
   customTitle,
+  rootUrl
 }) => {
   const navigate = useNavigate();
   const [tablePadding, setTablePadding] = React.useState('ds-u-padding-y--1');
@@ -48,7 +50,7 @@ const FilteredResourceBody = ({
   let conditions = options.conditions.length ? options.conditions : [];
   const resource = useDatastore(
     '',
-    process.env.REACT_APP_ROOT_URL,
+    rootUrl,
     {
       ...options,
       limit: 25,
@@ -64,7 +66,7 @@ const FilteredResourceBody = ({
     }
   }, [distribution]);
   const downloadUrl = `${
-    process.env.REACT_APP_ROOT_URL
+    rootUrl
   }/datastore/query/${id}/${distIndex}/download?${qs.stringify(
     { conditions: resource.conditions },
     { encode: true }
@@ -72,7 +74,7 @@ const FilteredResourceBody = ({
   const pageTitle =
     distribution.data.title && distribution.data.title.toLowerCase() !== 'csv'
       ? distribution.data.title
-      : dataset.title;
+      : dataset.title;å
 
   return (
     <section className="ds-l-container ds-u-padding-bottom--3 ds-u-margin-bottom--2">
@@ -131,7 +133,7 @@ const FilteredResourceBody = ({
             <div ref={apiDocs}>
               <h2>Try the API</h2>
               <SwaggerUI
-                url={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${
+                url={`${rootUrl}/metastore/schemas/dataset/items/${
                   dataset.identifier
                 }/docs${
                   additionalParams && additionalParams.ACA
