@@ -1,10 +1,9 @@
 import React from 'react';
-import { DataTable } from '@civicactions/data-catalog-components';
 
 import { TextField, Spinner } from '@cmsgov/design-system';
 import { transformTableFilterToQueryCondition } from '../../services/useDatastore/transformConditions';
 import { transformTableSortToQuerySort} from '../../services/useDatastore/transformSorts';
-// import DataTable from '../Datatable';
+import DataTable from '../Datatable';
 
 
 function calculateMaxWidth(previewSize) {
@@ -84,22 +83,22 @@ const ResourcePreview = ({
     >
       {previewContainer.current && (
         <DataTable
-          filterTitle="Filter columns"
+          // filterTitle="Filter columns"
           data={resource.values}
           sortDefaults={defaultSort}
           columns={
             customColumns ? customColumns : prepareColumns(resource.columns, resource.schema[id])
           }
-          schema={resource.schema}
-          totalRows={parseInt(resource.totalRows)}
-          limit={resource.limit}
-          offset={resource.offset}
-          loading={resource.loading}
+          // schema={resource.schema}
+          // totalRows={parseInt(resource.totalRows)}
+          // limit={resource.limit}
+          // offset={resource.offset}
+          // loading={resource.loading}
           setSort={resource.setSort}
-          setConditions={resource.setConditions}
-          conditionsTransform={transformTableFilterToQueryCondition}
+          // setConditions={resource.setConditions}
+          // conditionsTransform={transformTableFilterToQueryCondition}
           sortTransform={transformTableSortToQuerySort}
-          tableClasses={tableClasses}
+          tablePadding={tablePadding}
           className="dc-c-datatable"
           columnDefaults={columnDefaults}
           customColumnFilter={DefaultColumnFilter}

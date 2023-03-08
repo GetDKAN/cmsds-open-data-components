@@ -10,10 +10,10 @@ import {
   Accordion,
   AccordionItem,
 } from '@cmsgov/design-system';
-import { DataTablePageResults } from '@civicactions/data-catalog-components';
-import DataTableDensity from '../../components/DataTableDensity';
-import ManageColumns from '../../components/ManageColumns';
-import DataTableRowChanger from '../../components/DataTableRowChanger';
+import DataTablePageResults from '../DataTablePageResults';
+import DataTableDensity from '../DataTableDensity';
+import ManageColumns from '../ManageColumns';
+import DataTableRowChanger from '../DataTableRowChanger';
 import DownloadIcon from '../../assets/icons/download';
 import CopyIcon from '../../assets/icons/copy';
 import SettingsIcon from '../../assets/icons/settings';
@@ -44,7 +44,7 @@ const ResourceHeader = ({
       <div className="ds-l-row">
         <div className="ds-l-col--12">
           {includeFiltered && (
-            <Link className="ds-c-button ds-c-button--primary" to={`/dataset/${id}/data`}>
+            <Link className="ds-c-button ds-c-button--solid" to={`/dataset/${id}/data`}>
               View and filter data
             </Link>
           )}
@@ -53,11 +53,11 @@ const ResourceHeader = ({
       <div className="ds-l-row ds-u-align-items--center">
         <div className="ds-l-col--12 ds-u-display--flex ds-u-justify-content--between ds-u-align-items--center">
           <div className="ds-u-font-weight--bold">
-            {<DataTablePageResults
+            <DataTablePageResults
               totalRows={parseInt(intCount)}
               limit={parseInt(limit)}
               offset={parseInt(offset)}
-            />}
+            />
           </div>
           <div className="dc-c-resource-header--buttons">
             {includeDownload && (

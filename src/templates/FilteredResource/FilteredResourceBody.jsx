@@ -74,7 +74,7 @@ const FilteredResourceBody = ({
   const pageTitle =
     distribution.data.title && distribution.data.title.toLowerCase() !== 'csv'
       ? distribution.data.title
-      : dataset.title;å
+      : dataset.title;
 
   return (
     <section className="ds-l-container ds-u-padding-bottom--3 ds-u-margin-bottom--2">

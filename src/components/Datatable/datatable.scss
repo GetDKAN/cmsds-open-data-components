@@ -1,0 +1,44 @@
+.dc-c-datatable {
+  width: 100%;
+  border-spacing: 0px;
+  th {
+    text-align: left;
+    .dc-c-resize-handle {
+      top: 0;
+      bottom: 0;
+      right: 0;
+      position: absolute;
+      background-color: #{var(--color-gray-light)};
+      width: 10px;
+      cursor: col-resize;
+      min-width: 10px;
+      display: block;
+      margin-left: -10px;
+      z-index: 1;
+      &.isResizing,
+      &:hover {
+        background-color: #{var(--color-primary)};
+      }
+    }
+  }
+}
+
+.dc-c-datatable--even-row td {
+  background-color: #{var(--table-striped__background-color)};
+}
+
+th {
+  position: relative;
+}
+
+
+
+// @media (hover: hover) {
+//   .resizer {
+//     opacity: 0;
+//   }
+
+//   *:hover > .resizer {
+//     opacity: 1;
+//   }
+// }
