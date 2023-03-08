@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useMetastoreDataset } from '@civicactions/data-catalog-services';
+import useMetastoreDataset from '../../services/useMetastoreDataset';
 import PageNotFound from '../PageNotFound';
 import FilteredResourceBody from './FilteredResourceBody';
 import "./filtered-resource.scss";

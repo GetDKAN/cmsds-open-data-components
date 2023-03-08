@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import qs from 'qs';
 import { Link, useNavigate } from 'react-router-dom';
 import SwaggerUI from 'swagger-ui-react';
-import { useDatastore } from '@civicactions/data-catalog-services';
+import useDatastore from '../../services/useDatastore';
 import {
   HelpDrawerToggle,
   Button,
