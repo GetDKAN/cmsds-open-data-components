@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useMediaQuery } from 'react-responsive';
 import { Button } from '@cmsgov/design-system';
 import NavLink from '../../components/NavLink';
+import "./footer.scss";
 
 const Footer = ({
   links,
@@ -31,7 +32,7 @@ const Footer = ({
                 <p>{emailBody}</p>
               </div>
               <div className="ds-l-md-col--4 ds-u-padding-left--7">
-                <Button href={emailLink}>{emailButton}</Button>
+                <Button onDark variation="solid" href={emailLink}>{emailButton}</Button>
               </div>
             </div>
           </div>

@@ -1,5 +1,4 @@
 import React from 'react';
-// import { DataTable } from '@civicactions/data-catalog-components';
 
 import { TextField, Spinner } from '@cmsgov/design-system';
 import { transformTableFilterToQueryCondition } from '../../services/useDatastore/transformConditions';
@@ -101,23 +100,23 @@ const ResourcePreview = ({
           sortTransform={transformTableSortToQuerySort}
           tablePadding={tablePadding}
           className="dc-c-datatable"
-          // columnDefaults={columnDefaults}
-          // customColumnFilter={DefaultColumnFilter}
-          // options={options}
-          // CustomLoadingComponent={
-          //   <div className="ds-u-display--flex ds-u-padding--3">
-          //     <Spinner
-          //       className="ds-u-valign--middle"
-          //       role="status"
-          //       aria-valuetext="Datatable loading"
-          //     />
-          //   </div>
-          // }
-          // CustomNoResults={
-          //   <div className="ds-u-display--flex ds-u-padding--3">
-          //     <p>No results returned.</p>
-          //   </div>
-          // }
+          columnDefaults={columnDefaults}
+          customColumnFilter={DefaultColumnFilter}
+          options={options}
+          CustomLoadingComponent={
+            <div className="ds-u-display--flex ds-u-padding--3">
+              <Spinner
+                className="ds-u-valign--middle"
+                role="status"
+                aria-valuetext="Datatable loading"
+              />
+            </div>
+          }
+          CustomNoResults={
+            <div className="ds-u-display--flex ds-u-padding--3">
+              <p>No results returned.</p>
+            </div>
+          }
         />
       )}
     </div>

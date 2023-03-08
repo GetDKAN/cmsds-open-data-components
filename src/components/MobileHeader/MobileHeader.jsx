@@ -86,8 +86,8 @@ const MobileHeader = ({
       )}
       <div className="dc-c-main-navigation ds-u-display--flex ds-u-justify-content--between ds-u-align-items--center">
         <Button
-          variation="transparent"
-          inversed
+          variation="ghost"
+          onDark
           size="small"
           className="dc-c-mobile-menu--open"
           onClick={() => setMenuOpen(true)}
@@ -118,8 +118,8 @@ const MobileHeader = ({
       <div className="dc-c-mobile-header--menu" ref={menu}>
         <div className="ds-u-display--flex dc-c-mobile-header--menu-close ds-u-justify-content--between">
           <Button
-            variation="transparent"
-            inversed
+            variation="ghost"
+            onDark
             size="small"
             className="dc-c-mobile-menu--close ds-u-margin-left--1 ds-u-padding-left--0"
             onClick={() => setMenuOpen(false)}

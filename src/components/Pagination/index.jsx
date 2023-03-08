@@ -162,7 +162,7 @@ const Pagination = ({ totalPages, currentPage, buttonAction }) => {
                     className={buttonClass}
                     disabled={item.disabled ? item.disabled : false}
                     size="small"
-                    variation="transparent"
+                    variation="ghost"
                     onClick={() => buttonAction(buttonValue(item.text))}
                   >
                     {item.text}
