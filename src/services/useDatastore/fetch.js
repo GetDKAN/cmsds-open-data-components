@@ -29,7 +29,6 @@ export async function fetchDataFromQuery(
   if (typeof setLoading === "function") {
     setLoading(true);
   }
-  console.log(rootUrl)
   return await axios({
     method: "GET",
     url: `${rootUrl}/datastore/query/${id}`,
@@ -51,7 +50,6 @@ export async function fetchDataFromQuery(
     // },
   }).then((res) => {
     const { data } = res;
-    console.log(res)
     const propertyKeys =
       data.schema[id] && data.schema[id].fields
         ? Object.keys(data.schema[id].fields)
