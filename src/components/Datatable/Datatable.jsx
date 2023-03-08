@@ -71,10 +71,8 @@ const DataTable = ({
 
    React.useEffect(() => {
     const normalizedSort = sortTransform ? sortTransform(sorting) : filters;
-    console.log(sorting)
     setSort(normalizedSort);
   }, [sorting]);
-  console.log(sorting)
   return(
     <div>
       <table
