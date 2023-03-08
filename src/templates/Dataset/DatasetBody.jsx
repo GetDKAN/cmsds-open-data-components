@@ -12,6 +12,7 @@ import TransformedDate from '../../components/TransformedDate';
 import ResourceFooter from '../../components/ResourceFooter';
 import ResourceInformation from '../../components/ResourceInformation';
 import { buildCustomColHeaders } from '../FilteredResource/functions';
+import 'swagger-ui-react/swagger-ui.css';
 
 const DatasetBody = ({
   rootUrl,
@@ -129,7 +130,7 @@ const DatasetBody = ({
             <div ref={apiDocs}>
               <h2>Try the API</h2>
               <SwaggerUI
-                url={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${
+                url={`${rootUrl}/metastore/schemas/dataset/items/${
                   dataset.identifier
                 }/docs${
                   additionalParams && additionalParams.ACA
@@ -150,7 +151,10 @@ const DatasetBody = ({
           ) : (
             ''
           )}
-          <DatasetTags keywords={dataset.keyword} />
+          {dataset.keyword && (
+            <DatasetTags keywords={dataset.keyword} />
+          )}
+          
           {Object.keys(distribution).length && fileFormat === 'CSV' ? (
             <div className="dc-c-dataset-tags ds-u-margin-bottom--3 ds-u-padding--2 ds-u-border ds-u-border--1">
               <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-top--0 ds-u-margin-bottom--2 ds-u-padding-bottom--2">

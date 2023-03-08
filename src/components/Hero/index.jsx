@@ -35,7 +35,7 @@ const Hero = ({ title, description, searchUrl, searchKey, textfieldLabel, search
                 onChange={(e) => setSearchValue(e.target.value)}
               />
             </div>
-            <Button className="ds-u-margin-left--auto" size="big" type="submit">
+            <Button className="ds-u-margin-left--auto" size="big" type="submit" variation="solid" onDark>
               <span className="fas fa-search small-text ds-u-sm-display--none" />
               <span className="full-text ds-u-display--none ds-u-sm-display--inline-block">
                 {searchButtonText}
