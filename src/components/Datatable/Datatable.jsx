@@ -10,12 +10,8 @@ import {
   getSortedRowModel,
   SortingState,
 } from "@tanstack/react-table";
+import { ArrowsStackedIcon, ArrowIcon } from "@cmsgov/design-system";
 import "./datatable.scss";
-
-const MyCell = ({children}) => {
-  return <span>{children}</span>
-}
-
 
 const DataTable = ({
   data,
@@ -46,26 +42,23 @@ const DataTable = ({
         // cell: <MyCell>{info => info.getValue()}</MyCell>
       })
     ))
-  const options = {
-
-  }
-
-
-
 
   const sortElement = (isSorted, onClickFn) => {
     if(isSorted === 'asc') {
-      return <span>' 🔼'</span>
+      return <span><ArrowIcon direction="up" /></span>
     }
     if(isSorted === 'desc') {
-      return <span>' 🔽'</span>
+      return <span><ArrowIcon direction="down" /></span>
     }
-    return <span>' a'</span>
+    return <span><ArrowsStackedIcon /></span>
   }
+  const filters = []
   const table = useReactTable({
     data: data,
     columns: table_columns,
+    manualSorting: true,
     state: {
+
       sorting,
     },
     columnResizeMode: 'onChange',
@@ -76,12 +69,11 @@ const DataTable = ({
     debugTable: true,
   });
 
-  //  useEffect(() => {
-  //   if (columnSort) {
-  //     const normalizedSort = sortTransform ? sortTransform(sortBy) : filters;
-  //     setSort(normalizedSort);
-  //   }
-  // }, [sortBy]);
+   React.useEffect(() => {
+    const normalizedSort = sortTransform ? sortTransform(sorting) : filters;
+    console.log(sorting)
+    setSort(normalizedSort);
+  }, [sorting]);
   console.log(sorting)
   return(
     <div>
