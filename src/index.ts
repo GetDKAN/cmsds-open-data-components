@@ -8,6 +8,7 @@ export { default as PageNotFound } from './templates/PageNotFound';
 export { default as DatasetSearch } from './templates/DatasetSearch';
 export { default as Dataset } from './templates/Dataset';
 export { default as Header } from './templates/Header';
+export { default as Footer } from './templates/Footer';
 
 // Services
 export { default as useSearchAPI } from './services/useSearchAPI';
@@ -22,20 +23,12 @@ export { default as DatasetSearchListItem } from './components/DatasetSearchList
 // export { default as SubMenu } from './components/SubMenu';
 // export { default as ApiDocumentation } from './components/ApiDocumentation';
 // export { default as ResourceConditionField } from './components/ResourceConditionField';
-// export { default as ResourceFilter } from './components/ResourceFilter';
-// export { default as ResourceHeader } from './components/ResourceHeader';
-// export { default as ResourcePreview } from './components/ResourcePreview';
-// export { default as ResourceFooter } from './components/ResourceFooter';
+export { default as ResourceFilter } from './components/ResourceFilter';
+export { default as ResourceHeader } from './components/ResourceHeader';
+export { default as ResourcePreview } from './components/ResourcePreview';
+export { default as ResourceFooter } from './components/ResourceFooter';
 // export { default as Breadcrumb } from './components/Breadcrumb';
-// export { default as TransformedDate } from './components/TransformedDate';
-
-// Templates
-export { default as Footer } from './templates/Footer';
-// export { default as Dataset } from './templates/Dataset';
-// export { default as DatasetSearch } from './templates/DatasetSearch';
-// export { default as DrupalPage } from './templates/DrupalPage';
-// export { default as Header } from './templates/header';
-// export { default as MobileHeader } from './templates/mobile_header';
+export { default as TransformedDate } from './components/TransformedDate';
 
 export { default as FilteredResource } from './templates/FilteredResource';
 // export { default as QueryBuilder } from './templates/FilteredResource/QueryBuilder';
@@ -43,7 +36,11 @@ export { default as FilteredResource } from './templates/FilteredResource';
 
 // Hooks
 export { default as useAddLoginLink } from './components/useAddLoginLink';
-// export { default as useScrollToTop } from './components/useScrollToTop';
+export { default as useScrollToTop } from './components/useScrollToTop';
+export { default as useDatastore } from './services/useDatastore';
+export { default as useMetastoreDataset } from './services/useMetastoreDataset';
 
 // Assets
 // export { default as frequencyMap } from './assets/frequencyMap';
+
+export { default as DataTablePageResults } from './components/DataTablePageResults';
