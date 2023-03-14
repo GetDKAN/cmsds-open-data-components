@@ -45,7 +45,7 @@ const SearchModal = ({
           onExit={() => setModalSearch(false)}
           getApplicationNode={() => document.getElementById(appNodeId)}
           closeButtonVariation="primary"
-          closeText={<>Close</>}
+          closeButtonText={<>Close</>}
         >
           <p>{searchModalText}</p>
           <form
