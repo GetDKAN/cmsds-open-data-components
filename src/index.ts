@@ -27,7 +27,7 @@ export { default as ResourceFilter } from './components/ResourceFilter';
 export { default as ResourceHeader } from './components/ResourceHeader';
 export { default as ResourcePreview } from './components/ResourcePreview';
 export { default as ResourceFooter } from './components/ResourceFooter';
-// export { default as Breadcrumb } from './components/Breadcrumb';
+export { default as Breadcrumb } from './components/Breadcrumb';
 export { default as TransformedDate } from './components/TransformedDate';
 
 export { default as FilteredResource } from './templates/FilteredResource';
