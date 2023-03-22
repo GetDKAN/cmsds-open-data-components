@@ -29,6 +29,7 @@ const DataTable = ({
   sortTransform,
   className,
   tablePadding,
+  allowOverflow,
   // customColumnFilter,
   // cellTextClassName,
   // CustomLoadingComponent,
@@ -45,12 +46,12 @@ const DataTable = ({
 
   const sortElement = (isSorted, onClickFn) => {
     if(isSorted === 'asc') {
-      return <span><ArrowIcon direction="up" /></span>
+      return 'dc-c-sort--asc'
     }
     if(isSorted === 'desc') {
-      return <span><ArrowIcon direction="down" /></span>
+      return 'dc-c-sort--desc'
     }
-    return <span><ArrowsStackedIcon /></span>
+    return 'dc-c-sort--default'
   }
   const filters = []
   const table = useReactTable({
@@ -73,12 +74,16 @@ const DataTable = ({
     const normalizedSort = sortTransform ? sortTransform(sorting) : filters;
     setSort(normalizedSort);
   }, [sorting]);
+
   return(
     <div>
       <table
+        tabIndex={0}
         {...{
           style: {
-            width: table.getCenterTotalSize(),
+            width: allowOverflow ? table.getCenterTotalSize() : "100%",
+            maxWidth: allowOverflow ? table.getCenterTotalSize() : "100%",
+            minWidth: allowOverflow ? table.getCenterTotalSize() : "100%",
           },
         }}
         className="dc-c-datatable"
@@ -103,7 +108,7 @@ const DataTable = ({
                        <div
                         {...{
                           className: header.column.getCanSort()
-                            ? 'cursor-pointer select-none'
+                            ? `cursor-pointer select-none ${sortElement(header.column.getIsSorted())}`
                             : '',
                           onClick: header.column.getToggleSortingHandler(),
                         }}
@@ -112,7 +117,7 @@ const DataTable = ({
                             header.column.columnDef.header,
                             header.getContext()
                           )}
-                          {sortElement(header.column.getIsSorted())}
+
                           <span
                             {...{
                               onMouseDown: header.getResizeHandler(),

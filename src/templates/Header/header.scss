@@ -276,7 +276,7 @@ nav.dc-c-site-menu {
       height: 100%;
     }
     button {
-      color: #{var(--color-white)};
+      // color: #{var(--color-white)};
       text-decoration: none;
       font-size: 16px;
       border: none;
@@ -286,22 +286,26 @@ nav.dc-c-site-menu {
     }
     a {
       text-decoration: none;
-      color: #{var(--color-white)};
+      padding: #{var(--space, 8px 24px)};
+      // color: #{var(--color-white)};
       span {
         border-bottom: 2px solid transparent;
       }
       &:focus {
         background-color: transparent;
-        outline: 3px solid #bd13b8;
+        outline: 3px solid transparent;
+        box-shadow: 0 0 0 3px #{var(--color-focus-light)}, 0 0 4px 6px #{var(--color-focus-dark)};
+        outline-offset: 3px;
+        border-radius: #{var(--button__border-radius)};
       }
     }
     button {
       &:focus {
-        background-color: transparent;
-        outline: 3px solid #bd13b8;
-        box-shadow: none;
-        outline-offset: inherit;
-        border-radius: 0px;
+        // background-color: transparent;
+        // outline: 3px solid #bd13b8;
+        // box-shadow: none;
+        // outline-offset: inherit;
+        // border-radius: 0px;
       }
     }
     > li:hover > button span,
@@ -350,9 +354,15 @@ li.has-submenu {
 
 .dc-c-site-title a {
   text-decoration: none;
-  color: #{var(--color-white)};
-  display: inline-block;
 }
+
+// .dc-c-site-title a:visited {
+//   color: #{var(--color-white)};
+// }
+
+// .dc-c-site-title a:visited {
+//   color: #{var(--color-white)};
+// }
 
 div.ds-c-dialog-wrap {
   background-color: rgba(0, 113, 188, 0.9);

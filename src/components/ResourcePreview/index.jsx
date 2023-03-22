@@ -43,6 +43,7 @@ const ResourcePreview = ({
   columnSettings,
   columnWidths,
   customClasses,
+  allowOverflow,
 }) => {
   const previewContainer = React.useRef(null);
   const columnDefaults = {
@@ -85,6 +86,7 @@ const ResourcePreview = ({
         <DataTable
           // filterTitle="Filter columns"
           data={resource.values}
+          allowOverflow={allowOverflow}
           sortDefaults={defaultSort}
           columns={
             customColumns ? customColumns : prepareColumns(resource.columns, resource.schema[id])
@@ -132,6 +134,7 @@ ResourcePreview.defaultProps = {
   },
   truncateCellHeader: true,
   defaultSort: [],
+  allowOverflow: true,
 };
 
 export default ResourcePreview;
