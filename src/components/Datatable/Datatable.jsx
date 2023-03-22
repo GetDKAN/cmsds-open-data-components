@@ -44,7 +44,6 @@ const DataTable = ({
       })
     ))
 
-  
   const sortElement = (isSorted, onClickFn) => {
     if(isSorted === 'asc') {
       return 'dc-c-sort--asc'
@@ -63,7 +62,6 @@ const DataTable = ({
 
       sorting,
     },
-    enableColumnResizing: true,
     columnResizeMode: 'onChange',
     onSortingChange: setSorting,
 
