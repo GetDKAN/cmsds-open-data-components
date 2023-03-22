@@ -44,6 +44,7 @@ const DataTable = ({
       })
     ))
 
+  
   const sortElement = (isSorted, onClickFn) => {
     if(isSorted === 'asc') {
       return 'dc-c-sort--asc'
@@ -62,6 +63,7 @@ const DataTable = ({
 
       sorting,
     },
+    enableColumnResizing: true,
     columnResizeMode: 'onChange',
     onSortingChange: setSorting,
 
@@ -82,8 +84,6 @@ const DataTable = ({
         {...{
           style: {
             width: allowOverflow ? table.getCenterTotalSize() : "100%",
-            maxWidth: allowOverflow ? table.getCenterTotalSize() : "100%",
-            minWidth: allowOverflow ? table.getCenterTotalSize() : "100%",
           },
         }}
         className="dc-c-datatable"
@@ -100,12 +100,13 @@ const DataTable = ({
                     },
                   }
                 }
-                className="ds-u-padding--2 ds-u-border-y--2 ds-u-border--dark  ds-u-font-weight--bold dc-c-table-header-cell"
+                className="ds-u-border-y--2 ds-u-border--dark  ds-u-font-weight--bold dc-c-table-header-cell"
                 >
                   {header.isPlaceholder
                     ? null
                     : (
-                       <div
+                      <div>
+                        <div
                         {...{
                           className: header.column.getCanSort()
                             ? `cursor-pointer select-none ${sortElement(header.column.getIsSorted())}`
@@ -117,8 +118,8 @@ const DataTable = ({
                             header.column.columnDef.header,
                             header.getContext()
                           )}
-
-                          <span
+                        </div>
+                        <span
                             {...{
                               onMouseDown: header.getResizeHandler(),
                               onTouchStart: header.getResizeHandler(),
@@ -127,7 +128,7 @@ const DataTable = ({
                               }`,
                             }}
                           />
-                        </div>
+                      </div>
                   )}
                 </th>
               ))}
@@ -143,10 +144,15 @@ const DataTable = ({
                   let classList = "dc-truncate ds-u-padding-x--1"
                   return (
                     <td
-                      key={cell.id}
+                      {...{
+                        key: cell.id,
+                        style: {
+                          maxWidth: cell.column.getSize(),
+                        },
+                      }}
                       className={`${classList} ${tablePadding}`}
                     >
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      <span>{flexRender(cell.column.columnDef.cell, cell.getContext())}</span>
                     </td>
                   );
                 })}
