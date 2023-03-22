@@ -48,8 +48,8 @@ const DesktopHeader = ({
         <div className="ds-l-container">
           <div className="ds-l-row ds-u-align-items--center">
             <div className="ds-u-margin-right--5 ds-u-padding-y--3 dc-c-site-title">
-              <NavLink to="/">
-                <span className="ds-h1">{siteName}</span>
+              <NavLink className="ds-c-link--inverse ds-h1" to="/">
+                <span className="">{siteName}</span>
               </NavLink>
             </div>
             <NavBar
