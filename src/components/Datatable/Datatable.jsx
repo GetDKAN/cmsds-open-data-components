@@ -105,7 +105,8 @@ const DataTable = ({
                   {header.isPlaceholder
                     ? null
                     : (
-                       <div
+                      <div>
+                        <div
                         {...{
                           className: header.column.getCanSort()
                             ? `cursor-pointer select-none ${sortElement(header.column.getIsSorted())}`
@@ -117,8 +118,8 @@ const DataTable = ({
                             header.column.columnDef.header,
                             header.getContext()
                           )}
-
-                          <span
+                        </div>
+                        <span
                             {...{
                               onMouseDown: header.getResizeHandler(),
                               onTouchStart: header.getResizeHandler(),
@@ -127,7 +128,7 @@ const DataTable = ({
                               }`,
                             }}
                           />
-                        </div>
+                      </div>
                   )}
                 </th>
               ))}
@@ -143,10 +144,15 @@ const DataTable = ({
                   let classList = "dc-truncate ds-u-padding-x--1"
                   return (
                     <td
-                      key={cell.id}
+                      {...{
+                        key: cell.id,
+                        style: {
+                          maxWidth: cell.column.getSize(),
+                        },
+                      }}
                       className={`${classList} ${tablePadding}`}
                     >
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      <span>{flexRender(cell.column.columnDef.cell, cell.getContext())}</span>
                     </td>
                   );
                 })}
