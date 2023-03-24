@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink as RRDNavLink } from 'react-router-dom';
+import './NavLink.scss';
 // import validator from 'validator';
 
 const NavLink = ({ link, className, wrapLabel }) => {
