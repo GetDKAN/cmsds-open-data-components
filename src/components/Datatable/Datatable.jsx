@@ -82,6 +82,8 @@ const DataTable = ({
         {...{
           style: {
             width: allowOverflow ? table.getCenterTotalSize() : "100%",
+            maxWidth: allowOverflow ? table.getCenterTotalSize() : "100%",
+            minWidth: allowOverflow ? table.getCenterTotalSize() : "100%",
           },
         }}
         className="dc-c-datatable"
