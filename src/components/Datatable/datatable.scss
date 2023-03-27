@@ -2,6 +2,7 @@
   width: 100%;
   border-spacing: 0px;
   th {
+    position: relative;
     text-align: left;
     .dc-c-resize-handle {
       top: 0;
@@ -25,10 +26,6 @@
 
 .dc-c-datatable--even-row td {
   background-color: #{var(--table-striped__background-color)};
-}
-
-th {
-  position: relative;
 }
 
 .dc-c-sort--default,

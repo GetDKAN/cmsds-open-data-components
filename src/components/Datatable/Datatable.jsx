@@ -100,7 +100,7 @@ const DataTable = ({
                     },
                   }
                 }
-                className="ds-u-border-y--2 ds-u-border--dark  ds-u-font-weight--bold dc-c-table-header-cell"
+                className="ds-u-border-y--2 ds-u-padding--2 ds-u-border--dark  ds-u-font-weight--bold dc-c-table-header-cell"
                 >
                   {header.isPlaceholder
                     ? null
