@@ -45,15 +45,6 @@ const ResourcePreview = ({
   customClasses,
   allowOverflow,
 }) => {
-  const previewContainer = React.useRef(null);
-  const columnDefaults = {
-    width: 200,
-    maxWidth: previewContainer.current
-      ? calculateMaxWidth(previewContainer.current.offsetWidth)
-      : 300,
-    minWidth: 100,
-    ...columnWidths,
-  };
   const tableClasses = {
     tableContainerClassName: 'dc-c-table-container',
     headerCellClassName:
@@ -78,49 +69,45 @@ const ResourcePreview = ({
   };
   return (
     <div
-      ref={previewContainer}
       id="resource-preview"
       className="ds-u-overflow--auto ds-u-border-x--1 ds-u-border-bottom--1"
     >
-      {previewContainer.current && (
-        <DataTable
-          // filterTitle="Filter columns"
-          data={resource.values}
-          allowOverflow={allowOverflow}
-          sortDefaults={defaultSort}
-          columns={
-            customColumns ? customColumns : prepareColumns(resource.columns, resource.schema[id])
-          }
-          // schema={resource.schema}
-          // totalRows={parseInt(resource.totalRows)}
-          // limit={resource.limit}
-          // offset={resource.offset}
-          // loading={resource.loading}
-          setSort={resource.setSort}
-          // setConditions={resource.setConditions}
-          // conditionsTransform={transformTableFilterToQueryCondition}
-          sortTransform={transformTableSortToQuerySort}
-          tablePadding={tablePadding}
-          className="dc-c-datatable"
-          columnDefaults={columnDefaults}
-          customColumnFilter={DefaultColumnFilter}
-          options={options}
-          CustomLoadingComponent={
-            <div className="ds-u-display--flex ds-u-padding--3">
-              <Spinner
-                className="ds-u-valign--middle"
-                role="status"
-                aria-valuetext="Datatable loading"
-              />
-            </div>
-          }
-          CustomNoResults={
-            <div className="ds-u-display--flex ds-u-padding--3">
-              <p>No results returned.</p>
-            </div>
-          }
-        />
-      )}
+      <DataTable
+        // filterTitle="Filter columns"
+        data={resource.values}
+        allowOverflow={allowOverflow}
+        sortDefaults={defaultSort}
+        columns={
+          customColumns ? customColumns : prepareColumns(resource.columns, resource.schema[id])
+        }
+        // schema={resource.schema}
+        // totalRows={parseInt(resource.totalRows)}
+        // limit={resource.limit}
+        // offset={resource.offset}
+        // loading={resource.loading}
+        setSort={resource.setSort}
+        // setConditions={resource.setConditions}
+        // conditionsTransform={transformTableFilterToQueryCondition}
+        sortTransform={transformTableSortToQuerySort}
+        tablePadding={tablePadding}
+        className="dc-c-datatable"
+        customColumnFilter={DefaultColumnFilter}
+        options={options}
+        CustomLoadingComponent={
+          <div className="ds-u-display--flex ds-u-padding--3">
+            <Spinner
+              className="ds-u-valign--middle"
+              role="status"
+              aria-valuetext="Datatable loading"
+            />
+          </div>
+        }
+        CustomNoResults={
+          <div className="ds-u-display--flex ds-u-padding--3">
+            <p>No results returned.</p>
+          </div>
+        }
+      />
     </div>
   );
 };
