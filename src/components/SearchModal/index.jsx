@@ -6,6 +6,7 @@ import { Button, Dialog, TextField } from '@cmsgov/design-system';
 const SearchModal = ({
   searchFunc,
   appNodeId,
+  headingText,
   searchModalText,
   buttonSize,
   inversedModalButton,
@@ -44,10 +45,12 @@ const SearchModal = ({
           className="dc-c-search-dialog"
           onExit={() => setModalSearch(false)}
           getApplicationNode={() => document.getElementById(appNodeId)}
-          closeButtonVariation="primary"
           closeButtonText={<>Close</>}
+          heading={`${headingText}`}
         >
-          <p>{searchModalText}</p>
+          {searchModalText &&
+            <p>{searchModalText}</p>
+          }
           <form
             className="ds-u-display--flex ds-u-align-items--stretch ds-u-flex-wrap--nowrap"
             onSubmit={(e) => {
@@ -63,7 +66,7 @@ const SearchModal = ({
               labelClassName="ds-u-visibility--screen-reader"
               onChange={(e) => setModalSearchTerm(e.target.value)}
             />
-            <Button type="submit" onDark={inversedModalButton} className="ds-l-col--3">
+            <Button type="submit" className="ds-l-col--3">
               <span className="fas fa-search small-text ds-u-sm-display--none" />
               <span className="full-text ds-u-display--none ds-u-sm-display--inline-block">
                 Search
@@ -81,6 +84,7 @@ SearchModal.defaultProps = {
   buttonSize: null,
   inversedModalButton: true,
   inversedSearchButton: true,
+  headingText: "Dataset Search"
 };
 
 export default SearchModal;
