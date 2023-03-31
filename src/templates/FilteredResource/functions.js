@@ -1,7 +1,7 @@
 // Example custom column headers, where only effective date has an ! at the end
 // [
-//  {schema: 'date', Cell: ({ value }) => localeDate(value),},
-//  {accessor: 'effective_date',Cell: ({ value }) => localeDate(value) + '!',},
+//  {schema: 'date', cell: ({ value }) => localeDate(value),},
+//  {accessor: 'effective_date',cell: ({ value }) => localeDate(value) + '!',},
 // ]
 
 export function buildCustomColHeaders(customHeaders, columns, schema) {
@@ -13,19 +13,18 @@ export function buildCustomColHeaders(customHeaders, columns, schema) {
     let newColumn = {};
     // If specific accessor is passed, this will override a general mysql_type Cell rewrite.
     if (customAccessorIndex > -1) {
-      newColumn.Header =
+      newColumn.header =
         schema && schema.fields[column].description ? schema.fields[column].description : column;
       newColumn.accessor = column;
-      newColumn.Cell = customHeaders[customAccessorIndex].Cell;
+      newColumn.cell = customHeaders[customAccessorIndex].cell;
     } else {
-      newColumn.Header =
+      newColumn.header =
         schema && schema.fields[column].description ? schema.fields[column].description : column;
       newColumn.accessor = column;
       if (customSchemaIndex > -1) {
-        newColumn.Cell = customHeaders[customSchemaIndex].Cell;
+        newColumn.cell = customHeaders[customSchemaIndex].cell;
       }
     }
-
     return newColumn;
   });
 }
