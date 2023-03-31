@@ -12,8 +12,8 @@ const QueryTitle = ({ conditions, schema, customColumns }) => {
     if (customColumns.length > 0) {
       let newValue = text;
       let customColumn = customColumns.find((c) => c.accessor === property);
-      if (customColumn && customColumn.Cell) {
-        return customColumn.Cell({ value: text });
+      if (customColumn && customColumn.cell) {
+        return customColumn.cell({ value: text });
       }
       return text;
     } else {

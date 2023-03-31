@@ -12,7 +12,7 @@ function calculateMaxWidth(previewSize) {
 
 export function prepareColumns(columns, schema) {
   return columns.map((column) => ({
-    Header:
+    header:
       schema && schema.fields[column].description ? schema.fields[column].description : column,
     accessor: column,
   }));
