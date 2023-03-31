@@ -37,12 +37,21 @@ const DataTable = ({
 }) => {
   const [ sorting, setSorting ] = React.useState([])
   const columnHelper = createColumnHelper()
-  const table_columns = columns.map((col) => (
+  const table_columns = columns.map((col) => {
+    if (col.cell) {
+      return (
+        columnHelper.accessor(col.accessor, {
+          header: <span>{col.header}</span>,
+          cell: col.cell,
+        })
+      )
+    }
+    return (
       columnHelper.accessor(col.accessor, {
-        header: <span>{col.Header}</span>,
-        // cell: <MyCell>{info => info.getValue()}</MyCell>
+        header: <span>{col.header}</span>,
       })
-    ))
+    )
+  })
 
   const sortElement = (isSorted, onClickFn) => {
     if(isSorted === 'asc') {
