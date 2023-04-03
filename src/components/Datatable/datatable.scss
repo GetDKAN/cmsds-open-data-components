@@ -11,11 +11,13 @@
       position: absolute;
       background-color: #{var(--color-gray-light)};
       width: 10px;
-      cursor: col-resize;
       min-width: 10px;
       display: block;
       margin-left: -10px;
       z-index: 1;
+    }
+    .dc-c-resize-handle.dc-c-can-resize {
+      cursor: col-resize;
       &.isResizing,
       &:hover {
         background-color: #{var(--color-primary)};

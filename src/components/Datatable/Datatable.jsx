@@ -134,11 +134,12 @@ const DataTable = ({
                         </div>
                         <span
                             {...{
-                              onMouseDown: header.getResizeHandler(),
-                              onTouchStart: header.getResizeHandler(),
+                              onMouseDown: canResize ? header.getResizeHandler() : null,
+                              onTouchStart: canResize ? header.getResizeHandler() : null,
                               className: `dc-c-resize-handle ${
                                 header.column.getIsResizing() ? 'isResizing' : ''
-                              }`,
+                              }
+                              ${canResize ? ' dc-c-can-resize' : ''}`,
                             }}
                           />
                       </div>
