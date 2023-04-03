@@ -43,30 +43,9 @@ const ResourcePreview = ({
   columnSettings,
   columnWidths,
   customClasses,
-  allowOverflow,
+  truncateHeader,
 }) => {
-  const tableClasses = {
-    tableContainerClassName: 'dc-c-table-container',
-    headerCellClassName:
-      'ds-u-border--dark ds-u-padding--2 ds-u-border-y--2 ds-u-font-weight--bold dc-c-table-header-cell',
-    headerGroupClassName: 'dc-c-table-header-group',
-    headerCellTextClassName: `${
-      truncateCellHeader ? 'dc-truncate' : ''
-    } ds-u-display--inline-block`,
-    cellEvenRowClassName: 'ds-u-fill--gray-lightest',
-    cellClassName: `${tablePadding} dc-truncate ds-u-padding-x--1`,
-    filterTitleClassName:
-      'ds-u-font-weight--bold ds-u-padding-left--2  ds-u-fill--gray-lightest ds-u-display--block',
-    headerFilterClassName: 'ds-u-padding-top--1 ds-u-fill--gray-lightest',
-    headerFilterCellClassName:
-      'ds-u-padding-x--1 ds-u-padding-bottom--0 ds-u-border-bottom--0 ds-u-fill--gray-lightest',
-    columnIsSortedClassName: 'dc-c-sort dc-c-sort--default',
-    columnIsSortedAscClassName: 'dc-c-sort dc-c-sort--asc',
-    columnIsSortedDecClassName: 'dc-c-sort dc-c-sort--desc',
-    tableColumnResizer: 'dc-c-resize-handle',
-    tableColumnIsResizing: 'isResizing',
-    ...customClasses,
-  };
+
   return (
     <div
       id="resource-preview"
@@ -75,7 +54,7 @@ const ResourcePreview = ({
       <DataTable
         // filterTitle="Filter columns"
         data={resource.values}
-        allowOverflow={allowOverflow}
+        truncateHeader={truncateHeader}
         sortDefaults={defaultSort}
         columns={
           customColumns ? customColumns : prepareColumns(resource.columns, resource.schema[id])
@@ -121,7 +100,7 @@ ResourcePreview.defaultProps = {
   },
   truncateCellHeader: true,
   defaultSort: [],
-  allowOverflow: true,
+  truncateHeader: true,
 };
 
 export default ResourcePreview;

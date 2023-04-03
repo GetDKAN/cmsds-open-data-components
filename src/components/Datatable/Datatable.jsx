@@ -29,7 +29,7 @@ const DataTable = ({
   sortTransform,
   className,
   tablePadding,
-  allowOverflow,
+  truncateHeader,
   // customColumnFilter,
   // cellTextClassName,
   // CustomLoadingComponent,
@@ -41,14 +41,14 @@ const DataTable = ({
     if (col.cell) {
       return (
         columnHelper.accessor(col.accessor, {
-          header: <span>{col.header}</span>,
+          header: <span className={`${truncateHeader ? "dc-truncate" : ""} ds-u-display--inline-block`}>{col.header}</span>,
           cell: col.cell,
         })
       )
     }
     return (
       columnHelper.accessor(col.accessor, {
-        header: <span>{col.header}</span>,
+        header: <span className={`${truncateHeader ? "dc-truncate" : ""} ds-u-display--inline-block`}>{col.header}</span>,
       })
     )
   })
@@ -90,9 +90,9 @@ const DataTable = ({
         tabIndex={0}
         {...{
           style: {
-            width: allowOverflow ? table.getCenterTotalSize() : "100%",
-            maxWidth: allowOverflow ? table.getCenterTotalSize() : "100%",
-            minWidth: allowOverflow ? table.getCenterTotalSize() : "100%",
+            width: !truncateHeader ? table.getCenterTotalSize() : "100%",
+            maxWidth: !truncateHeader ? table.getCenterTotalSize() : "100%",
+            minWidth: !truncateHeader ? table.getCenterTotalSize() : "100%",
           },
         }}
         className="dc-c-datatable"
@@ -118,9 +118,12 @@ const DataTable = ({
                         <div
                         {...{
                           className: header.column.getCanSort()
-                            ? `cursor-pointer select-none ${sortElement(header.column.getIsSorted())}`
+                            ? `cursor-pointer select-none ds-u-leading--reset ${sortElement(header.column.getIsSorted())}`
                             : '',
                           onClick: header.column.getToggleSortingHandler(),
+                          style: {
+                            maxWidth: header.getSize(),
+                          },
                         }}
                         >
                           {flexRender(
@@ -172,15 +175,6 @@ const DataTable = ({
       </table>
     </div>
   )
-
-
-
-
-
-
-
-
-
 
   // const tableClasses = {
   //   tableContainerClassName: 'dc-c-table-container',
