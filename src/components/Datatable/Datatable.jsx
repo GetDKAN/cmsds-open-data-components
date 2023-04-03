@@ -30,6 +30,7 @@ const DataTable = ({
   className,
   tablePadding,
   truncateHeader,
+  canResize,
   // customColumnFilter,
   // cellTextClassName,
   // CustomLoadingComponent,
@@ -71,12 +72,12 @@ const DataTable = ({
 
       sorting,
     },
-    columnResizeMode: 'onChange',
+    columnResizeMode: canResize ? 'onChange' : null,
     onSortingChange: setSorting,
 
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    debugTable: true,
+    debugTable: false,
   });
 
    React.useEffect(() => {

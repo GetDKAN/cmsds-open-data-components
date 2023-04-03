@@ -44,6 +44,7 @@ const ResourcePreview = ({
   columnWidths,
   customClasses,
   truncateHeader,
+  canResize,
 }) => {
 
   return (
@@ -55,6 +56,7 @@ const ResourcePreview = ({
         // filterTitle="Filter columns"
         data={resource.values}
         truncateHeader={truncateHeader}
+        canResize={canResize}
         sortDefaults={defaultSort}
         columns={
           customColumns ? customColumns : prepareColumns(resource.columns, resource.schema[id])
@@ -101,6 +103,7 @@ ResourcePreview.defaultProps = {
   truncateCellHeader: true,
   defaultSort: [],
   truncateHeader: true,
+  canResize: true,
 };
 
 export default ResourcePreview;
