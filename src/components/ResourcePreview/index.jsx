@@ -100,7 +100,6 @@ ResourcePreview.defaultProps = {
   },
   truncateCellHeader: true,
   defaultSort: [],
-  truncateHeader: true,
   canResize: true,
 };
 
