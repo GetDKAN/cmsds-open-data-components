@@ -4,23 +4,48 @@
   th {
     position: relative;
     text-align: left;
-    .dc-c-resize-handle {
-      top: 0;
-      bottom: 0;
-      right: 0;
-      position: absolute;
-      background-color: #{var(--color-gray-light)};
-      width: 10px;
-      cursor: col-resize;
-      min-width: 10px;
-      display: block;
-      margin-left: -10px;
-      z-index: 1;
-      &.isResizing,
-      &:hover {
-        background-color: #{var(--color-primary)};
-      }
+  }
+  thead th div {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+}
+
+.dc-thead--fixed-size th {
+  border-left: 2px solid var(--color-border);
+}
+
+.dc-thead--fixed-size th:first-child {
+  border-left: none;
+}
+
+.dc-thead--resizeable {
+  .dc-c-resize-handle {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    background-color: #{var(--color-gray-light)};
+    width: 10px;
+    cursor: col-resize;
+    min-width: 10px;
+    display: block;
+    margin-left: -10px;
+    z-index: 1;
+    &.isResizing,
+    &:hover {
+      background-color: #{var(--color-primary)};
     }
+  }
+}
+
+.dc-thead--truncated {
+  th span {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block;
   }
 }
 
