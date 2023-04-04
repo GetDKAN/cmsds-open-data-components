@@ -43,7 +43,6 @@ const ResourcePreview = ({
   columnSettings,
   columnWidths,
   customClasses,
-  truncateHeader,
   canResize,
 }) => {
 
@@ -55,7 +54,6 @@ const ResourcePreview = ({
       <DataTable
         // filterTitle="Filter columns"
         data={resource.values}
-        truncateHeader={truncateHeader}
         canResize={canResize}
         sortDefaults={defaultSort}
         columns={

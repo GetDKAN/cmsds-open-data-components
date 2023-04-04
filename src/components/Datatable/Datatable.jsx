@@ -23,7 +23,6 @@ const DataTable = ({
   sortTransform,
   className,
   tablePadding,
-  truncateHeader,
   canResize,
 }) => {
   const [ sorting, setSorting ] = React.useState([])
@@ -97,7 +96,6 @@ const DataTable = ({
               <tr key={row.id} className={`${even ? "dc-c-datatable--even-row" : ""}`}>
                 {row.getVisibleCells().map((cell) => {
                   let classList = "dc-truncate ds-u-padding-x--1"
-                  console.log(cell)
                   return (
                     <td
                       {...{
