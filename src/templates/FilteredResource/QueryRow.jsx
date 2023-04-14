@@ -83,7 +83,7 @@ const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schem
           >
             <span>Value</span>
           </label>
-          <DatePicker
+          <DatePicker.default
             name={`${condition.key}_date_value`}
             selected={convertUTCToLocalDate(startDate)}
             onChange={(date) => {
