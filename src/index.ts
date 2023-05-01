@@ -50,6 +50,6 @@ export { default as useMetastoreDataset } from './services/useMetastoreDataset';
 
 // Assets
 // export { default as frequencyMap } from './assets/frequencyMap';
-export {defaultMetadataMapping} from './assets/metadataMapping';
+export { defaultMetadataMapping } from './assets/metadataMapping';
 
 export { default as DataTablePageResults } from './components/DataTablePageResults';
