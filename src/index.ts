@@ -30,6 +30,7 @@ export { default as ResourcePreview } from './components/ResourcePreview';
 export { default as ResourceFooter } from './components/ResourceFooter';
 export { default as Breadcrumb } from './components/Breadcrumb';
 export { default as TransformedDate } from './components/TransformedDate';
+export { buildRows } from './components/DatasetAdditionalInformation';
 
 // Templates
 // export { default as Dataset } from './templates/Dataset';
@@ -49,5 +50,6 @@ export { default as useMetastoreDataset } from './services/useMetastoreDataset';
 
 // Assets
 // export { default as frequencyMap } from './assets/frequencyMap';
+export { defaultMetadataMapping } from './assets/metadataMapping';
 
 export { default as DataTablePageResults } from './components/DataTablePageResults';
