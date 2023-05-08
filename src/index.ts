@@ -30,6 +30,7 @@ export { default as ResourcePreview } from './components/ResourcePreview';
 export { default as ResourceFooter } from './components/ResourceFooter';
 export { default as Breadcrumb } from './components/Breadcrumb';
 export { default as TransformedDate } from './components/TransformedDate';
+export { default as DataTable } from './components/Datatable';
 export { buildRows } from './components/DatasetAdditionalInformation';
 
 // Templates
@@ -41,6 +42,8 @@ export { buildRows } from './components/DatasetAdditionalInformation';
 
 export { default as FilteredResource } from './templates/FilteredResource';
 // export { default as QueryBuilder } from './templates/FilteredResource/QueryBuilder';
+export { default as QueryTitle } from './templates/FilteredResource/QueryTitle';
+export { buildOperatorOptions, convertUTCToLocalDate, cleanText } from './templates/FilteredResource/functions';
 // export { default as APIPage } from './templates/APIPage';
 
 // Hooks
