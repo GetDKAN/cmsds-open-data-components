@@ -13,6 +13,7 @@ export { default as Footer } from './templates/Footer';
 // Services
 export { default as useSearchAPI } from './services/useSearchAPI';
 export { default as useDatastore } from './services/useDatastore';
+export { transformTableSortToQuerySort } from './services/useDatastore/transformSorts';
 
 // export { default as NavLink } from './components/NavLink';
 // export { default as DatasetTags } from './components/DatasetTags';
@@ -43,7 +44,7 @@ export { buildRows } from './components/DatasetAdditionalInformation';
 export { default as FilteredResource } from './templates/FilteredResource';
 // export { default as QueryBuilder } from './templates/FilteredResource/QueryBuilder';
 export { default as QueryTitle } from './templates/FilteredResource/QueryTitle';
-export { buildOperatorOptions, convertUTCToLocalDate, cleanText } from './templates/FilteredResource/functions';
+export { buildOperatorOptions, convertUTCToLocalDate, cleanText, buildCustomColHeaders } from './templates/FilteredResource/functions';
 // export { default as APIPage } from './templates/APIPage';
 
 // Hooks
