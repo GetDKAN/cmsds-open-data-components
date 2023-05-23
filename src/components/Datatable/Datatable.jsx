@@ -1,16 +1,12 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import {
   useReactTable,
   flexRender,
   getCoreRowModel,
   createColumnHelper,
-  ColumnResizeMode,
-  ColumnDef,
   getSortedRowModel,
-  SortingState,
 } from "@tanstack/react-table";
-import { ArrowsStackedIcon, ArrowIcon } from "@cmsgov/design-system";
+import { Spinner } from "@cmsgov/design-system";
 import TruncatedResizeableTHead from "./TruncatedResizeableTHead";
 import FixedSizeTHead from "./FixedSizeTHead";
 import "./datatable.scss";
@@ -18,12 +14,11 @@ import "./datatable.scss";
 const DataTable = ({
   data,
   columns,
-  sortDefaults,
   setSort,
   sortTransform,
-  className,
   tablePadding,
   canResize,
+  loading = false,
 }) => {
   const [ sorting, setSorting ] = React.useState([])
   const columnHelper = createColumnHelper()
@@ -89,7 +84,16 @@ const DataTable = ({
           ? <TruncatedResizeableTHead table={table} sortElement={sortElement} />
           : <FixedSizeTHead table={table} sortElement={sortElement} />
         }
-        <tbody>
+        {loading ? (
+          <tbody>
+            <tr>
+              <td colSpan={columns.length}>
+                <Spinner aria-valuetext="Dataset loading" role="status" className="ds-u-margin--3" />
+              </td>
+            </tr>
+          </tbody>
+        ) : (
+          <tbody>
           {table.getRowModel().rows.map((row, index) => {
             const even = (index + 1) % 2 === 0;
             return(
@@ -113,8 +117,9 @@ const DataTable = ({
               </tr>
             )
             })}
-        </tbody>
-      </table>
+          </tbody>
+        )}
+        </table>
     </div>
   )
 }
