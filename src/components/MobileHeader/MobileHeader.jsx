@@ -7,6 +7,7 @@ import NavBar from '../NavBar/Navbar';
 import cmsLogo from '../../assets/images/CMSGovLogo-O.png';
 import cmsLogoWhite from '../../assets/images/CMSgov@2x-white-O.png';
 
+let mobileHeaderMenuClassName = "dc-c-mobile-header--menu";
 const MobileHeader = ({
   siteName,
   links,
@@ -30,6 +31,17 @@ const MobileHeader = ({
         setMenuOpen(false);
       }
     }
+
+    function handleFocusIn(event){
+      if (!menuOpen) return;
+      const mobileHeaderMenu = document.querySelector(`.${mobileHeaderMenuClassName}`);
+      if (!mobileHeaderMenu) return
+      // Select the first tabbable element in the `mobileHeaderMenu`
+      const firstTabbableElement = mobileHeaderMenu.querySelector('a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])');
+      if (!firstTabbableElement) return;
+      firstTabbableElement.focus();
+    }
+
     function handleClick(event) {
       // Links are wrapped in spans, this checks if the parent is an A, also check if in the search modal.
       if (
@@ -48,6 +60,8 @@ const MobileHeader = ({
     menu.current.addEventListener('focusout', handleFocusOut);
     document.addEventListener('mousedown', handleClick);
     document.addEventListener('keyup', handleSearchEnter);
+    handleFocusIn();
+
     return () => {
       document.removeEventListener('keyup', handleSearchEnter);
       document.removeEventListener('mousedown', handleClick);
@@ -118,8 +132,8 @@ const MobileHeader = ({
           </div>
         )}
       </div>
-      <div className="dc-c-mobile-header--menu" ref={menu}>
-        <div className="ds-u-display--flex dc-c-mobile-header--menu-close ds-u-justify-content--between">
+      <div className={mobileHeaderMenuClassName} ref={menu}>
+        <div className={`ds-u-display--flex ${mobileHeaderMenuClassName}-close ds-u-justify-content--between`}>
           <Button
             variation="ghost"
             onDark
