@@ -181,7 +181,7 @@ const DatasetSearch = ({
               <div className="ds-u-display--flex ds-u-justify-content--between ds-u-align-items--end">
               <div>
                 {currentResultNumbers && (
-                  <p className="ds-u-margin-y--0">
+                  <p className="ds-u-margin-y--0" role="region" aria-live="polite" data-currentResults="" >
                     Showing {currentResultNumbers.startingNumber} -{' '}
                     {currentResultNumbers.endingNumber} of {data.data.total} datasets
                   </p>
