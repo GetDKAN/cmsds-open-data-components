@@ -55,4 +55,25 @@ describe('<DatasetSearchFacets />', () => {
     expect(screen.getByText(/0-0 out of 0/i));
     expect(screen.getByText('[0 entries total on page]'));
   });
+
+  test('Renders correctly', async () => {
+    await axios.get.mockImplementation(() => Promise.resolve(data_results));
+    const { debug } = render(<DatasetSearch rootUrl={rootUrl} />);
+    await act(async () => {
+      // debug()
+      jest.useFakeTimers();
+    });
+    // debug()
+    // expect(axios.get).toHaveBeenCalledWith(
+    //     `${rootUrl}/search/?`,
+    //   );
+    // await act(async () => {  });
+
+    const dataCurrentResultsElement = screen.getByTestId('data-currentResults');
+
+    expect(dataCurrentResultsElement).toBeInTheDocument();
+    expect(dataCurrentResultsElement).toHaveAttribute('role', 'region');
+    expect(dataCurrentResultsElement).toHaveAttribute('aria-live');
+    expect(['polite', 'assertive']).toContain(dataCurrentResultsElement.getAttribute('aria-live'));
+  });
 });
