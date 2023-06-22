@@ -18,7 +18,6 @@ export { transformTableSortToQuerySort } from './services/useDatastore/transform
 // export { default as NavLink } from './components/NavLink';
 // export { default as DatasetTags } from './components/DatasetTags';
 // export { default as DatasetDownloads } from './components/DatasetDownloads';
-// export { default as Pagination } from './components/Pagination';
 export { default as Hero } from './components/Hero';
 // export { default as SearchModal } from './components/SearchModal';
 export { default as DatasetSearchListItem } from './components/DatasetSearchListItem';

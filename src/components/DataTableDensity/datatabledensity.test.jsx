@@ -4,8 +4,10 @@ import '@testing-library/jest-dom/extend-expect';
 import DataTableDensity from './index';
 
 describe('<DataTableRowDetails />', () => {
-  test.skip('Renders 3 buttons', () => {
+  test('Renders 3 options', () => {
     render(<DataTableDensity setTablePadding={(p) => console.log(p)} />);
-    expect(screen.getByRole('button', { name: /Display density:/i })).toBeTruthy();
+    expect(screen.getByText('Tight')).toBeTruthy();
+    expect(screen.getByText('Normal')).toBeTruthy();
+    expect(screen.getByText('Expanded')).toBeTruthy();
   });
 });

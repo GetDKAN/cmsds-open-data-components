@@ -55,15 +55,28 @@ describe('<DatasetSearchFacets />', () => {
     expect(screen.getByRole('button', { name: 'Search' }));
   });
 
-  test.skip('Announces search results to screen readers', async () => {
+  test('Announces search results to screen readers', async () => {
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      value: jest.fn().mockImplementation((query) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: jest.fn(), // Deprecated
+        removeListener: jest.fn(), // Deprecated
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+      })),
+    });
     await axios.get.mockImplementation(() => Promise.resolve(data_results));
-    const { debug } = render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
     await act(async () => {
       // debug()
       jest.useFakeTimers();
+      const { debug } = render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
     });
 
-    const dataCurrentResultsElement = screen.getByTestId('data-currentResults');
+    const dataCurrentResultsElement = screen.getByTestId('currentResults');
 
     expect(dataCurrentResultsElement).toBeInTheDocument();
     expect(dataCurrentResultsElement).toHaveAttribute('role', 'region');
