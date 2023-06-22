@@ -1,13 +1,8 @@
 version: 2.1
 jobs:
   build:
-    parameters:
-      pr-version:
-        type: string
-        default: "1.2.0"
-    parallelism: 1
-    machine:
-      image: cimg/base:2021.04
+    docker:
+     - image: cimg/base:2021.04
     environment:
       TEST_RESULTS: /tmp/test-results
       DKTL_VERSION: "4.2.0"
