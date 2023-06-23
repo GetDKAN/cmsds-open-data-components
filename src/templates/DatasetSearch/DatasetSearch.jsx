@@ -61,6 +61,8 @@ const DatasetSearch = ({
     setSelectedFacets(facets);
   }
 
+  const pageSize = location.search.pageSize ? location.search.pageSize : defaultPageSize;
+
   useEffect(() => {
     const baseNumber = Number(totalItems) > 0 ? 1 : 0;
     const startingNumber = baseNumber + (Number(pageSize) * Number(page) - Number(pageSize));
@@ -112,8 +114,6 @@ const DatasetSearch = ({
     }
     return qs.stringify(newParams, { addQueryPrefix: includePage, encode: true });
   }
-
-  const pageSize = location.search.pageSize ? location.search.pageSize : defaultPageSize;
 
   let params = {
     fulltext: fulltext ? fulltext : undefined,
@@ -181,7 +181,7 @@ const DatasetSearch = ({
               <div className="ds-u-display--flex ds-u-justify-content--between ds-u-align-items--end">
               <div>
                 {currentResultNumbers && (
-                  <p className="ds-u-margin-y--0" role="region" aria-live="polite" data-currentResults="" >
+                  <p className="ds-u-margin-y--0" role="region" aria-live="polite" data-testid="currentResults" >
                     Showing {currentResultNumbers.startingNumber} -{' '}
                     {currentResultNumbers.endingNumber} of {data.data.total} datasets
                   </p>

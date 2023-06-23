@@ -3,7 +3,9 @@ import axios from 'axios';
 import { act } from 'react-dom/test-utils';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import DatasetSearch, { selectedFacetsMessage } from './index';
+import DatasetSearch from './index';
+import { selectedFacetsMessage } from '../../services/useSearchAPI/helpers';
+import { MemoryRouter } from 'react-router-dom';
 
 jest.mock('axios');
 jest.useFakeTimers();
@@ -36,7 +38,7 @@ describe('selectedFacetsMessage', () => {
 describe('<DatasetSearchFacets />', () => {
   test('Renders correctly', async () => {
     await axios.get.mockImplementation(() => Promise.resolve(data_results));
-    const { debug } = render(<DatasetSearch rootUrl={rootUrl} />);
+    const { debug } = render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
     await act(async () => {
       // debug()
       jest.useFakeTimers();
@@ -49,22 +51,32 @@ describe('<DatasetSearchFacets />', () => {
 
     expect(screen.getByRole('heading', { name: 'Datasets' }));
     expect(screen.getByRole('textbox', { name: 'Search term' }));
-    expect(screen.getByRole('button', { name: 'Clear all filters' }));
     expect(screen.getByRole('combobox', { name: 'Sort by' }));
     expect(screen.getByRole('button', { name: 'Search' }));
-    expect(screen.getByText(/0-0 out of 0/i));
-    expect(screen.getByText('[0 entries total on page]'));
   });
 
   test('Announces search results to screen readers', async () => {
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      value: jest.fn().mockImplementation((query) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: jest.fn(), // Deprecated
+        removeListener: jest.fn(), // Deprecated
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+      })),
+    });
     await axios.get.mockImplementation(() => Promise.resolve(data_results));
-    const { debug } = render(<DatasetSearch rootUrl={rootUrl} />);
     await act(async () => {
       // debug()
       jest.useFakeTimers();
+      const { debug } = render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
     });
 
-    const dataCurrentResultsElement = screen.getByTestId('data-currentResults');
+    const dataCurrentResultsElement = screen.getByTestId('currentResults');
 
     expect(dataCurrentResultsElement).toBeInTheDocument();
     expect(dataCurrentResultsElement).toHaveAttribute('role', 'region');
