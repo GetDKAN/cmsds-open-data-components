@@ -1,0 +1,81 @@
+.dc-c-footer {
+  background-color: white;
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+.dc-c-footer--middle-container {
+  background: linear-gradient(90deg, #f6f9fd 50%, #e8f0fa 50%);
+}
+
+.dc-c-footer__title {
+  font-weight: 400;
+  color: #{var(--color-gray)};
+  span {
+    font-weight: 700;
+  }
+}
+
+.dc-c-footer__resources {
+  background: #f6f9fd;
+}
+
+.dc-c-footer__utility {
+  background: #{var(--color-white)};
+}
+
+.dc-c-footer__utility li {
+  list-style: none;
+}
+
+.dc-c-footer__cms-information {
+  background: #e8f0fa;
+}
+
+.dc-footer--heading {
+  text-transform: uppercase;
+}
+
+.dc-c-emailupdates {
+  background-image: linear-gradient(
+    35deg,
+    #{var(--color-primary-darkest)},
+    #{var(--color-primary-darker)},
+    #{var(--color-primary)}
+  );
+  color: #{var(--color-white)};
+}
+.dc-c-footer--svg-icon {
+  width: 40px;
+  height: 40px;
+  font-size: 42px;
+  display: inline-block;
+  text-align: center;
+  position: relative;
+
+  svg.svg-inline--fa {
+    width: 1em;
+    height: 1em;
+  }
+
+  .fa-circle {
+    fill: #6f757c;
+  }
+
+  .fa-inverse {
+    font-size: 25px;
+    padding-left: 2px;
+    fill: #{var(--color-white)};
+  }
+}
+.svg-inline--fa {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}

@@ -115,7 +115,7 @@ const ResourceFilter = ({
           ))}
         <Button
           className="ds-u-margin-right--1"
-          variation="transparent"
+          variation="ghost"
           onClick={(e) => {
             e.preventDefault();
             setFormConditions([...formConditions, { ...defaultCondition }]);
@@ -126,7 +126,7 @@ const ResourceFilter = ({
       </form>
       {formConditions.length > 1 ? (
         <Button
-          variation="transparent"
+          variation="ghost"
           onClick={(e) => {
             e.preventDefault();
             removeAll();

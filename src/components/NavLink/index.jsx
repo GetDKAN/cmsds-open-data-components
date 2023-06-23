@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink as RRDNavLink } from 'react-router-dom';
-import validator from 'validator';
+import './NavLink.scss';
+// import validator from 'validator';
 
 const NavLink = ({ link, className, wrapLabel }) => {
   const innerHtml = wrapLabel ? <span>{link.label}</span> : link.label;
 
-  if (validator.isURL(link.url, { require_protocol: true }) || link.nonReactLink) {
-    return (
-      <a className={className} href={link.url}>
-        {innerHtml}
-      </a>
-    );
-  } else {
+  // if (validator.isURL(link.url, { require_protocol: true })) {
+  //   return (
+  //     <a className={className} href={link.url}>
+  //       {innerHtml}
+  //     </a>
+  //   );
+  // } else {
     return (
       <RRDNavLink
         className={({ isActive }) => (isActive ? `dc-c-active-link ${className}` : `${className}`)}
@@ -21,7 +22,7 @@ const NavLink = ({ link, className, wrapLabel }) => {
         {innerHtml}
       </RRDNavLink>
     );
-  }
+  // }
 };
 
 NavLink.defaultProps = {

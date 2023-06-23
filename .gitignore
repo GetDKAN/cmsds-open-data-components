@@ -5,3 +5,4 @@ dist
 .docz
 docs
 .DS_Store
+.parcel-cache

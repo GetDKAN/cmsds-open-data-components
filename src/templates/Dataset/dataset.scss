@@ -1,0 +1,21 @@
+.dc-resource-header {
+  &::before {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 4px;
+    margin: 8px 0;
+    background-color: #{var(--color-primary-alt-light)};
+  }
+}
+
+.dc-truncate {
+  max-width: 85%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dc-c-metadata-description {
+  white-space: pre-line;
+}

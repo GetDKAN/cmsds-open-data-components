@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Table, TableHead, TableRow, TableCell, TableBody } from '@cmsgov/design-system';
+import './additional-information-table.scss';
 
 export function buildRows(metadataMapping, datasetInfo) {
   const rows = [];
@@ -13,8 +14,8 @@ export function buildRows(metadataMapping, datasetInfo) {
   return rows;
 }
 
-const DatasetAdditionalInformation = ({ datasetInfo, id, metadataMapping }) => {
-  const [rows] = useState(buildRows(metadataMapping, datasetInfo));
+const DatasetAdditionalInformation = ({ datasetInfo, id, metadataMapping}) => {
+  const rows = buildRows(metadataMapping, datasetInfo);
   return (
     <div className="dc-c-additional-info-table ds-u-margin-bottom--6">
       <h2>Additional Information</h2>

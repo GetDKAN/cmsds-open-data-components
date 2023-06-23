@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import SwaggerUI from 'swagger-ui-react';
-import { useDatastore } from '@civicactions/data-catalog-services';
 import { Badge, Button } from '@cmsgov/design-system';
+import useDatastore from '../../services/useDatastore';
 import ResourcePreview from '../../components/ResourcePreview';
 import ResourceHeader from '../../components/ResourceHeader';
 import DatasetTags from '../../components/DatasetTags';
@@ -12,8 +12,10 @@ import TransformedDate from '../../components/TransformedDate';
 import ResourceFooter from '../../components/ResourceFooter';
 import ResourceInformation from '../../components/ResourceInformation';
 import { buildCustomColHeaders } from '../FilteredResource/functions';
+import 'swagger-ui-react/swagger-ui.css';
 
 const DatasetBody = ({
+  rootUrl,
   id,
   dataset,
   additionalParams,
@@ -33,7 +35,7 @@ const DatasetBody = ({
   }
   const resource = useDatastore(
     '',
-    process.env.REACT_APP_ROOT_URL,
+    rootUrl,
     {
       limit: 10,
       manual: true,
@@ -128,7 +130,7 @@ const DatasetBody = ({
             <div ref={apiDocs}>
               <h2>Try the API</h2>
               <SwaggerUI
-                url={`${process.env.REACT_APP_ROOT_URL}/metastore/schemas/dataset/items/${
+                url={`${rootUrl}/metastore/schemas/dataset/items/${
                   dataset.identifier
                 }/docs${
                   additionalParams && additionalParams.ACA
@@ -149,14 +151,17 @@ const DatasetBody = ({
           ) : (
             ''
           )}
-          <DatasetTags keywords={dataset.keyword} />
+          {dataset.keyword && (
+            <DatasetTags keywords={dataset.keyword} />
+          )}
+          
           {Object.keys(distribution).length && fileFormat === 'CSV' ? (
             <div className="dc-c-dataset-tags ds-u-margin-bottom--3 ds-u-padding--2 ds-u-border ds-u-border--1">
               <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-top--0 ds-u-margin-bottom--2 ds-u-padding-bottom--2">
                 API
               </h2>
               <Button
-                variation="transparent"
+                variation="ghost"
                 onClick={() =>
                   window.scrollTo({
                     behavior: 'smooth',

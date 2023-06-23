@@ -1,0 +1,36 @@
+.dc-dataset-search-list {
+  list-style: none;
+}
+
+.dc-c-clear-filters {
+  font-weight: 300;
+}
+
+.dc-fulltext--input-container {
+  width: 100%;
+  input {
+    max-width: inherit;
+  }
+}
+
+.dc-search-header {
+  display: relative;
+  &::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 4px;
+    margin: 16px 0;
+    background-color: #{var(--color-primary-alt-light)};
+  }
+}
+
+.dataset-results-count {
+  font-weight: bold;
+}
+
+.dc-dataset-search--facets-container .ds-c-accordion__button {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 24px 16px 24px;
+}

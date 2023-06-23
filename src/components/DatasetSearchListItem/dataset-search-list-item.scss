@@ -1,0 +1,18 @@
+.dc-dataset-searchlist-item {
+  h2 a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  .dc-dataset-searchlist-item--keyword {
+    background: #{var(--color-primary-alt-lightest)};
+    border: none;
+    color: #{var(--color-base)};
+  }
+}

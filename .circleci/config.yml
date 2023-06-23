@@ -1,0 +1,23 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+     - image: cimg/node:18.9.1
+    environment:
+      TEST_RESULTS: /tmp/test-results
+      DKTL_VERSION: "4.2.0"
+    steps:
+      - checkout
+      - run:
+          name: "Setup variables"
+          command: |
+            echo $CIRCLE_BRANCH
+            echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
+            echo ' [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
+      - run:
+          name: Install Dependencies and Run Jest Tests
+          command: |
+            npm install
+            npm rebuild node-sass
+            node --version
+            npx jest --coverage
