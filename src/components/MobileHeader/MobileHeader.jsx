@@ -162,7 +162,7 @@ const MobileHeader = ({
         <NavBar
           links={links.main}
           wrapLabel
-          menuName="CMS Site Main Nav"
+          menuName="Main Nav"
           menuId="site"
           menuClasses="dc-c-header--links dc-c-header--mobile-links"
           linkClasses="ds-u-margin-left--1 ds-u-padding-bottom--2 ds-h5"
