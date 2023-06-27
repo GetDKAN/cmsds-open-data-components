@@ -52,18 +52,28 @@ const MobileHeader = ({
       }
     }
     function handleSearchEnter(event) {
-      // Close upon user hiting enter on search.
+      // Close upon user hitting enter on search.
       if (event.keyCode === 13) {
         setMenuOpen(false);
       }
     }
+
+    function handleMenuClose(event) {
+      // Close upon user hitting escape
+      if (event.keyCode === 27 && menuOpen) {
+        setMenuOpen(false);
+      }
+    }
+
     menu.current.addEventListener('focusout', handleFocusOut);
     document.addEventListener('mousedown', handleClick);
     document.addEventListener('keyup', handleSearchEnter);
+    document.addEventListener('keyup', handleMenuClose);
     handleFocusIn();
 
     return () => {
       document.removeEventListener('keyup', handleSearchEnter);
+      document.removeEventListener('keyup', handleMenuClose);
       document.removeEventListener('mousedown', handleClick);
       if (menu.current) {
         menu.current.removeEventListener('focusout', handleFocusOut);
