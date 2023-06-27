@@ -6,6 +6,7 @@ import SearchModal from '../SearchModal';
 import NavBar from '../NavBar/Navbar';
 import cmsLogo from '../../assets/images/CMSGovLogo-O.png';
 import cmsLogoWhite from '../../assets/images/CMSgov@2x-white-O.png';
+import './mobile-header.scss';
 
 let mobileHeaderMenuClassName = "dc-c-mobile-header--menu";
 const MobileHeader = ({
@@ -142,7 +143,7 @@ const MobileHeader = ({
           </div>
         )}
       </div>
-      <div className={mobileHeaderMenuClassName} ref={menu}>
+      <div className={mobileHeaderMenuClassName} data-ds-override='focus' ref={menu}>
         <div className={`ds-u-display--flex ${mobileHeaderMenuClassName}-close ds-u-justify-content--between`}>
           <Button
             variation="ghost"
