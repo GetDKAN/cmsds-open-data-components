@@ -106,8 +106,8 @@ const MobileHeader = ({
           {mobile ? <span className="ds-u-visibility--screen-reader">Menu</span> : <>Menu</>}
         </Button>
         <div className="ds-u-padding-y--3 dc-c-site-title">
-          <Link to="/">
-            <span className="ds-h1">{siteName}</span>
+          <Link to="/" className="ds-h1 ds-c-link--inverse">
+            <span>{siteName}</span>
           </Link>
         </div>
         {includeSearch && (
