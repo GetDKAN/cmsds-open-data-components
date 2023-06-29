@@ -143,7 +143,7 @@ const MobileHeader = ({
           </div>
         )}
       </div>
-      <div className={mobileHeaderMenuClassName} data-ds-override='focus' ref={menu}>
+      <div className={mobileHeaderMenuClassName} ref={menu}>
         <div className={`ds-u-display--flex ${mobileHeaderMenuClassName}-close ds-u-justify-content--between`}>
           <Button
             variation="ghost"
