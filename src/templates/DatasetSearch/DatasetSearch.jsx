@@ -180,7 +180,7 @@ const DatasetSearch = ({
             <>
               <div className="ds-u-display--flex ds-u-justify-content--between ds-u-align-items--end">
               <div>
-                {currentResultNumbers && (
+                {(currentResultNumbers && data) && (
                   <p className="ds-u-margin-y--0" role="region" aria-live="polite" data-testid="currentResults" >
                     Showing {currentResultNumbers.startingNumber} -{' '}
                     {currentResultNumbers.endingNumber} of {data.data.total} datasets
@@ -203,7 +203,7 @@ const DatasetSearch = ({
             </div>
             <ol className="dc-dataset-search-list ds-u-padding--0">
               {noResults && <Alert variation="error" heading="No results found." />}
-              {Object.keys(data.data.results).map((key) => {
+              {data && Object.keys(data.data.results).map((key) => {
                   return data.data.results[key];
                 }).map((item) => (
                   <li className="ds-u-padding--0" key={item.identifier}>
@@ -211,7 +211,7 @@ const DatasetSearch = ({
                   </li>
                 ))}
             </ol>
-            {data.data.total != 0 && (
+            {data && data.data.total != 0 && (
               <Pagination
                 id="test-default"
                 currentPage={Number(page)}
