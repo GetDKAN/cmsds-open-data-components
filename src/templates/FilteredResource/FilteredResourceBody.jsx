@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import qs from 'qs';
+import DOMPurify from 'dompurify';
 import { Link, useNavigate } from 'react-router-dom';
 import SwaggerUI from 'swagger-ui-react';
 import useDatastore from '../../services/useDatastore';
@@ -86,7 +87,7 @@ const FilteredResourceBody = ({
           <h1 className="ds-title">{customTitle ? customTitle : pageTitle}</h1>
           <p
             className="ds-u-margin-top--0 dc-c-metadata-description"
-            dangerouslySetInnerHTML={{ __html: distribution.data.description }}
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(distribution.data.description) }}
           />
           {resource.columns && Object.keys(resource.schema).length && (
             <QueryBuilder

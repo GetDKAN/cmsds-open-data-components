@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import DOMPurify from 'dompurify';
 import SwaggerUI from 'swagger-ui-react';
 import { Badge, Button } from '@cmsgov/design-system';
 import useDatastore from '../../services/useDatastore';
@@ -76,7 +77,7 @@ const DatasetBody = ({
               </p>
             )}
           </div>
-          <p className="dc-c-metadata-description" dangerouslySetInnerHTML={{ __html: dataset.description }} />
+          <p className="dc-c-metadata-description" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(dataset.description) }} />
           {resource.columns && Object.keys(resource.schema).length ? (
             <>
               <h2 className="dc-resource-header">Resource Preview</h2>
@@ -154,7 +155,7 @@ const DatasetBody = ({
           {dataset.keyword && (
             <DatasetTags keywords={dataset.keyword} />
           )}
-          
+
           {Object.keys(distribution).length && fileFormat === 'CSV' ? (
             <div className="dc-c-dataset-tags ds-u-margin-bottom--3 ds-u-padding--2 ds-u-border ds-u-border--1">
               <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-top--0 ds-u-margin-bottom--2 ds-u-padding-bottom--2">
