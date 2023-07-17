@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import DOMPurify from 'dompurify';
 import TextTruncate from 'react-text-truncate';
 
 import { Button, Badge } from '@cmsgov/design-system';
@@ -7,7 +8,7 @@ import TransformedDate from '../TransformedDate';
 import './dataset-search-list-item.scss';
 
 const dangerousDescriptionElement = ({ children }) => (
-  <span dangerouslySetInnerHTML={{ __html: children }} />
+  <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(children) }} />
 );
 
 const DatasetSearchListItem = ({ item, updateFacets }) => {
