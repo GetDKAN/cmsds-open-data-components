@@ -29,7 +29,7 @@ const DatasetDownloads = ({ dataDictionaryURL, dataDictionaryType, distributions
          }
          {(dataDictionaryURL && dataDictionaryType) &&
             <li>
-              <a href="dataDictionaryURL">
+              <a href={dataDictionaryURL}>
                 Data Dictionary ({trimDataDictionaryType()})
               </a>
             </li>
