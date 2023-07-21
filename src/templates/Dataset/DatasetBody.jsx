@@ -148,7 +148,11 @@ const DatasetBody = ({
         </div>
         <div className="ds-l-md-col--3 ds-l-sm-col--12">
           {Object.keys(distribution).length ? (
-            <DatasetDownloads downloadURL={distribution.data.downloadURL} type={fileFormat} />
+            <DatasetDownloads
+              dataDictionaryURL={dataset.describedBy}
+              dataDictionaryType={dataset.describedByType}
+              distributions={dataset.distribution}
+            />
           ) : (
             ''
           )}

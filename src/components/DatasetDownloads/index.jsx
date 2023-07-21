@@ -1,16 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './datasetdownloads.scss';
 
-const DatasetDownloads = ({ downloadURL, type }) => {
+const DatasetDownloads = ({ dataDictionaryURL, dataDictionaryType, distributions }) => {
+  function trimDataDictionaryType() {
+    let splitDataDictionaryType = dataDictionaryType.split('/');
+    let type = splitDataDictionaryType.length > 1 ? splitDataDictionaryType[1] : splitDataDictionaryType[0];
+    return type.toUpperCase()
+  }
+
   return (
-    <div className="ds-u-margin-bottom--3 ds-u-padding--2 ds-u-border ds-u-border--1">
+    <div className="ds-u-margin-bottom--3 ds-u-padding--2 ds-u-border ds-u-border--1 dc-c-dataset-downloads">
       <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-top--0 ds-u-margin-bottom--2 ds-u-padding-bottom--2 ds-u-border ds-u-border-bottom--1">
         Downloads
       </h2>
-      <p className="ds-u-margin-bottom--1 ds-u-color--gray">Resource</p>
-      <a href={downloadURL} className="ds-u-word-break">
-        Download this resource ({type})
-      </a>
+      {(distributions.length || (dataDictionaryURL && dataDictionaryType)) &&
+       <ul className="ds-u-padding-left--0 ds-u-margin-bottom--0">
+         {
+          distributions.map((dist) => (
+            <li className="ds-u-padding-bottom--1">
+              <a key={dist.identifier} href={dist.data.downloadURL} className="ds-u-word-break">
+                {dist.data.format.toUpperCase()}
+                {' '}
+                Resource File
+              </a>
+            </li>
+          ))
+         }
+         {(dataDictionaryURL && dataDictionaryType) &&
+            <li>
+              <a href="dataDictionaryURL">
+                Data Dictionary ({trimDataDictionaryType()})
+              </a>
+            </li>
+         }
+       </ul>
+      }
     </div>
   );
 };
