@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './datasetdownloads.scss';
 
 const DatasetDownloads = ({ dataDictionaryURL, dataDictionaryType, distributions }) => {
   function trimDataDictionaryType() {
@@ -15,7 +14,7 @@ const DatasetDownloads = ({ dataDictionaryURL, dataDictionaryType, distributions
         Downloads
       </h2>
       {(distributions.length || (dataDictionaryURL && dataDictionaryType)) &&
-       <ul className="ds-u-padding-left--0 ds-u-margin-bottom--0">
+       <ul className="ds-c-list ds-c-list--bare">
          {
           distributions.map((dist) => (
             <li className="ds-u-padding-bottom--1">
