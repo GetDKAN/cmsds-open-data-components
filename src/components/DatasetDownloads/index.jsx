@@ -8,6 +8,19 @@ const DatasetDownloads = ({ dataDictionaryURL, dataDictionaryType, distributions
     return type.toUpperCase()
   }
 
+  function getFormatType(dist) {
+    if(dist.data.format) {
+      return dist.data.format.toUpperCase()
+    } else if (dist.data.mediaType) {
+      const mediaType = dist.data.mediaType.split('/');
+      if (mediaType.length && mediaType[1]) {
+        return mediaType[1].toUpperCase();
+      }
+    } else {
+      return '';
+    }
+  }
+
   return (
     <div className="ds-u-margin-bottom--3 ds-u-padding--2 ds-u-border ds-u-border--1 dc-c-dataset-downloads">
       <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-top--0 ds-u-margin-bottom--2 ds-u-padding-bottom--2 ds-u-border ds-u-border-bottom--1">
@@ -19,7 +32,7 @@ const DatasetDownloads = ({ dataDictionaryURL, dataDictionaryType, distributions
           distributions.map((dist) => (
             <li className="ds-u-padding-bottom--1">
               <a key={dist.identifier} href={dist.data.downloadURL} className="ds-u-word-break">
-                {dist.data.format.toUpperCase()}
+                {getFormatType(dist)}
                 {' '}
                 Resource File
               </a>
