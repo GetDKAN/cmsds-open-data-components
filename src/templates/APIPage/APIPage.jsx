@@ -1,20 +1,25 @@
 import React from 'react';
+import qs from 'qs';
 import SwaggerUI from 'swagger-ui-react';
 import 'swagger-ui-react/swagger-ui.css';
 
-const APIPage = ({ hideAuth, additionalParams, rootUrl }) => (
-  <section className="ds-l-container">
+const APIPage = ({ hideAuth, additionalParams, rootUrl }) => {
+  const hasACA = additionalParams && additionalParams.ACA ? true : false;
+  let params = {
+    authentication: hideAuth ? false : undefined,
+    ACA: hasACA ? additionalParams.ACA : undefined,
+    redirect: hasACA ? false : undefined,
+  };
+  return (
+    <section className="ds-l-container">
     <SwaggerUI
-      url={`${rootUrl}?${hideAuth ? 'authentication=false&' : ''}${
-        additionalParams && additionalParams.ACA
-          ? 'ACA=' + additionalParams.ACA + '&redirect=false'
-          : ''
-      }`}
+      url={`${rootUrl}${qs.stringify(params, { addQueryPrefix: true })}`}
       docExpansion={'list'}
       defaultModelsExpandDepth={-1}
     />
   </section>
-);
+  )
+};
 
 APIPage.defaultProps = {
   hideAuth: true,
