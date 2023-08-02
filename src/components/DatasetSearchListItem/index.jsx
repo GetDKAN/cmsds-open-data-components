@@ -28,7 +28,7 @@ const DatasetSearchListItem = ({ item, updateFacets }) => {
   return (
     <div className="dc-dataset-searchlist-item ds-u-border-top--1 ds-u-margin-bottom--5">
       <div className="ds-l-row ds-u-padding-top--5">
-        <div className="ds-l-col--7">
+        <div className="ds-l-sm-col--7 ds-l-col--12">
           {theme && (
             <ul className="ds-u-padding--0 ds-u-display--flex ds-u-flex-direction--row ds-u-flex-wrap--wrap">
               {theme.map((t) => (
@@ -39,7 +39,7 @@ const DatasetSearchListItem = ({ item, updateFacets }) => {
             </ul>
           )}
         </div>
-        <span className="ds-l-col--5 ds-u-color--gray ds-u-text-align--right">
+        <span className="ds-l-sm-col--5 ds-l-col--12 ds-u-color--gray ds-u-sm-text-align--right">
           Updated <TransformedDate date={modified} />
         </span>
       </div>
