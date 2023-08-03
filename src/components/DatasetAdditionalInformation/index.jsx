@@ -30,7 +30,7 @@ const DatasetAdditionalInformation = ({ datasetInfo, id, metadataMapping}) => {
           {rows.map((r) => (
             <TableRow key={`${r.label}_${id}`}>
               <TableCell>{r.label}</TableCell>
-              <TableCell>{r.value}</TableCell>
+              <TableCell className="ds-u-word-break-anywhere">{r.value}</TableCell>
             </TableRow>
           ))}
         </TableBody>
