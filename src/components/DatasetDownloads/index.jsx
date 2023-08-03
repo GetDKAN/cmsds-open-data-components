@@ -11,14 +11,22 @@ const DatasetDownloads = ({ dataDictionaryURL, dataDictionaryType, distributions
   function getFormatType(dist) {
     if(dist.data.format) {
       return dist.data.format.toUpperCase()
-    } else if (dist.data.mediaType) {
+    }
+    if(dist.data.mediaType) {
       const mediaType = dist.data.mediaType.split('/');
       if (mediaType.length && mediaType[1]) {
         return mediaType[1].toUpperCase();
       }
-    } else {
-      return '';
     }
+    if(dist.data["%Ref:downloadURL"].length && dist.data["%Ref:downloadURL"][0].data) {
+      if(dist.data["%Ref:downloadURL"][0].data.mimeType) {
+        const mimeType = dist.data["%Ref:downloadURL"][0].data.mimeType.split("/");
+        if (mimeType.length && mimeType[1]) {
+          return mimeType[1].toUpperCase();
+        }
+      }
+    }
+    return '';
   }
 
   return (
@@ -30,8 +38,8 @@ const DatasetDownloads = ({ dataDictionaryURL, dataDictionaryType, distributions
        <ul className="ds-c-list ds-c-list--bare">
          {
           distributions.map((dist) => (
-            <li className="ds-u-padding-bottom--1">
-              <a key={dist.identifier} href={dist.data.downloadURL} className="ds-u-word-break">
+            <li className="ds-u-padding-bottom--1" key={dist.identifier}>
+              <a href={dist.data.downloadURL} className="ds-u-word-break">
                 {getFormatType(dist)}
                 {' '}
                 Resource File
@@ -52,9 +60,5 @@ const DatasetDownloads = ({ dataDictionaryURL, dataDictionaryType, distributions
   );
 };
 
-DatasetDownloads.propTypes = {
-  downloadURL: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-};
 
 export default DatasetDownloads;
