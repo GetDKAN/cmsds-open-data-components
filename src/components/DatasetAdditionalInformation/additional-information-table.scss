@@ -7,3 +7,8 @@
 .dc-c-additional-info-table a {
   word-break: break-all;
 }
+
+.ds-u-word-break-anywhere {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
