@@ -18,6 +18,7 @@ const DatasetSearch = ({
   fulltextLabel,
   fulltextLabelClassName,
   fulltextPlaceholder,
+  filterTitle,
   formClassName,
   additionalParams,
   sortOptions,
@@ -49,11 +50,36 @@ const DatasetSearch = ({
       ? transformedParams.sortOrder
       : defaultSort ? defaultSort.defaultOrder : defaultSortOrder
   );
+  const [sortDisplay, setSortDisplay] = useState(() => {
+    return sort === 'modified' ? (sortOrder === 'desc' ? 'newest' : 'oldest') : (sortOrder === 'desc' ? 'titleZA' : 'titleAZ');
+  })
   const [selectedFacets, setSelectedFacets] = useState(
     transformedParams.selectedFacets
       ? transformedParams.selectedFacets
       : defaultSelectedFacets
   )
+
+  const setSortOptions = (value) => {
+    setSortDisplay(value)
+    switch(value) {
+      case 'newest':
+        setSort('modified');
+        setSortOrder('desc');
+        break;
+      case 'oldest':
+        setSort('modified');
+        setSortOrder('asc');
+        break;
+      case 'titleAZ':
+        setSort('title');
+        setSortOrder('asc');
+        break;
+      case 'titleZA':
+        setSort('title');
+        setSortOrder('desc');
+        break;
+    }
+  }
 
   function updateSelectedFacets(currentFacet) {
     const facets = updateSelectedFacetObject(currentFacet, selectedFacets);
@@ -136,40 +162,68 @@ const DatasetSearch = ({
     <section className="ds-l-container">
       <h1 className="dc-search-header ds-title ds-u-margin-y--3">{pageTitle}</h1>
       <div className="ds-l-row">
-        <div className="ds-l-md-col--8 ds-l-sm-col--12ds-u-margin-bottom--3">
-          {introText ? introText : null}
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              () => {
-                setFullText(filterText);
-                setPage(defaultPage)
-              }
+        <div className="ds-l-col--12">
+        {introText ? introText : null}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            () => {
+              setFullText(filterText);
+              setPage(defaultPage)
+            }
+          }}
+          className={formClassName}
+        >
+          <TextField
+            fieldClassName="ds-u-margin--0"
+            value={filterText}
+            className="dc-fulltext--input-container ds-u-padding-right--2"
+            label={fulltextLabel}
+            labelClassName={fulltextLabelClassName}
+            placeholder={fulltextPlaceholder}
+            name="dataset_fulltext_search"
+            onChange={(e) => setFilterText(e.target.value)}
+          />
+          <Button
+            type="submit"
+            variation="solid"
+            htmlFor="dataset_fulltext_search"
+            onClick={() => {
+              setFullText(filterText);
+              setPage(defaultPage)
             }}
-            className={formClassName}
           >
-            <TextField
-              fieldClassName="ds-u-margin--0"
-              value={filterText}
-              className="dc-fulltext--input-container ds-u-padding-right--2"
-              label={fulltextLabel}
-              labelClassName={fulltextLabelClassName}
-              placeholder={fulltextPlaceholder}
-              name="dataset_fulltext_search"
-              onChange={(e) => setFilterText(e.target.value)}
-            />
+            Search
+          </Button>
+        </form>
+        </div>
+      </div>
+      <div className="ds-l-row ds-u-padding-top--6">
+        <div className="ds-l-col--12 ds-l-sm-col--4">
             <Button
-              type="submit"
-              variation="solid"
-              htmlFor="dataset_fulltext_search"
-              onClick={() => {
-                setFullText(filterText);
-                setPage(defaultPage)
-              }}
+              className="dc-dataset-search--clear-all-filters ds-u-margin-bottom--2"
+              onClick={() => resetFilters()}
             >
-              Search
+              Clear all filters
             </Button>
-          </form>
+            {theme && (
+              <DatasetSearchFacets
+                facets={theme}
+                title="Categories"
+                onClickFunction={updateSelectedFacets}
+                selectedFacets={selectedFacets.theme}
+              />
+            )}
+            {keyword && (
+              <DatasetSearchFacets
+                facets={keyword}
+                title={filterTitle ? filterTitle : "Tags"}
+                onClickFunction={updateSelectedFacets}
+                selectedFacets={selectedFacets.keyword}
+              />
+            )}
+        </div>
+        <div className="ds-l-col--12 ds-l-sm-col--8">
           {status === "loading" ? (
             <Spinner
               className="ds-u-valign--middle"
@@ -178,29 +232,34 @@ const DatasetSearch = ({
             />
           ) : (
             <>
-              <div className="ds-u-display--flex ds-u-justify-content--between ds-u-align-items--end">
-              <div>
-                {currentResultNumbers && (
-                  <p className="ds-u-margin-y--0" role="region" aria-live="polite" data-testid="currentResults" >
-                    Showing {currentResultNumbers.startingNumber} -{' '}
-                    {currentResultNumbers.endingNumber} of {data.data.total} datasets
+              <div className="ds-u-display--flex ds-u-justify-content--between ds-u-align-items--end ds-u-flex-wrap--reverse ds-u-sm-flex-wrap--wrap">
+                <div className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--8">
+                  {currentResultNumbers && (
+                    <p className="ds-u-margin-y--0" role="region" aria-live="polite" data-testid="currentResults" >
+                      Showing {currentResultNumbers.startingNumber} -{' '}
+                      {currentResultNumbers.endingNumber} of {data.data.total} datasets
+                    </p>
+                  )}
+                  <p className="ds-u-margin-y--0">
+                    {selectedFacetsMessage(selectedFacets, {
+                      theme: 'Categories',
+                      keyword: 'Tags',
+                    })}
                   </p>
+                </div>
+                {showSort && (
+                  <div className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--4 ds-u-sm-padding-right--0">
+                    <Dropdown
+                      options={sortOptions}
+                      value={sortDisplay}
+                      label="Sort"
+                      labelClassName="ds-u-margin-top--0"
+                      name="dataset_search_sort"
+                      onChange={(e) => setSortOptions(e.target.value)}
+                    />
+                  </div>
                 )}
-                <p className="ds-u-margin-y--0">
-                  {selectedFacetsMessage(selectedFacets, {
-                    theme: 'Categories',
-                    keyword: 'Tags',
-                  })}
-                </p>
               </div>
-              <Button
-                className="ds-u-padding--0 dc-c-clear-filters"
-                variation="ghost"
-                onClick={() => resetFilters()}
-              >
-                Clear all filters
-              </Button>
-            </div>
             <ol className="dc-dataset-search-list ds-u-padding--0">
               {noResults && <Alert variation="error" heading="No results found." />}
               {Object.keys(data.data.results).map((key) => {
@@ -232,63 +291,6 @@ const DatasetSearch = ({
           </>
           )}
         </div>
-        <div className="ds-l-md-col--4 ds-l-sm-col--12">
-          {showSort && (
-            <div className="ds-u-padding--2 ds-u-margin-bottom--4 ds-u-border--1">
-              <Dropdown
-                options={sortOptions}
-                value={sort}
-                label="Sort by"
-                labelClassName="ds-u-margin-top--0"
-                name="dataset_search_sort"
-                onChange={(e) => setSort(e.target.value)}
-              />
-              <Dropdown
-                options={[
-                  { label: 'Ascending', value: 'asc' },
-                  { label: 'Descending', value: 'desc' },
-                ]}
-                value={sortOrder}
-                label="Sort order"
-                labelClassName="ds-u-margin-top--0"
-                name="dataset_search_sort_order"
-                onChange={(e) => setSortOrder(e.target.value)}
-              />
-            </div>
-          )}
-          <div className="ds-u-padding--2 ds-u-margin-bottom--4 ds-u-border--1">
-            {theme ? (
-              <DatasetSearchFacets
-                title="Categories"
-                facets={theme}
-                onclickFunction={updateSelectedFacets}
-                selectedFacets={selectedFacets.theme}
-                loading={status === "loading"}
-              />
-            ) : (
-              <Spinner
-                className="ds-u-valign--middle"
-                aria-valuetext="Categories loading"
-                role="status"
-              />
-            )}
-            {keyword ? (
-              <DatasetSearchFacets
-                title="Tags"
-                facets={keyword}
-                onclickFunction={updateSelectedFacets}
-                selectedFacets={selectedFacets.keyword}
-                loading={status === "loading"}
-              />
-            ) : (
-              <Spinner
-                className="ds-u-valign--middle"
-                aria-valuetext="Tags loading"
-                role="status"
-              />
-            )}
-          </div>
-        </div>
       </div>
     </section>
   );
@@ -303,10 +305,12 @@ DatasetSearch.defaultProps = {
   formClassName: 'ds-u-display--flex ds-u-justify-content--between ds-u-margin-bottom--2',
   showSort: true,
   sortOptions: [
-    { label: 'Recently Updated', value: 'modified' },
-    { label: 'Title', value: 'title' },
+    { label: 'Newest', value: 'newest'},
+    { label: 'Oldest', value: 'oldest'},
+    { label: 'Title A-Z', value: 'titleAZ'},
+    { label: 'Title Z-A', value: 'titleZA'}
   ],
-  defaultSort: { defaultSort: 'modified', defaultOrder: 'desc' },
+  defaultSort: { defaultSort: 'modified', defaultOrder: 'desc'},
 };
 
 export default withQueryProvider(DatasetSearch);
