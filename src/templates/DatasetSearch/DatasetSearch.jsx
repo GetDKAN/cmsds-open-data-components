@@ -208,7 +208,7 @@ const DatasetSearch = ({
             >
               Clear all filters
             </Button>
-            {data && (
+            {theme && (
               <DatasetSearchFacets
                 facets={theme}
                 title="Categories"
@@ -216,7 +216,7 @@ const DatasetSearch = ({
                 selectedFacets={selectedFacets.theme}
               />
             )}
-            {data && (
+            {keyword && (
               <DatasetSearchFacets
                 facets={keyword}
                 title={filterTitle ? filterTitle : "Tags"}
