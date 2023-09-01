@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import qs from 'qs';
 import withQueryProvider from '../../utilities/QueryProvider/QueryProvider';
-import { TextField, Dropdown, Spinner, Button, Alert, Pagination } from '@cmsgov/design-system';
+import { Accordion, AccordionItem, TextField, Dropdown, Spinner, Button, Alert, Pagination } from '@cmsgov/design-system';
 import DatasetSearchListItem from '../../components/DatasetSearchListItem';
 import DatasetSearchFacets from '../../components/DatasetSearchFacets';
+import LargeFileInfo from '../../components/LargeFileInfo';
 import { useQuery } from '@tanstack/react-query';
 import { separateFacets, updateSelectedFacetObject, selectedFacetsMessage, transformUrlParamsToSearchObject } from '../../services/useSearchAPI/helpers';
 
@@ -23,6 +24,7 @@ const DatasetSearch = ({
   sortOptions,
   defaultSort,
   showSort,
+  showLargeFileWarning,
 }) => {
   const defaultSortBy = "";
   const defaultFulltext = "";
@@ -138,6 +140,20 @@ const DatasetSearch = ({
       <div className="ds-l-row">
         <div className="ds-l-md-col--8 ds-l-sm-col--12ds-u-margin-bottom--3">
           {introText ? introText : null}
+          {showLargeFileWarning && (
+            <div className="ds-l-row ds-u-margin-bottom--6">
+              <div className="ds-l-md-col--12">
+                <Accordion bordered openItems={[0]}>
+                  <AccordionItem
+                    contentClassName="downloading-datasets"
+                    heading="Please read before downloading datasets"
+                  >
+                    <LargeFileInfo />
+                  </AccordionItem>
+                </Accordion>
+              </div>
+            </div>
+          )}
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -299,7 +315,7 @@ DatasetSearch.defaultProps = {
   introText: '',
   fulltextLabel: 'Search term',
   fulltextLabelClassName: 'ds-u-visibility--screen-reader',
-  fulltextPlaceholder: 'Type search term here',
+  fulltextPlaceholder: 'Search datasets',
   formClassName: 'ds-u-display--flex ds-u-justify-content--between ds-u-margin-bottom--2',
   showSort: true,
   sortOptions: [
@@ -307,6 +323,7 @@ DatasetSearch.defaultProps = {
     { label: 'Title', value: 'title' },
   ],
   defaultSort: { defaultSort: 'modified', defaultOrder: 'desc' },
+  showLargeFileWarning: false,
 };
 
 export default withQueryProvider(DatasetSearch);
