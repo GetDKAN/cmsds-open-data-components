@@ -6,6 +6,8 @@ import { Accordion, AccordionItem, TextField, Dropdown, Spinner, Button, Alert, 
 import DatasetSearchListItem from '../../components/DatasetSearchListItem';
 import DatasetSearchFacets from '../../components/DatasetSearchFacets';
 import LargeFileInfo from '../../components/LargeFileInfo';
+import SearchButton from '../../components/SearchButton';
+import PageHeader from '../../components/PageHeader';
 import { useQuery } from '@tanstack/react-query';
 import { separateFacets, updateSelectedFacetObject, selectedFacetsMessage, transformUrlParamsToSearchObject } from '../../services/useSearchAPI/helpers';
 
@@ -161,10 +163,11 @@ const DatasetSearch = ({
   const { theme, keyword } = separateFacets(data ? data.data.facets : []);
 
   return (
+    <>
+    <PageHeader headerText={pageTitle} />
     <section className="ds-l-container">
-      <h1 className="dc-search-header ds-title ds-u-margin-y--3">{pageTitle}</h1>
       <div className="ds-l-row">
-        <div className="ds-l-md-col--8 ds-l-sm-col--12ds-u-margin-bottom--3">
+        <div className="ds-l-col--12 ds-u-margin-bottom--3">
           {introText ? introText : null}
           {showLargeFileWarning && (
             <div className="ds-l-row ds-u-margin-bottom--6">
@@ -180,16 +183,25 @@ const DatasetSearch = ({
               </div>
             </div>
           )}
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              () => {
-                setFullText(filterText);
-                setPage(defaultPage)
-              }
-            }}
-          >
-            Search
+        <form
+          onSubmit={() => {
+            e.preventDefault();
+            setFullText(filterText);
+          }}
+          className="dkan-dataset-search ds-l-form-row ds-u-padding-bottom--6 ds-u-border-bottom--1"
+        >
+          <span className="ds-c-field__before fas fa-search ds-u-display--none ds-u-sm-display--inline-block" />
+          <TextField
+            fieldClassName="ds-u-margin--0"
+            value={filterText}
+            className="ds-u-padding-right--2 ds-l-col--10"
+            label="Search datasets"
+            labelClassName="ds-u-visibility--screen-reader"
+            placeholder="Search datasets"
+            name="dataset_fulltext_search"
+            onChange={() => setFilterText(e.target.value)}
+          />
+          <SearchButton />
         </form>
         </div>
       </div>
@@ -288,11 +300,12 @@ const DatasetSearch = ({
         </div>
       </div>
     </section>
+    </>
   );
 };
 
 DatasetSearch.defaultProps = {
-  pageTitle: 'Datasets',
+  pageTitle: 'Dataset Explorer',
   introText: '',
   fulltextLabel: 'Search term',
   fulltextLabelClassName: 'ds-u-visibility--screen-reader',
