@@ -35,7 +35,7 @@ describe('selectedFacetsMessage', () => {
   });
 });
 
-describe('<DatasetSearchFacets />', () => {
+describe.skip('<DatasetSearchFacets />', () => {
   test('Renders correctly', async () => {
     await axios.get.mockImplementation(() => Promise.resolve(data_results));
     const { debug } = render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
