@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import qs from 'qs';
 import withQueryProvider from '../../utilities/QueryProvider/QueryProvider';
-import { TextField, Dropdown, Spinner, Button, Alert, Pagination } from '@cmsgov/design-system';
+import { Accordion, AccordionItem, TextField, Dropdown, Spinner, Button, Alert, Pagination } from '@cmsgov/design-system';
 import DatasetSearchListItem from '../../components/DatasetSearchListItem';
 import DatasetSearchFacets from '../../components/DatasetSearchFacets';
+import LargeFileInfo from '../../components/LargeFileInfo';
+import SearchButton from '../../components/SearchButton';
+import PageHeader from '../../components/PageHeader';
 import { useQuery } from '@tanstack/react-query';
 import { separateFacets, updateSelectedFacetObject, selectedFacetsMessage, transformUrlParamsToSearchObject } from '../../services/useSearchAPI/helpers';
 
@@ -24,6 +27,7 @@ const DatasetSearch = ({
   sortOptions,
   defaultSort,
   showSort,
+  showLargeFileWarning,
 }) => {
   const defaultSortBy = "";
   const defaultFulltext = "";
@@ -159,42 +163,45 @@ const DatasetSearch = ({
   const { theme, keyword } = separateFacets(data ? data.data.facets : []);
 
   return (
+    <>
+    <PageHeader headerText={pageTitle} />
     <section className="ds-l-container">
-      <h1 className="dc-search-header ds-title ds-u-margin-y--3">{pageTitle}</h1>
       <div className="ds-l-row">
-        <div className="ds-l-col--12">
-        {introText ? introText : null}
+        <div className="ds-l-col--12 ds-u-margin-bottom--3">
+          {introText ? introText : null}
+          {showLargeFileWarning && (
+            <div className="ds-l-row ds-u-margin-bottom--6">
+              <div className="ds-l-md-col--12">
+                <Accordion bordered openItems={[0]}>
+                  <AccordionItem
+                    contentClassName="downloading-datasets"
+                    heading="Please read before downloading datasets"
+                  >
+                    <LargeFileInfo />
+                  </AccordionItem>
+                </Accordion>
+              </div>
+            </div>
+          )}
         <form
-          onSubmit={(e) => {
+          onSubmit={() => {
             e.preventDefault();
-            () => {
-              setFullText(filterText);
-              setPage(defaultPage)
-            }
+            setFullText(filterText);
           }}
-          className={formClassName}
+          className="dkan-dataset-search ds-l-form-row ds-u-padding-bottom--6 ds-u-border-bottom--1"
         >
+          <span className="ds-c-field__before fas fa-search ds-u-display--none ds-u-sm-display--inline-block" />
           <TextField
             fieldClassName="ds-u-margin--0"
             value={filterText}
-            className="dc-fulltext--input-container ds-u-padding-right--2"
-            label={fulltextLabel}
-            labelClassName={fulltextLabelClassName}
-            placeholder={fulltextPlaceholder}
+            className="ds-u-padding-right--2 ds-l-col--10"
+            label="Search datasets"
+            labelClassName="ds-u-visibility--screen-reader"
+            placeholder="Search datasets"
             name="dataset_fulltext_search"
-            onChange={(e) => setFilterText(e.target.value)}
+            onChange={() => setFilterText(e.target.value)}
           />
-          <Button
-            type="submit"
-            variation="solid"
-            htmlFor="dataset_fulltext_search"
-            onClick={() => {
-              setFullText(filterText);
-              setPage(defaultPage)
-            }}
-          >
-            Search
-          </Button>
+          <SearchButton />
         </form>
         </div>
       </div>
@@ -293,15 +300,16 @@ const DatasetSearch = ({
         </div>
       </div>
     </section>
+    </>
   );
 };
 
 DatasetSearch.defaultProps = {
-  pageTitle: 'Datasets',
+  pageTitle: 'Dataset Explorer',
   introText: '',
   fulltextLabel: 'Search term',
   fulltextLabelClassName: 'ds-u-visibility--screen-reader',
-  fulltextPlaceholder: 'Type search term here',
+  fulltextPlaceholder: 'Search datasets',
   formClassName: 'ds-u-display--flex ds-u-justify-content--between ds-u-margin-bottom--2',
   showSort: true,
   sortOptions: [
@@ -310,7 +318,8 @@ DatasetSearch.defaultProps = {
     { label: 'Title A-Z', value: 'titleAZ'},
     { label: 'Title Z-A', value: 'titleZA'}
   ],
-  defaultSort: { defaultSort: 'modified', defaultOrder: 'desc'},
+  defaultSort: { defaultSort: 'modified', defaultOrder: 'desc' },
+  showLargeFileWarning: false,
 };
 
 export default withQueryProvider(DatasetSearch);

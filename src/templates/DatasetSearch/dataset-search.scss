@@ -2,17 +2,6 @@
   list-style: none;
 }
 
-.dc-c-clear-filters {
-  font-weight: 300;
-}
-
-.dc-fulltext--input-container {
-  width: 100%;
-  input {
-    max-width: inherit;
-  }
-}
-
 .dc-search-header {
   display: relative;
   &::after {
@@ -37,4 +26,18 @@
 
 .dc-dataset-search--clear-all-filters {
   width: 100%;
+}
+
+.dkan-dataset-search {
+  position: relative;
+  input {
+    min-width: 100%;
+    @media only screen and (min-width: 544px) {
+      padding-left: 32px;
+    }
+  }
+  .ds-c-field__before {
+    left: 16px;
+    top: 12px;
+  }
 }
