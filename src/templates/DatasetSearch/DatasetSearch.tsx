@@ -9,29 +9,37 @@ import LargeFileInfo from '../../components/LargeFileInfo';
 import SearchButton from '../../components/SearchButton';
 import PageHeader from '../../components/PageHeader';
 import { useQuery } from '@tanstack/react-query';
-import { separateFacets, updateSelectedFacetObject, selectedFacetsMessage, transformUrlParamsToSearchObject } from '../../services/useSearchAPI/helpers';
+import { separateFacets, selectedFacetsMessage, transformUrlParamsToSearchObject } from '../../services/useSearchAPI/helpers';
 
 import axios from 'axios';
 import './dataset-search.scss';
+import { DatasetSearchPageProps, SelectedFacetsType, SidebarFacetTypes } from '../../types/search';
+import { TextFieldValue } from '@cmsgov/design-system/dist/types/TextField/TextField';
 
-const DatasetSearch = ({
-  rootUrl,
-  pageTitle,
-  introText,
-  fulltextLabel,
-  fulltextLabelClassName,
-  fulltextPlaceholder,
-  filterTitle,
-  formClassName,
-  additionalParams,
-  sortOptions,
-  defaultSort,
-  showSort,
-  showLargeFileWarning,
-}) => {
+const DatasetSearch = (props: DatasetSearchPageProps) => {
+  const {
+    rootUrl,
+    surveyLink,
+    additionalParams,
+    enableSort,
+    pageTitle,
+    filterTitle,
+    showSort,
+    showLargeFileWarning,
+    introText
+  } = props;
+
+  const defaultSort = { defaultSort: 'modified', defaultOrder: 'desc' }
+  const sortOptions = [
+    { label: 'Newest', value: 'newest'},
+    { label: 'Oldest', value: 'oldest'},
+    { label: 'Title A-Z', value: 'titleAZ'},
+    { label: 'Title Z-A', value: 'titleZA'}
+  ];
+
   const defaultSortBy = "";
   const defaultFulltext = "";
-  const defaultSelectedFacets = {};
+  const defaultSelectedFacets = {theme: [], keyword: []};
   const defaultSortOrder = "";
   const defaultPage = 1;
   const defaultPageSize = 10;
@@ -39,12 +47,12 @@ const DatasetSearch = ({
   const location = useLocation();
   const transformedParams = transformUrlParamsToSearchObject(location.search, ['theme', 'keyword'], defaultSort);
 
-  const [currentResultNumbers, setCurrentResultNumbers] = useState(null);
+  const [currentResultNumbers, setCurrentResultNumbers] = useState({total: 0, startingNumber: 0, endingNumber: 0});
   const [noResults, setNoResults] = useState(false);
   let [searchParams, setSearchParams] = useSearchParams();
   const [fulltext, setFullText] = useState(transformedParams.fulltext);
   const [filterText, setFilterText] = useState(transformedParams.fulltext);
-  const [totalItems, setTotalItems] = useState(null);
+  const [totalItems, setTotalItems] = useState(0);
   const [page, setPage] = useState(transformedParams.page ? transformedParams.page : defaultPage);
   const [sort, setSort] = useState(
     transformedParams.sort ? transformedParams.sort : defaultSort ? defaultSort.defaultSort : defaultSortBy
@@ -57,13 +65,16 @@ const DatasetSearch = ({
   const [sortDisplay, setSortDisplay] = useState(() => {
     return sort === 'modified' ? (sortOrder === 'desc' ? 'newest' : 'oldest') : (sortOrder === 'desc' ? 'titleZA' : 'titleAZ');
   })
-  const [selectedFacets, setSelectedFacets] = useState(
+  const [selectedFacets, setSelectedFacets] = useState<SelectedFacetsType>(
     transformedParams.selectedFacets
       ? transformedParams.selectedFacets
-      : defaultSelectedFacets
+      : {
+          theme: [],
+          keyword: [],
+        }
   )
 
-  const setSortOptions = (value) => {
+  const setSortOptions = (value: string) => {
     setSortDisplay(value)
     switch(value) {
       case 'newest':
@@ -85,13 +96,28 @@ const DatasetSearch = ({
     }
   }
 
-  function updateSelectedFacets(currentFacet) {
-    const facets = updateSelectedFacetObject(currentFacet, selectedFacets);
-    setPage(1);
-    setSelectedFacets(facets);
+  function updateSelectedFacets(key: string, value: string) {
+    const newFacets: SelectedFacetsType = { ...selectedFacets };
+    if (key === 'theme') {
+      const existingFacet = newFacets.theme.findIndex((s) => s === value);
+      if (existingFacet > -1) {
+        newFacets.theme.splice(existingFacet, 1);
+      } else {
+        newFacets.theme.push(value);
+      }
+    }
+    if (key === 'keyword') {
+      const existingFacet = newFacets.keyword.findIndex((s) => s === value);
+      if (existingFacet > -1) {
+        newFacets.keyword.splice(existingFacet, 1);
+      } else {
+        newFacets.keyword.push(value);
+      }
+    }
+    setSelectedFacets(newFacets);
   }
 
-  const pageSize = location.search.pageSize ? location.search.pageSize : defaultPageSize;
+  const pageSize = defaultPageSize;
 
   useEffect(() => {
     const baseNumber = Number(totalItems) > 0 ? 1 : 0;
@@ -102,7 +128,7 @@ const DatasetSearch = ({
       startingNumber: Number(totalItems) >= startingNumber ? startingNumber : 0,
       endingNumber: Number(totalItems) < endingNumber ? Number(totalItems) : endingNumber,
     });
-    if (totalItems <= 0 && currentResultNumbers !== null) {
+    if (totalItems && totalItems <= 0 && currentResultNumbers !== null) {
       setNoResults(true);
     } else {
       setNoResults(false);
@@ -123,8 +149,8 @@ const DatasetSearch = ({
     setPage(defaultPage);
   }
 
-  function buildSearchParams(includePage) {
-    let newParams = {};
+  function buildSearchParams(includePage: boolean) {
+    let newParams: any = {};
     if (Number(page) !== 1 && includePage) {
       newParams.page = page;
     }
@@ -155,12 +181,12 @@ const DatasetSearch = ({
     ...additionalParams
   }
   const { data, status, error } = useQuery(["datasets", params], () =>
-    axios.get(`${rootUrl}/search/?${qs.stringify(params, {arrayFormat: 'comma',encode: false, skipEmptyString: true })}`)
+    axios.get(`${rootUrl}/search/?${qs.stringify(params, {arrayFormat: 'comma',encode: false })}`)
   );
 
   if (data && totalItems != data.data.total) setTotalItems(data.data.total);
 
-  const { theme, keyword } = separateFacets(data ? data.data.facets : []);
+  const facets: SidebarFacetTypes = separateFacets(data ? data.data.facets : []);
 
   return (
     <>
@@ -172,7 +198,7 @@ const DatasetSearch = ({
           {showLargeFileWarning && (
             <div className="ds-l-row ds-u-margin-bottom--6">
               <div className="ds-l-md-col--12">
-                <Accordion bordered openItems={[0]}>
+                <Accordion bordered>
                   <AccordionItem
                     contentClassName="downloading-datasets"
                     heading="Please read before downloading datasets"
@@ -184,7 +210,7 @@ const DatasetSearch = ({
             </div>
           )}
         <form
-          onSubmit={() => {
+          onSubmit={(e) => {
             e.preventDefault();
             setFullText(filterText);
           }}
@@ -193,13 +219,13 @@ const DatasetSearch = ({
           <span className="ds-c-field__before fas fa-search ds-u-display--none ds-u-sm-display--inline-block" />
           <TextField
             fieldClassName="ds-u-margin--0"
-            value={filterText}
+            value={filterText as TextFieldValue}
             className="ds-u-padding-right--2 ds-l-col--10"
             label="Search datasets"
             labelClassName="ds-u-visibility--screen-reader"
             placeholder="Search datasets"
             name="dataset_fulltext_search"
-            onChange={() => setFilterText(e.target.value)}
+            onChange={(e) => setFilterText(e.target.value)}
           />
           <SearchButton />
         </form>
@@ -213,18 +239,18 @@ const DatasetSearch = ({
             >
               Clear all filters
             </Button>
-            {theme && (
+            {facets.theme && (
               <DatasetSearchFacets
-                facets={theme}
+                facets={facets.theme}
                 title="Categories"
                 onClickFunction={updateSelectedFacets}
                 selectedFacets={selectedFacets.theme}
               />
             )}
-            {keyword && (
+            {facets.keyword && (
               <DatasetSearchFacets
-                facets={keyword}
-                title={filterTitle ? filterTitle : "Tags"}
+                facets={facets.keyword}
+                title={filterTitle}
                 onClickFunction={updateSelectedFacets}
                 selectedFacets={selectedFacets.keyword}
               />
@@ -244,7 +270,7 @@ const DatasetSearch = ({
                   {currentResultNumbers && (
                     <p className="ds-u-margin-y--0" role="region" aria-live="polite" data-testid="currentResults" >
                       Showing {currentResultNumbers.startingNumber} -{' '}
-                      {currentResultNumbers.endingNumber} of {data.data.total} datasets
+                      {currentResultNumbers.endingNumber} of {data ? data.data.total : ""} datasets
                     </p>
                   )}
                   <p className="ds-u-margin-y--0">
@@ -269,7 +295,7 @@ const DatasetSearch = ({
               </div>
             <ol className="dc-dataset-search-list ds-u-padding--0">
               {noResults && <Alert variation="error" heading="No results found." />}
-              {Object.keys(data.data.results).map((key) => {
+              {data && Object.keys(data.data.results).map((key) => {
                   return data.data.results[key];
                 }).map((item) => (
                   <li className="ds-u-padding--0" key={item.identifier}>
@@ -277,9 +303,8 @@ const DatasetSearch = ({
                   </li>
                 ))}
             </ol>
-            {data.data.total != 0 && (
+            {data && data.data.total != 0 && (
               <Pagination
-                id="test-default"
                 currentPage={Number(page)}
                 totalPages={Math.ceil(Number(data.data.total) / pageSize)}
                 onPageChange={(evt, page) => {
@@ -310,6 +335,7 @@ DatasetSearch.defaultProps = {
   fulltextLabel: 'Search term',
   fulltextLabelClassName: 'ds-u-visibility--screen-reader',
   fulltextPlaceholder: 'Search datasets',
+  filterTitle: 'Tags',
   formClassName: 'ds-u-display--flex ds-u-justify-content--between ds-u-margin-bottom--2',
   showSort: true,
   sortOptions: [

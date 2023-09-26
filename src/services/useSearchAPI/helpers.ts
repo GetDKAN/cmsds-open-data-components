@@ -1,9 +1,9 @@
 import axios from 'axios';
 import qs from 'qs';
-import { useQuery } from '@tanstack/react-query';
+import { SearchAPIFacetType, SelectedFacetsType, SortType } from '../../types/search';
 
-export function separateFacets(facets) {
-  let facetObj = {};
+export function separateFacets(facets: SearchAPIFacetType[]) {
+  let facetObj: any = {};
   if (facets) {
     facets.forEach((f) => {
       if(facetObj[f.type]) {
@@ -16,10 +16,10 @@ export function separateFacets(facets) {
   }
 }
 
-export function selectedFacetsMessage(facets, alternateTitles) {
-  let message = [];
+export function selectedFacetsMessage(facets: any, alternateTitles: any) {
+  let message: string[] = [];
   const keys = Object.keys(facets);
-  keys.forEach((k) => {
+  keys.forEach((k: any) => {
     if (facets[k].length) {
       message.push(`${alternateTitles[k]}: ${facets[k].join(', ')}`);
     }
@@ -27,29 +27,30 @@ export function selectedFacetsMessage(facets, alternateTitles) {
   return message.join(' & ');
 }
 
-export function transformUrlParamsToSearchObject(searchParams, facetList, defaultSortOptions) {
+export function transformUrlParamsToSearchObject(searchParams: string, facetList: [string, string], defaultSortOptions: SortType) {
   const params = qs.parse(searchParams, { ignoreQueryPrefix: true });
-  const selectedFacets = {};
-  facetList.forEach((facet) => {
-    selectedFacets[facet] = params[facet] ? params[facet] : [];
-  });
+  let themes = params.theme as string[];
+  let keywords = params.keyword as string[];
   return {
     page: params.page,
     sort: !params.sort ? defaultSortOptions.defaultSort : params.sort,
     sortOrder: !params.sortOrder ? defaultSortOptions.defaultOrder : params.sortOrder,
     fulltext: params.fulltext,
-    selectedFacets: selectedFacets,
+    selectedFacets: {
+      theme: themes ? themes : [],
+      keyword: keywords ? keywords : [],
+    },
   };
 }
 
-export function isSelectedFacet(currentFacet, selectedFacets) {
+export function isSelectedFacet(currentFacet: any, selectedFacets: any) {
   const isInSelectedFacets = selectedFacets[currentFacet.key] ? selectedFacets[currentFacet.key].indexOf(currentFacet.value) : -1;
   return isInSelectedFacets;
 }
 
-export function updateSelectedFacetObject(currentFacet, selectedFacets) {
+export function updateSelectedFacetObject(currentFacet: any, selectedFacets: SelectedFacetsType[]) {
   const key = currentFacet['key']
-  let newFacetList = {...selectedFacets};
+  let newFacetList: any = {...selectedFacets};
   if(newFacetList[key]) {
     const existingFacet = isSelectedFacet(currentFacet, newFacetList);
     if(existingFacet > -1) {
@@ -63,7 +64,7 @@ export function updateSelectedFacetObject(currentFacet, selectedFacets) {
   return newFacetList;
 }
 
-export async function fetchDatasets(rootUrl, options, additionalParams) {
+export async function fetchDatasets(rootUrl: string, options: any, additionalParams: any) {
   const { fulltext, selectedFacets, sort, sortOrder, page, pageSize } = options;
 
   let params = {
@@ -75,11 +76,11 @@ export async function fetchDatasets(rootUrl, options, additionalParams) {
     ['page-size']: pageSize !== 10 ? pageSize : undefined,
     ...additionalParams
   }
-  return await axios.get(`${rootUrl}/search/?${qs.stringify(params, {arrayFormat: 'comma',encode: false, skipEmptyString: true })}`)
+  return await axios.get(`${rootUrl}/search/?${qs.stringify(params, {arrayFormat: 'comma',encode: false})}`)
 }
 
-export function stringifySearchParams(selectedFacets, fulltext, sort) {
-  let newParams = {...selectedFacets}
+export function stringifySearchParams(selectedFacets: SelectedFacetsType[], fulltext: string, sort: any) {
+  let newParams: any = {...selectedFacets}
   if(fulltext) {
     newParams.fulltext = fulltext;
   }
