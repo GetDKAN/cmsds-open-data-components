@@ -9,7 +9,7 @@ import LargeFileInfo from '../../components/LargeFileInfo';
 import SearchButton from '../../components/SearchButton';
 import PageHeader from '../../components/PageHeader';
 import { useQuery } from '@tanstack/react-query';
-import { separateFacets, selectedFacetsMessage, transformUrlParamsToSearchObject } from '../../services/useSearchAPI/helpers';
+import { separateFacets, transformUrlParamsToSearchObject } from '../../services/useSearchAPI/helpers';
 
 import axios from 'axios';
 import './dataset-search.scss';
@@ -73,6 +73,8 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
           keyword: [],
         }
   )
+
+  console.log(selectedFacets)
 
   const setSortOptions = (value: string) => {
     setSortDisplay(value)
@@ -273,12 +275,6 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                       {currentResultNumbers.endingNumber} of {data ? data.data.total : ""} datasets
                     </p>
                   )}
-                  <p className="ds-u-margin-y--0">
-                    {selectedFacetsMessage(selectedFacets, {
-                      theme: 'Categories',
-                      keyword: 'Tags',
-                    })}
-                  </p>
                 </div>
                 {showSort && (
                   <div className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--4 ds-u-sm-padding-right--0">

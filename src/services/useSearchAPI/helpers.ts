@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
-import { SearchAPIFacetType, SelectedFacetsType, SortType } from '../../types/search';
+import { SearchAPIFacetType, SortType } from '../../types/search';
 
 export function separateFacets(facets: SearchAPIFacetType[]) {
   let facetObj: any = {};
@@ -14,17 +14,6 @@ export function separateFacets(facets: SearchAPIFacetType[]) {
     })
     return facetObj;
   }
-}
-
-export function selectedFacetsMessage(facets: any, alternateTitles: any) {
-  let message: string[] = [];
-  const keys = Object.keys(facets);
-  keys.forEach((k: any) => {
-    if (facets[k].length) {
-      message.push(`${alternateTitles[k]}: ${facets[k].join(', ')}`);
-    }
-  });
-  return message.join(' & ');
 }
 
 export function transformUrlParamsToSearchObject(searchParams: string, facetList: [string, string], defaultSortOptions: SortType) {
@@ -43,27 +32,6 @@ export function transformUrlParamsToSearchObject(searchParams: string, facetList
   };
 }
 
-export function isSelectedFacet(currentFacet: any, selectedFacets: any) {
-  const isInSelectedFacets = selectedFacets[currentFacet.key] ? selectedFacets[currentFacet.key].indexOf(currentFacet.value) : -1;
-  return isInSelectedFacets;
-}
-
-export function updateSelectedFacetObject(currentFacet: any, selectedFacets: SelectedFacetsType[]) {
-  const key = currentFacet['key']
-  let newFacetList: any = {...selectedFacets};
-  if(newFacetList[key]) {
-    const existingFacet = isSelectedFacet(currentFacet, newFacetList);
-    if(existingFacet > -1) {
-      newFacetList[key].splice(existingFacet, 1);
-    } else {
-      newFacetList[key] = [...newFacetList[key], currentFacet.value]
-    }
-  } else {
-    newFacetList[key] = [currentFacet.value]
-  }
-  return newFacetList;
-}
-
 export async function fetchDatasets(rootUrl: string, options: any, additionalParams: any) {
   const { fulltext, selectedFacets, sort, sortOrder, page, pageSize } = options;
 
@@ -77,15 +45,4 @@ export async function fetchDatasets(rootUrl: string, options: any, additionalPar
     ...additionalParams
   }
   return await axios.get(`${rootUrl}/search/?${qs.stringify(params, {arrayFormat: 'comma',encode: false})}`)
-}
-
-export function stringifySearchParams(selectedFacets: SelectedFacetsType[], fulltext: string, sort: any) {
-  let newParams: any = {...selectedFacets}
-  if(fulltext) {
-    newParams.fulltext = fulltext;
-  }
-  if(sort) {
-    newParams.sort = sort;
-  }
-  return qs.stringify(newParams, {addQueryPrefix: true, encode: false, arrayFormat: 'brackets'})
 }

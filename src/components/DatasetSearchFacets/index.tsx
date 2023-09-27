@@ -4,7 +4,7 @@ import { SearchAPIFacetType, SearchFacetsPropTypes } from '../../types/search';
 import './dataset-search-facets.scss';
 
 const SearchFacets = (props: SearchFacetsPropTypes) => {
-  const { facets, title, onClickFunction, selectedFacets } = props;
+  const { facets, title, onClickFunction, selectedFacets = [] } = props;
   return (
     <div className="dkan-dataset-search--facet-container ds-u-margin-bottom--4">
       <Accordion>

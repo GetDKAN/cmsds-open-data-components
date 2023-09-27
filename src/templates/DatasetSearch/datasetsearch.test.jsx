@@ -4,7 +4,6 @@ import { act } from 'react-dom/test-utils';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import DatasetSearch from './index';
-import { selectedFacetsMessage } from '../../services/useSearchAPI/helpers';
 import { MemoryRouter } from 'react-router-dom';
 
 jest.mock('axios');
@@ -25,15 +24,6 @@ const data_results = {
     ],
   },
 };
-
-describe('selectedFacetsMessage', () => {
-  test('turns selectedFacets and titles into a string', () => {
-    const selectedFacets = { theme: ['dkan'], keyword: ['react'] };
-    expect(selectedFacetsMessage(selectedFacets, { theme: 'Categories', keyword: 'Tags' })).toEqual(
-      'Categories: dkan & Tags: react'
-    );
-  });
-});
 
 describe.skip('<DatasetSearchFacets />', () => {
   test('Renders correctly', async () => {
