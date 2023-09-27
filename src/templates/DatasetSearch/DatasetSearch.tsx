@@ -74,8 +74,6 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
         }
   )
 
-  console.log(selectedFacets)
-
   const setSortOptions = (value: string) => {
     setSortDisplay(value)
     switch(value) {
@@ -289,7 +287,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                   </div>
                 )}
               </div>
-            <ol className="dc-dataset-search-list ds-u-padding--0">
+            <ol className="dc-dataset-search-list ds-u-padding--0" data-testid="results-list">
               {noResults && <Alert variation="error" heading="No results found." />}
               {data && Object.keys(data.data.results).map((key) => {
                   return data.data.results[key];
