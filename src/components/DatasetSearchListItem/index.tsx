@@ -15,7 +15,6 @@ type SearchItemProps = {
   theme: string[];
   identifier: string;
   downloadUrl?: string;
-  showDownload: boolean;
   largeFile: boolean;
 }
 
@@ -25,7 +24,7 @@ const dangerousDescriptionElement = ({ children } : {children: string}) => (
 
 const DatasetSearchListItem = (props: SearchItemProps) => {
   const desktop = useMediaQuery({ minWidth: 1024 });
-  const { title, modified, description, theme, identifier, downloadUrl, showDownload = false, largeFile = false } = props;
+  const { title, modified, description, theme, identifier, downloadUrl, largeFile = false } = props;
 
   let linkContainerClasses = 'ds-l-col--12 ds-u-margin-bottom--2';
   let linkClasses = 'ds-c-button ds-u-display--block ds-u-text-align--left';
@@ -84,7 +83,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
               </Link>
             </span>
           </li>
-          {(showDownload && downloadUrl )? (
+          {( downloadUrl ) ? (
             <li className={linkContainerClasses}>
               <span className={linkClasses}>
                 {largeFile ? (

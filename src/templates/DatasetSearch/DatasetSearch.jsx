@@ -272,17 +272,23 @@ const DatasetSearch = ({
               {noResults && <Alert variation="error" heading="No results found." />}
               {Object.keys(data.data.results).map((key) => {
                   return data.data.results[key];
-                }).map((item) => (
-                  <DatasetSearchListItem 
-                    title={item.title}
-                    modified={item.modified}
-                    description={item.description}
-                    theme={item.theme}
-                    identifier={item.identifier}
-                    showDownload={showDownloadIcon}
-                    largeFile={item.theme.includes('General Payments')} // Hardcoded for Open Payments for now, until we have a better way of detecting this
-                  />
-                ))}
+                }).map((item) => {
+                  function getDownloadUrl(item) {
+                    let distribution_array = item.distribution ? item.distribution : [];
+                    return distribution_array.length ? item.distribution[0].downloadURL : null;
+                  }
+                  return (
+                    <DatasetSearchListItem 
+                      title={item.title}
+                      modified={item.modified}
+                      description={item.description}
+                      theme={item.theme}
+                      identifier={item.identifier}
+                      downloadUrl={showDownloadIcon && getDownloadUrl(item)}
+                      largeFile={item.theme.includes('General Payments')} // Hardcoded for Open Payments for now, until we have a better way of detecting this
+                    />
+                  )
+                })}
             </ol>
             {data.data.total != 0 && (
               <Pagination

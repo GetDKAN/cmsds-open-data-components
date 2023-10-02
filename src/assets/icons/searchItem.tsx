@@ -1,3 +1,4 @@
+import React from 'react'
 type IconProps = {
   id: string;
 };
