@@ -1,6 +1,6 @@
 {
   "name": "@civicactions/cmsds-open-data-components",
-  "version": "3.0.0-alpha.3",
+  "version": "3.0.0-alpha.5",
   "description": "Components for the open data catalog frontend using CMS Design System",
   "main": "dist/main.js",
   "source": "src/index.ts",
@@ -43,6 +43,8 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
+    "@types/dompurify": "^3.0.3",
+    "@types/react-text-truncate": "^0.14.2",
     "core-js": "^3.27.2",
     "css-loader": "^6.7.3",
     "jest": "29.5.0",

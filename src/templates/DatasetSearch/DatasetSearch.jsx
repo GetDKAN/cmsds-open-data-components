@@ -28,6 +28,7 @@ const DatasetSearch = ({
   defaultSort,
   showSort,
   showLargeFileWarning,
+  showDownloadIcon,
 }) => {
   const defaultSortBy = "";
   const defaultFulltext = "";
@@ -272,9 +273,15 @@ const DatasetSearch = ({
               {Object.keys(data.data.results).map((key) => {
                   return data.data.results[key];
                 }).map((item) => (
-                  <li className="ds-u-padding--0" key={item.identifier}>
-                    <DatasetSearchListItem item={item} updateFacets={updateSelectedFacets} />
-                  </li>
+                  <DatasetSearchListItem 
+                    title={item.title}
+                    modified={item.modified}
+                    description={item.description}
+                    theme={item.theme}
+                    identifier={item.identifier}
+                    showDownload={showDownloadIcon}
+                    largeFile={item.theme.includes('General Payments')} // Hardcoded for Open Payments for now, until we have a better way of detecting this
+                  />
                 ))}
             </ol>
             {data.data.total != 0 && (
@@ -320,6 +327,7 @@ DatasetSearch.defaultProps = {
   ],
   defaultSort: { defaultSort: 'modified', defaultOrder: 'desc' },
   showLargeFileWarning: false,
+  showDownloadIcon: false
 };
 
 export default withQueryProvider(DatasetSearch);
