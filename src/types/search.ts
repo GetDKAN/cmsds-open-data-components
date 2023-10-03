@@ -29,9 +29,12 @@ export type DatasetSearchPageProps = {
     redirect: boolean;
   }
   enableSort: boolean;
+  defaultSort: {
+    defaultSort: string;
+    defaultOrder: string;
+  }
   pageTitle: string;
   filterTitle: string;
-  showSort?: boolean;
   showLargeFileWarning?: boolean;
   introText: string;
 };

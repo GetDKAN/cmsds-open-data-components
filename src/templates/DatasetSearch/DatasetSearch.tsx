@@ -22,14 +22,13 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     surveyLink,
     additionalParams,
     enableSort,
+    defaultSort,
     pageTitle,
     filterTitle,
-    showSort,
     showLargeFileWarning,
     introText
   } = props;
-
-  const defaultSort = { defaultSort: 'modified', defaultOrder: 'desc' }
+  
   const sortOptions = [
     { label: 'Newest', value: 'newest'},
     { label: 'Oldest', value: 'oldest'},
@@ -274,7 +273,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                     </p>
                   )}
                 </div>
-                {showSort && (
+                {enableSort && (
                   <div className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--4 ds-u-sm-padding-right--0">
                     <Dropdown
                       options={sortOptions}
@@ -331,7 +330,7 @@ DatasetSearch.defaultProps = {
   fulltextPlaceholder: 'Search datasets',
   filterTitle: 'Tags',
   formClassName: 'ds-u-display--flex ds-u-justify-content--between ds-u-margin-bottom--2',
-  showSort: true,
+  enableSort: true,
   sortOptions: [
     { label: 'Newest', value: 'newest'},
     { label: 'Oldest', value: 'oldest'},
