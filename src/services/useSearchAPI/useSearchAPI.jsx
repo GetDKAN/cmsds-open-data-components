@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { updateSelectedFacetObject, fetchDatasets } from "./helpers";
+import { fetchDatasets } from "./helpers";
 
 const useSearchAPI = (
   rootUrl,
@@ -72,11 +72,6 @@ const useSearchAPI = (
     setPage(defaultPage);
   }
 
-  function updateSelectedFacets(currentFacet) {
-    const facets = updateSelectedFacetObject(currentFacet, selectedFacets);
-    setSelectedFacets(facets);
-  }
-
   useEffect(() => {
     if (totalItems !== null) {
       setPage(1);
@@ -108,7 +103,6 @@ const useSearchAPI = (
     setPageSize,
     setSort,
     setSortOrder,
-    updateSelectedFacets,
     setFulltext,
     resetFilters,
   };
