@@ -14,7 +14,7 @@ type SearchItemProps = {
   description: string;
   theme: string[];
   identifier: string;
-  downloadUrl?: string;
+  downloadUrl?: string | null;
   largeFile: boolean;
 }
 

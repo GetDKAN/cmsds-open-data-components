@@ -18,10 +18,8 @@
   font-weight: bold;
 }
 
-.dc-dataset-search--facets-container .ds-c-accordion__button {
-  display: flex;
-  justify-content: space-between;
-  padding: 16px 24px 16px 24px;
+.dkan-dataset-search--facet-container .ds-c-accordion__content {
+  max-height: 32rem;
 }
 
 .dc-dataset-search--clear-all-filters {
