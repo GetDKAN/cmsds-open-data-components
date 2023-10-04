@@ -304,7 +304,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                       theme={item.theme}
                       identifier={item.identifier}
                       downloadUrl={showDownloadIcon ? getDownloadUrl(item) : null}
-                      largeFile={item.theme.includes('General Payments')} // Hardcoded for Open Payments for now, until we have a better way of detecting this
+                      largeFile={item.theme && item.theme.includes('General Payments')} // Hardcoded for Open Payments for now, until we have a better way of detecting this
                     />
                   )
                 })}
