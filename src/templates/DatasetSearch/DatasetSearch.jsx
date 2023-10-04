@@ -128,9 +128,9 @@ const DatasetSearch = ({
     axios.get(`${rootUrl}/search/?${qs.stringify(params, {arrayFormat: 'comma',encode: false, skipEmptyString: true })}`)
   );
 
-  if (data && totalItems != data.data.total) setTotalItems(data.data.total);
+  if ((data && data.data.total) && totalItems != data.data.total) setTotalItems(data.data.total);
 
-  const { theme, keyword } = separateFacets(data ? data.data.facets : []);
+  const { theme, keyword } = (data && data.data.facets) ? separateFacets(data ? data.data.facets : []) : {theme: null, keyword: null};
 
   return (
     <section className="ds-l-container">
@@ -203,15 +203,17 @@ const DatasetSearch = ({
             </div>
             <ol className="dc-dataset-search-list ds-u-padding--0">
               {noResults && <Alert variation="error" heading="No results found." />}
-              {data && Object.keys(data.data.results).map((key) => {
+              {data && data.data.results ? Object.keys(data.data.results).map((key) => {
                   return data.data.results[key];
                 }).map((item) => (
                   <li className="ds-u-padding--0" key={item.identifier}>
                     <DatasetSearchListItem item={item} updateFacets={updateSelectedFacets} />
                   </li>
-                ))}
+                )): (
+                  <Alert variation="error" heading="Could not connect to the API." />
+                )}
             </ol>
-            {data && data.data.total != 0 && (
+            {(data && data.data.total) && data.data.total !== 0 && (
               <Pagination
                 id="test-default"
                 currentPage={Number(page)}
