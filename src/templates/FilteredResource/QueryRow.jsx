@@ -95,7 +95,7 @@ const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schem
             showMonthDropdown
             showYearDropdown
             dropdownMode="select"
-            className="ds-c-field"
+            className={"ds-l-md-col--4 ds-l-sm-col--8 ds-l-col--12 ds-u-padding--0 ds-u-sm-padding-right--2"}
             withPortal
             // popperPlacement="top-end"
             // popperModifiers={[
