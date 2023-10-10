@@ -39,7 +39,7 @@ const DesktopHeader = ({
               links={links.topnav}
               menuName="CMS Main Header"
               menuId="cmsheader"
-              menuClasses="ds-u-display--flex dc-c-header--links ds-u-font-size--small"
+              menuClasses="ds-u-display--flex ds-u-flex-direction--row dc-c-header--links ds-u-font-size--small"
             />
           </div>
         </div>
@@ -48,7 +48,7 @@ const DesktopHeader = ({
         <div className="ds-l-container">
           <div className="ds-l-row ds-u-align-items--center">
             <div className="ds-u-margin-right--5 ds-u-padding-y--3 dc-c-site-title">
-              <NavLink className="ds-c-link--inverse ds-h1" to="/">
+              <NavLink className="ds-c-link--inverse ds-text-heading--3xl" to="/">
                 <span className="">{siteName}</span>
               </NavLink>
             </div>
@@ -57,7 +57,7 @@ const DesktopHeader = ({
               wrapLabel
               menuName="CMS Site Main Nav"
               menuId="site"
-              menuClasses="ds-u-display--flex dc-c-header--links ds-u-align-items--center"
+              menuClasses="ds-u-display--flex ds-u-flex-direction--row dc-c-header--links ds-u-align-items--center"
               linkClasses={linkClasses}
             />
             <div className="dc-c-main-navigation--search ds-u-margin-left--auto ds-u-lg-padding-left--1 ds-u-xl-padding-left--3">

@@ -18,7 +18,7 @@ const DatasetAdditionalInformation = ({ datasetInfo, id, metadataMapping}) => {
   const rows = buildRows(metadataMapping, datasetInfo);
   return (
     <div className="dc-c-additional-info-table ds-u-margin-bottom--6">
-      <h2>Additional Information</h2>
+      <h2 className="ds-text-heading--2xl ds-u-margin-y--2">Additional Information</h2>
       <Table compact striped>
         <TableHead>
           <TableRow>

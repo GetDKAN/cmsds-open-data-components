@@ -132,7 +132,7 @@ const FilteredResourceBody = ({
           )}
           {dataset.identifier && (
             <div ref={apiDocs}>
-              <h2>Try the API</h2>
+              <h2 className="ds-text-heading--2xl ds-u-margin-y--2">Try the API</h2>
               <SwaggerUI
                 url={`${rootUrl}/metastore/schemas/dataset/items/${
                   dataset.identifier

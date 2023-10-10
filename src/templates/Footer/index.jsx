@@ -25,10 +25,10 @@ const Footer = ({
     <footer className="dc-c-footer">
       {showEmail && (
         <div className="dc-c-emailupdates">
-          <div className="ds-l-container ds-u-padding-y--5">
+          <div className="ds-l-container ds-u-padding-y--5 ds-u-padding-x--0">
             <div className="ds-l-row ds-u-align-items--center">
               <div className="ds-l-md-col--8">
-                <h2 className="ds-h4">{emailTitle}</h2>
+                <h2 className="ds-text-heading--lg">{emailTitle}</h2>
                 <p>{emailBody}</p>
               </div>
               <div className="ds-l-md-col--4 ds-u-padding-left--7">
@@ -53,7 +53,7 @@ const Footer = ({
                   }`}
                 >
                   <div className="ds-u-margin-right--6 ds-u-margin-bottom--2">
-                    <h2 className="ds-h6 dc-footer--heading ds-u-margin-bottom--2">
+                    <h2 className="ds-text-heading--sm dc-footer--heading ds-u-margin-bottom--2">
                       Open data tools
                     </h2>
                     <ul className="ds-u-font-size--small ds-u-margin-bottom--3">
@@ -65,7 +65,7 @@ const Footer = ({
                     </ul>
                   </div>
                   <div>
-                    <h2 className="ds-h6 dc-footer--heading ds-u-margin-bottom--2">
+                    <h2 className="ds-text-heading--sm dc-footer--heading ds-u-margin-bottom--2">
                       Additional resources
                     </h2>
                     <ul className="ds-u-font-size--small">
@@ -130,7 +130,7 @@ const Footer = ({
                 </div>
                 {trademarkContent}
                 {socialMediaLinks && (
-                  <ul className="ds-u-display--flex">
+                  <ul className="ds-u-display--flex ds-u-flex-direction--row">
                     {socialMediaLinks.facebook && socialMediaLinks.facebook.url && (
                       <li className="ds-u-margin-right--1">
                         <a href={socialMediaLinks.facebook.url}>
