@@ -12,7 +12,6 @@ import {
   Accordion,
   AccordionItem,
 } from '@cmsgov/design-system';
-import ResourceFilter from '../../components/ResourceFilter';
 import ResourceHeader from '../../components/ResourceHeader';
 import ResourcePreview from '../../components/ResourcePreview';
 import ResourceFooter from '../../components/ResourceFooter';
