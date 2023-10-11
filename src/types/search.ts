@@ -37,7 +37,14 @@ export type DatasetSearchPageProps = {
   filterTitle: string;
   showLargeFileWarning?: boolean;
   introText: string;
+  showDownloadIcon: boolean;
 };
+
+export type DistributionItemType = {
+  distribution: {
+    downloadURL: string;
+  }[];
+}
 
 export type SearchFacetsPropTypes = {
   facets: SearchAPIFacetType[];

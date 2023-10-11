@@ -13,7 +13,7 @@ import { separateFacets, transformUrlParamsToSearchObject } from '../../services
 
 import axios from 'axios';
 import './dataset-search.scss';
-import { DatasetSearchPageProps, SelectedFacetsType, SidebarFacetTypes } from '../../types/search';
+import { DatasetSearchPageProps, SelectedFacetsType, SidebarFacetTypes, DistributionItemType } from '../../types/search';
 import { TextFieldValue } from '@cmsgov/design-system/dist/types/TextField/TextField';
 
 const DatasetSearch = (props: DatasetSearchPageProps) => {
@@ -26,7 +26,8 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     pageTitle,
     filterTitle,
     showLargeFileWarning,
-    introText
+    introText,
+    showDownloadIcon,
   } = props;
   
   const sortOptions = [
@@ -290,11 +291,23 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
               {noResults && <Alert variation="error" heading="No results found." />}
               {data && Object.keys(data.data.results).map((key) => {
                   return data.data.results[key];
-                }).map((item) => (
-                  <li className="ds-u-padding--0" key={item.identifier}>
-                    <DatasetSearchListItem item={item} updateFacets={updateSelectedFacets} />
-                  </li>
-                ))}
+                }).map((item) => {
+                  function getDownloadUrl(item: DistributionItemType) {
+                    let distribution_array = item.distribution ? item.distribution : [];
+                    return distribution_array.length ? item.distribution[0].downloadURL : null;
+                  }
+                  return (
+                    <DatasetSearchListItem 
+                      title={item.title}
+                      modified={item.modified}
+                      description={item.description}
+                      theme={item.theme}
+                      identifier={item.identifier}
+                      downloadUrl={showDownloadIcon ? getDownloadUrl(item) : null}
+                      largeFile={item.theme && item.theme.includes('General Payments')} // Hardcoded for Open Payments for now, until we have a better way of detecting this
+                    />
+                  )
+                })}
             </ol>
             {data && data.data.total != 0 && (
               <Pagination
@@ -339,6 +352,7 @@ DatasetSearch.defaultProps = {
   ],
   defaultSort: { defaultSort: 'modified', defaultOrder: 'desc' },
   showLargeFileWarning: false,
+  showDownloadIcon: false
 };
 
 export default withQueryProvider(DatasetSearch);
