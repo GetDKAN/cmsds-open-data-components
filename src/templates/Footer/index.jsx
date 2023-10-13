@@ -56,7 +56,7 @@ const Footer = ({
                     <h2 className="ds-text-heading--sm dc-footer--heading ds-u-margin-bottom--2">
                       Open data tools
                     </h2>
-                    <ul className="ds-u-font-size--small ds-u-margin-bottom--3">
+                    <ul className="ds-u-font-size--sm ds-u-margin-bottom--3">
                       {footerOpenDataToolLinks.map((link) => (
                         <li className="ds-u-margin-bottom--1" key={link.id}>
                           <NavLink link={link} className="dc-menu-item" />
@@ -68,7 +68,7 @@ const Footer = ({
                     <h2 className="ds-text-heading--sm dc-footer--heading ds-u-margin-bottom--2">
                       Additional resources
                     </h2>
-                    <ul className="ds-u-font-size--small">
+                    <ul className="ds-u-font-size--sm">
                       {footerAdditionalResourcesLinks
                         .filter((link) => {
                           const noOnClick = Object.keys(link).findIndex((l) => l === 'onClick');
@@ -108,7 +108,7 @@ const Footer = ({
                 md ? 'ds-u-padding-left--7' : ''
               } ${sm ? ' ds-u-padding-left--4' : ''} ds-u-padding-y--7`}
             >
-              <div className="ds-u-font-size--small">
+              <div className="ds-u-font-size--sm">
                 <div>
                   <a
                     href="http://www.hhs.gov/"
@@ -322,7 +322,7 @@ const Footer = ({
           </div>
         </div>
       </div>
-      <div className="dc-c-footer__utility ds-l-container ds-u-padding-y--2 ds-u-font-size--small">
+      <div className="dc-c-footer__utility ds-l-container ds-u-padding-y--2 ds-u-font-size--sm">
         <div className="ds-l-row ">
           <div className="ds-l-col--12 ds-u-padding-y--3">
             <ul

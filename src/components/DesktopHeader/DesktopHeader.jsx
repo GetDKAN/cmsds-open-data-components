@@ -39,7 +39,7 @@ const DesktopHeader = ({
               links={links.topnav}
               menuName="CMS Main Header"
               menuId="cmsheader"
-              menuClasses="ds-u-display--flex ds-u-flex-direction--row dc-c-header--links ds-u-font-size--small"
+              menuClasses="ds-u-display--flex ds-u-flex-direction--row dc-c-header--links ds-u-font-size--sm"
             />
           </div>
         </div>

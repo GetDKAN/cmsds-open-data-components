@@ -162,7 +162,7 @@ const DatasetBody = ({
 
           {Object.keys(distribution).length && fileFormat === 'CSV' ? (
             <div className="dc-c-dataset-tags ds-u-margin-bottom--3 ds-u-padding--2 ds-u-border ds-u-border--1">
-              <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-top--0 ds-u-margin-bottom--2 ds-u-padding-bottom--2">
+              <h2 className="ds-u-color--primary ds-u-font-size--xl ds-u-margin-top--0 ds-u-margin-bottom--2 ds-u-padding-bottom--2">
                 API
               </h2>
               <Button
