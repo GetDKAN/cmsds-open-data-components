@@ -5,7 +5,6 @@ import { Accordion, AccordionItem, Button, Dropdown, TextField } from '@cmsgov/d
 import { buildOperatorOptions, convertUTCToLocalDate, cleanText } from './functions';
 import 'react-datepicker/dist/react-datepicker.css';
 import CloseIcon from '../../assets/icons/close';
-import './query-row.scss';
 
 function getStartDate(condition, schema, id) {
   if (schema[id].fields[condition.property].mysql_type === 'date') {
