@@ -104,7 +104,7 @@ const MobileHeader = ({
                 links={links.topnav}
                 menuName="CMS Main Header"
                 menuId="cmsheader"
-                menuClasses="ds-u-display--flex dc-c-header--links ds-u-font-size--sm"
+                menuClasses="ds-u-display--flex ds-u-flex-direction--row dc-c-header--links ds-u-font-size--sm ds-u-margin-bottom--2"
               />
             </div>
           )}
@@ -186,7 +186,7 @@ const MobileHeader = ({
               menuName="CMS Main Header"
               menuId="cms-mobile-header"
               linkClasses="ds-u-margin-left--1 ds-u-margin-bottom--2"
-              menuClasses="dc-c-header--links ds-u-font-size--sm"
+              menuClasses="dc-c-header--links ds-u-font-size--sm ds-u-margin-bottom--2"
             />
           </div>
         )}

@@ -68,7 +68,7 @@ const DatasetBody = ({
         <div className="ds-l-md-col--9 ds-l-sm-col--12">
           <h1 className="ds-title ds-u-word-break">{dataset.title}</h1>
           <div className="ds-l-row">
-            <p className="ds-l-col--6">
+            <p className="ds-l-col--6 ds-u-margin-bottom--2">
               {dataset.theme ? <Badge variation="info">{dataset.theme[0].data}</Badge> : null}
             </p>
             {dataset.modified && (
