@@ -55,7 +55,7 @@ const DatasetSearchListItem = ({ item, updateFacets }) => {
             {keyword.map((k) => (
               <li key={k}>
                 <Badge
-                  className="ds-u-radius ds-u-fill--primary-alt-lightest ds-u-color--base ds-u-margin-right--1 ds-u-margin-bottom--2"
+                  className="ds-u-radius ds-u-fill--info-lightest ds-u-color--base ds-u-margin-right--1 ds-u-margin-bottom--2"
                   variation="info"
                 >
                   {k}

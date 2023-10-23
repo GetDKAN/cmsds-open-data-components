@@ -6,7 +6,7 @@ const ResourceInformation = ({ resource }) => {
   const { count, columns } = resource;
   return (
     <div className="dc-c-resource-info-table">
-      <h2 className="ds-text-heading--2xl ds-u-margin-y--2">About this Resource</h2>
+      <h2 className="ds-text-heading--2xl ds-u-margin-y--3">About this Resource</h2>
       <Table compact striped>
         <TableRow>
           <TableCell component="th" scope="row">

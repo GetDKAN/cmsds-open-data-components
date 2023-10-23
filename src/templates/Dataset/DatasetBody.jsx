@@ -80,7 +80,7 @@ const DatasetBody = ({
           <p className="dc-c-metadata-description" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(dataset.description) }} />
           {resource.columns && Object.keys(resource.schema).length ? (
             <>
-              <h2 className="dc-resource-header ds-text-heading--2xl ds-u-margin-y--2">Resource Preview</h2>
+              <h2 className="dc-resource-header ds-text-heading--2xl ds-u-margin-y--3">Resource Preview</h2>
               {resource.columns ? (
                 <div>
                   <ResourceHeader
