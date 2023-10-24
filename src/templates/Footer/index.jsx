@@ -358,7 +358,7 @@ Footer.defaultProps = {
         A federal government website managed and paid for by the U.S. Centers for Medicare &amp;
         Medicaid Services.
       </p>
-      <p>7500 Security Boulevard, Baltimore, MD 21244</p>
+      <p className="ds-u-padding-bottom--2">7500 Security Boulevard, Baltimore, MD 21244</p>
     </div>
   ),
 };
