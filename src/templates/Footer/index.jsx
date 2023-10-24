@@ -25,11 +25,11 @@ const Footer = ({
     <footer className="dc-c-footer">
       {showEmail && (
         <div className="dc-c-emailupdates">
-          <div className="ds-l-container ds-u-padding-y--5 ds-u-padding-x--0">
+          <div className="ds-l-container ds-u-padding-y--5">
             <div className="ds-l-row ds-u-align-items--center">
               <div className="ds-l-md-col--8">
                 <h2 className="ds-text-heading--lg">{emailTitle}</h2>
-                <p>{emailBody}</p>
+                <p className="ds-u-padding-bottom--2">{emailBody}</p>
               </div>
               <div className="ds-l-md-col--4 ds-u-padding-left--7">
                 <Button onDark variation="solid" href={emailLink}>{emailButton}</Button>
@@ -42,11 +42,10 @@ const Footer = ({
         <div className={`${md ? 'ds-l-container' : ''}`}>
           <div className="ds-l-row ds-u-margin--0">
             <div
-              className={`dc-c-footer__resources ds-l-md-col--7 ds-l-sm-col--12 ds-u-padding-top--7 ds-u-padding-bottom--4 ${
-                md ? 'ds-u-padding-x--0' : ''
-              } ${sm ? 'ds-u-padding-x--4' : ''}`}
+              className={`dc-c-footer__resources ds-l-md-col--7 ds-l-sm-col--12 ds-u-padding-top--7 ds-u-padding-bottom--4
+                ${xs ? 'ds-u-padding-x--0' : ''}`}
             >
-              <div className="ds-l-lg-col--9 ds-l-md-col--11 ds-u-padding-x--0">
+              <div className="ds-l-lg-col--9 ds-l-md-col--11">
                 <div
                   className={`ds-u-display--flex ${
                     xs ? 'ds-u-flex-direction--column' : 'ds-u-flex-direction--row'
