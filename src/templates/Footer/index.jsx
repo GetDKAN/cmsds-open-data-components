@@ -28,8 +28,8 @@ const Footer = ({
           <div className="ds-l-container ds-u-padding-y--5">
             <div className="ds-l-row ds-u-align-items--center">
               <div className="ds-l-md-col--8">
-                <h2 className="ds-h4">{emailTitle}</h2>
-                <p>{emailBody}</p>
+                <h2 className="ds-text-heading--lg">{emailTitle}</h2>
+                <p className="ds-u-padding-bottom--2">{emailBody}</p>
               </div>
               <div className="ds-l-md-col--4 ds-u-padding-left--7">
                 <Button onDark variation="solid" href={emailLink}>{emailButton}</Button>
@@ -42,21 +42,20 @@ const Footer = ({
         <div className={`${md ? 'ds-l-container' : ''}`}>
           <div className="ds-l-row ds-u-margin--0">
             <div
-              className={`dc-c-footer__resources ds-l-md-col--7 ds-l-sm-col--12 ds-u-padding-top--7 ds-u-padding-bottom--4 ${
-                md ? 'ds-u-padding-x--0' : ''
-              } ${sm ? 'ds-u-padding-x--4' : ''}`}
+              className={`dc-c-footer__resources ds-l-md-col--7 ds-l-sm-col--12 ds-u-padding-top--7 ds-u-padding-bottom--4
+                ${xs ? 'ds-u-padding-x--0' : ''}`}
             >
-              <div className="ds-l-lg-col--9 ds-l-md-col--11 ds-u-padding-x--0">
+              <div className="ds-l-lg-col--9 ds-l-md-col--11">
                 <div
                   className={`ds-u-display--flex ${
                     xs ? 'ds-u-flex-direction--column' : 'ds-u-flex-direction--row'
                   }`}
                 >
                   <div className="ds-u-margin-right--6 ds-u-margin-bottom--2">
-                    <h2 className="ds-h6 dc-footer--heading ds-u-margin-bottom--2">
+                    <h2 className="ds-text-heading--sm dc-footer--heading ds-u-margin-bottom--2">
                       Open data tools
                     </h2>
-                    <ul className="ds-u-font-size--small ds-u-margin-bottom--3">
+                    <ul className="ds-u-font-size--sm ds-u-margin-bottom--3">
                       {footerOpenDataToolLinks.map((link) => (
                         <li className="ds-u-margin-bottom--1" key={link.id}>
                           <NavLink link={link} className="dc-menu-item" />
@@ -65,10 +64,10 @@ const Footer = ({
                     </ul>
                   </div>
                   <div>
-                    <h2 className="ds-h6 dc-footer--heading ds-u-margin-bottom--2">
+                    <h2 className="ds-text-heading--sm dc-footer--heading ds-u-margin-bottom--2">
                       Additional resources
                     </h2>
-                    <ul className="ds-u-font-size--small">
+                    <ul className="ds-u-font-size--sm">
                       {footerAdditionalResourcesLinks
                         .filter((link) => {
                           const noOnClick = Object.keys(link).findIndex((l) => l === 'onClick');
@@ -108,7 +107,7 @@ const Footer = ({
                 md ? 'ds-u-padding-left--7' : ''
               } ${sm ? ' ds-u-padding-left--4' : ''} ds-u-padding-y--7`}
             >
-              <div className="ds-u-font-size--small">
+              <div className="ds-u-font-size--sm">
                 <div>
                   <a
                     href="http://www.hhs.gov/"
@@ -130,7 +129,7 @@ const Footer = ({
                 </div>
                 {trademarkContent}
                 {socialMediaLinks && (
-                  <ul className="ds-u-display--flex">
+                  <ul className="ds-u-display--flex ds-u-flex-direction--row">
                     {socialMediaLinks.facebook && socialMediaLinks.facebook.url && (
                       <li className="ds-u-margin-right--1">
                         <a href={socialMediaLinks.facebook.url}>
@@ -322,7 +321,7 @@ const Footer = ({
           </div>
         </div>
       </div>
-      <div className="dc-c-footer__utility ds-l-container ds-u-padding-y--2 ds-u-font-size--small">
+      <div className="dc-c-footer__utility ds-l-container ds-u-padding-y--2 ds-u-font-size--sm">
         <div className="ds-l-row ">
           <div className="ds-l-col--12 ds-u-padding-y--3">
             <ul
@@ -359,7 +358,7 @@ Footer.defaultProps = {
         A federal government website managed and paid for by the U.S. Centers for Medicare &amp;
         Medicaid Services.
       </p>
-      <p>7500 Security Boulevard, Baltimore, MD 21244</p>
+      <p className="ds-u-padding-bottom--2">7500 Security Boulevard, Baltimore, MD 21244</p>
     </div>
   ),
 };

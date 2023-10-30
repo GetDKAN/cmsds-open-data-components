@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { Button } from '@cmsgov/design-system';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import SearchModal from '../SearchModal';
 import NavBar from '../NavBar/Navbar';
 import cmsLogo from '../../assets/images/CMSGovLogo-O.png';
@@ -104,7 +104,7 @@ const MobileHeader = ({
                 links={links.topnav}
                 menuName="CMS Main Header"
                 menuId="cmsheader"
-                menuClasses="ds-u-display--flex dc-c-header--links ds-u-font-size--small"
+                menuClasses="ds-u-display--flex ds-u-flex-direction--row dc-c-header--links ds-u-font-size--sm ds-u-margin-bottom--2"
               />
             </div>
           )}
@@ -121,9 +121,9 @@ const MobileHeader = ({
           {mobile ? <span className="ds-u-visibility--screen-reader">Menu</span> : <>Menu</>}
         </Button>
         <div className="ds-u-padding-y--3 dc-c-site-title">
-          <Link to="/">
-            <span className="ds-h1">{siteName}</span>
-          </Link>
+          <NavLink className="ds-c-link--inverse ds-text-heading--3xl" to="/">
+            <span className="">{siteName}</span>
+          </NavLink>
         </div>
         {includeSearch && (
           <div className="dc-c-mobile-menu--search">
@@ -176,7 +176,7 @@ const MobileHeader = ({
           menuName="Main Nav"
           menuId="site"
           menuClasses="dc-c-header--links dc-c-header--mobile-links"
-          linkClasses="ds-u-margin-left--1 ds-u-padding-bottom--2 ds-h5"
+          linkClasses="ds-u-margin-left--1 ds-u-padding-bottom--2 ds-text-heading--md"
         />
         {mobile && (
           <div className="cms-mobile-header--container">
@@ -186,7 +186,7 @@ const MobileHeader = ({
               menuName="CMS Main Header"
               menuId="cms-mobile-header"
               linkClasses="ds-u-margin-left--1 ds-u-margin-bottom--2"
-              menuClasses="dc-c-header--links ds-u-font-size--small"
+              menuClasses="dc-c-header--links ds-u-font-size--sm ds-u-margin-bottom--2"
             />
           </div>
         )}

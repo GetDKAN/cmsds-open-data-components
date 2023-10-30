@@ -51,11 +51,11 @@ const DatasetSearchListItem = ({ item, updateFacets }) => {
       {truncatedDescription}
       <div>
         {keyword && (
-          <ul className="ds-u-padding--0 ds-u-display--flex ds-u-flex-wrap--wrap">
+          <ul className="ds-u-padding--0 ds-u-display--flex ds-u-flex-direction--row ds-u-flex-wrap--wrap">
             {keyword.map((k) => (
               <li key={k}>
                 <Badge
-                  className="ds-u-radius ds-u-fill--primary-alt-lightest ds-u-color--base ds-u-margin-right--1 ds-u-margin-bottom--2"
+                  className="ds-u-radius ds-u-fill--info-lightest ds-u-color--base ds-u-margin-right--1 ds-u-margin-bottom--2"
                   variation="info"
                 >
                   {k}

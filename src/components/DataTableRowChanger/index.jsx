@@ -6,7 +6,7 @@ const DataTableRowChanger = ({ setLimit, rowOptions, limit }) => {
   return (
     <div>
       <Dropdown
-        options={rowOptions.map((row) => ({ label: row, value: row }))}
+        options={rowOptions.map((row) => ({ label: row.toString(), value: row }))}
         size="small"
         label="Rows per page:"
         labelClassName="ds-u-margin-top--0"

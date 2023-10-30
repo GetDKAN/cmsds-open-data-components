@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { act } from 'react-dom/test-utils';
 import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import DatasetSearch from './index';
 import { selectedFacetsMessage } from '../../services/useSearchAPI/helpers';
 import { MemoryRouter } from 'react-router-dom';
@@ -51,7 +51,7 @@ describe('<DatasetSearchFacets />', () => {
 
     expect(screen.getByRole('heading', { name: 'Datasets' }));
     expect(screen.getByRole('textbox', { name: 'Search term' }));
-    expect(screen.getByRole('combobox', { name: 'Sort by' }));
+    expect(screen.getByText('Sort by', {selector: 'span'}));
     expect(screen.getByRole('button', { name: 'Search' }));
   });
 
