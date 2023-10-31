@@ -5,7 +5,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { render, screen, act } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import ResourceFilter from './index';
 
 const columns = ['column_1', 'column_2', 'column_3'];
@@ -93,11 +93,11 @@ describe('Resource Filter Functions', () => {
   });
   test('renders an empty field on clean start', async () => {
     render(BasicFilter);
-    expect(screen.getByLabelText('Filter column')).toBeInTheDocument();
-    expect(screen.getByLabelText('Filter operator')).toBeInTheDocument();
+    expect(screen.getByLabelText('Filter column', {selector: 'select'})).toBeInTheDocument();
+    expect(screen.getByLabelText('Filter operator', {selector: 'select'})).toBeInTheDocument();
     expect(screen.getByLabelText('Filter value')).toBeInTheDocument();
-    expect(screen.getByDisplayValue('Select column')).toBeInTheDocument();
-    expect(screen.getByDisplayValue('--')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Select column Filter column' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: '-- Filter operator'})).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Remove filter' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: '+ Add another filter' })).toBeInTheDocument();
   });
@@ -132,8 +132,8 @@ describe('Resource Filter Functions', () => {
   test('opens pre-filled', async () => {
     render(PreFilledFilter);
     expect(screen.getByDisplayValue('column_2')).toBeInTheDocument();
-    expect(screen.getByRole('option', { name: 'column_2' }).selected).toBe(true);
-    expect(screen.getByRole('option', { name: 'Contains' }).selected).toBe(true);
+    expect(screen.getByRole('button', { name: 'column_2 Filter column' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Contains Filter operator' })).toBeTruthy();
     expect(screen.getByLabelText('Filter value')).not.toBeDisabled();
     expect(screen.getByDisplayValue('dkan')).toBeInTheDocument();
   });
