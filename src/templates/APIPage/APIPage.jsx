@@ -2,6 +2,7 @@ import React from 'react';
 import qs from 'qs';
 import SwaggerUI from 'swagger-ui-react';
 import 'swagger-ui-react/swagger-ui.css';
+import './swagger.scss';
 
 const APIPage = ({ hideAuth, additionalParams, rootUrl }) => {
   const hasACA = additionalParams && additionalParams.ACA ? true : false;
