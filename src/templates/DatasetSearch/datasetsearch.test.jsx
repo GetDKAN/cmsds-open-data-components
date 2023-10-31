@@ -61,7 +61,7 @@ describe('<DatasetSearch />', () => {
     const dataCurrentResultsElement = screen.getByTestId('currentResults');
 
     expect(dataCurrentResultsElement).toBeInTheDocument();
-    expect(screen.getByRole('combobox', { name: 'Sort' }));
+    expect(screen.getByText('Sort', {selector: 'span'}));
     expect(screen.getByTestId('results-list'))
   })
 
