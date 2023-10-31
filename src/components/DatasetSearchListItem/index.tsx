@@ -51,7 +51,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
           <span className="ds-l-col--12 ds-u-text-align--right ds-u-padding-top--2">
             Updated <TransformedDate date={modified} />
           </span>
-          <h2 className="ds-l-col--12">
+          <h2 className="ds-l-col--12 ds-text-heading--2xl">
             <Link to={`/dataset/${identifier}`}>{title}</Link>
           </h2>
         </div>

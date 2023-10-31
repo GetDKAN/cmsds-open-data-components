@@ -14,7 +14,7 @@ import { separateFacets, transformUrlParamsToSearchObject } from '../../services
 import axios from 'axios';
 import './dataset-search.scss';
 import { DatasetSearchPageProps, SelectedFacetsType, SidebarFacetTypes, DistributionItemType } from '../../types/search';
-import { TextFieldValue } from '@cmsgov/design-system/dist/types/TextField/TextField';
+import { TextFieldValue } from '@cmsgov/design-system/dist/react-components/types/TextField/TextField';
 
 const DatasetSearch = (props: DatasetSearchPageProps) => {
   const {
