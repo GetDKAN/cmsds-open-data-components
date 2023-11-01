@@ -14,7 +14,7 @@ import { separateFacets, transformUrlParamsToSearchObject } from '../../services
 import axios from 'axios';
 import './dataset-search.scss';
 import { DatasetSearchPageProps, SelectedFacetsType, SidebarFacetTypes, DistributionItemType } from '../../types/search';
-import { TextFieldValue } from '@cmsgov/design-system/dist/types/TextField/TextField';
+import { TextFieldValue } from '@cmsgov/design-system/dist/react-components/types/TextField/TextField';
 
 const DatasetSearch = (props: DatasetSearchPageProps) => {
   const {
@@ -184,9 +184,9 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     axios.get(`${rootUrl}/search/?${qs.stringify(params, {arrayFormat: 'comma',encode: false })}`)
   );
 
-  if (data && totalItems != data.data.total) setTotalItems(data.data.total);
+  if ((data && data.data.total) && totalItems != data.data.total) setTotalItems(data.data.total);
 
-  const facets: SidebarFacetTypes = separateFacets(data ? data.data.facets : []);
+  const facets: SidebarFacetTypes = (data && data.data.facets) ? separateFacets(data ? data.data.facets : []) :  {theme: null, keyword: null};
 
   return (
     <>
@@ -267,7 +267,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
             <>
               <div className="ds-u-display--flex ds-u-justify-content--between ds-u-align-items--end ds-u-flex-wrap--reverse ds-u-sm-flex-wrap--wrap">
                 <div className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--8">
-                  {currentResultNumbers && (
+                  {(currentResultNumbers && data) && (
                     <p className="ds-u-margin-y--0" role="region" aria-live="polite" data-testid="currentResults" >
                       Showing {currentResultNumbers.startingNumber} -{' '}
                       {currentResultNumbers.endingNumber} of {data ? data.data.total : ""} datasets
@@ -289,7 +289,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
               </div>
             <ol className="dc-dataset-search-list ds-u-padding--0" data-testid="results-list">
               {noResults && <Alert variation="error" heading="No results found." />}
-              {data && Object.keys(data.data.results).map((key) => {
+              {data && data.data.results ? Object.keys(data.data.results).map((key) => {
                   return data.data.results[key];
                 }).map((item) => {
                   function getDownloadUrl(item: DistributionItemType) {
@@ -307,9 +307,11 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                       largeFile={item.theme && item.theme.includes('General Payments')} // Hardcoded for Open Payments for now, until we have a better way of detecting this
                     />
                   )
-                })}
+                }) : (
+                  <Alert variation="error" heading="Could not connect to the API." />
+                )}
             </ol>
-            {data && data.data.total != 0 && (
+            {(data && data.data.total) && data.data.total != 0 && (
               <Pagination
                 currentPage={Number(page)}
                 totalPages={Math.ceil(Number(data.data.total) / pageSize)}

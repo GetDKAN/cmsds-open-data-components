@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { act } from 'react-dom/test-utils';
 import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import DatasetSearch from './index';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -61,7 +61,7 @@ describe('<DatasetSearch />', () => {
     const dataCurrentResultsElement = screen.getByTestId('currentResults');
 
     expect(dataCurrentResultsElement).toBeInTheDocument();
-    expect(screen.getByRole('combobox', { name: 'Sort' }));
+    expect(screen.getByText('Sort', {selector: 'span'}));
     expect(screen.getByTestId('results-list'))
   })
 
