@@ -44,36 +44,32 @@ const SearchModal = ({
         <Dialog
           className="dc-c-search-dialog"
           onExit={() => setModalSearch(false)}
-          getApplicationNode={() => document.getElementById(appNodeId)}
-          closeButtonText={<>Close</>}
           heading={`${headingText}`}
-        >
-          {searchModalText &&
-            <p>{searchModalText}</p>
-          }
-          <form
-            className="ds-u-display--flex ds-u-align-items--stretch ds-u-flex-wrap--nowrap"
-            onSubmit={(e) => {
-              searchForDataset(e);
-            }}
-          >
-            <TextField
-              value={modalSearchTerm}
-              fieldClassName="ds-u-display--inline-block"
-              className="ds-l-col--9"
-              label="Search Term"
-              name="search-modal"
-              labelClassName="ds-u-visibility--screen-reader"
-              onChange={(e) => setModalSearchTerm(e.target.value)}
-            />
-            <Button type="submit" className="ds-l-col--3">
-              <span className="fas fa-search small-text ds-u-sm-display--none" />
-              <span className="full-text ds-u-display--none ds-u-sm-display--inline-block">
-                Search
-              </span>
-            </Button>
-          </form>
-        </Dialog>
+          actions= {<>
+            <form
+              className="ds-u-display--flex ds-u-align-items--stretch ds-u-flex-wrap--nowrap"
+              onSubmit={(e) => {
+                searchForDataset(e);
+              }}
+            >
+              <TextField
+                value={modalSearchTerm}
+                fieldClassName="ds-u-display--inline-block"
+                className="ds-l-col--9"
+                label="Search Term"
+                name="search-modal"
+                labelClassName="ds-u-visibility--screen-reader"
+                onChange={(e) => setModalSearchTerm(e.target.value)}
+              />
+              <Button type="submit" className="ds-l-col--3">
+                <span className="fas fa-search small-text ds-u-sm-display--none" />
+                <span className="full-text ds-u-display--none ds-u-sm-display--inline-block">
+                  Search
+                </span>
+              </Button>
+            </form>
+          </>}
+        />
       )}
     </>
   );
