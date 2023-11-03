@@ -5,12 +5,12 @@ import DataTableRowChanger from './index';
 
 describe('<DataTableRowChanger />', () => {
   test('Renders 4 buttons by default', () => {
-    render(<DataTableRowChanger setTablePadding={(p) => console.log(p)} setLimit={() => {return;}} />);
+    render(<DataTableRowChanger limit={25} setLimit={() => {return;}} />);
     expect(screen.getAllByText(/Rows per page:/i)).toBeTruthy();
   });
 
   test('Renders 2 buttons when given an array of 2 rowOptions', () => {
-    render(<DataTableRowChanger setTablePadding={(p) => console.log(p)} rowOptions={[5, 8]} setLimit={() => {return;}} />);
+    render(<DataTableRowChanger limit={25} setLimit={() => {return;}} />);
     expect(screen.getAllByText(/Rows per page:/i)).toBeTruthy();
   });
 });
