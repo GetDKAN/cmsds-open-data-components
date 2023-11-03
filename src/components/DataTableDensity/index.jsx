@@ -11,12 +11,11 @@ const DataTableDensity = ({ setTablePadding, tablePadding }) => {
           { label: 'Normal', value: 'ds-u-padding-y--1' },
           { label: 'Expanded', value: 'ds-u-padding-y--2' },
         ]}
-        size="small"
         label="Display density:"
         labelClassName="ds-u-margin-top--0"
         name="datatable_display_density"
         onChange={(e) => setTablePadding(e.target.value)}
-        defaultValue={'ds-u-padding-y--1'}
+        defaultValue={tablePadding}
       />
     </div>
   );
