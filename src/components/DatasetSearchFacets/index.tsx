@@ -5,6 +5,10 @@ import './dataset-search-facets.scss';
 
 const SearchFacets = (props: SearchFacetsPropTypes) => {
   const { facets, title, onClickFunction, selectedFacets = [] } = props;
+  const filteredFacets = facets .filter((f: SearchAPIFacetType) => {
+    return Number(f.total) > 0 || selectedFacets.findIndex((i) => i === f.name) !== -1;
+  });
+
   return (
     <div className="dkan-dataset-search--facet-container ds-u-margin-bottom--4">
       <Accordion>
@@ -14,10 +18,7 @@ const SearchFacets = (props: SearchFacetsPropTypes) => {
           defaultOpen
         >
           <ul>
-            {facets
-              .filter((f: SearchAPIFacetType) => {
-                return Number(f.total) > 0;
-              })
+            {filteredFacets.length ? filteredFacets
               .map((f: SearchAPIFacetType) => {
                 return (
                   <li key={f.name as React.Key}>
@@ -32,7 +33,9 @@ const SearchFacets = (props: SearchFacetsPropTypes) => {
                     />
                   </li>
                 );
-              })}
+              }) : (
+                <p className="ds-h5">No matching facets found.</p>
+              )}
           </ul>
         </AccordionItem>
       </Accordion>
