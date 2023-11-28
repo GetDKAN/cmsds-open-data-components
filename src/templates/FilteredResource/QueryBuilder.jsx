@@ -4,6 +4,7 @@ import { Accordion, AccordionItem, Button, Dropdown, TextField } from '@cmsgov/d
 import QueryRow from './QueryRow';
 import QueryTitle from './QueryTitle';
 import { buildOperatorOptions } from './functions';
+import "./query-builder.scss";
 
 function updateQueryForDatastore(condition) {
   let cond = condition;
