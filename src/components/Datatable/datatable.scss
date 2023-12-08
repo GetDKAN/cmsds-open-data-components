@@ -25,13 +25,15 @@
     top: 0;
     bottom: 0;
     right: 0;
-    position: absolute;
+    position: absolute !important;
     background-color: #{var(--color-gray-light)};
     width: 10px;
     cursor: col-resize;
     min-width: 10px;
     display: block;
     margin-left: -10px;
+    padding: 0;
+    border: none;
     z-index: 1;
     &.isResizing,
     &:hover {
@@ -58,6 +60,8 @@
 .dc-c-sort--desc {
   padding-left: 8px;
   padding-right: 16px;
+  border: none;
+  background: none;
   &::after {
     font-family: 'Font Awesome 5 Pro';
     display: inline;
