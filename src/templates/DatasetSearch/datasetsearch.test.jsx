@@ -2,9 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { act } from 'react-dom/test-utils';
 import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import DatasetSearch from './index';
-import { selectedFacetsMessage } from '../../services/useSearchAPI/helpers';
 import { MemoryRouter } from 'react-router-dom';
 
 jest.mock('axios');
@@ -26,34 +25,45 @@ const data_results = {
   },
 };
 
-describe('selectedFacetsMessage', () => {
-  test('turns selectedFacets and titles into a string', () => {
-    const selectedFacets = { theme: ['dkan'], keyword: ['react'] };
-    expect(selectedFacetsMessage(selectedFacets, { theme: 'Categories', keyword: 'Tags' })).toEqual(
-      'Categories: dkan & Tags: react'
-    );
-  });
-});
-
-describe('<DatasetSearchFacets />', () => {
+describe('<DatasetSearch />', () => {
   test('Renders correctly', async () => {
     await axios.get.mockImplementation(() => Promise.resolve(data_results));
-    const { debug } = render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
+    render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
+    await act(async () => {
+      jest.useFakeTimers();
+    });
+
+    expect(screen.getByRole('heading', { name: 'Dataset Explorer' }));
+    expect(screen.getByRole('textbox', { name: 'Search datasets' }));
+    expect(screen.getByRole('button', { name: 'Search' }));
+  });
+  test('Renders correctly after performing a search', async () => {
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      value: jest.fn().mockImplementation((query) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: jest.fn(), // Deprecated
+        removeListener: jest.fn(), // Deprecated
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+      })),
+    });
+    await axios.get.mockImplementation(() => Promise.resolve(data_results));
     await act(async () => {
       // debug()
       jest.useFakeTimers();
+      render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
     });
-    // debug()
-    // expect(axios.get).toHaveBeenCalledWith(
-    //     `${rootUrl}/search/?`,
-    //   );
-    // await act(async () => {  });
 
-    expect(screen.getByRole('heading', { name: 'Datasets' }));
-    expect(screen.getByRole('textbox', { name: 'Search term' }));
-    expect(screen.getByRole('combobox', { name: 'Sort by' }));
-    expect(screen.getByRole('button', { name: 'Search' }));
-  });
+    const dataCurrentResultsElement = screen.getByTestId('currentResults');
+
+    expect(dataCurrentResultsElement).toBeInTheDocument();
+    expect(screen.getByText('Sort', {selector: 'span'}));
+    expect(screen.getByTestId('results-list'))
+  })
 
   test('Announces search results to screen readers', async () => {
     Object.defineProperty(window, "matchMedia", {
@@ -73,12 +83,10 @@ describe('<DatasetSearchFacets />', () => {
     await act(async () => {
       // debug()
       jest.useFakeTimers();
-      const { debug } = render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
+      render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
     });
 
     const dataCurrentResultsElement = screen.getByTestId('currentResults');
-
-    expect(dataCurrentResultsElement).toBeInTheDocument();
     expect(dataCurrentResultsElement).toHaveAttribute('role', 'region');
     expect(dataCurrentResultsElement).toHaveAttribute('aria-live');
     expect(['polite', 'assertive']).toContain(dataCurrentResultsElement.getAttribute('aria-live'));

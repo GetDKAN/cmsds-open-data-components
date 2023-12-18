@@ -29,7 +29,7 @@ const DataTablePageResults = ({
 };
 
 DataTablePageResults.defaultProps = {
-  className: 'data-table-results',
+  className: 'data-table-results ds-u-margin-bottom--2',
 };
 
 DataTablePageResults.propTypes = {
