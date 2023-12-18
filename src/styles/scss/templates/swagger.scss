@@ -1,21 +1,105 @@
-// Swagger overrides
-.swagger-ui .opblock .opblock-summary-path {
-  flex-shrink: 1 !important;
-  max-width: calc(100% - 110px) !important;
+/*
+This document provides overrides to Swagger UI, fixing accessibility issues.
+*/
+
+:root {
+  //Colors
+  --su-color--blue-dark: rgb(0, 51, 102);
+  --su-color--brown: rgba(136, 76, 0, 1);
+  --su-color--green-dark: rgb(0, 118, 65);
+  --su-color--green-muted: rgb(39, 117, 100);
+  --su-color--orange-dark: rgb(209, 0, 0);
+  --su-color--orange-light: rgba(209, 0, 0, .1);
+  --su-color--red-dark: rgb(151, 0, 0);
+  --su-color--red-light: rgba(211, 0, 0, .1);
+  --su-color--red: rgb(211, 0, 0);
 }
-.swagger-ui .opblock .opblock-summary-method {
-  min-width: auto !important;
-  @media (min-width: 765px) {
-    min-width: 80px !important;
+
+.swagger-ui {
+  .opblock {
+    .opblock-summary-path {
+      flex-shrink: 1 !important;
+      max-width: calc(100% - 110px) !important;
+    }
+
+    .opblock-summary-method {
+      color: #333;
+      min-width: auto !important;
+      @media (min-width: 765px) {
+        min-width: 80px !important;
+      }
+    }
+
+    .opblock-tag-section {
+      min-width: 460px;
+    }
+
+    .opblock-tag small {
+      @media (max-width: 544px) {
+        flex: initial;
+      }
+    }
+
+    &.opblock-delete {
+      background-color: var(--su-color--red-light);
+      border-color: var(--su-color--red);
+
+      .opblock-summary-method {
+        color: white;
+
+        background-color: var(--su-color--red-dark);
+      }
+    }
+
+    &.opblock-put {
+      .opblock-summary-method {
+        background-color: var(--su-color--brown);
+        color: white;
+      }
+    }
   }
-}
 
-.swagger-ui .opblock-tag-section {
-  min-width: 460px;
-}
+  .parameter__name {
+    &.required {
+      span {
+        color: var(--su-color--red);
+      }
 
-@media (max-width: 544px) {
-  .swagger-ui .opblock-tag small {
-    flex: initial;
+      &:after {
+        color: var(--su-color--red);
+      }
+    }
+  }
+
+  .btn {
+    &.cancel {
+      border-color: var(--su-color--red);
+      color: var(--su-color--red);
+    }
+
+    &.authorize {
+      border-color: var(--su-color--green-muted);
+      background-color: var(--su-color--green-muted);
+    }
+
+    &.execute {
+      background-color: var(--su-color--blue-dark)
+    }
+  }
+
+  .info {
+    .title {
+      small {
+        background-color: #666;
+
+        &.version-stamp {
+          background-color: #005830;
+        }
+      }
+    }
+
+    a {
+      color: #036;
+    }
   }
 }
