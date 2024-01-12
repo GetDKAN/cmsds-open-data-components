@@ -19,3 +19,17 @@
 .dc-c-metadata-description {
   white-space: pre-line;
 }
+
+.dc-dataset .ds-c-tabs {
+  .ds-c-tabs__item {
+    text-decoration:none;
+    &[aria-selected=true] {
+      svg {
+        fill: #{var(--link__color)};
+      }
+    }
+  }
+  svg {
+    margin-right: 8px;
+  }
+}
