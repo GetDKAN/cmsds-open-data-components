@@ -89,6 +89,17 @@ const Dataset = ({
                   <p>Overview</p>
                 </TabPanel>
                 <TabPanel
+                  id={'data-dictionary'}
+                  tab={
+                    <span>
+                      <SearchItemIcon id="data-dictionary" />
+                      Data Dictionary
+                    </span>
+                  }
+                >
+                  <p>Data Dictionary</p>
+                </TabPanel>
+                <TabPanel
                   id={'api'}
                   tab={
                     <span>
