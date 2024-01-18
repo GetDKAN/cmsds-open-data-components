@@ -1,0 +1,97 @@
+import React, { useState } from 'react';
+import qs from 'qs';
+import DataTable from '../Datatable/Datatable';
+import { transformTableSortToQuerySort } from '../../services/useDatastore/transformSorts';
+import { buildCustomColHeaders } from '../../templates/FilteredResource/functions';
+import { Pagination, Dropdown } from '@cmsgov/design-system';
+//import DataTableHeader from '../DatatableHeader';
+import QueryBuilder from '../QueryBuilder';
+import { DistributionType } from '../../types/search';
+
+export function prepareColumns(columns : any, schema : any) {
+  return columns.map((column : any) => ({
+    header:
+      schema && schema.fields[column].description ? schema.fields[column].description : column,
+    accessor: column,
+  }));
+}
+
+const DatasetTable = ({ id, distribution, resource } : {id: string, distribution: DistributionType, resource: any}) => {
+  const defaultPage = 1;
+  const defaultPageSize = 10;
+  const [page, setPage] = useState(defaultPage);
+
+  const customColumns = buildCustomColHeaders(
+    [],
+    resource.columns,
+    resource.schema[distribution.identifier]
+  );
+  const columns = customColumns
+    ? customColumns
+    : prepareColumns(resource.columns, resource.schema[id]);
+
+  const rowOptions = [10, 25, 50, 100];
+  const { limit, setLimit, setOffset } = resource;
+  const pageSize = limit ? limit : defaultPageSize;
+
+  /* const downloadURL = `${
+    process.env.REACT_APP_ROOT_URL
+  }/datastore/query/${id}/0/download?${qs.stringify(
+    { conditions: resource.conditions },
+    { encode: true }
+  )}&format=csv`; */
+
+  if (
+    Object.keys(resource).length &&
+    columns.length &&
+    resource.schema &&
+    Object.keys(distribution).length
+  ) {
+    return (
+      <>
+        <QueryBuilder resource={resource} id={distribution.identifier} customColumns={[]} />
+        {/*<DataTableHeader resource={resource} downloadURL={downloadURL} /> */ }
+        <div className="ds-u-overflow--auto ds-u-border-x--1 ds-u-border-bottom--1">
+          <DataTable
+            data={resource.values}
+            canResize={true}
+            columns={columns}
+            setSort={resource.setSort}
+            sortTransform={transformTableSortToQuerySort}
+            tablePadding={'ds-u-padding-y--2'}
+          />
+        </div>
+        <div className="ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--end ds-u-md-justify-content--between ds-u-margin-top--2 ds-u-align-items--center">
+          <Pagination
+            totalPages={Math.ceil(resource.count / pageSize)}
+            currentPage={page}
+            onPageChange={(evt, page) => {
+              evt.preventDefault();
+              setOffset((page - 1) * limit);
+              setPage(page);
+            }}
+            renderHref={(page) => {
+              return '';
+            }}
+            className="ds-l-lg-col--7 ds-l-md-col--9 ds-l-col--12 ds-u-padding-x--0"
+          />
+          <Dropdown
+            options={rowOptions.map((row) => ({ label: row, value: row }))}
+            size="medium"
+            label="Rows per page:"
+            labelClassName="ds-u-margin-top--0"
+            name="datatable_rows_per_page"
+            onChange={(e) => {
+              setLimit(e.target.value);
+              setPage(1);
+              setOffset(0);
+            }}
+            defaultValue={limit}
+          />
+      </div>
+    </>
+  ) 
+  } else return <></>;
+};
+
+export default DatasetTable;

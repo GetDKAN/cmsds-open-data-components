@@ -40,10 +40,13 @@ export type DatasetSearchPageProps = {
   showDownloadIcon: boolean;
 };
 
+export type DistributionType = {
+  downloadURL: string;
+  identifier: string;
+}
+
 export type DistributionItemType = {
-  distribution: {
-    downloadURL: string;
-  }[];
+  distribution: DistributionType[]
 }
 
 export type SearchFacetsPropTypes = {
@@ -56,4 +59,11 @@ export type SearchFacetsPropTypes = {
 export type SortType = {
   defaultSort: string;
   defaultOrder: string;
+}
+
+export type DatasetType = {
+  title?: string,
+  distribution?: DistributionType[],
+  error?: string,
+  description: string,
 }
