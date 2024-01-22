@@ -3,25 +3,16 @@ import DatePicker from 'react-datepicker';
 import { Button, Dropdown, TextField } from '@cmsgov/design-system';
 import { buildOperatorOptions, convertUTCToLocalDate, cleanText } from '../../templates/FilteredResource/functions';
 import 'react-datepicker/dist/react-datepicker.css';
+import { QueryRowType, ConditionType } from '../../types/dataset';
 
-function getStartDate(condition : any, schema : any, id : string) {
+function getStartDate(condition : ConditionType, schema : any, id : string) {
   if (schema[id].fields[condition.property].mysql_type === 'date') {
-    const newDate = new Date(condition.value);
+    const newDate = new Date(condition.value.toString());
     if (newDate instanceof Date && !isNaN(newDate.getTime())) {
       return newDate;
     }
   }
   return new Date();
-}
-
-type QueryRowType = {
-  id: string,
-  condition : any,
-  index : number,
-  update : any,
-  remove : any,
-  propertyOptions : any,
-  schema : any
 }
 
 const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schema } : QueryRowType) => {

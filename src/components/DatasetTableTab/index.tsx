@@ -4,9 +4,9 @@ import DataTable from '../Datatable/Datatable';
 import { transformTableSortToQuerySort } from '../../services/useDatastore/transformSorts';
 import { buildCustomColHeaders } from '../../templates/FilteredResource/functions';
 import { Pagination, Dropdown } from '@cmsgov/design-system';
-//import DataTableHeader from '../DatatableHeader';
+import DataTableHeader from '../DatatableHeader';
 import QueryBuilder from '../QueryBuilder';
-import { DistributionType } from '../../types/search';
+import { DistributionType, ColumnType, ResourceType } from '../../types/dataset';
 
 export function prepareColumns(columns : any, schema : any) {
   return columns.map((column : any) => ({
@@ -16,30 +16,29 @@ export function prepareColumns(columns : any, schema : any) {
   }));
 }
 
-const DatasetTable = ({ id, distribution, resource } : {id: string, distribution: DistributionType, resource: any}) => {
+const DatasetTable = ({ id, distribution, resource, rootUrl, customColumns = [] } : {id: string, distribution: DistributionType, resource: ResourceType, rootUrl: string, customColumns: Array<ColumnType>}) => {
   const defaultPage = 1;
   const defaultPageSize = 10;
   const [page, setPage] = useState(defaultPage);
 
-  const customColumns = buildCustomColHeaders(
-    [],
+  const customColumnHeaders = buildCustomColHeaders(
+    customColumns,
     resource.columns,
     resource.schema[distribution.identifier]
   );
-  const columns = customColumns
-    ? customColumns
+
+  const columns = customColumnHeaders
+    ? customColumnHeaders
     : prepareColumns(resource.columns, resource.schema[id]);
 
   const rowOptions = [10, 25, 50, 100];
   const { limit, setLimit, setOffset } = resource;
   const pageSize = limit ? limit : defaultPageSize;
 
-  /* const downloadURL = `${
-    process.env.REACT_APP_ROOT_URL
-  }/datastore/query/${id}/0/download?${qs.stringify(
+  const downloadURL = `${rootUrl}/datastore/query/${id}/0/download?${qs.stringify(
     { conditions: resource.conditions },
     { encode: true }
-  )}&format=csv`; */
+  )}&format=csv`;
 
   if (
     Object.keys(resource).length &&
@@ -49,8 +48,8 @@ const DatasetTable = ({ id, distribution, resource } : {id: string, distribution
   ) {
     return (
       <>
-        <QueryBuilder resource={resource} id={distribution.identifier} customColumns={[]} />
-        {/*<DataTableHeader resource={resource} downloadURL={downloadURL} /> */ }
+        <QueryBuilder resource={resource} id={distribution.identifier} customColumns={customColumnHeaders} />
+        {<DataTableHeader resource={resource} downloadURL={downloadURL} /> }
         <div className="ds-u-overflow--auto ds-u-border-x--1 ds-u-border-bottom--1">
           <DataTable
             data={resource.values}
@@ -76,13 +75,13 @@ const DatasetTable = ({ id, distribution, resource } : {id: string, distribution
             className="ds-l-lg-col--7 ds-l-md-col--9 ds-l-col--12 ds-u-padding-x--0"
           />
           <Dropdown
-            options={rowOptions.map((row) => ({ label: row, value: row }))}
+            options={rowOptions.map((row) => ({ label: row.toString(), value: row }))}
             size="medium"
             label="Rows per page:"
             labelClassName="ds-u-margin-top--0"
             name="datatable_rows_per_page"
             onChange={(e) => {
-              setLimit(e.target.value);
+              setLimit(parseInt(e.target.value));
               setPage(1);
               setOffset(0);
             }}

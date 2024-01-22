@@ -9,19 +9,8 @@ import { defaultMetadataMapping } from '../../assets/metadataMapping';
 import { Tabs, TabPanel } from '@cmsgov/design-system';
 import SearchItemIcon from '../../assets/icons/searchItem';
 import DatasetTable from '../../components/DatasetTableTab';
-import { DatasetType, DistributionType } from '../../types/search';
+import { DatasetPageType, DistributionType } from '../../types/dataset';
 import './dataset.scss';
-
-type DatasetPageType = {
-  id: any,
-  rootUrl: any,
-  additionalParams: any,
-  customColumns : any,
-  setDatasetTitle : any,
-  columnSettings : any,
-  columnWidths : any,
-  customMetadataMapping : any,
-}
 
 const Dataset = ({
   id,
@@ -29,16 +18,13 @@ const Dataset = ({
   additionalParams,
   customColumns,
   setDatasetTitle,
-  columnSettings,
-  columnWidths,
   customMetadataMapping,
 } : DatasetPageType) => {
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
     : { conditions: [] };
 
-  const metastore = useMetastoreDataset(id, rootUrl, additionalParams);
-  const { dataset } : { dataset: DatasetType } = metastore;
+  const { dataset } = useMetastoreDataset(id, rootUrl, additionalParams);
   const title = dataset.title ? dataset.title : '';
   const metadataMapping = {
     ...defaultMetadataMapping,
@@ -119,7 +105,7 @@ const Dataset = ({
                     </span>
                   }
                 >
-                  <DatasetTable id={id} distribution={distribution} resource={resource} />
+                  <DatasetTable id={id} distribution={distribution} resource={resource} rootUrl={rootUrl} customColumns={customColumns} />
                 </TabPanel>
                 <TabPanel
                   id={'overview'}

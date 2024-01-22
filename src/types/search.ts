@@ -1,3 +1,5 @@
+import { DistributionType } from "./dataset";
+
 export type SearchAPIFacetType = {
   type: string;
   name: string;
@@ -13,12 +15,6 @@ export type SelectedFacetsType = {
 export type SidebarFacetTypes = {
   theme: SearchAPIFacetType[];
   keyword: SearchAPIFacetType[];
-};
-
-export type NewParamsType = {
-  fulltext?: string;
-  theme?: string[];
-  keyword?: string[];
 };
 
 export type DatasetSearchPageProps = {
@@ -40,11 +36,6 @@ export type DatasetSearchPageProps = {
   showDownloadIcon: boolean;
 };
 
-export type DistributionType = {
-  downloadURL: string;
-  identifier: string;
-}
-
 export type DistributionItemType = {
   distribution: DistributionType[]
 }
@@ -59,11 +50,4 @@ export type SearchFacetsPropTypes = {
 export type SortType = {
   defaultSort: string;
   defaultOrder: string;
-}
-
-export type DatasetType = {
-  title?: string,
-  distribution?: DistributionType[],
-  error?: string,
-  description: string,
 }

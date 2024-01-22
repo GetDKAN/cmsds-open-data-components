@@ -5,22 +5,12 @@ import { Accordion, AccordionItem, Button } from '@cmsgov/design-system';
 import { buildOperatorOptions } from '../../templates/FilteredResource/functions';
 import QueryTitle from '../../templates/FilteredResource/QueryTitle';
 import QueryRow from '../QueryRow';
+import { ConditionType, SchemaType } from '../../types/dataset';
 
-type ConditionType = {
-  operator: String;
-  value: any;
-  key?: string;
-  property: String;
-  [key: string]: any;
-};
-type SchemaType = {
-  [key: string]: any;
-};
-
-type QueryBuilderTypes = {
+type QueryBuilderPropTypes = {
   resource: {
     conditions: Array<ConditionType>;
-    schema: Array<SchemaType>;
+    schema: SchemaType;
     setConditions: Function;
   };
   id: string;
@@ -55,10 +45,10 @@ function updateQueryForDatastore(condition: ConditionType) {
   return cond;
 }
 
-const QueryBuilder = (props: QueryBuilderTypes) => {
+const QueryBuilder = (props: QueryBuilderPropTypes) => {
   const { resource, id, includeSearchParams, customColumns } = props;
   const { conditions, schema, setConditions } = resource;
-  const fields = Object.keys(schema[id as any].fields);
+  const fields = Object.keys(schema[id].fields);
 
   const [conditionsCleared, setConditionsCleared] = useState(false);
   const [queryConditions, setQueryConditions] = useState<Array<ConditionType>>([]);
@@ -71,7 +61,7 @@ const QueryBuilder = (props: QueryBuilderTypes) => {
     if (Array.isArray(condition)) {
       const keyedConditions = condition.map((oc) => ({
         ...oc,
-        key: Date.now() + oc.value + oc.property,
+        key: Date.now().toString() + oc.value + oc.property,
       }));
       setQueryConditions(keyedConditions);
     } else {
@@ -80,7 +70,7 @@ const QueryBuilder = (props: QueryBuilderTypes) => {
         {
           property: fields[0],
           value: '',
-          operator: buildOperatorOptions(schema[id as any].fields[fields[0]].mysql_type)[0].value,
+          operator: buildOperatorOptions(schema[id].fields[fields[0]].mysql_type)[0].value,
           key: Date.now().toString(),
         },
       ]);
@@ -99,8 +89,8 @@ const QueryBuilder = (props: QueryBuilderTypes) => {
   }, [conditionsCleared]);
 
   const propertyOptions = fields.map((f) => {
-    if (schema[id as any].fields[f].description) {
-      return { label: schema[id as any].fields[f].description, value: f };
+    if (schema[id].fields[f].description) {
+      return { label: schema[id].fields[f].description, value: f };
     }
     return { label: f, value: f };
   });
@@ -131,7 +121,7 @@ const QueryBuilder = (props: QueryBuilderTypes) => {
     }
   };
 
-  const updateCondition = (index: number, key: string, value: String) => {
+  const updateCondition = (index: number, key: string, value: string) => {
     let newConditions = [...queryConditions];
     newConditions[index][key] = value;
     setQueryConditions(newConditions);
@@ -152,7 +142,7 @@ const QueryBuilder = (props: QueryBuilderTypes) => {
         <AccordionItem
           heading={
             <QueryTitle
-              schema={schema[id as any]}
+              schema={schema[id]}
               conditions={titleConditions}
               customColumns={customColumns}
             />

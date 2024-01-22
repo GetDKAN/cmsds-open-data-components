@@ -32,7 +32,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
     linkContainerClasses = 'ds-l-col--auto';
     linkClasses = 'ds-u-display--block ds-u-text-align--left';
   }
-
+  
   const truncatedDescription = (
     <TextTruncate
       line={3}
@@ -44,6 +44,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
       textTruncateChild=""
     />
   );
+
   return (
     <li className="dc-c-search-list-item" key={identifier}>
       <div className="dc-c-searchlist-item ds-u-border-top--1 ds-u-margin-bottom--4">
