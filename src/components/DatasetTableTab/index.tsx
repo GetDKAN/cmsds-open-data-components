@@ -85,7 +85,7 @@ const DatasetTable = ({ id, distribution, resource, rootUrl, customColumns = [] 
               setPage(1);
               setOffset(0);
             }}
-            defaultValue={limit}
+            defaultValue={limit.toString()}
           />
       </div>
     </>
