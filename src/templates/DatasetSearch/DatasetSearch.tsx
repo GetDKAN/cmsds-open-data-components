@@ -26,6 +26,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     pageTitle,
     filterTitle,
     showLargeFileWarning,
+    largeFileThemes,
     introText,
     showDownloadIcon,
   } = props;
@@ -296,6 +297,13 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                     let distribution_array = item.distribution ? item.distribution : [];
                     return distribution_array.length ? item.distribution[0].downloadURL : null;
                   }
+                  let showLargeFile = false;
+                  if (largeFileThemes && item.theme)
+                    largeFileThemes.forEach(theme => {
+                      if (item.theme.includes(theme))
+                        showLargeFile = true;
+                  });
+                  
                   return (
                     <DatasetSearchListItem 
                       title={item.title}
@@ -304,7 +312,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                       theme={item.theme}
                       identifier={item.identifier}
                       downloadUrl={showDownloadIcon ? getDownloadUrl(item) : null}
-                      largeFile={item.theme && item.theme.includes('General Payments')} // Hardcoded for Open Payments for now, until we have a better way of detecting this
+                      largeFile={showLargeFile}
                     />
                   )
                 }) : (
