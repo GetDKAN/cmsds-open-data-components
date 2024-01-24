@@ -1,0 +1,42 @@
+export const documentation = [
+  {
+    id: 'excel',
+    application: 'Microsoft Excel',
+    notes: 'Official size limitations for Microsoft Excel',
+    link: 'https://support.microsoft.com/en-us/office/excel-specifications-and-limits-1672b34d-7043-467e-8e27-269d656771c3?redirectSourcePath=%252fen-us%252farticle%252fExcel-specifications-and-limits-ca36e2dc-1f09-4620-b726-67c00b05040f',
+    linkText: 'Excel Specifications and Limits',
+    screenReaderOnlyText:'on microsoft.com',
+  },
+  {
+    id: 'access',
+    application: 'Microsoft Access',
+    notes: 'Official size limitations for Microsoft Access',
+    link: 'https://support.microsoft.com/en-us/office/access-specifications-0cf3c66f-9cf2-4e32-9568-98c1025bb47c?ui=en-us&rs=en-us&ad=us',
+    linkText: 'Access 2016 Specifications',
+    screenReaderOnlyText:'on microsoft.com',
+  },
+  {
+    id: 'oracle-sql-developer',
+    application: 'Oracle SQL Developer',
+    notes: 'Oracle SQL Developer tool',
+    link: 'https://www.oracle.com/database/sqldeveloper/',
+    linkText: 'Oracle SQL Developer Overview',
+    screenReaderOnlyText:'on oracle.com',
+  },
+  {
+    id: 'oracle-database',
+    application: 'Oracle Database',
+    notes: 'Oracle Database official size limitations',
+    link: 'https://docs.oracle.com/cd/B28359_01/server.111/b28320/limits002.htm#i287915',
+    linkText: 'Oracle Physical Database Limits',
+    screenReaderOnlyText:'on oracle.com',
+  },
+  {
+    id: 'oracle-sql-client-tools',
+    application: 'Oracle SQL Client Tools',
+    notes: 'Oracle SQL Client Tools',
+    link: 'https://www.oracle.com/database/technologies/oracle-database-software-downloads.html',
+    linkText: 'Oracle SQL Client',
+    screenReaderOnlyText:'on oracle.com',
+  },
+];
