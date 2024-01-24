@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import DOMPurify from 'dompurify';
 import TextTruncate from 'react-text-truncate';
 import { useMediaQuery } from 'react-responsive';
-
+import LargeFileDialog from '../LargeFileDialog';
 import SearchItemIcon from '../../assets/icons/searchItem';
 import TransformedDate from '../TransformedDate';
 import './dataset-search-list-item.scss';
@@ -90,7 +90,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
                 {largeFile ? (
                   <span>
                     <SearchItemIcon id="download" />
-                    {/*<LargeFileDialog downloadUrl={downloadUrl} /> */}
+                    {<LargeFileDialog downloadUrl={downloadUrl} />}
                   </span>
                 ) : (
                   <a href={downloadUrl}>
