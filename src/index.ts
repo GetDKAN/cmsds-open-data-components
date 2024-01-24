@@ -9,6 +9,7 @@ export { default as DatasetSearch } from './templates/DatasetSearch';
 export { default as Dataset } from './templates/Dataset';
 export { default as Header } from './templates/Header';
 export { default as Footer } from './templates/Footer';
+export { default as SpecsAndLimits } from './templates/SpecsAndLimits';
 
 // Services
 export { default as useSearchAPI } from './services/useSearchAPI';
@@ -32,13 +33,6 @@ export { default as Breadcrumb } from './components/Breadcrumb';
 export { default as TransformedDate } from './components/TransformedDate';
 export { default as DataTable } from './components/Datatable';
 export { buildRows } from './components/DatasetAdditionalInformation';
-
-// Templates
-// export { default as Dataset } from './templates/Dataset';
-// export { default as DatasetSearch } from './templates/DatasetSearch';
-// export { default as DrupalPage } from './templates/DrupalPage';
-// export { default as Header } from './templates/header';
-// export { default as MobileHeader } from './templates/mobile_header';
 
 export { default as FilteredResource } from './templates/FilteredResource';
 // export { default as QueryBuilder } from './templates/FilteredResource/QueryBuilder';
