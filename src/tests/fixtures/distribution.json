@@ -1,0 +1,22 @@
+{
+  "identifier": "d60b31aa-bfa8-527e-9b50-6c3f972ee9a9",
+  "data": {
+      "@type": "dcat:Distribution",
+      "title": "Product Data for Newly Reported Drugs in the Medicaid Drug Rebate Program 2024-01-15-to-2024-01-21",
+      "format": "csv",
+      "downloadURL": "https://test.gov/dataset/download.csv",
+      "%Ref:downloadURL": [
+          {
+              "identifier": "b73d59704d7c0a099f717aad69d03063__1705940823__source",
+              "data": {
+                  "filePath": "https://h-o.st/sites/default/files/uploaded_resources/mdrp-newly-rprt-drug-01-15-2024-to-01-21-2024.csv",
+                  "identifier": "b73d59704d7c0a099f717aad69d03063",
+                  "mimeType": "text/csv",
+                  "perspective": "source",
+                  "version": "1705940823",
+                  "checksum": null
+              }
+          }
+      ]
+  }
+}

@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import DOMPurify from 'dompurify';
+import qs from 'qs';
 import useMetastoreDataset from '../../services/useMetastoreDataset';
+import useDatastore from '../../services/useDatastore';
 import PageNotFound from '../PageNotFound';
 import { defaultMetadataMapping } from '../../assets/metadataMapping';
 import { Tabs, TabPanel } from '@cmsgov/design-system';
 import SearchItemIcon from '../../assets/icons/searchItem';
+import DatasetTable from '../../components/DatasetTableTab';
+import { DatasetPageType, DistributionType } from '../../types/dataset';
 import './dataset.scss';
 
 const Dataset = ({
@@ -14,17 +18,43 @@ const Dataset = ({
   additionalParams,
   customColumns,
   setDatasetTitle,
-  columnSettings,
-  columnWidths,
   customMetadataMapping,
-}) => {
-  const metastore = useMetastoreDataset(id, rootUrl, additionalParams);
-  const { dataset } = metastore;
+} : DatasetPageType) => {
+  const options = location.search
+    ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
+    : { conditions: [] };
+
+  const { dataset } = useMetastoreDataset(id, rootUrl, additionalParams);
   const title = dataset.title ? dataset.title : '';
   const metadataMapping = {
     ...defaultMetadataMapping,
     ...customMetadataMapping,
   };
+
+  let distribution = {} as DistributionType;
+  let distribution_array = dataset.distribution ? dataset.distribution : [];
+  if (distribution_array.length) {
+    distribution = distribution_array[0];
+  }
+
+  const resource = useDatastore(
+    '',
+    rootUrl,
+    {
+      ...options,
+      limit: 25,
+      manual: true,
+    },
+    additionalParams
+  );
+
+  useEffect(() => {
+    if (distribution.identifier) {
+      resource.setResource(distribution.identifier);
+      resource.setManual(false);
+    }
+  }, [distribution]);
+
   useEffect(() => {
     if (title) {
       if (setDatasetTitle) {
@@ -52,7 +82,7 @@ const Dataset = ({
   return (
     <>
       {dataset.error ? (
-        <PageNotFound content={notFoundContent} />
+        <PageNotFound content={notFoundContent} siteUrl={rootUrl} />
       ) : (
         <div className={'ds-l-container'}>
           <div className={'ds-l-row'}>
@@ -75,7 +105,7 @@ const Dataset = ({
                     </span>
                   }
                 >
-                  <p>Data Table</p>
+                  <DatasetTable id={id} distribution={distribution} resource={resource} rootUrl={rootUrl} customColumns={customColumns} />
                 </TabPanel>
                 <TabPanel
                   id={'overview'}
