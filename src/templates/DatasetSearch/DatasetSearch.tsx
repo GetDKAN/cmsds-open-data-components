@@ -315,7 +315,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                       largeFile={showLargeFile}
                     />
                   )
-                }) : (
+                }) : ( 
                   <Alert variation="error" heading="Could not connect to the API." />
                 )}
             </ol>
