@@ -1,3 +1,4 @@
+import React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { Button } from '@cmsgov/design-system';
 import ResourceInformation from '../ResourceInformation';

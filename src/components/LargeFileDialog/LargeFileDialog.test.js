@@ -9,6 +9,8 @@ describe("<LargeFileDialog />", () => {
     expect(screen.getByRole('button', { name: "Download" }));
   });
   test('Opens and Closes correctly', () => {
+    window.scrollTo = jest.fn();
+    
     render(<LargeFileDialog downloadUrl="test" />);
 
     fireEvent.click(screen.getByRole('button', { name: "Download" }));
