@@ -1,0 +1,92 @@
+/*
+This document provides overrides to Swagger UI, fixing accessibility issues.
+*/
+
+:root {
+  //Colors
+  --su-color--blue-dark: rgb(0, 51, 102);
+  --su-color--brown: rgba(136, 76, 0, 1);
+  --su-color--green-dark: rgb(0, 118, 65);
+  --su-color--green-muted: rgb(39, 117, 100);
+  --su-color--orange-dark: rgb(209, 0, 0);
+  --su-color--orange-light: rgba(209, 0, 0, .1);
+  --su-color--red-dark: rgb(151, 0, 0);
+  --su-color--red-light: rgba(211, 0, 0, .1);
+  --su-color--red: rgb(211, 0, 0);
+}
+
+// State  `.swagger-ui` twice to include specificity and avoid multiple `!important` statements;
+.swagger-ui.swagger-ui {
+  .opblock {
+    .opblock-summary-method {
+      color: #333;
+    }
+
+    &.opblock-delete {
+      background-color: var(--su-color--red-light);
+      border-color: var(--su-color--red);
+
+      .opblock-summary-method {
+        color: white;
+
+        background-color: var(--su-color--red-dark);
+      }
+    }
+
+    &.opblock-put {
+      .opblock-summary-method {
+        background-color: var(--su-color--brown);
+        color: white;
+      }
+    }
+  }
+
+  .parameter__name {
+    &.required {
+      span {
+        color: var(--su-color--red);
+      }
+
+      &:after {
+        color: var(--su-color--red);
+      }
+    }
+  }
+
+  .btn {
+    &.cancel {
+      border-color: var(--su-color--red);
+      color: var(--su-color--red);
+    }
+
+    &.authorize {
+      border-color: var(--su-color--green-muted);
+      background-color: var(--su-color--green-muted);
+    }
+
+    &.execute {
+      background-color: var(--su-color--blue-dark)
+    }
+  }
+
+  .info {
+    .title {
+      small {
+        background-color: #666;
+
+        &.version-stamp {
+          background-color: #005830;
+        }
+      }
+    }
+
+    a {
+      color: #036;
+    }
+  }
+}
+
+// Swagger overrides
+.swagger-ui h2, .swagger-ui h3, .swagger-ui h4 {
+  font-weight: bold !important;
+}

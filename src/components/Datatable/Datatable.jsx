@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   useReactTable,
   flexRender,
@@ -21,6 +21,7 @@ const DataTable = ({
   loading = false,
 }) => {
   const [ sorting, setSorting ] = React.useState([])
+  const [ariaLiveFeedback, setAriaLiveFeedback] = useState('')
   const columnHelper = createColumnHelper()
   const table_columns = columns.map((col) => {
     if (col.cell) {
@@ -81,7 +82,7 @@ const DataTable = ({
         className="dc-c-datatable"
       >
         {canResize
-          ? <TruncatedResizeableTHead table={table} sortElement={sortElement} />
+          ? <TruncatedResizeableTHead table={table} sortElement={sortElement} setAriaLiveFeedback={setAriaLiveFeedback} />
           : <FixedSizeTHead table={table} sortElement={sortElement} />
         }
         {loading ? (
@@ -120,6 +121,7 @@ const DataTable = ({
           </tbody>
         )}
         </table>
+        <div className='sr-only' aria-live='assertive' aria-atomic='true'>{ariaLiveFeedback}</div>
     </div>
   )
 }
