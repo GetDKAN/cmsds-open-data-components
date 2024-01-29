@@ -27,9 +27,20 @@ const MobileHeader = ({
   const tablet = useMediaQuery({ minWidth: 544, maxWidth: 1023 });
   const menu = useRef(null);
   useEffect(() => {
-    function handleFocusOut(event) {
-      if (menu.current && !menu.current.contains(event.relatedTarget)) {
-        setMenuOpen(false);
+
+    const trapFocus = (event, container) => {
+      const focusableEls = getFocusableElements(menu.current).selectors.visible;
+      const firstEl = focusableEls[0];
+      const lastEl = focusableEls[focusableEls.length - 1];
+
+      if (event.key === 'Tab') {
+        if (event.shiftKey && document.activeElement === firstEl) {
+          lastEl.focus();
+          event.preventDefault();
+        } else if (!event.shiftKey && document.activeElement === lastEl) {
+          firstEl.focus();
+          event.preventDefault();
+        }
       }
     }
 
@@ -66,21 +77,39 @@ const MobileHeader = ({
       }
     }
 
-    menu.current.addEventListener('focusout', handleFocusOut);
     document.addEventListener('mousedown', handleClick);
     document.addEventListener('keyup', handleSearchEnter);
     document.addEventListener('keyup', handleMenuClose);
     handleFocusIn();
+    menu.current.addEventListener('keydown', (evt) => trapFocus(evt, menu.current));
 
     return () => {
       document.removeEventListener('keyup', handleSearchEnter);
       document.removeEventListener('keyup', handleMenuClose);
       document.removeEventListener('mousedown', handleClick);
       if (menu.current) {
-        menu.current.removeEventListener('focusout', handleFocusOut);
+        menu.current.removeEventListener('keydown', trapFocus);
       }
     };
-  }, [menu.current, menuOpen]);
+  }, [menuOpen]);
+
+  const getFocusableElements = (container) => {
+    const allSelectors = container.querySelectorAll(
+      'a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
+      );
+
+    const visibleSelectors = Array.from(allSelectors).filter((el) => {
+      return el.offsetWidth > 0 || el.offsetHeight > 0;
+    });
+
+    return {
+      selectors: {
+        all: allSelectors,
+        visible: visibleSelectors,
+      },
+    };
+  };
+
   return (
     <header
       className={`dc-c-header dc-c-mobile-header ${menuOpen ? 'menu-open' : ''}`}
@@ -143,7 +172,7 @@ const MobileHeader = ({
           </div>
         )}
       </div>
-      <div className={mobileHeaderMenuClassName} ref={menu}>
+      <div className={mobileHeaderMenuClassName} data-testid="mobile-menu" ref={menu}>
         <div className={`ds-u-display--flex ${mobileHeaderMenuClassName}-close ds-u-justify-content--between`}>
           <Button
             variation="ghost"
