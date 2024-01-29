@@ -85,3 +85,8 @@ This document provides overrides to Swagger UI, fixing accessibility issues.
     }
   }
 }
+
+// Swagger overrides
+.swagger-ui h2, .swagger-ui h3, .swagger-ui h4 {
+  font-weight: bold !important;
+}

@@ -68,7 +68,7 @@ const DatasetBody = ({
         <div className="ds-l-md-col--9 ds-l-sm-col--12">
           <h1 className="ds-title ds-u-word-break">{dataset.title}</h1>
           <div className="ds-l-row">
-            <p className="ds-l-col--6">
+            <p className="ds-l-col--6 ds-u-margin-bottom--2">
               {dataset.theme ? <Badge variation="info">{dataset.theme[0].data}</Badge> : null}
             </p>
             {dataset.modified && (
@@ -80,7 +80,7 @@ const DatasetBody = ({
           <p className="dc-c-metadata-description" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(dataset.description) }} />
           {resource.columns && Object.keys(resource.schema).length ? (
             <>
-              <h2 className="dc-resource-header">Resource Preview</h2>
+              <h2 className="dc-resource-header ds-text-heading--2xl ds-u-margin-y--3">Resource Preview</h2>
               {resource.columns ? (
                 <div>
                   <ResourceHeader
@@ -129,7 +129,7 @@ const DatasetBody = ({
           )}
           {Object.keys(distribution).length && fileFormat === 'CSV' && dataset.identifier ? (
             <div ref={apiDocs}>
-              <h2>Try the API</h2>
+              <h2 className="ds-text-heading--2xl ds-u-margin-y--2">Try the API</h2>
               <SwaggerUI
                 url={`${rootUrl}/metastore/schemas/dataset/items/${
                   dataset.identifier
@@ -162,7 +162,7 @@ const DatasetBody = ({
 
           {Object.keys(distribution).length && fileFormat === 'CSV' ? (
             <div className="dc-c-dataset-tags ds-u-margin-bottom--3 ds-u-padding--2 ds-u-border ds-u-border--1">
-              <h2 className="ds-u-color--primary ds-u-font-size--h3 ds-u-margin-top--0 ds-u-margin-bottom--2 ds-u-padding-bottom--2">
+              <h2 className="ds-u-color--primary ds-u-font-size--xl ds-u-margin-top--0 ds-u-margin-bottom--2 ds-u-padding-bottom--2">
                 API
               </h2>
               <Button

@@ -17,6 +17,7 @@ import DataTableRowChanger from '../DataTableRowChanger';
 import DownloadIcon from '../../assets/icons/download';
 import CopyIcon from '../../assets/icons/copy';
 import SettingsIcon from '../../assets/icons/settings';
+import './resource-header.scss';
 
 const ResourceHeader = ({
   setTablePadding,
@@ -80,7 +81,7 @@ const ResourceHeader = ({
                   onOpen={() => {
                     navigator.clipboard.writeText(window.location.href);
                   }}
-                  className="ds-c-button ds-c-button--small ds-u-text-align--left ds-u-margin-right--1"
+                  className="ds-c-button ds-c-button--small ds-u-text-align--left ds-u-margin-right--1 display-settings-font"
                   placement="bottom"
                   dialog
                   ariaLabel="Copy link to filtered data"
@@ -96,7 +97,7 @@ const ResourceHeader = ({
               </>
             )}
             <Tooltip
-              className="ds-c-button ds-c-button--small ds-u-text-align--left"
+              className="ds-c-button ds-c-button--small ds-u-text-align--left display-settings-font"
               placement="bottom"
               dialog
               ariaLabel="Display settings"

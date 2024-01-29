@@ -47,7 +47,7 @@ const DatasetSearchFacets = ({ title, facets, onclickFunction, selectedFacets, l
                 })}
               </ul>
             ) : (
-              <p className="ds-h5">No matching facets found.</p>
+              <p className="ds-text-heading--md">No matching facets found.</p>
             )}
           </>
         </AccordionItem>
