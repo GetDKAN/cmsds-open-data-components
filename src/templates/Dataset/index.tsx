@@ -21,6 +21,7 @@ const Dataset = ({
   customColumns,
   setDatasetTitle,
   customMetadataMapping,
+  apiPageUrl = "/api",
 } : DatasetPageType) => {
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
@@ -144,7 +145,7 @@ const Dataset = ({
                     </span>
                   }
                 >
-                  <DatasetAPI id={id} rootUrl={rootUrl} />
+                  <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} />
                 </TabPanel>
               </Tabs>
             </div>

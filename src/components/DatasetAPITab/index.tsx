@@ -4,9 +4,10 @@ import ApiDocumentation from "../ApiDocumentation";
 type DatasetAPIProps = {
   id: String;
   rootUrl: String;
+  apiUrl: string;
 };
 
-const DatasetAPI = ({ id, rootUrl }: DatasetAPIProps) => {
+const DatasetAPI = ({ id, rootUrl, apiUrl }: DatasetAPIProps) => {
   return (
     <>
       <div className="ds-u-display--flex ds-u-flex-wrap--wrap">
@@ -18,7 +19,7 @@ const DatasetAPI = ({ id, rootUrl }: DatasetAPIProps) => {
           </p>
         </div>
         <div className="ds-l-col--12 ds-l-md-col--3 ds-u-font-weight--bold ds-u-margin-top--2 ds-u-padding-left--0 ds-u-md-padding-left--2">
-          <a href="/about/api">
+          <a href={apiUrl}>
             View API{' '}
             <span style={{ whiteSpace: 'nowrap' }}>
               specification <i className="fa fa-arrow-right ds-u-font-weight--bold"></i>
