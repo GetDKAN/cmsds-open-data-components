@@ -9,9 +9,10 @@ import { defaultMetadataMapping } from '../../assets/metadataMapping';
 import { Tabs, TabPanel } from '@cmsgov/design-system';
 import SearchItemIcon from '../../assets/icons/searchItem';
 import DatasetTable from '../../components/DatasetTableTab';
+import DatasetOverview from '../../components/DatasetOverviewTab';
+import DatasetAPI from '../../components/DatasetAPITab';
 import { DatasetPageType, DistributionType } from '../../types/dataset';
 import './dataset.scss';
-import DatasetOverview from '../../components/DatasetOverviewTab';
 
 const Dataset = ({
   id,
@@ -143,7 +144,7 @@ const Dataset = ({
                     </span>
                   }
                 >
-                  <p>API</p>
+                  <DatasetAPI id={id} rootUrl={rootUrl} />
                 </TabPanel>
               </Tabs>
             </div>
