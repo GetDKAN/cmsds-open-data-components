@@ -11,6 +11,7 @@ import SearchItemIcon from '../../assets/icons/searchItem';
 import DatasetTable from '../../components/DatasetTableTab';
 import { DatasetPageType, DistributionType } from '../../types/dataset';
 import './dataset.scss';
+import DatasetOverview from '../../components/DatasetOverviewTab';
 
 const Dataset = ({
   id,
@@ -62,6 +63,7 @@ const Dataset = ({
       }
     }
   }, [title]);
+
   const notFoundContent = (
     <div className="ds-u-padding-top--3">
       <h1 className="ds-title">Error: Dataset not found</h1>
@@ -95,7 +97,10 @@ const Dataset = ({
           </div>
           <div className={'ds-l-row'}>
             <div className={'ds-l-md-col--12 dc-dataset'}>
-              <Tabs onChange={function noRefCheck() {}}>
+              <Tabs
+                onChange={function noRefCheck() {}}
+                defaultSelectedId={window.location.hash.substring(1)}
+              >
                 <TabPanel
                   id={'data-table'}
                   tab={
@@ -116,7 +121,7 @@ const Dataset = ({
                     </span>
                   }
                 >
-                  <p>Overview</p>
+                  <DatasetOverview resource={resource} dataset={dataset} distribution={distribution} metadataMapping={metadataMapping} />
                 </TabPanel>
                 <TabPanel
                   id={'data-dictionary'}
