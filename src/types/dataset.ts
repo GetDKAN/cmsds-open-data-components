@@ -1,6 +1,13 @@
+export type DistributionDataType = {
+  downloadURL: string,
+  format: string,
+  title: string,
+  mediaType: string,
+}
+
 export type DistributionType = {
-  downloadURL: string;
   identifier: string;
+  data: DistributionDataType;
 }
 
 export type DatasetType = {
@@ -8,6 +15,7 @@ export type DatasetType = {
   distribution: DistributionType[],
   error: string,
   description: string,
+  identifier: string,
 }
 
 export type ConditionType = {
@@ -49,6 +57,7 @@ export type DatasetPageType = {
   customMetadataMapping : any, // TODO
 }
 
+
 export type ResourceType = {
   columns: Array<string>,
   count: number,
@@ -62,6 +71,8 @@ export type ResourceType = {
   setOffset: Function,
   setSort: Function,
   setConditions: Function,
+  setResource: Function,
+  setManual: Function,
 }
 
 export type QueryRowType = {
@@ -72,4 +83,11 @@ export type QueryRowType = {
   remove : Function,
   propertyOptions : Array<PropertyType>,
   schema : SchemaType
+}
+
+export type DatasetOverviewPropsType = {
+  dataset: DatasetType,
+  resource: ResourceType,
+  distribution: DistributionType,
+  metadataMapping: any, //TODO
 }

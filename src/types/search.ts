@@ -1,4 +1,7 @@
-import { DistributionType } from "./dataset";
+export type SearchDistributionType = {
+  identifier: string;
+  downloadURL: string;
+}
 
 export type SearchAPIFacetType = {
   type: string;
@@ -38,7 +41,7 @@ export type DatasetSearchPageProps = {
 };
 
 export type DistributionItemType = {
-  distribution: DistributionType[]
+  distribution: SearchDistributionType[]
 }
 
 export type SearchFacetsPropTypes = {

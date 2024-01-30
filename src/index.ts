@@ -24,8 +24,6 @@ export { default as Hero } from './components/Hero';
 export { default as DatasetSearchListItem } from './components/DatasetSearchListItem';
 // export { default as SubMenu } from './components/SubMenu';
 export { default as ApiDocumentation } from './components/ApiDocumentation';
-// export { default as ResourceConditionField } from './components/ResourceConditionField';
-export { default as ResourceFilter } from './components/ResourceFilter';
 export { default as ResourceHeader } from './components/ResourceHeader';
 export { default as ResourcePreview } from './components/ResourcePreview';
 export { default as ResourceFooter } from './components/ResourceFooter';
