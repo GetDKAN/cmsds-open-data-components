@@ -12,7 +12,6 @@ type ResourcePropsType = {
 
 const Resource = ({ distributions, resource, title } : ResourcePropsType ) => {
   function getFormatType(dist : DistributionType) {
-    console.log(dist)
     if(dist.data.format) {
       return dist.data.format == "xlsx" ? "excel" : dist.data.format.toLowerCase()
     }

@@ -30,8 +30,6 @@ const DataDictionary = ({ rootUrl } : {rootUrl: string}) => {
     }
   });
 
-  console.log(data)
-
   return (
     <>
       {data && (
