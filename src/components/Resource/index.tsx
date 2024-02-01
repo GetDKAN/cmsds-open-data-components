@@ -36,35 +36,38 @@ const Resource = ({ distributions, resource, title } : ResourcePropsType ) => {
   return (
     <div className="ds-u-display--flex ds-u-flex-wrap--wrap">
       <h2 className="ds-l-col--12 ds-u-padding-left--0 ds-text-heading--2xl">Resources</h2>
-      <div>
-        {distributions.length &&
-          <ul className="ds-c-list ds-c-list--bare">
-            {
-              distributions.map((dist) => {
-                return (
-                  <li key={dist.identifier}>
-                    <span className="ds-u-font-weight--bold ds-u-font-size--lg ds-l-col--12 ds-l-md-col--6 ds-u-padding-left--0">
-                      <i className={'fa ds-u-color--primary ds-u-padding-right--1 ' + 'fa-file-' + getFormatType(dist)}></i>
-                      {title}
-                    </span>
+      {distributions.length &&
+        <ul className="ds-c-list ds-c-list--bare">
+          {
+            distributions.map((dist) => {
+              const fileFormat = getFormatType(dist)
+              return (
+                <li key={dist.identifier} className="ds-u-display--flex ds-u-flex-wrap--wrap">
+                  <div className="ds-u-font-weight--bold ds-u-font-size--lg ds-l-col--12 ds-l-md-col--6 ds-u-padding-left--0">
+                    <i className={'fa ds-u-color--primary ds-u-padding-right--1 ' + 'fa-file-' + fileFormat}></i>
+                    {title}
+                  </div>
+                  <div className="ds-l-col--12 ds-l-md-col--6 ds-u-text-align--center ds-u-md-text-align--right ds-u-margin-top--2 ds-u-md-margin-top--0">
                     <a
                       href={dist.data.downloadURL}
-                      className="ds-l-col--12 ds-l-md-col--6 ds-u-text-align--right ds-u-margin-top--2 ds-u-md-margin-top--0"
-                      style={{ order: sm ? '1' : '0' }}
+                      style={{
+                        order: sm ? '1' : '0',
+                        width: sm ? '100%' : 'auto'
+                      }}
+                      aria-label={"Download " + title + " " + fileFormat}
+                      className="ds-c-button"
                     >
-                      <Button style={{ width: sm ? '100%' : '' }}>
-                        <i className="fa fa-file-download ds-u-color--primary ds-u-padding-right--1"></i>
-                        Download
-                      </Button>
+                      <i className="fa fa-file-download ds-u-color--primary ds-u-padding-right--1"></i>
+                      Download
                     </a>
-                    <ResourceInformation resource={resource} />
-                  </li>
-                )
-              })
-            }
-          </ul>
-        }
-      </div>
+                  </div>
+                  <ResourceInformation resource={resource} />
+                </li>
+              )
+            })
+          }
+        </ul>
+      }
     </div>
   );
 };
