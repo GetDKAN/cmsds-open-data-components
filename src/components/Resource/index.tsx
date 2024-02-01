@@ -13,7 +13,7 @@ type ResourcePropsType = {
 const Resource = ({ distributions, resource, title } : ResourcePropsType ) => {
   function getFormatType(dist : DistributionType) {
     if(dist.data.format) {
-      return dist.data.format == "xlsx" ? "excel" : dist.data.format.toLowerCase()
+      return  dist.data.format.toLowerCase()
     }
     if(dist.data.mediaType) {
       const mediaType = dist.data.mediaType.split('/');
@@ -44,8 +44,8 @@ const Resource = ({ distributions, resource, title } : ResourcePropsType ) => {
               return (
                 <li key={dist.identifier} className="ds-u-display--flex ds-u-flex-wrap--wrap">
                   <div className="ds-u-font-weight--bold ds-u-font-size--lg ds-l-col--12 ds-l-md-col--6 ds-u-padding-left--0">
-                    <i className={'fa ds-u-color--primary ds-u-padding-right--1 ' + 'fa-file-' + fileFormat}></i>
-                    {title}
+                    <i className={'fa ds-u-color--primary ds-u-padding-right--1 ' + 'fa-file-' + (fileFormat == "xlsx" ? "excel" : fileFormat)}></i>
+                    {title + " (" + fileFormat.toUpperCase() + ")"}
                   </div>
                   <div className="ds-l-col--12 ds-l-md-col--6 ds-u-text-align--center ds-u-md-text-align--right ds-u-margin-top--2 ds-u-md-margin-top--0">
                     <a
