@@ -11,6 +11,7 @@ import SearchItemIcon from '../../assets/icons/searchItem';
 import DatasetTable from '../../components/DatasetTableTab';
 import DatasetOverview from '../../components/DatasetOverviewTab';
 import DatasetAPI from '../../components/DatasetAPITab';
+import DataDictionary from '../../components/DatasetDataDictionaryTab';
 import { DatasetPageType, DistributionType } from '../../types/dataset';
 import './dataset.scss';
 
@@ -22,6 +23,7 @@ const Dataset = ({
   setDatasetTitle,
   customMetadataMapping,
   apiPageUrl = "/api",
+  dataDictionaryUrl,
 } : DatasetPageType) => {
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
@@ -35,9 +37,9 @@ const Dataset = ({
   };
 
   let distribution = {} as DistributionType;
-  let distribution_array = dataset.distribution ? dataset.distribution : [];
-  if (distribution_array.length) {
-    distribution = distribution_array[0];
+  let distributions= dataset.distribution ? dataset.distribution : [];
+  if (distributions.length) {
+    distribution = distributions[0];
   }
 
   const resource = useDatastore(
@@ -123,19 +125,21 @@ const Dataset = ({
                     </span>
                   }
                 >
-                  <DatasetOverview resource={resource} dataset={dataset} distribution={distribution} metadataMapping={metadataMapping} />
+                  <DatasetOverview resource={resource} dataset={dataset} distributions={distributions} metadataMapping={metadataMapping} />
                 </TabPanel>
-                <TabPanel
-                  id={'data-dictionary'}
-                  tab={
-                    <span>
-                      <SearchItemIcon id="data-dictionary" />
-                      Data Dictionary
-                    </span>
-                  }
-                >
-                  <p>Data Dictionary</p>
-                </TabPanel>
+                { dataset.describedBy && (
+                  <TabPanel
+                    id={'data-dictionary'}
+                    tab={
+                      <span>
+                        <SearchItemIcon id="data-dictionary" />
+                        Data Dictionary
+                      </span>
+                    }
+                  >
+                    <DataDictionary rootUrl={rootUrl} />
+                  </TabPanel>
+                )}
                 <TabPanel
                   id={'api'}
                   tab={
