@@ -55,6 +55,7 @@ export type DatasetPageType = {
   customColumns : Array<ColumnType>,
   setDatasetTitle : Function,
   customMetadataMapping : any, // TODO
+  apiPageUrl: string,
 }
 
 
