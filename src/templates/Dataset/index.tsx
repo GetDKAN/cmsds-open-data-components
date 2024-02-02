@@ -72,7 +72,6 @@ const Dataset = ({
   ) as ResourceType;
 
   const { siteWideDataDictionary } = dataDictionaryUrl ? getSiteWideDataDictionary(rootUrl, dataDictionaryUrl) : { siteWideDataDictionary: null};
-  console.log(siteWideDataDictionary)
 
   // compare schema fields with siteWideDataDictionary to display commonalities for now
   // until dataset level data dictionaries are implemented
@@ -80,7 +79,6 @@ const Dataset = ({
     siteWideDataDictionary.data.fields.filter((field : DatasetDictionaryItemType) => {
       return Object.keys(resource.schema[distribution.identifier].fields).indexOf(field.name) !== -1;
     }) : null;
-  console.log(datasetDictionary)
     
 
   useEffect(() => {
