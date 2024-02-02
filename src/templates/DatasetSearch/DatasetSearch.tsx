@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import qs from 'qs';
+import axios from 'axios';
 import withQueryProvider from '../../utilities/QueryProvider/QueryProvider';
 import { Accordion, AccordionItem, TextField, Dropdown, Spinner, Button, Alert, Pagination } from '@cmsgov/design-system';
 import DatasetSearchListItem from '../../components/DatasetSearchListItem';
@@ -180,18 +181,16 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     ['page-size']: pageSize !== 10 ? pageSize : undefined,
     ...additionalParams
   }
-  const { data, status, error } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["datasets", params],
     queryFn: () => {
-      return fetch(`${rootUrl}/search/?${qs.stringify(params, {arrayFormat: 'comma',encode: false })}`).then(
-        (res) => res.json(),
-      )
+      return axios.get(`${rootUrl}/search/?${qs.stringify(params, {arrayFormat: 'comma',encode: false })}`)
     }
-});
+  });
 
-  if ((data && data.total) && totalItems != data.total) setTotalItems(data.total);
+  if ((data && data.data.total) && totalItems != data.data.total) setTotalItems(data.data.total);
 
-  const facets: SidebarFacetTypes = (data && data.facets) ? separateFacets(data ? data.facets : []) :  {theme: null, keyword: null};
+  const facets: SidebarFacetTypes = (data && data.data.facets) ? separateFacets(data ? data.data.facets : []) :  {theme: null, keyword: null};
 
   return (
     <>
@@ -262,7 +261,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
             )}
         </div>
         <div className="ds-l-col--12 ds-l-sm-col--8">
-          {status === "pending" ? (
+          {isLoading ? (
             <Spinner
               className="ds-u-valign--middle"
               aria-valuetext="Dataset Search loading"
@@ -275,7 +274,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                   {(currentResultNumbers && data) && (
                     <p className="ds-u-margin-y--0" role="region" aria-live="polite" data-testid="currentResults" >
                       Showing {currentResultNumbers.startingNumber} -{' '}
-                      {currentResultNumbers.endingNumber} of {data ? data.total : ""} datasets
+                      {currentResultNumbers.endingNumber} of {data ? data.data.total : ""} datasets
                     </p>
                   )}
                 </div>
@@ -294,8 +293,8 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
               </div>
             <ol className="dc-dataset-search-list ds-u-padding--0" data-testid="results-list">
               {noResults && <Alert variation="error" heading="No results found." />}
-              {data && data.results ? Object.keys(data.results).map((key) => {
-                  return data.results[key];
+              {data && data.data.results ? Object.keys(data.data.results).map((key) => {
+                  return data.data.results[key];
                 }).map((item) => {
                   function getDownloadUrl(item: DistributionItemType) {
                     let distribution_array = item.distribution ? item.distribution : [];
@@ -323,10 +322,10 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                   <Alert variation="error" heading="Could not connect to the API." />
                 )}
             </ol>
-            {(data && data.total) && data.total != 0 && (
+            {(data && data.data.total) && data.data.total != 0 && (
               <Pagination
                 currentPage={Number(page)}
-                totalPages={Math.ceil(Number(data.total) / pageSize)}
+                totalPages={Math.ceil(Number(data.data.total) / pageSize)}
                 onPageChange={(evt, page) => {
                   evt.preventDefault();
                   window.scroll(0, 0);

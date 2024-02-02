@@ -12,13 +12,13 @@ describe('<Resource />', () => {
     render(
       <Resource
         resource={resource}
-        distribution={distribution}
+        distributions={distribution.distribution}
         title={"Test title"}
         fileFormat={"csv"}
       />
     )
 
-    expect(screen.getByText("Test title")).toBeInTheDocument();
-    expect(screen.getByRole("button", {name: "Download"})).toBeInTheDocument();
+    expect(screen.getByText("Test title (CSV)")).toBeInTheDocument();
+    expect(screen.getByRole("link", {name: "Download Test title csv"})).toBeInTheDocument();
   });
 });
