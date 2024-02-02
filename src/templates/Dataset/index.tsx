@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import DOMPurify from 'dompurify';
 import qs from 'qs';
+import { useQuery } from '@tanstack/react-query';
+import withQueryProvider from '../../utilities/QueryProvider/QueryProvider';
 import useMetastoreDataset from '../../services/useMetastoreDataset';
 import useDatastore from '../../services/useDatastore';
 import PageNotFound from '../PageNotFound';
@@ -12,8 +14,24 @@ import DatasetTable from '../../components/DatasetTableTab';
 import DatasetOverview from '../../components/DatasetOverviewTab';
 import DatasetAPI from '../../components/DatasetAPITab';
 import DataDictionary from '../../components/DatasetDataDictionaryTab';
-import { DatasetPageType, DistributionType } from '../../types/dataset';
+import { DatasetDictionaryItemType, DatasetPageType, DatasetDictionaryType, DistributionType, ResourceType } from '../../types/dataset';
 import './dataset.scss';
+
+const getSiteWideDataDictionary = (rootUrl : string, dataDictionaryUrl : string) => {
+  const {data, isLoading, error} = useQuery({
+    queryKey: ["dictionary"],
+    queryFn: () => {
+      return fetch(rootUrl + dataDictionaryUrl).then(
+        (res) => res.json(),
+      )
+    }
+  });
+
+  return {
+    siteWideDataDictionary: data as DatasetDictionaryType,
+    dataDictionaryLoading: isLoading
+  }
+}
 
 const Dataset = ({
   id,
@@ -51,7 +69,19 @@ const Dataset = ({
       manual: true,
     },
     additionalParams
-  );
+  ) as ResourceType;
+
+  const { siteWideDataDictionary } = dataDictionaryUrl ? getSiteWideDataDictionary(rootUrl, dataDictionaryUrl) : { siteWideDataDictionary: null};
+  console.log(siteWideDataDictionary)
+
+  // compare schema fields with siteWideDataDictionary to display commonalities for now
+  // until dataset level data dictionaries are implemented
+  const datasetDictionary = (siteWideDataDictionary && resource && resource.schema[distribution.identifier]) ?
+    siteWideDataDictionary.data.fields.filter((field : DatasetDictionaryItemType) => {
+      return Object.keys(resource.schema[distribution.identifier].fields).indexOf(field.name) !== -1;
+    }) : null;
+  console.log(datasetDictionary)
+    
 
   useEffect(() => {
     if (distribution.identifier) {
@@ -127,7 +157,7 @@ const Dataset = ({
                 >
                   <DatasetOverview resource={resource} dataset={dataset} distributions={distributions} metadataMapping={metadataMapping} />
                 </TabPanel>
-                { dataset.describedBy && (
+                { datasetDictionary && datasetDictionary.length && (
                   <TabPanel
                     id={'data-dictionary'}
                     tab={
@@ -137,7 +167,7 @@ const Dataset = ({
                       </span>
                     }
                   >
-                    <DataDictionary rootUrl={rootUrl} />
+                    <DataDictionary datasetDictionary={datasetDictionary} title={"Data Dictionary"} />
                   </TabPanel>
                 )}
                 <TabPanel
@@ -165,4 +195,4 @@ Dataset.propTypes = {
   rootUrl: PropTypes.string.isRequired,
 };
 
-export default Dataset;
+export default withQueryProvider(Dataset);

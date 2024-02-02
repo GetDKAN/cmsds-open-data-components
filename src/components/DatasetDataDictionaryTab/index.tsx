@@ -3,8 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import withQueryProvider from '../../utilities/QueryProvider/QueryProvider';
 
 import { Table, TableHead, TableRow, TableCell, TableBody } from '@cmsgov/design-system';
+import { DatasetDictionaryItemType } from '../../types/dataset';
 
-const DataDictionary = ({ rootUrl } : {rootUrl: string}) => {
+const DataDictionary = (
+  { datasetDictionary, title } : 
+  { datasetDictionary: DatasetDictionaryItemType[], title: string}) => {
 
   const tableColumns = [
     {
@@ -18,23 +21,17 @@ const DataDictionary = ({ rootUrl } : {rootUrl: string}) => {
     {
       colName: "type",
       UIName: "Type"
+    },
+    {
+      colName: "format",
+      UIName: "Format"
     }
   ];
-  
-  const {data, status, error} = useQuery({
-    queryKey: ["dictionary"],
-    queryFn: () => {
-      return fetch(rootUrl + "/metastore/schemas/data-dictionary/items/sitewide-data-dictionary").then(
-        (res) => res.json(),
-      )
-    }
-  });
+
 
   return (
     <>
-      {data && (
-        <h2 className="ds-text-heading--2xl ds-u-margin-y--3">{data.title}</h2>
-      )}
+      <h2 className="ds-text-heading--2xl ds-u-margin-y--3">{title}</h2>
       <Table>
         <TableHead>
           <TableRow>
@@ -46,7 +43,7 @@ const DataDictionary = ({ rootUrl } : {rootUrl: string}) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data && data.data.fields.map((row) => {      
+          {datasetDictionary.map((row : DatasetDictionaryItemType) => {      
             return (
               <TableRow>
                 { tableColumns.map((col) => {

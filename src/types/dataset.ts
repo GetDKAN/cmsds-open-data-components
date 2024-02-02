@@ -98,3 +98,19 @@ export type DatasetOverviewPropsType = {
   distributions: DistributionType[],
   metadataMapping: any, //TODO
 }
+
+export type DatasetDictionaryItemType = {
+  format: string,
+  name: string,
+  title: string,
+  type: string,
+  [name: string]: string,
+}
+
+export type DatasetDictionaryType = {
+  identifier: string,
+  title: string,
+  data: {
+    fields: DatasetDictionaryItemType[]
+  }
+}
