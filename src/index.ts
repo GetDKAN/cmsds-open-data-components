@@ -7,6 +7,7 @@ export { default as APIPage } from './templates/APIPage';
 export { default as PageNotFound } from './templates/PageNotFound';
 export { default as DatasetSearch } from './templates/DatasetSearch';
 export { default as Dataset } from './templates/Dataset';
+export { default as DatasetTable } from './components/DatasetTableTab';
 export { default as Header } from './templates/Header';
 export { default as Footer } from './templates/Footer';
 export { default as SpecsAndLimits } from './templates/SpecsAndLimits';

@@ -49,6 +49,7 @@ const QueryBuilder = (props: QueryBuilderPropTypes) => {
   const { resource, id, includeSearchParams, customColumns } = props;
   const { conditions, schema, setConditions } = resource;
   const fields = Object.keys(schema[id].fields);
+  console.log(resource)
 
   const [conditionsCleared, setConditionsCleared] = useState(false);
   const [queryConditions, setQueryConditions] = useState<Array<ConditionType>>([]);
@@ -78,6 +79,7 @@ const QueryBuilder = (props: QueryBuilderPropTypes) => {
   };
 
   React.useEffect(() => {
+    console.log(conditions)
     addCondition(conditions);
     setTitleConditions(conditions);
   }, []);
@@ -109,6 +111,7 @@ const QueryBuilder = (props: QueryBuilderPropTypes) => {
         return updateQueryForDatastore(cond);
       });
     setConditions(submitConditions);
+    console.log(queryConditions)
     setTitleConditions(queryConditions.map((oc) => Object.assign({}, oc)));
     setConditionsChanged(false);
     if (includeSearchParams) {
@@ -135,6 +138,8 @@ const QueryBuilder = (props: QueryBuilderPropTypes) => {
     setConditionsChanged(true);
     setConditionsCleared(true);
   };
+
+  console.log(titleConditions)
 
   return (
     <div className="dc-query-builder ds-u-margin-bottom--3">
