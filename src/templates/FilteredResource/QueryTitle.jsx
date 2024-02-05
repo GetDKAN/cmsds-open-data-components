@@ -4,7 +4,7 @@ import { operatorMapping, cleanText } from './functions';
 
 const QueryTitle = ({ conditions, schema, customColumns }) => {
   const { fields } = schema;
-  if (!conditions.length) {
+  if (!conditions || !conditions.length) {
     return <>Add a filter</>;
   }
 

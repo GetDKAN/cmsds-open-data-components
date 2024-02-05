@@ -177,7 +177,7 @@ const Dataset = ({
                     </span>
                   }
                 >
-                  <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} />
+                  <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} additionalParams={additionalParams} />
                 </TabPanel>
               </Tabs>
             </div>

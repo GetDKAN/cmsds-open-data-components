@@ -16,7 +16,9 @@ export function prepareColumns(columns : any, schema : any) {
   }));
 }
 
-const DatasetTable = ({ id, distribution, resource, rootUrl, customColumns = [] } : {id: string, distribution: DistributionType, resource: ResourceType, rootUrl: string, customColumns: Array<ColumnType>}) => {
+const DatasetTable = ({ id, distribution, resource, rootUrl, customColumns = [], jsonUrl = undefined }
+  : {id: string, distribution: DistributionType, resource: ResourceType, rootUrl: string, customColumns: Array<ColumnType>, jsonUrl?: string}
+  ) => {
   const defaultPage = 1;
   const defaultPageSize = 10;
   const [page, setPage] = useState(defaultPage);
@@ -49,7 +51,7 @@ const DatasetTable = ({ id, distribution, resource, rootUrl, customColumns = [] 
     return (
       <>
         <QueryBuilder resource={resource} id={distribution.identifier} customColumns={customColumnHeaders} />
-        {<DataTableHeader resource={resource} downloadURL={downloadURL} /> }
+        {<DataTableHeader resource={resource} downloadURL={downloadURL} jsonUrl={jsonUrl} /> }
         <div className="ds-u-overflow--auto ds-u-border-x--1 ds-u-border-bottom--1">
           <DataTable
             data={resource.values}
