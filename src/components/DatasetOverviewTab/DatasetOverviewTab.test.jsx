@@ -19,7 +19,7 @@ describe('<DatasetOverview />', () => {
       <MemoryRouter>
         <DatasetOverview
           resource={resource}
-          distribution={distribution}
+          distributions={distribution.distribution}
           dataset={dataset}
           metadataMapping={metadataMapping}
         />

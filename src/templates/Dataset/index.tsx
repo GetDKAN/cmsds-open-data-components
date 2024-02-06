@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import DOMPurify from 'dompurify';
 import qs from 'qs';
+import { useQuery } from '@tanstack/react-query';
+import withQueryProvider from '../../utilities/QueryProvider/QueryProvider';
 import useMetastoreDataset from '../../services/useMetastoreDataset';
 import useDatastore from '../../services/useDatastore';
 import PageNotFound from '../PageNotFound';
@@ -11,8 +13,25 @@ import SearchItemIcon from '../../assets/icons/searchItem';
 import DatasetTable from '../../components/DatasetTableTab';
 import DatasetOverview from '../../components/DatasetOverviewTab';
 import DatasetAPI from '../../components/DatasetAPITab';
-import { DatasetPageType, DistributionType } from '../../types/dataset';
+import DataDictionary from '../../components/DatasetDataDictionaryTab';
+import { DatasetDictionaryItemType, DatasetPageType, DatasetDictionaryType, DistributionType, ResourceType } from '../../types/dataset';
 import './dataset.scss';
+
+const getSiteWideDataDictionary = (rootUrl : string, dataDictionaryUrl : string) => {
+  const {data, isLoading, error} = useQuery({
+    queryKey: ["dictionary"],
+    queryFn: () => {
+      return fetch(rootUrl + dataDictionaryUrl).then(
+        (res) => res.json(),
+      )
+    }
+  });
+
+  return {
+    siteWideDataDictionary: data as DatasetDictionaryType,
+    dataDictionaryLoading: isLoading
+  }
+}
 
 const Dataset = ({
   id,
@@ -22,6 +41,7 @@ const Dataset = ({
   setDatasetTitle,
   customMetadataMapping,
   apiPageUrl = "/api",
+  dataDictionaryUrl,
 } : DatasetPageType) => {
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
@@ -35,9 +55,9 @@ const Dataset = ({
   };
 
   let distribution = {} as DistributionType;
-  let distribution_array = dataset.distribution ? dataset.distribution : [];
-  if (distribution_array.length) {
-    distribution = distribution_array[0];
+  let distributions= dataset.distribution ? dataset.distribution : [];
+  if (distributions.length) {
+    distribution = distributions[0];
   }
 
   const resource = useDatastore(
@@ -49,7 +69,17 @@ const Dataset = ({
       manual: true,
     },
     additionalParams
-  );
+  ) as ResourceType;
+
+  const { siteWideDataDictionary } = dataDictionaryUrl ? getSiteWideDataDictionary(rootUrl, dataDictionaryUrl) : { siteWideDataDictionary: null};
+
+  // compare schema fields with siteWideDataDictionary to display commonalities for now
+  // until dataset level data dictionaries are implemented
+  const datasetDictionary = (siteWideDataDictionary && resource && resource.schema[distribution.identifier]) ?
+    siteWideDataDictionary.data.fields.filter((field : DatasetDictionaryItemType) => {
+      return Object.keys(resource.schema[distribution.identifier].fields).indexOf(field.name) !== -1;
+    }) : null;
+    
 
   useEffect(() => {
     if (distribution.identifier) {
@@ -123,19 +153,21 @@ const Dataset = ({
                     </span>
                   }
                 >
-                  <DatasetOverview resource={resource} dataset={dataset} distribution={distribution} metadataMapping={metadataMapping} />
+                  <DatasetOverview resource={resource} dataset={dataset} distributions={distributions} metadataMapping={metadataMapping} />
                 </TabPanel>
-                <TabPanel
-                  id={'data-dictionary'}
-                  tab={
-                    <span>
-                      <SearchItemIcon id="data-dictionary" />
-                      Data Dictionary
-                    </span>
-                  }
-                >
-                  <p>Data Dictionary</p>
-                </TabPanel>
+                { datasetDictionary && datasetDictionary.length && (
+                  <TabPanel
+                    id={'data-dictionary'}
+                    tab={
+                      <span>
+                        <SearchItemIcon id="data-dictionary" />
+                        Data Dictionary
+                      </span>
+                    }
+                  >
+                    <DataDictionary datasetDictionary={datasetDictionary} title={"Data Dictionary"} />
+                  </TabPanel>
+                )}
                 <TabPanel
                   id={'api'}
                   tab={
@@ -161,4 +193,4 @@ Dataset.propTypes = {
   rootUrl: PropTypes.string.isRequired,
 };
 
-export default Dataset;
+export default withQueryProvider(Dataset);

@@ -3,11 +3,13 @@ export type DistributionDataType = {
   format: string,
   title: string,
   mediaType: string,
+  mimeType: string,
+  "%Ref:downloadURL": DistributionType[],
 }
 
 export type DistributionType = {
-  identifier: string;
-  data: DistributionDataType;
+  identifier: string,
+  data: DistributionDataType,
 }
 
 export type DatasetType = {
@@ -16,6 +18,8 @@ export type DatasetType = {
   error: string,
   description: string,
   identifier: string,
+  describedBy?: any, // TODO
+  describedByType?: any, //TODO
 }
 
 export type ConditionType = {
@@ -56,6 +60,8 @@ export type DatasetPageType = {
   setDatasetTitle : Function,
   customMetadataMapping : any, // TODO
   apiPageUrl: string,
+  dataDictionaryUrl: string | undefined,
+  dataDictionaryACA: string | undefined
 }
 
 
@@ -89,6 +95,22 @@ export type QueryRowType = {
 export type DatasetOverviewPropsType = {
   dataset: DatasetType,
   resource: ResourceType,
-  distribution: DistributionType,
+  distributions: DistributionType[],
   metadataMapping: any, //TODO
+}
+
+export type DatasetDictionaryItemType = {
+  format: string,
+  name: string,
+  title: string,
+  type: string,
+  [name: string]: string,
+}
+
+export type DatasetDictionaryType = {
+  identifier: string,
+  title: string,
+  data: {
+    fields: DatasetDictionaryItemType[]
+  }
 }
