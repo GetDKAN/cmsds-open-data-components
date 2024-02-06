@@ -64,7 +64,6 @@ const QueryBuilder = ({ resource, id, includeSearchParams, customColumns }) => {
   };
 
   React.useEffect(() => {
-    console.log(conditions)
     addCondition(conditions);
     setTitleConditions(conditions);
   }, []);
@@ -90,7 +89,6 @@ const QueryBuilder = ({ resource, id, includeSearchParams, customColumns }) => {
         return updateQueryForDatastore(cond);
       });
     setConditions(submitConditions);
-    console.log(queryConditions)
     setTitleConditions(queryConditions.map((oc) => Object.assign({}, oc)));
     setConditionsChanged(false);
     if (includeSearchParams) {
@@ -116,8 +114,6 @@ const QueryBuilder = ({ resource, id, includeSearchParams, customColumns }) => {
     setQueryConditions(newConditions);
     setConditionsChanged(true);
   };
-
-  console.log(titleConditions)
 
   return (
     <div className="dc-query-builder ds-u-margin-bottom--3">
