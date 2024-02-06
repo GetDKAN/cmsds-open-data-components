@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import qs from 'qs';
+import axios from 'axios';
 import withQueryProvider from '../../utilities/QueryProvider/QueryProvider';
 import { Accordion, AccordionItem, TextField, Dropdown, Spinner, Button, Alert, Pagination } from '@cmsgov/design-system';
 import DatasetSearchListItem from '../../components/DatasetSearchListItem';
@@ -11,7 +12,6 @@ import PageHeader from '../../components/PageHeader';
 import { useQuery } from '@tanstack/react-query';
 import { separateFacets, transformUrlParamsToSearchObject } from '../../services/useSearchAPI/helpers';
 
-import axios from 'axios';
 import './dataset-search.scss';
 import { DatasetSearchPageProps, SelectedFacetsType, SidebarFacetTypes, DistributionItemType } from '../../types/search';
 import { TextFieldValue } from '@cmsgov/design-system/dist/react-components/types/TextField/TextField';
@@ -181,9 +181,12 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     ['page-size']: pageSize !== 10 ? pageSize : undefined,
     ...additionalParams
   }
-  const { data, status, error } = useQuery(["datasets", params], () =>
-    axios.get(`${rootUrl}/search/?${qs.stringify(params, {arrayFormat: 'comma',encode: false })}`)
-  );
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["datasets", params],
+    queryFn: () => {
+      return axios.get(`${rootUrl}/search/?${qs.stringify(params, {arrayFormat: 'comma',encode: false })}`)
+    }
+  });
 
   if ((data && data.data.total) && totalItems != data.data.total) setTotalItems(data.data.total);
 
@@ -258,7 +261,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
             )}
         </div>
         <div className="ds-l-col--12 ds-l-sm-col--8">
-          {status === "loading" ? (
+          {isLoading ? (
             <Spinner
               className="ds-u-valign--middle"
               aria-valuetext="Dataset Search loading"

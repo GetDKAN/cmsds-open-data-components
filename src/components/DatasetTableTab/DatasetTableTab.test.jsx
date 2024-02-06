@@ -11,7 +11,7 @@ describe('<DatasetTableTab />', () => {
     render(
       <DatasetTable
         resource={resource}
-        distribution={distribution}
+        distribution={distribution.distribution[0]}
         rootUrl={"test/api/"}
       />)
 
