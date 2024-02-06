@@ -85,7 +85,7 @@
     margin-bottom: 16px;
     width: 48px;
     height: 2px;
-    background: #{var(--color-primary-alt-light)};
+    background: #{var(--color-primary-light)};
     content: '';
   }
   ul {
@@ -105,7 +105,7 @@
   }
   a:hover,
   a:active {
-    border-bottom: 2px solid #{var(--color-primary-alt-light)};
+    border-bottom: 2px solid #{var(--color-primary-light)};
   }
 }
 .has-submenu > button::after {
@@ -282,7 +282,7 @@ nav.dc-c-site-menu {
     > li:focus > a span,
     > li a:hover span,
     > li a:focus span {
-      border-bottom: 2px solid #{var(--color-primary-alt-lightest)};
+      border-bottom: 2px solid #{var(--color-primary-lightest)};
     }
   }
 }
@@ -324,7 +324,7 @@ li.has-submenu {
   }
   a:hover span,
   a:focus span {
-    border-bottom: 2px solid #{var(--color-primary-alt-light)};
+    border-bottom: 2px solid #{var(--color-primary-light)};
   }
 }
 
