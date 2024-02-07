@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { useMediaQuery } from 'react-responsive';
-import { Accordion, AccordionItem, Button, Dropdown, TextField } from '@cmsgov/design-system';
+import { Button, Dropdown, TextField } from '@cmsgov/design-system';
 import { buildOperatorOptions, convertUTCToLocalDate, cleanText } from './functions';
 import 'react-datepicker/dist/react-datepicker.css';
-import CloseIcon from '../../assets/icons/close';
 
 function getStartDate(condition, schema, id) {
   if (schema[id].fields[condition.property].mysql_type === 'date') {
@@ -78,7 +77,7 @@ const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schem
         />
       </div>
       {schema[id].fields[property].mysql_type === 'date' ? (
-        <div className="ds-l-md-col--5 ds-l-lg-col--4 ds-l-sm-col--8 ds-l-col--12 ds-u-padding--0 ds-u-sm-padding-right--2 ds-u-md-padding-right--0 ds-u-lg-padding-right--2">
+        <div className="ds-l-md-col--5 ds-l-lg-col--4 ds-l-sm-col--8 ds-l-col--12 ds-u-padding--0 ds-u-sm-padding-right--2 ds-u-md-padding-right--0 ds-u-lg-padding-right--2 ds-u-margin-bottom--2">
           <label
             className="ds-c-label"
             htmlFor={`${condition.key}_date_value`}
