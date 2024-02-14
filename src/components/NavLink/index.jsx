@@ -4,7 +4,7 @@ import { NavLink as RRDNavLink } from 'react-router-dom';
 import './NavLink.scss';
 // import validator from 'validator';
 
-const NavLink = ({ link, className, wrapLabel }) => {
+const NavLink = ({ link, className, wrapLabel, clickHandler = null }) => {
   const innerHtml = wrapLabel ? <span>{link.label}</span> : link.label;
 
   // if (validator.isURL(link.url, { require_protocol: true })) {
@@ -14,10 +14,12 @@ const NavLink = ({ link, className, wrapLabel }) => {
   //     </a>
   //   );
   // } else {
+
     return (
       <RRDNavLink
         className={({ isActive }) => (isActive ? `dc-c-active-link ${className}` : `${className}`)}
         to={link.url}
+        onClick={clickHandler}
       >
         {innerHtml}
       </RRDNavLink>
