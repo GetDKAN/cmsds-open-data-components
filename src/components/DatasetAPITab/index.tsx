@@ -5,9 +5,12 @@ type DatasetAPIProps = {
   id: String;
   rootUrl: String;
   apiUrl: string;
+  additionalParams: {
+    ACA: string,
+  }
 };
 
-const DatasetAPI = ({ id, rootUrl, apiUrl }: DatasetAPIProps) => {
+const DatasetAPI = ({ id, rootUrl, apiUrl, additionalParams }: DatasetAPIProps) => {
   return (
     <>
       <div className="ds-u-display--flex ds-u-flex-wrap--wrap">
@@ -28,7 +31,11 @@ const DatasetAPI = ({ id, rootUrl, apiUrl }: DatasetAPIProps) => {
         </div>
       </div>
       <ApiDocumentation
-        endpoint={`${rootUrl}/metastore/schemas/dataset/items/${id}/docs`}
+        endpoint={`${rootUrl}/metastore/schemas/dataset/items/${id}/docs${
+          additionalParams && additionalParams.ACA
+            ? '?ACA=' + additionalParams.ACA + '&redirect=false'
+            : ''
+        }`}
       />
     </>
   );
