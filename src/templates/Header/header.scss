@@ -282,7 +282,7 @@ nav.dc-c-site-menu {
     > li:focus > a span,
     > li a:hover span,
     > li a:focus span {
-      border-bottom: 2px solid #{var(--color-primary-lightest)};
+      border-bottom: 2px solid #{var(--color-primary-light)};
     }
   }
 }
@@ -294,6 +294,7 @@ nav.dc-c-site-menu .dc-c-header--links a:focus,
   box-shadow: 0 0 0 3px #{var(--color-focus-light)}, 0 0 4px 6px #{var(--color-focus-dark)};
   outline-offset: 3px;
   border-radius: #{var(--button__border-radius)};
+  text-decoration: none;
 }
 
 nav > ul li ul {
