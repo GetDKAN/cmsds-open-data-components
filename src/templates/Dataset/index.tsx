@@ -121,7 +121,7 @@ const Dataset = ({
         <div className={'ds-l-container'}>
           <div className={'ds-l-row'}>
             <div className={'ds-l-md-col--9'}>
-              <h1 className={'ds-u-margin-bottom--7 ds-h1 title-underline'}>{title}</h1>
+              <h1 className={'ds-u-margin-bottom--7 ds-h1 title-underline ds-u-margin-top--3'}>{title}</h1>
               <div className={'ds-u-measure--wide ds-u-margin-bottom--7'}>
                 <p className="dc-c-metadata-description" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(dataset.description) }}/>
               </div>
@@ -177,7 +177,7 @@ const Dataset = ({
                     </span>
                   }
                 >
-                  <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} />
+                  <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} additionalParams={additionalParams} />
                 </TabPanel>
               </Tabs>
             </div>
