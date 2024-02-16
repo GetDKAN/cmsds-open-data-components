@@ -78,7 +78,7 @@ const useDatastore = (
         if (conditions && conditions.length) {
           fetchData();
         } else {
-          setCount(null);
+          setCount(0);
           setValues([]);
         }
       }

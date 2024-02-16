@@ -79,12 +79,22 @@ const Dataset = ({
     siteWideDataDictionary.data.fields.filter((field : DatasetDictionaryItemType) => {
       return Object.keys(resource.schema[distribution.identifier].fields).indexOf(field.name) !== -1;
     }) : null;
-    
 
   useEffect(() => {
     if (distribution.identifier) {
-      resource.setResource(distribution.identifier);
-      resource.setManual(false);
+      let localFileFormat = '';
+      if (distribution.data.format) {
+        localFileFormat = distribution.data.format.toUpperCase();
+      } else if (distribution.data.mediaType) {
+        const mediaType = distribution.data.mediaType.split('/');
+        if (mediaType.length && mediaType[1]) {
+          localFileFormat = mediaType[1].toUpperCase();
+        }
+      }
+      if (localFileFormat === 'CSV') {
+        resource.setResource(distribution.identifier);
+        resource.setManual(false);
+      }
     }
   }, [distribution]);
 
@@ -113,6 +123,7 @@ const Dataset = ({
       </p>
     </div>
   );
+  
   return (
     <>
       {dataset.error ? (
@@ -129,57 +140,61 @@ const Dataset = ({
           </div>
           <div className={'ds-l-row'}>
             <div className={'ds-l-md-col--12 dc-dataset'}>
-              <Tabs
-                onChange={function noRefCheck() {}}
-                defaultSelectedId={window.location.hash.substring(1)}
-              >
-                <TabPanel
-                  id={'data-table'}
-                  tab={
-                    <span>
-                      <SearchItemIcon id="data-table" />
-                      Data Table
-                    </span>
-                  }
+              {distribution && distribution.data && (
+                <Tabs
+                  onChange={function noRefCheck() {}}
+                  defaultSelectedId={window.location.hash.substring(1)}
                 >
-                  <DatasetTable id={id} distribution={distribution} resource={resource} rootUrl={rootUrl} customColumns={customColumns} />
-                </TabPanel>
-                <TabPanel
-                  id={'overview'}
-                  tab={
-                    <span>
-                      <SearchItemIcon id="overview" />
-                      Overview
-                    </span>
-                  }
-                >
-                  <DatasetOverview resource={resource} dataset={dataset} distributions={distributions} metadataMapping={metadataMapping} />
-                </TabPanel>
-                { datasetDictionary && datasetDictionary.length && (
+                  {distribution.data.format === "csv" && (
+                    <TabPanel
+                      id={'data-table'}
+                      tab={
+                        <span>
+                          <SearchItemIcon id="data-table" />
+                          Data Table
+                        </span>
+                      }
+                    >
+                      <DatasetTable id={id} distribution={distribution} resource={resource} rootUrl={rootUrl} customColumns={customColumns} />
+                    </TabPanel>
+                  )}
                   <TabPanel
-                    id={'data-dictionary'}
+                    id={'overview'}
                     tab={
                       <span>
-                        <SearchItemIcon id="data-dictionary" />
-                        Data Dictionary
+                        <SearchItemIcon id="overview" />
+                        Overview
                       </span>
                     }
                   >
-                    <DataDictionary datasetDictionary={datasetDictionary} title={"Data Dictionary"} />
+                    <DatasetOverview resource={resource} dataset={dataset} distributions={distributions} metadataMapping={metadataMapping} />
                   </TabPanel>
-                )}
-                <TabPanel
-                  id={'api'}
-                  tab={
-                    <span>
-                      <SearchItemIcon id="api" />
-                      API
-                    </span>
-                  }
-                >
-                  <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} additionalParams={additionalParams} />
-                </TabPanel>
-              </Tabs>
+                  { datasetDictionary && datasetDictionary.length && (
+                    <TabPanel
+                      id={'data-dictionary'}
+                      tab={
+                        <span>
+                          <SearchItemIcon id="data-dictionary" />
+                          Data Dictionary
+                        </span>
+                      }
+                    >
+                      <DataDictionary datasetDictionary={datasetDictionary} title={"Data Dictionary"} />
+                    </TabPanel>
+                  )}
+                  <TabPanel
+                    id={'api'}
+                    tab={
+                      <span>
+                        <SearchItemIcon id="api" />
+                        API
+                      </span>
+                    }
+                  >
+                    <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} additionalParams={additionalParams} />
+                  </TabPanel>
+                </Tabs>
+              )}
             </div>
           </div>
         </div>
