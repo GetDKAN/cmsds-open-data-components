@@ -5,4 +5,5 @@ export interface NavbarProps {
   menuClasses: string;
   linkClasses: string;
   wrapLabel: boolean;
+  clickHandler?: Function;
 }
