@@ -6,7 +6,7 @@ import DataTableDensity from './index';
 describe('<DataTableRowDetails />', () => {
   test('Renders 3 options', () => {
     render(<DataTableDensity setTablePadding={(p) => console.log(p)} />);
-    expect(screen.getByText('Tight')).toBeTruthy();
+    expect(screen.getAllByText('Tight')).toBeTruthy();
     expect(screen.getAllByText('Normal')).toBeTruthy();
     expect(screen.getByText('Expanded')).toBeTruthy();
   });

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { useMediaQuery } from 'react-responsive';
-import { Accordion, AccordionItem, Button, Dropdown, TextField } from '@cmsgov/design-system';
+import { Button, Dropdown, TextField } from '@cmsgov/design-system';
 import { buildOperatorOptions, convertUTCToLocalDate, cleanText } from './functions';
 import 'react-datepicker/dist/react-datepicker.css';
-import CloseIcon from '../../assets/icons/close';
 
 function getStartDate(condition, schema, id) {
   if (schema[id].fields[condition.property].mysql_type === 'date') {

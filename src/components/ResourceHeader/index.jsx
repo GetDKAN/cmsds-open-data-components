@@ -81,7 +81,7 @@ const ResourceHeader = ({
                   onOpen={() => {
                     navigator.clipboard.writeText(window.location.href);
                   }}
-                  className="ds-c-button ds-c-button--small ds-u-text-align--left ds-u-margin-right--1"
+                  className="ds-c-button ds-c-button--small ds-u-text-align--left ds-u-margin-right--1 display-settings-font"
                   placement="bottom"
                   dialog
                   ariaLabel="Copy link to filtered data"
