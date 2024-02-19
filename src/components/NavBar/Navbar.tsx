@@ -3,7 +3,7 @@ import { NavbarProps } from './Navbar.types';
 import SubMenu from '../SubMenu';
 import NavLink from '../NavLink';
 
-const NavBar = ({ links, menuName, menuId, menuClasses, linkClasses, wrapLabel }: NavbarProps) => {
+const NavBar = ({ links, menuName, menuId, menuClasses, linkClasses, wrapLabel, clickHandler }: NavbarProps) => {
   return (
     <nav className={`dc-c-${menuId}-menu`} aria-labelledby={`dc-c-${menuId}-menu--heading`}>
       <h2 id={`dc-c-${menuId}-menu--heading`} className="ds-u-visibility--screen-reader">
@@ -18,7 +18,7 @@ const NavBar = ({ links, menuName, menuId, menuClasses, linkClasses, wrapLabel }
           } else {
             return (
               <li key={link.id}>
-                <NavLink link={link} className={linkClasses} wrapLabel={wrapLabel} />
+                <NavLink link={link} className={linkClasses} wrapLabel={wrapLabel} clickHandler={clickHandler} />
               </li>
             );
           }

@@ -57,7 +57,6 @@ const MobileHeader = ({
     function handleClick(event) {
       // Links are wrapped in spans, this checks if the parent is an A, also check if in the search modal.
       if (
-        // event.target.parentElement.nodeName === 'A' ||
         event.target.closest('.dc-c-search-dialog')
       ) {
         setMenuOpen(false);
@@ -109,6 +108,11 @@ const MobileHeader = ({
       },
     };
   };
+
+  const handleMobileLinkClick = (e) => {
+    if(e.target.closest('a').getAttribute('href') === window.location.pathname)
+      setMenuOpen(false);
+  }
 
   return (
     <header
@@ -206,6 +210,7 @@ const MobileHeader = ({
           menuId="site"
           menuClasses="dc-c-header--links dc-c-header--mobile-links"
           linkClasses="ds-u-margin-left--1 ds-u-padding-bottom--2 ds-text-heading--md"
+          clickHandler={handleMobileLinkClick}
         />
         {mobile && (
           <div className="cms-mobile-header--container">

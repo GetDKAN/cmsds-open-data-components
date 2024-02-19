@@ -1,23 +1,26 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink as RRDNavLink } from 'react-router-dom';
 import './NavLink.scss';
-// import validator from 'validator';
 
-const NavLink = ({ link, className, wrapLabel }) => {
+type NavLinkPropTypes = {
+  link: {
+    label: string,
+    url: string,
+  },
+  className: string,
+  wrapLabel: boolean,
+  clickHandler?: null | Function
+}
+
+const NavLink = ({ link, className, wrapLabel, clickHandler } : NavLinkPropTypes) => {
   const innerHtml = wrapLabel ? <span>{link.label}</span> : link.label;
 
-  // if (validator.isURL(link.url, { require_protocol: true })) {
-  //   return (
-  //     <a className={className} href={link.url}>
-  //       {innerHtml}
-  //     </a>
-  //   );
-  // } else {
     return (
       <RRDNavLink
         className={({ isActive }) => (isActive ? `dc-c-active-link ${className}` : `${className}`)}
         to={link.url}
+        onClick={clickHandler ? clickHandler as MouseEventHandler : undefined}
       >
         {innerHtml}
       </RRDNavLink>
