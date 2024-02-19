@@ -12,7 +12,7 @@ const DataTableRowChanger = ({ setLimit, rowOptions, limit }) => {
         labelClassName="ds-u-margin-top--0"
         name="datatable_rows_per_page"
         onChange={(e) => setLimit(e.target.value)}
-        defaultValue={limit}
+        defaultValue={limit.toString()}
       />
     </div>
   );

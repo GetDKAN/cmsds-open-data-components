@@ -3,6 +3,7 @@ import { useMediaQuery } from 'react-responsive';
 import { Button } from '@cmsgov/design-system';
 import ResourceInformation from '../ResourceInformation';
 import { DistributionType, ResourceType } from '../../types/dataset';
+import './Resource.scss';
 
 type ResourcePropsType = {
   distributions: DistributionType[],
@@ -37,7 +38,7 @@ const Resource = ({ distributions, resource, title } : ResourcePropsType ) => {
     <div className="ds-u-display--flex ds-u-flex-wrap--wrap">
       <h2 className="ds-l-col--12 ds-u-padding-left--0 ds-text-heading--2xl">Resources</h2>
       {distributions.length &&
-        <ul className="ds-c-list ds-c-list--bare">
+        <ul className="ds-c-list ds-c-list--bare dc-c-resource-full-width">
           {
             distributions.map((dist) => {
               const fileFormat = getFormatType(dist)
