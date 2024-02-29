@@ -169,7 +169,7 @@ const Dataset = ({
                   >
                     <DatasetOverview resource={resource} dataset={dataset} distributions={distributions} metadataMapping={metadataMapping} />
                   </TabPanel>
-                  { datasetDictionary && datasetDictionary.length && (
+                  { datasetDictionary && datasetDictionary.length ? (
                     <TabPanel
                       id={'data-dictionary'}
                       tab={
@@ -181,7 +181,8 @@ const Dataset = ({
                     >
                       <DataDictionary datasetDictionary={datasetDictionary} title={"Data Dictionary"} />
                     </TabPanel>
-                  )}
+                  )
+                  : null}
                   <TabPanel
                     id={'api'}
                     tab={
