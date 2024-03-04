@@ -1,0 +1,58 @@
+{
+  "@type": "dcat:Dataset",
+  "title": "Product Data for Newly Reported Drugs in the Medicaid Drug Rebate Program 2024-01-08-to-2024-01-14",
+  "identifier": "4eaa5ebe-62f7-402e-a407-963cd380688b",
+  "description": "The data below contains newly reported, active covered outpatient drugs which were reported by participating drug manufacturers since the last quarterly update of the Drug Products in the Medicaid Drug Rebate Program (MDRP) database.",
+  "accessLevel": "public",
+  "accrualPeriodicity": "R/P10Y",
+  "modified": "2024-01-16T18:50:39+00:00",
+  "license": "http://www.usa.gov/publicdomain/label/1.0/",
+  "publisher": {
+      "identifier": "4f3cccad-4fcd-5411-9d07-c23ed9e20068",
+      "data": {
+          "@type": "org:Organization",
+          "name": "data.medicaid.gov"
+      }
+  },
+  "contactPoint": {
+      "fn": "Medicaid.gov",
+      "hasEmail": "mailto:Medicaid.gov@cms.hhs.gov"
+  },
+  "keyword": [
+      {
+          "identifier": "7c583fc5-6456-5bb1-975f-3c7e202fcf5a",
+          "data": "drug rebate program"
+      }
+  ],
+  "distribution": [
+      {
+          "identifier": "d60b31aa-bfa8-527e-9b50-6c3f972ee9a9",
+          "data": {
+              "@type": "dcat:Distribution",
+              "title": "Product Data for Newly Reported Drugs in the Medicaid Drug Rebate Program 2024-01-08-to-2024-01-14",
+              "format": "csv",
+              "downloadURL": "https://data.medicaid.gov/sites/default/files/uploaded_resources/mdrp-newly-rprt-drug-01-08-2024-to-01-14-2024.csv",
+              "%Ref:downloadURL": [
+                  {
+                      "identifier": "04c61553dab96573d64c62281d8c9c00__1705431154__source",
+                      "data": {
+                          "filePath": "https://h-o.st/sites/default/files/uploaded_resources/mdrp-newly-rprt-drug-01-08-2024-to-01-14-2024.csv",
+                          "identifier": "04c61553dab96573d64c62281d8c9c00",
+                          "mimeType": "text/csv",
+                          "perspective": "source",
+                          "version": "1705431154",
+                          "checksum": null
+                      }
+                  }
+              ]
+          }
+      }
+  ],
+  "bureauCode": [
+      "009:00"
+  ],
+  "programCode": [
+      "009:000"
+  ],
+  "%modified": "2024-01-16T13:52:33-0500"
+}

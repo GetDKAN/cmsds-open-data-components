@@ -17,7 +17,7 @@ const useDatastore = (
   const [id, setResource] = useState(resourceId);
   const [rootUrl, setRootUrl] = useState(rootAPIUrl);
   const [limit, setLimit] = useState(options.limit ? options.limit : 20);
-  const [count, setCount] = useState(null);
+  const [count, setCount] = useState(0);
   const [columns, setColumns] = useState([]);
   const [offset, setOffset] = useState(options.offset ? options.offset : 0);
   const [loading, setLoading] = useState(false);
@@ -78,7 +78,7 @@ const useDatastore = (
         if (conditions && conditions.length) {
           fetchData();
         } else {
-          setCount(null);
+          setCount(0);
           setValues([]);
         }
       }

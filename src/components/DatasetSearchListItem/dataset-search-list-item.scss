@@ -1,18 +1,25 @@
-.dc-dataset-searchlist-item {
-  h2 a {
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
+.dc-c-search-list-item {
+  list-style: none;
+  li {
+    list-style: none;
+
+    a,
+    button {
+      text-decoration: underline !important;
+    }
+    a svg,
+    span svg {
+      fill: #{var(--link__color)};
     }
   }
-
-  ul {
-    list-style: none;
+  svg {
+    margin-right: 8px;
   }
-
-  .dc-dataset-searchlist-item--keyword {
-    background: #{var(--color-primary-alt-lightest)};
-    border: none;
-    color: #{var(--color-base)};
+  span > span > button {
+    font-weight: normal !important;
+    padding: 0 !important;
+  }
+  a:visited svg {
+    fill: #{var(--link__color--visited)};
   }
 }

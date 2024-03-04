@@ -4,8 +4,8 @@ import { operatorMapping, cleanText } from './functions';
 
 const QueryTitle = ({ conditions, schema, customColumns }) => {
   const { fields } = schema;
-  if (!conditions.length) {
-    return 'Add a filter';
+  if (!conditions || !conditions.length) {
+    return <>Add a filter</>;
   }
 
   function formatValue(text, property) {
@@ -19,16 +19,6 @@ const QueryTitle = ({ conditions, schema, customColumns }) => {
     } else {
       return text;
     }
-  }
-
-  function buildTitle() {
-    const newTitle = conditions.map((c) => {
-      const field = fields[c.property];
-      const description = field && field.description ? field.description : c.property;
-      const operator = operatorMapping.find((op) => op.value === c.operator);
-      return `${description} ${operator.label} ${cleanText(c.value)}`;
-    });
-    return newTitle.join(' AND ');
   }
 
   return (

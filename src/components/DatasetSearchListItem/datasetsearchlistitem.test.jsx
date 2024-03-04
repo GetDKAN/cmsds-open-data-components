@@ -14,17 +14,36 @@ const singleItem = {
 
 describe('<DatasetSearchListItem />', () => {
   test('Renders correctly', () => {
-    render(<MemoryRouter><DatasetSearchListItem item={singleItem} /></MemoryRouter>);
-    const listItemOptions = singleItem.theme.concat(singleItem.keyword);
-    const listItems = screen.getAllByRole('listitem');
-    listItems.forEach((item, idx) => {
-      const { getByText } = within(item);
-      expect(getByText(listItemOptions[idx])).toBeInTheDocument();
-    });
+    render(
+      <MemoryRouter>
+        <DatasetSearchListItem
+          title={singleItem.title}
+          modified={singleItem.modified}
+          description={singleItem.description}
+          theme={singleItem.theme}
+          identifier={"test"}
+        />
+      </MemoryRouter>
+    );
 
     expect(screen.getByRole('heading', { name: 'Dataset Title' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Dataset Title' })).toBeInTheDocument();
     expect(screen.getByText('Updated October 22, 2020')).toBeInTheDocument();
-    // expect(screen.getByText('This is my description.')).toBeInTheDocument();
+  });
+  test('Renders correctly with Download button', () => {
+    render(
+      <MemoryRouter>
+        <DatasetSearchListItem
+          title={singleItem.title}
+          modified={singleItem.modified}
+          description={singleItem.description}
+          theme={singleItem.theme}
+          identifier={"test"}
+          showDownload={true}
+          downloadUrl={"test.com"}
+        />
+      </MemoryRouter>
+    );
+    expect(screen.getByRole('link', { name: 'Download Icon Download' })).toBeInTheDocument();
   });
 });

@@ -14,7 +14,6 @@ This document provides overrides to Swagger UI, fixing accessibility issues.
   --su-color--red-light: rgba(211, 0, 0, .1);
   --su-color--red: rgb(211, 0, 0);
 }
-
 // State  `.swagger-ui` twice to include specificity and avoid multiple `!important` statements;
 .swagger-ui.swagger-ui {
   .opblock {
@@ -84,9 +83,25 @@ This document provides overrides to Swagger UI, fixing accessibility issues.
       color: #036;
     }
   }
+
+  .model-hint {
+    max-width: 100%;
+    word-wrap: break-word;
+    white-space: normal;
+    top: 1.5em;
+  }
+  section.models .model-container {
+    overflow-x: auto;
+  }
+  table {
+    min-width: 500px;
+
+    &.model tbody tr td:first-of-type  {
+      min-width: 174px;
+    }
+  }
 }
 
-// Swagger overrides
 .swagger-ui h2, .swagger-ui h3, .swagger-ui h4 {
   font-weight: bold !important;
 }
