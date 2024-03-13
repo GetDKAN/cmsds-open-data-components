@@ -23,10 +23,8 @@
 .dc-dataset .ds-c-tabs {
   .ds-c-tabs__item {
     text-decoration:none;
-    &[aria-selected=true] {
-      svg {
-        fill: #{var(--link__color)};
-      }
+    svg {
+      fill: #{var(--link__color)};
     }
   }
   svg {

@@ -61,7 +61,9 @@ export type DatasetPageType = {
   customMetadataMapping : any, // TODO
   apiPageUrl: string,
   dataDictionaryUrl: string | undefined,
-  dataDictionaryACA: string | undefined
+  dataDictionaryACA: string | undefined,
+  borderlessTabs: boolean,
+  defaultPageSize: Number
 }
 
 

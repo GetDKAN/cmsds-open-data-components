@@ -24,12 +24,17 @@ const DataTablePageResults = ({
   const page = offset / limit;
   const startTotal = () => (page * limit + 1)
   return (
-    <p className={className}>{`${startTotal().toLocaleString()} - ${ofTotal().toLocaleString()} of ${numTotalRows.toLocaleString()} rows`}</p>
+    <p className={className}>
+      Displaying{' '}
+      <span className="ds-u-font-weight--bold">{`${startTotal().toLocaleString()} - ${ofTotal().toLocaleString()}`}</span>{' '}
+      of <span className="ds-u-font-weight--bold">{`${numTotalRows.toLocaleString()}`}</span>{' '}
+      results
+    </p>
   );
 };
 
 DataTablePageResults.defaultProps = {
-  className: 'data-table-results ds-u-margin-bottom--2',
+  className: 'data-table-results',
 };
 
 DataTablePageResults.propTypes = {

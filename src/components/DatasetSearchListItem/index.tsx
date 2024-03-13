@@ -37,7 +37,6 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
     <TextTruncate
       line={3}
       element={'p'}
-      containerClassName="ds-u-margin-top--0"
       truncateText="…"
       textElement={dangerousDescriptionElement}
       text={description}
@@ -46,8 +45,8 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
   );
 
   return (
-    <li className="dc-c-search-list-item" key={identifier}>
-      <div className="dc-c-searchlist-item ds-u-border-top--1 ds-u-margin-bottom--4">
+    <li className="dc-c-search-list-item ds-u-padding-top--3" key={identifier}>
+      <div className="dc-c-searchlist-item ds-u-border-top--1">
         <div className="ds-l-row ds-u-align-items--start">
           <span className="ds-l-col--12 ds-u-text-align--right ds-u-padding-top--2">
             Updated <TransformedDate date={modified} />
@@ -59,7 +58,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
         <div className="ds-l-row">
           <div className="ds-l-col--12 ds-l-md-col--12">{truncatedDescription}</div>
         </div>
-        <ul className="ds-l-row ds-u-padding--0 ds-u-flex-direction--row">
+        <ul className="ds-l-row ds-u-padding--0 ds-u-flex-direction--row ds-u-margin-top--4">
           <li className={linkContainerClasses}>
             <span className={linkClasses}>
               <Link to={`/dataset/${identifier}#overview`}>
