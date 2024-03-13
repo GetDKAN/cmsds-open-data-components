@@ -90,3 +90,15 @@ This document provides overrides to Swagger UI, fixing accessibility issues.
 .swagger-ui h2, .swagger-ui h3, .swagger-ui h4 {
   font-weight: bold !important;
 }
+
+// Fix issue on mobile with text on accordion looking weird.
+
+.swagger-ui .opblock-tag-section {
+  min-width: 460px;
+}
+
+@media (max-width: 544px) {
+  .swagger-ui .opblock-tag small {
+    flex: initial;
+  }
+}
