@@ -19,9 +19,20 @@ type SearchItemProps = {
   paginationEnabled: boolean;
 }
 
-const dangerousDescriptionElement = ({ children } : {children: string}) => (
-  <span dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(children) }} />
-);
+function prepDescription(description: string) {
+  if (description.substring(0, 1) === "<") {
+    const elementTagStart = description.indexOf('<');
+    const elementTagEnd = description.indexOf('>')
+    const elementTagInner = description.substring(elementTagStart + 1, elementTagEnd)
+    const elementTagLength = elementTagInner.length
+    const isolatedDescriptionStart = description.indexOf(`<${elementTagInner}>`) + (elementTagLength + 2)
+    const isolatedDescriptionEnd = description.indexOf(`</${elementTagInner}>`)
+    const isolatedDescription = description.substring(isolatedDescriptionStart, isolatedDescriptionEnd)
+    return DOMPurify.sanitize(isolatedDescription, {ALLOWED_TAGS: []});
+  } 
+  return DOMPurify.sanitize(description, {ALLOWED_TAGS: []})
+}
+
 
 const DatasetSearchListItem = (props: SearchItemProps) => {
   const desktop = useMediaQuery({ minWidth: 1024 });
@@ -39,9 +50,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
       line={3}
       element={'p'}
       truncateText="…"
-      textElement={dangerousDescriptionElement}
-      text={description}
-      textTruncateChild=""
+      text={prepDescription(description)}
     />
   );
 
