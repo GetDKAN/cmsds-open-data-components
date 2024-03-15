@@ -40,6 +40,7 @@ export type DatasetSearchPageProps = {
   largeFileThemes?: Array<string>;
   introText: string;
   showDownloadIcon: boolean;
+  altMobileSearchButton?: boolean;
 };
 
 export type DistributionItemType = {

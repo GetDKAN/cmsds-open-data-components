@@ -31,6 +31,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     largeFileThemes,
     introText,
     showDownloadIcon,
+    altMobileSearchButton,
   } = props;
   
   const sortOptions = [
@@ -225,14 +226,14 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
           <TextField
             fieldClassName="ds-u-margin--0"
             value={filterText as TextFieldValue}
-            className="ds-u-padding-right--2 ds-l-col--10"
+            className={`ds-u-padding-right--2 ${altMobileSearchButton ? 'ds-l-col--12 --alt-style' : 'ds-l-col--10'}`}
             label="Search datasets"
             labelClassName="ds-u-visibility--screen-reader"
             placeholder="Search datasets"
             name="dataset_fulltext_search"
             onChange={(e) => setFilterText(e.target.value)}
           />
-          <SearchButton />
+          <SearchButton altMobileStyle={altMobileSearchButton} />
         </form>
         </div>
       </div>
