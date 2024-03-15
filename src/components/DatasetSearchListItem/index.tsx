@@ -16,6 +16,7 @@ type SearchItemProps = {
   identifier: string;
   downloadUrl?: string | null;
   largeFile: boolean;
+  paginationEnabled: boolean;
 }
 
 const dangerousDescriptionElement = ({ children } : {children: string}) => (
@@ -24,7 +25,7 @@ const dangerousDescriptionElement = ({ children } : {children: string}) => (
 
 const DatasetSearchListItem = (props: SearchItemProps) => {
   const desktop = useMediaQuery({ minWidth: 1024 });
-  const { title, modified, description, theme, identifier, downloadUrl, largeFile = false } = props;
+  const { title, modified, description, theme, identifier, downloadUrl, largeFile = false, paginationEnabled } = props;
 
   let linkContainerClasses = 'ds-l-col--12 ds-u-margin-bottom--2';
   let linkClasses = 'ds-c-button ds-u-display--block ds-u-text-align--left';
@@ -46,9 +47,9 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
 
   return (
     <li className="dc-c-search-list-item ds-u-padding-top--3" key={identifier}>
-      <div className="dc-c-searchlist-item ds-u-border-top--1">
+      <div className={`dc-c-searchlist-item ${paginationEnabled ? 'ds-u-border-top--1' : 'ds-u-border-bottom--1 ds-u-padding-bottom--3'}`}>
         <div className="ds-l-row ds-u-align-items--start">
-          <span className="ds-l-col--12 ds-u-text-align--right ds-u-padding-top--2">
+          <span className={`ds-l-col--12 ds-u-text-align--right ${paginationEnabled ? 'ds-u-padding-top--2' : 'ds-u-padding-top--0'}`}>
             Updated <TransformedDate date={modified} />
           </span>
           <h2 className="ds-l-col--12 ds-text-heading--2xl">

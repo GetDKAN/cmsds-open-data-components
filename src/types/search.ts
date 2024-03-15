@@ -28,6 +28,8 @@ export type DatasetSearchPageProps = {
     redirect: boolean;
   }
   enableSort: boolean;
+  enablePagination: boolean;
+  defaultPageSize: number,
   defaultSort: {
     defaultSort: string;
     defaultOrder: string;
