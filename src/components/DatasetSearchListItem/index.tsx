@@ -20,7 +20,11 @@ type SearchItemProps = {
 }
 
 function prepDescription(description: string) {
-  if (description.substring(0, 1) === "<") {
+  if (!description) {
+    return;
+  }
+
+  if (description.length > 1 && description.substring(0, 1) === "<") {
     const elementTagStart = description.indexOf('<');
     const elementTagEnd = description.indexOf('>')
     const elementTagInner = description.substring(elementTagStart + 1, elementTagEnd)
