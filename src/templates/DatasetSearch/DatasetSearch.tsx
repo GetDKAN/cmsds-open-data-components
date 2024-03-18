@@ -226,7 +226,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
           <TextField
             fieldClassName="ds-u-margin--0"
             value={filterText as TextFieldValue}
-            className={`ds-u-padding-right--2 ds-l-col--12 ${altMobileSearchButton ? 'ds-l-md-col--10 --alt-style' : ''}`}
+            className={`ds-u-padding-right--2 ${altMobileSearchButton ? 'ds-l-col--12 ds-l-md-col--10 --alt-style' : 'ds-l-col--10'}`}
             label="Search datasets"
             labelClassName="ds-u-visibility--screen-reader"
             placeholder="Search datasets"
