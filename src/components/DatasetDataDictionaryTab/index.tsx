@@ -50,7 +50,7 @@ const DataDictionary = (
               <TableRow>
                 {headerGroup.headers.map(header => {
                   return (
-                    <TableCell>{flexRender(header.column.columnDef.header, header.getContext())}</TableCell>
+                    <TableCell>{flexRender(header.column.columnDef.header, header.getContext()) as React.ReactNode}</TableCell>
                   )
                 }) }
               </TableRow>
@@ -69,7 +69,7 @@ const DataDictionary = (
                         key: cell.id
                       }}
                       >
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        {flexRender(cell.column.columnDef.cell, cell.getContext()) as React.ReactNode}
                       </TableCell>
                     )
                   })}
