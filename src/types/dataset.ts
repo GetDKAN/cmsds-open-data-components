@@ -61,13 +61,15 @@ export type DatasetPageType = {
   customMetadataMapping : any, // TODO
   apiPageUrl: string,
   dataDictionaryUrl: string | undefined,
-  dataDictionaryACA: string | undefined
+  dataDictionaryACA: string | undefined,
+  borderlessTabs: boolean,
+  defaultPageSize: Number
 }
 
 
 export type ResourceType = {
   columns: Array<string>,
-  count: number,
+  count: number | null,
   limit: number,
   offset: number,
   loading: boolean,

@@ -12,7 +12,8 @@ describe('<DatatableHeader />', () => {
         downloadUrl={"https://test.gov/test.csv"}
       />);
 
-    expect(screen.getByText("1 - 25 of 69 rows")).toBeInTheDocument();
+    const el = screen.getByText('Displaying', {exact: false})
+    expect(el.textContent).toEqual("Displaying 1 - 25 of 69 results");
     expect(screen.getByText("Export CSV")).toBeInTheDocument();
   });
 });

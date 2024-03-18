@@ -28,6 +28,8 @@ export type DatasetSearchPageProps = {
     redirect: boolean;
   }
   enableSort: boolean;
+  enablePagination: boolean;
+  defaultPageSize: number,
   defaultSort: {
     defaultSort: string;
     defaultOrder: string;
@@ -38,6 +40,7 @@ export type DatasetSearchPageProps = {
   largeFileThemes?: Array<string>;
   introText: string;
   showDownloadIcon: boolean;
+  altMobileSearchButton?: boolean;
 };
 
 export type DistributionItemType = {

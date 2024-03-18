@@ -78,7 +78,11 @@ const QueryBuilder = (props: QueryBuilderPropTypes) => {
   };
 
   React.useEffect(() => {
-    addCondition(conditions);
+    if (conditions.length) {
+      addCondition(conditions);
+    } else {
+      addCondition(null);
+    }
     setTitleConditions(conditions);
   }, []);
   React.useEffect(() => {

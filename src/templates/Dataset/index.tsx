@@ -42,6 +42,8 @@ const Dataset = ({
   customMetadataMapping,
   apiPageUrl = "/api",
   dataDictionaryUrl,
+  borderlessTabs = false,
+  defaultPageSize = 25
 } : DatasetPageType) => {
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
@@ -65,7 +67,7 @@ const Dataset = ({
     rootUrl,
     {
       ...options,
-      limit: 25,
+      limit: defaultPageSize,
       manual: true,
     },
     additionalParams
@@ -132,7 +134,7 @@ const Dataset = ({
         <div className={'ds-l-container'}>
           <div className={'ds-l-row'}>
             <div className={'ds-l-md-col--9'}>
-              <h1 className={'ds-u-margin-bottom--7 ds-h1 title-underline ds-u-margin-top--3'}>{title}</h1>
+              <h1 className={'ds-u-margin-bottom--4 ds-h1 title-underline'}>{title}</h1>
               <div className={'ds-u-measure--wide ds-u-margin-bottom--7'}>
                 <p className="dc-c-metadata-description" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(dataset.description) }}/>
               </div>
@@ -149,11 +151,12 @@ const Dataset = ({
                     <TabPanel
                       id={'data-table'}
                       tab={
-                        <span>
+                        <span className="ds-u-color--primary">
                           <SearchItemIcon id="data-table" />
                           Data Table
                         </span>
                       }
+                      className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
                     >
                       <DatasetTable id={id} distribution={distribution} resource={resource} rootUrl={rootUrl} customColumns={customColumns} />
                     </TabPanel>
@@ -161,11 +164,12 @@ const Dataset = ({
                   <TabPanel
                     id={'overview'}
                     tab={
-                      <span>
+                      <span className="ds-u-color--primary">
                         <SearchItemIcon id="overview" />
                         Overview
                       </span>
                     }
+                    className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
                   >
                     <DatasetOverview resource={resource} dataset={dataset} distributions={distributions} metadataMapping={metadataMapping} />
                   </TabPanel>
@@ -173,11 +177,12 @@ const Dataset = ({
                     <TabPanel
                       id={'data-dictionary'}
                       tab={
-                        <span>
+                        <span className="ds-u-color--primary">
                           <SearchItemIcon id="data-dictionary" />
                           Data Dictionary
                         </span>
                       }
+                      className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
                     >
                       <DataDictionary datasetDictionary={datasetDictionary} title={"Data Dictionary"} />
                     </TabPanel>
@@ -186,11 +191,12 @@ const Dataset = ({
                   <TabPanel
                     id={'api'}
                     tab={
-                      <span>
+                      <span className="ds-u-color--primary">
                         <SearchItemIcon id="api" />
                         API
                       </span>
                     }
+                    className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
                   >
                     <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} additionalParams={additionalParams} />
                   </TabPanel>

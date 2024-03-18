@@ -22,6 +22,8 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     surveyLink,
     additionalParams,
     enableSort,
+    enablePagination = true,
+    defaultPageSize = 10,
     defaultSort,
     pageTitle,
     filterTitle,
@@ -29,6 +31,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     largeFileThemes,
     introText,
     showDownloadIcon,
+    altMobileSearchButton,
   } = props;
   
   const sortOptions = [
@@ -43,10 +46,9 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   const defaultSelectedFacets = {theme: [], keyword: []};
   const defaultSortOrder = "";
   const defaultPage = 1;
-  const defaultPageSize = 10;
 
   const location = useLocation();
-  const transformedParams = transformUrlParamsToSearchObject(location.search, ['theme', 'keyword'], defaultSort);
+  const transformedParams = transformUrlParamsToSearchObject(location.search, defaultSort);
 
   const [currentResultNumbers, setCurrentResultNumbers] = useState({total: 0, startingNumber: 0, endingNumber: 0});
   const [noResults, setNoResults] = useState(false);
@@ -197,10 +199,10 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     <PageHeader headerText={pageTitle} />
     <section className="ds-l-container">
       <div className="ds-l-row">
-        <div className="ds-l-col--12 ds-u-margin-bottom--3">
+        <div className="ds-l-col--12">
           {introText ? introText : null}
           {showLargeFileWarning && (
-            <div className="ds-l-row ds-u-margin-bottom--6">
+            <div className="ds-l-row ds-u-margin-bottom--2 ds-u-margin-top--4">
               <div className="ds-l-md-col--12">
                 <Accordion bordered>
                   <AccordionItem
@@ -218,24 +220,24 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
             e.preventDefault();
             setFullText(filterText);
           }}
-          className="dkan-dataset-search ds-l-form-row ds-u-padding-bottom--6 ds-u-border-bottom--1"
+          className="dkan-dataset-search ds-l-form-row ds-u-padding-bottom--4 ds-u-border-bottom--1"
         >
           <span className="ds-c-field__before fas fa-search ds-u-display--none ds-u-sm-display--inline-block" />
           <TextField
             fieldClassName="ds-u-margin--0"
             value={filterText as TextFieldValue}
-            className="ds-u-padding-right--2 ds-l-col--10"
+            className={`ds-u-padding-right--2 ${altMobileSearchButton ? 'ds-l-col--12 ds-l-md-col--10 --alt-style' : 'ds-l-col--10'}`}
             label="Search datasets"
             labelClassName="ds-u-visibility--screen-reader"
             placeholder="Search datasets"
             name="dataset_fulltext_search"
             onChange={(e) => setFilterText(e.target.value)}
           />
-          <SearchButton />
+          <SearchButton altMobileStyle={altMobileSearchButton} />
         </form>
         </div>
       </div>
-      <div className="ds-l-row ds-u-padding-top--6">
+      <div className="ds-l-row ds-u-padding-top--4">
         <div className="ds-l-col--12 ds-l-sm-col--4">
             <Button
               className="dc-dataset-search--clear-all-filters ds-u-margin-bottom--2"
@@ -270,14 +272,16 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
           ) : (
             <>
               <div className="ds-u-display--flex ds-u-justify-content--between ds-u-align-items--end ds-u-flex-wrap--reverse ds-u-sm-flex-wrap--wrap">
-                <div className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--8">
-                  {(currentResultNumbers && data) && (
-                    <p className="ds-u-margin-y--0" role="region" aria-live="polite" data-testid="currentResults" >
-                      Showing {currentResultNumbers.startingNumber} -{' '}
-                      {currentResultNumbers.endingNumber} of {data ? data.data.total : ""} datasets
-                    </p>
-                  )}
-                </div>
+                { enablePagination && (
+                  <div className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--8">
+                    {(currentResultNumbers && data) && (
+                      <p className="ds-u-margin-y--0" role="region" aria-live="polite" data-testid="currentResults" >
+                        Showing {currentResultNumbers.startingNumber} -{' '}
+                        {currentResultNumbers.endingNumber} of {data ? data.data.total : ""} datasets
+                      </p>
+                    )}
+                  </div>
+                )}
                 {enableSort && (
                   <div className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--4 ds-u-sm-padding-right--0">
                     <Dropdown
@@ -291,7 +295,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                   </div>
                 )}
               </div>
-            <ol className="dc-dataset-search-list ds-u-padding--0" data-testid="results-list">
+            <ol className="dc-dataset-search-list ds-u-padding--0 ds-u-margin-top--0 ds-u-display--block" data-testid="results-list">
               {noResults && <Alert variation="error" heading="No results found." />}
               {data && data.data.results ? Object.keys(data.data.results).map((key) => {
                   return data.data.results[key];
@@ -316,13 +320,14 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                       identifier={item.identifier}
                       downloadUrl={showDownloadIcon ? getDownloadUrl(item) : null}
                       largeFile={showLargeFile}
+                      paginationEnabled={enablePagination}
                     />
                   )
                 }) : ( 
                   <Alert variation="error" heading="Could not connect to the API." />
                 )}
             </ol>
-            {(data && data.data.total) && data.data.total != 0 && (
+            {enablePagination && (data && data.data.total) && data.data.total != 0 && (
               <Pagination
                 currentPage={Number(page)}
                 totalPages={Math.ceil(Number(data.data.total) / pageSize)}

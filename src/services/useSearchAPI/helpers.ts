@@ -12,11 +12,19 @@ export function separateFacets(facets: SearchAPIFacetType[]) {
         facetObj[f.type] = [f]
       }
     })
+    // sort facets descending by int value, put non int last
+    if (facetObj.keyword) {
+      facetObj.keyword.sort((a: {name: string}, b: {name:string}) => {
+        if (Number(a.name) && Number(b.name)) {
+          return Number(b.name) - Number(a.name);
+        }
+      });
+    }
     return facetObj;
   }
 }
 
-export function transformUrlParamsToSearchObject(searchParams: string, facetList: [string, string], defaultSortOptions: SortType) {
+export function transformUrlParamsToSearchObject(searchParams: string, defaultSortOptions: SortType) {
   const params = qs.parse(searchParams, { ignoreQueryPrefix: true });
   let themes = params.theme as string[];
   let keywords = params.keyword as string[];

@@ -42,12 +42,12 @@ export async function fetchDataFromQuery(
       groupings: groupings,
       ...additionalParams,
     },
-    paramsSerializer: {
-      serialize: qs.stringify
+    //paramsSerializer: {
+    //  serialize: qs.stringify
+    //},
+    paramsSerializer: (params) => {
+      return qs.stringify(params);
     },
-    // paramsSerializer: (params) => {
-    //   return qs.stringify(params);
-    // },
   }).then((res) => {
     const { data } = res;
     const propertyKeys =
