@@ -28,11 +28,11 @@ describe('<QueryBuilder />', () => {
     await act(() => {
       screen.getByRole("button", { name: "+ Add another filter" }).click();
     });
-    expect(screen.getByRole("group")).toBeInTheDocument();
+    expect(screen.queryAllByRole("group")).toHaveLength(2);
 
     await act(() => {
-      screen.getByRole("button", { name: "Delete filter" }).click();
+      screen.getAllByRole("button", { name: "Delete filter" })[0].click();
     });
-    expect(screen.queryByRole("group")).not.toBeInTheDocument();
+    expect(screen.queryAllByRole("group")).toHaveLength(1);
   });
 });

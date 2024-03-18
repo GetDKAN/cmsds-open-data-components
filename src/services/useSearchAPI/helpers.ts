@@ -13,11 +13,13 @@ export function separateFacets(facets: SearchAPIFacetType[]) {
       }
     })
     // sort facets descending by int value, put non int last
-    facetObj.keyword.sort((a: {name: string}, b: {name:string}) => {
-      if (Number(a.name) && Number(b.name)) {
-        return Number(b.name) - Number(a.name);
-      }
-    });
+    if (facetObj.keyword) {
+      facetObj.keyword.sort((a: {name: string}, b: {name:string}) => {
+        if (Number(a.name) && Number(b.name)) {
+          return Number(b.name) - Number(a.name);
+        }
+      });
+    }
     return facetObj;
   }
 }
