@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge, FilterChip } from '@cmsgov/design-system';
+import { Badge } from '@cmsgov/design-system';
 import { operatorMapping, cleanText } from './functions';
 
 const QueryTitle = ({ conditions, schema, customColumns }) => {
@@ -9,7 +9,7 @@ const QueryTitle = ({ conditions, schema, customColumns }) => {
   }
 
   function formatValue(text, property) {
-    if (customColumns.length > 0) {
+    if (customColumns && customColumns.length > 0) {
       let newValue = text;
       let customColumn = customColumns.find((c) => c.accessor === property);
       if (customColumn && customColumn.cell) {
