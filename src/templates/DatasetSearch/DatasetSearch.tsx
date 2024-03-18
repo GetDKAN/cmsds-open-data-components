@@ -48,7 +48,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   const defaultPage = 1;
 
   const location = useLocation();
-  const transformedParams = transformUrlParamsToSearchObject(location.search, ['theme', 'keyword'], defaultSort);
+  const transformedParams = transformUrlParamsToSearchObject(location.search, defaultSort);
 
   const [currentResultNumbers, setCurrentResultNumbers] = useState({total: 0, startingNumber: 0, endingNumber: 0});
   const [noResults, setNoResults] = useState(false);
