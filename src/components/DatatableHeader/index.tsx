@@ -17,7 +17,7 @@ const DataTableHeader = ({ resource, downloadURL, jsonUrl } : {resource: Resourc
             offset={offset}
           />
         </div>
-        <div className="dc-c-resource-header--buttons ds-l-col--12 ds-l-md-col--8 ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--end ds-u-margin-bottom--2 ds-u-md-margin-bottom--0 ds-u-padding-x--0">
+        <div className="dc-c-resource-header--buttons ds-l-col--12 ds-l-lg-col--8 ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--end ds-u-margin-bottom--2 ds-u-md-margin-bottom--0 ds-u-padding-x--0">
           <div className="ds-l-col--12 ds-l-sm-col--auto ds-u-padding-x--0 ds-u-sm-margin-right--2 ds-u-margin-bottom--2 ds-u-sm-margin-bottom--0">
             <Tooltip
               onOpen={() => {

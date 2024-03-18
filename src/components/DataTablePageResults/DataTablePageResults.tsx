@@ -24,7 +24,7 @@ const DataTablePageResults = ({
   const page = offset / limit;
   const startTotal = () => (page * limit + 1)
   return (
-    <p className={className}>
+    <p className={`ds-u-margin-bottom--2 ${className}`}>
       Displaying{' '}
       <span className="ds-u-font-weight--bold">{`${startTotal().toLocaleString()} - ${ofTotal().toLocaleString()}`}</span>{' '}
       of <span className="ds-u-font-weight--bold">{`${numTotalRows.toLocaleString()}`}</span>{' '}
