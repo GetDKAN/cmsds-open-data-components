@@ -295,7 +295,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                   </div>
                 )}
               </div>
-            <ol className="dc-dataset-search-list ds-u-padding--0 ds-u-margin-top--0 ds-u-display--block" data-testid="results-list">
+            <ol className="dc-dataset-search-list ds-u-padding--0 ds-u-margin-top--0 ds-u-margin-bottom--4 ds-u-display--block" data-testid="results-list">
               {noResults && <Alert variation="error" heading="No results found." />}
               {data && data.data.results ? Object.keys(data.data.results).map((key) => {
                   return data.data.results[key];
