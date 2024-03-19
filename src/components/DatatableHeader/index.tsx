@@ -10,14 +10,14 @@ const DataTableHeader = ({ resource, downloadURL, jsonUrl } : {resource: Resourc
   return (
     <div className="ds-l-row ds-u-align-items--center ds-u-margin-bottom--2">
       <div className="ds-l-col--12 ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--between ds-u-align-items--center">
-        <div>
+        <div className="ds-l-col--12 ds-l-lg-col--6">
           <DataTablePageResults
             totalRows={intCount}
             limit={limit}
             offset={offset}
           />
         </div>
-        <div className="dc-c-resource-header--buttons ds-l-col--12 ds-l-lg-col--8 ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--end ds-u-margin-bottom--2 ds-u-md-margin-bottom--0 ds-u-padding-x--0">
+        <div className="dc-c-resource-header--buttons ds-l-col--12 ds-l-lg-col--6 ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--end ds-u-margin-bottom--2 ds-u-md-margin-bottom--0 ds-u-padding-x--0">
           <div className="ds-l-col--12 ds-l-sm-col--auto ds-u-padding-x--0 ds-u-sm-margin-right--2 ds-u-margin-bottom--2 ds-u-sm-margin-bottom--0">
             <Tooltip
               onOpen={() => {
