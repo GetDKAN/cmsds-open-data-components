@@ -37,4 +37,16 @@ describe('<DatasetSearchFacets />', () => {
       screen.getByRole('checkbox', { name: 'facet-1 (2)', checked: true })
     ).toBeInTheDocument();
   });
+  test('Accordion svgs are hidden', () => {
+    const handleClick = jest.fn();
+    render(
+      <DatasetSearchFacets title="Facets" facets={testFacets} onClickFunction={handleClick} />
+    );
+    expect(screen.queryByTitle('Close')).toBe(null);
+    expect(screen.queryByRole('img')).toBe(null);
+    fireEvent.click(screen.getByRole('button', { name: 'Facets' }));
+    expect(screen.queryByTitle('Open')).toBe(null);
+    expect(screen.queryByRole('img')).toBe(null);
+  });
+
 });
