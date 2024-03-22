@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Choice, Button, Accordion, AccordionItem } from '@cmsgov/design-system';
+import { Choice, Accordion, AccordionItem, AddIcon, RemoveIcon } from '@cmsgov/design-system';
 import './dataset-search-facets.scss';
 
 export function isSelected(currentFacet, selectedFacets) {
@@ -19,6 +19,10 @@ const DatasetSearchFacets = ({ title, facets, onclickFunction, selectedFacets, l
     const selectedIndex = selectedFacets.findIndex((item) => item === f.name);
     return f.total > 0 || selectedIndex !== -1;
   });
+
+  const hiddenAddIcon = () => <AddIcon ariaHidden={true} />;
+  const hiddenCloseIcon = () => <RemoveIcon ariaHidden={true} />;
+
   return (
     <div className="ds-u-margin-bottom--4 dc-dataset-search--facets-container">
       <Accordion>
@@ -26,6 +30,8 @@ const DatasetSearchFacets = ({ title, facets, onclickFunction, selectedFacets, l
           contentClassName="ds-u-padding-left--1 ds-u-padding-right--0"
           heading={`${title} (${filteredFacets.length})`}
           defaultOpen
+          openIconComponent={hiddenAddIcon}
+          closeIconComponent={hiddenCloseIcon}
         >
           <>
             {filteredFacets.length ? (

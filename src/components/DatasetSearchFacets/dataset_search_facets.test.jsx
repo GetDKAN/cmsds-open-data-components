@@ -22,7 +22,7 @@ describe('isSelected Function', () => {
 describe('<DatasetSearchFacets />', () => {
   test('Renders correctly', () => {
     render(<DatasetSearchFacets title="Facets" facets={testFacets} onclickFunction={() => ({})} />);
-    expect(screen.getByRole('button', { name: 'Facets (2) Close' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Facets (2)' })).toBeInTheDocument();
     expect(screen.getByLabelText('facet-1 (2)')).toBeInTheDocument();
     expect(screen.getByLabelText('facet-2 (3)')).toBeInTheDocument();
     expect(screen.getAllByRole('checkbox')).toHaveLength(2);
@@ -38,7 +38,7 @@ describe('<DatasetSearchFacets />', () => {
     expect(screen.getAllByRole('checkbox')).toHaveLength(2);
   });
   */
-  test('Checkbox fires onclickFunction', () => {
+  test('Checkbox fires onclickFunction', () => {  
     const handleClick = jest.fn();
     render(
       <DatasetSearchFacets title="Facets" facets={testFacets} onclickFunction={handleClick} />
@@ -59,5 +59,16 @@ describe('<DatasetSearchFacets />', () => {
     expect(
       screen.getByRole('checkbox', { name: 'facet-1 (2)', checked: true })
     ).toBeInTheDocument();
+  });
+  test('Accordion svgs are hidden', () => {
+    const handleClick = jest.fn();
+    render(
+      <DatasetSearchFacets title="Facets" facets={testFacets} onClickFunction={handleClick} />
+    );
+    expect(screen.queryByTitle('Close')).toBe(null);
+    expect(screen.queryByRole('img')).toBe(null);
+    fireEvent.click(screen.getByRole('button', { name: 'Facets (2)' }));
+    expect(screen.queryByTitle('Open')).toBe(null);
+    expect(screen.queryByRole('img')).toBe(null);
   });
 });
