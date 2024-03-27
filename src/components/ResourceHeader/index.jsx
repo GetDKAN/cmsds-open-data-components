@@ -67,7 +67,6 @@ const ResourceHeader = ({
                   size="small"
                   className="ds-u-text-align--left ds-u-font-weight--normal ds-u-font-size--base ds-u-margin-right--1"
                   href={downloadUrl}
-                  aria-label="Download filtered data (CSV)"
                 >
                   <DownloadIcon />
                   {!md && (
