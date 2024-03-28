@@ -18,7 +18,7 @@ const DataTableHeader = ({ resource, downloadURL, jsonUrl } : {resource: Resourc
           />
         </div>
         <div className="dc-c-resource-header--buttons ds-l-col--12 ds-l-lg-col--8 ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--end ds-u-margin-bottom--2 ds-u-md-margin-bottom--0 ds-u-padding-x--0">
-          <div className="ds-l-col--12 ds-l-sm-col--auto ds-u-padding-x--0 ds-u-md-margin-right--2 ds-u-sm-margin-bottom--2 ds-u-md-margin-bottom--0">
+          <div className="ds-l-col--12 ds-l-sm-col--auto ds-u-padding-x--0 ds-u-sm-margin-bottom--2 ds-u-md-margin-bottom--0">
             <Tooltip
               onOpen={() => {
                 navigator.clipboard.writeText(window.location.href);
@@ -34,7 +34,7 @@ const DataTableHeader = ({ resource, downloadURL, jsonUrl } : {resource: Resourc
               </span>
             </Tooltip>
           </div>
-          <div className="ds-l-col--12 ds-l-sm-col--auto ds-u-padding-x--0">
+          <div className="ds-l-col--12 ds-l-sm-col--auto ds-u-padding-x--0 ds-u-sm-margin-left--2">
             <Button
               className="ds-u-text-align--center ds-u-font-weight--normal ds-u-font-size--base ds-u-margin-right--1 ds-u-display--inline-block ds-l-col--12"
               href={downloadURL}
