@@ -14,6 +14,6 @@ describe('<DatatableHeader />', () => {
 
     const el = screen.getByText('Displaying', {exact: false})
     expect(el.textContent).toEqual("Displaying 1 - 25 of 69 results");
-    expect(screen.getByText("Export CSV")).toBeInTheDocument();
+    expect(screen.getByText("Download filtered data (CSV)")).toBeInTheDocument();
   });
 });
