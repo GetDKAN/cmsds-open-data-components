@@ -59,14 +59,14 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
   );
 
   return (
-    <li className="dc-c-search-list-item ds-u-padding-top--3" key={identifier}>
+    <li className="dc-c-search-list-item ds-u-padding-top--3">
       <div className={`dc-c-searchlist-item ${paginationEnabled ? 'ds-u-border-top--1' : 'ds-u-border-bottom--1 ds-u-padding-bottom--3'}`}>
         <div className="ds-l-row ds-u-align-items--start">
-          <span className={`ds-l-col--12 ds-u-text-align--right ${paginationEnabled ? 'ds-u-padding-top--2' : 'ds-u-padding-top--0'}`}>
+          <span id={`dataset-${identifier}-updated-date`} className={`ds-l-col--12 ds-u-text-align--right ${paginationEnabled ? 'ds-u-padding-top--2' : 'ds-u-padding-top--0'}`}>
             Updated <TransformedDate date={modified} />
           </span>
           <h2 className="ds-l-col--12 ds-text-heading--2xl">
-            <Link to={`/dataset/${identifier}`}>{title}</Link>
+            <Link aria-describedby={`dataset-${identifier}-updated-date`} to={`/dataset/${identifier}`}>{title}</Link>
           </h2>
         </div>
         <div className="ds-l-row">
