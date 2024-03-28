@@ -77,7 +77,7 @@ const MobileHeader = ({
     }
 
     document.addEventListener('mousedown', handleClick);
-    document.addEventListener('keyup', handleSearchEnter);
+    //document.addEventListener('keyup', handleSearchEnter);
     document.addEventListener('keyup', handleMenuClose);
     handleFocusIn();
     menu.current.addEventListener('keydown', (evt) => trapFocus(evt, menu.current));
