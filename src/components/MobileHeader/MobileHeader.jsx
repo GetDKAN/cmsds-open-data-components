@@ -62,12 +62,6 @@ const MobileHeader = ({
         setMenuOpen(false);
       }
     }
-    function handleSearchEnter(event) {
-      // Close upon user hitting enter on search.
-      if (event.keyCode === 13) {
-        setMenuOpen(false);
-      }
-    }
 
     function handleMenuClose(event) {
       // Close upon user hitting escape
