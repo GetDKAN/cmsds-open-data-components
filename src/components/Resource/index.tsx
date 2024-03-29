@@ -62,7 +62,7 @@ const Resource = ({ distributions, resource, title } : ResourcePropsType ) => {
                       Download
                     </a>
                   </div>
-                  <ResourceInformation resource={resource} />
+                  {fileFormat === "csv" && <ResourceInformation resource={resource} />}
                 </li>
               )
             })
