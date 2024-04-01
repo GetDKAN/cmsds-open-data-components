@@ -17,6 +17,7 @@ import ResourcePreview from '../../components/ResourcePreview';
 import ResourceFooter from '../../components/ResourceFooter';
 import { buildCustomColHeaders } from './functions';
 import QueryBuilder from './QueryBuilder';
+import TransformedDate from '../../components/TransformedDate';
 import 'swagger-ui-react/swagger-ui.css';
 
 const FilteredResourceBody = ({
@@ -84,6 +85,9 @@ const FilteredResourceBody = ({
             Back to {dataset.title}
           </Link>
           <h1 className="ds-title">{customTitle ? customTitle : pageTitle}</h1>
+          <div class="ds-l-row">
+            <span class="ds-l-col--12 ds-u-color--gray ds-u-margin-y--1 ds-u-text-align--right">Updated <TransformedDate date={dataset.modified} /></span>
+          </div>
           <p
             className="ds-u-margin-top--0 dc-c-metadata-description"
             dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(distribution.data.description) }}
