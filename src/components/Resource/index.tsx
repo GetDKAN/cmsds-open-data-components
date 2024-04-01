@@ -41,7 +41,6 @@ const Resource = ({ distributions, resource, title } : ResourcePropsType ) => {
         <ul className="ds-c-list ds-c-list--bare dc-c-resource-full-width">
           {
             distributions.map((dist) => {
-              console.log(dist)
               const fileFormat = getFormatType(dist)
               return (
                 <li key={dist.identifier} className={`ds-u-display--flex ds-u-flex-wrap--wrap ${fileFormat !== "csv" && "ds-u-margin-bottom--2"}`}>
