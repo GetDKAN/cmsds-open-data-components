@@ -43,7 +43,7 @@ const Resource = ({ distributions, resource, title } : ResourcePropsType ) => {
             distributions.map((dist) => {
               const fileFormat = getFormatType(dist)
               return (
-                <li key={dist.identifier} className={`ds-u-display--flex ds-u-flex-wrap--wrap ${fileFormat !== "csv" && "ds-u-margin-y--2"}`}>
+                <li key={dist.identifier} className={`ds-u-display--flex ds-u-flex-wrap--wrap ${fileFormat !== "csv" && "ds-u-margin-bottom--2"}`}>
                   <div className="ds-u-font-weight--bold ds-u-font-size--lg ds-l-col--12 ds-l-md-col--6 ds-u-padding-left--0">
                     <i className={'fa ds-u-color--primary ds-u-padding-right--1 ' + 'fa-file-' + (fileFormat == "xlsx" ? "excel" : fileFormat)}></i>
                     {title + " (" + fileFormat.toUpperCase() + ")"}
