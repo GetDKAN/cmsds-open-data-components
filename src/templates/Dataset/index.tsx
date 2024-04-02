@@ -135,7 +135,7 @@ const Dataset = ({
         <div className={'ds-l-container'}>
           <div className={'ds-l-row'}>
             <div className={'ds-l-md-col--9'}>
-              <h1 className={'ds-u-margin-bottom--4 ds-h1 title-underline'}>{title}</h1>
+              <h1 className={'ds-h1 title-underline'}>{title}</h1>
             </div>
             <div className={'ds-l-md-col--12 ds-u-color--gray ds-u-margin-y--1 ds-u-text-align--right'}>
               <p>Updated <TransformedDate date={dataset.modified} /></p>
