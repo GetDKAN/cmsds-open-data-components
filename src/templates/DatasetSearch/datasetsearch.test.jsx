@@ -13,7 +13,7 @@ const data_results = {
   data: {
     total: '1',
     results: {
-      'dkan_dataset/5d69-frba': { title: 'dkan' },
+      'dkan_dataset/5d69-frba': { title: 'dkan', identifier: '1234' },
     },
     facets: [
       {
