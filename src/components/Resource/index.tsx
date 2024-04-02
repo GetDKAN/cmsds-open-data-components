@@ -46,7 +46,7 @@ const Resource = ({ distributions, resource, title } : ResourcePropsType ) => {
                 <li key={dist.identifier} className={`ds-u-display--flex ds-u-flex-wrap--wrap ${fileFormat !== "csv" && "ds-u-margin-bottom--2"}`}>
                   <div className="ds-u-font-weight--bold ds-u-font-size--lg ds-l-col--12 ds-l-md-col--6 ds-u-padding-left--0">
                     <i className={'fa ds-u-color--primary ds-u-padding-right--1 ' + 'fa-file-' + (fileFormat == "xlsx" ? "excel" : fileFormat)}></i>
-                    {title + " (" + fileFormat.toUpperCase() + ")"}
+                    {dist.data.title ? dist.data.title : title + " (" + fileFormat.toUpperCase() + ")"}
                   </div>
                   <div className="ds-l-col--12 ds-l-md-col--6 ds-u-text-align--center ds-u-md-text-align--right ds-u-margin-top--2 ds-u-md-margin-top--0">
                     <a
@@ -62,6 +62,9 @@ const Resource = ({ distributions, resource, title } : ResourcePropsType ) => {
                       Download
                     </a>
                   </div>
+                  {dist.data.description && (
+                    <p>{dist.data.description}</p>
+                  )}
                   {fileFormat === "csv" && <ResourceInformation resource={resource} />}
                 </li>
               )
