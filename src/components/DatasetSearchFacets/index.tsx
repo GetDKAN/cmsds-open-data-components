@@ -1,5 +1,5 @@
 import React from 'react';
-import { Choice, Accordion, AccordionItem } from '@cmsgov/design-system';
+import { Choice, Accordion, AccordionItem, AddIcon, RemoveIcon } from '@cmsgov/design-system';
 import { SearchAPIFacetType, SearchFacetsPropTypes } from '../../types/search';
 import './dataset-search-facets.scss';
 
@@ -9,6 +9,9 @@ const SearchFacets = (props: SearchFacetsPropTypes) => {
     return Number(f.total) > 0 || selectedFacets.findIndex((i) => i === f.name) !== -1;
   });
 
+  const hiddenAddIcon = () => <AddIcon ariaHidden={true} />;
+  const hiddenCloseIcon = () => <RemoveIcon ariaHidden={true} />;
+
   return (
     <div className="dkan-dataset-search--facet-container ds-u-margin-bottom--4">
       <Accordion>
@@ -16,6 +19,8 @@ const SearchFacets = (props: SearchFacetsPropTypes) => {
           contentClassName="ds-u-padding-left--1 ds-u-padding-right--0"
           heading={title}
           defaultOpen
+          openIconComponent={hiddenAddIcon}
+          closeIconComponent={hiddenCloseIcon}
         >
           <ul>
             {filteredFacets.length ? filteredFacets
