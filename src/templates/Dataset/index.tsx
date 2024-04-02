@@ -44,7 +44,7 @@ const Dataset = ({
   apiPageUrl = "/api",
   dataDictionaryUrl,
   borderlessTabs = false,
-  defaultPageSize = 25,
+  defaultPageSize = 25
 } : DatasetPageType) => {
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
