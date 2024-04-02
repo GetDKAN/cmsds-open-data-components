@@ -138,11 +138,11 @@ const Dataset = ({
               <h1 className={'ds-h1 title-underline'}>{title}</h1>
             </div>
             <div className={'ds-l-md-col--12 ds-u-color--gray ds-u-margin-y--1 ds-u-text-align--right'}>
-              <p>Updated <TransformedDate date={dataset.modified} /></p>
+              <p className="ds-u-margin--0">Updated <TransformedDate date={dataset.modified} /></p>
             </div>
             <div className={'ds-l-md-col--9'}>
               <div className={'ds-u-measure--wide ds-u-margin-bottom--7'}>
-                <p className="dc-c-metadata-description" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(dataset.description) }}/>
+                <p className="dc-c-metadata-description ds-u-margin--0" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(dataset.description) }}/>
               </div>
             </div>
           </div>
