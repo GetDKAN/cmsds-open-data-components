@@ -20,6 +20,7 @@ export type DatasetType = {
   identifier: string,
   describedBy?: any, // TODO
   describedByType?: any, //TODO
+  modified: string,
 }
 
 export type ConditionType = {

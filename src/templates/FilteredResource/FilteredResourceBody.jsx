@@ -85,8 +85,8 @@ const FilteredResourceBody = ({
             Back to {dataset.title}
           </Link>
           <h1 className="ds-title">{customTitle ? customTitle : pageTitle}</h1>
-          <div class="ds-l-row">
-            <span class="ds-l-col--12 ds-u-color--gray ds-u-margin-y--1 ds-u-text-align--right">Updated <TransformedDate date={dataset.modified} /></span>
+          <div className="ds-l-row">
+            <span className="ds-l-col--12 ds-u-color--gray ds-u-margin-y--1 ds-u-text-align--right">Updated <TransformedDate date={dataset.modified} /></span>
           </div>
           <p
             className="ds-u-margin-top--0 dc-c-metadata-description"
