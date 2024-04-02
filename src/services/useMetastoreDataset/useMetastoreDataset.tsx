@@ -10,6 +10,7 @@ const useMetastoreDataset = (datasetId : string, rootAPIUrl : string, additional
     error: '',
     description: '',
     identifier: '',
+    modified: '',
   } as DatasetType);
   const [id, setId] = useState(datasetId)
   const [rootUrl, setRootUrl] = useState(rootAPIUrl)
@@ -18,7 +19,7 @@ const useMetastoreDataset = (datasetId : string, rootAPIUrl : string, additional
     async function fetchData() {
       return axios.get(`${rootUrl}/metastore/schemas/dataset/items/${id}?show-reference-ids${additionalParamsString}`)
         .then((res) => setDataset(res.data))
-        .catch((error) => setDataset({title: dataset.title, distribution: dataset.distribution, error: error, description: dataset.description, identifier: dataset.identifier}));
+        .catch((error) => setDataset({title: dataset.title, distribution: dataset.distribution, error: error, description: dataset.description, identifier: dataset.identifier, modified: dataset.modified}));
     }
     fetchData();
   }, [id, rootUrl]);

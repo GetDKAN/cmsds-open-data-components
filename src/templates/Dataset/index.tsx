@@ -15,6 +15,7 @@ import DatasetOverview from '../../components/DatasetOverviewTab';
 import DatasetAPI from '../../components/DatasetAPITab';
 import DataDictionary from '../../components/DatasetDataDictionaryTab';
 import { DatasetDictionaryItemType, DatasetPageType, DatasetDictionaryType, DistributionType, ResourceType } from '../../types/dataset';
+import TransformedDate from '../../components/TransformedDate';
 import './dataset.scss';
 
 const getSiteWideDataDictionary = (rootUrl : string, dataDictionaryUrl : string) => {
@@ -134,9 +135,14 @@ const Dataset = ({
         <div className={'ds-l-container'}>
           <div className={'ds-l-row'}>
             <div className={'ds-l-md-col--9'}>
-              <h1 className={'ds-u-margin-bottom--4 ds-h1 title-underline'}>{title}</h1>
+              <h1 className={'ds-h1 title-underline'}>{title}</h1>
+            </div>
+            <div className={'ds-l-md-col--12 ds-u-color--gray ds-u-margin-y--1 ds-u-text-align--right'}>
+              <p className="ds-u-margin--0">Updated <TransformedDate date={dataset.modified} /></p>
+            </div>
+            <div className={'ds-l-md-col--9'}>
               <div className={'ds-u-measure--wide ds-u-margin-bottom--7'}>
-                <p className="dc-c-metadata-description" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(dataset.description) }}/>
+                <p className="dc-c-metadata-description ds-u-margin--0" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(dataset.description) }}/>
               </div>
             </div>
           </div>
