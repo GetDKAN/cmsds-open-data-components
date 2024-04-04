@@ -107,6 +107,7 @@ export type DatasetDictionaryItemType = {
   format: string,
   name: string,
   title: string,
+  description: string,
   type: string,
   [name: string]: string,
 }
