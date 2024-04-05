@@ -15,7 +15,7 @@ describe('<DatasetTableTab />', () => {
         rootUrl={"test/api/"}
       />)
 
-    expect(screen.getByText("Add a filter")).toBeInTheDocument();
+    expect(screen.getByText("Data filters: none")).toBeInTheDocument();
     expect(screen.getByRole("table")).toBeInTheDocument();
     expect(screen.getByRole("navigation")).toHaveClass("ds-c-pagination");
   });
