@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useReactTable, flexRender, getCoreRowModel, getPaginationRowModel } from '@tanstack/react-table';
 import { Table, TableHead, TableRow, TableCell, TableBody, Pagination } from '@cmsgov/design-system';
 import HeaderResizeElement from '../Datatable/HeaderResizeElement';
+import './dataDictionaryTable.scss';
 
 const DataDictionaryTable = ({tableColumns, tableData, count, pageSize} :
   {tableColumns: Array<any>, tableData: Array<any>, count: number, pageSize: number}
@@ -26,7 +27,7 @@ const DataDictionaryTable = ({tableColumns, tableData, count, pageSize} :
 
   return (
     <div>
-      <div className="ds-u-border-x--1">
+      <div className="dc-c-datadictionary-table">
         <Table className="dc-c-datatable" {...{style:{width: '100%'}}} >
           <TableHead className="dc-thead--truncated dc-thead--resizeable">
             {table.getHeaderGroups().map(headerGroup => (
@@ -36,7 +37,7 @@ const DataDictionaryTable = ({tableColumns, tableData, count, pageSize} :
                   return (header.id === "nameAndTitle") ? (
                     <HeaderResizeElement table={table} header={header} setAriaLiveFeedback={setAriaLiveFeedback} />
                   ) : (
-                    <TableCell>{flexRender(header.column.columnDef.header, header.getContext()) as React.ReactNode}</TableCell>
+                    <TableCell className="ds-u-border-y--2 ds-u-border--dark ds-u-border-x--0">{flexRender(header.column.columnDef.header, header.getContext()) as React.ReactNode}</TableCell>
                   )
                 }) }
               </TableRow>
@@ -47,7 +48,7 @@ const DataDictionaryTable = ({tableColumns, tableData, count, pageSize} :
             {table.getRowModel().rows.map((row, index) => { 
               const even = (index + 1) % 2 === 0;     
               return (
-                <TableRow className={`${even ? "dc-c-datatable--even-row" : ""}`}>
+                <TableRow>
                   {row.getVisibleCells().map((cell) => {
                     return (
                       <TableCell

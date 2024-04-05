@@ -14,7 +14,7 @@ const HeaderResizeElement = ({table, header, sortElement, setAriaLiveFeedback} :
         title: header.column.columnDef.header
       }
     }
-    className="ds-u-border-y--2 ds-u-padding--2 ds-u-border--dark  ds-u-font-weight--bold dc-c-table-header-cell"
+    className="ds-u-border-y--2 ds-u-padding--2 ds-u-border--dark  ds-u-font-weight--bold"
     >
       <div className="ds-u-display--flex">
         <span style={{maxWidth: header.getSize() - 16}} >
