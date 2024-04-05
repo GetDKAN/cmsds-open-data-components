@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createColumnHelper } from '@tanstack/react-table';
 import { DatasetDictionaryItemType } from '../../types/dataset';
 import DataDictionaryTable from '../DataDictionaryTable';
 import { Tooltip, TooltipIcon } from '@cmsgov/design-system';
+import "./datadictionary.scss"
 
 const DatasetDictionaryTable = ({ datasetDictionary, pageSize} : {datasetDictionary: DatasetDictionaryItemType[], pageSize: number}) => {
   const tableData = datasetDictionary.map((item) => {
@@ -20,7 +21,7 @@ const DatasetDictionaryTable = ({ datasetDictionary, pageSize} : {datasetDiction
   const tableColumns = [
     columnHelper.accessor('nameAndTitle', {
       header: () => (
-        <div className="ds-u-font-weight--normal">
+        <div className="ds-u-font-weight--normal dc-c-tooltip-width-override">
           Name / Title
           <Tooltip
             title={
@@ -31,25 +32,32 @@ const DatasetDictionaryTable = ({ datasetDictionary, pageSize} : {datasetDiction
                 </div>
               )
             }
+            // @ts-ignore
             style={{ border: 'none', background: 'none' }}
-            maxWidth="400"
+            maxWidth="500px"
           >
             <TooltipIcon />
           </Tooltip>
         </div>
       ),
-      cell: props => (
-      <>
-        <p>{props.getValue().name}</p>
-        <p>{props.getValue().title}</p>
-      </>
-      )
+      cell: props  => {
+        const cellValue = props.getValue() as unknown as {name: string, title: string}
+        return (
+          <>
+            <p className="dc-truncate">{cellValue.name}</p>
+            <p className="dc-truncate">{cellValue.title}</p>
+          </>
+      )},
+      size: 300
     }),
     columnHelper.accessor('description', {
       header: 'Description',
+      minSize: 600,
     }),
     columnHelper.accessor('type', {
       header: 'Type',
+      size: 150,
+      enableResizing: false
     }),
   ];
 

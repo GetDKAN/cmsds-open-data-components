@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 import { useReactTable, flexRender, getCoreRowModel, getPaginationRowModel } from '@tanstack/react-table';
 import { Table, TableHead, TableRow, TableCell, TableBody, Pagination } from '@cmsgov/design-system';
+import HeaderResizeElement from '../Datatable/HeaderResizeElement';
 
-const DataDictionaryTable = ({tableColumns, tableData, count, pageSize}) => {
+const DataDictionaryTable = ({tableColumns, tableData, count, pageSize} :
+  {tableColumns: Array<any>, tableData: Array<any>, count: number, pageSize: number}
+  ) => {
   const [pagination, setPagination] = useState({
     pageIndex: 1,
     pageSize: pageSize,
   });
+  const [ariaLiveFeedback, setAriaLiveFeedback] = useState('')
 
   const table = useReactTable({
     data: tableData,
     columns: tableColumns,
+    columnResizeMode: 'onChange',
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
@@ -22,12 +27,15 @@ const DataDictionaryTable = ({tableColumns, tableData, count, pageSize}) => {
   return (
     <div>
       <div className="ds-u-border-x--1">
-        <Table className="dc-c-datatable">
-          <TableHead>
+        <Table className="dc-c-datatable" {...{style:{width: '100%'}}} >
+          <TableHead className="dc-thead--truncated dc-thead--resizeable">
             {table.getHeaderGroups().map(headerGroup => (
               <TableRow>
                 {headerGroup.headers.map(header => {
-                  return (
+                  console.log(header)
+                  return (header.id === "nameAndTitle") ? (
+                    <HeaderResizeElement table={table} header={header} setAriaLiveFeedback={setAriaLiveFeedback} />
+                  ) : (
                     <TableCell>{flexRender(header.column.columnDef.header, header.getContext()) as React.ReactNode}</TableCell>
                   )
                 }) }
@@ -44,7 +52,10 @@ const DataDictionaryTable = ({tableColumns, tableData, count, pageSize}) => {
                     return (
                       <TableCell
                       {...{
-                        key: cell.id
+                        key: cell.id,
+                        style: {
+                          maxWidth: cell.column.getSize(),
+                        },
                       }}
                       >
                         {flexRender(cell.column.columnDef.cell, cell.getContext()) as React.ReactNode}
@@ -56,6 +67,7 @@ const DataDictionaryTable = ({tableColumns, tableData, count, pageSize}) => {
             })}
           </TableBody>
         </Table>
+        <div className='sr-only' aria-live='assertive' aria-atomic='true'>{ariaLiveFeedback}</div>
       </div>
       {count > pageSize ? (
         <Pagination

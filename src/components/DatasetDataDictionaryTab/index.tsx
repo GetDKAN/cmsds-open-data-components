@@ -1,8 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import withQueryProvider from '../../utilities/QueryProvider/QueryProvider';
-import { useReactTable, getCoreRowModel, flexRender, createColumnHelper, getPaginationRowModel } from '@tanstack/react-table';
 
-import { Table, TableHead, TableRow, TableCell, TableBody, Pagination } from '@cmsgov/design-system';
 import { DatasetDictionaryItemType } from '../../types/dataset';
 import SitewideDataDictionaryTable from '../SitewideDataDictionaryTable';
 import DatasetDictionaryTable from '../DatasetDictionaryTable'
