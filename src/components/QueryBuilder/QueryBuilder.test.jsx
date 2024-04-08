@@ -15,7 +15,7 @@ describe('<QueryBuilder />', () => {
         id={"d60b31aa-bfa8-527e-9b50-6c3f972ee9a9"}
       />);
 
-    expect(screen.getByText("Add a filter")).toBeInTheDocument();
+    expect(screen.getByText("Data filters: none")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "+ Add another filter" })).toBeInTheDocument();
   });
   test("Adds and removes a row when the buttons are clicked", async () => {

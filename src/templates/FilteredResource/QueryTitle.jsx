@@ -4,8 +4,9 @@ import { operatorMapping, cleanText } from './functions';
 
 const QueryTitle = ({ conditions, schema, customColumns }) => {
   const { fields } = schema;
+  const prependedMessage = <>Data filters: </>
   if (!conditions || !conditions.length) {
-    return <>Add a filter</>;
+    return <p className="ds-u-margin-y--0">{prependedMessage} none</p>;
   }
 
   function formatValue(text, property) {
@@ -23,6 +24,7 @@ const QueryTitle = ({ conditions, schema, customColumns }) => {
 
   return (
     <span className="dc-querybuilder-title">
+      <p className="ds-u-margin-y--0">{prependedMessage}</p>
       {conditions
         .map((c) => {
           const field = fields[c.property];
