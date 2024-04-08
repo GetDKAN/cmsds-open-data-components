@@ -17,7 +17,7 @@ const useMetastoreDataset = (datasetId : string, rootAPIUrl : string, additional
   const additionalParamsString = Object.keys(additionalParams).length ? `&${qs.stringify(additionalParams)}` : '';
 
   const {data, isPending, error} = useQuery({
-    queryKey: ["metastore" + id],
+    queryKey: ["metastore" + id + additionalParamsString],
     queryFn: () => {
       return fetch(`${rootUrl}/metastore/schemas/dataset/items/${id}?show-reference-ids${additionalParamsString}`)
         .then(res => res.json())
