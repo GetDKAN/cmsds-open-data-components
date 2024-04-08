@@ -74,7 +74,7 @@ export type ResourceType = {
   count: number | null,
   limit: number,
   offset: number,
-  isPending: boolean,
+  loading: boolean,
   conditions: Array<ConditionType>,
   schema: SchemaType,
   values: Array<Object>,

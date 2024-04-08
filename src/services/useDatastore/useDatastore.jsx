@@ -67,7 +67,7 @@ const useDatastore = (
   }, [data])
 
   return {
-    isPending,
+    loading: isPending,
     values,
     count,
     columns,
