@@ -60,7 +60,7 @@ const DatasetTable = ({ id, distribution, resource, rootUrl, customColumns = [],
             setSort={resource.setSort}
             sortTransform={transformTableSortToQuerySort}
             tablePadding={'ds-u-padding-y--2'}
-            loading={resource.loading}
+            loading={resource.isPending}
           />
         </div>
         <div className="ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--end ds-u-md-justify-content--between ds-u-margin-top--2 ds-u-align-items--center">

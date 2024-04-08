@@ -9,7 +9,6 @@ import * as distributionWithCustomTitle from "../../tests/fixtures/distributionW
 describe('<Resource />', () => {
   test("Renders correctly", () => {
     resource.setResource = jest.fn();
-    resource.setManual = jest.fn()
     render(
       <Resource
         resource={resource}
@@ -23,7 +22,6 @@ describe('<Resource />', () => {
   });
   test("Renders custom title and description if they exist", () => {
     resource.setResource = jest.fn();
-    resource.setManual = jest.fn()
     render(
       <Resource
         resource={resource}

@@ -74,7 +74,7 @@ export type ResourceType = {
   count: number | null,
   limit: number,
   offset: number,
-  loading: boolean,
+  isPending: boolean,
   conditions: Array<ConditionType>,
   schema: SchemaType,
   values: Array<Object>,
@@ -83,7 +83,6 @@ export type ResourceType = {
   setSort: Function,
   setConditions: Function,
   setResource: Function,
-  setManual: Function,
 }
 
 export type QueryRowType = {

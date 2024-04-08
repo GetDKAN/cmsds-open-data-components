@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import DOMPurify from 'dompurify';
 import qs from 'qs';
@@ -19,7 +19,7 @@ import TransformedDate from '../../components/TransformedDate';
 import './dataset.scss';
 
 const getSiteWideDataDictionary = (rootUrl : string, dataDictionaryUrl : string) => {
-  const {data, isLoading, error} = useQuery({
+  const {data, isPending, error} = useQuery({
     queryKey: ["dictionary"],
     queryFn: () => {
       return fetch(rootUrl + dataDictionaryUrl).then(
@@ -30,7 +30,7 @@ const getSiteWideDataDictionary = (rootUrl : string, dataDictionaryUrl : string)
 
   return {
     siteWideDataDictionary: data as DatasetDictionaryType,
-    dataDictionaryLoading: isLoading
+    dataDictionaryLoading: isPending
   }
 }
 
@@ -50,7 +50,7 @@ const Dataset = ({
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
     : { conditions: [] };
 
-  const { dataset } = useMetastoreDataset(id, rootUrl, additionalParams);
+  const { dataset, isPending } = useMetastoreDataset(id, rootUrl, additionalParams);
   const title = dataset.title ? dataset.title : '';
   const metadataMapping = {
     ...defaultMetadataMapping,
@@ -58,7 +58,7 @@ const Dataset = ({
   };
 
   let distribution = {} as DistributionType;
-  let distributions= dataset.distribution ? dataset.distribution : [];
+  let distributions = dataset.distribution ? dataset.distribution : [];
   if (distributions.length) {
     distribution = distributions[0];
   }
@@ -83,9 +83,9 @@ const Dataset = ({
       return Object.keys(resource.schema[distribution.identifier].fields).indexOf(field.name) !== -1;
     }) : null;
 
-  useEffect(() => {
+  const getlocalFileFormat = () => {
+    let localFileFormat = '';
     if (distribution.identifier) {
-      let localFileFormat = '';
       if (distribution.data.format) {
         localFileFormat = distribution.data.format.toUpperCase();
       } else if (distribution.data.mediaType) {
@@ -94,10 +94,14 @@ const Dataset = ({
           localFileFormat = mediaType[1].toUpperCase();
         }
       }
-      if (localFileFormat === 'CSV') {
-        resource.setResource(distribution.identifier);
-        resource.setManual(false);
-      }
+    }
+    return localFileFormat;
+  }
+
+  useEffect(() => {
+    const localFileFormat = getlocalFileFormat();
+    if (localFileFormat === 'CSV') {
+      resource.setResource(distribution.identifier);
     }
   }, [distribution]);
 
@@ -126,6 +130,19 @@ const Dataset = ({
       </p>
     </div>
   );
+
+
+  // The below code manages the selected tab in the Design System tab group manually to ensure we can still use the
+  // Data Table tab as the default since it no longer exists on initial render (By default, Overview will appear as default)
+  const getDefaultTab = () => {
+    return (distribution && distribution.data && (getlocalFileFormat() === "CSV")) ? "data-table" : "overview";
+  }
+  const [selectedTab, setSelectedTab] = useState(
+    window.location.hash.substring(1) ? window.location.hash.substring(1) : getDefaultTab())
+
+  useEffect(() => {
+    setSelectedTab(getDefaultTab())
+  }, [distribution])
   
   return (
     <>
@@ -148,12 +165,14 @@ const Dataset = ({
           </div>
           <div className={'ds-l-row'}>
             <div className={'ds-l-md-col--12 dc-dataset'}>
-              {distribution && distribution.data && (
+              {!isPending && (
                 <Tabs
-                  onChange={function noRefCheck() {}}
-                  defaultSelectedId={window.location.hash.substring(1)}
+                  onChange={(selectedId, prevSelectedId) => {
+                    setSelectedTab(selectedId)
+                  }}
+                  selectedId={selectedTab}
                 >
-                  {distribution.data.format === "csv" && (
+                  {distribution && distribution.data && (getlocalFileFormat() === "CSV") && (
                     <TabPanel
                       id={'data-table'}
                       tab={
@@ -179,7 +198,7 @@ const Dataset = ({
                   >
                     <DatasetOverview resource={resource} dataset={dataset} distributions={distributions} metadataMapping={metadataMapping} />
                   </TabPanel>
-                  { datasetDictionary && datasetDictionary.length ? (
+                  {(distribution && distribution.data) && datasetDictionary && datasetDictionary.length ? (
                     <TabPanel
                       id={'data-dictionary'}
                       tab={
@@ -194,18 +213,20 @@ const Dataset = ({
                     </TabPanel>
                   )
                   : null}
-                  <TabPanel
-                    id={'api'}
-                    tab={
-                      <span className="ds-u-color--primary">
-                        <SearchItemIcon id="api" />
-                        API
-                      </span>
-                    }
-                    className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
-                  >
-                    <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} additionalParams={additionalParams} />
-                  </TabPanel>
+                  { distribution && distribution.data && (
+                    <TabPanel
+                      id={'api'}
+                      tab={
+                        <span className="ds-u-color--primary">
+                          <SearchItemIcon id="api" />
+                          API
+                        </span>
+                      }
+                      className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
+                    >
+                      <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} additionalParams={additionalParams} />
+                    </TabPanel>
+                  )}
                 </Tabs>
               )}
             </div>
