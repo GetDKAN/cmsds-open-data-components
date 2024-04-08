@@ -16,6 +16,7 @@ import DatasetAPI from '../../components/DatasetAPITab';
 import DataDictionary from '../../components/DatasetDataDictionaryTab';
 import { DatasetDictionaryItemType, DatasetPageType, DatasetDictionaryType, DistributionType, ResourceType } from '../../types/dataset';
 import TransformedDate from '../../components/TransformedDate';
+import { getFormatType } from '../../utilities/format';
 import './dataset.scss';
 
 const getSiteWideDataDictionary = (rootUrl : string, dataDictionaryUrl : string) => {
@@ -83,24 +84,9 @@ const Dataset = ({
       return Object.keys(resource.schema[distribution.identifier].fields).indexOf(field.name) !== -1;
     }) : null;
 
-  const getlocalFileFormat = () => {
-    let localFileFormat = '';
-    if (distribution.identifier) {
-      if (distribution.data.format) {
-        localFileFormat = distribution.data.format.toUpperCase();
-      } else if (distribution.data.mediaType) {
-        const mediaType = distribution.data.mediaType.split('/');
-        if (mediaType.length && mediaType[1]) {
-          localFileFormat = mediaType[1].toUpperCase();
-        }
-      }
-    }
-    return localFileFormat;
-  }
-
   useEffect(() => {
-    const localFileFormat = getlocalFileFormat();
-    if (localFileFormat === 'CSV') {
+    const localFileFormat = getFormatType(distribution);
+    if (localFileFormat === 'csv') {
       resource.setResource(distribution.identifier);
     }
   }, [distribution]);
@@ -135,7 +121,7 @@ const Dataset = ({
   // The below code manages the selected tab in the Design System tab group manually to ensure we can still use the
   // Data Table tab as the default since it no longer exists on initial render (By default, Overview will appear as default)
   const getDefaultTab = () => {
-    return (distribution && distribution.data && (getlocalFileFormat() === "CSV")) ? "data-table" : "overview";
+    return (getFormatType(distribution) === "csv") ? "data-table" : "overview";
   }
   const [selectedTab, setSelectedTab] = useState(
     window.location.hash.substring(1) ? window.location.hash.substring(1) : getDefaultTab())
@@ -172,7 +158,7 @@ const Dataset = ({
                   }}
                   selectedId={selectedTab}
                 >
-                  {distribution && distribution.data && (getlocalFileFormat() === "CSV") && (
+                  {getFormatType(distribution) === "csv" && (
                     <TabPanel
                       id={'data-table'}
                       tab={

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { Button } from '@cmsgov/design-system';
 import ResourceInformation from '../ResourceInformation';
 import { DistributionType, ResourceType } from '../../types/dataset';
+import { getFormatType } from '../../utilities/format';
 import './Resource.scss';
 
 type ResourcePropsType = {
@@ -12,27 +12,6 @@ type ResourcePropsType = {
 }
 
 const Resource = ({ distributions, resource, title } : ResourcePropsType ) => {
-  function getFormatType(dist : DistributionType) {
-    if(dist.data.format) {
-      return  dist.data.format.toLowerCase()
-    }
-    if(dist.data.mediaType) {
-      const mediaType = dist.data.mediaType.split('/');
-      if (mediaType.length && mediaType[1]) {
-        return mediaType[1].toLowerCase();
-      }
-    }
-    if(dist.data["%Ref:downloadURL"].length && dist.data["%Ref:downloadURL"][0].data) {
-      if(dist.data["%Ref:downloadURL"][0].data.mimeType) {
-        const mimeType = dist.data["%Ref:downloadURL"][0].data.mimeType.split("/");
-        if (mimeType.length && mimeType[1]) {
-          return mimeType[1].toLowerCase();
-        }
-      }
-    }
-    return '';
-  }
-  
   const sm = useMediaQuery({ minWidth: 0, maxWidth: 767 });
   return (
     <div className="ds-u-display--flex ds-u-flex-wrap--wrap">
