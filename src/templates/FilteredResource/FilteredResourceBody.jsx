@@ -88,10 +88,14 @@ const FilteredResourceBody = ({
           <div className="ds-l-row">
             <span className="ds-l-col--12 ds-u-color--gray ds-u-margin-y--1 ds-u-text-align--right">Updated <TransformedDate date={dataset.modified} /></span>
           </div>
-          <p
-            className="ds-u-margin-top--0 dc-c-metadata-description"
-            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(distribution.data.description) }}
-          />
+          <div className={'ds-l-md-col--9'}>
+            <div className={'ds-u-measure--wide ds-u-margin-bottom--7'}>
+              <p
+                className="ds-u-margin-top--0 dc-c-metadata-description"
+                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(distribution.data.description) }}
+              />
+            </div>
+          </div>
           {resource.columns && Object.keys(resource.schema).length && (
             <QueryBuilder
               resource={resource}
