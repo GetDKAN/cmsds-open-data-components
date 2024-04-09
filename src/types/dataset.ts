@@ -3,6 +3,8 @@ export type DistributionDataType = {
   format: string,
   title: string,
   description: string,
+  describedBy: string,
+  describedByType: string,
   mediaType: string,
   mimeType: string,
   "%Ref:downloadURL": DistributionType[],

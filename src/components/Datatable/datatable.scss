@@ -6,6 +6,7 @@
     text-align: left;
   }
   thead th div {
+    display: flex;
     align-items: center;
     cursor: pointer;
   }
@@ -42,11 +43,15 @@
 }
 
 .dc-thead--truncated {
-  th span {
+  th > div > span {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     display: inline-block;
+    .ds-c-tooltip__container {
+      white-space: wrap;
+      font-weight: normal;
+    }
   }
   th p {
     white-space: normal;

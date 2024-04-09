@@ -31,13 +31,19 @@ const DataDictionaryTable = ({tableColumns, tableData, count, pageSize} :
         <Table className="dc-c-datatable" {...{style:{width: '100%'}}} >
           <TableHead className="dc-thead--truncated dc-thead--resizeable">
             {table.getHeaderGroups().map(headerGroup => (
-              <TableRow>
+              <TableRow key={"header" + headerGroup.id}>
                 {headerGroup.headers.map(header => {
-                  console.log(header)
-                  return (header.id === "nameAndTitle") ? (
-                    <HeaderResizeElement table={table} header={header} setAriaLiveFeedback={setAriaLiveFeedback} />
+                  return (header.id === "titleResizable") ? (
+                    <HeaderResizeElement key={header.id + "_resize"} table={table} header={header} setAriaLiveFeedback={setAriaLiveFeedback} />
                   ) : (
-                    <TableCell className="ds-u-border-y--2 ds-u-border--dark ds-u-border-x--0">{flexRender(header.column.columnDef.header, header.getContext()) as React.ReactNode}</TableCell>
+                    <TableCell
+                      {...{
+                        key: header.id
+                      }}
+                      className="ds-u-border-y--2 ds-u-border--dark ds-u-border-x--0"
+                    >
+                      {flexRender(header.column.columnDef.header, header.getContext()) as React.ReactNode}
+                    </TableCell>
                   )
                 }) }
               </TableRow>
@@ -45,10 +51,9 @@ const DataDictionaryTable = ({tableColumns, tableData, count, pageSize} :
             )}
           </TableHead>
           <TableBody>
-            {table.getRowModel().rows.map((row, index) => { 
-              const even = (index + 1) % 2 === 0;     
+            {table.getRowModel().rows.map((row, index) => {    
               return (
-                <TableRow>
+                <TableRow key={index + JSON.stringify(row)}>
                   {row.getVisibleCells().map((cell) => {
                     return (
                       <TableCell

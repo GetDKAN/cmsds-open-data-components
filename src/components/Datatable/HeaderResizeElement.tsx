@@ -10,8 +10,7 @@ const HeaderResizeElement = ({table, header, sortElement, setAriaLiveFeedback} :
         key: header.id,
         style: {
           width: header.getSize(),
-        },
-        title: header.column.columnDef.header
+        }
       }
     }
     className="ds-u-border-y--2 ds-u-padding--2 ds-u-border--dark  ds-u-font-weight--bold"
@@ -23,7 +22,7 @@ const HeaderResizeElement = ({table, header, sortElement, setAriaLiveFeedback} :
             : flexRender(
                 header.column.columnDef.header,
                 header.getContext()
-            )}
+            ) as React.ReactNode}
         </span>
         {sortElement && (
         <button
