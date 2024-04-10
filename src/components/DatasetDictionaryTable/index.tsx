@@ -21,10 +21,10 @@ const DatasetDictionaryTable = ({ datasetDictionary, pageSize} : {datasetDiction
         <div className="dc-c-tooltip-width-override">
           Title
           <Tooltip
-            title={"Title is the human readable text that will be displayed in the data preview on the dataset page. (e.g., Change_Type)"}
+            title={"Title represents the column headers of the data file (e.g., Change_Type)"}
             // @ts-ignore
             style={{ border: 'none', background: 'none' }}
-            maxWidth="500px"
+            maxWidth="400px"
           >
             <TooltipIcon />
           </Tooltip>

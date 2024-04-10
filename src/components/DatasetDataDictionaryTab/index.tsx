@@ -36,7 +36,7 @@ const DataDictionary = (
         <>
           <div className="ds-u-margin-bottom--1 ds-u-display--flex ds-u-justify-content--end">
             <Button className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--4" onClick={() => window.open(datasetDictionaryEndpoint)} type="button" >
-              <i className="fa fa-file-download ds-u-color--primary ds-u-padding-right--1"></i> Download Dictionary JSON
+              <i className="fa fa-file-download ds-u-color--primary ds-u-padding-right--1"></i> View Dictionary JSON
             </Button>
           </div>
           <DatasetDictionaryTable datasetDictionary={datasetDictionary} pageSize={pageSize} />
