@@ -63,6 +63,7 @@ const DataDictionaryTable = ({tableColumns, tableData, count, pageSize} :
                           maxWidth: cell.column.getSize(),
                         },
                       }}
+                      className={`${cell.column.id === 'titleResizable' ? 'ds-u-word-break' : ''}`}
                       >
                         {flexRender(cell.column.columnDef.cell, cell.getContext()) as React.ReactNode}
                       </TableCell>
