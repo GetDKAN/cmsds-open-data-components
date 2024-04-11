@@ -1,4 +1,5 @@
 import React from 'react';
+import DOMPurify from 'dompurify';
 import { useMediaQuery } from 'react-responsive';
 import { Button } from '@cmsgov/design-system';
 import ResourceInformation from '../ResourceInformation';
@@ -63,7 +64,9 @@ const Resource = ({ distributions, resource, title } : ResourcePropsType ) => {
                     </a>
                   </div>
                   {dist.data.description && (
-                    <p>{dist.data.description}</p>
+                    <div className={'ds-u-measure--wide ds-u-margin-bottom--7'}>
+                      <p className="dc-c-metadata-description ds-u-margin--0" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(dist.data.description) }}/>
+                    </div>
                   )}
                   {fileFormat === "csv" && <ResourceInformation resource={resource} />}
                 </li>

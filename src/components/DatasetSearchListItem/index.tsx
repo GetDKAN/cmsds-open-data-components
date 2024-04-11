@@ -1,7 +1,8 @@
 import React from 'react';
+import truncate from 'lodash.truncate'
 import { Link } from 'react-router-dom';
 import DOMPurify from 'dompurify';
-import TextTruncate from 'react-text-truncate';
+// import TextTruncate from 'react-text-truncate';
 import { useMediaQuery } from 'react-responsive';
 import LargeFileDialog from '../LargeFileDialog';
 import SearchItemIcon from '../../assets/icons/searchItem';
@@ -49,14 +50,15 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
     linkClasses = 'ds-u-display--block ds-u-text-align--left';
   }
   
-  const truncatedDescription = (
-    <TextTruncate
-      line={3}
-      element={'p'}
-      truncateText="…"
-      text={prepDescription(description)}
-    />
-  );
+  // const truncatedDescription = (
+  //   <TextTruncate
+  //     line={3}
+  //     element={'p'}
+  //     truncateText="…"
+  //     text={prepDescription(description)}
+  //   />
+    
+  // );
 
   return (
     <li className="dc-c-search-list-item ds-u-padding-top--3">
@@ -70,7 +72,10 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
           </h2>
         </div>
         <div className="ds-l-row">
-          <div className="ds-l-col--12 ds-l-md-col--12">{truncatedDescription}</div>
+          <div className="ds-l-col--12 ds-l-md-col--12">{truncate(description, {
+            length: 80 * 3,
+            separator:  /[ (<br\/>)]+/
+          })}</div>
         </div>
         <ul className="ds-l-row ds-u-padding--0 ds-u-flex-direction--row ds-u-margin-top--4">
           <li className={linkContainerClasses}>
