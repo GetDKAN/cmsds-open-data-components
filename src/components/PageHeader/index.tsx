@@ -9,7 +9,7 @@ const PageHeader = (props: pageHeaderProps) => {
     <div className="ds-l-container">
       <div className="ds-l-row">
         <div className="ds-l-md-col--8">
-          <h1 className="dc-c-entity__name ds-title ds-u-margin-bottom--4">
+          <h1 className="dc-c-entity__name ds-text-heading--3xl ds-u-margin-bottom--4">
             <span className="ds-u-margin-right--2" data-testid="profile-full-name">
               {headerText}
             </span>
