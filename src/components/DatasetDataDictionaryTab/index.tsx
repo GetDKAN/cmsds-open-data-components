@@ -27,7 +27,7 @@ const DataDictionary = (
     }
   });
 
-  const datasetDictionary = data && data.data && data.data.fields.length ? data.data.fields : null;
+  const datasetDictionary = data && data.data && data.data.fields && data.data.fields.length ? data.data.fields : null;
 
   return (
     <>
