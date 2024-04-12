@@ -78,7 +78,7 @@ const Dataset = ({
 
   // compare schema fields with siteWideDataDictionary to display commonalities for now
   // until dataset level data dictionaries are implemented
-  const datasetSitewideDictionary = (siteWideDataDictionary && resource && resource.schema[distribution.identifier]) ?
+  const datasetSitewideDictionary = (siteWideDataDictionary && siteWideDataDictionary.data && siteWideDataDictionary.data.fields && resource && resource.schema[distribution.identifier]) ?
     siteWideDataDictionary.data.fields.filter((field : DatasetDictionaryItemType) => {
       return Object.keys(resource.schema[distribution.identifier].fields).indexOf(field.name) !== -1;
     }) : null;
