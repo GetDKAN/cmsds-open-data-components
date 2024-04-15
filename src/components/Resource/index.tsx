@@ -51,7 +51,7 @@ const Resource = ({ distributions, resource, title } : ResourcePropsType ) => {
           }
         </ul>
       ) : (
-        <div className="ds-u-margin-y--2">No resources have been added to this dataset.</div>
+        <div className="ds-u-margin-bottom--2">No resources have been added to this dataset.</div>
       )}
     </div>
   );
