@@ -49,3 +49,4 @@ export { default as useMetastoreDataset } from './services/useMetastoreDataset';
 export { defaultMetadataMapping } from './assets/metadataMapping';
 
 export { default as DataTablePageResults } from './components/DataTablePageResults';
+export { truncateText } from './components/DatasetSearchListItem/truncateText';
