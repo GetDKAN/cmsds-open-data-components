@@ -3,7 +3,7 @@ import qs from 'qs';
 import DataTable from '../Datatable/Datatable';
 import { transformTableSortToQuerySort } from '../../services/useDatastore/transformSorts';
 import { buildCustomColHeaders } from '../../templates/FilteredResource/functions';
-import { Pagination, Dropdown } from '@cmsgov/design-system';
+import { Pagination, Dropdown, Spinner } from '@cmsgov/design-system';
 import DataTableHeader from '../DatatableHeader';
 import QueryBuilder from '../QueryBuilder';
 import { DistributionType, ColumnType, ResourceType } from '../../types/dataset';
@@ -63,37 +63,39 @@ const DatasetTable = ({ id, distribution, resource, rootUrl, customColumns = [],
             loading={resource.loading}
           />
         </div>
-        <div className="ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--end ds-u-md-justify-content--between ds-u-margin-top--2 ds-u-align-items--center">
-          <Pagination
-            totalPages={Math.ceil(resource.count ? resource.count / pageSize : 1)}
-            currentPage={page}
-            onPageChange={(evt, page) => {
-              evt.preventDefault();
-              setOffset((page - 1) * limit);
-              setPage(page);
-            }}
-            renderHref={(page) => {
-              return '';
-            }}
-            className="ds-l-lg-col--7 ds-l-md-col--9 ds-l-col--12 ds-u-padding-x--0"
-          />
-          <Dropdown
-            options={rowOptions.map((row) => ({ label: row.toString(), value: row }))}
-            size="medium"
-            label="Rows per page:"
-            labelClassName="ds-u-margin-top--0"
-            name="datatable_rows_per_page"
-            onChange={(e) => {
-              setLimit(parseInt(e.target.value));
-              setPage(1);
-              setOffset(0);
-            }}
-            defaultValue={limit.toString()}
-          />
-      </div>
+        {!resource.loading && (
+          <div className="ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--end ds-u-md-justify-content--between ds-u-margin-top--2 ds-u-align-items--center">
+            <Pagination
+              totalPages={Math.ceil(resource.count ? resource.count / pageSize : 1)}
+              currentPage={page}
+              onPageChange={(evt, page) => {
+                evt.preventDefault();
+                setOffset((page - 1) * limit);
+                setPage(page);
+              }}
+              renderHref={(page) => {
+                return '';
+              }}
+              className="ds-l-lg-col--7 ds-l-md-col--9 ds-l-col--12 ds-u-padding-x--0"
+            />
+            <Dropdown
+              options={rowOptions.map((row) => ({ label: row.toString(), value: row }))}
+              size="medium"
+              label="Rows per page:"
+              labelClassName="ds-u-margin-top--0"
+              name="datatable_rows_per_page"
+              onChange={(e) => {
+                setLimit(parseInt(e.target.value));
+                setPage(1);
+                setOffset(0);
+              }}
+              defaultValue={limit.toString()}
+            />
+          </div>
+        )}
     </>
   ) 
-  } else return <></>;
+  } else return <Spinner aria-valuetext="Dataset loading" role="status" className="ds-u-margin--3" />;
 };
 
 export default DatasetTable;
