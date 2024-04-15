@@ -11,7 +11,6 @@ import { MemoryRouter } from 'react-router-dom';
 describe('<DatasetOverview />', () => {
   test("Renders correctly", () => {
     resource.setResource = jest.fn();
-    resource.setManual = jest.fn()
     const metadataMapping = {
       ...defaultMetadataMapping,
     }
