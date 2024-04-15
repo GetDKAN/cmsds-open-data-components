@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import qs from 'qs';
-import axios from 'axios';
 import { DatasetType } from '../../types/dataset';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 const useMetastoreDataset = (datasetId : string, rootAPIUrl : string, additionalParams={}) => {
   const [dataset, setDataset] = useState({
@@ -15,15 +16,21 @@ const useMetastoreDataset = (datasetId : string, rootAPIUrl : string, additional
   const [id, setId] = useState(datasetId)
   const [rootUrl, setRootUrl] = useState(rootAPIUrl)
   const additionalParamsString = Object.keys(additionalParams).length ? `&${qs.stringify(additionalParams)}` : '';
-  useEffect(() => {
-    async function fetchData() {
+
+  const { data, isPending } = useQuery({
+    queryKey: ["metastore" + id + additionalParamsString],
+    queryFn: () => {
       return axios.get(`${rootUrl}/metastore/schemas/dataset/items/${id}?show-reference-ids${additionalParamsString}`)
-        .then((res) => setDataset(res.data))
-        .catch((error) => setDataset({title: dataset.title, distribution: dataset.distribution, error: error, description: dataset.description, identifier: dataset.identifier, modified: dataset.modified}));
+        .then((res) => res.data)
+        .catch((error) => {return {title: dataset.title, distribution: dataset.distribution, error: error, description: dataset.description, identifier: dataset.identifier, modified: dataset.modified}});
     }
-    fetchData();
-  }, [id, rootUrl]);
-  return {dataset, setId, setRootUrl};
+  })
+  useEffect(() => {
+    if (!isPending && data && data != dataset)
+      setDataset(data)
+  }, [data])
+
+  return {dataset, isPending, setId, setRootUrl};
 }
 
 export default useMetastoreDataset;

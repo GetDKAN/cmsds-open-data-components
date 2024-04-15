@@ -1,8 +1,9 @@
 import React from 'react';
+import DOMPurify from 'dompurify';
 import { useMediaQuery } from 'react-responsive';
-import { Button } from '@cmsgov/design-system';
 import ResourceInformation from '../ResourceInformation';
 import { DistributionType, ResourceType } from '../../types/dataset';
+import { getFormatType } from '../../utilities/format';
 import './Resource.scss';
 
 type ResourcePropsType = {
@@ -12,32 +13,11 @@ type ResourcePropsType = {
 }
 
 const Resource = ({ distributions, resource, title } : ResourcePropsType ) => {
-  function getFormatType(dist : DistributionType) {
-    if(dist.data.format) {
-      return  dist.data.format.toLowerCase()
-    }
-    if(dist.data.mediaType) {
-      const mediaType = dist.data.mediaType.split('/');
-      if (mediaType.length && mediaType[1]) {
-        return mediaType[1].toLowerCase();
-      }
-    }
-    if(dist.data["%Ref:downloadURL"] && dist.data["%Ref:downloadURL"].length && dist.data["%Ref:downloadURL"][0].data) {
-      if(dist.data["%Ref:downloadURL"][0].data.mimeType) {
-        const mimeType = dist.data["%Ref:downloadURL"][0].data.mimeType.split("/");
-        if (mimeType.length && mimeType[1]) {
-          return mimeType[1].toLowerCase();
-        }
-      }
-    }
-    return '';
-  }
-  
   const sm = useMediaQuery({ minWidth: 0, maxWidth: 767 });
   return (
     <div className="ds-u-display--flex ds-u-flex-wrap--wrap">
       <h2 className="ds-l-col--12 ds-u-padding-left--0 ds-text-heading--2xl">Resources</h2>
-      {distributions.length &&
+      {distributions.length ? ( 
         <ul className="ds-c-list ds-c-list--bare dc-c-resource-full-width">
           {
             distributions.map((dist) => {
@@ -63,7 +43,9 @@ const Resource = ({ distributions, resource, title } : ResourcePropsType ) => {
                     </a>
                   </div>
                   {dist.data.description && (
-                    <p>{dist.data.description}</p>
+                    <div className={'ds-u-measure--wide ds-u-margin-bottom--7'}>
+                      <p className="dc-c-metadata-description ds-u-margin--0" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(dist.data.description) }}/>
+                    </div>
                   )}
                   {fileFormat === "csv" && <ResourceInformation resource={resource} />}
                 </li>
@@ -71,7 +53,9 @@ const Resource = ({ distributions, resource, title } : ResourcePropsType ) => {
             })
           }
         </ul>
-      }
+      ) : (
+        <div className="ds-u-margin-bottom--2">No resources have been added to this dataset.</div>
+      )}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { buildRows } from '../DatasetAdditionalInformation';
 import { Table, TableBody, TableRow, TableCell } from '@cmsgov/design-system';

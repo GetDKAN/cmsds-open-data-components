@@ -183,7 +183,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     ['page-size']: pageSize !== 10 ? pageSize : undefined,
     ...additionalParams
   }
-  const { data, isLoading, error } = useQuery({
+  const { data, isPending, error } = useQuery({
     queryKey: ["datasets", params],
     queryFn: () => {
       return axios.get(`${rootUrl}/search/?${qs.stringify(params, {arrayFormat: 'comma',encode: false })}`)
@@ -263,7 +263,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
             )}
         </div>
         <div className="ds-l-col--12 ds-l-sm-col--8">
-          {isLoading ? (
+          {isPending ? (
             <Spinner
               className="ds-u-valign--middle"
               aria-valuetext="Dataset Search loading"

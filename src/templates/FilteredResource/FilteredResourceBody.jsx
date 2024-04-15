@@ -63,7 +63,6 @@ const FilteredResourceBody = ({
   useEffect(() => {
     if (distribution.identifier) {
       resource.setResource(distribution.identifier);
-      resource.setManual(false);
     }
   }, [distribution]);
   const downloadUrl = `${

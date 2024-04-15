@@ -85,7 +85,6 @@ export type ResourceType = {
   setSort: Function,
   setConditions: Function,
   setResource: Function,
-  setManual: Function,
 }
 
 export type QueryRowType = {

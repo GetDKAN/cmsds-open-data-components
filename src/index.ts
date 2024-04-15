@@ -43,6 +43,7 @@ export { buildOperatorOptions, convertUTCToLocalDate, cleanText, buildCustomColH
 export { default as useAddLoginLink } from './components/useAddLoginLink';
 export { default as useScrollToTop } from './components/useScrollToTop';
 export { default as useMetastoreDataset } from './services/useMetastoreDataset';
+export { default as withQueryProvider } from './utilities/QueryProvider/QueryProvider'
 
 // Assets
 // export { default as frequencyMap } from './assets/frequencyMap';
