@@ -50,3 +50,4 @@ export { default as withQueryProvider } from './utilities/QueryProvider/QueryPro
 export { defaultMetadataMapping } from './assets/metadataMapping';
 
 export { default as DataTablePageResults } from './components/DataTablePageResults';
+export { truncateText } from './components/DatasetSearchListItem/truncateText';
