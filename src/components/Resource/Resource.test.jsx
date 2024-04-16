@@ -30,7 +30,7 @@ describe('<Resource />', () => {
         fileFormat={"csv"}
       />
     )
-    expect(screen.getByText("Test Custom Title")).toBeInTheDocument();
+    expect(screen.getByText("Test Custom Title (CSV)")).toBeInTheDocument();
     expect(screen.getByText("Test Custom Description")).toBeInTheDocument();
     expect(screen.getByRole("link", {name: "Download Test title csv"})).toBeInTheDocument();
   })
