@@ -26,9 +26,9 @@ const FixedSizeTHead = ({table, sortElement}) => {
                   title: header.column.columnDef.header
                 }
               }
-              className="ds-u-border-y--2 ds-u-padding--2 ds-u-border--dark  ds-u-font-weight--bold dc-c-table-header-cell"
+              className="ds-u-border-y--2 ds-u-padding--2 ds-u-border--dark  ds-u-font-weight--bold"
               >
-                <div onClick={header.column.getToggleSortingHandler()}>
+                <div onClick={header.column.getToggleSortingHandler()} className="ds-u-display--flex">
                   <span>
                     {header.isPlaceholder
                       ? null

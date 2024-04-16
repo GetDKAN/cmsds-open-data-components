@@ -19,18 +19,18 @@ import TransformedDate from '../../components/TransformedDate';
 import { getFormatType } from '../../utilities/format';
 import './dataset.scss';
 
-const getSiteWideDataDictionary = (rootUrl : string, dataDictionaryUrl : string) => {
+const getDataDictionary = (dataDictionaryUrl : string, additionalParams: any) => {
   const {data, isPending, error} = useQuery({
-    queryKey: ["dictionary"],
+    queryKey: ["dictionary" + dataDictionaryUrl],
     queryFn: () => {
-      return fetch(rootUrl + dataDictionaryUrl).then(
+      return fetch(`${dataDictionaryUrl}?${qs.stringify(additionalParams, {arrayFormat: 'comma',encode: false })}`).then(
         (res) => res.json(),
       )
     }
   });
 
   return {
-    siteWideDataDictionary: data as DatasetDictionaryType,
+    dataDictionary: data as DatasetDictionaryType,
     dataDictionaryLoading: isPending
   }
 }
@@ -75,11 +75,11 @@ const Dataset = ({
     additionalParams
   ) as ResourceType;
 
-  const { siteWideDataDictionary } = dataDictionaryUrl ? getSiteWideDataDictionary(rootUrl, dataDictionaryUrl) : { siteWideDataDictionary: null};
+  const siteWideDataDictionary = dataDictionaryUrl ? getDataDictionary(rootUrl + dataDictionaryUrl, additionalParams).dataDictionary : null;
 
   // compare schema fields with siteWideDataDictionary to display commonalities for now
   // until dataset level data dictionaries are implemented
-  const datasetDictionary = (siteWideDataDictionary && resource && resource.schema[distribution.identifier]) ?
+  const datasetSitewideDictionary = (siteWideDataDictionary && siteWideDataDictionary.data && siteWideDataDictionary.data.fields && resource && resource.schema[distribution.identifier]) ?
     siteWideDataDictionary.data.fields.filter((field : DatasetDictionaryItemType) => {
       return Object.keys(resource.schema[distribution.identifier].fields).indexOf(field.name) !== -1;
     }) : null;
@@ -184,7 +184,7 @@ const Dataset = ({
                   >
                     <DatasetOverview resource={resource} dataset={dataset} distributions={distributions} metadataMapping={metadataMapping} />
                   </TabPanel>
-                  {(distribution && distribution.data) && datasetDictionary && datasetDictionary.length ? (
+                  {(distribution.data && distribution.data.describedBy && distribution.data.describedByType === 'application/vnd.tableschema+json') || (datasetSitewideDictionary && datasetSitewideDictionary.length) ? (
                     <TabPanel
                       id={'data-dictionary'}
                       tab={
@@ -195,7 +195,7 @@ const Dataset = ({
                       }
                       className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
                     >
-                      <DataDictionary datasetDictionary={datasetDictionary} title={"Data Dictionary"} />
+                      <DataDictionary datasetSitewideDictionary={datasetSitewideDictionary} datasetDictionaryEndpoint={distribution.data.describedBy} title={"Data Dictionary"} additionalParams={additionalParams} />
                     </TabPanel>
                   )
                   : null}

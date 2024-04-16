@@ -3,6 +3,8 @@ export type DistributionDataType = {
   format: string,
   title: string,
   description: string,
+  describedBy: string,
+  describedByType: string,
   mediaType: string,
   mimeType: string,
   "%Ref:downloadURL": DistributionType[],
@@ -106,6 +108,7 @@ export type DatasetDictionaryItemType = {
   format: string,
   name: string,
   title: string,
+  description: string,
   type: string,
   [name: string]: string,
 }
