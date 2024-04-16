@@ -139,11 +139,15 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   }, [totalItems, pageSize, page]);
 
   useEffect(() => {
+    setPage(1)
+  }, [fulltext, selectedFacets]);
+
+  useEffect(() => {
     var params = buildSearchParams(true);
     if (params !== location.search) {
       setSearchParams(params);
     }
-  }, [page, sort, sortOrder, fulltext, selectedFacets]);
+  }, [page, sort, sortOrder]);
 
   function resetFilters() {
     setFullText(defaultFulltext);
