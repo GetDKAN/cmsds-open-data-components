@@ -3,7 +3,7 @@ import { createColumnHelper } from '@tanstack/react-table';
 import { DatasetDictionaryItemType } from '../../types/dataset';
 import DataDictionaryTable from '../DataDictionaryTable';
 import { Tooltip, TooltipIcon } from '@cmsgov/design-system';
-import "./datadictionary.scss"
+import "./dataDictionary.scss"
 
 const DatasetDictionaryTable = ({ datasetDictionary, pageSize} : {datasetDictionary: DatasetDictionaryItemType[], pageSize: number}) => {
   const tableData = datasetDictionary.map((item) => {
