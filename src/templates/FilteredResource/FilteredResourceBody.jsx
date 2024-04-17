@@ -1,23 +1,16 @@
 import React, { useEffect, useRef } from 'react';
 import qs from 'qs';
-import DOMPurify from 'dompurify';
 import { Link, useNavigate } from 'react-router-dom';
 import SwaggerUI from 'swagger-ui-react';
 import useDatastore from '../../services/useDatastore';
-import {
-  HelpDrawerToggle,
-  Button,
-  Tooltip,
-  Spinner,
-  Accordion,
-  AccordionItem,
-} from '@cmsgov/design-system';
+import {Spinner } from '@cmsgov/design-system';
 import ResourceHeader from '../../components/ResourceHeader';
 import ResourcePreview from '../../components/ResourcePreview';
 import ResourceFooter from '../../components/ResourceFooter';
 import { buildCustomColHeaders } from './functions';
 import QueryBuilder from './QueryBuilder';
 import TransformedDate from '../../components/TransformedDate';
+import FilteredResourceDescription from './FilteredResourceDescription';
 import 'swagger-ui-react/swagger-ui.css';
 
 const FilteredResourceBody = ({
@@ -25,7 +18,6 @@ const FilteredResourceBody = ({
   dataset,
   distIndex,
   location,
-  apiDocPage,
   additionalParams,
   customColumns,
   columnSettings,
@@ -76,6 +68,8 @@ const FilteredResourceBody = ({
       ? distribution.data.title
       : dataset.title;
 
+  let description = "";
+
   return (
     <section className="ds-l-container ds-u-padding-bottom--3 ds-u-margin-bottom--2">
       {Object.keys(distribution).length && (
@@ -90,12 +84,7 @@ const FilteredResourceBody = ({
             <p className="ds-u-margin--0">Updated <TransformedDate date={dataset.modified} /></p>
           </div>
           <div className={'ds-l-md-col--9'}>
-            <div className={'ds-u-measure--wide ds-u-margin-bottom--7'}>
-              <p
-                className="ds-u-margin-top--0 dc-c-metadata-description"
-                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(distribution.data.description) }}
-              />
-            </div>
+            <FilteredResourceDescription distribution={distribution} dataset={dataset} />
           </div>
           {resource.columns && Object.keys(resource.schema).length && (
             <QueryBuilder
