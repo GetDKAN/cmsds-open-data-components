@@ -1,10 +1,10 @@
+import React from 'react';
 import DOMPurify from 'dompurify';
 
 const FilteredResourceDescription = ({distribution, dataset}) => {
   if(!distribution && !dataset) {
     return null;
   }
-  
   let description = "";
   if(distribution.data && distribution.data.description) {
     description = distribution.data.description;
