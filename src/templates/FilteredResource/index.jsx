@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useMetastoreDataset from '../../services/useMetastoreDataset';
 import PageNotFound from '../PageNotFound';
 import FilteredResourceBody from './FilteredResourceBody';
+import withQueryProvider from '../../utilities/QueryProvider/QueryProvider';
 import "./filtered-resource.scss";
 
 const FilteredResource = ({
@@ -80,4 +81,4 @@ const FilteredResource = ({
   );
 };
 
-export default FilteredResource;
+export default withQueryProvider(FilteredResource);
