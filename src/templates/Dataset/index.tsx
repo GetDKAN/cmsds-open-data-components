@@ -145,7 +145,7 @@ const Dataset = ({
             </div>
             <div className={'ds-l-md-col--9'}>
               <div className={'ds-u-measure--wide ds-u-margin-bottom--7'}>
-                <p className="dc-c-metadata-description ds-u-margin--0" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(dataset.description) }}/>
+                <div className="dc-c-metadata-description ds-u-margin--0" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(dataset.description) }}/>
               </div>
             </div>
           </div>
