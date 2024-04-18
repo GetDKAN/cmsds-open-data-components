@@ -68,8 +68,6 @@ const FilteredResourceBody = ({
       ? distribution.data.title
       : dataset.title;
 
-  let description = "";
-
   return (
     <section className="ds-l-container ds-u-padding-bottom--3 ds-u-margin-bottom--2">
       {Object.keys(distribution).length && (
