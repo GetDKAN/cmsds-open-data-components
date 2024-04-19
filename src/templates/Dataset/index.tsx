@@ -157,7 +157,6 @@ const Dataset = ({
               {!isPending && (
                 <Tabs
                   onChange={(selectedId, prevSelectedId) => {
-                    console.log("hello")
                     setSelectedTab(selectedId)
                   }}
                   selectedId={selectedTab}
