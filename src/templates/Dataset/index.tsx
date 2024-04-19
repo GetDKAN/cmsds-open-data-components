@@ -127,8 +127,11 @@ const Dataset = ({
     window.location.hash.substring(1) ? window.location.hash.substring(1) : getDefaultTab())
 
   useEffect(() => {
-    setSelectedTab(getDefaultTab())
-  }, [distribution])
+    if (!window.location.hash.substring(1))
+      setSelectedTab(getDefaultTab())
+    else if (window.location.hash.substring(1) != selectedTab)
+      setSelectedTab(window.location.hash.substring(1))
+  }, [distribution, window.location.hash])
   
   return (
     <>
@@ -154,6 +157,7 @@ const Dataset = ({
               {!isPending && (
                 <Tabs
                   onChange={(selectedId, prevSelectedId) => {
+                    console.log("hello")
                     setSelectedTab(selectedId)
                   }}
                   selectedId={selectedTab}
