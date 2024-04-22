@@ -65,6 +65,7 @@ const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schem
           label="Column Name"
           name={`${condition.key}_property`}
           onChange={(e) => setProperty(e.target.value)}
+          autoFocus
         />
         <Dropdown
           options={buildOperatorOptions(schema[id].fields[property].mysql_type)}
