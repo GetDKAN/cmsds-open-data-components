@@ -55,14 +55,16 @@ const useDatastore = (
   useEffect(() => {
     if(data) {
       const propertyKeys =
-        data.schema[id] && data.schema[id].fields
+        data.schema && data.schema[id] && data.schema[id].fields
           ? Object.keys(data.schema[id].fields)
           : [];
       setValues(data.results), setCount(data.count);
       if (propertyKeys.length) {
         setColumns(prepareColumns ? prepareColumns(propertyKeys) : propertyKeys);
       }
-      setSchema(data.schema);
+      if(data.schema) {
+        setSchema(data.schema);
+      }
     }
   }, [data])
 
