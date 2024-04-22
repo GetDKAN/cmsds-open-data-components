@@ -6,7 +6,9 @@
   "accessLevel": "public",
   "accrualPeriodicity": "R/P10Y",
   "modified": "2024-01-16T18:50:39+00:00",
+  "issued": "2015-08-19T22:29:45+00:00",
   "license": "http://www.usa.gov/publicdomain/label/1.0/",
+  "spatial": "Florida",
   "publisher": {
       "identifier": "4f3cccad-4fcd-5411-9d07-c23ed9e20068",
       "data": {
@@ -18,11 +20,25 @@
       "fn": "Medicaid.gov",
       "hasEmail": "mailto:Medicaid.gov@cms.hhs.gov"
   },
+  "theme": [
+    {
+        "identifier": "975f-3c7e202fcf5a",
+        "data": "theme1"
+    },
+    {
+      "identifier": "5bb1",
+      "data": "theme 2"
+  }
+],
   "keyword": [
       {
           "identifier": "7c583fc5-6456-5bb1-975f-3c7e202fcf5a",
-          "data": "drug rebate program"
-      }
+          "data": "keyword1"
+      },
+      {
+        "identifier": "7c583fc5-6456-5bb1",
+        "data": "tag2"
+    }
   ],
   "distribution": [
       {
@@ -48,11 +64,16 @@
           }
       }
   ],
+  "temporal": "2022-01-01/2022-12-31",
   "bureauCode": [
       "009:00"
   ],
   "programCode": [
       "009:000"
+  ],
+  "references": [
+    "https://test.com",
+    "https://test-2.com"
   ],
   "%modified": "2024-01-16T13:52:33-0500"
 }

@@ -42,11 +42,13 @@ export const defaultMetadataMapping = {
     if (data.length) {
       return [{ label: 'Bureau Code', value: data[0] }];
     }
+    return [];
   },
   programCode: (data) => {
     if (data.length) {
       return [{ label: 'Program Code', value: data[0] }];
     }
+    return [];
   },
   theme: (data) => {
     return [
