@@ -24,7 +24,8 @@ const DataDictionary = (
       return fetch(`${datasetDictionaryEndpoint}?${qs.stringify(additionalParams, {arrayFormat: 'comma',encode: false })}`).then(
         (res) => res.json(),
       )
-    }
+    },
+    enabled: datasetDictionaryEndpoint !== undefined
   });
 
   const datasetDictionary = data && data.data && data.data.fields && data.data.fields.length ? data.data.fields : null;
