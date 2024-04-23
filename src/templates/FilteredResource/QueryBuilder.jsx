@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import qs from 'qs';
-import { Accordion, AccordionItem, Button, Dropdown, TextField } from '@cmsgov/design-system';
+import { AccordionItem, Button, Dropdown, TextField } from '@cmsgov/design-system';
 import QueryRow from './QueryRow';
 import QueryTitle from './QueryTitle';
 import { buildOperatorOptions } from './functions';
@@ -117,7 +117,7 @@ const QueryBuilder = ({ resource, id, includeSearchParams, customColumns }) => {
 
   return (
     <div className="dc-query-builder ds-u-margin-bottom--3">
-      <Accordion bordered>
+      <div className="ds-c-accordion ds-c-accordion--bordered">
         <AccordionItem
           heading={
             <QueryTitle
@@ -154,7 +154,7 @@ const QueryBuilder = ({ resource, id, includeSearchParams, customColumns }) => {
             </div>
           </form>
         </AccordionItem>
-      </Accordion>
+      </div>
     </div>
   );
 };
