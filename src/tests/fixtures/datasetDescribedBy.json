@@ -1,0 +1,66 @@
+{
+  "bureauCode": [
+      "009:38"
+  ],
+  "programCode": [
+      "009:000"
+  ],
+  "accessLevel": "public",
+  "keyword": [
+      {
+          "identifier": "53edf88c-ba11-5f87-9794-cb14e4eb48aa",
+          "data": "2022"
+      }
+  ],
+  "contactPoint": {
+      "fn": "Open Payments",
+      "hasEmail": "openpayments@cms.hhs.gov"
+  },
+  "dataQuality": true,
+  "description": "All general (non-research, non-ownership related) payments from the 2022 program year [January 1 \u2013 December 31, 2022]\u003Cp\u003E\u003Cstrong\u003ENOTE: \u003C\/strong\u003EThis is a very large file and, depending on your network characteristics and software, may take a long time to download or fail to download. Additionally, the number of rows in the file may be larger than the maximum rows your version of \u003Ca href=\u0022https:\/\/support.microsoft.com\/en-us\/office\/excel-specifications-and-limits-1672b34d-7043-467e-8e27-269d656771c3\u0022\u003EMicrosoft Excel\u003C\/a\u003E supports. If you can\u0027t download the file, we recommend engaging your IT support staff. If you are able to download the file but are unable to open it in MS Excel or get a message that the data has been truncated, we recommend trying alternative programs such as MS Access, Universal Viewer, Editpad or any other software your organization has available for large datasets.\u003C\/p\u003E",
+  "distribution": [
+      {
+          "identifier": "9237b925-2a6d-5acf-a914-d3dc0ce74807",
+          "data": {
+              "title": "General Payment Data \u2013 Detailed Dataset 2022 Reporting Year",
+              "mediaType": "text\/csv",
+              "format": "csv",
+              "downloadURL": "https:\/\/download.cms.gov\/openpayments\/PGYR22_P011824\/OP_DTL_GNRL_PGYR2022_P01182024.csv",
+              "describedBy": "https:\/\/dkan.com\/api\/1\/metastore\/schemas\/data-dictionary\/items\/71ec19df-f5ef-5b99-b43b-e566e22670b7",
+              "describedByType": "application\/vnd.tableschema+json",
+              "%Ref:downloadURL": [
+                  {
+                      "identifier": "ea60621641a47f9ce30d01ea50f88c1a__1704497404__source",
+                      "data": {
+                          "filePath": "https:\/\/download.cms.gov\/openpayments\/PGYR22_P011824\/OP_DTL_GNRL_PGYR2022_P01182024.csv",
+                          "identifier": "ea60621641a47f9ce30d01ea50f88c1a",
+                          "mimeType": "text\/csv",
+                          "perspective": "source",
+                          "version": "1704497404",
+                          "checksum": null
+                      }
+                  }
+              ]
+          }
+      }
+  ],
+  "identifier": "df01c2f8-dc1f-4e79-96cb-8208beaf143c",
+  "title": "2022 General Payment Data",
+  "issued": "2023-06-30",
+  "modified": "2024-01-18",
+  "temporal": "2022-01-01\/2022-12-31",
+  "publisher": {
+      "identifier": "11b41668-9929-5de3-b494-6464ac4f018d",
+      "data": {
+          "name": "openpaymentsdata.cms.gov"
+      }
+  },
+  "license": "https:\/\/www.usa.gov\/government-works",
+  "theme": [
+      {
+          "identifier": "d2d239e8-05e9-515d-978c-69b34af232da",
+          "data": "General Payments"
+      }
+  ],
+  "%modified": "2024-04-11T15:28:41+0000"
+}

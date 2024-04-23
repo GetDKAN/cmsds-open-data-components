@@ -2,6 +2,7 @@ import React from 'react';
 import withQueryProvider from '../../utilities/QueryProvider/QueryProvider';
 import { useQuery } from '@tanstack/react-query';
 import qs from 'qs';
+import axios from 'axios';
 
 import { DatasetDictionaryItemType } from '../../types/dataset';
 import SitewideDataDictionaryTable from '../SitewideDataDictionaryTable';
@@ -21,9 +22,9 @@ const DataDictionary = (
   const {data, isPending, error} = useQuery({
     queryKey: ["dictionary" + datasetDictionaryEndpoint],
     queryFn: () => {
-      return fetch(`${datasetDictionaryEndpoint}?${qs.stringify(additionalParams, {arrayFormat: 'comma',encode: false })}`).then(
-        (res) => res.json(),
-      )
+      return axios.get(`${datasetDictionaryEndpoint}?${qs.stringify(additionalParams, {arrayFormat: 'comma',encode: false })}`)
+        .then((res) => res.data)
+        .catch((error) => console.error(error))
     }
   });
 
