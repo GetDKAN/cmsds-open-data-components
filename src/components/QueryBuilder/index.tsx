@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import qs from 'qs';
 import { useMediaQuery } from 'react-responsive';
-import { Accordion, AccordionItem, Button } from '@cmsgov/design-system';
+import { AccordionItem, Button } from '@cmsgov/design-system';
 import { buildOperatorOptions } from '../../templates/FilteredResource/functions';
 import QueryTitle from '../../templates/FilteredResource/QueryTitle';
 import QueryRow from '../QueryRow';
@@ -142,7 +142,7 @@ const QueryBuilder = (props: QueryBuilderPropTypes) => {
 
   return (
     <div className="dc-query-builder ds-u-margin-bottom--3">
-      <Accordion bordered>
+      <div className="ds-c-accordion ds-c-accordion--bordered">
         <AccordionItem
           heading={
             <QueryTitle
@@ -204,7 +204,7 @@ const QueryBuilder = (props: QueryBuilderPropTypes) => {
             </div>
           </form>
         </AccordionItem>
-      </Accordion>
+        </div>
     </div>
   );
 };
