@@ -74,7 +74,7 @@ const FilteredResourceBody = ({
       {Object.keys(distribution).length && (
         <>
           <div className={'ds-l-md-col--9'}>
-          <Link to={`/dataset/${id}`} className="ds-u-padding-y--3 ds-u-display--block">
+          <Link to={`/dataset/${id}`} className="ds-u-padding-y--4 ds-u-display--block">
             Back to {dataset.title}
           </Link>
           </div>
