@@ -49,7 +49,8 @@ const useDatastore = (
     queryFn: () => {
       return fetch(`${rootUrl}/datastore/query/${id}?${additionalParamsString}`)
         .then(res => res.json())
-    }
+    },
+    enabled: id != ""
   })
 
   useEffect(() => {
