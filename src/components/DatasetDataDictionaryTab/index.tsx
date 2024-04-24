@@ -25,7 +25,8 @@ const DataDictionary = (
       return axios.get(`${datasetDictionaryEndpoint}?${qs.stringify(additionalParams, {arrayFormat: 'comma',encode: false })}`)
         .then((res) => res.data)
         .catch((error) => console.error(error))
-    }
+    },
+    enabled: datasetDictionaryEndpoint !== undefined
   });
 
   const datasetDictionary = data && data.data && data.data.fields && data.data.fields.length ? data.data.fields : null;
