@@ -176,7 +176,7 @@ const QueryBuilder = (props: QueryBuilderPropTypes) => {
                   onClick={() => addCondition(null)}
                   className="ds-u-padding-left--0"
                 >
-                  + Add another filter
+                  + Add filter
                 </Button>
               </div>
               <div className="ds-u-display--flex ds-u-justify-content--end ds-l-col--12 ds-l-md-col--6 ds-u-padding-x--0">

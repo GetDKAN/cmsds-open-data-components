@@ -16,7 +16,7 @@ describe('<QueryBuilder />', () => {
       />);
 
     expect(screen.getByText("Data filters: none")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "+ Add another filter" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "+ Add filter" })).toBeInTheDocument();
   });
   test("Adds and removes a row when the buttons are clicked", async () => {
     render(
@@ -26,7 +26,7 @@ describe('<QueryBuilder />', () => {
       />);
 
     await act(() => {
-      screen.getByRole("button", { name: "+ Add another filter" }).click();
+      screen.getByRole("button", { name: "+ Add filter" }).click();
     });
     expect(screen.queryAllByRole("group")).toHaveLength(2);
 
