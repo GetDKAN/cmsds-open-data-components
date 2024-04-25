@@ -6,7 +6,8 @@ const useDatastore = (
   resourceId,
   rootAPIUrl,
   options,
-  additionalParams = {}
+  additionalParams = {},
+  enabledParam = true,
 ) => {
   const keys = options.keys ? options.keys : true;
   const { prepareColumns } = options;
@@ -50,7 +51,7 @@ const useDatastore = (
       return fetch(`${rootUrl}/datastore/query/${id}?${additionalParamsString}`)
         .then(res => res.json())
     },
-    enabled: id != ""
+    enabled: enabledParam && id !== null && id != ""
   })
 
   useEffect(() => {
