@@ -42,8 +42,8 @@ const useDatastore = (
     groupings: groupings,
     ...additionalParams,
   }
-
   const additionalParamsString = Object.keys(params).length ? `&${qs.stringify(params)}` : '';
+  const enabled = enabledParam && id !== null && id != "";
 
   const {data, isPending, error} = useQuery({
     queryKey: ["datastore" + id + additionalParamsString],
@@ -51,7 +51,7 @@ const useDatastore = (
       return fetch(`${rootUrl}/datastore/query/${id}?${additionalParamsString}`)
         .then(res => res.json())
     },
-    enabled: enabledParam && id !== null && id != ""
+    enabled: enabled
   })
 
   useEffect(() => {
@@ -71,7 +71,7 @@ const useDatastore = (
   }, [data])
 
   return {
-    loading: isPending,
+    loading: enabled ? isPending : false,
     values,
     count,
     columns,
