@@ -7,7 +7,6 @@ const useDatastore = (
   rootAPIUrl,
   options,
   additionalParams = {},
-  enabledParam = true,
 ) => {
   const keys = options.keys ? options.keys : true;
   const { prepareColumns } = options;
@@ -22,6 +21,7 @@ const useDatastore = (
   const [conditions, setConditions] = useState(
     options.conditions ? options.conditions : undefined
   );
+  const requireConditions = options.requireConditions;
   const [sort, setSort] = useState(options.sort ? options.sort : undefined);
   const [groupings, setGroupings] = useState(
     options.groupings ? options.groupings : undefined
@@ -43,7 +43,14 @@ const useDatastore = (
     ...additionalParams,
   }
   const additionalParamsString = Object.keys(params).length ? `&${qs.stringify(params)}` : '';
-  const enabled = enabledParam && id !== null && id != "";
+  
+  let enabled = false;
+  if (id) {
+    if (!requireConditions)
+      enabled = true;
+    if (conditions && conditions.length)
+      enabled = true;
+  }
 
   const {data, isPending, error} = useQuery({
     queryKey: ["datastore" + id + additionalParamsString],
