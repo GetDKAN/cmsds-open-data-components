@@ -42,7 +42,7 @@ const useDatastore = (
     groupings: groupings,
     ...additionalParams,
   }
-  const additionalParamsString = Object.keys(params).length ? `&${qs.stringify(params)}` : '';
+  const additionalParamsString = Object.keys(params).length ? `${qs.stringify(params)}` : '';
   
   let enabled = false;
   if (id) {
