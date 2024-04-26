@@ -43,7 +43,7 @@ const useDatastore = (
     ...additionalParams,
   }
   const additionalParamsString = Object.keys(params).length ? `&${qs.stringify(params)}` : '';
-  const enabled = enabledParam && id !== null && id != "";
+  const enabled = (id && enabledParam) ? true : false;
 
   const {data, isPending, error} = useQuery({
     queryKey: ["datastore" + id + additionalParamsString],
