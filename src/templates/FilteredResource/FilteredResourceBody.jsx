@@ -70,11 +70,14 @@ const FilteredResourceBody = ({
 
   return (
     <section className="ds-l-container ds-u-padding-bottom--3 ds-u-margin-bottom--2">
+      <div className="ds-l-row">
       {Object.keys(distribution).length && (
         <>
-          <Link to={`/dataset/${id}`} className="ds-u-padding-y--3 ds-u-display--block">
+          <div className={'ds-l-md-col--9'}>
+          <Link to={`/dataset/${id}`} className="ds-u-padding-y--4 ds-u-display--block">
             Back to {dataset.title}
           </Link>
+          </div>
           <div className={'ds-l-md-col--9'}>
             <h1 className="ds-text-heading--3xl">{customTitle ? customTitle : pageTitle}</h1>
           </div>
@@ -85,14 +88,16 @@ const FilteredResourceBody = ({
             <FilteredResourceDescription distribution={distribution} dataset={dataset} />
           </div>
           {resource.columns && Object.keys(resource.schema).length && (
-            <QueryBuilder
-              resource={resource}
-              id={distribution.identifier}
-              customColumns={customColumns}
-            />
+            <div className={'ds-l-md-col--12'}>
+              <QueryBuilder
+                resource={resource}
+                id={distribution.identifier}
+                customColumns={customColumns}
+              />
+            </div>
           )}
           {resource.columns && Object.keys(resource.schema).length ? (
-            <div>
+            <div className={'ds-l-md-col--12'}>
               <ResourceHeader
                 includeDensity={true}
                 setTablePadding={setTablePadding}
@@ -126,7 +131,7 @@ const FilteredResourceBody = ({
             <Spinner role="status" aria-valuetext="Resource loading" />
           )}
           {dataset.identifier && (
-            <div ref={apiDocs}>
+            <div className={'ds-l-md-col--12'} ref={apiDocs}>
               <h2 className="ds-text-heading--2xl ds-u-margin-y--2">Try the API</h2>
               <SwaggerUI
                 url={`${rootUrl}/metastore/schemas/dataset/items/${
@@ -143,6 +148,7 @@ const FilteredResourceBody = ({
           )}
         </>
       )}
+      </div>
     </section>
   );
 };
