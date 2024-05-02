@@ -59,6 +59,7 @@ const MobileHeader = ({
       if (
         event.target.closest('.dc-c-search-dialog')
       ) {
+        document.querySelector('.dc-c-mobile-menu--open').focus();
         setMenuOpen(false);
       }
     }
@@ -67,6 +68,7 @@ const MobileHeader = ({
       // Close upon user hitting escape
       if (event.keyCode === 27 && menuOpen) {
         setMenuOpen(false);
+        document.querySelector('.dc-c-mobile-menu--open').focus();
       }
     }
 
@@ -83,6 +85,11 @@ const MobileHeader = ({
       }
     };
   }, [menuOpen]);
+
+  const closeMobileMenu = (e) => {
+    document.querySelector('.dc-c-mobile-menu--open').focus();
+    setMenuOpen(false);
+  }
 
   const getFocusableElements = (container) => {
     const allSelectors = container.querySelectorAll(
@@ -175,7 +182,7 @@ const MobileHeader = ({
             onDark
             size="small"
             className="dc-c-mobile-menu--close ds-u-margin-left--1 ds-u-padding-left--0"
-            onClick={() => setMenuOpen(false)}
+            onClick={() => closeMobileMenu()}
           >
             Close
           </Button>
