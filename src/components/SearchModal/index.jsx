@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import { Button, Dialog, TextField } from '@cmsgov/design-system';
+
+let mobileSearchClassName = "dc-c-search-dialog";
 
 const SearchModal = ({
   searchFunc,
@@ -16,6 +18,54 @@ const SearchModal = ({
   const [modalSearchTerm, setModalSearchTerm] = useState('');
   const [modalSearch, setModalSearch] = useState(false);
   const mobile = useMediaQuery({ minWidth: 0, maxWidth: 543 });
+  const mobileSearch = useRef(null);
+
+  useEffect(() => {
+
+    const trapFocus = (event, container) => {
+      const focusableEls = getFocusableElements(container).selectors.visible;
+      const firstEl = focusableEls[0];
+      const lastEl = focusableEls[focusableEls.length - 1];
+
+      if (event.key === 'Tab') {
+        if (event.shiftKey && document.activeElement === firstEl) {
+          lastEl.focus();
+          event.preventDefault();
+        } else if (!event.shiftKey && document.activeElement === lastEl) {
+          firstEl.focus();
+          event.preventDefault();
+        }
+      }
+    }
+
+    function handleFocusIn(event){
+      if (!modalSearch) return;
+      const mobileHeaderSearch = document.querySelector(`.${mobileSearchClassName}`);
+      if (!mobileHeaderSearch) return
+      // Select the first tabbable element in the `mobileHeaderSearch`
+      const firstTabbableElement = mobileHeaderSearch.querySelector('input');
+      if (!firstTabbableElement) return;
+      firstTabbableElement.focus();
+    }
+
+    function handleSearchClose(event) {
+      // Close upon user hitting escape
+      if (event.keyCode === 27 && modalSearch) {
+        setModalSearch(false);
+      }
+    }
+
+    document.addEventListener('keyup', handleSearchClose);
+    handleFocusIn();
+    //mobileSearch.current.addEventListener('keydown', (evt) => trapFocus(evt, mobileSearch.current));
+
+    return () => {
+      document.removeEventListener('keyup', handleSearchClose);
+      if (mobileSearch.current) {
+        mobileSearch.current.removeEventListener('keydown', trapFocus);
+      }
+    };
+  }, [modalSearch]);
 
   function searchForDataset(e) {
     e.preventDefault();
@@ -28,6 +78,23 @@ const SearchModal = ({
       }
     }
   }
+
+  const getFocusableElements = (container) => {
+    const allSelectors = container.querySelectorAll(
+      'a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
+      );
+
+    const visibleSelectors = Array.from(allSelectors).filter((el) => {
+      return el.offsetWidth > 0 || el.offsetHeight > 0;
+    });
+
+    return {
+      selectors: {
+        all: allSelectors,
+        visible: visibleSelectors,
+      },
+    };
+  };
 
   return (
     <>
@@ -42,9 +109,10 @@ const SearchModal = ({
       </Button>
       {modalSearch && (
         <Dialog
-          className="dc-c-search-dialog"
+          className={mobileSearchClassName}
           onExit={() => setModalSearch(false)}
           heading={`${headingText}`}
+          ref={mobileSearch}
           actions= {<>
             <form
               className="ds-u-display--flex ds-u-align-items--stretch ds-u-flex-wrap--nowrap"
