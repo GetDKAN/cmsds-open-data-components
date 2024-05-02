@@ -70,7 +70,6 @@ const Dataset = ({
     {
       ...options,
       limit: defaultPageSize,
-      manual: true,
     },
     additionalParams
   ) as ResourceType;

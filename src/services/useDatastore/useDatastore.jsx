@@ -6,7 +6,7 @@ const useDatastore = (
   resourceId,
   rootAPIUrl,
   options,
-  additionalParams = {}
+  additionalParams = {},
 ) => {
   const keys = options.keys ? options.keys : true;
   const { prepareColumns } = options;
@@ -21,6 +21,7 @@ const useDatastore = (
   const [conditions, setConditions] = useState(
     options.conditions ? options.conditions : undefined
   );
+  const requireConditions = options.requireConditions;
   const [sort, setSort] = useState(options.sort ? options.sort : undefined);
   const [groupings, setGroupings] = useState(
     options.groupings ? options.groupings : undefined
@@ -41,8 +42,15 @@ const useDatastore = (
     groupings: groupings,
     ...additionalParams,
   }
-
-  const additionalParamsString = Object.keys(params).length ? `&${qs.stringify(params)}` : '';
+  const additionalParamsString = Object.keys(params).length ? `${qs.stringify(params)}` : '';
+  
+  let enabled = false;
+  if (id) {
+    if (!requireConditions)
+      enabled = true;
+    if (conditions && conditions.length)
+      enabled = true;
+  }
 
   const {data, isPending, error} = useQuery({
     queryKey: ["datastore" + id + additionalParamsString],
@@ -50,7 +58,7 @@ const useDatastore = (
       return fetch(`${rootUrl}/datastore/query/${id}?${additionalParamsString}`)
         .then(res => res.json())
     },
-    enabled: id != ""
+    enabled: enabled
   })
 
   useEffect(() => {
@@ -70,7 +78,7 @@ const useDatastore = (
   }, [data])
 
   return {
-    loading: isPending,
+    loading: enabled ? isPending : false,
     values,
     count,
     columns,

@@ -47,7 +47,6 @@ const FilteredResourceBody = ({
     {
       ...options,
       limit: 25,
-      manual: true,
     },
     additionalParams
   );
