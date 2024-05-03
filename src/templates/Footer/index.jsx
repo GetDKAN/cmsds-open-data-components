@@ -45,7 +45,7 @@ const Footer = ({
               className={`dc-c-footer__resources ds-l-md-col--7 ds-l-sm-col--12 ds-u-padding-top--7 ds-u-padding-bottom--4
                 ${xs ? 'ds-u-padding-x--0' : ''}`}
             >
-              <div className="ds-l-lg-col--9 ds-l-md-col--11">
+              <div className="ds-l-col--11">
                 <div
                   className={`ds-u-display--flex ${
                     xs ? 'ds-u-flex-direction--column' : 'ds-u-flex-direction--row'
