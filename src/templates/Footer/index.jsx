@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useMediaQuery } from 'react-responsive';
 import { Button } from '@cmsgov/design-system';
 import NavLink from '../../components/NavLink';
-import "./footer.scss";
 
 const Footer = ({
   links,
@@ -17,9 +15,6 @@ const Footer = ({
   cmsLogo,
   trademarkContent,
 }) => {
-  const xs = useMediaQuery({ minWidth: 0, maxWidth: 544 });
-  const sm = useMediaQuery({ minWidth: 544, maxWidth: 768 });
-  const md = useMediaQuery({ minWidth: 768 });
   const { footerOpenDataToolLinks, footerAdditionalResourcesLinks, footerUtilityLinks } = links;
   return (
     <footer className="dc-c-footer">
@@ -39,73 +34,66 @@ const Footer = ({
         </div>
       )}
       <div className="dc-c-footer--middle-container">
-        <div className={`${md ? 'ds-l-container' : ''}`}>
-          <div className="ds-l-row ds-u-margin--0">
+        <div className="ds-l-container">
+          <div className="ds-l-row">
             <div
-              className={`dc-c-footer__resources ds-l-md-col--7 ds-l-sm-col--12 ds-u-padding-top--7 ds-u-padding-bottom--4
-                ${xs ? 'ds-u-padding-x--0' : ''}`}
+              className="dc-c-footer__resources ds-l-md-col--7 ds-l-sm-col--12 ds-u-padding-top--7 ds-u-padding-bottom--3"
             >
-              <div className="ds-l-col--11">
-                <div
-                  className={`ds-u-display--flex ${
-                    xs ? 'ds-u-flex-direction--column' : 'ds-u-flex-direction--row'
-                  }`}
-                >
-                  <div className="ds-u-margin-right--6 ds-u-margin-bottom--2">
-                    <h2 className="ds-text-heading--sm dc-footer--heading ds-u-margin-bottom--2">
-                      Open data tools
-                    </h2>
-                    <ul className="ds-u-font-size--sm ds-u-margin-bottom--3">
-                      {footerOpenDataToolLinks.map((link) => (
-                        <li className="ds-u-margin-bottom--1" key={link.id}>
-                          <NavLink link={link} className="dc-menu-item" />
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h2 className="ds-text-heading--sm dc-footer--heading ds-u-margin-bottom--2">
-                      Additional resources
-                    </h2>
-                    <ul className="ds-u-font-size--sm">
-                      {footerAdditionalResourcesLinks
-                        .filter((link) => {
-                          const noOnClick = Object.keys(link).findIndex((l) => l === 'onClick');
-                          if (noOnClick === -1 || (link.onClick && link.dataTag)) {
-                            return link;
-                          }
-                        })
-                        .map((link) => {
-                          if (link.onClick && link.dataTag) {
-                            return (
-                              <li className="ds-u-margin-bottom--1" key={link.id}>
-                                <a
-                                  href={link.url}
-                                  {...{
-                                    ['data-' + link.dataTag.name]: link.dataTag.value,
-                                  }}
-                                  onClick={link.onClick}
-                                >
-                                  {link.label}
-                                </a>
-                              </li>
-                            );
-                          }
+              <div
+                className="ds-u-display--flex ds-u-display--flex ds-u-sm-flex-direction--row ds-u-flex-direction--column"
+              >
+                <div className="ds-u-margin-right--6 ds-u-margin-bottom--3 ds-u-sm-margin-bottom--0">
+                  <h2 className="ds-text-heading--sm dc-footer--heading ds-u-margin-bottom--2">
+                    Open data tools
+                  </h2>
+                  <ul className="ds-u-font-size--sm">
+                    {footerOpenDataToolLinks.map((link) => (
+                      <li className="ds-u-margin-bottom--1" key={link.id}>
+                        <NavLink link={link} className="dc-menu-item" />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h2 className="ds-text-heading--sm dc-footer--heading ds-u-margin-bottom--2">
+                    Additional resources
+                  </h2>
+                  <ul className="ds-u-font-size--sm">
+                    {footerAdditionalResourcesLinks
+                      .filter((link) => {
+                        const noOnClick = Object.keys(link).findIndex((l) => l === 'onClick');
+                        if (noOnClick === -1 || (link.onClick && link.dataTag)) {
+                          return link;
+                        }
+                      })
+                      .map((link) => {
+                        if (link.onClick && link.dataTag) {
                           return (
                             <li className="ds-u-margin-bottom--1" key={link.id}>
-                              <NavLink link={link} className="dc-menu-item" />
+                              <a
+                                href={link.url}
+                                {...{
+                                  ['data-' + link.dataTag.name]: link.dataTag.value,
+                                }}
+                                onClick={link.onClick}
+                              >
+                                {link.label}
+                              </a>
                             </li>
                           );
-                        })}
-                    </ul>
-                  </div>
+                        }
+                        return (
+                          <li className="ds-u-margin-bottom--1" key={link.id}>
+                            <NavLink link={link} className="dc-menu-item" />
+                          </li>
+                        );
+                      })}
+                  </ul>
                 </div>
               </div>
             </div>
             <div
-              className={`dc-c-footer__cms-information ds-l-md-col--5 ds-l-sm-col--12 ${
-                md ? 'ds-u-padding-left--7' : ''
-              } ${sm ? ' ds-u-padding-left--4' : ''} ds-u-padding-y--7`}
+              className="dc-c-footer__cms-information ds-l-md-col--5 ds-l-sm-col--12 ds-u-lg-padding-left--7 ds-u-padding-y--7"
             >
               <div className="ds-u-font-size--sm">
                 <div>
@@ -322,12 +310,10 @@ const Footer = ({
         </div>
       </div>
       <div className="dc-c-footer__utility ds-l-container ds-u-padding-y--2 ds-u-font-size--sm">
-        <div className="ds-l-row ">
+        <div className="ds-l-row">
           <div className="ds-l-col--12 ds-u-padding-y--3">
             <ul
-              className={`ds-u-padding--0 ds-u-display--flex ${
-                md ? 'ds-u-flex-direction--row' : 'ds-u-flex-direction--column'
-              } ds-u-flex-wrap--wrap`}
+              className="ds-u-padding--0 ds-u-display--flex ds-u-lg-flex-direction--row ds-u-flex-direction--column"
             >
               {footerUtilityLinks.map((link) => (
                 <li key={link.id}>
