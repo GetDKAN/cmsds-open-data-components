@@ -41,7 +41,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
           </h2>
         </div>
         <div className="ds-l-row">
-          <div className="ds-l-col--12 ds-l-md-col--12">{truncateText(description)}</div>
+          <div className="ds-l-col--12 ds-l-md-col--12 ds-u-margin-top--2">{truncateText(description)}</div>
         </div>
         <ul className="ds-l-row ds-u-padding--0 ds-u-flex-direction--row ds-u-margin-top--4">
           <li className={linkContainerClasses}>
