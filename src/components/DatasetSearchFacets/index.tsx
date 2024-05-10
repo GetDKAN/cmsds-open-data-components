@@ -39,7 +39,7 @@ const SearchFacets = (props: SearchFacetsPropTypes) => {
                   </li>
                 );
               }) : (
-                <p className="ds-h5">No matching facets found.</p>
+                <p className="ds-text-heading--md">No matching facets found.</p>
               )}
           </ul>
         </AccordionItem>
