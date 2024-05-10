@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, TableHead, TableRow, TableCell, TableBody } from '@cmsgov/design-system';
+import { Table, TableRow, TableCell, TableBody } from '@cmsgov/design-system';
 import './additional-information-table.scss';
 
 export function buildRows(metadataMapping, datasetInfo) {
@@ -14,27 +14,23 @@ export function buildRows(metadataMapping, datasetInfo) {
   return rows;
 }
 
-const DatasetAdditionalInformation = ({ datasetInfo, id, metadataMapping}) => {
-  const rows = buildRows(metadataMapping, datasetInfo);
+const DatasetAdditionalInformation = ({ metadata, metadataMapping}) => {
+  const rows = buildRows(metadataMapping, metadata);
   return (
-    <div className="dc-c-additional-info-table ds-u-margin-bottom--6">
-      <h2 className="ds-text-heading--2xl ds-u-margin-y--3">Additional Information</h2>
-      <Table compact striped>
-        <TableHead>
-          <TableRow>
-            <TableCell>Field</TableCell>
-            <TableCell>Value</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((r) => (
-            <TableRow key={`${r.label}_${id}`}>
-              <TableCell>{r.label}</TableCell>
-              <TableCell className="ds-u-word-break-anywhere">{r.value}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+    <div className="dc-c-additional-info-table ds-u-margin-bottom--6 ds-u-padding-left--0 ds-l-lg-col--7 ds-l-md-col--9 ds-l-col--12">
+      <h2 className="ds-h2 ds-text-heading--2xl">Additional Information</h2>
+      <Table compact stackable stackableBreakpoint="sm" warningDisabled>
+          <TableBody>
+            {rows.map((r) => (
+              <TableRow key={`${r.label}_${metadata.identifier}`}>
+                <TableCell id={r.label.replace(/\s+/g, "")} component="th" className="ds-u-font-weight--bold">
+                    {r.label}
+                  </TableCell>
+                <TableCell stackedTitle={r.label} headers={r.label.replace(/\s+/g, "")}>{r.value}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
     </div>
   );
 };

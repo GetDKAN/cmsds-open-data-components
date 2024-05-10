@@ -12,3 +12,14 @@
   word-break: break-word;
   overflow-wrap: anywhere;
 }
+
+
+@media (max-width: 544px) {
+  .dc-c-additional-info-table table th {
+    display: none;
+  }
+
+  .dc-c-additional-info-table table tbody tr:first-child {
+    border-top: 4px solid var(--table__border-color);
+  }
+}
