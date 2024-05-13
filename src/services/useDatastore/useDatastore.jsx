@@ -10,12 +10,9 @@ const useDatastore = (
 ) => {
   const keys = options.keys ? options.keys : true;
   const { prepareColumns } = options;
-
-  const [values, setValues] = useState([]);
   const [id, setResource] = useState(resourceId);
   const [rootUrl, setRootUrl] = useState(rootAPIUrl);
   const [limit, setLimit] = useState(options.limit ? options.limit : 20);
-  const [count, setCount] = useState(null);
   const [columns, setColumns] = useState([]);
   const [offset, setOffset] = useState(options.offset ? options.offset : 0);
   const [conditions, setConditions] = useState(
@@ -67,7 +64,6 @@ const useDatastore = (
         data.schema && data.schema[id] && data.schema[id].fields
           ? Object.keys(data.schema[id].fields)
           : [];
-      setValues(data.results), setCount(data.count);
       if (propertyKeys.length) {
         setColumns(prepareColumns ? prepareColumns(propertyKeys) : propertyKeys);
       }
@@ -79,8 +75,8 @@ const useDatastore = (
 
   return {
     loading: enabled ? isPending : false,
-    values,
-    count,
+    values: data ? data.results : undefined,
+    count: data ? data.count : null,
     columns,
     limit,
     offset,
