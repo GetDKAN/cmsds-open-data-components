@@ -11,7 +11,7 @@
   color: #{var(--color-white)};
   text-decoration: none;
   &::before {
-    font-family: 'Font Awesome 5 Pro';
+    font-family: 'Font Awesome 6 Pro';
     content: '\f0c9';
     color: #{var(--color-white)};
     font-size: 18px;
@@ -33,7 +33,7 @@
   padding-left: 0;
   padding-bottom: 16px;
   &::before {
-    font-family: 'Font Awesome 5 Pro';
+    font-family: 'Font Awesome 6 Pro';
     content: '\f00d';
     color: #{var(--color-white)};
     font-size: 18px;
@@ -109,7 +109,7 @@
   }
 }
 .has-submenu > button::after {
-  font-family: 'Font Awesome 5 Pro';
+  font-family: 'Font Awesome 6 Pro';
   content: '\f105';
   color: #{var(--color-white)};
   font-size: 18px;
@@ -167,7 +167,7 @@
     display: inline-block;
   }
   a::before {
-    font-family: 'Font Awesome 5 Pro';
+    font-family: 'Font Awesome 6 Pro';
     content: '\f33e';
     color: #323a45;
     font-size: 18px;
@@ -339,7 +339,7 @@ li.has-submenu {
 
 .dc-c-search-modal--button {
   &::before {
-    font-family: 'Font Awesome 5 Pro';
+    font-family: 'Font Awesome 6 Pro';
     content: '\f002';
     color: #{var(--color-white)};
     font-size: 18px;
