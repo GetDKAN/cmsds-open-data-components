@@ -60,7 +60,7 @@
 }
 
 .dc-c-datatable--even-row td {
-  background-color: #{var(--table-striped__background-color)};
+  background-color: #{var(--table__background-color--striped)};
 }
 
 .dc-c-sort--default,

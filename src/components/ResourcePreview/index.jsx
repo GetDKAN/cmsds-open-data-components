@@ -1,14 +1,8 @@
 import React from 'react';
 
 import { TextField, Spinner } from '@cmsgov/design-system';
-import { transformTableFilterToQueryCondition } from '../../services/useDatastore/transformConditions';
 import { transformTableSortToQuerySort} from '../../services/useDatastore/transformSorts';
 import DataTable from '../Datatable';
-
-
-function calculateMaxWidth(previewSize) {
-  return Math.floor(previewSize * 0.84);
-}
 
 export function prepareColumns(columns, schema) {
   return columns.map((column) => ({
@@ -39,10 +33,6 @@ const ResourcePreview = ({
   resource,
   defaultSort,
   customColumns,
-  truncateCellHeader,
-  columnSettings,
-  columnWidths,
-  customClasses,
   canResize,
 }) => {
 
@@ -52,21 +42,13 @@ const ResourcePreview = ({
       className="ds-u-overflow--auto ds-u-border-x--1 ds-u-border-bottom--1"
     >
       <DataTable
-        // filterTitle="Filter columns"
         data={resource.values}
         canResize={canResize}
         sortDefaults={defaultSort}
         columns={
           customColumns ? customColumns : prepareColumns(resource.columns, resource.schema[id])
         }
-        // schema={resource.schema}
-        // totalRows={parseInt(resource.totalRows)}
-        // limit={resource.limit}
-        // offset={resource.offset}
-        // loading={resource.loading}
         setSort={resource.setSort}
-        // setConditions={resource.setConditions}
-        // conditionsTransform={transformTableFilterToQueryCondition}
         sortTransform={transformTableSortToQuerySort}
         tablePadding={tablePadding}
         className="dc-c-datatable"
