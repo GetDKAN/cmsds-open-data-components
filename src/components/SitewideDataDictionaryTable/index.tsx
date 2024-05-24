@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createColumnHelper } from '@tanstack/react-table';
 import { DatasetDictionaryItemType } from '../../types/dataset';
 import DataDictionaryTable from '../DataDictionaryTable';
