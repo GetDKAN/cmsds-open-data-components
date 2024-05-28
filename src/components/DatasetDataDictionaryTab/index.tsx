@@ -1,3 +1,4 @@
+import React from 'react';
 import withQueryProvider from '../../utilities/QueryProvider/QueryProvider';
 import { useQuery } from '@tanstack/react-query';
 import qs from 'qs';
