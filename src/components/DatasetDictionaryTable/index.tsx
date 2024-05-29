@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { createColumnHelper, ColumnFiltersState } from '@tanstack/react-table';
+import React, { useState, useMemo } from 'react';
+import { createColumnHelper } from '@tanstack/react-table';
 import { TextField, Dropdown, AccordionItem, Button, DropdownChangeObject } from '@cmsgov/design-system';
 import { DatasetDictionaryItemType } from '../../types/dataset';
 import DataDictionaryTable from '../DataDictionaryTable';
@@ -10,7 +10,10 @@ import ClearFiltersButton from '../QueryBuilder/ClearFiltersButton';
 const DatasetDictionaryTable = ({ datasetDictionary, pageSize} : {datasetDictionary: DatasetDictionaryItemType[], pageSize: number}) => {
   const [titleFilter, setTitleFilter ] = useState("");
   const [typeFilter, setTypeFilter ] = useState("all");
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const columnFilters = useMemo(() => [
+    {id: "titleResizable", value: titleFilter},
+    {id: "type", value: typeFilter === "all" ? "" : typeFilter}
+  ], [titleFilter, typeFilter])
 
   const tableData = datasetDictionary.map((item) => {
     return {
@@ -60,13 +63,6 @@ const DatasetDictionaryTable = ({ datasetDictionary, pageSize} : {datasetDiction
     {value: 'boolean', label: 'Boolean'}
   ];
 
-  const setFilters = () => {
-    setColumnFilters([
-      {id: "titleResizable", value: titleFilter},
-      {id: "type", value: typeFilter === "all" ? "" : typeFilter}
-    ])
-  }
-
   return ( 
     <>
       <div className="dc-query-builder ds-u-margin-bottom--3">
@@ -95,14 +91,10 @@ const DatasetDictionaryTable = ({ datasetDictionary, pageSize} : {datasetDiction
               />
               <div className="ds-u-float--right ds-u-padding-y--2 ds-l-col--12 ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--end">
                 <div className="ds-u-display--flex ds-u-justify-content--end ds-l-col--12 ds-l-md-col--6 ds-u-padding-x--0">
-                  <Button onClick={setFilters} className="ds-l-col--5 ds-u-margin-right--0 ds-u-sm-margin-right--1">
-                    Apply filters
-                  </Button>
                   <ClearFiltersButton
                     clearFiltersFn={() => {
                       setTitleFilter("");
                       setTypeFilter("all");
-                      setColumnFilters([]);
                     }} />
                 </div>
               </div>
@@ -110,7 +102,7 @@ const DatasetDictionaryTable = ({ datasetDictionary, pageSize} : {datasetDiction
           </AccordionItem>
         </div>
       </div>
-      <DataDictionaryTable tableColumns={tableColumns} tableData={tableData} count={datasetDictionary.length} pageSize={pageSize} columnFilters={columnFilters} />
+      <DataDictionaryTable tableColumns={tableColumns} tableData={tableData} pageSize={pageSize} columnFilters={columnFilters} />
     </>
   )
 }

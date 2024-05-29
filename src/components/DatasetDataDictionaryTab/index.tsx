@@ -7,7 +7,7 @@ import axios from 'axios';
 import { DatasetDictionaryItemType } from '../../types/dataset';
 import SitewideDataDictionaryTable from '../SitewideDataDictionaryTable';
 import DatasetDictionaryTable from '../DatasetDictionaryTable';
-import { Button } from '@cmsgov/design-system';
+import { Button, Spinner } from '@cmsgov/design-system';
 
 const DataDictionary = (
   { datasetDictionaryEndpoint, datasetSitewideDictionary, title, pageSize = 20, additionalParams } : 
@@ -30,7 +30,6 @@ const DataDictionary = (
   });
 
   const datasetDictionary = data && data.data && data.data.fields && data.data.fields.length ? data.data.fields : null;
-
   
   return (
     <>

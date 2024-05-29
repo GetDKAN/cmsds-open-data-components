@@ -20,7 +20,7 @@ const SitewideDataDictionaryTable = ({ datasetDictionary, pageSize} : {datasetDi
     }),
   ];
 
-  return ( <DataDictionaryTable tableColumns={tableColumns} tableData={datasetDictionary} count={datasetDictionary.length} pageSize={pageSize} /> )
+  return ( <DataDictionaryTable tableColumns={tableColumns} tableData={datasetDictionary} pageSize={pageSize} /> )
 }
 
 export default SitewideDataDictionaryTable;

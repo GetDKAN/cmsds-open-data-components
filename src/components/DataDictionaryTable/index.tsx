@@ -5,13 +5,9 @@ import { Table, TableHead, TableRow, TableCell, TableBody, Pagination } from '@c
 import HeaderResizeElement from '../Datatable/HeaderResizeElement';
 import './dataDictionaryTable.scss';
 
-const DataDictionaryTable = ({tableColumns, tableData, count, pageSize, columnFilters} :
-  {tableColumns: Array<any>, tableData: Array<any>, count: number, pageSize: number, columnFilters?: ColumnFiltersState}
+const DataDictionaryTable = ({tableColumns, tableData, pageSize, columnFilters} :
+  {tableColumns: Array<any>, tableData: Array<any>, pageSize: number, columnFilters?: ColumnFiltersState}
   ) => {
-  const [pagination, setPagination] = useState({
-    pageIndex: 1,
-    pageSize: pageSize,
-  });
   const [sorting, setSorting] = useState<SortingState>([])
   const [ariaLiveFeedback, setAriaLiveFeedback] = useState('');
 
@@ -34,11 +30,9 @@ const DataDictionaryTable = ({tableColumns, tableData, count, pageSize, columnFi
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    onPaginationChange: setPagination,
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: setSorting,
     state: {
-      pagination,
       sorting,
       columnFilters
     }
@@ -82,7 +76,7 @@ const DataDictionaryTable = ({tableColumns, tableData, count, pageSize, columnFi
             )}
           </TableHead>
           <TableBody>
-            {table.getFilteredRowModel().rows.map((row, index) => {    
+            {table.getRowModel().rows.map((row, index) => {    
               return (
                 <TableRow key={index + JSON.stringify(row)}>
                   {row.getVisibleCells().map((cell) => {
@@ -113,13 +107,10 @@ const DataDictionaryTable = ({tableColumns, tableData, count, pageSize, columnFi
       {table.getRowCount() > pageSize ? (
         <Pagination
           totalPages={table.getPageCount()}
-          currentPage={pagination.pageIndex + 1}
+          currentPage={table.getState().pagination.pageIndex + 1}
           onPageChange={(evt, page) => {
             evt.preventDefault();
-            setPagination({
-              pageIndex: page - 1,
-              pageSize: pageSize
-            })
+            table.setPageIndex(page - 1)
           }}
           renderHref={(page) => {
             return '';
