@@ -112,7 +112,7 @@ const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schem
         <Button
           variation="ghost"
           size="small"
-          className="ds-u-margin-top--3 ds-u-padding-right--0"
+          className="ds-u-margin-top--6 ds-u-padding-right--0"
           aria-label="Delete filter"
           onClick={() => remove(index)}
         >
