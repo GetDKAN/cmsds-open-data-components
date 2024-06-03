@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useReactTable, flexRender, getCoreRowModel, getPaginationRowModel, getSortedRowModel, SortingState, getFilteredRowModel, ColumnFiltersState } from '@tanstack/react-table';
 import { useMediaQuery } from 'react-responsive';
-import { Table, TableHead, TableRow, TableCell, TableBody, Pagination } from '@cmsgov/design-system';
+import { Table, TableHead, TableRow, TableCell, TableBody, Pagination, Dropdown, DropdownChangeObject } from '@cmsgov/design-system';
 import HeaderResizeElement from '../Datatable/HeaderResizeElement';
 import './dataDictionaryTable.scss';
 
@@ -38,8 +38,40 @@ const DataDictionaryTable = ({tableColumns, tableData, pageSize, columnFilters} 
     }
   });
 
+  const sortOptions = [
+    {value: 'default', label: 'No Sort'},
+    {value: 'titleasc', label: 'Title A-Z'},
+    {value: 'titledesc', label: 'Title Z-A'},
+    {value: 'typeasc', label: 'Type A-Z'},
+    {value: 'typedesc', label: 'Type Z-A'},
+  ];
+
+  const sortStatesLookup : {[key: string] : Array<any>} = {
+    default: [],
+    titleasc: [{id: 'titleResizable', desc: false}],
+    titledesc: [{id: 'titleResizable', desc: true}],
+    typeasc: [{id: 'type', desc: false}],
+    typedesc: [{id: 'type', desc: true}]
+  }
   return (
     <div>
+      {mobile && (
+        <div className="ds-u-margin-bottom--3">
+          <Dropdown
+            className="ds-l-col--12 ds-l-sm-col--6"
+            labelClassName="ds-u-margin-top--1 ds-u-sm-margin-top--0"
+            options={sortOptions}
+            label="Sort"
+            value={Object.keys(sortStatesLookup).find(key => {
+              return JSON.stringify(sortStatesLookup[key]) == JSON.stringify(sorting);
+            })}
+            name="dc-data-dictionary-type"
+            onChange={(e: DropdownChangeObject) => {
+              setSorting(sortStatesLookup[e.target.value])
+            }}
+          />
+        </div>
+      )}
       <div className="dc-c-datadictionary-table">
         <Table className="dc-c-datatable" {...{style:{width: '100%'}}} stackable>
           <TableHead className="dc-thead--truncated dc-thead--resizeable">
