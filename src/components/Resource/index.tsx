@@ -26,7 +26,7 @@ const Resource = ({ distributions, resource, title } : ResourcePropsType ) => {
                 <li key={dist.identifier} className={`ds-u-display--flex ds-u-flex-wrap--wrap ${fileFormat !== "csv" && "ds-u-margin-bottom--2"}`}>
                   <div className="ds-u-font-weight--bold ds-u-font-size--lg ds-l-col--12 ds-l-md-col--6 ds-u-padding-left--0 ds-u-align-items--center ds-u-display--flex">
                     <i className={'fa ds-u-color--primary ds-u-padding-right--1 ds-u-font-size--3xl ' + 'fa-file-' + (fileFormat == "xlsx" ? "excel" : fileFormat)}></i>
-                    <p className="ds-u-margin-top--0">{dist.data.title || title}{" (" + fileFormat.toUpperCase() + ")"}</p>
+                    <p className="ds-u-margin-top--0">{`${dist.data.title || title} (${fileFormat.toUpperCase()})`}</p>
                   </div>
                   <div className="ds-l-col--12 ds-l-md-col--6 ds-u-text-align--center ds-u-md-text-align--right ds-u-margin-top--2 ds-u-md-margin-top--0">
                     <a
