@@ -7,7 +7,7 @@ import axios from 'axios';
 import { DatasetDictionaryItemType } from '../../types/dataset';
 import SitewideDataDictionaryTable from '../SitewideDataDictionaryTable';
 import DatasetDictionaryTable from '../DatasetDictionaryTable';
-import { Button } from '@cmsgov/design-system';
+import { Button, Spinner } from '@cmsgov/design-system';
 
 const DataDictionary = (
   { datasetDictionaryEndpoint, datasetSitewideDictionary, title, pageSize = 20, additionalParams } : 
@@ -30,7 +30,7 @@ const DataDictionary = (
   });
 
   const datasetDictionary = data && data.data && data.data.fields && data.data.fields.length ? data.data.fields : null;
-
+  
   return (
     <>
       <h2 className="ds-text-heading--2xl ds-u-margin-y--3">{title}</h2>
@@ -41,7 +41,7 @@ const DataDictionary = (
               <i className="fa fa-file-download ds-u-color--primary ds-u-padding-right--1"></i> View Dictionary JSON
             </Button>
           </div>
-          <DatasetDictionaryTable datasetDictionary={datasetDictionary} pageSize={pageSize} />
+          <DatasetDictionaryTable datasetDictionary={datasetDictionary} pageSize={pageSize}/>
         </>
       )}
 

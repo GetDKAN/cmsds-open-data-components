@@ -36,9 +36,7 @@ function updateQueryForDatastore(condition) {
 const QueryBuilder = ({ resource, id, includeSearchParams, customColumns }) => {
   const { conditions, schema, setConditions } = resource;
   const fields = Object.keys(schema[id].fields);
-  const hasConditions = conditions.length > 0;
 
-  const [queryCount, setQueryCount] = useState(0);
   const [queryConditions, setQueryConditions] = useState([]);
   const [titleConditions, setTitleConditions] = useState([]); // Add use effect to load conditions on first load if needed
   const [conditionsChanged, setConditionsChanged] = useState(false);

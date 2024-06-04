@@ -6,6 +6,7 @@ import { buildOperatorOptions } from '../../templates/FilteredResource/functions
 import QueryTitle from '../../templates/FilteredResource/QueryTitle';
 import QueryRow from '../QueryRow';
 import { ConditionType, SchemaType } from '../../types/dataset';
+import ClearFiltersButton from './ClearFiltersButton';
 
 type QueryBuilderPropTypes = {
   resource: {
@@ -188,18 +189,13 @@ const QueryBuilder = (props: QueryBuilderPropTypes) => {
                 >
                   Apply filters
                 </Button>
-                <Button
+                <ClearFiltersButton
                   disabled={queryConditions.length === 0}
-                  className="ds-u-float--right ds-l-md-col--6 ds-l-col--5"
-                  variation={small ? 'ghost' : undefined}
-                  onClick={() => {
+                  clearFiltersFn={() => {
                     setQueryConditions([]);
                     setTitleConditions([]);
                     setConditionsCleared(true);
-                  }}
-                >
-                  {small ? 'Clear all' : 'Clear all filters'}
-                </Button>
+                  }} />
               </div>
             </div>
           </form>
