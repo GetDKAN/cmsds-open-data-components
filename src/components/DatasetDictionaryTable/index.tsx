@@ -80,15 +80,16 @@ const DatasetDictionaryTable = ({ datasetDictionary, pageSize} : {datasetDiction
                 name="dc-data-dictionary-title"
                 onChange={(e: Event) => setTitleFilter((e.target as HTMLInputElement).value)}
               />
-              <Dropdown
-                className="ds-l-col--12 ds-l-sm-col--6"
-                labelClassName="ds-u-margin-top--1 ds-u-sm-margin-top--0"
-                options={typeOptions}
-                label="Type"
-                value={typeFilter}
-                name="dc-data-dictionary-type"
-                onChange={(e: DropdownChangeObject) => setTypeFilter(e.target.value)}
-              />
+              <div className="ds-l-col--12 ds-l-sm-col--6">
+                <Dropdown
+                  labelClassName="ds-u-margin-top--1 ds-u-sm-margin-top--0"
+                  options={typeOptions}
+                  label="Type"
+                  value={typeFilter}
+                  name="dc-data-dictionary-type"
+                  onChange={(e: DropdownChangeObject) => setTypeFilter(e.target.value)}
+                />
+              </div>
               <div className="ds-u-float--right ds-u-padding-y--2 ds-l-col--12 ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--end">
                 <div className="ds-u-display--flex ds-u-justify-content--end ds-l-col--12 ds-l-md-col--6 ds-u-padding-x--0">
                   <ClearFiltersButton

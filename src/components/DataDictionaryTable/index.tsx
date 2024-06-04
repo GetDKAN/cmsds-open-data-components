@@ -56,9 +56,8 @@ const DataDictionaryTable = ({tableColumns, tableData, pageSize, columnFilters} 
   return (
     <div>
       {mobile && (
-        <div className="ds-u-margin-bottom--3">
+        <div className="ds-u-margin-bottom--3 ds-l-col--12 ds-l-sm-col--6">
           <Dropdown
-            className="ds-l-col--12 ds-l-sm-col--6"
             labelClassName="ds-u-margin-top--1 ds-u-sm-margin-top--0"
             options={sortOptions}
             label="Sort"
