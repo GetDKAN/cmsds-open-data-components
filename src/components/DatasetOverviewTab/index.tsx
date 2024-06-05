@@ -17,7 +17,7 @@ const DatasetOverview = ({ dataset, resource, distributions, metadataMapping } :
         title={dataset.title}
       />
       <div className="dc-c-additional-info-table ds-u-margin-bottom--6 ds-u-padding-left--0 ds-l-lg-col--7 ds-l-md-col--9 ds-l-col--12">
-        <h2 className="ds-h2 ds-text-heading--2xl">Additional Information</h2>
+        <h2 className="ds-text-heading--2xl ds-text-heading--2xl">Additional Information</h2>
         <Table compact stackable stackableBreakpoint="md" warningDisabled>
           <TableBody>
             {rows.map((r) => (

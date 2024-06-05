@@ -7,7 +7,7 @@ const PageNotFound = ({ siteUrl, content }) => {
         content
       ) : (
         <>
-          <h1 className="ds-title">Error: Page not found</h1>
+          <h1 className="ds-text-heading--4xl">Error: Page not found</h1>
           <p>
             We're sorry, but there is no {siteUrl} web page that matches your entry. You may have
             been directed here because:

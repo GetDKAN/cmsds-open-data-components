@@ -61,7 +61,8 @@ describe('<DatasetSearch />', () => {
     const dataCurrentResultsElement = screen.getByTestId('currentResults');
 
     expect(dataCurrentResultsElement).toBeInTheDocument();
-    expect(screen.getByText('Sort', {selector: 'span'}));
+    // The CMS Design System select wraps the HTML select/label in another label with a button.
+    expect(screen.getAllByLabelText('Sort')).toHaveLength(2);
     expect(screen.getByTestId('results-list'))
   })
 

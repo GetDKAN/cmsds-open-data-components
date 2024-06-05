@@ -18,7 +18,6 @@ const LargeFileDialog = (props: LargeFileDialogProps) => {
         <Dialog
           onExit={() => setModalOpen(false)}
           heading="Notice: Large File Size"
-          closeButtonSize="big"
           actions={
             <>
               <Button href={downloadUrl} className="ds-u-margin-right--2 " variation="solid">

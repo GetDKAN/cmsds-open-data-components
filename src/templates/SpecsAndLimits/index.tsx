@@ -44,7 +44,7 @@ const SpecsAndLimits = (props: PropsWithChildren<SpecsAndLimitsProps>) => {
         </div>
         <section className={'ds-u-margin-top--4 ds-l-row'}>
           <div className={'ds-l-col--12'}>
-            <h2 className="ds-text-heading--2xl ds-h2">Documentation by Application</h2>
+            <h2 className="ds-text-heading--2xl ds-text-heading--2xl">Documentation by Application</h2>
             <div className={'ds-u-margin-top--4'}>
               <DocumentationTable data={documentationList} />
             </div>

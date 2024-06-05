@@ -60,7 +60,7 @@
 }
 
 .dc-c-datatable--even-row td {
-  background-color: #{var(--table-striped__background-color)};
+  background-color: #{var(--table__background-color--striped)};
 }
 
 .dc-c-sort--default,
@@ -71,7 +71,7 @@
   border: none;
   background: none;
   &::after {
-    font-family: 'Font Awesome 5 Pro';
+    font-family: 'Font Awesome 6 Pro';
     display: inline;
     padding-left: 8px;
     line-height: 18px;
