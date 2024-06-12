@@ -32,6 +32,12 @@ const DataDictionaryTable = ({tableColumns, tableData, pageSize, columnFilters} 
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: setSorting,
+    initialState: {
+      pagination: {
+        pageSize: pageSize,
+        pageIndex: 0
+      }
+    },
     state: {
       sorting,
       columnFilters
