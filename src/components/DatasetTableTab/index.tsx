@@ -51,7 +51,7 @@ const DatasetTable = ({ id, distribution, resource, rootUrl, customColumns = [],
     return (
       <>
         <QueryBuilder resource={resource} id={distribution.identifier} customColumns={customColumnHeaders} />
-        {<DataTableHeader resource={resource} downloadURL={downloadURL} jsonUrl={jsonUrl} /> }
+        {<DataTableHeader resource={resource} downloadURL={downloadURL} unfilteredDownloadURL={distribution.data.downloadURL} jsonUrl={jsonUrl} /> }
         <div className="ds-u-overflow--auto ds-u-border-x--1 ds-u-border-bottom--1">
           <DataTable
             data={resource.values}
