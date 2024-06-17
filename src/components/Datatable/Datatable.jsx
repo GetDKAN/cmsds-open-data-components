@@ -123,7 +123,7 @@ const DataTable = ({
         )}
         </table>
         <div className='sr-only' aria-live='assertive' aria-atomic='true'>{ariaLiveFeedback}</div>
-        {table.getRowModel().rows.length === 0 && (
+        {!loading && table.getRowModel().rows.length === 0 && (
           <Alert variation="warn">No results found for the current filters</Alert>
         )}
     </div>
