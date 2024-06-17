@@ -6,7 +6,7 @@ import {
   createColumnHelper,
   getSortedRowModel,
 } from "@tanstack/react-table";
-import { Spinner } from "@cmsgov/design-system";
+import { Spinner, Alert } from "@cmsgov/design-system";
 import TruncatedResizeableTHead from "./TruncatedResizeableTHead";
 import FixedSizeTHead from "./FixedSizeTHead";
 import "./datatable.scss";
@@ -117,11 +117,15 @@ const DataTable = ({
                 })}
               </tr>
             )
-            })}
+            })
+          }
           </tbody>
         )}
         </table>
         <div className='sr-only' aria-live='assertive' aria-atomic='true'>{ariaLiveFeedback}</div>
+        {!loading && table.getRowModel().rows.length === 0 && (
+          <Alert variation="warn">No results found for the current filters</Alert>
+        )}
     </div>
   )
 }

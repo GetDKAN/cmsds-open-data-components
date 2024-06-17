@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useReactTable, flexRender, getCoreRowModel, getPaginationRowModel, getSortedRowModel, SortingState, getFilteredRowModel, ColumnFiltersState } from '@tanstack/react-table';
 import { useMediaQuery } from 'react-responsive';
-import { Table, TableHead, TableRow, TableCell, TableBody, Pagination, Dropdown, DropdownChangeObject } from '@cmsgov/design-system';
+import { Table, TableHead, TableRow, TableCell, TableBody, Pagination, Dropdown, DropdownChangeObject, Alert } from '@cmsgov/design-system';
 import HeaderResizeElement from '../Datatable/HeaderResizeElement';
 import './dataDictionaryTable.scss';
 
@@ -140,6 +140,9 @@ const DataDictionaryTable = ({tableColumns, tableData, pageSize, columnFilters} 
           </TableBody>
         </Table>
         <div className='sr-only' aria-live='assertive' aria-atomic='true'>{ariaLiveFeedback}</div>
+        {table.getRowModel().rows.length === 0 && (
+          <Alert variation="warn">No results found for the current filters</Alert>
+        )}
       </div>
       {table.getRowCount() > pageSize ? (
         <Pagination
