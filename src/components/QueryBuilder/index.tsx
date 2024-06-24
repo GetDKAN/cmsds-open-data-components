@@ -79,7 +79,7 @@ const QueryBuilder = (props: QueryBuilderPropTypes) => {
   };
 
   React.useEffect(() => {
-    if (conditions.length) {
+    if (conditions && conditions.length) {
       addCondition(conditions);
     } else {
       addCondition(null);
