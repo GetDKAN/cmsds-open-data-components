@@ -57,7 +57,6 @@ const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schem
 
   return (
     <fieldset className="ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--between ds-u-align-items--center ds-u-border--0">
-        Test A
         <Dropdown
           options={propertyOptions}
           className="ds-l-md-col--5 ds-l-lg-col--4 ds-l-sm-col--8 ds-l-col--12 ds-u-padding--0 ds-u-md-padding-right--2 ds-u-margin-bottom--0 ds-u-md-margin-bottom--2"
