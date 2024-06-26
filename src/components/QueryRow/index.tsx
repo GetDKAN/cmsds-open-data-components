@@ -86,8 +86,10 @@ const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schem
             name={`${condition.key}_date_value`}
             selected={convertUTCToLocalDate(startDate)}
             onChange={(date) => {
-              date && setStartDate(date);
-              date && setValue(date.toJSON().slice(0, 10));
+              if(date) {
+                setStartDate(date);
+                setValue(date.toJSON().slice(0, 10));
+              }
             }}
             showMonthDropdown
             showYearDropdown
