@@ -7,6 +7,7 @@ import { Pagination, Dropdown, Spinner } from '@cmsgov/design-system';
 import DataTableHeader from '../DatatableHeader';
 import QueryBuilder from '../QueryBuilder';
 import { DistributionType, ColumnType, ResourceType } from '../../types/dataset';
+import "./dataTableTab.scss";
 
 export function prepareColumns(columns : any, schema : any) {
   return columns.map((column : any) => ({
@@ -52,7 +53,7 @@ const DatasetTable = ({ id, distribution, resource, rootUrl, customColumns = [],
       <>
         <QueryBuilder resource={resource} id={distribution.identifier} customColumns={customColumnHeaders} />
         {<DataTableHeader resource={resource} downloadURL={downloadURL} unfilteredDownloadURL={distribution.data.downloadURL} jsonUrl={jsonUrl} /> }
-        <div className="ds-u-overflow--scroll ds-u-border-x--1 ds-u-border-bottom--1" style={{maxHeight: '80vh'}}>
+        <div className="dc-c-datatable-wrapper ds-u-border-x--1 ds-u-border-bottom--1">
           <DataTable
             data={resource.values}
             canResize={true}
