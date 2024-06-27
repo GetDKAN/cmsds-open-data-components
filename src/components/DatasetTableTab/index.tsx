@@ -52,7 +52,7 @@ const DatasetTable = ({ id, distribution, resource, rootUrl, customColumns = [],
       <>
         <QueryBuilder resource={resource} id={distribution.identifier} customColumns={customColumnHeaders} />
         {<DataTableHeader resource={resource} downloadURL={downloadURL} unfilteredDownloadURL={distribution.data.downloadURL} jsonUrl={jsonUrl} /> }
-        <div className="ds-u-overflow--auto ds-u-border-x--1 ds-u-border-bottom--1">
+        <div className="ds-u-overflow--scroll ds-u-border-x--1 ds-u-border-bottom--1" style={{maxHeight: '80vh'}}>
           <DataTable
             data={resource.values}
             canResize={true}
