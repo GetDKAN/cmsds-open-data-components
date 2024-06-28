@@ -116,8 +116,8 @@ const DataTable = ({
             }
             </tbody>
           )}
-          </table>
-          <div className='sr-only' aria-live='assertive' aria-atomic='true'>{ariaLiveFeedback}</div>
+        </table>
+        <div className='sr-only' aria-live='assertive' aria-atomic='true'>{ariaLiveFeedback}</div>
       </div>
       {loading && (
         <Spinner aria-valuetext="Dataset loading" role="status" className="ds-u-margin--3" />
