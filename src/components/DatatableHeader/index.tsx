@@ -21,7 +21,7 @@ const DataTableHeader = ({ resource, downloadURL, unfilteredDownloadURL, jsonUrl
         </div>
         <div className="dc-c-resource-header--buttons ds-l-col--12 ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--end ds-u-padding-x--0">
           <div className="ds-l-col--12 ds-l-sm-col--auto ds-u-padding-x--0 ds-u-margin-bottom--2">
-            {conditions.length ? (
+            {conditions && conditions.length ? (
               <Tooltip
                 onOpen={() => {
                   navigator.clipboard.writeText(window.location.href);
@@ -31,7 +31,7 @@ const DataTableHeader = ({ resource, downloadURL, unfilteredDownloadURL, jsonUrl
                 dialog
                 ariaLabel="Copy link to filtered data"
                 title="Link copied to clipboard"
-                aria-disabled={conditions.length === 0}
+                aria-disabled={!conditions || conditions.length === 0}
               >
                 <span className="ds-u-font-weight--semibold ds-u-margin-left--1 ds-u-padding--0">
                   <i className="fas fa-copy"></i> Copy link to filtered data
@@ -51,7 +51,7 @@ const DataTableHeader = ({ resource, downloadURL, unfilteredDownloadURL, jsonUrl
               <Button
                 className="ds-u-text-align--center ds-u-font-weight--normal ds-u-font-size--base ds-u-margin-right--1 ds-u-display--inline-block ds-l-col--12"
                 href={downloadURL}
-                aria-disabled={conditions.length === 0}
+                aria-disabled={!conditions || conditions.length === 0}
               >
                 <span className="ds-u-font-weight--semibold ds-u-margin-left--1 ds-u-padding--0">
                   <i className="fas fa-file-csv"></i> Download filtered data (CSV)
