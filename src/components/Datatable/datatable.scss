@@ -12,6 +12,10 @@
   }
 }
 
+.dc-c-datatable-wrapper {
+  overflow: auto;
+}
+
 .dc-thead--fixed-size th {
   border-left: 2px solid var(--color-border);
 }
@@ -89,14 +93,3 @@
 .dc-c-sort--desc::after {
   content: '\f0dd';
 }
-
-
-// @media (hover: hover) {
-//   .resizer {
-//     opacity: 0;
-//   }
-
-//   *:hover > .resizer {
-//     opacity: 1;
-//   }
-// }

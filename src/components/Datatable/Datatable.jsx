@@ -71,62 +71,61 @@ const DataTable = ({
   }, [sorting]);
 
   return(
-    <div>
-      <table
-        tabIndex={0}
-        {...{
-          style: {
-            width: canResize ? table.getCenterTotalSize() : "100%",
-          },
-        }}
-        className="dc-c-datatable"
-      >
-        {canResize
-          ? <TruncatedResizeableTHead table={table} sortElement={sortElement} setAriaLiveFeedback={setAriaLiveFeedback} />
-          : <FixedSizeTHead table={table} sortElement={sortElement} />
-        }
-        {loading ? (
-          <tbody>
-            <tr>
-              <td colSpan={columns.length}>
-                <Spinner aria-valuetext="Dataset loading" role="status" className="ds-u-margin--3" />
-              </td>
-            </tr>
-          </tbody>
-        ) : (
-          <tbody>
-          {table.getRowModel().rows.map((row, index) => {
-            const even = (index + 1) % 2 === 0;
-            return(
-              <tr key={row.id} className={`${even ? "dc-c-datatable--even-row" : ""}`}>
-                {row.getVisibleCells().map((cell) => {
-                  let classList = "dc-truncate ds-u-padding-x--1"
-                  return (
-                    <td
-                      {...{
-                        key: cell.id,
-                        style: {
-                          maxWidth: cell.column.getSize(),
-                        },
-                      }}
-                      className={`${classList} ${tablePadding}`}
-                    >
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </td>
-                  );
-                })}
-              </tr>
-            )
-            })
+    <>
+      <div className="dc-c-datatable-wrapper">
+        <table
+          tabIndex={0}
+          {...{
+            style: {
+              width: canResize ? table.getCenterTotalSize() : "100%",
+            },
+          }}
+          className="dc-c-datatable"
+        >
+          {canResize
+            ? <TruncatedResizeableTHead table={table} sortElement={sortElement} setAriaLiveFeedback={setAriaLiveFeedback} />
+            : <FixedSizeTHead table={table} sortElement={sortElement} />
           }
-          </tbody>
-        )}
-        </table>
-        <div className='sr-only' aria-live='assertive' aria-atomic='true'>{ariaLiveFeedback}</div>
-        {!loading && table.getRowModel().rows.length === 0 && (
-          <Alert variation="warn">No results found for the current filters</Alert>
-        )}
-    </div>
+          {loading ? (
+            <tbody></tbody>
+          ) : (
+            <tbody>
+            {table.getRowModel().rows.map((row, index) => {
+              const even = (index + 1) % 2 === 0;
+              return(
+                <tr key={row.id} className={`${even ? "dc-c-datatable--even-row" : ""}`}>
+                  {row.getVisibleCells().map((cell) => {
+                    let classList = "dc-truncate ds-u-padding-x--1"
+                    return (
+                      <td
+                        {...{
+                          key: cell.id,
+                          style: {
+                            maxWidth: cell.column.getSize(),
+                          },
+                        }}
+                        className={`${classList} ${tablePadding}`}
+                      >
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </td>
+                    );
+                  })}
+                </tr>
+              )
+              })
+            }
+            </tbody>
+          )}
+          </table>
+          <div className='sr-only' aria-live='assertive' aria-atomic='true'>{ariaLiveFeedback}</div>
+      </div>
+      {loading && (
+        <Spinner aria-valuetext="Dataset loading" role="status" className="ds-u-margin--3" />
+      )}
+      {!loading && table.getRowModel().rows.length === 0 && (
+        <Alert variation="warn">No results found for the current filters</Alert>
+      )}
+    </>
   )
 }
 
