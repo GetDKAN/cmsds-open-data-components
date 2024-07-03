@@ -72,9 +72,8 @@ const DataTable = ({
 
   return(
     <>
-      <div className="dc-c-datatable-wrapper">
+      <div className="dc-c-datatable-wrapper" tabIndex={0}>
         <table
-          tabIndex={0}
           {...{
             style: {
               width: canResize ? table.getCenterTotalSize() : "100%",
