@@ -67,7 +67,8 @@ export type DatasetPageType = {
   dataDictionaryUrl: string | undefined,
   dataDictionaryACA: string | undefined,
   borderlessTabs: boolean,
-  defaultPageSize: Number
+  defaultPageSize: Number,
+  dataDictionaryCSV: boolean,
 }
 
 

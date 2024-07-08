@@ -45,7 +45,8 @@ const Dataset = ({
   apiPageUrl = "/api",
   dataDictionaryUrl,
   borderlessTabs = false,
-  defaultPageSize = 25
+  defaultPageSize = 25,
+  dataDictionaryCSV = false
 } : DatasetPageType) => {
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
@@ -197,7 +198,13 @@ const Dataset = ({
                       }
                       className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
                     >
-                      <DataDictionary datasetSitewideDictionary={datasetSitewideDictionary} datasetDictionaryEndpoint={distribution.data.describedBy} title={"Data Dictionary"} additionalParams={additionalParams} />
+                      <DataDictionary
+                        datasetSitewideDictionary={datasetSitewideDictionary}
+                        datasetDictionaryEndpoint={distribution.data.describedBy}
+                        title={"Data Dictionary"}
+                        additionalParams={additionalParams}
+                        csvDownload={dataDictionaryCSV}
+                      />
                     </TabPanel>
                   )
                   : null}
