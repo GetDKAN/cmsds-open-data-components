@@ -1,6 +1,6 @@
 {
   "name": "@civicactions/cmsds-open-data-components",
-  "version": "3.2.3",
+  "version": "3.2.4",
   "description": "Components for the open data catalog frontend using CMS Design System",
   "main": "dist/main.js",
   "source": "src/index.ts",
@@ -69,7 +69,7 @@
     "extends": "react-app"
   },
   "peerDependencies": {
-    "@cmsgov/design-system": "^10.0.0",
+    "@cmsgov/design-system": "^10.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
