@@ -104,6 +104,7 @@ const DataTable = ({
                           },
                         }}
                         className={`${classList} ${tablePadding}`}
+                        title={cell.getValue()}
                       >
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </td>
