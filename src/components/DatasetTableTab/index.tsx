@@ -3,7 +3,7 @@ import qs from 'qs';
 import DataTable from '../Datatable/Datatable';
 import { transformTableSortToQuerySort } from '../../services/useDatastore/transformSorts';
 import { buildCustomColHeaders } from '../../templates/FilteredResource/functions';
-import { Pagination, Dropdown, Spinner } from '@cmsgov/design-system';
+import { Pagination, Dropdown, Spinner, Alert } from '@cmsgov/design-system';
 import DataTableHeader from '../DatatableHeader';
 import QueryBuilder from '../QueryBuilder';
 import { DistributionType, ColumnType, ResourceType } from '../../types/dataset';
@@ -16,8 +16,26 @@ export function prepareColumns(columns : any, schema : any) {
   }));
 }
 
-const DatasetTable = ({ id, distribution, resource, rootUrl, customColumns = [], jsonUrl = undefined }
-  : {id: string, distribution: DistributionType, resource: ResourceType, rootUrl: string, customColumns: Array<ColumnType>, jsonUrl?: string}
+type DatasetTableTabProps = {
+  id: string,
+  distribution: DistributionType,
+  resource: ResourceType,
+  rootUrl: string,
+  customColumns: Array<ColumnType>,
+  jsonUrl?: string,
+  dataDictionaryBanner: boolean,
+}
+
+const DatasetTable = ({
+    id,
+    distribution,
+    resource,
+    rootUrl,
+    customColumns = [],
+    jsonUrl = undefined,
+    dataDictionaryBanner
+   }
+  : DatasetTableTabProps
   ) => {
   const defaultPage = 1;
   const defaultPageSize = 10;
@@ -51,6 +69,11 @@ const DatasetTable = ({ id, distribution, resource, rootUrl, customColumns = [],
     return (
       <>
         <QueryBuilder resource={resource} id={distribution.identifier} customColumns={customColumnHeaders} />
+        {dataDictionaryBanner && (
+          <div className="ds-u-display--flex">
+            <Alert>Click on the "Data Dictionary" tab above for full column definitions</Alert>
+          </div>
+        )}
         {<DataTableHeader resource={resource} downloadURL={downloadURL} unfilteredDownloadURL={distribution.data.downloadURL} jsonUrl={jsonUrl} /> }
         <div className="ds-u-border-x--1 ds-u-border-bottom--1">
           <DataTable

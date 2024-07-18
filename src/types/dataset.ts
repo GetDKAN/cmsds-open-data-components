@@ -69,6 +69,7 @@ export type DatasetPageType = {
   borderlessTabs: boolean,
   defaultPageSize: Number,
   dataDictionaryCSV: boolean,
+  dataDictionaryBanner: boolean,
 }
 
 
