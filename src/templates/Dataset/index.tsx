@@ -46,7 +46,8 @@ const Dataset = ({
   dataDictionaryUrl,
   borderlessTabs = false,
   defaultPageSize = 25,
-  dataDictionaryCSV = false
+  dataDictionaryCSV = false,
+  dataDictionaryBanner = false
 } : DatasetPageType) => {
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
@@ -132,6 +133,8 @@ const Dataset = ({
     else if (window.location.hash.substring(1) != selectedTab)
       setSelectedTab(window.location.hash.substring(1))
   }, [distribution, window.location.hash])
+
+  const displayDataDictionaryTab = ((distribution.data && distribution.data.describedBy && distribution.data.describedByType === 'application/vnd.tableschema+json') || (datasetSitewideDictionary && datasetSitewideDictionary.length > 0)) as boolean;
   
   return (
     <>
@@ -172,7 +175,14 @@ const Dataset = ({
                       }
                       className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
                     >
-                      <DatasetTable id={id} distribution={distribution} resource={resource} rootUrl={rootUrl} customColumns={customColumns} />
+                      <DatasetTable
+                        id={id}
+                        distribution={distribution}
+                        resource={resource}
+                        rootUrl={rootUrl}
+                        customColumns={customColumns}
+                        dataDictionaryBanner={dataDictionaryBanner && displayDataDictionaryTab}
+                      />
                     </TabPanel>
                   )}
                   <TabPanel
@@ -187,7 +197,7 @@ const Dataset = ({
                   >
                     <DatasetOverview resource={resource} dataset={dataset} distributions={distributions} metadataMapping={metadataMapping} />
                   </TabPanel>
-                  {(distribution.data && distribution.data.describedBy && distribution.data.describedByType === 'application/vnd.tableschema+json') || (datasetSitewideDictionary && datasetSitewideDictionary.length) ? (
+                  {displayDataDictionaryTab && (
                     <TabPanel
                       id={'data-dictionary'}
                       tab={
@@ -206,8 +216,7 @@ const Dataset = ({
                         csvDownload={dataDictionaryCSV}
                       />
                     </TabPanel>
-                  )
-                  : null}
+                  )}
                   { distribution && distribution.data && (
                     <TabPanel
                       id={'api'}
