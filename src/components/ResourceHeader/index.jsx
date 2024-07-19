@@ -53,7 +53,7 @@ const ResourceHeader = ({
       </div>
       <div className="ds-l-row ds-u-align-items--center">
         <div className="ds-l-col--12 ds-u-display--flex ds-u-justify-content--between ds-u-align-items--center">
-          <div className="ds-u-font-weight--bold">
+          <div className="ds-u-font-weight--bold ds-u-margin-bottom--2">
             <DataTablePageResults
               totalRows={parseInt(intCount)}
               limit={parseInt(limit)}

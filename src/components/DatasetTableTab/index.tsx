@@ -51,7 +51,6 @@ const DatasetTable = ({
     ? customColumnHeaders
     : prepareColumns(resource.columns, resource.schema[id]);
 
-  const rowOptions = [10, 25, 50, 100];
   const { limit, setLimit, setOffset } = resource;
   const pageSize = limit ? limit : defaultPageSize;
 
@@ -70,11 +69,18 @@ const DatasetTable = ({
       <>
         <QueryBuilder resource={resource} id={distribution.identifier} customColumns={customColumnHeaders} />
         {dataDictionaryBanner && (
-          <div className="ds-u-display--flex">
+          <div>
             <Alert>Click on the "Data Dictionary" tab above for full column definitions</Alert>
           </div>
         )}
-        {<DataTableHeader resource={resource} downloadURL={downloadURL} unfilteredDownloadURL={distribution.data.downloadURL} jsonUrl={jsonUrl} /> }
+        {
+          <DataTableHeader
+            resource={resource}
+            downloadURL={downloadURL}
+            unfilteredDownloadURL={distribution.data.downloadURL}
+            jsonUrl={jsonUrl}
+            setPage={setPage}
+          /> }
         <div className="ds-u-border-x--1 ds-u-border-bottom--1">
           <DataTable
             data={resource.values}
@@ -99,20 +105,7 @@ const DatasetTable = ({
               renderHref={(page) => {
                 return '';
               }}
-              className="ds-l-lg-col--7 ds-l-md-col--9 ds-l-col--12 ds-u-padding-x--0"
-            />
-            <Dropdown
-              options={rowOptions.map((row) => ({ label: row.toString(), value: row }))}
-              size="medium"
-              label="Rows per page:"
-              labelClassName="ds-u-margin-top--0"
-              name="datatable_rows_per_page"
-              onChange={(e) => {
-                setLimit(parseInt(e.target.value));
-                setPage(1);
-                setOffset(0);
-              }}
-              defaultValue={limit.toString()}
+              className="ds-l-col--12 ds-u-padding-x--0"
             />
           </div>
         )}
