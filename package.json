@@ -1,6 +1,6 @@
 {
   "name": "@civicactions/cmsds-open-data-components",
-  "version": "3.2.6",
+  "version": "3.2.5",
   "description": "Components for the open data catalog frontend using CMS Design System",
   "main": "dist/main.js",
   "source": "src/index.ts",
