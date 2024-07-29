@@ -10,6 +10,7 @@ import { Spinner, Alert } from "@cmsgov/design-system";
 import TruncatedResizeableTHead from "./TruncatedResizeableTHead";
 import FixedSizeTHead from "./FixedSizeTHead";
 import "./datatable.scss";
+import ManageColumns from "../ManageColumns/ManageColumns";
 
 const DataTable = ({
   data,
@@ -38,6 +39,8 @@ const DataTable = ({
       })
     )
   })
+  const [columnOrder, setColumnOrder] = useState(() => table_columns.map(c => c.accessorKey))
+  const [columnVisibility, setColumnVisibility] = useState({})
 
   const sortElement = (isSorted, onClickFn) => {
     if(isSorted === 'asc') {
@@ -54,12 +57,14 @@ const DataTable = ({
     columns: table_columns,
     manualSorting: true,
     state: {
-
+      columnOrder,
+      columnVisibility,
       sorting,
     },
     columnResizeMode: 'onChange',
     onSortingChange: setSorting,
-
+    onColumnOrderChange: setColumnOrder,
+    onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     debugTable: false,
@@ -72,6 +77,9 @@ const DataTable = ({
 
   return(
     <>
+      <div>
+        <ManageColumns columns={table.getAllLeafColumns()} columnOrder={columnOrder} />
+      </div>
       <div className="dc-c-datatable-wrapper" tabIndex={0}>
         <table
           {...{

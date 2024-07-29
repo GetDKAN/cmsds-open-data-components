@@ -1,0 +1,23 @@
+dialog.dkan-manage-columns-dialog {
+  height: 80vh;
+  width: 100%;
+  .ds-c-dialog__window {
+    min-width: 768px; // TODO responsive
+  }
+  .dkan-manage-columns-list {
+    list-style: none;
+    max-height: 350px; // TODO responsive
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+
+    .ds-c-choice-wrapper {
+      margin-top: 0;
+    }
+
+    .dkan-manage-columns-reorder-button {
+      background: none;
+      border: none;
+    }
+  }
+}

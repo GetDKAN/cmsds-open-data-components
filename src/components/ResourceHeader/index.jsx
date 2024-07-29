@@ -12,7 +12,6 @@ import {
 } from '@cmsgov/design-system';
 import DataTablePageResults from '../DataTablePageResults';
 import DataTableDensity from '../DataTableDensity';
-import ManageColumns from '../ManageColumns';
 import DataTableRowChanger from '../DataTableRowChanger';
 import DownloadIcon from '../../assets/icons/download';
 import CopyIcon from '../../assets/icons/copy';
