@@ -78,7 +78,7 @@ const DataTable = ({
   return(
     <>
       <div>
-        <ManageColumns columns={table.getAllLeafColumns()} columnOrder={columnOrder} />
+        <ManageColumns columns={table.getAllLeafColumns()} columnOrder={columnOrder} setColumnVisibility={setColumnVisibility} />
       </div>
       <div className="dc-c-datatable-wrapper" tabIndex={0}>
         <table

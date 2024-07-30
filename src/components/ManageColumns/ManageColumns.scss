@@ -3,9 +3,14 @@ dialog.dkan-manage-columns-dialog {
   width: 100%;
   .ds-c-dialog__window {
     min-width: 768px; // TODO responsive
+    padding: 0;
+    .ds-c-dialog__header {
+      padding: 24px;
+    }
   }
   .dkan-manage-columns-list {
     list-style: none;
+    gap: 0;
     max-height: 350px; // TODO responsive
     margin: 0;
     padding: 0;
