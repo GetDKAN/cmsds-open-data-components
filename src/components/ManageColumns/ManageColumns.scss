@@ -26,3 +26,22 @@ dialog.dkan-manage-columns-dialog {
     }
   }
 }
+
+@media screen and (max-width: 767px) {
+  dialog.dkan-manage-columns-dialog  {
+    height: 100%;
+    .ds-c-dialog__window {
+      margin-top: 0;
+      width: 100%;
+      min-width: auto;
+      height: 100%;
+    }
+
+    .ds-c-dialog__actions {
+      position:absolute;
+      bottom: 0;
+      background-color: white;
+      padding-top: 16px;
+    }
+  }
+}

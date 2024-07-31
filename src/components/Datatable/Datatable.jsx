@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import {
   useReactTable,
   flexRender,
@@ -75,10 +75,19 @@ const DataTable = ({
     setSort(normalizedSort);
   }, [sorting]);
 
+  const defaultColumnOrder = useMemo(() => table_columns.map(column => {
+    return column.accessorKey
+  }));
+
   return(
     <>
       <div>
-        <ManageColumns columns={table.getAllLeafColumns()} columnOrder={columnOrder} setColumnVisibility={setColumnVisibility} />
+        <ManageColumns
+          columns={table.getAllLeafColumns()}
+          defaultColumnOrder={defaultColumnOrder} 
+          setColumnOrder={setColumnOrder}
+          setColumnVisibility={setColumnVisibility}
+        />
       </div>
       <div className="dc-c-datatable-wrapper" tabIndex={0}>
         <table

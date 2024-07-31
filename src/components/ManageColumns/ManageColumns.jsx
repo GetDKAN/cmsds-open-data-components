@@ -1,17 +1,16 @@
-import React, { useContext, useEffect, useState, useCallback, useRef } from 'react'
+import React, { useCallback, useState,} from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { Alert, Button, Choice, Dialog } from '@cmsgov/design-system'
-import ManageColumnsCard from './ManageColumnsCard'
-import isEqual from 'lodash.isequal'
 import Card from './Card'
 
 import './ManageColumns.scss'
 
-const ManageColumns = ({ columns, columnOrder, setColumnVisibility }) => {
-  const [modalOpen, setModalOpen] = useState(false)
-  const [ariaLiveFeedback, setAriaLiveFeedback] = useState()
-  
+const ManageColumns = ({ columns, defaultColumnOrder, setColumnOrder, setColumnVisibility }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [ariaLiveFeedback, setAriaLiveFeedback] = useState();
+
+  // maintain card state separately from table state - only sync states when the Save button is pressed
   const [cards, setCards] = useState(columns.map(c => {
     return {id: c.id, visible: c.getIsVisible()}
   }));
@@ -19,14 +18,23 @@ const ManageColumns = ({ columns, columnOrder, setColumnVisibility }) => {
   const hiddenColumns = columns.filter(c => c.getIsVisible() === false ).length;
   const cardHiddenColumns = cards.filter(c => c.visible === false).length
 
-  const updateVisibility = (id, newVisibility) => {
+  const updateVisibility = useCallback((id, newVisibility) => {
     setCards(cards.map(card => {
       if (card.id === id) {
         return {...card, visible: newVisibility}
       }
       return card;
     }))
-  }
+  });
+
+  const moveCard = useCallback(
+    (dragIndex, hoverIndex) => {
+      const dragCard = JSON.parse(JSON.stringify(cards[dragIndex]));
+      const newCards = cards.toSpliced(dragIndex, 1).toSpliced(hoverIndex, 0, dragCard);
+      setCards(newCards);
+    },
+    [cards, setCards]
+  )
 
   return (
     <>
@@ -62,11 +70,17 @@ const ManageColumns = ({ columns, columnOrder, setColumnVisibility }) => {
                   // update table state
 
                   // Visibility
-                  // this isn't very performant - is there a better way?
+                  // this isn't very performant when there are many changes - is there a better way?
                   // This code is building a new columnVisibility state object from the card state and doing a single setState on the table
                   // vs doing a setState on every changed column individually
                   const newColumnVisibility = Object.fromEntries(cards.map(c => Object.values(c)));
                   setColumnVisibility(newColumnVisibility);
+
+                  // Card order
+                  const newCardOrder = cards.map(c => {
+                    return c.id;
+                  });
+                  setColumnOrder(newCardOrder);
                   
                 }}
                   // disabled={checkedLength === 0} todo
@@ -75,14 +89,26 @@ const ManageColumns = ({ columns, columnOrder, setColumnVisibility }) => {
                 </Button>
                 <Button
                   variation="ghost"
-                  onClick={() => setModalOpen(false)} // TODO - reset card state based on table state
+                  onClick={() => {
+                    setModalOpen(false)
+                    setCards(columns.map(c => {
+                      return {id: c.id, visible: c.getIsVisible()}
+                    }));
+                  }}
                 >
                   Cancel
                 </Button>
               </div>
               <Button
                 variation="ghost"
-                
+                onClick={() => {
+                  // reset to default column order and set all cards to visible
+                  // do not save this to the table state until the "Save" button is clicked
+                  setCards(defaultColumnOrder.map(column => {
+                    const card = cards.filter(c => c.id === column)[0]
+                    return {...card, visible: true }
+                  }));
+                }}
               >
                 Reset Columns
               </Button>
@@ -107,13 +133,15 @@ const ManageColumns = ({ columns, columnOrder, setColumnVisibility }) => {
             <span>Display column</span>
             <span>Reorder</span>
           </div>
-          <ul className="dkan-manage-columns-list">
-            {cards.map((card) => {
-              return (
-                <Card id={card.id} visible={card.visible} key={card.id} updateVisibility={updateVisibility} />
-              )
-            })}
-          </ul>
+          <DndProvider backend={HTML5Backend}>
+            <ul className="dkan-manage-columns-list">
+              {cards.map((card, i) => {
+                return (
+                  <Card id={card.id} visible={card.visible} key={card.id} updateVisibility={updateVisibility} index={i} moveCard={moveCard} />
+                )
+              })}
+            </ul>
+          </DndProvider>
         </Dialog>
       </div>
     </>
