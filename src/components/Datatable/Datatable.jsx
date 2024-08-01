@@ -96,6 +96,7 @@ const DataTable = ({
       <div>
         <ManageColumns
           columns={table.getAllLeafColumns()}
+          columnOrder={columnOrder}
           defaultColumnOrder={defaultColumnOrder} 
           setColumnOrder={setColumnOrder}
           setColumnVisibility={setColumnVisibility}

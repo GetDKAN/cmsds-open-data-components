@@ -1,12 +1,14 @@
-import React, { useCallback, useState,} from 'react'
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
+import React, { useCallback, useMemo, useState,} from 'react'
+import { DndContext, closestCenter, KeyboardSensor, PointerSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core'
+import { SortableContext, verticalListSortingStrategy, sortableKeyboardCoordinates, arrayMove } from '@dnd-kit/sortable'
+import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
 import { Alert, Button, Choice, Dialog } from '@cmsgov/design-system'
 import Card from './Card'
 
 import './ManageColumns.scss'
+import { SortableContext } from '@dnd-kit/sortable'
 
-const ManageColumns = ({ columns, defaultColumnOrder, setColumnOrder, setColumnVisibility }) => {
+const ManageColumns = ({ columns, columnOrder, defaultColumnOrder, setColumnOrder, setColumnVisibility }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [ariaLiveFeedback, setAriaLiveFeedback] = useState();
 
@@ -14,6 +16,22 @@ const ManageColumns = ({ columns, defaultColumnOrder, setColumnOrder, setColumnV
   const [cards, setCards] = useState(columns.map(c => {
     return {id: c.id, visible: c.getIsVisible()}
   }));
+  const cardOrder = useMemo(() => 
+    cards.map(({id}) => id),
+    [cards]
+  );
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 5
+      }
+    }),
+    useSensor(TouchSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   const hiddenColumns = columns.filter(c => c.getIsVisible() === false ).length;
   const cardHiddenColumns = cards.filter(c => c.visible === false).length
@@ -27,14 +45,17 @@ const ManageColumns = ({ columns, defaultColumnOrder, setColumnOrder, setColumnV
     }))
   });
 
-  const moveCard = useCallback(
-    (dragIndex, hoverIndex) => {
-      const dragCard = JSON.parse(JSON.stringify(cards[dragIndex]));
-      const newCards = cards.toSpliced(dragIndex, 1).toSpliced(hoverIndex, 0, dragCard);
-      setCards(newCards);
-    },
-    [cards, setCards]
-  )
+  function handleDragEnd(e) {
+    const {active, over} = e;
+    if (active.id !== over.id) {
+      setCards(() => {
+        const oldIndex = cardOrder.indexOf(active.id);
+        const newIndex = cardOrder.indexOf(over.id);
+        let newCards = arrayMove(cards, oldIndex, newIndex)
+        return newCards;
+      });
+    }
+  }
 
   return (
     <>
@@ -83,11 +104,9 @@ const ManageColumns = ({ columns, defaultColumnOrder, setColumnOrder, setColumnV
                   setColumnOrder(newCardOrder);
 
                   // save to localStorage
-                  
                   localStorage.setItem("tableColumnOrder", JSON.stringify(newCardOrder));
                   localStorage.setItem("tableColumnVisibility", JSON.stringify(newColumnVisibility));
                 }}
-                  // disabled={checkedLength === 0} todo
                 >
                   Save
                 </Button>
@@ -138,15 +157,22 @@ const ManageColumns = ({ columns, defaultColumnOrder, setColumnOrder, setColumnV
             <span>Display column</span>
             <span>Reorder</span>
           </div>
-          <DndProvider backend={HTML5Backend}>
-            <ul className="dkan-manage-columns-list">
-              {cards.map((card, i) => {
-                return (
-                  <Card id={card.id} visible={card.visible} key={card.id} updateVisibility={updateVisibility} index={i} moveCard={moveCard} />
-                )
-              })}
-            </ul>
-          </DndProvider>
+          <DndContext
+            collisionDetection={closestCenter}
+            modifiers={[restrictToVerticalAxis]}
+            sensors={sensors}
+            onDragEnd={handleDragEnd}
+          >
+            <SortableContext items={cardOrder} strategy={verticalListSortingStrategy}>
+              <ul className="dkan-manage-columns-list">
+                {cards.map((card) => {
+                  return (
+                    <Card id={card.id} visible={card.visible} key={card.id} updateVisibility={updateVisibility} />
+                  )
+                })}
+              </ul>
+            </SortableContext>
+          </DndContext>
         </Dialog>
       </div>
     </>
