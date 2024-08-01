@@ -34,7 +34,12 @@ export const defaultMetadataMapping = {
       rows.push({ label: 'Contact', value: data.fn });
     }
     if (data.hasEmail) {
-      rows.push({ label: 'Contact Email', value: data.hasEmail });
+      rows.push({
+        label: 'Contact Email',
+        value: (
+          <a href={data.hasEmail.includes("mailto:") ? data.hasEmail : `mailto:${data.hasEmail}`}>{data.hasEmail.replace("mailto:", "")}</a>
+        )
+      });
     }
     return rows;
   },
