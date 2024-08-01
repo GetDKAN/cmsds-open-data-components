@@ -4,9 +4,7 @@ import { SortableContext, verticalListSortingStrategy, sortableKeyboardCoordinat
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
 import { Alert, Button, Choice, Dialog } from '@cmsgov/design-system'
 import Card from './Card'
-
 import './ManageColumns.scss'
-import { SortableContext } from '@dnd-kit/sortable'
 
 const ManageColumns = ({ columns, columnOrder, defaultColumnOrder, setColumnOrder, setColumnVisibility }) => {
   const [modalOpen, setModalOpen] = useState(false);

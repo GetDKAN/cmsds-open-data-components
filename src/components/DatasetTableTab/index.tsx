@@ -24,6 +24,7 @@ type DatasetTableTabProps = {
   customColumns: Array<ColumnType>,
   jsonUrl?: string,
   dataDictionaryBanner: boolean,
+  manageColumnsEnabled: boolean,
 }
 
 const DatasetTable = ({
@@ -33,7 +34,8 @@ const DatasetTable = ({
     rootUrl,
     customColumns = [],
     jsonUrl = undefined,
-    dataDictionaryBanner
+    dataDictionaryBanner,
+    manageColumnsEnabled,
    }
   : DatasetTableTabProps
   ) => {
@@ -90,6 +92,7 @@ const DatasetTable = ({
             sortTransform={transformTableSortToQuerySort}
             tablePadding={'ds-u-padding-y--2'}
             loading={resource.loading}
+            manageColumnsEnabled={manageColumnsEnabled}
           />
         </div>
         {!resource.loading && (

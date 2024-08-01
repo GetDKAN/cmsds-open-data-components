@@ -20,6 +20,7 @@ const DataTable = ({
   tablePadding,
   canResize,
   loading = false,
+  manageColumnsEnabled,
 }) => {
   const [ sorting, setSorting ] = React.useState([])
   const [ariaLiveFeedback, setAriaLiveFeedback] = useState('')
@@ -41,14 +42,14 @@ const DataTable = ({
   })
   const [columnOrder, setColumnOrder] = useState(() => {
     const storedColumnOrder = JSON.parse(localStorage.getItem('tableColumnOrder'));
-    if (storedColumnOrder)
+    if (manageColumnsEnabled && storedColumnOrder)
       return storedColumnOrder;
     else
       return table_columns.map(c => c.accessorKey);
   })
   const [columnVisibility, setColumnVisibility] = useState(() => {
     const storedColumnVisibility = JSON.parse(localStorage.getItem('tableColumnVisibility'));
-    if (storedColumnVisibility)
+    if (manageColumnsEnabled && storedColumnVisibility)
       return storedColumnVisibility;
     else
       return {};
@@ -93,15 +94,17 @@ const DataTable = ({
 
   return(
     <>
-      <div>
-        <ManageColumns
-          columns={table.getAllLeafColumns()}
-          columnOrder={columnOrder}
-          defaultColumnOrder={defaultColumnOrder} 
-          setColumnOrder={setColumnOrder}
-          setColumnVisibility={setColumnVisibility}
-        />
-      </div>
+      { manageColumnsEnabled && (
+        <div>
+          <ManageColumns
+            columns={table.getAllLeafColumns()}
+            columnOrder={columnOrder}
+            defaultColumnOrder={defaultColumnOrder} 
+            setColumnOrder={setColumnOrder}
+            setColumnVisibility={setColumnVisibility}
+          />
+        </div>
+      )}
       <div className="dc-c-datatable-wrapper" tabIndex={0}>
         <table
           {...{
