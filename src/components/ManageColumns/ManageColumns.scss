@@ -36,6 +36,13 @@ dialog.dkan-manage-columns-dialog {
       min-width: auto;
       height: 100%;
     }
+    .ds-c-dialog__body > div:not(.ds-c-dialog__actions) {
+      display: flex;
+      flex-direction: column;
+    }
+    .dkan-manage-columns-list {
+      max-height: calc(100vh - 420px); /* approx height of all other dialog elements */
+    }
 
     .ds-c-dialog__actions {
       position:absolute;

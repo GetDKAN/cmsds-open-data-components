@@ -81,7 +81,11 @@ const ManageColumns = ({ columns, defaultColumnOrder, setColumnOrder, setColumnV
                     return c.id;
                   });
                   setColumnOrder(newCardOrder);
+
+                  // save to localStorage
                   
+                  localStorage.setItem("tableColumnOrder", JSON.stringify(newCardOrder));
+                  localStorage.setItem("tableColumnVisibility", JSON.stringify(newColumnVisibility));
                 }}
                   // disabled={checkedLength === 0} todo
                 >
@@ -128,6 +132,7 @@ const ManageColumns = ({ columns, defaultColumnOrder, setColumnOrder, setColumnV
             name=''
             value=''
             label='Select all'
+            hint={cardHiddenColumns && cardHiddenColumns + " columns hidden"}
           />
           <div className='ds-u-display--flex ds-u-justify-content--between ds-u-font-weight--bold ds-u-padding-y--2 ds-u-padding-x--3 ds-u-border-y--1 ds-u-margin-top--2'>
             <span>Display column</span>

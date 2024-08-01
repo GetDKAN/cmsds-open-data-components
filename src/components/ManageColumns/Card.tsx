@@ -26,7 +26,6 @@ const Card = ({id, visible, updateVisibility, index, moveCard}: {id: string, vis
       if (dragIndex === hoverIndex) {
         return
       }
-
       // Determine rectangle on screen
       const hoverBoundingRect = dragRef.current.getBoundingClientRect()
 
@@ -47,7 +46,6 @@ const Card = ({id, visible, updateVisibility, index, moveCard}: {id: string, vis
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return
       }
-
       // Dragging upwards
       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
         return
@@ -81,13 +79,14 @@ const Card = ({id, visible, updateVisibility, index, moveCard}: {id: string, vis
         label={id}
         name={id}
         checked={visible}
-        className="ds-u-margin-top--0 ds-u-margin-y--1 ds-u-padding-x--3"
+        className="ds-l-col--10 ds-u-margin-top--0 ds-u-margin-y--1 ds-u-padding-x--3"
+        labelClassName="dc-truncate"
         value=""
         onChange={() => {
           updateVisibility(id, !visible)
         }}
       />
-      <button className="ds-l-col--1 dkan-manage-columns-reorder-button">
+      <button className="ds-l-col--2 dkan-manage-columns-reorder-button">
         <span className="fa fa-sort"></span>
       </button>
     </li>

@@ -39,8 +39,20 @@ const DataTable = ({
       })
     )
   })
-  const [columnOrder, setColumnOrder] = useState(() => table_columns.map(c => c.accessorKey))
-  const [columnVisibility, setColumnVisibility] = useState({})
+  const [columnOrder, setColumnOrder] = useState(() => {
+    const storedColumnOrder = JSON.parse(localStorage.getItem('tableColumnOrder'));
+    if (storedColumnOrder)
+      return storedColumnOrder;
+    else
+      return table_columns.map(c => c.accessorKey);
+  })
+  const [columnVisibility, setColumnVisibility] = useState(() => {
+    const storedColumnVisibility = JSON.parse(localStorage.getItem('tableColumnVisibility'));
+    if (storedColumnVisibility)
+      return storedColumnVisibility;
+    else
+      return {};
+  })
 
   const sortElement = (isSorted, onClickFn) => {
     if(isSorted === 'asc') {
