@@ -19,7 +19,25 @@ const Card = ({id, visible, updateVisibility}: {id: string, visible: boolean, up
   };
 
   return (
-    <li className="ds-u-display--flex ds-u-justify-content--between ds-u-border-bottom--1" ref={setNodeRef} style={style} {...listeners} {...attributes} >
+    <li
+      className="ds-u-display--flex ds-u-justify-content--between ds-u-border-bottom--1"
+      ref={setNodeRef}
+      style={style}
+      {...listeners}
+      {...attributes}
+      onPointerUp={(e) => {
+        // Small hack to get around a chrome / webkit rendering bug = force chrome to repaint the checkbox
+        // For whatever reason the way dnd-kit handles events doesn't work well with chrome
+        // Without this code checkboxes can end up visually out of sync with app state until a repaint is forced
+        // this code forces the repaint without user interaction
+        const target = e.target as HTMLElement;
+        if (isDragging && target.tagName.toLowerCase() === "label") {
+          setTimeout(() => {
+            target.parentNode!.querySelector('input')!.checked = visible
+          }, 1)
+        }
+      }} 
+    >
       <Choice
         type="checkbox"
         label={id}
