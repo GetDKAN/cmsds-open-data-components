@@ -16,6 +16,10 @@ dialog.dkan-manage-columns-dialog {
     padding: 0;
     overflow-y: auto;
 
+    li {
+      cursor: pointer;
+    }
+
     .ds-c-choice-wrapper {
       margin-top: 0;
     }

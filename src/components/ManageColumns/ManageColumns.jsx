@@ -1,10 +1,50 @@
-import React, { useCallback, useMemo, useState,} from 'react'
-import { DndContext, closestCenter, KeyboardSensor, PointerSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core'
+import React, { useCallback, useMemo, useState } from 'react'
+import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy, sortableKeyboardCoordinates, arrayMove } from '@dnd-kit/sortable'
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
 import { Alert, Button, Choice, Dialog } from '@cmsgov/design-system'
 import Card from './Card'
 import './ManageColumns.scss'
+
+class ExcludeCheckboxKeyboardSensor extends KeyboardSensor {
+  // Custom function to exclude checkbox from keyboard dragging
+  static activators = [
+    {
+      eventName: 'onKeyDown',
+      handler: ({nativeEvent: event}) => {
+        // prevent scrolling the list
+        const isCheckbox = ["input", "checkbox"].indexOf(event.target.tagName.toLowerCase()) !== -1;
+        if(event.key === " " && !isCheckbox){ 
+          event.preventDefault();
+        } 
+
+        // only activate on a space or return press
+        if ([" ", "Enter"].indexOf(event.key) === -1) return false;
+        if (!isCheckbox)
+        {
+          return true;
+        }
+        return false;
+      },
+    },
+  ];
+}
+
+class ExcludeCheckboxPointerSensor extends PointerSensor {
+  // Custom function to stop accidental checkbox clicks on pointer activation
+  static activators = [
+    {
+      eventName: 'onPointerDown',
+      handler: ({nativeEvent: event}) => {
+        if (event.target.tagName.toLowerCase() === "input") return false;
+        if (event.target.tagName.toLowerCase() === "label") {
+          event.target.blur();
+        }
+        return true;
+      }
+    }
+  ]
+}
 
 const ManageColumns = ({ columns, columnOrder, defaultColumnOrder, setColumnOrder, setColumnVisibility }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -20,13 +60,12 @@ const ManageColumns = ({ columns, columnOrder, defaultColumnOrder, setColumnOrde
   );
 
   const sensors = useSensors(
-    useSensor(PointerSensor, {
+    useSensor(ExcludeCheckboxPointerSensor, {
       activationConstraint: {
         distance: 5
       }
     }),
-    useSensor(TouchSensor),
-    useSensor(KeyboardSensor, {
+    useSensor(ExcludeCheckboxKeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
@@ -46,12 +85,10 @@ const ManageColumns = ({ columns, columnOrder, defaultColumnOrder, setColumnOrde
   function handleDragEnd(e) {
     const {active, over} = e;
     if (active.id !== over.id) {
-      setCards(() => {
-        const oldIndex = cardOrder.indexOf(active.id);
-        const newIndex = cardOrder.indexOf(over.id);
-        let newCards = arrayMove(cards, oldIndex, newIndex)
-        return newCards;
-      });
+      const oldIndex = cardOrder.indexOf(active.id);
+      const newIndex = cardOrder.indexOf(over.id);
+      let newCards = arrayMove(cards, oldIndex, newIndex);
+      setCards(newCards);
     }
   }
 

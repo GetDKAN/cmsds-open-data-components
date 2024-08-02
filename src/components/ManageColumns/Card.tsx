@@ -18,11 +18,11 @@ const Card = ({id, visible, updateVisibility}: {id: string, visible: boolean, up
   };
 
   return (
-    <li className="ds-u-display--flex ds-u-justify-content--between ds-u-border-bottom--1" ref={setNodeRef} style={style} {...listeners} {...attributes}>
+    <li className="ds-u-display--flex ds-u-justify-content--between ds-u-border-bottom--1" ref={setNodeRef} style={style} {...listeners} {...attributes} >
       <Choice
         type="checkbox"
         label={id}
-        name={id}
+        name={id + "_visibility"}
         checked={visible}
         className="ds-l-col--10 ds-u-margin-top--0 ds-u-margin-y--1 ds-u-padding-x--3"
         labelClassName="dc-truncate"
