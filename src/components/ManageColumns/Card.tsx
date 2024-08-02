@@ -15,6 +15,7 @@ const Card = ({id, visible, updateVisibility}: {id: string, visible: boolean, up
     zIndex: isDragging ? 1 : 0,
     position: 'relative',
     background: 'white',
+    touchAction: 'none'
   };
 
   return (
