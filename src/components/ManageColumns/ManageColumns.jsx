@@ -46,7 +46,7 @@ class ExcludeCheckboxPointerSensor extends PointerSensor {
   ]
 }
 
-const ManageColumns = ({ columns, columnOrder, defaultColumnOrder, setColumnOrder, setColumnVisibility }) => {
+const ManageColumns = ({ columns, defaultColumnOrder, setColumnOrder, setColumnVisibility }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [ariaLiveFeedback, setAriaLiveFeedback] = useState();
 
@@ -83,13 +83,19 @@ const ManageColumns = ({ columns, columnOrder, defaultColumnOrder, setColumnOrde
   });
 
   function handleDragEnd(e) {
-    const {active, over} = e;
+    const { active, over } = e;
     if (active.id !== over.id) {
       const oldIndex = cardOrder.indexOf(active.id);
       const newIndex = cardOrder.indexOf(over.id);
       let newCards = arrayMove(cards, oldIndex, newIndex);
       setCards(newCards);
     }
+  }
+
+  const resetCards = () => {
+    setCards(columns.map(c => {
+      return {id: c.id, visible: c.getIsVisible()}
+    }));
   }
 
   return (
@@ -114,19 +120,22 @@ const ManageColumns = ({ columns, columnOrder, defaultColumnOrder, setColumnOrde
         <Dialog
         heading='Manage columns'
           isOpen={modalOpen}
-          onExit={() => setModalOpen(false)}
+          onExit={() => {
+            setModalOpen(false);
+            resetCards();
+          }}
           className="dkan-manage-columns-dialog"
           actions={(
-            <div className='ds-u-display--flex ds-u-justify-content--between ds-u-padding-x--3 ds-u-padding-bottom--3'>
-              <div>
+            <div className='ds-u-display--flex ds-u-justify-content--between ds-u-flex-wrap--wrap ds-u-padding-x--3 ds-u-padding-bottom--1 ds-u-sm-padding-bottom--3'>
+              <div className="ds-l-col--12 ds-l-sm-col--auto ds-u-padding-x--0">
                 <Button
                 variation="solid"
+                className="ds-l-col--6 ds-l-sm-col--auto"
                 onClick={() => {
                   setModalOpen(false);
                   // update table state
 
                   // Visibility
-                  // this isn't very performant when there are many changes - is there a better way?
                   // This code is building a new columnVisibility state object from the card state and doing a single setState on the table
                   // vs doing a setState on every changed column individually
                   const newColumnVisibility = Object.fromEntries(cards.map(c => Object.values(c)));
@@ -147,29 +156,31 @@ const ManageColumns = ({ columns, columnOrder, defaultColumnOrder, setColumnOrde
                 </Button>
                 <Button
                   variation="ghost"
+                  className="ds-l-col--6 ds-l-sm-col--auto"
                   onClick={() => {
                     setModalOpen(false)
-                    setCards(columns.map(c => {
-                      return {id: c.id, visible: c.getIsVisible()}
-                    }));
+                    resetCards();
                   }}
                 >
                   Cancel
                 </Button>
               </div>
-              <Button
-                variation="ghost"
-                onClick={() => {
-                  // reset to default column order and set all cards to visible
-                  // do not save this to the table state until the "Save" button is clicked
-                  setCards(defaultColumnOrder.map(column => {
-                    const card = cards.filter(c => c.id === column)[0]
-                    return {...card, visible: true }
-                  }));
-                }}
-              >
-                Reset Columns
-              </Button>
+              <div className="ds-l-col--12 ds-l-sm-col--auto ds-u-padding-x--0 ds-u-padding-top--1 ds-u-sm-padding-y--0">
+                <Button
+                  variation="ghost"
+                  className="ds-l-col--6 ds-l-sm-col--auto"
+                  onClick={() => {
+                    // reset to default column order and set all cards to visible
+                    // do not save this to the table state until the "Save" button is clicked
+                    setCards(defaultColumnOrder.map(column => {
+                      const card = cards.filter(c => c.id === column)[0]
+                      return {...card, visible: true }
+                    }));
+                  }}
+                >
+                  Reset Columns
+                </Button>
+              </div>
             </div>
           )}
         >
@@ -208,6 +219,7 @@ const ManageColumns = ({ columns, columnOrder, defaultColumnOrder, setColumnOrde
               </ul>
             </SortableContext>
           </DndContext>
+          <div className='sr-only aria-live-feedback' aria-live='assertive' aria-atomic='true'>{ariaLiveFeedback}</div>
         </Dialog>
       </div>
     </>

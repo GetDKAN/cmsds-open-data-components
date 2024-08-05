@@ -1,3 +1,4 @@
+import React from "react";
 import { CSSProperties } from "react";
 import { Choice } from "@cmsgov/design-system";
 import { useSortable } from "@dnd-kit/sortable";
@@ -11,7 +12,7 @@ const Card = ({id, visible, updateVisibility}: {id: string, visible: boolean, up
   const style: CSSProperties = {
     transform: CSS.Transform.toString(transform),
     transition,
-    opacity: isDragging ? 0.8 : 1,
+    opacity: isDragging ? 0.7 : 1,
     zIndex: isDragging ? 1 : 0,
     position: 'relative',
     background: 'white',
@@ -45,12 +46,13 @@ const Card = ({id, visible, updateVisibility}: {id: string, visible: boolean, up
         checked={visible}
         className="ds-l-col--10 ds-u-margin-top--0 ds-u-margin-y--1 ds-u-padding-x--3"
         labelClassName="dc-truncate"
+        title="Toggle Column Visible"
         value=""
         onChange={() => {
           updateVisibility(id, !visible)
         }}
       />
-      <button className="ds-l-col--2 dkan-manage-columns-reorder-button">
+      <button className={`ds-l-col--2 dkan-manage-columns-reorder-button ${isDragging && 'grabbed'}`} aria-label={`Reorder ${id} column`}>
         <span className="fa fa-sort"></span>
       </button>
     </li>

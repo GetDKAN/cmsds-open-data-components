@@ -27,6 +27,10 @@ dialog.dkan-manage-columns-dialog {
     .dkan-manage-columns-reorder-button {
       background: none;
       border: none;
+
+      &.grabbed {
+        background-color: var(--color-primary-lighter);
+      }
     }
   }
 }
@@ -45,7 +49,7 @@ dialog.dkan-manage-columns-dialog {
       flex-direction: column;
     }
     .dkan-manage-columns-list {
-      max-height: calc(100vh - 420px); /* approx height of all other dialog elements */
+      max-height: calc(100vh - 435px); /* approx height of all other dialog elements */
     }
 
     .ds-c-dialog__actions {
