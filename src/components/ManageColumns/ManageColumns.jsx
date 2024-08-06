@@ -46,7 +46,7 @@ class ExcludeCheckboxPointerSensor extends PointerSensor {
   ]
 }
 
-const ManageColumns = ({ columns, defaultColumnOrder, setColumnOrder, setColumnVisibility }) => {
+const ManageColumns = ({ id, columns, defaultColumnOrder, setColumnOrder, setColumnVisibility }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [ariaLiveFeedback, setAriaLiveFeedback] = useState();
 
@@ -148,8 +148,11 @@ const ManageColumns = ({ columns, defaultColumnOrder, setColumnOrder, setColumnV
                   setColumnOrder(newCardOrder);
 
                   // save to localStorage
-                  localStorage.setItem("tableColumnOrder", JSON.stringify(newCardOrder));
-                  localStorage.setItem("tableColumnVisibility", JSON.stringify(newColumnVisibility));
+                  const localStorageData = {
+                    tableColumnOrder: newCardOrder,
+                    tableColumnVisibility: newColumnVisibility
+                  }
+                  localStorage.setItem(id, JSON.stringify(localStorageData))
                 }}
                 >
                   Save

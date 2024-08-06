@@ -85,6 +85,7 @@ const DatasetTable = ({
           /> }
         <div className="ds-u-border-x--1 ds-u-border-bottom--1">
           <DataTable
+            id={id}
             data={resource.values}
             canResize={true}
             columns={columns}

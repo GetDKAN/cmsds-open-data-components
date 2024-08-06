@@ -13,6 +13,7 @@ import "./datatable.scss";
 import ManageColumns from "../ManageColumns/ManageColumns";
 
 const DataTable = ({
+  id,
   data,
   columns,
   setSort,
@@ -40,17 +41,16 @@ const DataTable = ({
       })
     )
   })
+  const localStorageData = JSON.parse(localStorage.getItem(id));
   const [columnOrder, setColumnOrder] = useState(() => {
-    const storedColumnOrder = JSON.parse(localStorage.getItem('tableColumnOrder'));
-    if (manageColumnsEnabled && storedColumnOrder)
-      return storedColumnOrder;
+    if (manageColumnsEnabled && localStorageData)
+      return localStorageData.tablecolumnOrder;
     else
       return table_columns.map(c => c.accessorKey);
   })
   const [columnVisibility, setColumnVisibility] = useState(() => {
-    const storedColumnVisibility = JSON.parse(localStorage.getItem('tableColumnVisibility'));
-    if (manageColumnsEnabled && storedColumnVisibility)
-      return storedColumnVisibility;
+    if (manageColumnsEnabled && localStorageData)
+      return localStorageData.tableColumnVisibility;
     else
       return {};
   })
@@ -97,6 +97,7 @@ const DataTable = ({
       { manageColumnsEnabled && (
         <div>
           <ManageColumns
+            id={id}
             columns={table.getAllLeafColumns()}
             columnOrder={columnOrder}
             defaultColumnOrder={defaultColumnOrder} 
