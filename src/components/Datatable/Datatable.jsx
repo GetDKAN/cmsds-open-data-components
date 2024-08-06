@@ -44,7 +44,7 @@ const DataTable = ({
   const localStorageData = JSON.parse(localStorage.getItem(id));
   const [columnOrder, setColumnOrder] = useState(() => {
     if (manageColumnsEnabled && localStorageData)
-      return localStorageData.tablecolumnOrder;
+      return localStorageData.tableColumnOrder;
     else
       return table_columns.map(c => c.accessorKey);
   })
