@@ -46,7 +46,6 @@ const Card = ({id, visible, updateVisibility}: {id: string, visible: boolean, up
         checked={visible}
         className="ds-l-col--10 ds-u-margin-top--0 ds-u-margin-y--1 ds-u-padding-x--3"
         labelClassName="dc-truncate"
-        title="Toggle Column Visible"
         value=""
         onChange={() => {
           updateVisibility(id, !visible)
