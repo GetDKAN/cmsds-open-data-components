@@ -2,6 +2,8 @@
 export { default as ErrorBoundary } from './components/ErrorBoundary';
 export { default as FAQAccordion } from './components/FAQAccordion';
 export { default as NavBar } from './components/NavBar';
+export { default as SidebarNavigation } from './components/SidebarNavigation';
+export { default as SidebarPage } from './components/SidebarPage';
 
 
 // Templates

@@ -6,3 +6,10 @@ export type FAQItemType = {
   body: ReactNode,
   open: boolean
 }
+
+export type MenuLinkType = {
+  id: string,
+  label: string,
+  url: string,
+  target: string
+}
