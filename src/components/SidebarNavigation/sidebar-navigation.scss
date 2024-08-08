@@ -1,0 +1,21 @@
+div.dkan-c-sidebar-nav {
+  border-top: 8px solid var(--color-secondary) !important;
+  border-radius: 4px;
+}
+
+.dkan-c-sidebar-nav ul {
+  list-style: none;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.dkan-c-sidebar-nav-link-status {
+  border: 2px solid var(--color-gray-lighter);
+  border-radius: 2px;
+}
+
+.active .dkan-c-sidebar-nav-link-status {
+  border: 2px solid var(--color-primary-darker);
+  border-radius: 2px;
+}
