@@ -47,7 +47,8 @@ const Dataset = ({
   borderlessTabs = false,
   defaultPageSize = 25,
   dataDictionaryCSV = false,
-  dataDictionaryBanner = false
+  dataDictionaryBanner = false,
+  manageColumnsEnabled = false,
 } : DatasetPageType) => {
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
@@ -182,6 +183,7 @@ const Dataset = ({
                         rootUrl={rootUrl}
                         customColumns={customColumns}
                         dataDictionaryBanner={dataDictionaryBanner && displayDataDictionaryTab}
+                        manageColumnsEnabled={manageColumnsEnabled}
                       />
                     </TabPanel>
                   )}

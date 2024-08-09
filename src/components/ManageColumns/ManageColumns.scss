@@ -1,0 +1,62 @@
+dialog.dkan-manage-columns-dialog {
+  height: 80vh;
+  width: 100%;
+  .ds-c-dialog__window {
+    min-width: 768px; // TODO responsive
+    padding: 0;
+    .ds-c-dialog__header {
+      padding: 24px;
+    }
+  }
+  .dkan-manage-columns-list {
+    list-style: none;
+    gap: 0;
+    max-height: 350px; // TODO responsive
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+
+    li {
+      cursor: pointer;
+    }
+
+    .ds-c-choice-wrapper {
+      margin-top: 0;
+    }
+
+    .dkan-manage-columns-reorder-button {
+      background: none;
+      border: none;
+
+      &.grabbed {
+        background-color: var(--color-primary-lighter);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  dialog.dkan-manage-columns-dialog  {
+    height: 100%;
+    .ds-c-dialog__window {
+      margin-top: 0;
+      width: 100%;
+      min-width: auto;
+      height: 100%;
+    }
+    .ds-c-dialog__body > div:not(.ds-c-dialog__actions) {
+      display: flex;
+      flex-direction: column;
+    }
+    .dkan-manage-columns-list {
+      max-height: calc(100vh - 435px); /* approx height of all other dialog elements */
+    }
+
+    .ds-c-dialog__actions {
+      position:absolute;
+      bottom: 0;
+      background-color: white;
+      padding-top: 16px;
+    }
+  }
+}
