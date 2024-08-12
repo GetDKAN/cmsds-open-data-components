@@ -46,9 +46,15 @@ class ExcludeCheckboxPointerSensor extends PointerSensor {
   ]
 }
 
-const ManageColumns = ({ id, columns, defaultColumnOrder, setColumnOrder, setColumnVisibility }) => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [ariaLiveFeedback, setAriaLiveFeedback] = useState();
+const ManageColumns = ({
+    id,
+    columns,
+    defaultColumnOrder,
+    setColumnOrder,
+    setColumnVisibility,
+    modalOpen,
+    setModalOpen
+   }) => {
 
   // maintain card state separately from table state - only sync states when the Save button is pressed
   const [cards, setCards] = useState(columns.map(c => {
@@ -69,8 +75,6 @@ const ManageColumns = ({ id, columns, defaultColumnOrder, setColumnOrder, setCol
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
-
-  const hiddenColumns = columns.filter(c => c.getIsVisible() === false ).length;
   const cardHiddenColumns = cards.filter(c => c.visible === false).length
 
   const updateVisibility = useCallback((id, newVisibility) => {
@@ -99,133 +103,114 @@ const ManageColumns = ({ id, columns, defaultColumnOrder, setColumnOrder, setCol
   }
 
   return (
-    <>
-      <div className='ds-u-border-top--1 ds-u-fill--gray-lightest ds-u-display--flex ds-u-justify-content--between'>
-        <div>
-          {hiddenColumns > 0 && (
-            <Alert variation="warn">{hiddenColumns} Columns Hidden</Alert>
-          )}
-        </div>
-        <button
-          aria-label='Manage columns - Opens in a dialog'
-          icon='columns'
-          text='Manage columns'
-          className="ds-c-button ds-c-button--ghost ds-u-margin-y--1"
-          onClick={() => {
-            setModalOpen(true)
-          }}
-        ><i className="far fa-cog ds-u-margin-right--1"></i>Manage Columns</button>
-      </div>
-      <div className={`ds-c-dialog-wrap${modalOpen ? ' open' : ''}`}>
-        <Dialog
-        heading='Manage columns'
-          isOpen={modalOpen}
-          onExit={() => {
-            setModalOpen(false);
-            resetCards();
-          }}
-          className="dkan-manage-columns-dialog"
-          actions={(
-            <div className='ds-u-display--flex ds-u-justify-content--between ds-u-flex-wrap--wrap ds-u-padding-x--3 ds-u-padding-bottom--1 ds-u-sm-padding-bottom--3'>
-              <div className="ds-l-col--12 ds-l-sm-col--auto ds-u-padding-x--0">
-                <Button
-                variation="solid"
+    <div className={`ds-c-dialog-wrap${modalOpen ? ' open' : ''}`}>
+      <Dialog
+      heading='Manage columns'
+        isOpen={modalOpen}
+        onExit={() => {
+          setModalOpen(false);
+          resetCards();
+        }}
+        className="dkan-manage-columns-dialog"
+        actions={(
+          <div className='ds-u-display--flex ds-u-justify-content--between ds-u-flex-wrap--wrap ds-u-padding-x--3 ds-u-padding-bottom--1 ds-u-sm-padding-bottom--3'>
+            <div className="ds-l-col--12 ds-l-sm-col--auto ds-u-padding-x--0">
+              <Button
+              variation="solid"
+              className="ds-l-col--6 ds-l-sm-col--auto"
+              onClick={() => {
+                setModalOpen(false);
+                // update table state
+
+                // Visibility
+                // This code is building a new columnVisibility state object from the card state and doing a single setState on the table
+                // vs doing a setState on every changed column individually
+                const newColumnVisibility = Object.fromEntries(cards.map(c => Object.values(c)));
+                setColumnVisibility(newColumnVisibility);
+
+                // Card order
+                const newCardOrder = cards.map(c => {
+                  return c.id;
+                });
+                setColumnOrder(newCardOrder);
+
+                // save to localStorage
+                const localStorageData = {
+                  tableColumnOrder: newCardOrder,
+                  tableColumnVisibility: newColumnVisibility
+                }
+                localStorage.setItem(id, JSON.stringify(localStorageData))
+              }}
+              >
+                Save
+              </Button>
+              <Button
+                variation="ghost"
                 className="ds-l-col--6 ds-l-sm-col--auto"
                 onClick={() => {
-                  setModalOpen(false);
-                  // update table state
-
-                  // Visibility
-                  // This code is building a new columnVisibility state object from the card state and doing a single setState on the table
-                  // vs doing a setState on every changed column individually
-                  const newColumnVisibility = Object.fromEntries(cards.map(c => Object.values(c)));
-                  setColumnVisibility(newColumnVisibility);
-
-                  // Card order
-                  const newCardOrder = cards.map(c => {
-                    return c.id;
-                  });
-                  setColumnOrder(newCardOrder);
-
-                  // save to localStorage
-                  const localStorageData = {
-                    tableColumnOrder: newCardOrder,
-                    tableColumnVisibility: newColumnVisibility
-                  }
-                  localStorage.setItem(id, JSON.stringify(localStorageData))
+                  setModalOpen(false)
+                  resetCards();
                 }}
-                >
-                  Save
-                </Button>
-                <Button
-                  variation="ghost"
-                  className="ds-l-col--6 ds-l-sm-col--auto"
-                  onClick={() => {
-                    setModalOpen(false)
-                    resetCards();
-                  }}
-                >
-                  Cancel
-                </Button>
-              </div>
-              <div className="ds-l-col--12 ds-l-sm-col--auto ds-u-padding-x--0 ds-u-padding-top--1 ds-u-sm-padding-y--0">
-                <Button
-                  variation="ghost"
-                  className="ds-l-col--6 ds-l-sm-col--auto"
-                  onClick={() => {
-                    // reset to default column order and set all cards to visible
-                    // do not save this to the table state until the "Save" button is clicked
-                    setCards(defaultColumnOrder.map(column => {
-                      const card = cards.filter(c => c.id === column)[0]
-                      return {...card, visible: true }
-                    }));
-                  }}
-                >
-                  Reset Columns
-                </Button>
-              </div>
+              >
+                Cancel
+              </Button>
             </div>
-          )}
-        >
-          <p id='reorder-help' className='ds-u-padding-x--3'>Activate the reorder button and use the arrow keys to reorder the list or use your mouse to drag/reorder. Press escape to cancel the reordering.</p>
-          <Choice
-            checked={cardHiddenColumns === 0}
-            type='checkbox'
-            onChange={() => {
-              setCards(cards.map(c => {
-                return {...c, visible: cardHiddenColumns !== 0}
-              }))
-            }}
-            className='ds-u-padding-x--3'
-            name=''
-            value=''
-            label='Select all'
-            hint={cardHiddenColumns && cardHiddenColumns + " columns hidden"}
-          />
-          <div className='ds-u-display--flex ds-u-justify-content--between ds-u-font-weight--bold ds-u-padding-y--2 ds-u-padding-x--3 ds-u-border-y--1 ds-u-margin-top--2'>
-            <span>Display column</span>
-            <span>Reorder</span>
+            <div className="ds-l-col--12 ds-l-sm-col--auto ds-u-padding-x--0 ds-u-padding-top--1 ds-u-sm-padding-y--0">
+              <Button
+                variation="ghost"
+                className="ds-l-col--6 ds-l-sm-col--auto"
+                onClick={() => {
+                  // reset to default column order and set all cards to visible
+                  // do not save this to the table state until the "Save" button is clicked
+                  setCards(defaultColumnOrder.map(column => {
+                    const card = cards.filter(c => c.id === column)[0]
+                    return {...card, visible: true }
+                  }));
+                }}
+              >
+                Reset Columns
+              </Button>
+            </div>
           </div>
-          <DndContext
-            collisionDetection={closestCenter}
-            modifiers={[restrictToVerticalAxis]}
-            sensors={sensors}
-            onDragEnd={handleDragEnd}
-          >
-            <SortableContext items={cardOrder} strategy={verticalListSortingStrategy}>
-              <ul className="dkan-manage-columns-list">
-                {cards.map((card) => {
-                  return (
-                    <Card id={card.id} visible={card.visible} key={card.id} updateVisibility={updateVisibility} />
-                  )
-                })}
-              </ul>
-            </SortableContext>
-          </DndContext>
-          <div className='sr-only aria-live-feedback' aria-live='assertive' aria-atomic='true'>{ariaLiveFeedback}</div>
-        </Dialog>
-      </div>
-    </>
+        )}
+      >
+        <p id='reorder-help' className='ds-u-padding-x--3'>Activate the reorder button and use the arrow keys to reorder the list or use your mouse to drag/reorder. Press escape to cancel the reordering.</p>
+        <Choice
+          checked={cardHiddenColumns === 0}
+          type='checkbox'
+          onChange={() => {
+            setCards(cards.map(c => {
+              return {...c, visible: cardHiddenColumns !== 0}
+            }))
+          }}
+          className='ds-u-padding-x--3'
+          name=''
+          value=''
+          label='Select all'
+          hint={cardHiddenColumns && cardHiddenColumns + " columns hidden"}
+        />
+        <div className='ds-u-display--flex ds-u-justify-content--between ds-u-font-weight--bold ds-u-padding-y--2 ds-u-padding-x--3 ds-u-border-y--1 ds-u-margin-top--2'>
+          <span>Display column</span>
+          <span>Reorder</span>
+        </div>
+        <DndContext
+          collisionDetection={closestCenter}
+          modifiers={[restrictToVerticalAxis]}
+          sensors={sensors}
+          onDragEnd={handleDragEnd}
+        >
+          <SortableContext items={cardOrder} strategy={verticalListSortingStrategy}>
+            <ul className="dkan-manage-columns-list">
+              {cards.map((card) => {
+                return (
+                  <Card id={card.id} visible={card.visible} key={card.id} updateVisibility={updateVisibility} />
+                )
+              })}
+            </ul>
+          </SortableContext>
+        </DndContext>
+      </Dialog>
+    </div>
   )
 }
 

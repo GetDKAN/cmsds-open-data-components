@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useContext } from "react";
 import {
   useReactTable,
   flexRender,
@@ -10,21 +10,24 @@ import { Spinner, Alert } from "@cmsgov/design-system";
 import TruncatedResizeableTHead from "./TruncatedResizeableTHead";
 import FixedSizeTHead from "./FixedSizeTHead";
 import "./datatable.scss";
-import ManageColumns from "../ManageColumns/ManageColumns";
+import DataTableControls from "../DataTableControls";
+import { DataTableContext } from "../../templates/Dataset";
 
 const DataTable = ({
-  id,
-  data,
   columns,
   setSort,
   sortTransform,
   tablePadding,
   canResize,
   loading = false,
-  manageColumnsEnabled,
+  isModal,
 }) => {
+  const { id, resource, manageColumnsEnabled } = useContext(DataTableContext);
+
+  const data = resource.values;
   const [ sorting, setSorting ] = React.useState([])
-  const [ariaLiveFeedback, setAriaLiveFeedback] = useState('')
+  const [ariaLiveFeedback, setAriaLiveFeedback] = useState('');
+
   const columnHelper = createColumnHelper()
   const table_columns = columns.map((col) => {
     if (col.cell) {
@@ -42,6 +45,7 @@ const DataTable = ({
     )
   })
   const localStorageData = JSON.parse(localStorage.getItem(id));
+  
   const [columnOrder, setColumnOrder] = useState(() => {
     if (manageColumnsEnabled && localStorageData)
       return localStorageData.tableColumnOrder;
@@ -88,21 +92,20 @@ const DataTable = ({
     setSort(normalizedSort);
   }, [sorting]);
 
-  const defaultColumnOrder = useMemo(() => table_columns.map(column => {
-    return column.accessorKey
-  }));
+  const defaultColumnOrder = useMemo(() => table_columns.map(column => column.accessorKey), []);
 
   return(
     <>
       { manageColumnsEnabled && (
         <div>
-          <ManageColumns
+          <DataTableControls
             id={id}
             columns={table.getAllLeafColumns()}
+            defaultColumnOrder={defaultColumnOrder}
             columnOrder={columnOrder}
-            defaultColumnOrder={defaultColumnOrder} 
             setColumnOrder={setColumnOrder}
             setColumnVisibility={setColumnVisibility}
+            isModal={isModal}
           />
         </div>
       )}

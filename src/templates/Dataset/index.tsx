@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import DOMPurify from 'dompurify';
 import qs from 'qs';
@@ -18,6 +18,9 @@ import { DatasetDictionaryItemType, DatasetPageType, DatasetDictionaryType, Dist
 import TransformedDate from '../../components/TransformedDate';
 import { getFormatType } from '../../utilities/format';
 import './dataset.scss';
+
+// create context
+export const DataTableContext = createContext({})
 
 const getDataDictionary = (dataDictionaryUrl : string, additionalParams: any) => {
   const {data, isPending, error} = useQuery({
@@ -176,15 +179,17 @@ const Dataset = ({
                       }
                       className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
                     >
-                      <DatasetTable
-                        id={id}
-                        distribution={distribution}
-                        resource={resource}
-                        rootUrl={rootUrl}
-                        customColumns={customColumns}
-                        dataDictionaryBanner={dataDictionaryBanner && displayDataDictionaryTab}
-                        manageColumnsEnabled={manageColumnsEnabled}
-                      />
+                      <DataTableContext.Provider value={{
+                        id: id,
+                        resource: resource,
+                        distribution: distribution,
+                        rootUrl: rootUrl,
+                        customColumns: customColumns,
+                        dataDictionaryBanner: (dataDictionaryBanner && displayDataDictionaryTab),
+                        manageColumnsEnabled: manageColumnsEnabled
+                      }}>
+                        <DatasetTable />
+                      </DataTableContext.Provider>
                     </TabPanel>
                   )}
                   <TabPanel

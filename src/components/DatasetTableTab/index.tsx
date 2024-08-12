@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import qs from 'qs';
 import DataTable from '../Datatable/Datatable';
 import { transformTableSortToQuerySort } from '../../services/useDatastore/transformSorts';
 import { buildCustomColHeaders } from '../../templates/FilteredResource/functions';
-import { Pagination, Dropdown, Spinner, Alert } from '@cmsgov/design-system';
+import { Pagination, Spinner, Alert } from '@cmsgov/design-system';
 import DataTableHeader from '../DatatableHeader';
 import QueryBuilder from '../QueryBuilder';
 import { DistributionType, ColumnType, ResourceType } from '../../types/dataset';
+import { DataTableContext } from '../../templates/Dataset';
 
 export function prepareColumns(columns : any, schema : any) {
   return columns.map((column : any) => ({
@@ -22,23 +23,13 @@ type DatasetTableTabProps = {
   resource: ResourceType,
   rootUrl: string,
   customColumns: Array<ColumnType>,
-  jsonUrl?: string,
   dataDictionaryBanner: boolean,
   manageColumnsEnabled: boolean,
 }
 
-const DatasetTable = ({
-    id,
-    distribution,
-    resource,
-    rootUrl,
-    customColumns = [],
-    jsonUrl = undefined,
-    dataDictionaryBanner,
-    manageColumnsEnabled,
-   }
-  : DatasetTableTabProps
-  ) => {
+const DatasetTable = ({isModal = false}) => {
+  const {id, distribution, resource, rootUrl, customColumns = [], dataDictionaryBanner } = useContext(DataTableContext) as DatasetTableTabProps
+
   const defaultPage = 1;
   const defaultPageSize = 10;
   const [page, setPage] = useState(defaultPage);
@@ -53,7 +44,7 @@ const DatasetTable = ({
     ? customColumnHeaders
     : prepareColumns(resource.columns, resource.schema[id]);
 
-  const { limit, setLimit, setOffset } = resource;
+  const { limit, setOffset } = resource;
   const pageSize = limit ? limit : defaultPageSize;
 
   const downloadURL = `${rootUrl}/datastore/query/${id}/0/download?${qs.stringify(
@@ -70,7 +61,7 @@ const DatasetTable = ({
     return (
       <>
         <QueryBuilder resource={resource} id={distribution.identifier} customColumns={customColumnHeaders} />
-        {dataDictionaryBanner && (
+        {(dataDictionaryBanner && !isModal) && (
           <div>
             <Alert>Click on the "Data Dictionary" tab above for full column definitions</Alert>
           </div>
@@ -80,20 +71,17 @@ const DatasetTable = ({
             resource={resource}
             downloadURL={downloadURL}
             unfilteredDownloadURL={distribution.data.downloadURL}
-            jsonUrl={jsonUrl}
             setPage={setPage}
           /> }
         <div className="ds-u-border-x--1 ds-u-border-bottom--1">
           <DataTable
-            id={id}
-            data={resource.values}
             canResize={true}
             columns={columns}
             setSort={resource.setSort}
             sortTransform={transformTableSortToQuerySort}
             tablePadding={'ds-u-padding-y--2'}
             loading={resource.loading}
-            manageColumnsEnabled={manageColumnsEnabled}
+            isModal={isModal}
           />
         </div>
         {!resource.loading && (
