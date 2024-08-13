@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useMemo, useRef } from "react";
 import {
   useReactTable,
   flexRender,
@@ -10,8 +10,10 @@ import { Spinner, Alert } from "@cmsgov/design-system";
 import TruncatedResizeableTHead from "./TruncatedResizeableTHead";
 import FixedSizeTHead from "./FixedSizeTHead";
 import "./datatable.scss";
+import ManageColumns from "../ManageColumns/ManageColumns";
 
 const DataTable = ({
+  id,
   data,
   columns,
   setSort,
@@ -19,6 +21,7 @@ const DataTable = ({
   tablePadding,
   canResize,
   loading = false,
+  manageColumnsEnabled,
 }) => {
   const [ sorting, setSorting ] = React.useState([])
   const [ariaLiveFeedback, setAriaLiveFeedback] = useState('')
@@ -39,6 +42,19 @@ const DataTable = ({
       })
     )
   })
+  const localStorageData = JSON.parse(localStorage.getItem(id));
+  const [columnOrder, setColumnOrder] = useState(() => {
+    if (manageColumnsEnabled && localStorageData)
+      return localStorageData.tableColumnOrder;
+    else
+      return table_columns.map(c => c.accessorKey);
+  })
+  const [columnVisibility, setColumnVisibility] = useState(() => {
+    if (manageColumnsEnabled && localStorageData)
+      return localStorageData.tableColumnVisibility;
+    else
+      return {};
+  })
 
   const sortElement = (isSorted, onClickFn) => {
     if(isSorted === 'asc') {
@@ -55,13 +71,17 @@ const DataTable = ({
     columns: table_columns,
     manualSorting: true,
     state: {
-      sorting
+      columnOrder,
+      columnVisibility,
+      sorting,
     },
     columnResizeMode: 'onChange',
     onSortingChange: setSorting,
+    onColumnOrderChange: setColumnOrder,
+    onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    debugTable: false
+    debugTable: false,
   });
 
    React.useEffect(() => {
@@ -72,14 +92,29 @@ const DataTable = ({
   const tableWrapperWidth = () => {
     if (dataTableWrapperElement.current) {
       return dataTableWrapperElement.current.offsetWidth;
-      
     }
 
     return 'auto';
   };
 
+  const defaultColumnOrder = useMemo(() => table_columns.map(column => {
+    return column.accessorKey
+  }));
+
   return(
     <>
+      { manageColumnsEnabled && (
+        <div>
+          <ManageColumns
+            id={id}
+            columns={table.getAllLeafColumns()}
+            columnOrder={columnOrder}
+            defaultColumnOrder={defaultColumnOrder} 
+            setColumnOrder={setColumnOrder}
+            setColumnVisibility={setColumnVisibility}
+          />
+        </div>
+      )}
       <div className="dc-c-datatable-wrapper" tabIndex={0} ref={dataTableWrapperElement}>
         <table
           {...{
