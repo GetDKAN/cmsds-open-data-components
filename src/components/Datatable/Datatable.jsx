@@ -21,6 +21,7 @@ const DataTable = ({
   canResize,
   loading = false,
   isModal,
+  closeFullScreenModal,
 }) => {
   const { id, resource, manageColumnsEnabled } = useContext(DataTableContext);
 
@@ -102,10 +103,10 @@ const DataTable = ({
             id={id}
             columns={table.getAllLeafColumns()}
             defaultColumnOrder={defaultColumnOrder}
-            columnOrder={columnOrder}
             setColumnOrder={setColumnOrder}
             setColumnVisibility={setColumnVisibility}
             isModal={isModal}
+            closeFullScreenModal={closeFullScreenModal}
           />
         </div>
       )}

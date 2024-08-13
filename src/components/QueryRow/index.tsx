@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
+import { useMediaQuery } from 'react-responsive';
 import { Button, Dropdown, TextField } from '@cmsgov/design-system';
 import { buildOperatorOptions, convertUTCToLocalDate, cleanText } from '../../templates/FilteredResource/functions';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -20,6 +21,9 @@ const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schem
   const [property, setProperty] = useState(condition.property);
   const [value, setValue] = useState(condition.value);
   const [startDate, setStartDate] = React.useState(getStartDate(condition, schema, id));
+
+  const xl = useMediaQuery({minWidth: 1280})
+
   useEffect(() => {
     if (property !== condition.property) {
       if (property) {

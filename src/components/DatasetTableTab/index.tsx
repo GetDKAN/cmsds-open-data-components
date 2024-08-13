@@ -27,7 +27,7 @@ type DatasetTableTabProps = {
   manageColumnsEnabled: boolean,
 }
 
-const DatasetTable = ({isModal = false}) => {
+const DatasetTable = ({isModal = false, closeFullScreenModal} : {isModal?: boolean, closeFullScreenModal?: Function}) => {
   const {id, distribution, resource, rootUrl, customColumns = [], dataDictionaryBanner } = useContext(DataTableContext) as DatasetTableTabProps
 
   const defaultPage = 1;
@@ -60,7 +60,7 @@ const DatasetTable = ({isModal = false}) => {
   ) {
     return (
       <>
-        <QueryBuilder resource={resource} id={distribution.identifier} customColumns={customColumnHeaders} />
+        <QueryBuilder resource={resource} id={distribution.identifier} customColumns={customColumnHeaders} isModal={isModal} />
         {(dataDictionaryBanner && !isModal) && (
           <div>
             <Alert>Click on the "Data Dictionary" tab above for full column definitions</Alert>
@@ -73,7 +73,7 @@ const DatasetTable = ({isModal = false}) => {
             unfilteredDownloadURL={distribution.data.downloadURL}
             setPage={setPage}
           /> }
-        <div className="ds-u-border-x--1 ds-u-border-bottom--1">
+        <div className={`ds-u-border-x--1 ds-u-border-bottom--1 ${isModal && 'dkan-datatable-fullscreen-mode'}`}>
           <DataTable
             canResize={true}
             columns={columns}
@@ -82,9 +82,10 @@ const DatasetTable = ({isModal = false}) => {
             tablePadding={'ds-u-padding-y--2'}
             loading={resource.loading}
             isModal={isModal}
+            closeFullScreenModal={closeFullScreenModal}
           />
         </div>
-        {!resource.loading && (
+        {(!resource.loading) && (
           <div className="ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--end ds-u-md-justify-content--between ds-u-margin-top--2 ds-u-align-items--center">
             <Pagination
               totalPages={Math.ceil(resource.count ? resource.count / pageSize : 1)}

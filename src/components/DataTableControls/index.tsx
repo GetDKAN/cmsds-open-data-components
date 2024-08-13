@@ -3,7 +3,18 @@ import { Alert } from "@cmsgov/design-system";
 import ManageColumns from "../ManageColumns/ManageColumns";
 import FullScreenDataTable from "../FullScreenDataTable";
 
-const DataTableControls = ({id, columns, defaultColumnOrder, columnOrder, setColumnOrder, setColumnVisibility, isModal}) => {
+const DataTableControls = (
+  {id, columns, defaultColumnOrder, columnOrder, setColumnOrder, setColumnVisibility, isModal, closeFullScreenModal} : {
+    id: string,
+    columns: Array<any>,
+    defaultColumnOrder: Array<string>,
+    columnOrder: Array<string>,
+    setColumnOrder: Function,
+    setColumnVisibility: Function,
+    isModal: boolean,
+    closeFullScreenModal: Function
+  }
+) => {
   const [manageColumnsModalOpen, setManageColumnsModalOpen] = useState(false);
   const [fullScreenModalOpen, setFullScreenModalOpen] = useState(false);
 
@@ -17,30 +28,32 @@ const DataTableControls = ({id, columns, defaultColumnOrder, columnOrder, setCol
             <Alert variation="warn">{hiddenColumns} Columns Hidden</Alert>
           )}
         </div>
-        <button
-          aria-label='Manage columns - Opens in a dialog'
-          icon='columns'
-          text='Manage columns'
-          className="ds-c-button ds-c-button--ghost ds-u-margin-y--1"
-          onClick={() => {
-            setManageColumnsModalOpen(true)
-          }}
-        ><i className="far fa-cog ds-u-margin-right--1"></i>Manage Columns</button>
-        <button
-          aria-label='Full Screen mode - Opens in a dialog'
-          icon='fullscreen'
-          text='Full Screen'
-          className="ds-c-button ds-c-button--ghost ds-u-margin-y--1"
-          onClick={() => {
-            setFullScreenModalOpen(true)
-          }}
-        ><i className="far fa-cog ds-u-margin-right--1"></i>FullScreen</button>
+        <div>
+          <button
+            aria-label='Manage columns - Opens in a dialog'
+            className="ds-c-button ds-c-button--ghost ds-u-margin-y--1"
+            onClick={() => {
+              setManageColumnsModalOpen(true)
+            }}
+          ><i className="far fa-cog ds-u-margin-right--1"></i>Manage Columns</button>
+          <button
+            aria-label='Full Screen mode - Opens in a dialog'
+            className="ds-c-button ds-c-button--ghost ds-u-margin-y--1"
+            onClick={() => {
+              // todo if in modal needs to close the original modal
+              if (isModal) {
+                closeFullScreenModal();
+              } else {
+                setFullScreenModalOpen(true)
+              }
+            }}
+          ><i className={`fa ${isModal ? 'fa-compress' : 'fa-expand'} ds-u-margin-right--1`}></i>{isModal ? "Exit Full Screen" : "Full Screen"}</button>
+        </div>
       </div>
       <div>
         <ManageColumns
           id={id}
           columns={columns}
-          columnOrder={columnOrder}
           defaultColumnOrder={defaultColumnOrder} 
           setColumnOrder={setColumnOrder}
           setColumnVisibility={setColumnVisibility}
