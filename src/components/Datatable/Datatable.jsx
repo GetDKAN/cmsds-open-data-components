@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useRef } from "react";
 import {
   useReactTable,
   flexRender,
@@ -10,10 +10,8 @@ import { Spinner, Alert } from "@cmsgov/design-system";
 import TruncatedResizeableTHead from "./TruncatedResizeableTHead";
 import FixedSizeTHead from "./FixedSizeTHead";
 import "./datatable.scss";
-import ManageColumns from "../ManageColumns/ManageColumns";
 
 const DataTable = ({
-  id,
   data,
   columns,
   setSort,
@@ -21,10 +19,10 @@ const DataTable = ({
   tablePadding,
   canResize,
   loading = false,
-  manageColumnsEnabled,
 }) => {
   const [ sorting, setSorting ] = React.useState([])
   const [ariaLiveFeedback, setAriaLiveFeedback] = useState('')
+  const dataTableWrapperElement = useRef(null)
   const columnHelper = createColumnHelper()
   const table_columns = columns.map((col) => {
     if (col.cell) {
@@ -40,19 +38,6 @@ const DataTable = ({
         header: col.header,
       })
     )
-  })
-  const localStorageData = JSON.parse(localStorage.getItem(id));
-  const [columnOrder, setColumnOrder] = useState(() => {
-    if (manageColumnsEnabled && localStorageData)
-      return localStorageData.tableColumnOrder;
-    else
-      return table_columns.map(c => c.accessorKey);
-  })
-  const [columnVisibility, setColumnVisibility] = useState(() => {
-    if (manageColumnsEnabled && localStorageData)
-      return localStorageData.tableColumnVisibility;
-    else
-      return {};
   })
 
   const sortElement = (isSorted, onClickFn) => {
@@ -70,17 +55,13 @@ const DataTable = ({
     columns: table_columns,
     manualSorting: true,
     state: {
-      columnOrder,
-      columnVisibility,
-      sorting,
+      sorting
     },
     columnResizeMode: 'onChange',
     onSortingChange: setSorting,
-    onColumnOrderChange: setColumnOrder,
-    onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    debugTable: false,
+    debugTable: false
   });
 
    React.useEffect(() => {
@@ -88,29 +69,23 @@ const DataTable = ({
     setSort(normalizedSort);
   }, [sorting]);
 
-  const defaultColumnOrder = useMemo(() => table_columns.map(column => {
-    return column.accessorKey
-  }));
+  const tableWrapperWidth = () => {
+    if (dataTableWrapperElement.current) {
+      return dataTableWrapperElement.current.offsetWidth;
+      
+    }
+
+    return 'auto';
+  };
 
   return(
     <>
-      { manageColumnsEnabled && (
-        <div>
-          <ManageColumns
-            id={id}
-            columns={table.getAllLeafColumns()}
-            columnOrder={columnOrder}
-            defaultColumnOrder={defaultColumnOrder} 
-            setColumnOrder={setColumnOrder}
-            setColumnVisibility={setColumnVisibility}
-          />
-        </div>
-      )}
-      <div className="dc-c-datatable-wrapper" tabIndex={0}>
+      <div className="dc-c-datatable-wrapper" tabIndex={0} ref={dataTableWrapperElement}>
         <table
           {...{
             style: {
               width: canResize ? table.getCenterTotalSize() : "100%",
+              minWidth: tableWrapperWidth()
             },
           }}
           className="dc-c-datatable"
