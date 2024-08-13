@@ -1,0 +1,50 @@
+[
+    {
+      "pdc": "Modified",
+      "definition": "Most recent date on which the dataset was changed, updated or modified"
+    },
+    {
+      "pdc": "Released",
+      "definition": "xxx"
+    },
+    {
+      "pdc": "Issued",
+      "definition": "Dare of formal issuance\" Project Open Data uses lable \"Release"
+    },
+    {
+      "pdc": "Publisher",
+      "definition": "The publishing entity and optionally their parent organization(s)"
+    },
+    {
+      "pdc": "Identifier",
+      "definition": "A unique identifier for the dataset or API as maintained within an Agency catalog or database"
+    },
+    {
+      "pdc": "Contact",
+      "definition": "Contact name for the asset"
+    },
+    {
+      "pdc": "Contact Email",
+      "definition": "Contact name for the asset"
+    },
+    {
+      "pdc": "Public Access Level",
+      "definition": "The degree to which this dataset could be made pubicly-available. \nChoices:\npublic (data asset is or could be made publicly available to all without restrictions), \nrestricted public (Data aset is available under certain use restrictions) or \nnon-public (Data asset is not available to members of the public"
+    },
+    {
+      "pdc": "Homepage URL",
+      "definition": "This field is not intended for an agency's homepage (e.g. www.agency.gov) but rather if a datast has a human-friendly hub or landing page that users can be directed to for all resources tied to the dataset"
+    },
+    {
+      "pdc": "Bureau Code",
+      "definition": "Federal agencies, combined agency and bureau code from OMB Circular A-11, Appendix C (PDF, CSV in the format of 015:11."
+    },
+    {
+      "pdc": "Program Code",
+      "definition": "Federal agencies, list the primary program related to this data asset, from the Federal Program Inventory. Use the format of 015:001."
+    },
+    {
+      "pdc": "Tags",
+      "definition": "Tags (or keywords) help users discover your dataset; please include terms that would be used by technical and non-technical users."
+    }
+  ]
