@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef } from "react";
 import {
   useReactTable,
   flexRender,
@@ -25,6 +25,7 @@ const DataTable = ({
 }) => {
   const [ sorting, setSorting ] = React.useState([])
   const [ariaLiveFeedback, setAriaLiveFeedback] = useState('')
+  const dataTableWrapperElement = useRef(null)
   const columnHelper = createColumnHelper()
   const table_columns = columns.map((col) => {
     if (col.cell) {
@@ -88,6 +89,14 @@ const DataTable = ({
     setSort(normalizedSort);
   }, [sorting]);
 
+  const tableWrapperWidth = () => {
+    if (dataTableWrapperElement.current) {
+      return dataTableWrapperElement.current.offsetWidth;
+    }
+
+    return 'auto';
+  };
+
   const defaultColumnOrder = useMemo(() => table_columns.map(column => {
     return column.accessorKey
   }));
@@ -106,11 +115,12 @@ const DataTable = ({
           />
         </div>
       )}
-      <div className="dc-c-datatable-wrapper" tabIndex={0}>
+      <div className="dc-c-datatable-wrapper" tabIndex={0} ref={dataTableWrapperElement}>
         <table
           {...{
             style: {
               width: canResize ? table.getCenterTotalSize() : "100%",
+              minWidth: tableWrapperWidth()
             },
           }}
           className="dc-c-datatable"
