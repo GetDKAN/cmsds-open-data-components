@@ -4,13 +4,10 @@ import ManageColumns from "../ManageColumns/ManageColumns";
 import FullScreenDataTable from "../FullScreenDataTable";
 
 const DataTableControls = (
-  {id, columns, defaultColumnOrder, columnOrder, setColumnOrder, setColumnVisibility, isModal, closeFullScreenModal} : {
+  {id, columns, defaultColumnOrder, isModal, closeFullScreenModal} : {
     id: string,
     columns: Array<any>,
     defaultColumnOrder: Array<string>,
-    columnOrder: Array<string>,
-    setColumnOrder: Function,
-    setColumnVisibility: Function,
     isModal: boolean,
     closeFullScreenModal: Function
   }
@@ -55,8 +52,6 @@ const DataTableControls = (
           id={id}
           columns={columns}
           defaultColumnOrder={defaultColumnOrder} 
-          setColumnOrder={setColumnOrder}
-          setColumnVisibility={setColumnVisibility}
           modalOpen={manageColumnsModalOpen}
           setModalOpen={setManageColumnsModalOpen}
         />

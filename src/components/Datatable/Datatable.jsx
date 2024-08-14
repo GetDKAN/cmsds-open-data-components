@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useContext } from "react";
+import React, { useState, useMemo, useContext, useEffect } from "react";
 import {
   useReactTable,
   flexRender,
@@ -12,6 +12,7 @@ import FixedSizeTHead from "./FixedSizeTHead";
 import "./datatable.scss";
 import DataTableControls from "../DataTableControls";
 import { DataTableContext } from "../../templates/Dataset";
+import { ManageColumnsContext } from "../DatasetTableTab/DataTableStateWrapper";
 
 const DataTable = ({
   columns,
@@ -24,6 +25,7 @@ const DataTable = ({
   closeFullScreenModal,
 }) => {
   const { id, resource, manageColumnsEnabled } = useContext(DataTableContext);
+  const { columnOrder, setColumnOrder, columnVisibility, setColumnVisibility} = useContext(ManageColumnsContext);
 
   const data = resource.values;
   const [ sorting, setSorting ] = React.useState([])
@@ -45,19 +47,10 @@ const DataTable = ({
       })
     )
   })
-  const localStorageData = JSON.parse(localStorage.getItem(id));
-  
-  const [columnOrder, setColumnOrder] = useState(() => {
-    if (manageColumnsEnabled && localStorageData)
-      return localStorageData.tableColumnOrder;
-    else
-      return table_columns.map(c => c.accessorKey);
-  })
-  const [columnVisibility, setColumnVisibility] = useState(() => {
-    if (manageColumnsEnabled && localStorageData)
-      return localStorageData.tableColumnVisibility;
-    else
-      return {};
+
+  useEffect(() => {
+    if (!columnOrder.length)
+      setColumnOrder(table_columns.map(c => c.accessorKey))
   })
 
   const sortElement = (isSorted, onClickFn) => {
@@ -88,7 +81,7 @@ const DataTable = ({
     debugTable: false,
   });
 
-   React.useEffect(() => {
+  useEffect(() => {
     const normalizedSort = sortTransform ? sortTransform(sorting) : filters;
     setSort(normalizedSort);
   }, [sorting]);
@@ -103,8 +96,6 @@ const DataTable = ({
             id={id}
             columns={table.getAllLeafColumns()}
             defaultColumnOrder={defaultColumnOrder}
-            setColumnOrder={setColumnOrder}
-            setColumnVisibility={setColumnVisibility}
             isModal={isModal}
             closeFullScreenModal={closeFullScreenModal}
           />

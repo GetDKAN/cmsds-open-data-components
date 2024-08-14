@@ -14,13 +14,23 @@ import DatasetTable from '../../components/DatasetTableTab';
 import DatasetOverview from '../../components/DatasetOverviewTab';
 import DatasetAPI from '../../components/DatasetAPITab';
 import DataDictionary from '../../components/DatasetDataDictionaryTab';
-import { DatasetDictionaryItemType, DatasetPageType, DatasetDictionaryType, DistributionType, ResourceType } from '../../types/dataset';
+import { DatasetDictionaryItemType, DatasetPageType, DatasetDictionaryType, DistributionType, ResourceType, ColumnType } from '../../types/dataset';
 import TransformedDate from '../../components/TransformedDate';
 import { getFormatType } from '../../utilities/format';
 import './dataset.scss';
+import DataTableStateWrapper from '../../components/DatasetTableTab/DataTableStateWrapper';
 
 // create context
-export const DataTableContext = createContext({})
+type DataTableContextType = {
+  id: string | null,
+  resource?: ResourceType,
+  distribution?: DistributionType,
+  rootUrl?: string,
+  customColumns?: Array<ColumnType>,
+  dataDictionaryBanner?: boolean,
+  manageColumnsEnabled?: boolean
+}
+export const DataTableContext = createContext<DataTableContextType>({ id: null})
 
 const getDataDictionary = (dataDictionaryUrl : string, additionalParams: any) => {
   const {data, isPending, error} = useQuery({
@@ -188,7 +198,7 @@ const Dataset = ({
                         dataDictionaryBanner: (dataDictionaryBanner && displayDataDictionaryTab),
                         manageColumnsEnabled: manageColumnsEnabled
                       }}>
-                        <DatasetTable />
+                        <DataTableStateWrapper />
                       </DataTableContext.Provider>
                     </TabPanel>
                   )}

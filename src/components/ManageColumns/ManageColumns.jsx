@@ -1,9 +1,10 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy, sortableKeyboardCoordinates, arrayMove } from '@dnd-kit/sortable'
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
 import { Alert, Button, Choice, Dialog } from '@cmsgov/design-system'
 import Card from './Card'
+import { ManageColumnsContext } from '../DatasetTableTab/DataTableStateWrapper'
 import './ManageColumns.scss'
 
 class ExcludeCheckboxKeyboardSensor extends KeyboardSensor {
@@ -50,11 +51,11 @@ const ManageColumns = ({
     id,
     columns,
     defaultColumnOrder,
-    setColumnOrder,
-    setColumnVisibility,
     modalOpen,
     setModalOpen
    }) => {
+  
+  const {columnOrder, setColumnOrder, setColumnVisibility} = useContext(ManageColumnsContext);
 
   // maintain card state separately from table state - only sync states when the Save button is pressed
   const [cards, setCards] = useState(columns.map(c => {
@@ -64,6 +65,15 @@ const ManageColumns = ({
     cards.map(({id}) => id),
     [cards]
   );
+
+  // keep state in sync
+  useEffect(() => {
+    if (columnOrder.length)
+      setCards(columnOrder.map(c => {
+        const column = columns.filter(col => col.id === c)[0];
+        return {id: column.id, visible: column.getIsVisible()}
+      }))
+  }, [columnOrder])
 
   const sensors = useSensors(
     useSensor(ExcludeCheckboxPointerSensor, {
