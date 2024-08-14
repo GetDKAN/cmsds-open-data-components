@@ -1,9 +1,17 @@
 // Components
+export { default as CMSTopNav } from './components/CMSTopNav';
 export { default as ErrorBoundary } from './components/ErrorBoundary';
 export { default as FAQAccordion } from './components/FAQAccordion';
+export { default as HeaderNav } from './components/HeaderNav';
+export { default as HeaderNavIconLink } from './components/HeaderNavIconLink';
+export { default as HeaderSearch } from './components/HeaderSearch';
+export { default as HeaderSiteTitle } from './components/HeaderSiteTitle';
+export { default as HeaderTagline } from './components/HeaderTagline';
+export { default as MobileMenuButton } from './components/MobileMenuButton';
 export { default as NavBar } from './components/NavBar';
 export { default as SidebarNavigation } from './components/SidebarNavigation';
 export { default as SidebarPage } from './components/SidebarPage';
+export { default as SubMenu } from './components/SubMenu';
 
 
 // Templates
@@ -15,6 +23,9 @@ export { default as DatasetTable } from './components/DatasetTableTab';
 export { default as Header } from './templates/Header';
 export { default as Footer } from './templates/Footer';
 export { default as SpecsAndLimits } from './templates/SpecsAndLimits';
+
+// Context
+export { default as HeaderContext } from './templates/Header/HeaderContext';
 
 // Services
 export { default as useSearchAPI } from './services/useSearchAPI';
