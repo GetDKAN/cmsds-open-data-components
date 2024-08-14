@@ -1,0 +1,31 @@
+.dkan-c-header-search--modal-button {
+  &::before {
+    font-family: 'Font Awesome 6 Pro';
+    content: '\f002';
+    color: #{var(--color-white)};
+    font-size: 18px;
+    padding-right: 10px;
+    display: inline-block;
+    line-height: 18px;
+    height: 18px;
+    width: 18px;
+    margin-left: 10px;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: lighter;
+    box-sizing: content-box
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .dkan-c-header-search--modal-button span{
+    clip: rect(0, 0, 0, 0);
+    word-wrap: normal;
+    border: 0;
+    height: 1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+}

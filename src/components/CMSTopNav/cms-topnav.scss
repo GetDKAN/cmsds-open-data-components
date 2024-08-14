@@ -1,0 +1,29 @@
+.dkan-c-cms-topnav {
+  height: 51px;
+}
+
+.dkan-c-cms-topnav--tagline {
+  display: none;
+  color: #6f757c;
+}
+
+.dkan-c-cms-topnav .dkan-c-cms-topnav-menu a {
+  display: inline-block;
+  margin: 3px 7px;
+}
+
+@media screen and (max-width: 544px) {
+  .dkan-c-cms-topnav-menu {
+    display: none;
+  }
+}
+
+
+@media screen and (min-width: 1024px) {
+  .dkan-c-cms-topnav {
+    height: 85px;
+  }
+  .dkan-c-cms-topnav--tagline {
+    display: inline-block;
+  }
+}

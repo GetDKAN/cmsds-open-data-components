@@ -1,44 +1,49 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Button } from '@cmsgov/design-system';
-import NavLink from '../NavLink';
+import { NavLink } from 'react-router-dom';
 
-const SubMenu = ({ link, linkClasses, wrapLabel }) => {
-  const [isExpanded, setIsExapanded] = useState(false);
+import './submenu.scss';
+
+const SubMenu = ({ link, linkClasses, subLinkClasses, wrapLabel }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
   const innerHtml = wrapLabel ? <span>{link.label}</span> : link.label;
   const menu = useRef();
   useEffect(() => {
+    let currentMenu = null;
+    if (menu.current) {
+      currentMenu = menu.current;
+    }
     function handleClickOutside(event) {
-      if (menu.current && !menu.current.contains(event.target)) {
-        setIsExapanded(false);
+      if (currentMenu && !currentMenu.contains(event.target)) {
+        setIsExpanded(false);
       }
     }
     function handleFocusOut(event) {
-      if (menu.current && !menu.current.contains(event.relatedTarget)) {
-        setIsExapanded(false);
+      if (currentMenu && !currentMenu.contains(event.relatedTarget)) {
+        setIsExpanded(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
-    menu.current.addEventListener('focusout', handleFocusOut);
+    currentMenu?.addEventListener('focusout', handleFocusOut);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
-      if (menu.current) {
-        menu.current.removeEventListener('focusout', handleFocusOut);
+      if (currentMenu) {
+        currentMenu.removeEventListener('focusout', handleFocusOut);
       }
     };
-  }, [menu, isExpanded]);
+  }, [isExpanded]);
 
   return (
-    <li className={`has-submenu ${isExpanded ? 'open' : ''}`} ref={menu}>
+    <li className={`dkan-c-nav-submenu has-submenu${isExpanded ? ' open' : ''}`} ref={menu}>
       <Button
-        size="small"
         variation="ghost"
         onDark
-        className={linkClasses}
+        className={`${linkClasses} ds-u-margin-right--3 ds-u-padding-y--3`}
         aria-haspopup="true"
         aria-expanded={isExpanded}
         onClick={(e) => {
           e.preventDefault();
-          setIsExapanded(!isExpanded);
+          setIsExpanded(!isExpanded);
         }}
       >
         {innerHtml}
@@ -46,7 +51,19 @@ const SubMenu = ({ link, linkClasses, wrapLabel }) => {
       <ul className="dc-c-site-menu--sub-menu">
         {link.submenu.map((s) => (
           <li key={s.id}>
-            <NavLink link={s} wrapLabel={wrapLabel} />
+            {s.external ? (
+              <a href={s.url} className={subLinkClasses}>
+                {s.label}
+              </a>
+            ) : (
+              <NavLink
+                to={s.url}
+                className={subLinkClasses}
+                onClick={() => setIsExpanded(!isExpanded)}
+              >
+                {s.label}
+              </NavLink>
+            )}
           </li>
         ))}
       </ul>

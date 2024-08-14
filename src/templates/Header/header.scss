@@ -355,3 +355,46 @@ li.has-submenu {
     box-sizing: content-box
   }
 }
+
+:root {
+  --mobile-nav-animation-time: 1s;
+  --cms-top-nav-height: 87px;
+  --navbar-height: 100px;
+}
+
+.dkan-c-header .dkan-c-main-navigation {
+  background-color: var(--color-primary);
+  background-image: linear-gradient(90deg, var(--color-primary-darkest) 10%, var(--color-primary) 90%);
+}
+
+button.dkan-c-mobile-menu-button {
+  display: none;
+  &::before {
+    font-family: 'Font Awesome 6 Pro';
+    color: #{var(--color-white)};
+    font-size: 18px;
+    padding-right: 10px;
+    display: inline-block;
+    line-height: 18px;
+    height: 18px;
+    width: 18px;
+    margin-left: 10px;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: lighter;
+    box-sizing: content-box
+  }
+}
+
+button.dkan-c-mobile-menu-button--open {
+  &::before {
+    content: '\f0c9';
+  }
+}
+
+button.dkan-c-mobile-menu-button--close {
+  &::before {
+    content: '\f00d';
+  }
+}
+
