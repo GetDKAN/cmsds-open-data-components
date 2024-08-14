@@ -51,15 +51,29 @@
   }
 }
 
-.dc-thead--truncated {
-  th > div > span {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    display: inline-block;
-    .ds-c-tooltip__container {
-      white-space: wrap;
-      font-weight: normal;
+thead.dc-thead--truncated {
+  th > div {
+    align-items: stretch; 
+
+    > div {
+      overflow: hidden;
+      flex: 1 1 auto;
+      position: relative;
+  
+      > span {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        display: inline-block;
+        overflow: hidden;
+        position: absolute;
+        left: 0;
+        width: 100%;
+  
+        .ds-c-tooltip__container {
+          white-space: wrap;
+          font-weight: normal;
+        }
+      }
     }
   }
   th p {
