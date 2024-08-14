@@ -19,10 +19,10 @@ const DatasetOverview = ({ dataset, resource, distributions, metadataMapping } :
       updateOpen(false);
     };
     
-    const accordionItems = definitions.map( ({ pdc, definition }, i) => <AccordionItem
+    const accordionItems = definitions.map( ({ heading, definition }, i) => <AccordionItem
       key={i}
       defaultOpen
-      heading={pdc}
+      heading={heading}
     >
       <p>{definition}</p>
     </AccordionItem>)
