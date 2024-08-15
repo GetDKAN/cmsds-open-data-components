@@ -51,7 +51,7 @@ const DataTable = ({
   useEffect(() => {
     if (!columnOrder.length)
       setColumnOrder(table_columns.map(c => c.accessorKey))
-  })
+  }, [columnOrder])
 
   const sortElement = (isSorted, onClickFn) => {
     if(isSorted === 'asc') {

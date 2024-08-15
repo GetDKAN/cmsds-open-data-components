@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useEffect, useMemo, useState } from 're
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy, sortableKeyboardCoordinates, arrayMove } from '@dnd-kit/sortable'
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
-import { Alert, Button, Choice, Dialog } from '@cmsgov/design-system'
+import { Button, Choice, Dialog } from '@cmsgov/design-system'
 import Card from './Card'
 import { ManageColumnsContext } from '../DatasetTableTab/DataTableStateWrapper'
 import './ManageColumns.scss'
@@ -222,6 +222,6 @@ const ManageColumns = ({
       </Dialog>
     </div>
   )
-}
+};
 
-export default ManageColumns
+export default ManageColumns;
