@@ -70,7 +70,7 @@ export type DatasetPageType = {
   defaultPageSize: Number,
   dataDictionaryCSV: boolean,
   dataDictionaryBanner: boolean,
-  manageColumnsEnabled: boolean,
+  datasetTableControls: boolean,
 }
 
 

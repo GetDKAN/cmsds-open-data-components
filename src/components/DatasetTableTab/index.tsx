@@ -24,7 +24,7 @@ type DatasetTableTabProps = {
   rootUrl: string,
   customColumns: Array<ColumnType>,
   dataDictionaryBanner: boolean,
-  manageColumnsEnabled: boolean,
+  datasetTableControls: boolean,
 }
 
 const DatasetTable = ({isModal = false, closeFullScreenModal} : {isModal?: boolean, closeFullScreenModal?: Function}) => {

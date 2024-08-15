@@ -24,7 +24,7 @@ const DataTable = ({
   isModal,
   closeFullScreenModal,
 }) => {
-  const { id, resource, manageColumnsEnabled } = useContext(DataTableContext);
+  const { id, resource, datasetTableControls } = useContext(DataTableContext);
   const { columnOrder, setColumnOrder, columnVisibility, setColumnVisibility} = useContext(ManageColumnsContext);
 
   const data = resource.values;
@@ -97,7 +97,7 @@ const DataTable = ({
 
   return(
     <>
-      { manageColumnsEnabled && (
+      { datasetTableControls && (
         <div>
           <DataTableControls
             id={id}

@@ -6,18 +6,18 @@ import { DataTableContext } from "../../templates/Dataset";
 export const ManageColumnsContext = createContext({})
 
 const DataTableStateWrapper = () => {
-  const { id, manageColumnsEnabled } = useContext(DataTableContext);
+  const { id, datasetTableControls } = useContext(DataTableContext);
   // a wrapper component to keep column state synced between full screen and regular modes
   const localStorageData = id ? JSON.parse(localStorage.getItem(id) as string) : null;
 
   const [columnOrder, setColumnOrder] = useState(() => {
-    if (manageColumnsEnabled && localStorageData)
+    if (datasetTableControls && localStorageData)
       return localStorageData.tableColumnOrder;
     else
       return [];
   })
   const [columnVisibility, setColumnVisibility] = useState(() => {
-    if (manageColumnsEnabled && localStorageData)
+    if (datasetTableControls && localStorageData)
       return localStorageData.tableColumnVisibility;
     else
       return {};

@@ -28,7 +28,7 @@ type DataTableContextType = {
   rootUrl?: string,
   customColumns?: Array<ColumnType>,
   dataDictionaryBanner?: boolean,
-  manageColumnsEnabled?: boolean
+  datasetTableControls?: boolean
 }
 export const DataTableContext = createContext<DataTableContextType>({ id: null})
 
@@ -61,7 +61,7 @@ const Dataset = ({
   defaultPageSize = 25,
   dataDictionaryCSV = false,
   dataDictionaryBanner = false,
-  manageColumnsEnabled = false,
+  datasetTableControls = false,
 } : DatasetPageType) => {
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
@@ -196,7 +196,7 @@ const Dataset = ({
                         rootUrl: rootUrl,
                         customColumns: customColumns,
                         dataDictionaryBanner: (dataDictionaryBanner && displayDataDictionaryTab),
-                        manageColumnsEnabled: manageColumnsEnabled
+                        datasetTableControls: datasetTableControls
                       }}>
                         <DataTableStateWrapper />
                       </DataTableContext.Provider>
