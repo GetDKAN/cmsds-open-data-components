@@ -16,14 +16,16 @@ const HeaderResizeElement = ({table, header, sortElement, setAriaLiveFeedback} :
     className="ds-u-border-y--2 ds-u-padding--2 ds-u-border--dark  ds-u-font-weight--bold"
     >
       <div className="ds-u-display--flex">
-        <span style={{maxWidth: header.getSize() - 16}} title={typeof(header.column.columnDef.header) === "string" ? header.column.columnDef.header : ''}>
-          {header.isPlaceholder
-            ? null
-            : flexRender(
-                header.column.columnDef.header,
-                header.getContext()
-            ) as React.ReactNode}
-        </span>
+        <div>
+          <span title={typeof(header.column.columnDef.header) === "string" ? header.column.columnDef.header : ''}>
+            {header.isPlaceholder
+              ? null
+              : flexRender(
+                  header.column.columnDef.header,
+                  header.getContext()
+              ) as React.ReactNode}
+          </span>
+        </div>
         {sortElement && (
         <button
           onClick={header.column.getToggleSortingHandler()}
