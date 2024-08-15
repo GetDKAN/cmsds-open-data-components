@@ -5,6 +5,7 @@ import { Accordion, AccordionItem, Button, Drawer, InfoCircleIconThin, Table, Ta
 import Resource from '../Resource';
 import { DatasetOverviewPropsType } from '../../types/dataset';
 import definitions from "./data/definitions.json";
+import DOMPurify from 'dompurify';
 
 const DatasetOverview = ({ dataset, resource, distributions, metadataMapping } : DatasetOverviewPropsType) => {
   const md = useMediaQuery({ minWidth: 0, maxWidth: 768 });
@@ -24,7 +25,7 @@ const DatasetOverview = ({ dataset, resource, distributions, metadataMapping } :
       defaultOpen
       heading={heading}
     >
-      <p>{definition}</p>
+      <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(definition)}} />
     </AccordionItem>)
 
   return (

@@ -29,7 +29,7 @@
     },
     {
       "heading": "Public Access Level",
-      "definition": "The degree to which this dataset could be made pubicly-available. \nChoices:\npublic (data asset is or could be made publicly available to all without restrictions), \nrestricted public (Data aset is available under certain use restrictions) or \nnon-public (Data asset is not available to members of the public"
+      "definition": "The degree to which this dataset could be made pubicly-available. <br />Choices:<ul><li>public (data asset is or could be made publicly available to all without restrictions),</li><li>restricted public (Data aset is available under certain use restrictions) or non-public (Data asset is not available to members of the public</li><ul>"
     },
     {
       "heading": "Homepage URL",
