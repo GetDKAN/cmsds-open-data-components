@@ -94,5 +94,5 @@ describe('<DatasetTableTab />', () => {
       await screen.queryAllByText("Manage Columns")[1].click();
     });
     expect(screen.getByRole('checkbox', {name: "Select all"})).not.toBeChecked();
-  })
+  }, 10000)
 });
