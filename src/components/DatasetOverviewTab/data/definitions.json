@@ -31,7 +31,7 @@
       "heading": "Public Access Level",
       "definition": "The degree to which this dataset could be made pubicly-available. <br />Choices:<ul><li>public (data asset is or could be made publicly available to all without restrictions),</li><li>restricted public (Data aset is available under certain use restrictions) or non-public (Data asset is not available to members of the public</li><ul>"
     },
-    {
+    { 
       "heading": "Homepage URL",
       "definition": "This field is not intended for an agency's homepage (e.g. www.agency.gov) but rather if a datast has a human-friendly hub or landing page that users can be directed to for all resources tied to the dataset"
     },

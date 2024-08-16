@@ -19,13 +19,22 @@ const DatasetOverview = ({ dataset, resource, distributions, metadataMapping } :
     const hideDrawer = () => {
       updateOpen(false);
     };
+
+    const sortedDefinitions = new Array()
+    rows.forEach( ({ label }) => {
+      definitions.find( item => {
+        if (label === item.heading) {
+          sortedDefinitions.push(item)
+        }
+      })
+    })
     
-    const accordionItems = definitions.map( ({ heading, definition }, i) => <AccordionItem
+    const accordionItems = sortedDefinitions.map( (item, i) => <AccordionItem
       key={i}
       defaultOpen
-      heading={heading}
+      heading={item.heading}
     >
-      <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(definition)}} />
+      <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.definition)}} />
     </AccordionItem>)
 
   return (
