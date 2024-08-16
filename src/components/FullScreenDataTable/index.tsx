@@ -1,9 +1,9 @@
+import React from "react";
 import { Dialog } from "@cmsgov/design-system";
 import './FullScreenDataTable.scss';
 import DatasetTable from "../DatasetTableTab";
 
-const FullScreenDataTable = ({modalOpen, setModalOpen, isModal} : {modalOpen: boolean, setModalOpen: Function, isModal: boolean}) => {
-
+const FullScreenDataTable = ({modalOpen, setModalOpen} : {modalOpen: boolean, setModalOpen: Function}) => {
   return (
     <div className={`ds-c-dialog-wrap${modalOpen ? ' open' : ''}`}>
       <Dialog
@@ -12,9 +12,7 @@ const FullScreenDataTable = ({modalOpen, setModalOpen, isModal} : {modalOpen: bo
         onExit={() => setModalOpen(false)}
         className="dkan-full-screen-dataset-dialog"
       >
-        {!isModal && (
-          <DatasetTable isModal={true} closeFullScreenModal={() => setModalOpen(false)} />
-        )}
+        <DatasetTable isModal={true} closeFullScreenModal={() => setModalOpen(false)} />
       </Dialog>
     </div>
   )

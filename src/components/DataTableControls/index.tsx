@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { Alert } from "@cmsgov/design-system";
 import ManageColumns from "../ManageColumns/ManageColumns";
@@ -34,10 +35,9 @@ const DataTableControls = (
             }}
           ><i className="far fa-cog ds-u-margin-right--1"></i>Manage Columns</button>
           <button
-            aria-label='Full Screen mode - Opens in a dialog'
+            aria-label={isModal ? 'Close Full Screen dialog' : 'Full Screen mode - Opens in a dialog'}
             className="ds-c-button ds-c-button--ghost ds-u-margin-y--1"
             onClick={() => {
-              // todo if in modal needs to close the original modal
               if (isModal) {
                 closeFullScreenModal();
               } else {
@@ -55,7 +55,9 @@ const DataTableControls = (
           modalOpen={manageColumnsModalOpen}
           setModalOpen={setManageColumnsModalOpen}
         />
-        <FullScreenDataTable modalOpen={fullScreenModalOpen} setModalOpen={setFullScreenModalOpen} isModal={isModal}/>
+        {!isModal && (
+          <FullScreenDataTable modalOpen={fullScreenModalOpen} setModalOpen={setFullScreenModalOpen} />
+        )}
       </div>
     </>
   )

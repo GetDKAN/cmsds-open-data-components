@@ -27,7 +27,7 @@ const columns = [
         "accessorKey": "teaching_hospital_ccn"
     },
     "columns": [],
-    "getIsVisible": () => true
+    "getIsVisible": () => true // mock
   },
   {
     "id": "change_type",
@@ -44,7 +44,7 @@ const columns = [
         "accessorKey": "change_type"
     },
     "columns": [],
-    "getIsVisible": () => true // mock
+    "getIsVisible": () => true
   },
   {
     "id": "covered_recipient_type",
@@ -96,7 +96,7 @@ describe('ManageColumns component.', () => {
       <ManageColumnsContext.Provider value={{
         columnOrder: [],
         setColumnOrder: setColumnOrder,
-        setColumnVisibility, setColumnVisibility
+        setColumnVisibility: setColumnVisibility
       }}>
         <ManageColumns
           id={"test"}
