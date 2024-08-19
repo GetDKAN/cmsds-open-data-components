@@ -58,4 +58,18 @@ describe('<Dataset />', () => {
       expect(screen.getByTestId('dataset-dictionary-tab')).toBeInTheDocument();
     });
   });
+  test("Renders no data dictionary", async () => {
+    await act(async () => {
+      jest.useFakeTimers();
+      await render(<MemoryRouter>
+        <Dataset
+          rootUrl={rootUrl}
+          id={"6c64c58e-34fe-59bb-9d32-dcbbe8f49d13"}
+        />
+      </MemoryRouter>);
+    });
+    await waitFor(() => {
+      expect(screen.queryByTestId('dataset-dictionary-tab')).not.toBeInTheDocument();
+    });
+  });
 });
