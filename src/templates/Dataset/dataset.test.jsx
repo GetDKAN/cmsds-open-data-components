@@ -58,7 +58,7 @@ describe('<Dataset />', () => {
       expect(screen.getByTestId('dataset-dictionary-tab')).toBeInTheDocument();
     });
   });
-  test("Renders no data dictionary", async () => {
+  test("does not render data dictionary", async () => {
     await act(async () => {
       jest.useFakeTimers();
       await render(<MemoryRouter>
