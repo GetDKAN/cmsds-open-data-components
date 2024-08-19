@@ -63,7 +63,7 @@ const DataTableHeader = ({ resource, downloadURL, unfilteredDownloadURL, setPage
       </div>
       <div className="ds-l-col--12 ds-u-display--flex ds-u-align-items--end ds-u-flex-direction--row-reverse ds-u-sm-flex-direction--row ds-u-padding-x--0 ds-u-margin-bottom--2 ds-u-flex-wrap--wrap">
         <div className="ds-l-col--12 ds-l-sm-col--8 ds-u-padding-x--0">
-          {!resource.loading && (
+          {(!resource.loading && resource.count !== null) && (
             <DataTablePageResults
               totalRows={intCount}
               limit={limit}
@@ -84,6 +84,7 @@ const DataTableHeader = ({ resource, downloadURL, unfilteredDownloadURL, setPage
                 setPage(1);
                 setOffset(0);
               }}
+              value={limit.toString()}
               defaultValue={limit.toString()}
             />
           </div>

@@ -8,6 +8,7 @@ import DataTableHeader from '../DatatableHeader';
 import QueryBuilder from '../QueryBuilder';
 import { DistributionType, ColumnType, ResourceType } from '../../types/dataset';
 import { DataTableContext } from '../../templates/Dataset';
+import { ManageColumnsContext } from './DataTableStateWrapper';
 
 export function prepareColumns(columns : any, schema : any) {
   return columns.map((column : any) => ({
@@ -29,10 +30,9 @@ type DatasetTableTabProps = {
 
 const DatasetTable = ({isModal = false, closeFullScreenModal} : {isModal?: boolean, closeFullScreenModal?: Function}) => {
   const {id, distribution, resource, rootUrl, customColumns = [], dataDictionaryBanner } = useContext(DataTableContext) as DatasetTableTabProps
-
-  const defaultPage = 1;
+  const {page, setPage} = useContext(ManageColumnsContext) as {page: number, setPage: Function}
+  
   const defaultPageSize = 10;
-  const [page, setPage] = useState(defaultPage);
 
   const customColumnHeaders = buildCustomColHeaders(
     customColumns,
@@ -85,7 +85,7 @@ const DatasetTable = ({isModal = false, closeFullScreenModal} : {isModal?: boole
             closeFullScreenModal={closeFullScreenModal}
           />
         </div>
-        {(!resource.loading) && (
+        {(!resource.loading && resource.count !== null) && (
           <div className="ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--end ds-u-md-justify-content--between ds-u-margin-top--2 ds-u-align-items--center">
             <Pagination
               totalPages={Math.ceil(resource.count ? resource.count / pageSize : 1)}
