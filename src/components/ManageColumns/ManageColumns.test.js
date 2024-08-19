@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, within, act } from '@testing-library/react'
 import ManageColumns from './ManageColumns'
+import { ManageColumnsContext } from '../DatasetTableTab/DataTableStateWrapper';
 
 // Rationale
 // We shouldn't need to rest dnd-kit functionality as that should be handled downstream in their library
@@ -26,7 +27,7 @@ const columns = [
         "accessorKey": "teaching_hospital_ccn"
     },
     "columns": [],
-    "getIsVisible": () => true
+    "getIsVisible": () => true // mock
   },
   {
     "id": "change_type",
@@ -43,7 +44,7 @@ const columns = [
         "accessorKey": "change_type"
     },
     "columns": [],
-    "getIsVisible": () => true // mock
+    "getIsVisible": () => true
   },
   {
     "id": "covered_recipient_type",
@@ -88,19 +89,24 @@ const setColumnVisibility = jest.fn();
 window.scrollTo = jest.fn();
 
 describe('ManageColumns component.', () => {
+  const closeModal = jest.fn();
   beforeEach(async () => {
     // render component and open the dialog
-    render(<ManageColumns
-      columns={columns}
-      defaultColumnOrder={defaultColumnOrder}
-      setColumnOrder={setColumnOrder}
-      setColumnVisibility={setColumnVisibility}
-    />)
- 
-    const dialog = await screen.findByRole('button', {name:"Manage columns - Opens in a dialog"})
-    await act(() => {
-      dialog.click();
-    });
+    render(
+      <ManageColumnsContext.Provider value={{
+        columnOrder: [],
+        setColumnOrder: setColumnOrder,
+        setColumnVisibility: setColumnVisibility
+      }}>
+        <ManageColumns
+          id={"test"}
+          columns={columns}
+          defaultColumnOrder={defaultColumnOrder}
+          modalOpen={true}
+          setModalOpen={closeModal}
+        />
+      </ManageColumnsContext.Provider>
+    )
   })
   
   it('Renders correctly', async () => {
@@ -119,7 +125,7 @@ describe('ManageColumns component.', () => {
     await act(async () => {
       await screen.getByRole('button', {name: "Close modal dialog"}).click()
     });
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(closeModal).toHaveBeenCalled();
   })
 
   it('Sets column order and column visibility when the Save button is clicked', async () => {
@@ -128,8 +134,6 @@ describe('ManageColumns component.', () => {
     });
     expect(setColumnOrder).toHaveBeenCalled();
     expect(setColumnVisibility).toHaveBeenCalled();
-
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });
 
   it('Toggles all checkboxes when Select All is clicked', async () => {

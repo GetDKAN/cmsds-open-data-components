@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import DOMPurify from 'dompurify';
 import qs from 'qs';
@@ -14,10 +14,23 @@ import DatasetTable from '../../components/DatasetTableTab';
 import DatasetOverview from '../../components/DatasetOverviewTab';
 import DatasetAPI from '../../components/DatasetAPITab';
 import DataDictionary from '../../components/DatasetDataDictionaryTab';
-import { DatasetDictionaryItemType, DatasetPageType, DatasetDictionaryType, DistributionType, ResourceType } from '../../types/dataset';
+import { DatasetDictionaryItemType, DatasetPageType, DatasetDictionaryType, DistributionType, ResourceType, ColumnType } from '../../types/dataset';
 import TransformedDate from '../../components/TransformedDate';
 import { getFormatType } from '../../utilities/format';
 import './dataset.scss';
+import DataTableStateWrapper from '../../components/DatasetTableTab/DataTableStateWrapper';
+
+// create context
+type DataTableContextType = {
+  id: string | null,
+  resource?: ResourceType,
+  distribution?: DistributionType,
+  rootUrl?: string,
+  customColumns?: Array<ColumnType>,
+  dataDictionaryBanner?: boolean,
+  datasetTableControls?: boolean
+}
+export const DataTableContext = createContext<DataTableContextType>({ id: null})
 
 const getDataDictionary = (dataDictionaryUrl : string, additionalParams: any) => {
   const {data, isPending, error} = useQuery({
@@ -48,7 +61,7 @@ const Dataset = ({
   defaultPageSize = 25,
   dataDictionaryCSV = false,
   dataDictionaryBanner = false,
-  manageColumnsEnabled = false,
+  datasetTableControls = false,
 } : DatasetPageType) => {
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
@@ -176,15 +189,17 @@ const Dataset = ({
                       }
                       className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
                     >
-                      <DatasetTable
-                        id={id}
-                        distribution={distribution}
-                        resource={resource}
-                        rootUrl={rootUrl}
-                        customColumns={customColumns}
-                        dataDictionaryBanner={dataDictionaryBanner && displayDataDictionaryTab}
-                        manageColumnsEnabled={manageColumnsEnabled}
-                      />
+                      <DataTableContext.Provider value={{
+                        id: id,
+                        resource: resource,
+                        distribution: distribution,
+                        rootUrl: rootUrl,
+                        customColumns: customColumns,
+                        dataDictionaryBanner: (dataDictionaryBanner && displayDataDictionaryTab),
+                        datasetTableControls: datasetTableControls
+                      }}>
+                        <DataTableStateWrapper />
+                      </DataTableContext.Provider>
                     </TabPanel>
                   )}
                   <TabPanel

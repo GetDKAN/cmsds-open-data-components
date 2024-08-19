@@ -1,0 +1,19 @@
+dialog.dkan-full-screen-dataset-dialog > .ds-c-dialog__window {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+
+  form {
+    max-width: 1024px;
+  }
+
+  .dkan-datatable-fullscreen-mode {
+    max-height: calc(100vh - 415px);
+    min-height: calc(100vh - 415px);
+    overflow: hidden;
+
+    .dc-c-datatable-wrapper {
+      max-height: calc(100vh - 473px);
+    }
+  }
+}

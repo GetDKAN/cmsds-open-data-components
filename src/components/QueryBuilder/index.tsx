@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import qs from 'qs';
-import { useMediaQuery } from 'react-responsive';
 import { AccordionItem, Button } from '@cmsgov/design-system';
 import { buildOperatorOptions } from '../../templates/FilteredResource/functions';
 import QueryTitle from '../../templates/FilteredResource/QueryTitle';
@@ -17,6 +16,7 @@ type QueryBuilderPropTypes = {
   id: string;
   includeSearchParams: Boolean;
   customColumns: Array<Object>;
+  isModal?: boolean;
 };
 
 function updateQueryForDatastore(condition: ConditionType) {
@@ -46,17 +46,33 @@ function updateQueryForDatastore(condition: ConditionType) {
   return cond;
 }
 
-const QueryBuilder = (props: QueryBuilderPropTypes) => {
-  const { resource, id, includeSearchParams, customColumns } = props;
+const QueryBuilder = ({resource, id, includeSearchParams, customColumns, isModal = false}: QueryBuilderPropTypes) => {
   const { conditions, schema, setConditions } = resource;
+
   const fields = Object.keys(schema[id].fields);
 
-  const [conditionsCleared, setConditionsCleared] = useState(false);
   const [queryConditions, setQueryConditions] = useState<Array<ConditionType>>([]);
   const [titleConditions, setTitleConditions] = useState<Array<ConditionType>>([]); // Add use effect to load conditions on first load if needed
   const [conditionsChanged, setConditionsChanged] = useState(false);
 
-  const small = useMediaQuery({ minWidth: 0, maxWidth: 544 });
+  const syncConditions = () => {
+    if (conditions && conditions.length) {
+      const keyedConditions = conditions.map((oc) => ({
+        ...oc,
+        key: Date.now().toString() + oc.value + oc.property,
+      }));
+      setQueryConditions(keyedConditions);
+    } else {
+      setQueryConditions([
+        {
+          property: fields[0],
+          value: '',
+          operator: buildOperatorOptions(schema[id].fields[fields[0]].mysql_type)[0].value,
+          key: Date.now().toString(),
+        },
+      ])
+    }
+  }
 
   const addCondition = (condition: Array<ConditionType> | ConditionType | null) => {
     if (Array.isArray(condition)) {
@@ -78,20 +94,11 @@ const QueryBuilder = (props: QueryBuilderPropTypes) => {
     }
   };
 
+  // Sync the UI with the actual data conditions whenever those change
   React.useEffect(() => {
-    if (conditions && conditions.length) {
-      addCondition(conditions);
-    } else {
-      addCondition(null);
-    }
+    syncConditions();
     setTitleConditions(conditions);
-  }, []);
-  React.useEffect(() => {
-    if (conditionsCleared) {
-      submitConditions(new Event('submit'));
-      setConditionsCleared(false);
-    }
-  }, [conditionsCleared]);
+  }, [conditions]);
 
   const propertyOptions = fields.map((f) => {
     if (schema[id].fields[f].description) {
@@ -100,7 +107,19 @@ const QueryBuilder = (props: QueryBuilderPropTypes) => {
     return { label: f, value: f };
   });
 
+  const updateBrowserURL = (newConditions: Array<ConditionType>) => {
+    if (includeSearchParams) {
+      const url = new URL(window.location.href);
+      const urlString = qs.stringify(
+        { conditions: newConditions },
+        { encodeValuesOnly: true, addQueryPrefix: true }
+      );
+      window.history.pushState({}, '', `${url.origin}${url.pathname}${urlString}`);
+    }
+  }
+
   const submitConditions = (e: Event) => {
+    // only update the data conditions when "Apply filters" is pressed
     e.preventDefault();
     const submitConditions = queryConditions
       .filter((oc: ConditionType) => {
@@ -114,16 +133,8 @@ const QueryBuilder = (props: QueryBuilderPropTypes) => {
         return updateQueryForDatastore(cond);
       });
     setConditions(submitConditions);
-    setTitleConditions(queryConditions.map((oc) => Object.assign({}, oc)));
     setConditionsChanged(false);
-    if (includeSearchParams) {
-      const url = new URL(window.location.href);
-      const urlString = qs.stringify(
-        { conditions: submitConditions },
-        { encodeValuesOnly: true, addQueryPrefix: true }
-      );
-      window.history.pushState({}, '', `${url.origin}${url.pathname}${urlString}`);
-    }
+    updateBrowserURL(submitConditions)
   };
 
   const updateCondition = (index: number, key: string, value: string) => {
@@ -134,11 +145,11 @@ const QueryBuilder = (props: QueryBuilderPropTypes) => {
   };
 
   const removeCondition = (index: number) => {
+    // just removes the condition from the UI - "Apply Filters" must be clicked to change the data model
     let newConditions = queryConditions.map((oc) => Object.assign({}, oc));
     newConditions.splice(index, 1);
     setQueryConditions(newConditions);
     setConditionsChanged(true);
-    setConditionsCleared(true);
   };
 
   return (
@@ -152,7 +163,7 @@ const QueryBuilder = (props: QueryBuilderPropTypes) => {
               customColumns={customColumns}
             />
           }
-          defaultOpen={true}
+          defaultOpen={!isModal}
         >
           <form onSubmit={(e) => submitConditions(e as any)}>
             <div>
@@ -192,9 +203,8 @@ const QueryBuilder = (props: QueryBuilderPropTypes) => {
                 <ClearFiltersButton
                   disabled={queryConditions.length === 0}
                   clearFiltersFn={() => {
-                    setQueryConditions([]);
-                    setTitleConditions([]);
-                    setConditionsCleared(true);
+                    setConditions([]);
+                    updateBrowserURL([]);
                   }} />
               </div>
             </div>
