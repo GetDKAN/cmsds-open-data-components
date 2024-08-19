@@ -1,0 +1,42 @@
+{
+    "title": "prodAuto_states_measures_download",
+    "description": "This is a dataset created for use by the DQ Atlas website, and is not intended for use outside that application. For more information on the DQ Atlas and the information contained in this dataset see https://www.medicaid.gov/dq-atlas/welcome",
+    "accessLevel": "public",
+    "accrualPeriodicity": "R/PT1S",
+    "programCode": [
+      "009:000"
+    ],
+    "bureauCode": [
+      "009:38"
+    ],
+    "publisher": {
+      "name": "Centers for Medicare & Medicaid Services"
+    },
+    "contactPoint": {
+      "hasEmail": "dataconnectsupport@cms.hhs.gov",
+      "fn": "DataConnect Support Team"
+    },
+    "modified": "2024-02-13T17:01:02",
+    "theme": [
+      "Uncategorized"
+    ],
+    "keyword": [
+      "dqatlas",
+      "utility",
+      "dqatlas_prodAuto"
+    ],
+    "references": [
+      "https://www.medicaid.gov/dq-atlas/welcome",
+      "https://www.mathematica.org/"
+    ],
+    "distribution": [
+      {
+        "title": "states_measures_download csv file",
+        "downloadURL": "https://download.medicaid.gov/data/dq-atlas/20240202_ETL_DEV/states_measures_download.csv",
+        "description": "{\"dataset\": \"states_measures_download\", \"stage\": \"prodAuto\", \"update_id\": \"20240202_ETL_DEV\"}",
+        "mediaType": "text/csv",
+        "format": "csv"
+      }
+    ],
+    "identifier": "6c64c58e-34fe-59bb-9d32-dcbbe8f49d13"
+  }

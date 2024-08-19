@@ -5,6 +5,7 @@ import axios from 'axios';
 import Dataset from './index';
 import * as dataset from "../../tests/fixtures/dataset";
 import * as datasetWithDictionary from "../../tests/fixtures/datasetDescribedBy.json"
+import * as datasetNoDictionary from "../../tests/fixtures/datasetNoDictionary.json"
 import { MemoryRouter } from 'react-router-dom';
 
 const rootUrl = 'http://dkan.com/api/1';
@@ -18,6 +19,8 @@ describe('<Dataset />', () => {
           return Promise.resolve({data: dataset});
         case 'http://dkan.com/api/1/metastore/schemas/dataset/items/df01c2f8-dc1f-4e79-96cb-8208beaf143c?show-reference-ids':
           return Promise.resolve({data: datasetWithDictionary});
+        case 'https://dkan.com/api/1/metastore/schemas/data-dictionary/items/6c64c58e-34fe-59bb-9d32-dcbbe8f49d13?':
+          return Promise.resolve({data: datasetNoDictionary});
         case 'https://dkan.com/api/1/metastore/schemas/data-dictionary/items/71ec19df-f5ef-5b99-b43b-e566e22670b7?':
           return Promise.resolve({data: {}});
         default:
@@ -37,7 +40,6 @@ describe('<Dataset />', () => {
     });
     await waitFor(() => {
       expect(screen.getByRole('heading', { name: 'Product Data for Newly Reported Drugs in the Medicaid Drug Rebate Program 2024-01-08-to-2024-01-14' }));
-      expect(screen.queryByText('Data Dictionary')).not.toBeInTheDocument();
     });
 
   });
@@ -53,7 +55,7 @@ describe('<Dataset />', () => {
     });
     await waitFor(() => {
       expect(screen.getByRole('heading', { name: '2022 General Payment Data' }));
-      expect(screen.queryAllByText('Data Dictionary'));
+      expect(screen.getByTestId('dataset-dictionary-tab')).toBeInTheDocument();
     });
-  })
+  });
 });

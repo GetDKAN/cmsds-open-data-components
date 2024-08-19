@@ -33,7 +33,7 @@ const DataDictionary = (
   const datasetDictionary = data && data.data && data.data.fields && data.data.fields.length ? data.data.fields : null;
   
   return (
-    <>
+    <div data-testid="dataset-dictionary-tab">
       <h2 className="ds-text-heading--2xl ds-u-margin-y--3">{title}</h2>
       {datasetDictionary && (
         <>
@@ -61,7 +61,7 @@ const DataDictionary = (
       {datasetSitewideDictionary && (
         <SitewideDataDictionaryTable datasetDictionary={datasetSitewideDictionary} pageSize={pageSize} />
       )}
-    </>
+    </div>
   )
 }
 
