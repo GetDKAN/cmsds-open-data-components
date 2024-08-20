@@ -77,7 +77,6 @@ const DatasetTable = ({isModal = false, closeFullScreenModal} : {isModal?: boole
           <DataTable
             canResize={true}
             columns={columns}
-            setSort={resource.setSort}
             sortTransform={transformTableSortToQuerySort}
             tablePadding={'ds-u-padding-y--2'}
             loading={resource.loading}

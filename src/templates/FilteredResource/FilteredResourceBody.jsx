@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import qs from 'qs';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import SwaggerUI from 'swagger-ui-react';
 import useDatastore from '../../services/useDatastore';
 import {Spinner } from '@cmsgov/design-system';
@@ -12,6 +12,8 @@ import QueryBuilder from './QueryBuilder';
 import TransformedDate from '../../components/TransformedDate';
 import FilteredResourceDescription from './FilteredResourceDescription';
 import 'swagger-ui-react/swagger-ui.css';
+import { DataTableContext } from '../Dataset';
+import { ManageColumnsContext } from '../../components/DatasetTableTab/DataTableStateWrapper';
 
 const FilteredResourceBody = ({
   id,
@@ -25,10 +27,8 @@ const FilteredResourceBody = ({
   customTitle,
   rootUrl
 }) => {
-  const navigate = useNavigate();
   const [tablePadding, setTablePadding] = React.useState('ds-u-padding-y--1');
   let apiDocs = useRef();
-  const [filtersOpen, setFiltersOpen] = React.useState(false);
   let distribution = {};
   let distribution_array = dataset.distribution ? dataset.distribution : [];
   if (distribution_array.length) {
@@ -36,11 +36,9 @@ const FilteredResourceBody = ({
       (dist) => dist.identifier === distribution_array[distIndex].identifier
     );
   }
-  let buttonRef = null;
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
     : { conditions: [] };
-  let conditions = options.conditions.length ? options.conditions : [];
   const resource = useDatastore(
     '',
     rootUrl,
@@ -86,7 +84,7 @@ const FilteredResourceBody = ({
           <div className={'ds-l-md-col--9'}>
             <FilteredResourceDescription distribution={distribution} dataset={dataset} />
           </div>
-          {resource.columns && Object.keys(resource.schema).length && (
+          {Object.keys(resource).length && resource.columns && Object.keys(resource.schema).length && (
             <div className={'ds-l-md-col--12'}>
               <QueryBuilder
                 resource={resource}
@@ -95,37 +93,47 @@ const FilteredResourceBody = ({
               />
             </div>
           )}
-          {resource.columns && Object.keys(resource.schema).length ? (
-            <div className={'ds-l-md-col--12'}>
-              <ResourceHeader
-                includeDensity={true}
-                setTablePadding={setTablePadding}
-                distribution={distribution}
-                resource={resource}
-                downloadUrl={downloadUrl}
-                tablePadding={tablePadding}
-                includeDownload
-              />
-              <ResourcePreview
-                id={distribution.identifier}
-                tablePadding={tablePadding}
-                resource={resource}
-                customColumns={buildCustomColHeaders(
-                  customColumns,
-                  resource.columns,
-                  resource.schema[distribution_array[distIndex].identifier]
-                )}
-                columnSettings={columnSettings}
-                options={{
-                  layout: 'flex',
-                  columnFilter: false,
-                  columnSort: true,
-                  columnResize: true,
-                }}
-                columnWidths={columnWidths}
-              />
-              <ResourceFooter resource={resource} />
-            </div>
+          {Object.keys(resource).length && resource.columns && Object.keys(resource.schema).length ? (
+            <DataTableContext.Provider value={{
+              id: id,
+              resource: resource,
+              distribution: distribution,
+              rootUrl: rootUrl,
+              customColumns: buildCustomColHeaders(
+                customColumns,
+                resource.columns,
+                resource.schema[distribution_array[distIndex].identifier]
+              ),
+            }}>
+              <div className={'ds-l-md-col--12'}>
+                <ResourceHeader
+                  includeDensity={true}
+                  setTablePadding={setTablePadding}
+                  distribution={distribution}
+                  resource={resource}
+                  downloadUrl={downloadUrl}
+                  tablePadding={tablePadding}
+                  includeDownload
+                />
+                <ManageColumnsContext.Provider value={{
+                  columnOrder: [],
+                  setColumnOrder: () => {},
+                  columnVisibility: {},
+                  setColumnVisibility: () => {},
+                  page: 1,
+                  setPage: () => {}
+                }}>
+                <ResourcePreview
+                  id={distribution.identifier}
+                  tablePadding={tablePadding}
+                  columnSettings={columnSettings}
+                  columnWidths={columnWidths}
+                />
+                
+                <ResourceFooter resource={resource} />
+                </ManageColumnsContext.Provider>
+              </div>
+            </DataTableContext.Provider>
           ) : (
             <Spinner role="status" aria-valuetext="Resource loading" />
           )}

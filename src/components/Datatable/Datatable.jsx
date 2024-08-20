@@ -16,7 +16,6 @@ import { ManageColumnsContext } from "../DatasetTableTab/DataTableStateWrapper";
 
 const DataTable = ({
   columns,
-  setSort,
   sortTransform,
   tablePadding,
   canResize,
@@ -83,7 +82,7 @@ const DataTable = ({
 
   useEffect(() => {
     const normalizedSort = sortTransform ? sortTransform(sorting) : filters;
-    setSort(normalizedSort);
+    resource.setSort(normalizedSort);
   }, [sorting]);
 
   const defaultColumnOrder = useMemo(() => table_columns.map(column => column.accessorKey), []);
