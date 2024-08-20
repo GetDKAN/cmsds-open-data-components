@@ -5,7 +5,6 @@ import axios from 'axios';
 import Dataset from './index';
 import * as dataset from "../../tests/fixtures/dataset";
 import * as datasetWithDictionary from "../../tests/fixtures/datasetDescribedBy.json"
-import * as datasetNoDictionary from "../../tests/fixtures/datasetNoDictionary.json"
 import { MemoryRouter } from 'react-router-dom';
 
 const rootUrl = 'http://dkan.com/api/1';
@@ -19,8 +18,6 @@ describe('<Dataset />', () => {
           return Promise.resolve({data: dataset});
         case 'http://dkan.com/api/1/metastore/schemas/dataset/items/df01c2f8-dc1f-4e79-96cb-8208beaf143c?show-reference-ids':
           return Promise.resolve({data: datasetWithDictionary});
-        case 'https://dkan.com/api/1/metastore/schemas/data-dictionary/items/6c64c58e-34fe-59bb-9d32-dcbbe8f49d13?':
-          return Promise.resolve({data: datasetNoDictionary});
         case 'https://dkan.com/api/1/metastore/schemas/data-dictionary/items/71ec19df-f5ef-5b99-b43b-e566e22670b7?':
           return Promise.resolve({data: {}});
         default:
@@ -58,13 +55,13 @@ describe('<Dataset />', () => {
       expect(screen.getByTestId('dataset-dictionary-tab')).toBeInTheDocument();
     });
   });
-  test("does not render data dictionary", async () => {
+  test("Does not render Data Dictionary if dataset does not have describedBy attribute", async () => {
     await act(async () => {
       jest.useFakeTimers();
       await render(<MemoryRouter>
         <Dataset
           rootUrl={rootUrl}
-          id={"6c64c58e-34fe-59bb-9d32-dcbbe8f49d13"}
+          id={"4eaa5ebe-62f7-402e-a407-963cd380688b"}
         />
       </MemoryRouter>);
     });
