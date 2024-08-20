@@ -213,7 +213,6 @@ const Dataset = ({
                   >
                     <DatasetOverview resource={resource} dataset={dataset} distributions={distributions} metadataMapping={metadataMapping} />
                   </TabPanel>
-                  {displayDataDictionaryTab && (
                     <TabPanel
                       id={'data-dictionary'}
                       tab={
@@ -224,15 +223,15 @@ const Dataset = ({
                       }
                       className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
                     >
-                      <DataDictionary
+                      {displayDataDictionaryTab && <DataDictionary
                         datasetSitewideDictionary={datasetSitewideDictionary}
                         datasetDictionaryEndpoint={distribution.data.describedBy}
                         title={"Data Dictionary"}
                         additionalParams={additionalParams}
                         csvDownload={dataDictionaryCSV}
-                      />
+                      />}
+                      {!displayDataDictionaryTab && <p>There is no Data Dictionary associated with this dataset.</p>}
                     </TabPanel>
-                  )}
                   { distribution && distribution.data && (
                     <TabPanel
                       id={'api'}
