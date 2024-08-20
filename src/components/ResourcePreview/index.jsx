@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-import { TextField, Spinner } from '@cmsgov/design-system';
+import { TextField } from '@cmsgov/design-system';
 import { transformTableSortToQuerySort} from '../../services/useDatastore/transformSorts';
 import DataTable from '../Datatable';
+import { DataTableContext } from '../../templates/Dataset';
 
 export function prepareColumns(columns, schema) {
   return columns.map((column) => ({
@@ -29,12 +30,11 @@ function DefaultColumnFilter({ column: { Header, accessor, setFilter, filterValu
 const ResourcePreview = ({
   tablePadding,
   id,
-  options,
-  resource,
-  defaultSort,
-  customColumns,
   canResize,
 }) => {
+  console.log(DataTableContext)
+  const {resource, customColumns} = useContext(DataTableContext);
+  console.log(resource)
 
   return (
     <div
@@ -42,32 +42,14 @@ const ResourcePreview = ({
       className="ds-u-overflow--auto ds-u-border-x--1 ds-u-border-bottom--1"
     >
       <DataTable
-        data={resource.values}
         canResize={canResize}
-        sortDefaults={defaultSort}
         columns={
           customColumns ? customColumns : prepareColumns(resource.columns, resource.schema[id])
         }
-        setSort={resource.setSort}
         sortTransform={transformTableSortToQuerySort}
         tablePadding={tablePadding}
         className="dc-c-datatable"
         customColumnFilter={DefaultColumnFilter}
-        options={options}
-        CustomLoadingComponent={
-          <div className="ds-u-display--flex ds-u-padding--3">
-            <Spinner
-              className="ds-u-valign--middle"
-              role="status"
-              aria-valuetext="Datatable loading"
-            />
-          </div>
-        }
-        CustomNoResults={
-          <div className="ds-u-display--flex ds-u-padding--3">
-            <p>No results returned.</p>
-          </div>
-        }
       />
     </div>
   );

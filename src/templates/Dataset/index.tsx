@@ -10,7 +10,6 @@ import PageNotFound from '../PageNotFound';
 import { defaultMetadataMapping } from '../../assets/metadataMapping';
 import { Tabs, TabPanel } from '@cmsgov/design-system';
 import SearchItemIcon from '../../assets/icons/searchItem';
-import DatasetTable from '../../components/DatasetTableTab';
 import DatasetOverview from '../../components/DatasetOverviewTab';
 import DatasetAPI from '../../components/DatasetAPITab';
 import DataDictionary from '../../components/DatasetDataDictionaryTab';
