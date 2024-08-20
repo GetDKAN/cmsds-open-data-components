@@ -32,9 +32,7 @@ const ResourcePreview = ({
   id,
   canResize,
 }) => {
-  console.log(DataTableContext)
   const {resource, customColumns} = useContext(DataTableContext);
-  console.log(resource)
 
   return (
     <div

@@ -48,7 +48,6 @@ const FilteredResourceBody = ({
     },
     additionalParams
   );
-  console.log(resource)
 
   useEffect(() => {
     if (distribution.identifier) {
