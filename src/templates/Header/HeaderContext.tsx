@@ -1,9 +1,11 @@
-import { createContext } from "react";
+import { createContext, useRef } from "react";
 
 const HeaderContext = createContext({
   mobileMenuOpen: false, 
   setMobileMenuOpen: (el: boolean) => {},
-  navTop: '',
+  menuRef: null as any,
+  isMobile: false,
+  onDark: true,
 });
 
 export default HeaderContext;

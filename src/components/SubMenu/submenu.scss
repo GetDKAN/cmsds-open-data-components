@@ -1,39 +1,69 @@
-.dc-c-site-menu--sub-menu {
-  background: #{var(--color-primary)};
-  position: absolute;
-  left: 0;
-  top: 48px;
-  margin: 0;
-  padding: 0;
-  width: 300px;
-  a {
-    display: block;
+.dkan-c-site-menu--sub-menu {
+  list-style: none;
+  display: none;
+}
+
+.dkan-c-nav-submenu {
+  position: relative;
+}
+
+.dkan-c-nav-submenu.open .dkan-c-site-menu--sub-menu {
+  display: block;
+}
+
+.dkan-c-header--mobile {
+  .dkan-c-site-menu--sub-menu a svg {
+    display: none;
+  }
+}
+
+.dkan-c-header--desktop {
+  .dkan-c-site-menu--sub-menu {
+    background: #{var(--header-submenu--bg-color)};
+    position: absolute;
+    left: 0;
+    top: 48px;
+    margin: 0;
     padding: 16px;
-    span {
-      border-bottom: 2px solid transparent;
+    width: #{var(--header-submenu--width)};
+    a {
+      text-align: left;
+      display: flex;
+      padding: 16px;
+      span {
+        margin-left: 8px;
+        border-bottom-width: 2px;
+        border-bottom-style: solid;
+        border-bottom-color: transparent;
+      }
     }
+    a:hover,
+    a:focus {
+      span {
+        border-bottom-color: #{var(--header-nav-link--mobile-color)};
+      }
+    }
+    z-index: 999;
   }
-  a:hover span,
-  a:focus span {
-    border-bottom: 2px solid #{var(--color-primary-alt-light)};
-  }
-  z-index: 999;
+
 }
 
-.dkan-c-nav-submenu button {
-  text-decoration: none;
-  &::after {
-    font-family: 'Font Awesome 6 Pro';
-    content: '\f105';
-    color: #{var(--color-white)};
-    font-size: 18px;
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    font-weight: lighter;
-  }
-}
 
-.dkan-c-nav-submenu button:hover {
-  text-decoration: underline;
-}
+
+// .dkan-c-nav-submenu button {
+//   text-decoration: none;
+// }
+
+// .dkan-c-nav-submenu button:hover {
+//   text-decoration: underline;
+// }
+
+// .dkan-c-nav-menu--open .dc-c-site-menu--sub-menu {
+//   position: relative;
+//   width: 100%;
+//   background: none;
+//   top: 0;
+//   a {
+//     margin-left: 8px;
+//   }
+// }

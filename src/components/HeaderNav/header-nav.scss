@@ -1,59 +1,117 @@
-.dkan-c-nav-menu nav ul {
-  margin-top: 0px;
-}
-
-.dkan-c-nav-menu nav li {
+.dkan-c-header--link-list {
   list-style: none;
-  height: 100%;
 }
 
-.dkan-c-nav-menu nav a {
-  text-decoration: none;
-  color: #{var(--color-white)};
-  padding: 8px 24px;
+.dkan-c-header--wrapper {
+  flex-wrap: nowrap !important;
 }
 
-.dkan-c-nav-menu .dkan-c-top-nav {
-  display: none;
+.dkan-c-header--link-list .dkan-c-header--link,
+.dkan-c-header--link-list .dkan-c-header--link + ul a {
+  span {
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+  }
 }
 
-@media screen and (max-width: 768px) {
-  .nav-container--close {
-    visibility: hidden;
+
+
+.dkan-c-header--mobile {
+  .dkan-c-header--link-list .dkan-c-header--link,
+  .dkan-c-header--link-list .dkan-c-header--link + ul a {
+    text-decoration: none;
+    color: #{var(--header-nav-link--mobile-color)};
+    &:hover,
+    &:focus {
+      color: #{var(--header-nav-link--mobile-color)};
+      span {
+        border-bottom-color: #{var(--header-nav-link--mobile-color)};
+      }
+    }
+  }
+
+  .dkan-c-nav-menu ul {
+    padding-inline-start: 0;
+  }
+
+  .dkan-c-nav-menu--close {
     display: none;
-    transition: visibility 400ms;
-    transition-delay: #{var(--mobile-nav-animation-time)};
-  }
-
-  .nav-container--open {
-    visibility: visible;
-  }
-  .dkan-c-nav-menu {
-    
-    position: fixed;
-    background-color: #{var(--color-gray-dark)};
-    top: 0;
-    bottom: 0;
-    left: -840px;
-    z-index: 500;
-    height: 100%;
-    width: 100%;
-    transition-property: left;
-    transition-duration: #{var(--mobile-nav-animation-time)};
-    padding: 50px 0;
-  }
-
-  button.dkan-c-mobile-menu-button {
-    display: block;
   }
 
   .dkan-c-nav-menu--open {
-    display: inherit;
-    left: 0px;
+    flex: none;
+    max-width: 100%;
+    display: block;
+    position: fixed;
+    background-color: #{var(--header-mobile-bg-color)};
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 50px 0;
+    z-index: 500;
+    // TODO: Need to rework, doesn't do anything with display none/block.
+    transition-property: left;
+    transition-duration: #{var(--mobile-nav-animation-time)};
   }
 
   .dkan-c-nav-menu .dkan-c-top-nav {
+    padding-top: 8px;
     display: inherit;
+    &::before {
+      background: #{var(--color-primary-light)};
+      content: "";
+      width: 48px;
+      height: 2px;
+      margin-left: 24px;
+      display: block;
+      position: absolute;
+    }
+    
+    ul {
+      padding-top: 16px;
+    }
+  }
+}
+
+.dkan-c-header--desktop {
+  ul.dkan-c-header--link-list .dkan-c-header--link,
+  ul.dkan-c-header--link-list .dkan-c-header--link + ul a {
+    text-decoration: none;
+    color: #{var(--header-nav-link--color)};
+    padding: #{var(--space, 8px 8px)};
+    &:hover {
+      span {
+        border-bottom-color: #{var(--header-nav-link--color)};
+      }
+    }
   }
 
+  .dkan-c-header--link-list {
+    margin-block: 0;
+  }
+
+  .dkan-c-main-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+  }
+
+  .dkan-c-nav-menu--mobile-close-button {
+    display: none;
+  }
+
+  .dkan-c-header--link-list {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .dkan-c-nav-menu .dkan-c-top-nav {
+    display: none;
+  }
 }
+
+
+

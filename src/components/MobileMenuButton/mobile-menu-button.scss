@@ -1,0 +1,47 @@
+:root {
+  --mobile-menu-button--color: #{var(--color-white)};
+  --mobile-menu-button--hover-color: #{var(--color-white)};
+}
+
+.dkan-c-header--desktop {
+  .dkan-c-mobile-menu-button {
+    display: none;
+  }
+}
+
+.dkan-c-header--mobile {
+  .dkan-c-mobile-menu-button {
+    display: inherit;
+  }
+}
+
+button.dkan-c-mobile-menu-button {
+  color: #{var(--mobile-menu-button--color)};
+  &::before {
+    font-family: 'Font Awesome 6 Pro';
+    color: #{var(--mobile-menu-button--color)};
+    font-size: 18px;
+    padding-right: 10px;
+    display: inline-block;
+    line-height: 18px;
+    height: 18px;
+    width: 18px;
+    margin-left: 10px;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: lighter;
+    box-sizing: content-box
+  }
+  &:hover {
+    color: #{var(--mobile-menu-button--hover-color)};
+    &::before {
+      color: #{var(--mobile-menu-button--hover-color)};
+    }
+  }
+}
+
+button.dkan-c-mobile-menu-button--open {
+  &::before {
+    content: '\f0c9';
+  }
+}

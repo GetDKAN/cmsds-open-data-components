@@ -1,11 +1,13 @@
-import { useEffect, useState, useRef } from 'react';
-import { Button } from '@cmsgov/design-system';
+import React, { useEffect, useState, useRef } from 'react';
+import { Button, ArrowIcon } from '@cmsgov/design-system';
 import { NavLink } from 'react-router-dom';
+import HeaderContext from '../../templates/Header/HeaderContext';
 
 import './submenu.scss';
 
-const SubMenu = ({ link, linkClasses, subLinkClasses, wrapLabel }) => {
+const SubMenu = ({ link, linkClasses, subLinkClasses, wrapLabel = true }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const headerContext = React.useContext(HeaderContext);
   const innerHtml = wrapLabel ? <span>{link.label}</span> : link.label;
   const menu = useRef();
   useEffect(() => {
@@ -13,6 +15,7 @@ const SubMenu = ({ link, linkClasses, subLinkClasses, wrapLabel }) => {
     if (menu.current) {
       currentMenu = menu.current;
     }
+
     function handleClickOutside(event) {
       if (currentMenu && !currentMenu.contains(event.target)) {
         setIsExpanded(false);
@@ -31,14 +34,16 @@ const SubMenu = ({ link, linkClasses, subLinkClasses, wrapLabel }) => {
         currentMenu.removeEventListener('focusout', handleFocusOut);
       }
     };
+
+
   }, [isExpanded]);
 
   return (
     <li className={`dkan-c-nav-submenu has-submenu${isExpanded ? ' open' : ''}`} ref={menu}>
       <Button
         variation="ghost"
-        onDark
-        className={`${linkClasses} ds-u-margin-right--3 ds-u-padding-y--3`}
+        onDark={headerContext.onDark}
+        className={`${linkClasses}`}
         aria-haspopup="true"
         aria-expanded={isExpanded}
         onClick={(e) => {
@@ -47,21 +52,26 @@ const SubMenu = ({ link, linkClasses, subLinkClasses, wrapLabel }) => {
         }}
       >
         {innerHtml}
+        <ArrowIcon direction={isExpanded ? "down" : "right"} />
       </Button>
-      <ul className="dc-c-site-menu--sub-menu">
+      <ul className="dkan-c-site-menu--sub-menu">
         {link.submenu.map((s) => (
           <li key={s.id}>
-            {s.external ? (
-              <a href={s.url} className={subLinkClasses}>
-                {s.label}
+            {s.external || s.drupalPage ? (
+              <a href={s.url} className={`ds-u-display-flex ds-u-align-items--center ${subLinkClasses}`}>
+                {s.icon ?? null}
+                <span>{s.label}</span>
               </a>
             ) : (
               <NavLink
                 to={s.url}
-                className={subLinkClasses}
+                className={`ds-u-display-flex ds-u-align-items--center ${subLinkClasses}`}
                 onClick={() => setIsExpanded(!isExpanded)}
               >
-                {s.label}
+                {s.icon ?? null}
+                <span>
+                  {s.label}
+                </span>
               </NavLink>
             )}
           </li>

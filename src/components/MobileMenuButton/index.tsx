@@ -2,14 +2,23 @@ import React from 'react';
 import { Button } from '@cmsgov/design-system';
 import HeaderContext from '../../templates/Header/HeaderContext';
 
-const MobileMenuButton = () => {
+import "./mobile-menu-button.scss";
+
+export type MobileMenuButtonProps = {
+  wrapperClasses?: string
+}
+
+const MobileMenuButton = (props: MobileMenuButtonProps) => {
   const headerContext = React.useContext(HeaderContext);
+  const { wrapperClasses } = props;
   return(
-    <Button 
-      className={`dkan-c-mobile-menu-button dkan-c-mobile-menu-button--${headerContext.mobileMenuOpen ? "close" : "open"}`}
+    <Button
+      aria-haspopup="true"
+      aria-expanded={headerContext.mobileMenuOpen}
+      className={`dkan-c-mobile-menu-button ${wrapperClasses} dkan-c-mobile-menu-button--${headerContext.mobileMenuOpen ? "close" : "open"}`}
       onClick={() => headerContext.setMobileMenuOpen(!headerContext.mobileMenuOpen)}
     >
-      <span className="ds-u-visibility--screen-reader">Menu</span>
+      <span>Menu</span>
     </Button>
   );
 }

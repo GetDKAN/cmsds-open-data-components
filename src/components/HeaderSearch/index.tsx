@@ -5,7 +5,7 @@ import { Button, Dialog, TextField } from "@cmsgov/design-system";
 import "./header-search.scss";
 
 type HeaderSearchProps = {
-  headingText?: String
+  headingText?: string
 };
 
 const HeaderSearch = (props: HeaderSearchProps) => {
@@ -27,7 +27,7 @@ const HeaderSearch = (props: HeaderSearchProps) => {
   }
 
   return (
-    <div className="dc-c-main-navigation--search ds-u-margin-left--auto ds-u-lg-padding-left--1 ds-u-xl-padding-left--3">
+    <div className="dkan-c-main-navigation--search">
       <Button
         variation="ghost"
         onDark={true}
