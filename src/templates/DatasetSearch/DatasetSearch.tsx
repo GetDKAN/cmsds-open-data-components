@@ -139,7 +139,8 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   }, [totalItems, pageSize, page]);
 
   useEffect(() => {
-    setPage(1)
+    if (page !== 1 && (transformedParams.fulltext !== fulltext || transformedParams.selectedFacets !== selectedFacets))
+      setPage(1)
   }, [fulltext, selectedFacets]);
 
   useEffect(() => {
