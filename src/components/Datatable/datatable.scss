@@ -86,6 +86,10 @@ thead.dc-thead--truncated {
   background-color: #{var(--table__background-color--striped)};
 }
 
+.dc-c-datatable--highlight-row td {
+  background-color: #{var(--color-info-lightest)}
+}
+
 .dc-c-sort--default,
 .dc-c-sort--asc,
 .dc-c-sort--desc {

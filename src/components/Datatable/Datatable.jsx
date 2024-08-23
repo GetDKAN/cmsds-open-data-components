@@ -27,7 +27,7 @@ const DataTable = ({
   const { columnOrder, setColumnOrder, columnVisibility, setColumnVisibility} = useContext(ManageColumnsContext);
 
   const data = resource.values;
-  const [ sorting, setSorting ] = React.useState([])
+  const [ sorting, setSorting ] = useState([])
   const [ariaLiveFeedback, setAriaLiveFeedback] = useState('')
   const dataTableWrapperElement = useRef(null)
   const columnHelper = createColumnHelper()
@@ -46,6 +46,8 @@ const DataTable = ({
       })
     )
   })
+
+  const [ highlightRow, setHighlightRow ] = useState(null);
 
   useEffect(() => {
     if (!columnOrder.length)
@@ -94,6 +96,10 @@ const DataTable = ({
     return 'auto';
   };
 
+  useEffect(() => {
+    setHighlightRow(null);
+  }, [data])
+
   return(
     <>
       { datasetTableControls && (
@@ -127,8 +133,9 @@ const DataTable = ({
             <tbody>
             {table.getRowModel().rows.map((row, index) => {
               const even = (index + 1) % 2 === 0;
+              const highlight = highlightRow === row.id;
               return(
-                <tr key={row.id} className={`${even ? "dc-c-datatable--even-row" : ""}`}>
+                <tr key={row.id} className={`${highlight ? "dc-c-datatable--highlight-row" : (even && "dc-c-datatable--even-row")}`} onClick={() => setHighlightRow(row.id)}>
                   {row.getVisibleCells().map((cell) => {
                     let classList = "dc-truncate ds-u-padding-x--1"
                     return (
