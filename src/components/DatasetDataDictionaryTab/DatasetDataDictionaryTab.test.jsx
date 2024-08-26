@@ -12,7 +12,6 @@ jest.mock('axios');
 describe('<DataDictionary />', () => {
   beforeEach(async () => {
     await axios.get.mockImplementation((url) => {
-      console.log(url);
       switch (url) {
         case 'http://dkan.com/api/1/metastore/schemas/data-dictionary/items/sitewide-data-dictionary':
           return Promise.resolve({data: siteWideDataDictionary});

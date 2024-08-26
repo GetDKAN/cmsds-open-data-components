@@ -37,7 +37,6 @@ describe('<Dataset />', () => {
     });
     await waitFor(() => {
       expect(screen.getByRole('heading', { name: 'Product Data for Newly Reported Drugs in the Medicaid Drug Rebate Program 2024-01-08-to-2024-01-14' }));
-      expect(screen.queryByText('Data Dictionary')).not.toBeInTheDocument();
     });
 
   });
@@ -53,7 +52,21 @@ describe('<Dataset />', () => {
     });
     await waitFor(() => {
       expect(screen.getByRole('heading', { name: '2022 General Payment Data' }));
-      expect(screen.queryAllByText('Data Dictionary'));
+      expect(screen.getByTestId('dataset-dictionary-tab')).toBeInTheDocument();
     });
-  })
+  });
+  test("Does not render Data Dictionary if dataset does not have describedBy attribute", async () => {
+    await act(async () => {
+      jest.useFakeTimers();
+      await render(<MemoryRouter>
+        <Dataset
+          rootUrl={rootUrl}
+          id={"4eaa5ebe-62f7-402e-a407-963cd380688b"}
+        />
+      </MemoryRouter>);
+    });
+    await waitFor(() => {
+      expect(screen.queryByTestId('dataset-dictionary-tab')).not.toBeInTheDocument();
+    });
+  });
 });

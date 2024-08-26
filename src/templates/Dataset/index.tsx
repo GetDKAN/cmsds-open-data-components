@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import DOMPurify from 'dompurify';
 import qs from 'qs';
@@ -10,14 +10,26 @@ import PageNotFound from '../PageNotFound';
 import { defaultMetadataMapping } from '../../assets/metadataMapping';
 import { Tabs, TabPanel } from '@cmsgov/design-system';
 import SearchItemIcon from '../../assets/icons/searchItem';
-import DatasetTable from '../../components/DatasetTableTab';
 import DatasetOverview from '../../components/DatasetOverviewTab';
 import DatasetAPI from '../../components/DatasetAPITab';
 import DataDictionary from '../../components/DatasetDataDictionaryTab';
-import { DatasetDictionaryItemType, DatasetPageType, DatasetDictionaryType, DistributionType, ResourceType } from '../../types/dataset';
+import { DatasetDictionaryItemType, DatasetPageType, DatasetDictionaryType, DistributionType, ResourceType, ColumnType } from '../../types/dataset';
 import TransformedDate from '../../components/TransformedDate';
 import { getFormatType } from '../../utilities/format';
 import './dataset.scss';
+import DataTableStateWrapper from '../../components/DatasetTableTab/DataTableStateWrapper';
+
+// create context
+type DataTableContextType = {
+  id: string | null,
+  resource?: ResourceType,
+  distribution?: DistributionType,
+  rootUrl?: string,
+  customColumns?: Array<ColumnType>,
+  dataDictionaryBanner?: boolean,
+  datasetTableControls?: boolean
+}
+export const DataTableContext = createContext<DataTableContextType>({ id: null})
 
 const getDataDictionary = (dataDictionaryUrl : string, additionalParams: any) => {
   const {data, isPending, error} = useQuery({
@@ -47,7 +59,8 @@ const Dataset = ({
   borderlessTabs = false,
   defaultPageSize = 25,
   dataDictionaryCSV = false,
-  dataDictionaryBanner = false
+  dataDictionaryBanner = false,
+  datasetTableControls = false,
 } : DatasetPageType) => {
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
@@ -146,7 +159,7 @@ const Dataset = ({
             <div className={'ds-l-md-col--9'}>
               <h1 className="ds-text-heading--3xl">{title}</h1>
             </div>
-            <div className={'ds-l-md-col--12 ds-u-color--gray ds-u-margin-y--1 ds-u-text-align--right'}>
+            <div className={'ds-l-md-col--12 ds-u-margin-y--1 ds-u-text-align--right'}>
               <p className="ds-u-margin--0">Updated <TransformedDate date={dataset.modified} /></p>
             </div>
             <div className={'ds-l-md-col--9'}>
@@ -175,14 +188,17 @@ const Dataset = ({
                       }
                       className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
                     >
-                      <DatasetTable
-                        id={id}
-                        distribution={distribution}
-                        resource={resource}
-                        rootUrl={rootUrl}
-                        customColumns={customColumns}
-                        dataDictionaryBanner={dataDictionaryBanner && displayDataDictionaryTab}
-                      />
+                      <DataTableContext.Provider value={{
+                        id: id,
+                        resource: resource,
+                        distribution: distribution,
+                        rootUrl: rootUrl,
+                        customColumns: customColumns,
+                        dataDictionaryBanner: (dataDictionaryBanner && displayDataDictionaryTab),
+                        datasetTableControls: datasetTableControls
+                      }}>
+                        <DataTableStateWrapper />
+                      </DataTableContext.Provider>
                     </TabPanel>
                   )}
                   <TabPanel
@@ -197,7 +213,6 @@ const Dataset = ({
                   >
                     <DatasetOverview resource={resource} dataset={dataset} distributions={distributions} metadataMapping={metadataMapping} />
                   </TabPanel>
-                  {displayDataDictionaryTab && (
                     <TabPanel
                       id={'data-dictionary'}
                       tab={
@@ -208,15 +223,15 @@ const Dataset = ({
                       }
                       className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
                     >
-                      <DataDictionary
+                      {displayDataDictionaryTab && <DataDictionary
                         datasetSitewideDictionary={datasetSitewideDictionary}
                         datasetDictionaryEndpoint={distribution.data.describedBy}
                         title={"Data Dictionary"}
                         additionalParams={additionalParams}
                         csvDownload={dataDictionaryCSV}
-                      />
+                      />}
+                      {!displayDataDictionaryTab && <p>There is no Data Dictionary associated with this dataset.</p>}
                     </TabPanel>
-                  )}
                   { distribution && distribution.data && (
                     <TabPanel
                       id={'api'}

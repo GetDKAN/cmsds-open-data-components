@@ -55,6 +55,7 @@ const useDatastore = (
   const {data, isPending, error} = useQuery({
     queryKey: ["datastore" + id + additionalParamsString],
     queryFn: () => {
+      setCount(null)
       return fetch(`${rootUrl}/datastore/query/${id}?${additionalParamsString}`)
         .then(res => res.json())
     },
