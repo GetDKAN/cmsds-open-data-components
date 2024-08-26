@@ -4,7 +4,7 @@ import SwaggerUI from 'swagger-ui-react';
 import 'swagger-ui-react/swagger-ui.css';
 import './swagger-ui-overrides.scss';
 
-const APIPage = ({ hideAuth, additionalParams, rootUrl }) => {
+const APIPage = ({ hideAuth = true, additionalParams, rootUrl }) => {
   const hasACA = additionalParams && additionalParams.ACA ? true : false;
   let params = {
     authentication: hideAuth ? false : undefined,
@@ -20,10 +20,6 @@ const APIPage = ({ hideAuth, additionalParams, rootUrl }) => {
     />
   </section>
   )
-};
-
-APIPage.defaultProps = {
-  hideAuth: true,
 };
 
 export default APIPage;

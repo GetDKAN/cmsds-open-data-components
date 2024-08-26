@@ -4,13 +4,9 @@ import { useMediaQuery } from 'react-responsive';
 import { Button, Dialog, TextField } from '@cmsgov/design-system';
 
 const SearchModal = ({
-  searchFunc,
-  appNodeId,
-  headingText,
-  searchModalText,
-  buttonSize,
-  inversedModalButton,
-  inversedSearchButton,
+  headingText = 'Dataset Search',
+  buttonSize = null,
+  inversedSearchButton = true,
 }) => {
   const navigate = useNavigate();
   const [modalSearchTerm, setModalSearchTerm] = useState('');
@@ -73,14 +69,6 @@ const SearchModal = ({
       )}
     </>
   );
-};
-
-SearchModal.defaultProps = {
-  appNodeId: 'App',
-  buttonSize: null,
-  inversedModalButton: true,
-  inversedSearchButton: true,
-  headingText: "Dataset Search"
 };
 
 export default SearchModal;

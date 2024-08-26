@@ -5,12 +5,12 @@ import MobileHeader from '../../components/MobileHeader';
 import './header.scss';
 
 const Header = ({
-  mobileMaxWidth,
-  desktopMinWidth,
+  mobileMaxWidth = 1023,
+  desktopMinWidth = 1024,
   siteName,
   links,
   org,
-  includeTopNav
+  includeTopNav = true
 }) => {
   const mobile = useMediaQuery({ minWidth: 0, maxWidth: mobileMaxWidth});
   const desktop = useMediaQuery({ minWidth: desktopMinWidth});
@@ -35,12 +35,5 @@ const Header = ({
     </>
   );
 }
-
-Header.defaultProps = {
-  mobileMaxWidth: 1023,
-  desktopMinWidth: 1024,
-  includeTopNav: true,
-}
-
 
 export default Header;

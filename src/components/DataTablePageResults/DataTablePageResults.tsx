@@ -9,7 +9,7 @@ type DataTablePageResultsType = {
 }
 
 const DataTablePageResults = ({
-  totalRows, limit, offset, className
+  totalRows, limit, offset, className = 'data-table-results'
 }: DataTablePageResultsType) => {
   const numTotalRows = totalRows;
   if (numTotalRows === 0) {
@@ -31,10 +31,6 @@ const DataTablePageResults = ({
       results
     </p>
   );
-};
-
-DataTablePageResults.defaultProps = {
-  className: 'data-table-results',
 };
 
 DataTablePageResults.propTypes = {

@@ -1,5 +1,4 @@
 import React, { MouseEventHandler } from 'react';
-import PropTypes from 'prop-types';
 import { NavLink as RRDNavLink } from 'react-router-dom';
 import './NavLink.scss';
 
@@ -8,12 +7,12 @@ type NavLinkPropTypes = {
     label: string,
     url: string,
   },
-  className: string,
+  className: string | null,
   wrapLabel: boolean,
   clickHandler?: null | Function
 }
 
-const NavLink = ({ link, className, wrapLabel, clickHandler } : NavLinkPropTypes) => {
+const NavLink = ({ link, className = null, wrapLabel = false, clickHandler } : NavLinkPropTypes) => {
   const innerHtml = wrapLabel ? <span>{link.label}</span> : link.label;
 
     return (
@@ -26,24 +25,6 @@ const NavLink = ({ link, className, wrapLabel, clickHandler } : NavLinkPropTypes
       </RRDNavLink>
     );
   // }
-};
-
-NavLink.defaultProps = {
-  wrapLabel: false,
-  className: null,
-};
-
-NavLink.propTypes = {
-  link: PropTypes.shape({
-    url: PropTypes.string,
-    label: PropTypes.string,
-    nonReactLink: PropTypes.bool,
-  }).isRequired,
-  className: PropTypes.string,
-  /**
-   * Will wrap the link label in a span for help with styling.
-   */
-  wrapLabel: PropTypes.bool,
 };
 
 export default NavLink;

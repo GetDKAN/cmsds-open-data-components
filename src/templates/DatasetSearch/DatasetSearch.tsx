@@ -21,16 +21,16 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     rootUrl,
     surveyLink,
     additionalParams,
-    enableSort,
+    enableSort = true,
     enablePagination = true,
     defaultPageSize = 10,
-    defaultSort,
-    pageTitle,
-    filterTitle,
-    showLargeFileWarning,
+    defaultSort = { defaultSort: 'modified', defaultOrder: 'desc' },
+    pageTitle = 'Dataset Explorer',
+    filterTitle = 'Tags',
+    showLargeFileWarning = false,
     largeFileThemes,
-    introText,
-    showDownloadIcon,
+    introText = '',
+    showDownloadIcon = false,
     altMobileSearchButton,
   } = props;
   
@@ -356,26 +356,6 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     </section>
     </>
   );
-};
-
-DatasetSearch.defaultProps = {
-  pageTitle: 'Dataset Explorer',
-  introText: '',
-  fulltextLabel: 'Search term',
-  fulltextLabelClassName: 'ds-u-visibility--screen-reader',
-  fulltextPlaceholder: 'Search datasets',
-  filterTitle: 'Tags',
-  formClassName: 'ds-u-display--flex ds-u-justify-content--between ds-u-margin-bottom--2',
-  enableSort: true,
-  sortOptions: [
-    { label: 'Newest', value: 'newest'},
-    { label: 'Oldest', value: 'oldest'},
-    { label: 'Title A-Z', value: 'titleAZ'},
-    { label: 'Title Z-A', value: 'titleZA'}
-  ],
-  defaultSort: { defaultSort: 'modified', defaultOrder: 'desc' },
-  showLargeFileWarning: false,
-  showDownloadIcon: false
 };
 
 export default withQueryProvider(DatasetSearch);

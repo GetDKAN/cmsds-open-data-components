@@ -12,13 +12,20 @@ let mobileHeaderMenuClassName = "dc-c-mobile-header--menu";
 const MobileHeader = ({
   siteName,
   links,
-  org,
+  org = {
+    tagline: 'The Centers for Medicare and Medicaid Services',
+    url: 'https://cms.gov',
+    urlTitle: 'CMS.gov Centers for Medicare &amp; Medicaid Services',
+    logo: cmsLogo,
+    logoAltText: 'CMS.gov Centers for Medicare &amp; Medicaid Services',
+    inverseLogo: cmsLogoWhite,
+  },
   searchModalText,
   customSearch = false,
-  includeTopNav,
+  includeTopNav = true,
   inversedModalButton,
   inversedSearchButton,
-  includeSearch,
+  includeSearch = true,
 }) => {
   const { url, logo, urlTitle, logoAltText, inverseLogo } = org;
 
@@ -226,19 +233,6 @@ const MobileHeader = ({
       </div>
     </header>
   );
-};
-
-MobileHeader.defaultProps = {
-  org: {
-    tagline: 'The Centers for Medicare and Medicaid Services',
-    url: 'https://cms.gov',
-    urlTitle: 'CMS.gov Centers for Medicare &amp; Medicaid Services',
-    logo: cmsLogo,
-    logoAltText: 'CMS.gov Centers for Medicare &amp; Medicaid Services',
-    inverseLogo: cmsLogoWhite,
-  },
-  includeTopNav: true,
-  includeSearch: true,
 };
 
 export default MobileHeader;

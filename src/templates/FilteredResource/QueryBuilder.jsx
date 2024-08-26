@@ -33,7 +33,7 @@ function updateQueryForDatastore(condition) {
   return cond;
 }
 
-const QueryBuilder = ({ resource, id, includeSearchParams, customColumns }) => {
+const QueryBuilder = ({ resource, id, includeSearchParams = true, customColumns }) => {
   const { conditions, schema, setConditions } = resource;
   const fields = Object.keys(schema[id].fields);
 
@@ -155,10 +155,6 @@ const QueryBuilder = ({ resource, id, includeSearchParams, customColumns }) => {
       </div>
     </div>
   );
-};
-
-QueryBuilder.defaultProps = {
-  includeSearchParams: true,
 };
 
 export default QueryBuilder;

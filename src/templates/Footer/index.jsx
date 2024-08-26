@@ -5,15 +5,23 @@ import NavLink from '../../components/NavLink';
 
 const Footer = ({
   links,
-  showEmail,
-  emailTitle,
-  emailBody,
-  emailLink,
-  emailButton,
-  socialMediaLinks,
+  showEmail = true,
+  emailTitle = 'Get Email Updates',
+  emailBody = 'Sign up to get the latest information from CMS by choosing the topics and frequency of emails that are best for you.',
+  emailLink = '',
+  emailButton = 'Sign up for email updates',
+  socialMediaLinks = null,
   hhsLogo,
   cmsLogo,
-  trademarkContent,
+  trademarkContent = (
+    <div>
+      <p>
+        A federal government website managed and paid for by the U.S. Centers for Medicare &amp;
+        Medicaid Services.
+      </p>
+      <p className="ds-u-padding-bottom--2">7500 Security Boulevard, Baltimore, MD 21244</p>
+    </div>
+  ),
 }) => {
   const { footerOpenDataToolLinks, footerAdditionalResourcesLinks, footerUtilityLinks } = links;
   return (
@@ -328,25 +336,6 @@ const Footer = ({
       </div>
     </footer>
   );
-};
-
-Footer.defaultProps = {
-  showEmail: true,
-  emailTitle: 'Get Email Updates',
-  emailBody:
-    'Sign up to get the latest information from CMS by choosing the topics and frequency of emails that are best for you.',
-  emailLink: '',
-  emailButton: 'Sign up for email updates',
-  socialMediaLinks: null,
-  trademarkContent: (
-    <div>
-      <p>
-        A federal government website managed and paid for by the U.S. Centers for Medicare &amp;
-        Medicaid Services.
-      </p>
-      <p className="ds-u-padding-bottom--2">7500 Security Boulevard, Baltimore, MD 21244</p>
-    </div>
-  ),
 };
 
 Footer.propTypes = {
