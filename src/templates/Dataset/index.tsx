@@ -60,7 +60,7 @@ const Dataset = ({
   defaultPageSize = 25,
   dataDictionaryCSV = false,
   dataDictionaryBanner = false,
-  datasetTableControls = false,
+  disableTableControls = false,
 } : DatasetPageType) => {
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
@@ -195,7 +195,7 @@ const Dataset = ({
                         rootUrl: rootUrl,
                         customColumns: customColumns,
                         dataDictionaryBanner: (dataDictionaryBanner && displayDataDictionaryTab),
-                        datasetTableControls: datasetTableControls
+                        datasetTableControls: !disableTableControls
                       }}>
                         <DataTableStateWrapper />
                       </DataTableContext.Provider>
