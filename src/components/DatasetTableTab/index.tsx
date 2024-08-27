@@ -88,15 +88,13 @@ const DatasetTable = ({isModal = false, closeFullScreenModal} : {isModal?: boole
           <div className="ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--end ds-u-md-justify-content--between ds-u-margin-top--2 ds-u-align-items--center">
             <Pagination
               totalPages={Math.ceil(resource.count ? resource.count / pageSize : 1)}
-              currentPage={page}
+              currentPage={Number(page)}
               onPageChange={(evt, page) => {
                 evt.preventDefault();
                 setOffset((page - 1) * limit);
                 setPage(page);
               }}
-              renderHref={(page) => {
-                return '';
-              }}
+              renderHref={(p) => `?page=${p}`}
               className="ds-l-col--12 ds-u-padding-x--0"
             />
           </div>

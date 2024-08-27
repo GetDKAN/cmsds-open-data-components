@@ -152,9 +152,7 @@ const DataDictionaryTable = ({tableColumns, tableData, pageSize, columnFilters} 
             evt.preventDefault();
             table.setPageIndex(page - 1)
           }}
-          renderHref={(page) => {
-            return '';
-          }}
+          renderHref={(page) => `/page=${page}`}
         />
       ): ''}
     </div>
