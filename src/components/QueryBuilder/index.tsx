@@ -14,7 +14,7 @@ type QueryBuilderPropTypes = {
     setConditions: Function;
   };
   id: string;
-  includeSearchParams: Boolean;
+  includeSearchParams?: Boolean;
   customColumns: Array<Object>;
   isModal?: boolean;
 };

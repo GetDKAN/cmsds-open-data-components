@@ -5,7 +5,7 @@ type DataTablePageResultsType = {
   totalRows: number;
   limit: number;
   offset: number;
-  className: string;
+  className?: string;
 }
 
 const DataTablePageResults = ({
