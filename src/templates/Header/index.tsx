@@ -83,7 +83,7 @@ const Header = (props: HeaderProps) => {
   }
 
   const trapFocus = (event: KeyboardEvent) => {
-    if(menu.current) {
+    if(menu.current && mobileMenuOpen) {
       const focusableEls = getFocusableElements(menu.current).selectors.visible;
       const firstEl = focusableEls[0];
       const lastEl = focusableEls[focusableEls.length - 1];
