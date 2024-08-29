@@ -1,22 +1,25 @@
 import React, { ReactNode } from 'react';
+import { useMediaQuery } from 'react-responsive'
 import SidebarNavigation from '../SidebarNavigation';
 import { MenuLinkType } from '../../types/misc';
 
 type SidebarPageProps = {
   links: MenuLinkType[],
   menuTitle: string,
+  mobileMaxWidth?: number;
   children: ReactNode
 }
 
 const SidebarPage = (props: SidebarPageProps) => {
-  const {links, menuTitle, children} = props;
+  const {links, menuTitle, mobileMaxWidth = 768, children} = props;
+  const mobileMax = useMediaQuery({ query: `(max-width: ${mobileMaxWidth}px)` });
   return(
-    <div className="ds-l-container">
-      <div className="ds-l-row">
-        <div className="ds-u-display--none ds-u-md-display--block ds-l-col--4">
-          <SidebarNavigation links={links} title={menuTitle} />
+    <div className={`${mobileMax ? "a" : 'ds-l-container'}`}>
+      <div className={`${mobileMax ? "a" : 'ds-l-row'}`}>
+        <div className={`${mobileMax ? 'a' : "ds-l-col--4"}`}>
+          <SidebarNavigation links={links} title={menuTitle} mobileMax={mobileMax} />
         </div>
-        <div className="ds-l-md-col--8">
+        <div className={`${mobileMax ? "ds-l-container" : " ds-l-md-col--8"}`}>
           { children }
         </div>
       </div>
