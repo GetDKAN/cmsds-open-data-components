@@ -2,7 +2,14 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, TextField } from '@cmsgov/design-system';
 
-const Hero = ({ title, description, searchUrl, searchKey, textfieldLabel, searchButtonText }) => {
+const Hero = ({
+  title,
+  description,
+  searchUrl = 'datasets',
+  searchKey = 'fulltext',
+  textfieldLabel = 'Search for a dataset',
+  searchButtonText = 'Search'
+}) => {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = React.useState('');
 
@@ -46,13 +53,6 @@ const Hero = ({ title, description, searchUrl, searchKey, textfieldLabel, search
       </div>
     </section>
   );
-};
-
-Hero.defaultProps = {
-  searchKey: 'fulltext',
-  searchUrl: 'datasets',
-  textfieldLabel: 'Search for a dataset',
-  searchButtonText: 'Search',
 };
 
 export default Hero;

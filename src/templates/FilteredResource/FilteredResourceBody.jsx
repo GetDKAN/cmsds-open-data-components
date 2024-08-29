@@ -160,8 +160,4 @@ const FilteredResourceBody = ({
   );
 };
 
-FilteredResourceBody.defaultProps = {
-  apiDocPage: '/api',
-};
-
 export default FilteredResourceBody;

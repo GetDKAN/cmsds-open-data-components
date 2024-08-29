@@ -8,15 +8,20 @@ import cmsLogo from '../../assets/images/CMSGovLogo-O.png';
 const DesktopHeader = ({
   siteName,
   headerClasses,
-  linkClasses,
+  linkClasses = 'ds-u-xl-margin-right--4 ds-u-margin-right--3 ds-u-padding-y--3',
   links,
-  org,
+  org = {
+    tagline: 'The Centers for Medicare & Medicaid Services',
+    url: 'https://cms.gov',
+    urlTitle: 'CMS.gov Centers for Medicare & Medicaid Services',
+    logo: cmsLogo,
+    logoAltText: 'CMS.gov Centers for Medicare & Medicaid Services',
+  },
   searchModalText,
-  customSearch,
-  includeTopNav,
+  customSearch = false,
+  includeTopNav = true,
   inversedModalButton,
   inversedSearchButton,
-  includeSearch,
 }) => {
   const { url, tagline, logo, urlTitle, logoAltText } = org;
   const headerClassString = headerClasses ?? 'dc-c-header ds-base';
@@ -76,20 +81,6 @@ const DesktopHeader = ({
       </div>
     </header>
   );
-};
-
-DesktopHeader.defaultProps = {
-  org: {
-    tagline: 'The Centers for Medicare & Medicaid Services',
-    url: 'https://cms.gov',
-    urlTitle: 'CMS.gov Centers for Medicare & Medicaid Services',
-    logo: cmsLogo,
-    logoAltText: 'CMS.gov Centers for Medicare & Medicaid Services',
-  },
-  includeTopNav: true,
-  customSearch: false,
-  linkClasses: 'ds-u-xl-margin-right--4 ds-u-margin-right--3 ds-u-padding-y--3',
-  includeSearch: true,
 };
 
 DesktopHeader.propTypes = {

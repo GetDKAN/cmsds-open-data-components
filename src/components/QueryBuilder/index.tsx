@@ -14,7 +14,7 @@ type QueryBuilderPropTypes = {
     setConditions: Function;
   };
   id: string;
-  includeSearchParams: Boolean;
+  includeSearchParams?: Boolean;
   customColumns: Array<Object>;
   isModal?: boolean;
 };
@@ -46,7 +46,7 @@ function updateQueryForDatastore(condition: ConditionType) {
   return cond;
 }
 
-const QueryBuilder = ({resource, id, includeSearchParams, customColumns, isModal = false}: QueryBuilderPropTypes) => {
+const QueryBuilder = ({resource, id, includeSearchParams = false, customColumns, isModal = false}: QueryBuilderPropTypes) => {
   const { conditions, schema, setConditions } = resource;
 
   const fields = Object.keys(schema[id].fields);
@@ -213,10 +213,6 @@ const QueryBuilder = ({resource, id, includeSearchParams, customColumns, isModal
         </div>
     </div>
   );
-};
-
-QueryBuilder.defaultProps = {
-  includeSearchParams: true,
 };
 
 export default QueryBuilder;

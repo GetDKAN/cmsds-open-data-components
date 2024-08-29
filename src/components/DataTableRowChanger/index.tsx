@@ -8,8 +8,7 @@ type DataTableRowChangerProps = {
   setLimit: Function,
 };
 
-const DataTableRowChanger = (props: DataTableRowChangerProps) => {
-  const {limit, rowOptions, setLimit} = props;
+const DataTableRowChanger = ({limit, rowOptions = [10, 25, 50, 100], setLimit} : DataTableRowChangerProps) => {
   const rowOptionsFormatted = rowOptions.map((row: Number) => ({ label: row.toString(), value: row.toString() as DropdownValue } )) as Array<DropdownOption>;
   return (
     <div className="ds-u-display--flex">
@@ -23,10 +22,6 @@ const DataTableRowChanger = (props: DataTableRowChangerProps) => {
       />
     </div>
   );
-};
-
-DataTableRowChanger.defaultProps = {
-  rowOptions: [10, 25, 50, 100],
 };
 
 DataTableRowChanger.propTypes = {

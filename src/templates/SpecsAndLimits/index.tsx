@@ -17,7 +17,10 @@ type SpecsAndLimitsProps = {
 }
 
 const SpecsAndLimits = (props: PropsWithChildren<SpecsAndLimitsProps>) => {
-  const {documentationList, children } = props;
+  const {
+    documentationList = documentation,
+    children
+  } = props;
   
   const defaultContent = (
     <p>
@@ -53,16 +56,5 @@ const SpecsAndLimits = (props: PropsWithChildren<SpecsAndLimitsProps>) => {
       </div>
     </section>
 )};
-
-SpecsAndLimits.defaultProps = {
-  documentationList: documentation,
-  content: (
-    <p>
-      Some datasets are extremely large and may be difficult to download and/or cause
-      computer performance issues. The Centers for Medicare and Medicaid Services (CMS)
-      recommends using WinZip, WinRAR, or 7-Zip for file decompression.
-    </p>
-  )
-};
 
 export default SpecsAndLimits;

@@ -30,7 +30,7 @@ function DefaultColumnFilter({ column: { Header, accessor, setFilter, filterValu
 const ResourcePreview = ({
   tablePadding,
   id,
-  canResize,
+  canResize = true,
 }) => {
   const {resource, customColumns} = useContext(DataTableContext);
 
@@ -51,18 +51,6 @@ const ResourcePreview = ({
       />
     </div>
   );
-};
-
-ResourcePreview.defaultProps = {
-  options: {
-    layout: 'flex',
-    columnFilter: false,
-    columnSort: true,
-    columnResize: true,
-  },
-  truncateCellHeader: true,
-  defaultSort: [],
-  canResize: true,
 };
 
 export default ResourcePreview;
