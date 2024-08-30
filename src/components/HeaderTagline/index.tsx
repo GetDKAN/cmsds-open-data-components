@@ -8,7 +8,7 @@ export type HeaderTaglineProps = {
 
 const HeaderTagline = (props: HeaderTaglineProps) => {
   return (
-    <span className="dkan-c-cms-topnav--tagline ds-u-valign--middle	 ds-u-padding-left--2 ds-u-font-size--xl">
+    <span className="dkan-c-cms-topnav--tagline ds-u-valign--middle	ds-u-padding-left--2">
       {props.tagline}
     </span>
   );
