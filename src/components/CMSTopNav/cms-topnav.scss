@@ -2,6 +2,10 @@
   height: 51px;
 }
 
+.dkan-c-cms-topnav > div {
+  height: 100%;
+}
+
 .dkan-c-cms-topnav .dkan-c-cms-topnav-menu a {
   display: inline-block;
   margin: 3px 7px;
@@ -13,6 +17,10 @@
   padding: 0;
 }
 
+.dkan-c-cms-topnav .dkan-c-cms-topnav--tagline {
+  height: 100%;
+  margin-left: 16px;
+}
 
 @media screen and (max-width: 544px) {
   .dkan-c-cms-topnav {

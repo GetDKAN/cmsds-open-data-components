@@ -6,7 +6,6 @@
 .dkan-c-header-nav-icon-link {
   display: inline-flex;
   align-items: center;
-  margin-right: 16px;
   border-right: none;
   a {
     text-decoration: none;
@@ -50,23 +49,3 @@
     width: #{var(--header-nav-icon-link--desktop-width)};
   }
 }
-
-// @media (min-width: 1024px) {
-//   .dkan-c-header-nav-icon-link {
-//     float: left;
-//     border-right: 1px solid #d6d7d9;
-//     img {
-//       height: auto;
-//       display: inline-block;
-//       vertical-align: middle;
-//       width: #{var(--header-nav-icon-link--desktop-width)};
-//     }
-//     a::before {
-//       font-size: 28px;
-//       line-height: 28px;
-//       width: 28px;
-//       height: 28px;
-//       margin-left: 0;
-//     }
-//   }
-// }

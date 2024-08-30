@@ -10,6 +10,15 @@ div.dkan-c-sidebar-nav .dkan-c--sidebar-nav-wrapper {
   padding: 0;
 }
 
+.dkan-c-sidebar-nav-link,
+.dkan-c-sidebar-nav-link:visited {
+  color: var(--color-base);
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .dkan-c-sidebar-nav-link-status {
   border: 2px solid var(--color-gray-lighter);
   border-radius: 2px;
@@ -31,7 +40,7 @@ div.dkan-c-sidebar-nav .dkan-c--sidebar-nav-wrapper {
   }
 
   .dkan-c-sidebar-nav--mobile-header {
-    display: inherit;
+    display: flex;
     margin-top: -32px;
   }
 }

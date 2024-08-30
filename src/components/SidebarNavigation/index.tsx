@@ -18,7 +18,7 @@ const SidebarNavigation = (props: SidebarNavigationProps) => {
   const mobileClass = `dkan-c-sidebar-nav--${mobileMax ? 'mobile' : 'desktop'}`
   return(
     <div className={`dkan-c-sidebar-nav ${mobileClass}`}>
-      <div className='dkan-c-sidebar-nav--mobile-header ds-u-display--flex ds-u-align-items--center ds-u-justify-content--between ds-u-padding-y--2 ds-u-fill--primary-darker ds-u-color--white'>
+      <div className='dkan-c-sidebar-nav--mobile-header ds-u-align-items--center ds-u-justify-content--between ds-u-padding-y--2 ds-u-fill--primary-darker ds-u-color--white'>
         <span className="ds-u-margin-left--2 ds-u-margin-y--0 ds-text-heading--xl">Pages in this section</span>
         <Button
           aria-haspopup="true"

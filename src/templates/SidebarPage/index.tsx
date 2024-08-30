@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { useMediaQuery } from 'react-responsive'
-import SidebarNavigation from '../SidebarNavigation';
+import SidebarNavigation from '../../components/SidebarNavigation';
 import { MenuLinkType } from '../../types/misc';
 
 type SidebarPageProps = {

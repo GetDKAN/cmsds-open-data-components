@@ -24,6 +24,36 @@
   }
 }
 
+.dkan-c-header-search--modal-button {
+  &::before {
+    font-family: 'Font Awesome 6 Pro';
+    content: '\f002';
+    font-size: 18px;
+    padding-right: 10px;
+    display: inline-block;
+    line-height: 18px;
+    height: 18px;
+    width: 18px;
+    margin-left: 10px;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: lighter;
+    box-sizing: content-box
+  }
+}
+
+.dkan-c-main-navigation--search .dkan-c-header-search--modal-button {
+  color: #{var(--header-nav-search--color)};
+  text-decoration: none;
+  &:focus,
+  &:hover {
+    color: #{var(--header-nav-search--color)};
+    span {
+      border-bottom-color: #{var(--header-nav-search--color)};
+    }
+  }
+}
+
 .dkan-c-header--desktop {
   .dkan-c-main-navigation--search {
     border-left: 2px solid #{var(--header-nav-search--color)};
@@ -31,31 +61,6 @@
   .dkan-c-nav-menu--desktop .dkan-c-main-navigation--search {
     display: none;
   }
-  .dkan-c-main-navigation--search .dkan-c-header-search--modal-button {
-    color: #{var(--header-nav-search--color)};
-    text-decoration: none;
-    &:focus,
-    &:hover {
-      color: #{var(--header-nav-search--color)};
-      span {
-        border-bottom-color: #{var(--header-nav-search--color)};
-      }
-    }
-    &::before {
-      font-family: 'Font Awesome 6 Pro';
-      content: '\f002';
-      font-size: 18px;
-      padding-right: 10px;
-      display: inline-block;
-      line-height: 18px;
-      height: 18px;
-      width: 18px;
-      margin-left: 10px;
-      text-align: center;
-      vertical-align: middle;
-      font-weight: lighter;
-      box-sizing: content-box
-    }
-  }
+  
 }
 
