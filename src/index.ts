@@ -10,7 +10,7 @@ export { default as HeaderTagline } from './components/HeaderTagline';
 export { default as MobileMenuButton } from './components/MobileMenuButton';
 export { default as NavBar } from './components/NavBar';
 export { default as SidebarNavigation } from './components/SidebarNavigation';
-export { default as SidebarPage } from './components/SidebarPage';
+export { default as SidebarPage } from './templates/SidebarPage';
 export { default as SubMenu } from './components/SubMenu';
 
 
