@@ -1,0 +1,50 @@
+[
+    {
+      "heading": "Modified",
+      "definition": "Most recent date on which the dataset was changed, updated or modified"
+    },
+    {
+      "heading": "Released",
+      "definition": "xxx"
+    },
+    {
+      "heading": "Issued",
+      "definition": "\"Date of formal issuance\" Project Open Data uses label, \"Release\""
+    },
+    {
+      "heading": "Publisher",
+      "definition": "The publishing entity and optionally their parent organization(s)"
+    },
+    {
+      "heading": "Identifier",
+      "definition": "A unique identifier for the dataset or API as maintained within an Agency catalog or database"
+    },
+    {
+      "heading": "Contact",
+      "definition": "Contact name for the asset"
+    },
+    {
+      "heading": "Contact Email",
+      "definition": "Contact name for the asset"
+    },
+    {
+      "heading": "Public Access Level",
+      "definition": "The degree to which this dataset could be made pubicly-available. <br />Choices:<ul><li>public (data asset is or could be made publicly available to all without restrictions),</li><li>restricted public (Data aset is available under certain use restrictions) or non-public (Data asset is not available to members of the public</li><ul>"
+    },
+    { 
+      "heading": "Homepage URL",
+      "definition": "This field is not intended for an agency's homepage (e.g. www.agency.gov) but rather if a datast has a human-friendly hub or landing page that users can be directed to for all resources tied to the dataset"
+    },
+    {
+      "heading": "Bureau Code",
+      "definition": "Federal agencies, combined agency and bureau code from OMB Circular A-11, Appendix C (PDF, CSV in the format of 015:11."
+    },
+    {
+      "heading": "Program Code",
+      "definition": "Federal agencies, list the primary program related to this data asset, from the Federal Program Inventory. Use the format of 015:001."
+    },
+    {
+      "heading": "Tags",
+      "definition": "Tags (or keywords) help users discover your dataset; please include terms that would be used by technical and non-technical users."
+    }
+  ]

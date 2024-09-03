@@ -1,13 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { buildRows } from '../DatasetAdditionalInformation';
-import { Table, TableBody, TableRow, TableCell } from '@cmsgov/design-system';
+import { Accordion, AccordionItem, Button, Drawer, InfoCircleIconThin, Table, TableBody, TableRow, TableCell } from '@cmsgov/design-system';
 import Resource from '../Resource';
 import { DatasetOverviewPropsType } from '../../types/dataset';
+import definitions from "./data/definitions.json";
+import DOMPurify from 'dompurify';
 
 const DatasetOverview = ({ dataset, resource, distributions, metadataMapping } : DatasetOverviewPropsType) => {
   const md = useMediaQuery({ minWidth: 0, maxWidth: 768 });
   const rows = buildRows(metadataMapping, dataset);
+  const [drawerOpen, updateOpen] = useState(false);
+
+    const showDrawer = () => {
+      updateOpen(true);
+    };
+
+    const hideDrawer = () => {
+      updateOpen(false);
+    };
+
+    const sortedDefinitions = new Array()
+    rows.forEach( ({ label }) => {
+      definitions.find( item => {
+        if (label === item.heading) {
+          sortedDefinitions.push(item)
+        }
+      })
+    })
+    
+    const accordionItems = sortedDefinitions.map( (item, i) => <AccordionItem
+      key={i}
+      defaultOpen
+      heading={item.heading}
+    >
+      <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.definition)}} />
+    </AccordionItem>)
 
   return (
     <>
@@ -18,6 +46,20 @@ const DatasetOverview = ({ dataset, resource, distributions, metadataMapping } :
       />
       <div className="dc-c-additional-info-table ds-u-margin-bottom--6 ds-u-padding-left--0 ds-l-lg-col--7 ds-l-md-col--9 ds-l-col--12">
         <h2 className="ds-text-heading--2xl ds-text-heading--2xl">Additional Information</h2>
+        <Drawer
+          onCloseClick={hideDrawer}
+          heading="Metadata Definitions"
+          isOpen={drawerOpen}
+        >
+          <Accordion bordered>
+            {accordionItems}
+          </Accordion>
+        </Drawer>
+        <p className="ds-u-margin-bottom--2">
+          <Button className="ds-c-drawer__toggle" variation="ghost" onClick={showDrawer}>
+            <InfoCircleIconThin className="ds-u-margin-right--1" /> What do these fields mean?
+          </Button>
+        </p>
         <Table compact stackable stackableBreakpoint="md" warningDisabled>
           <TableBody>
             {rows.map((r) => (
