@@ -14,8 +14,8 @@ const CMSTopNav = (props: CMSTopNavProps) => {
   const { links, org } = props;
   const { urlTitle, logoAltText="", logoFilePath="", tagline, url} = org;
   return (
-    <div className="dkan-c-cms-topnav ds-l-row ds-u-display--flex ds-u-padding-x--5 ds-u-align-items--center ds-u-justify-content--center ds-u-lg-justify-content--start">
-      <div className="ds-l-col--12 ds-l-md-col--5 ds-l-lg-col--7 ds-u-display--flex ds-u-align-items--center ds-u-justify-content--center ds-u-lg-justify-content--start">
+    <div className="dkan-c-cms-topnav ds-u-display--flex ds-u-padding-x--5 ds-u-align-items--center ds-u-justify-content--center ds-u-lg-justify-content--start">
+      <div className="ds-l-col--12 ds-l-md-col--5 ds-l-lg-col--7 ds-u-display--flex ds-u-align-items--center ds-u-justify-content--center ds-u-md-justify-content--start">
         <HeaderNavIconLink
           url={url}
           urlTitle={urlTitle}

@@ -87,17 +87,6 @@
   visibility: hidden;
 }
 
-// .dc-c-mobile-header .dc-c-site-menu--sub-menu {
-//   position: relative;
-//   background: transparent;
-//   top: -24px;
-//   width: auto;
-//   left: auto;
-//   a {
-//     padding: 8px;
-//   }
-// }
-
 .dc-c-cmsheader {
   position: relative;
   background: #{var(--color-white)};
@@ -133,24 +122,7 @@
     border-bottom: 2px solid #{var(--color-primary-light)};
   }
 }
-// .has-submenu > button::after {
-//   font-family: 'Font Awesome 6 Pro';
-//   content: '\f105';
-//   color: #{var(--color-white)};
-//   font-size: 18px;
-//   padding-right: 10px;
-//   display: inline-block;
-//   line-height: 18px;
-//   height: 18px;
-//   width: 18px;
-//   margin-left: 10px;
-//   text-align: center;
-//   vertical-align: middle;
-//   font-weight: lighter;
-// }
-// .has-submenu.open > button::after {
-//   content: '\f107';
-// }
+
 .dc-c-header--mobile-links {
   button {
     padding: 0;
@@ -213,9 +185,6 @@
   }
 }
 
-
-
-
 nav.dc-c-site-menu {
   .dc-c-header--links {
     padding: 0;
@@ -261,31 +230,6 @@ nav.dc-c-site-menu .dc-c-header--links a:focus,
   border-radius: #{var(--button__border-radius)};
   text-decoration: none;
 }
-
-// li.has-submenu {
-//   position: relative;
-// }
-
-// .dc-c-site-menu--sub-menu {
-//   background: #{var(--color-primary)};
-//   position: absolute;
-//   left: 0;
-//   top: 48px;
-//   margin: 0;
-//   padding: 0;
-//   width: 300px;
-//   a {
-//     display: block;
-//     padding: 16px;
-//     span {
-//       border-bottom: 2px solid transparent;
-//     }
-//   }
-//   a:hover span,
-//   a:focus span {
-//     border-bottom: 2px solid #{var(--color-primary-light)};
-//   }
-// }
 
 .dc-c-site-title a {
   text-decoration: none;

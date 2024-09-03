@@ -52,7 +52,7 @@ const SubMenu = ({ link, linkClasses, subLinkClasses, wrapLabel = true }) => {
         }}
       >
         {innerHtml}
-        <ArrowIcon direction={isExpanded ? "down" : "right"} />
+        <ArrowIcon className="ds-u-margin-left--1" direction={isExpanded ? "down" : "right"} />
       </Button>
       <ul className="dkan-c-site-menu--sub-menu">
         {link.submenu.map((s) => (
