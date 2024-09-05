@@ -25,6 +25,8 @@ const FilteredResourceBody = ({
   columnSettings,
   columnWidths,
   customTitle,
+  customDescription,
+  dynamicDescription,
   rootUrl
 }) => {
   const [tablePadding, setTablePadding] = React.useState('ds-u-padding-y--1');
@@ -82,7 +84,13 @@ const FilteredResourceBody = ({
             <p className="ds-u-margin--0">Updated <TransformedDate date={dataset.modified} /></p>
           </div>
           <div className={'ds-l-md-col--9'}>
-            <FilteredResourceDescription distribution={distribution} dataset={dataset} />
+            <FilteredResourceDescription
+              distribution={distribution}
+              dataset={dataset}
+              resource={resource}
+              customDescription={customDescription}
+              dynamicDescription={dynamicDescription}
+            />
           </div>
           {Object.keys(resource).length && resource.columns && Object.keys(resource.schema).length && (
             <div className={'ds-l-md-col--12'}>

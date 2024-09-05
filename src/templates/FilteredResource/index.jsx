@@ -16,6 +16,8 @@ const FilteredResource = ({
   columnSettings,
   columnWidths,
   customTitle,
+  customDescription,
+  dynamicDescription,
   rootUrl
 }) => {
   const [ready, setReady] = useState(false);
@@ -72,6 +74,8 @@ const FilteredResource = ({
               columnSettings={columnSettings}
               columnWidths={columnWidths}
               customTitle={customTitle}
+              customDescription={customDescription}
+              dynamicDescription={dynamicDescription}
               rootUrl={rootUrl}
             />
           )}
