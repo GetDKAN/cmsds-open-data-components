@@ -1,14 +1,8 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { usePopper } from 'react-popper';
 import {
-  HelpDrawerToggle,
   Button,
   Tooltip,
-  Spinner,
-  Accordion,
-  AccordionItem,
 } from '@cmsgov/design-system';
 import DataTablePageResults from '../DataTablePageResults';
 import DataTableDensity from '../DataTableDensity';
@@ -20,9 +14,6 @@ import './resource-header.scss';
 
 const ResourceHeader = ({
   setTablePadding,
-  id,
-  distribution,
-  includeFiltered,
   includeDensity,
   includeDownload,
   resource,
@@ -32,32 +23,19 @@ const ResourceHeader = ({
   const md = useMediaQuery({ minWidth: 0, maxWidth: 768 });
   const { limit, offset, count, setLimit, setOffset } = resource;
   const intCount = count ? parseInt(count) : 0;
-  const [referenceElement, setReferenceElement] = useState(null);
-  const [popperElement, setPopperElement] = useState(null);
-  const [arrowElement, setArrowElement] = useState(null);
-  const { styles, attributes } = usePopper(referenceElement, popperElement, {
-    modifiers: [{ name: 'arrow', options: { element: arrowElement } }],
-  });
 
   return (
     <div className="dc-c-resource-header">
-      <div className="ds-l-row">
-        <div className="ds-l-col--12">
-          {includeFiltered && (
-            <Link className="ds-c-button ds-c-button--solid" to={`/dataset/${id}/data`}>
-              View and filter data
-            </Link>
-          )}
-        </div>
-      </div>
       <div className="ds-l-row ds-u-align-items--center">
         <div className="ds-l-col--12 ds-u-display--flex ds-u-justify-content--between ds-u-align-items--center">
           <div className="ds-u-font-weight--bold ds-u-margin-bottom--2">
-            <DataTablePageResults
-              totalRows={parseInt(intCount)}
-              limit={parseInt(limit)}
-              offset={parseInt(offset)}
-            />
+            {(!resource.loading && resource.count !== null) && (
+              <DataTablePageResults
+                totalRows={parseInt(intCount)}
+                limit={parseInt(limit)}
+                offset={parseInt(offset)}
+              />
+            )}
           </div>
           <div className="dc-c-resource-header--buttons">
             {includeDownload && (
@@ -101,7 +79,7 @@ const ResourceHeader = ({
               ariaLabel="Display settings"
               title={
                 <div className="dc-c-display-settings">
-                  <DataTableRowChanger limit={limit} setLimit={setLimit} setOffset={setOffset} />
+                  <DataTableRowChanger limit={Number(limit)} setLimit={setLimit} setOffset={setOffset} />
                   {includeDensity && (
                     <DataTableDensity
                       setTablePadding={setTablePadding}

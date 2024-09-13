@@ -13,7 +13,6 @@ import TransformedDate from '../../components/TransformedDate';
 import FilteredResourceDescription from './FilteredResourceDescription';
 import 'swagger-ui-react/swagger-ui.css';
 import { DataTableContext } from '../Dataset';
-import { ManageColumnsContext } from '../../components/DatasetTableTab/DataTableStateWrapper';
 
 const FilteredResourceBody = ({
   id,
@@ -109,29 +108,18 @@ const FilteredResourceBody = ({
                 <ResourceHeader
                   includeDensity={true}
                   setTablePadding={setTablePadding}
-                  distribution={distribution}
                   resource={resource}
                   downloadUrl={downloadUrl}
                   tablePadding={tablePadding}
                   includeDownload
                 />
-                <ManageColumnsContext.Provider value={{
-                  columnOrder: [],
-                  setColumnOrder: () => {},
-                  columnVisibility: {},
-                  setColumnVisibility: () => {},
-                  page: 1,
-                  setPage: () => {}
-                }}>
-                <ResourcePreview
-                  id={distribution.identifier}
-                  tablePadding={tablePadding}
-                  columnSettings={columnSettings}
-                  columnWidths={columnWidths}
-                />
-                
-                <ResourceFooter resource={resource} />
-                </ManageColumnsContext.Provider>
+                  <ResourcePreview
+                    id={distribution.identifier}
+                    tablePadding={tablePadding}
+                    columnSettings={columnSettings}
+                    columnWidths={columnWidths}
+                  />
+                  <ResourceFooter resource={resource} />
               </div>
             </DataTableContext.Provider>
           ) : (

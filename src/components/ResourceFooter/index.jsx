@@ -8,7 +8,6 @@ const ResourceFooter = ({ resource }) => {
     <div>
       {values.length > 0 && (
         <Pagination
-          id="test-default"
           currentPage={Number(offset) / limit + 1}
           totalPages={Math.ceil(Number(count) / limit)}
           onPageChange={(evt, page) => {

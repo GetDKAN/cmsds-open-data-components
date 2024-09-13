@@ -46,6 +46,7 @@ const ResourcePreview = ({
         }
         sortTransform={transformTableSortToQuerySort}
         tablePadding={tablePadding}
+        loading={resource.loading}
         className="dc-c-datatable"
         customColumnFilter={DefaultColumnFilter}
       />
