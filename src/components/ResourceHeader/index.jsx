@@ -27,8 +27,8 @@ const ResourceHeader = ({
   return (
     <div className="dc-c-resource-header">
       <div className="ds-l-row ds-u-align-items--center">
-        <div className="ds-l-col--12 ds-u-display--flex ds-u-justify-content--between ds-u-align-items--center">
-          <div className="ds-u-font-weight--bold ds-u-margin-bottom--2">
+        <div className="ds-l-col--12 ds-u-display--flex ds-u-justify-content--between ds-u-align-items--center ds-u-margin-bottom--2">
+          <div className="ds-u-font-weight--bold">
             {(!resource.loading && resource.count !== null) && (
               <DataTablePageResults
                 totalRows={parseInt(intCount)}
