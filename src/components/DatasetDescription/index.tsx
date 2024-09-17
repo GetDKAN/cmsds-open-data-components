@@ -3,7 +3,7 @@ import DOMPurify from 'dompurify';
 import { DatasetDescriptionType } from '../../types/dataset';
 
 const DatasetDescription = (
-  {distribution, dataset, resource, customDescription, dynamicDescription, updateAriaLive} : DatasetDescriptionType
+  {distribution, dataset, resource, customDescription, updateAriaLive} : DatasetDescriptionType
 ) => {
   const [description, setDescription] = useState("");
 
@@ -11,9 +11,6 @@ const DatasetDescription = (
     return null;
   }
   useEffect(() => {
-    if (!dynamicDescription && description !== "") {
-      return;
-    }
     let newDescription = '';
     if (customDescription) {
       newDescription = customDescription(dataset, distribution, resource);
@@ -28,7 +25,7 @@ const DatasetDescription = (
       updateAriaLive(newDescription);
     }
     setDescription(newDescription);
-  }, [resource, distribution, dataset, customDescription, dynamicDescription]);
+  }, [resource, distribution, dataset, customDescription]);
   
   return (
     <div className={'ds-u-measure--wide ds-u-margin-bottom--7'}>

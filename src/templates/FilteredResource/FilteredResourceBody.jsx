@@ -26,7 +26,6 @@ const FilteredResourceBody = ({
   columnWidths,
   customTitle,
   customDescription,
-  dynamicDescription,
   rootUrl,
   updateAriaLive
 }) => {
@@ -90,7 +89,6 @@ const FilteredResourceBody = ({
               dataset={dataset}
               resource={resource}
               customDescription={customDescription}
-              dynamicDescription={dynamicDescription}
               updateAriaLive={updateAriaLive}
             />
           </div>

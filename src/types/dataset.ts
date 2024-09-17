@@ -72,7 +72,6 @@ export type DatasetPageType = {
   disableTableControls: boolean,
   hideDataDictionary: boolean,
   customDescription?: Function,
-  dynamicDescription?: boolean,
   updateAriaLive?: Function,
 }
 
@@ -132,6 +131,5 @@ export type DatasetDescriptionType = {
   dataset: DatasetType,
   resource: ResourceType,
   customDescription?: Function,
-  dynamicDescription?: boolean
   updateAriaLive?: Function,
 }

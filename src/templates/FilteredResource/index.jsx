@@ -17,7 +17,6 @@ const FilteredResource = ({
   columnWidths,
   customTitle,
   customDescription,
-  dynamicDescription,
   rootUrl,
   updateAriaLive
 }) => {
@@ -76,7 +75,6 @@ const FilteredResource = ({
               columnWidths={columnWidths}
               customTitle={customTitle}
               customDescription={customDescription}
-              dynamicDescription={dynamicDescription}
               rootUrl={rootUrl}
               updateAriaLive={updateAriaLive}
             />

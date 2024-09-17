@@ -53,7 +53,6 @@ const Dataset = ({
   disableTableControls = false,
   hideDataDictionary = false,
   customDescription,
-  dynamicDescription,
   updateAriaLive,
 } : DatasetPageType) => {
   const options = location.search
@@ -162,7 +161,6 @@ const Dataset = ({
                 dataset={dataset}
                 resource={resource}
                 customDescription={customDescription}
-                dynamicDescription={dynamicDescription}
                 updateAriaLive={updateAriaLive}
               />
               {/* <div className={'ds-u-measure--wide ds-u-margin-bottom--7'}>
