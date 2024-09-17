@@ -10,7 +10,7 @@ import ResourceFooter from '../../components/ResourceFooter';
 import { buildCustomColHeaders } from './functions';
 import QueryBuilder from './QueryBuilder';
 import TransformedDate from '../../components/TransformedDate';
-import FilteredResourceDescription from './FilteredResourceDescription';
+import DatasetDescription from '../../components/DatasetDescription';
 import 'swagger-ui-react/swagger-ui.css';
 import DataTableContext from '../Dataset/DataTableContext';
 import ManageColumnsContext from '../../components/ManageColumns/ManageColumnsContext';
@@ -27,7 +27,8 @@ const FilteredResourceBody = ({
   customTitle,
   customDescription,
   dynamicDescription,
-  rootUrl
+  rootUrl,
+  updateAriaLive
 }) => {
   const [tablePadding, setTablePadding] = React.useState('ds-u-padding-y--1');
   let apiDocs = useRef();
@@ -84,12 +85,13 @@ const FilteredResourceBody = ({
             <p className="ds-u-margin--0">Updated <TransformedDate date={dataset.modified} /></p>
           </div>
           <div className={'ds-l-md-col--9'}>
-            <FilteredResourceDescription
+            <DatasetDescription
               distribution={distribution}
               dataset={dataset}
               resource={resource}
               customDescription={customDescription}
               dynamicDescription={dynamicDescription}
+              updateAriaLive={updateAriaLive}
             />
           </div>
           {Object.keys(resource).length && resource.columns && Object.keys(resource.schema).length && (

@@ -71,6 +71,9 @@ export type DatasetPageType = {
   dataDictionaryBanner: boolean,
   disableTableControls: boolean,
   hideDataDictionary: boolean,
+  customDescription?: Function,
+  dynamicDescription?: boolean,
+  updateAriaLive?: Function,
 }
 
 
@@ -122,4 +125,13 @@ export type DatasetDictionaryType = {
   data: {
     fields: DatasetDictionaryItemType[]
   }
+}
+
+export type DatasetDescriptionType = {
+  distribution: DistributionType,
+  dataset: DatasetType,
+  resource: ResourceType,
+  customDescription?: Function,
+  dynamicDescription?: boolean
+  updateAriaLive?: Function,
 }

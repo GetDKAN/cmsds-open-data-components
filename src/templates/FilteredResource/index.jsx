@@ -18,7 +18,8 @@ const FilteredResource = ({
   customTitle,
   customDescription,
   dynamicDescription,
-  rootUrl
+  rootUrl,
+  updateAriaLive
 }) => {
   const [ready, setReady] = useState(false);
   const [error, setError] = useState(false);
@@ -77,6 +78,7 @@ const FilteredResource = ({
               customDescription={customDescription}
               dynamicDescription={dynamicDescription}
               rootUrl={rootUrl}
+              updateAriaLive={updateAriaLive}
             />
           )}
         </>

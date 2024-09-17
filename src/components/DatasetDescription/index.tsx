@@ -1,25 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import DOMPurify from 'dompurify';
+import { DatasetDescriptionType } from '../../types/dataset';
 
-const FilteredResourceDescription = ({distribution, dataset, resource, customDescription, dynamicDescription}) => {
+const DatasetDescription = (
+  {distribution, dataset, resource, customDescription, dynamicDescription, updateAriaLive} : DatasetDescriptionType
+) => {
   const [description, setDescription] = useState("");
 
-  if(!distribution && !dataset) {
+  if(!distribution && !dataset?.identifier) {
     return null;
   }
   useEffect(() => {
     if (!dynamicDescription && description !== "") {
       return;
     }
+    let newDescription = '';
     if (customDescription) {
-      setDescription(customDescription(dataset, distribution, resource));
+      newDescription = customDescription(dataset, distribution, resource);
     } else {
       if(distribution.data && distribution.data.description) {
-        setDescription(distribution.data.description);
+        newDescription = distribution.data.description;
       } else if(dataset.description) {
-        setDescription(dataset.description);
+        newDescription = dataset.description;
       }
     }
+    if (description !== newDescription && updateAriaLive) {
+      updateAriaLive(newDescription);
+    }
+    setDescription(newDescription);
   }, [resource, distribution, dataset, customDescription, dynamicDescription]);
   
   return (
@@ -32,4 +40,4 @@ const FilteredResourceDescription = ({distribution, dataset, resource, customDes
   );
 }
 
-export default FilteredResourceDescription;
+export default DatasetDescription;
