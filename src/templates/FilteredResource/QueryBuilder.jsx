@@ -33,7 +33,7 @@ function updateQueryForDatastore(condition) {
   return cond;
 }
 
-const QueryBuilder = ({ resource, id, includeSearchParams = true, customColumns }) => {
+const QueryBuilder = ({ resource, id, customColumns }) => {
   const { conditions, schema, setConditions } = resource;
   const fields = Object.keys(schema[id].fields);
 
@@ -89,14 +89,13 @@ const QueryBuilder = ({ resource, id, includeSearchParams = true, customColumns 
     setConditions(submitConditions);
     setTitleConditions(queryConditions.map((oc) => Object.assign({}, oc)));
     setConditionsChanged(false);
-    if (includeSearchParams) {
-      const url = new URL(window.location);
-      const urlString = qs.stringify(
-        { conditions: submitConditions },
-        { encodeValuesOnly: true, addQueryPrefix: true }
-      );
-      window.history.pushState({}, '', `${url.origin}${url.pathname}${urlString}`);
-    }
+
+    const url = new URL(window.location);
+    const urlString = qs.stringify(
+      { conditions: submitConditions },
+      { encodeValuesOnly: true, addQueryPrefix: true }
+    );
+    window.history.pushState({}, '', `${url.origin}${url.pathname}${urlString}`);
   };
 
   const updateCondition = (index, key, value) => {

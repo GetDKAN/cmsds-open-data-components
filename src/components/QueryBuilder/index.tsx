@@ -14,7 +14,6 @@ type QueryBuilderPropTypes = {
     setConditions: Function;
   };
   id: string;
-  includeSearchParams?: Boolean;
   customColumns: Array<Object>;
   isModal?: boolean;
 };
@@ -46,7 +45,7 @@ function updateQueryForDatastore(condition: ConditionType) {
   return cond;
 }
 
-const QueryBuilder = ({resource, id, includeSearchParams = true, customColumns, isModal = false}: QueryBuilderPropTypes) => {
+const QueryBuilder = ({resource, id, customColumns, isModal = false}: QueryBuilderPropTypes) => {
   const { conditions, schema, setConditions } = resource;
 
   const fields = Object.keys(schema[id].fields);
@@ -108,14 +107,12 @@ const QueryBuilder = ({resource, id, includeSearchParams = true, customColumns, 
   });
 
   const updateBrowserURL = (newConditions: Array<ConditionType>) => {
-    if (includeSearchParams) {
-      const url = new URL(window.location.href);
-      const urlString = qs.stringify(
-        { conditions: newConditions },
-        { encodeValuesOnly: true, addQueryPrefix: true }
-      );
-      window.history.pushState({}, '', `${url.origin}${url.pathname}${urlString}`);
-    }
+    const url = new URL(window.location.href);
+    const urlString = qs.stringify(
+      { conditions: newConditions },
+      { encodeValuesOnly: true, addQueryPrefix: true }
+    );
+    window.history.pushState({}, '', `${url.origin}${url.pathname}${urlString}`);
   }
 
   const submitConditions = (e: Event) => {
