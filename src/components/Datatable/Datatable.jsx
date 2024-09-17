@@ -50,7 +50,7 @@ const DataTable = ({
   const [ highlightRow, setHighlightRow ] = useState(null);
 
   useEffect(() => {
-    if (!columnOrder.length)
+    if (columnOrder && !columnOrder.length)
       setColumnOrder(table_columns.map(c => c.accessorKey))
   }, [columnOrder])
 
