@@ -12,7 +12,7 @@ import FixedSizeTHead from "./FixedSizeTHead";
 import "./datatable.scss";
 import DataTableControls from "../DataTableControls";
 import DataTableContext from "../../templates/Dataset/DataTableContext";
-import ManageColumnsContext from "../DatasetTableTab/ManageColumnsContext";
+import ManageColumnsContext from "../ManageColumns/ManageColumnsContext";
 
 const DataTable = ({
   columns,

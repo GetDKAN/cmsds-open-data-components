@@ -27,7 +27,7 @@ export { default as SpecsAndLimits } from './templates/SpecsAndLimits';
 // Context
 export { default as HeaderContext } from './templates/Header/HeaderContext';
 export { default as DataTableContext } from './templates/Dataset/DataTableContext';
-export { default as ManageColumnsContext } from './components/DatasetTableTab/ManageColumnsContext';
+export { default as ManageColumnsContext } from './components/ManageColumns/ManageColumnsContext';
 
 // Services
 export { default as useSearchAPI } from './services/useSearchAPI';
