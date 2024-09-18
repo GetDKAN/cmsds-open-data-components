@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, within, act } from '@testing-library/react'
 import ManageColumns from './ManageColumns'
-import { ManageColumnsContext } from '../DatasetTableTab/DataTableStateWrapper';
+import ManageColumnsContext from './ManageColumnsContext';
 
 // Rationale
 // We shouldn't need to rest dnd-kit functionality as that should be handled downstream in their library

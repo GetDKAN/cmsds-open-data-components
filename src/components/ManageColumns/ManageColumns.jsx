@@ -4,7 +4,7 @@ import { SortableContext, verticalListSortingStrategy, sortableKeyboardCoordinat
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
 import { Button, Choice, Dialog } from '@cmsgov/design-system'
 import Card from './Card'
-import { ManageColumnsContext } from '../DatasetTableTab/DataTableStateWrapper'
+import ManageColumnsContext from './ManageColumnsContext';
 import './ManageColumns.scss'
 
 class ExcludeCheckboxKeyboardSensor extends KeyboardSensor {
