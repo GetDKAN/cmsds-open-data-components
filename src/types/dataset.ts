@@ -65,12 +65,12 @@ export type DatasetPageType = {
   customMetadataMapping : any, // TODO
   apiPageUrl: string,
   dataDictionaryUrl: string | undefined,
-  dataDictionaryACA: string | undefined,
   borderlessTabs: boolean,
   defaultPageSize: Number,
   dataDictionaryCSV: boolean,
   dataDictionaryBanner: boolean,
   disableTableControls: boolean,
+  hideDataDictionary: boolean,
 }
 
 
