@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 import DataTableStateWrapper from './DataTableStateWrapper';
 import * as resource from "../../tests/fixtures/resource.json";
 import * as distribution from "../../tests/fixtures/distribution.json";
-import { DataTableContext } from '../../templates/Dataset';
+import DataTableContext from "../../templates/Dataset/DataTableContext";
 
 describe('<DatasetTableTab />', () => {
   window.scrollTo = jest.fn();

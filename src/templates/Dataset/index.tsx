@@ -18,18 +18,7 @@ import TransformedDate from '../../components/TransformedDate';
 import { getFormatType } from '../../utilities/format';
 import './dataset.scss';
 import DataTableStateWrapper from '../../components/DatasetTableTab/DataTableStateWrapper';
-
-// create context
-type DataTableContextType = {
-  id: string | null,
-  resource?: ResourceType,
-  distribution?: DistributionType,
-  rootUrl?: string,
-  customColumns?: Array<ColumnType>,
-  dataDictionaryBanner?: boolean,
-  datasetTableControls?: boolean
-}
-export const DataTableContext = createContext<DataTableContextType>({ id: null})
+import DataTableContext from './DataTableContext';
 
 const getDataDictionary = (dataDictionaryUrl : string, additionalParams: any) => {
   const {data, isPending, error} = useQuery({

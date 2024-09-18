@@ -1,8 +1,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import DataTableControls from ".";
-import { ManageColumnsContext } from "../DatasetTableTab/DataTableStateWrapper";
-import { DataTableContext } from "../../templates/Dataset";
+import ManageColumnsContext from '../DatasetTableTab/ManageColumnsContext';
+import DataTableContext from "../../templates/Dataset/DataTableContext";
 import * as resource from "../../tests/fixtures/resource.json";
 import * as distribution from "../../tests/fixtures/distribution.json";
 

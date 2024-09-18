@@ -1,9 +1,8 @@
 import React from "react";
 import { createContext, useContext, useState } from "react";
 import DatasetTable from ".";
-import { DataTableContext } from "../../templates/Dataset";
-
-export const ManageColumnsContext = createContext({})
+import DataTableContext from "../../templates/Dataset/DataTableContext";
+import ManageColumnsContext from './ManageColumnsContext';
 
 const DataTableStateWrapper = () => {
   const { id, datasetTableControls } = useContext(DataTableContext);

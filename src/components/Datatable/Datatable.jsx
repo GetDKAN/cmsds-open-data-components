@@ -11,8 +11,8 @@ import TruncatedResizeableTHead from "./TruncatedResizeableTHead";
 import FixedSizeTHead from "./FixedSizeTHead";
 import "./datatable.scss";
 import DataTableControls from "../DataTableControls";
-import { DataTableContext } from "../../templates/Dataset";
-import { ManageColumnsContext } from "../DatasetTableTab/DataTableStateWrapper";
+import DataTableContext from "../../templates/Dataset/DataTableContext";
+import ManageColumnsContext from "../DatasetTableTab/ManageColumnsContext";
 
 const DataTable = ({
   columns,

@@ -7,8 +7,8 @@ import { Pagination, Spinner, Alert } from '@cmsgov/design-system';
 import DataTableHeader from '../DatatableHeader';
 import QueryBuilder from '../QueryBuilder';
 import { DistributionType, ColumnType, ResourceType } from '../../types/dataset';
-import { DataTableContext } from '../../templates/Dataset';
-import { ManageColumnsContext } from './DataTableStateWrapper';
+import DataTableContext from "../../templates/Dataset/DataTableContext";
+import ManageColumnsContext from '../DatasetTableTab/ManageColumnsContext';
 
 export function prepareColumns(columns : any, schema : any) {
   return columns.map((column : any) => ({

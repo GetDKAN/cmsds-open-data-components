@@ -12,8 +12,8 @@ import QueryBuilder from './QueryBuilder';
 import TransformedDate from '../../components/TransformedDate';
 import FilteredResourceDescription from './FilteredResourceDescription';
 import 'swagger-ui-react/swagger-ui.css';
-import { DataTableContext } from '../Dataset';
-import { ManageColumnsContext } from '../../components/DatasetTableTab/DataTableStateWrapper';
+import DataTableContext from '../Dataset/DataTableContext';
+import ManageColumnsContext from '../../components/DatasetTableTab/ManageColumnsContext';
 
 const FilteredResourceBody = ({
   id,
