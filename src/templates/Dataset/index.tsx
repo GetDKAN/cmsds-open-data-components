@@ -50,6 +50,7 @@ const Dataset = ({
   dataDictionaryCSV = false,
   dataDictionaryBanner = false,
   disableTableControls = false,
+  hideDataDictionary = false,
 } : DatasetPageType) => {
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
@@ -202,6 +203,7 @@ const Dataset = ({
                   >
                     <DatasetOverview resource={resource} dataset={dataset} distributions={distributions} metadataMapping={metadataMapping} />
                   </TabPanel>
+                  {!hideDataDictionary && (
                     <TabPanel
                       id={'data-dictionary'}
                       tab={
@@ -221,6 +223,7 @@ const Dataset = ({
                       />}
                       {!displayDataDictionaryTab && <p>There is no Data Dictionary associated with this dataset.</p>}
                     </TabPanel>
+                  )}
                   { distribution && distribution.data && (
                     <TabPanel
                       id={'api'}
