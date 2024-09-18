@@ -19,6 +19,7 @@ import { getFormatType } from '../../utilities/format';
 import './dataset.scss';
 import DataTableStateWrapper from '../../components/DatasetTableTab/DataTableStateWrapper';
 import DataTableContext from './DataTableContext';
+import DatasetDescription from '../../components/DatasetDescription';
 
 const getDataDictionary = (dataDictionaryUrl : string, additionalParams: any) => {
   const {data, isPending, error} = useQuery({
@@ -51,6 +52,8 @@ const Dataset = ({
   dataDictionaryBanner = false,
   disableTableControls = false,
   hideDataDictionary = false,
+  customDescription,
+  updateAriaLive,
 } : DatasetPageType) => {
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
@@ -153,9 +156,13 @@ const Dataset = ({
               <p className="ds-u-margin--0">Updated <TransformedDate date={dataset.modified} /></p>
             </div>
             <div className={'ds-l-md-col--9'}>
-              <div className={'ds-u-measure--wide ds-u-margin-bottom--7'}>
-                <div className="dc-c-metadata-description ds-u-margin--0" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(dataset.description) }}/>
-              </div>
+              <DatasetDescription
+                distribution={distribution}
+                dataset={dataset}
+                resource={resource}
+                customDescription={customDescription}
+                updateAriaLive={updateAriaLive}
+              />
             </div>
           </div>
           <div className={'ds-l-row'}>
