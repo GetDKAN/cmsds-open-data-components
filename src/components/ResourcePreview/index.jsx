@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { TextField } from '@cmsgov/design-system';
 import { transformTableSortToQuerySort} from '../../services/useDatastore/transformSorts';
 import DataTable from '../Datatable';
-import { DataTableContext } from '../../templates/Dataset';
+import DataTableContext from "../../templates/Dataset/DataTableContext";
 
 export function prepareColumns(columns, schema) {
   return columns.map((column) => ({

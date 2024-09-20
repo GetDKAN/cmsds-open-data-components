@@ -1,24 +1,33 @@
-import React from 'react';
-import { NavbarProps } from './Navbar.types';
 import SubMenu from '../SubMenu';
-import NavLink from '../NavLink';
+import { NavLink } from 'react-router-dom';
+import { NavbarProps } from './Navbar.types';
+import './navbar.scss';
 
-const NavBar = ({ links, menuName, menuId, menuClasses, linkClasses, wrapLabel = false, clickHandler }: NavbarProps) => {
+const NavBar = (props: NavbarProps) => {
+  const { links, menuName, menuId, menuClasses, linkClasses, subLinkClasses, wrapLabel = false } = props;
   return (
-    <nav className={`dc-c-${menuId}-menu`} aria-labelledby={`dc-c-${menuId}-menu--heading`}>
-      <h2 id={`dc-c-${menuId}-menu--heading`} className="ds-u-visibility--screen-reader">
+    <nav className={`dkan-c-${menuId}-menu`} aria-labelledby={`dkan-c-${menuId}-menu--heading`}>
+      <h2 id={`dkan-c-${menuId}-menu--heading`} className="ds-u-visibility--screen-reader">
         {menuName}
       </h2>
       <ul className={menuClasses}>
         {links.map((link) => {
           if (link.submenu) {
             return (
-              <SubMenu key={link.id} link={link} wrapLabel={wrapLabel} linkClasses={linkClasses} />
+              <SubMenu
+                key={link.id}
+                link={link}
+                wrapLabel={wrapLabel}
+                subLinkClasses={subLinkClasses}
+                linkClasses={linkClasses}
+              />
             );
           } else {
             return (
               <li key={link.id}>
-                <NavLink link={link} className={linkClasses} wrapLabel={wrapLabel} clickHandler={clickHandler} />
+                <NavLink to={link} className={linkClasses}>
+                  <span>{link.label}</span>
+                </NavLink>
               </li>
             );
           }

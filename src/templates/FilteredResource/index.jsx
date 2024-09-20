@@ -16,7 +16,9 @@ const FilteredResource = ({
   columnSettings,
   columnWidths,
   customTitle,
-  rootUrl
+  customDescription,
+  rootUrl,
+  updateAriaLive
 }) => {
   const [ready, setReady] = useState(false);
   const [error, setError] = useState(false);
@@ -72,7 +74,9 @@ const FilteredResource = ({
               columnSettings={columnSettings}
               columnWidths={columnWidths}
               customTitle={customTitle}
+              customDescription={customDescription}
               rootUrl={rootUrl}
+              updateAriaLive={updateAriaLive}
             />
           )}
         </>

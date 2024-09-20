@@ -65,12 +65,14 @@ export type DatasetPageType = {
   customMetadataMapping : any, // TODO
   apiPageUrl: string,
   dataDictionaryUrl: string | undefined,
-  dataDictionaryACA: string | undefined,
   borderlessTabs: boolean,
   defaultPageSize: Number,
   dataDictionaryCSV: boolean,
   dataDictionaryBanner: boolean,
   disableTableControls: boolean,
+  hideDataDictionary: boolean,
+  customDescription?: Function,
+  updateAriaLive?: Function,
 }
 
 
@@ -122,4 +124,12 @@ export type DatasetDictionaryType = {
   data: {
     fields: DatasetDictionaryItemType[]
   }
+}
+
+export type DatasetDescriptionType = {
+  distribution: DistributionType,
+  dataset: DatasetType,
+  resource: ResourceType,
+  customDescription?: Function,
+  updateAriaLive?: Function,
 }

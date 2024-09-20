@@ -1,52 +1,79 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Button } from '@cmsgov/design-system';
-import NavLink from '../NavLink';
+import { Button, ArrowIcon } from '@cmsgov/design-system';
+import { NavLink } from 'react-router-dom';
+import HeaderContext from '../../templates/Header/HeaderContext';
 
-const SubMenu = ({ link, linkClasses, wrapLabel }) => {
-  const [isExpanded, setIsExapanded] = useState(false);
+import './submenu.scss';
+
+const SubMenu = ({ link, linkClasses, subLinkClasses, wrapLabel = true }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const headerContext = React.useContext(HeaderContext);
   const innerHtml = wrapLabel ? <span>{link.label}</span> : link.label;
   const menu = useRef();
   useEffect(() => {
+    let currentMenu = null;
+    if (menu.current) {
+      currentMenu = menu.current;
+    }
+
     function handleClickOutside(event) {
-      if (menu.current && !menu.current.contains(event.target)) {
-        setIsExapanded(false);
+      if (currentMenu && !currentMenu.contains(event.target)) {
+        setIsExpanded(false);
       }
     }
     function handleFocusOut(event) {
-      if (menu.current && !menu.current.contains(event.relatedTarget)) {
-        setIsExapanded(false);
+      if (currentMenu && !currentMenu.contains(event.relatedTarget)) {
+        setIsExpanded(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
-    menu.current.addEventListener('focusout', handleFocusOut);
+    currentMenu?.addEventListener('focusout', handleFocusOut);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
-      if (menu.current) {
-        menu.current.removeEventListener('focusout', handleFocusOut);
+      if (currentMenu) {
+        currentMenu.removeEventListener('focusout', handleFocusOut);
       }
     };
-  }, [menu, isExpanded]);
+
+
+  }, [isExpanded]);
 
   return (
-    <li className={`has-submenu ${isExpanded ? 'open' : ''}`} ref={menu}>
+    <li className={`dkan-c-nav-submenu has-submenu${isExpanded ? ' open' : ''}`} ref={menu}>
       <Button
-        size="small"
         variation="ghost"
-        onDark
-        className={linkClasses}
+        onDark={headerContext.onDark}
+        className={`${linkClasses}`}
         aria-haspopup="true"
         aria-expanded={isExpanded}
         onClick={(e) => {
           e.preventDefault();
-          setIsExapanded(!isExpanded);
+          setIsExpanded(!isExpanded);
         }}
       >
         {innerHtml}
+        <ArrowIcon className="ds-u-margin-left--1" direction={isExpanded ? "down" : "right"} />
       </Button>
-      <ul className="dc-c-site-menu--sub-menu">
+      <ul className="dkan-c-site-menu--sub-menu">
         {link.submenu.map((s) => (
           <li key={s.id}>
-            <NavLink link={s} wrapLabel={wrapLabel} />
+            {s.external || s.drupalPage ? (
+              <a href={s.url} className={`ds-u-display-flex ds-u-align-items--center ${subLinkClasses}`}>
+                {s.icon ?? null}
+                <span>{s.label}</span>
+              </a>
+            ) : (
+              <NavLink
+                to={s.url}
+                className={`ds-u-display-flex ds-u-align-items--center ${subLinkClasses}`}
+                onClick={() => setIsExpanded(!isExpanded)}
+              >
+                {s.icon ?? null}
+                <span>
+                  {s.label}
+                </span>
+              </NavLink>
+            )}
           </li>
         ))}
       </ul>

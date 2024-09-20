@@ -1,0 +1,17 @@
+.dkan-c-cms-topnav--tagline {
+  color: #{var(--tag-line--color)};
+}
+
+.dkan-c-header--mobile {
+  .dkan-c-cms-topnav--tagline {
+    display: none;
+  }
+}
+
+.dkan-c-header--desktop {
+  .dkan-c-cms-topnav--tagline {
+    display: inline-flex;
+    align-items: center;
+    border-left: 1px solid #{var(--tag-line--border-color)};
+  }
+}

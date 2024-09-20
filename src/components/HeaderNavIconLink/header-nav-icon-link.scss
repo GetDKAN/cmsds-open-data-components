@@ -1,0 +1,51 @@
+:root {
+  --header-nav-icon-link--desktop-width: 240px;
+  --header-nav-icon-link--mobile-width: 90px;
+}
+
+.dkan-c-header-nav-icon-link {
+  display: inline-flex;
+  align-items: center;
+  border-right: none;
+  a {
+    text-decoration: none;
+    border-bottom: none;
+    display: inline-block;
+  }
+  a:focus,
+  a:hover {
+    background-color: transparent;
+  }
+  &.show-back-arrow a::before {
+    font-family: 'Font Awesome 6 Pro';
+    content: '\f33e';
+    color: #323a45;
+    font-size: 18px;
+    padding-right: 10px;
+    display: inline-block;
+    line-height: 18px;
+    height: 18px;
+    width: 18px;
+    margin-left: 10px;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: lighter;
+  }
+  img {
+    height: auto;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.dkan-c-header--mobile {
+  .dkan-c-header-nav-icon-link img {
+    width: #{var(--header-nav-icon-link--mobile-width)};
+  }
+}
+
+.dkan-c-header--desktop {
+  .dkan-c-header-nav-icon-link img {
+    width: #{var(--header-nav-icon-link--desktop-width)};
+  }
+}
