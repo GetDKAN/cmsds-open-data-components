@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import qs from 'qs';
-import { AccordionItem, Button, Dropdown, TextField } from '@cmsgov/design-system';
+import { AccordionItem, Button } from '@cmsgov/design-system';
 import QueryRow from './QueryRow';
 import QueryTitle from './QueryTitle';
 import { buildOperatorOptions } from './functions';
@@ -33,7 +33,7 @@ function updateQueryForDatastore(condition) {
   return cond;
 }
 
-const QueryBuilder = ({ resource, id, customColumns }) => {
+const QueryBuilder = ({ resource, id, customColumns, setOffset }) => {
   const { conditions, schema, setConditions } = resource;
   const fields = Object.keys(schema[id].fields);
 
@@ -89,6 +89,7 @@ const QueryBuilder = ({ resource, id, customColumns }) => {
     setConditions(submitConditions);
     setTitleConditions(queryConditions.map((oc) => Object.assign({}, oc)));
     setConditionsChanged(false);
+    setOffset(0);
 
     const url = new URL(window.location);
     const urlString = qs.stringify(

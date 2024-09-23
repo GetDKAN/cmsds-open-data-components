@@ -98,7 +98,6 @@ const FilteredResourceBody = ({
                 resource={resource}
                 id={distribution.identifier}
                 customColumns={customColumns}
-                setPage={resource.setPage}
                 setOffset={resource.setOffset}
               />
             </div>

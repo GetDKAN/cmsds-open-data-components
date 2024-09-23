@@ -44,6 +44,8 @@ describe('<QueryBuilder />', () => {
       <QueryBuilder
         resource={resource}
         id={"d60b31aa-bfa8-527e-9b50-6c3f972ee9a9"}
+        setPage={jest.fn()}
+        setOffset={jest.fn()}
       />);
     
     // Update text input
