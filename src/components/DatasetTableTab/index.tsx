@@ -60,7 +60,7 @@ const DatasetTable = ({isModal = false, closeFullScreenModal} : {isModal?: boole
   ) {
     return (
       <>
-        <QueryBuilder resource={resource} id={distribution.identifier} customColumns={customColumnHeaders} isModal={isModal} />
+        <QueryBuilder resource={resource} id={distribution.identifier} customColumns={customColumnHeaders} isModal={isModal} setPage={setPage} setOffset={setOffset} />
         {(dataDictionaryBanner && !isModal) && (
           <div>
             <Alert>Click on the "Data Dictionary" tab above for full column definitions</Alert>
