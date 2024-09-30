@@ -26,18 +26,7 @@ const data_results = {
 };
 
 describe('<DatasetSearch />', () => {
-  test('Renders correctly', async () => {
-    await axios.get.mockImplementation(() => Promise.resolve(data_results));
-    render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
-    await act(async () => {
-      jest.useFakeTimers();
-    });
-
-    expect(screen.getByRole('heading', { name: 'Dataset Explorer' }));
-    expect(screen.getByRole('textbox', { name: 'Search datasets' }));
-    expect(screen.getByRole('button', { name: 'Search' }));
-  });
-  test('Renders correctly after performing a search', async () => {
+  beforeEach(async() => {
     Object.defineProperty(window, "matchMedia", {
       writable: true,
       value: jest.fn().mockImplementation((query) => ({
@@ -52,6 +41,18 @@ describe('<DatasetSearch />', () => {
       })),
     });
     await axios.get.mockImplementation(() => Promise.resolve(data_results));
+  })
+  test('Renders correctly', async () => {
+    render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
+    await act(async () => {
+      jest.useFakeTimers();
+    });
+
+    expect(screen.getByRole('heading', { name: 'Dataset Explorer' }));
+    expect(screen.getByRole('textbox', { name: 'Search datasets' }));
+    expect(screen.getByRole('button', { name: 'Search' }));
+  });
+  test('Renders correctly after performing a search', async () => {
     await act(async () => {
       // debug()
       jest.useFakeTimers();
@@ -67,20 +68,6 @@ describe('<DatasetSearch />', () => {
   })
 
   test('Announces search results to screen readers', async () => {
-    Object.defineProperty(window, "matchMedia", {
-      writable: true,
-      value: jest.fn().mockImplementation((query) => ({
-        matches: false,
-        media: query,
-        onchange: null,
-        addListener: jest.fn(), // Deprecated
-        removeListener: jest.fn(), // Deprecated
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
-      })),
-    });
-    await axios.get.mockImplementation(() => Promise.resolve(data_results));
     await act(async () => {
       // debug()
       jest.useFakeTimers();
@@ -92,6 +79,20 @@ describe('<DatasetSearch />', () => {
     expect(dataCurrentResultsElement).toHaveAttribute('aria-live');
     expect(['polite', 'assertive']).toContain(dataCurrentResultsElement.getAttribute('aria-live'));
 
+  });
+  test("Updates the browser URL params when a facet is added", async () => {
+    window.history.pushState = jest.fn();
+    await act(async () => {
+      // debug()
+      jest.useFakeTimers();
+      render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
+    });
+    
+    await act(() => {
+      screen.getByRole("checkbox", { name: "general (2)" }).click();
+    });
+    // Check that the URL params were updated
+    expect(window.history.pushState).toHaveBeenNthCalledWith(1, {}, "", expect.stringContaining("theme[0]=general"))
   });
 });
 
