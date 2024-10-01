@@ -16,6 +16,8 @@ type QueryBuilderPropTypes = {
   id: string;
   customColumns: Array<Object>;
   isModal?: boolean;
+  setPage: Function;
+  setOffset: Function;
 };
 
 function updateQueryForDatastore(condition: ConditionType) {
@@ -45,7 +47,7 @@ function updateQueryForDatastore(condition: ConditionType) {
   return cond;
 }
 
-const QueryBuilder = ({resource, id, customColumns, isModal = false}: QueryBuilderPropTypes) => {
+const QueryBuilder = ({resource, id, customColumns, isModal = false, setPage, setOffset}: QueryBuilderPropTypes) => {
   const { conditions, schema, setConditions } = resource;
 
   const fields = Object.keys(schema[id].fields);
@@ -130,8 +132,10 @@ const QueryBuilder = ({resource, id, customColumns, isModal = false}: QueryBuild
         return updateQueryForDatastore(cond);
       });
     setConditions(submitConditions);
+    setPage(1);
+    setOffset(0);
     setConditionsChanged(false);
-    updateBrowserURL(submitConditions)
+    updateBrowserURL(submitConditions);
   };
 
   const updateCondition = (index: number, key: string, value: string) => {
