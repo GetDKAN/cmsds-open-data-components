@@ -117,7 +117,13 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
         newFacets.keyword.push(value);
       }
     }
+    const urlString = qs.stringify(
+      { theme: newFacets.theme, keyword: newFacets.keyword },
+      { encodeValuesOnly: true, addQueryPrefix: true }
+    );
     setSelectedFacets(newFacets);
+    const url = new URL(window.location.href);
+    window.history.pushState({}, '', `${url.origin}${url.pathname}${urlString}`);
   }
 
   const pageSize = defaultPageSize;
@@ -155,6 +161,8 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     setFilterText(defaultFulltext);
     setSelectedFacets(defaultSelectedFacets);
     setPage(defaultPage);
+    const url = new URL(window.location.href);
+    window.history.pushState({}, '', `${url.origin}${url.pathname}`);
   }
 
   function buildSearchParams(includePage: boolean) {
