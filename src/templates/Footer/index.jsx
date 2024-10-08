@@ -106,7 +106,7 @@ const Footer = ({
               <div className="ds-u-font-size--sm">
                 <div>
                   <a
-                    href="http://www.hhs.gov/"
+                    href="https://www.hhs.gov/"
                     target="_blank"
                     title="U.S. Department of Health &amp; Human Services"
                   >
@@ -116,7 +116,7 @@ const Footer = ({
                   <a
                     className="ds-u-margin-left--4"
                     target="_blank"
-                    href="http://www.cms.gov/"
+                    href="https://www.cms.gov/"
                     title="CMS.gov Centers for Medicare &amp; Medicaid Services"
                   >
                     <img className="dc-c-footer__logo" src={cmsLogo} alt="CMS Logo" />
