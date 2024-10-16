@@ -45,7 +45,7 @@ const Header = (props: HeaderProps) => {
 
   function handleClick(event: MouseEvent) {
     // Links are wrapped in spans, this checks if the parent is an A, also check if in the search modal.    
-    if (menu.current && !menu.current.contains(event.target as HTMLElement)) {
+    if (mobileMenuOpen && menu.current && !menu.current.contains(event.target as HTMLElement)) {
       setMobileMenuOpen(false);
       closeMobileMenu()
     }
