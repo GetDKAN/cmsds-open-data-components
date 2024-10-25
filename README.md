@@ -11,8 +11,24 @@ In the root folder for this project, run `npm run watch` to build local code. En
 
 ## Publishing new versions
 
-Run ```npm run build``` to create a production version of the library before publishing to npm.
+### Clear out caches and previous build
+
+Before running a build, it is recommended to clear out the old build and cache files to avoid publishing a stale build.
+
+Run ```rm -rf dist/``` to delete the previous build\
+Run ```rm -rf .parcel-cache/``` to clear out the parcel build caches
+
+### Create a new release
+
+Run ```npm run build``` to create a production version of the library before publishing to npm.\
 Run ```npm publish``` to publish to npm
+
+### Create an alpha/testing release
+
+When creating an alpha release or any other release intended for testing purposes, add a tag to the publish command. This will prevent the the testing release from showing up as the latest release in NPM. 
+
+After running ```npm run build```,\
+Run ```npm publish --tag <tag name>``` example (npm publish --tag "alpha")
 
 ## Testing
 
