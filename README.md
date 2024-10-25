@@ -25,7 +25,7 @@ Run ```npm publish``` to publish to npm
 
 ### Create an alpha/testing release
 
-When creating an alpha release or any other release intended for testing purposes, add a tag to the publish command. This will prevent the the testing release from showing up as the latest release in NPM. 
+When creating an alpha release or any other release intended for testing purposes, add a tag to the publish command. This will prevent the testing release from showing up as the latest release in NPM. 
 
 After running ```npm run build```,\
 Run ```npm publish --tag <tag name>``` example (npm publish --tag "alpha")
