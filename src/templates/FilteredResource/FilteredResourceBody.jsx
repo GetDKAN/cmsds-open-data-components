@@ -80,7 +80,7 @@ const FilteredResourceBody = ({
           <div className={'ds-l-md-col--9'}>
             <h1 className="ds-text-heading--3xl">{customTitle ? customTitle : pageTitle}</h1>
           </div>
-          <div className={'ds-l-md-col--12 ds-u-color--gray ds-u-margin-y--1 ds-u-text-align--right'}>
+          <div className={'ds-l-md-col--12 ds-u-margin-y--1 ds-u-text-align--right'}>
             <p className="ds-u-margin--0">Updated <TransformedDate date={dataset.modified} /></p>
           </div>
           <div className={'ds-l-md-col--9'}>
