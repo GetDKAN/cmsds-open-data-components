@@ -137,7 +137,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
       startingNumber: Number(totalItems) >= startingNumber ? startingNumber : 0,
       endingNumber: Number(totalItems) < endingNumber ? Number(totalItems) : endingNumber,
     });
-    if (totalItems && totalItems <= 0 && currentResultNumbers !== null) {
+    if (totalItems <= 0 && currentResultNumbers !== null) {
       setNoResults(true);
     } else {
       setNoResults(false);
