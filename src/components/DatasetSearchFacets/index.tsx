@@ -17,26 +17,28 @@ const SearchFacets = (props: SearchFacetsPropTypes) => {
           heading={title}
           defaultOpen
         >
-          <ul>
-            {filteredFacets.length ? filteredFacets
-              .map((f: SearchAPIFacetType) => {
-                return (
-                  <li key={f.name as React.Key}>
-                    <Choice
-                      className="ds-u-margin-y--1"
-                      checked={selectedFacets.findIndex((s) => s === f.name) > -1 ? true : false}
-                      name={`facet_theme_${f.name}`}
-                      type="checkbox"
-                      label={`${f.name} (${f.total})`}
-                      value={f.name}
-                      onClick={() => onClickFunction(f.type, f.name)}
-                    />
-                  </li>
-                );
-              }) : (
-                <p className="ds-text-heading--md">No matching facets found.</p>
-              )}
-          </ul>
+            {!filteredFacets.length ?
+              <p className="ds-text-heading--md">No matching facets found.</p>
+            :
+              <ul>
+                {filteredFacets
+                .map((f: SearchAPIFacetType) => {
+                  return (
+                    <li key={f.name as React.Key}>
+                      <Choice
+                        className="ds-u-margin-y--1"
+                        checked={selectedFacets.findIndex((s) => s === f.name) > -1 ? true : false}
+                        name={`facet_theme_${f.name}`}
+                        type="checkbox"
+                        label={`${f.name} (${f.total})`}
+                        value={f.name}
+                        onClick={() => onClickFunction(f.type, f.name)}
+                      />
+                    </li>
+                  )})
+                }
+              </ul>
+            }
         </AccordionItem>
       </Accordion>
     </div>
