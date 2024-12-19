@@ -17,6 +17,9 @@
 
 .dc-c-metadata-description {
   white-space: pre-line;
+  ul {
+    list-style-type: unset;
+  }
 }
 
 .dc-dataset .ds-c-tabs {
