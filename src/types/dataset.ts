@@ -79,6 +79,8 @@ export type DatasetPageType = {
 export type ResourceType = {
   columns: Array<string>,
   count: number | null,
+  totalRows: number,
+  totalColumns: number,
   limit: number,
   offset: number,
   loading: boolean,
