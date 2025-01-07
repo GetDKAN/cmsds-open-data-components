@@ -627,6 +627,8 @@
       "drug_reactivation_date",
       "date_reported_to_cms"
   ],
+  "totalRows": 69,
+  "totalColumns": 22,
   "limit": 25,
   "offset": 0,
   "schema": {

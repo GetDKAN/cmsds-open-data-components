@@ -17,6 +17,9 @@ const useDatastore = (
   const [limit, setLimit] = useState(options.limit ? options.limit : 20);
   const [count, setCount] = useState(null);
   const [columns, setColumns] = useState([]);
+  // unfiltered row / column count for overview tab
+  const [totalRows, setTotalRows] = useState(0);
+  const [totalColumns, setTotalColumns] = useState(0);
   const [offset, setOffset] = useState(options.offset ? options.offset : 0);
   const [conditions, setConditions] = useState(
     options.conditions ? options.conditions : undefined
@@ -62,6 +65,20 @@ const useDatastore = (
     enabled: enabled
   })
 
+  const{data: unfiltered} = useQuery({
+    queryKey: ["datastore" + id + "-unfilteredRowsAndCols"],
+    queryFn: () => {
+      const unfilteredParams = {
+        results: false,
+        count: true,
+        schema: true
+      }
+      return fetch(`${rootUrl}/datastore/query/${id}?${qs.stringify(unfilteredParams)}`)
+        .then(res => res.json())
+    },
+  })
+  
+
   useEffect(() => {
     if(data) {
       const propertyKeys =
@@ -77,12 +94,20 @@ const useDatastore = (
       }
     }
   }, [data])
+  useEffect(() => {
+    if (unfiltered) {
+      if (unfiltered.count) setTotalRows(unfiltered.count);
+      if (unfiltered.schema && unfiltered.schema[id] && unfiltered.schema[id].fields) setTotalColumns(Object.keys(unfiltered.schema[id].fields).length);
+    }
+  }, [unfiltered])
 
   return {
     loading: enabled ? isPending : false,
     values,
     count,
     columns,
+    totalRows,
+    totalColumns,
     limit,
     offset,
     schema,
