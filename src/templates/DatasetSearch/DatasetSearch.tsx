@@ -296,10 +296,6 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                   <div className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--8">
                     {(currentResultNumbers && data) && (
                       <>
-                        <p className="ds-u-margin-y--0">
-                          Showing {currentResultNumbers.startingNumber} -{' '}
-                          {currentResultNumbers.endingNumber} of {data ? data.data.total : ""} datasets
-                        </p>
                         <p 
                           className="ds-u-visibility--screen-reader" 
                           role="status"
