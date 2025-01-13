@@ -288,7 +288,13 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                 { enablePagination && (
                   <div className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--8">
                     {(currentResultNumbers && data) && (
-                      <p className="ds-u-margin-y--0" role="region" aria-live="polite" data-testid="currentResults" >
+                      <p 
+                        className="ds-u-margin-y--0" 
+                        role="status"
+                        aria-live="assertive"
+                        aria-atomic="true"
+                        data-testid="currentResults" 
+                      >
                         Showing {currentResultNumbers.startingNumber} -{' '}
                         {currentResultNumbers.endingNumber} of {data ? data.data.total : ""} datasets
                       </p>
