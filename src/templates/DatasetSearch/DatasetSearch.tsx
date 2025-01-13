@@ -294,19 +294,23 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
               <div className="ds-u-display--flex ds-u-justify-content--between ds-u-align-items--end ds-u-flex-wrap--reverse ds-u-sm-flex-wrap--wrap">
                 { enablePagination && (
                   <div className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--8">
-                    {(currentResultNumbers && data) && (
-                      <>
-                        <p 
-                          className="ds-u-visibility--screen-reader" 
-                          role="status"
-                          aria-live="assertive"
-                          aria-atomic="true"
-                          data-testid="currentResults" 
-                        >
-                          {announcementText}
-                        </p>
-                      </>
-                    )}
+                    <p className="ds-u-margin-y--0" aria-hidden="true">
+                      {(currentResultNumbers && data) && (
+                        <>
+                          Showing {currentResultNumbers.startingNumber} -{' '}
+                          {currentResultNumbers.endingNumber} of {data.data.total} datasets
+                        </>
+                      )}
+                    </p>
+                    <p 
+                      className="ds-u-visibility--screen-reader" 
+                      role="status"
+                      aria-live="assertive"
+                      aria-atomic="true"
+                      data-testid="currentResults" 
+                    >
+                      {announcementText}
+                    </p>
                   </div>
                 )}
                 {enableSort && (
