@@ -93,14 +93,14 @@ const FilteredResourceBody = ({
             />
           </div>
           <div className={'ds-l-md-col--12'}>
-            {Object.keys(resource).length && resource.columns && Object.keys(resource.schema).length && (
+            {Object.keys(resource).length && resource.columns && Object.keys(resource.schema).length ? (
               <QueryBuilder
                 resource={resource}
                 id={distribution.identifier}
                 customColumns={customColumns}
                 setOffset={resource.setOffset}
               />
-            )}
+            ) : ''}
           </div>
           {Object.keys(resource).length && resource.columns && Object.keys(resource.schema).length ? (
             <DataTableContext.Provider value={{
