@@ -92,16 +92,16 @@ const FilteredResourceBody = ({
               updateAriaLive={updateAriaLive}
             />
           </div>
-          {Object.keys(resource).length && resource.columns && Object.keys(resource.schema).length && (
-            <div className={'ds-l-md-col--12'}>
+          <div className={'ds-l-md-col--12'}>
+            {Object.keys(resource).length && resource.columns && Object.keys(resource.schema).length ? (
               <QueryBuilder
                 resource={resource}
                 id={distribution.identifier}
                 customColumns={customColumns}
                 setOffset={resource.setOffset}
               />
-            </div>
-          )}
+            ) : ''}
+          </div>
           {Object.keys(resource).length && resource.columns && Object.keys(resource.schema).length ? (
             <DataTableContext.Provider value={{
               id: id,
@@ -133,7 +133,9 @@ const FilteredResourceBody = ({
               </div>
             </DataTableContext.Provider>
           ) : (
-            <Spinner role="status" aria-valuetext="Resource loading" />
+            <div className={'ds-l-md-col--12'}>
+              <Spinner role="status" aria-valuetext="Resource loading" />
+            </div>
           )}
           {dataset.identifier && (
             <div className={'ds-l-md-col--12'} ref={apiDocs}>
