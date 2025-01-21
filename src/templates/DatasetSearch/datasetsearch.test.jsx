@@ -75,7 +75,7 @@ describe('<DatasetSearch />', () => {
     });
 
     const dataCurrentResultsElement = screen.getByTestId('currentResults');
-    expect(dataCurrentResultsElement).toHaveAttribute('role', 'region');
+    expect(dataCurrentResultsElement).toHaveAttribute('role', 'status');
     expect(dataCurrentResultsElement).toHaveAttribute('aria-live');
     expect(['polite', 'assertive']).toContain(dataCurrentResultsElement.getAttribute('aria-live'));
 
