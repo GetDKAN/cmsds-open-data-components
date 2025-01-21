@@ -52,6 +52,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
 
   const [currentResultNumbers, setCurrentResultNumbers] = useState({total: 0, startingNumber: 0, endingNumber: 0});
   const [noResults, setNoResults] = useState(false);
+  const [announcementText, setAnnouncementText] = useState('');
   let [searchParams, setSearchParams] = useSearchParams();
   const [fulltext, setFullText] = useState(transformedParams.fulltext);
   const [filterText, setFilterText] = useState(transformedParams.fulltext);
@@ -132,11 +133,17 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     const baseNumber = Number(totalItems) > 0 ? 1 : 0;
     const startingNumber = baseNumber + (Number(pageSize) * Number(page) - Number(pageSize));
     const endingNumber = Number(pageSize) * Number(page);
+    
     setCurrentResultNumbers({
       total: Number(totalItems),
       startingNumber: Number(totalItems) >= startingNumber ? startingNumber : 0,
       endingNumber: Number(totalItems) < endingNumber ? Number(totalItems) : endingNumber,
     });
+
+    setTimeout(() => {
+      setAnnouncementText(`Showing ${startingNumber} to ${endingNumber} of ${totalItems} datasets`);
+    }, 100);
+
     if (totalItems <= 0 && currentResultNumbers !== null) {
       setNoResults(true);
     } else {
@@ -287,12 +294,23 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
               <div className="ds-u-display--flex ds-u-justify-content--between ds-u-align-items--end ds-u-flex-wrap--reverse ds-u-sm-flex-wrap--wrap">
                 { enablePagination && (
                   <div className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--8">
-                    {(currentResultNumbers && data) && (
-                      <p className="ds-u-margin-y--0" role="region" aria-live="polite" data-testid="currentResults" >
-                        Showing {currentResultNumbers.startingNumber} -{' '}
-                        {currentResultNumbers.endingNumber} of {data ? data.data.total : ""} datasets
-                      </p>
-                    )}
+                    <p className="ds-u-margin-y--0" aria-hidden="true">
+                      {(currentResultNumbers && data) && (
+                        <>
+                          Showing {currentResultNumbers.startingNumber} -{' '}
+                          {currentResultNumbers.endingNumber} of {data.data.total} datasets
+                        </>
+                      )}
+                    </p>
+                    <p 
+                      className="ds-u-visibility--screen-reader" 
+                      role="status"
+                      aria-live="assertive"
+                      aria-atomic="true"
+                      data-testid="currentResults" 
+                    >
+                      {announcementText}
+                    </p>
                   </div>
                 )}
                 {enableSort && (
