@@ -73,6 +73,7 @@ thead.dc-thead--truncated {
         .ds-c-tooltip__container {
           white-space: wrap;
           font-weight: normal;
+          overflow: visible;
         }
       }
     }
@@ -80,7 +81,13 @@ thead.dc-thead--truncated {
   th p {
     white-space: normal;
   }
+}
 
+div.dc-c-datadictionary-table thead.dc-thead--truncated th > div > div {
+  overflow: visible;
+  > span {
+    overflow: visible;
+  }
 }
 
 .dc-c-datatable--even-row td {
