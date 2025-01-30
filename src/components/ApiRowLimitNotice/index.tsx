@@ -4,7 +4,7 @@ export default function ApiRowLimitNotice() {
   return (
     <div className="ds-u-padding-top--3">
       <Accordion bordered>
-        <AccordionItem key="1" heading="Row Limit">
+        <AccordionItem key="1" heading="Row Limit Warning">
           <p>
             If you receive a 500 response from your API query it is most likely due to memory
             exhaustion. You may see a "Temporarily Unavailable" message. Make sure you include a
