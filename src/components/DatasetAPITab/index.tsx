@@ -27,7 +27,7 @@ const DatasetAPI = ({
             The Open Data API (ODA) provides programmatic access to this dataset including the
             ability to filter, query, and aggregate data.
           </p>
-          <div className='ds-u-padding-top--3'>{showRowLimitNotice && <ApiRowLimitNotice />}</div>
+          {showRowLimitNotice && <ApiRowLimitNotice />}
         </div>
         <div className="ds-l-col--12 ds-l-md-col--3 ds-u-font-weight--bold ds-u-margin-top--2 ds-u-padding-left--0 ds-u-md-padding-left--2">
           <a href={apiUrl}>
