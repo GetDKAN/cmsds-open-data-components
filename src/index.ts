@@ -1,4 +1,5 @@
 // Components
+export { default as ApiRowLimitNotice } from './components/ApiRowLimitNotice';
 export { default as CMSTopNav } from './components/CMSTopNav';
 export { default as ErrorBoundary } from './components/ErrorBoundary';
 export { default as FAQAccordion } from './components/FAQAccordion';

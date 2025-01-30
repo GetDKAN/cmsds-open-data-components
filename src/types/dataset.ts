@@ -73,6 +73,7 @@ export type DatasetPageType = {
   hideDataDictionary: boolean,
   customDescription?: Function,
   updateAriaLive?: Function,
+  showRowLimitNotice?: boolean,
 }
 
 

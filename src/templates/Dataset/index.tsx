@@ -54,6 +54,7 @@ const Dataset = ({
   hideDataDictionary = false,
   customDescription,
   updateAriaLive,
+  showRowLimitNotice = false
 } : DatasetPageType) => {
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
@@ -242,7 +243,7 @@ const Dataset = ({
                       }
                       className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
                     >
-                      <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} additionalParams={additionalParams} />
+                      <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} additionalParams={additionalParams} showRowLimitNotice={showRowLimitNotice} />
                     </TabPanel>
                   )}
                 </Tabs>
