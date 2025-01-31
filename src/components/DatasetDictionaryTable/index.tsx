@@ -39,7 +39,8 @@ const DatasetDictionaryTable = ({ datasetDictionary, pageSize} : {datasetDiction
           </Tooltip>
         </div>
       ),
-      size: 300
+      size: 300,
+      minSize: 132
     }),
     columnHelper.accessor('description', {
       header: 'Description',
