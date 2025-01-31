@@ -1,16 +1,23 @@
-
 import React from 'react';
-import ApiDocumentation from "../ApiDocumentation";
+import ApiDocumentation from '../ApiDocumentation';
+import ApiRowLimitNotice from '../ApiRowLimitNotice';
 type DatasetAPIProps = {
   id: String;
   rootUrl: String;
   apiUrl: string;
   additionalParams: {
-    ACA: string,
-  }
+    ACA: string;
+  };
+  showRowLimitNotice?: boolean;
 };
 
-const DatasetAPI = ({ id, rootUrl, apiUrl, additionalParams }: DatasetAPIProps) => {
+const DatasetAPI = ({
+  id,
+  rootUrl,
+  apiUrl,
+  additionalParams,
+  showRowLimitNotice = false,
+}: DatasetAPIProps) => {
   return (
     <>
       <div className="ds-u-display--flex ds-u-flex-wrap--wrap">
@@ -20,6 +27,7 @@ const DatasetAPI = ({ id, rootUrl, apiUrl, additionalParams }: DatasetAPIProps) 
             The Open Data API (ODA) provides programmatic access to this dataset including the
             ability to filter, query, and aggregate data.
           </p>
+          {showRowLimitNotice && <ApiRowLimitNotice />}
         </div>
         <div className="ds-l-col--12 ds-l-md-col--3 ds-u-font-weight--bold ds-u-margin-top--2 ds-u-padding-left--0 ds-u-md-padding-left--2">
           <a href={apiUrl}>
