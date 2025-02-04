@@ -1,10 +1,11 @@
 import React from 'react';
 import qs from 'qs';
 import SwaggerUI from 'swagger-ui-react';
+import ApiRowLimitNotice from '../../components/ApiRowLimitNotice';
 import 'swagger-ui-react/swagger-ui.css';
 import './swagger-ui-overrides.scss';
 
-const APIPage = ({ hideAuth = true, additionalParams, rootUrl }) => {
+const APIPage = ({ hideAuth = true, additionalParams, rootUrl, showRowLimitNotice = false }) => {
   const hasACA = additionalParams && additionalParams.ACA ? true : false;
   let params = {
     authentication: hideAuth ? false : undefined,
@@ -12,14 +13,17 @@ const APIPage = ({ hideAuth = true, additionalParams, rootUrl }) => {
     redirect: hasACA ? false : undefined,
   };
   return (
-    <section className="ds-l-container">
-    <SwaggerUI
-      url={`${rootUrl}${qs.stringify(params, { addQueryPrefix: true })}`}
-      docExpansion={'list'}
-      defaultModelsExpandDepth={-1}
-    />
-  </section>
-  )
+    <>
+      {showRowLimitNotice && <ApiRowLimitNotice />}
+      <section className="ds-l-container">
+        <SwaggerUI
+          url={`${rootUrl}${qs.stringify(params, { addQueryPrefix: true })}`}
+          docExpansion={'list'}
+          defaultModelsExpandDepth={-1}
+        />
+      </section>
+    </>
+  );
 };
 
 export default APIPage;
