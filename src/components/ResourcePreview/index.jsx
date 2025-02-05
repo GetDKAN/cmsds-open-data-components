@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 
-import { TextField } from '@cmsgov/design-system';
+import { Spinner, TextField } from '@cmsgov/design-system';
 import { transformTableSortToQuerySort} from '../../services/useDatastore/transformSorts';
+import { buildCustomColHeaders } from '../../templates/FilteredResource/functions';
 import DataTable from '../Datatable';
 import DataTableContext from "../../templates/Dataset/DataTableContext";
 
@@ -34,7 +35,22 @@ const ResourcePreview = ({
 }) => {
   const {resource, customColumns} = useContext(DataTableContext);
 
-  return (
+  const customColumnHeaders = buildCustomColHeaders(
+    customColumns,
+    resource.columns,
+    resource.schema[id]
+  );
+
+  const columns = customColumnHeaders
+    ? customColumnHeaders
+    : prepareColumns(resource.columns, resource.schema[id]);
+
+  if (
+    Object.keys(resource).length &&
+    columns.length &&
+    resource.schema
+  ) {
+    return (
     <div
       id="resource-preview"
       className="ds-u-overflow--auto ds-u-border-x--1 ds-u-border-bottom--1"
@@ -51,7 +67,12 @@ const ResourcePreview = ({
         customColumnFilter={DefaultColumnFilter}
       />
     </div>
-  );
+  )
+} else {
+  return (
+    <Spinner />
+  )
+}
 };
 
 export default ResourcePreview;
