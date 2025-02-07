@@ -6,7 +6,7 @@ const ResourceFooter = ({ resource }) => {
 
   return (
     <div>
-      {values.length > 0 && (
+      {values && values.length > 0 && (
         <Pagination
           currentPage={Number(offset) / limit + 1}
           totalPages={Math.ceil(Number(count) / limit)}
