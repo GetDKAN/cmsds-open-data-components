@@ -1,6 +1,7 @@
 import React from 'react';
 import qs from 'qs';
 import SwaggerUI from 'swagger-ui-react';
+import { SpanOpenAPIVersion, SpanVersionStamp } from '@civicactions/swagger-ui-layout';
 import ApiRowLimitNotice from '../../components/ApiRowLimitNotice';
 import 'swagger-ui-react/swagger-ui.css';
 import './swagger-ui-overrides.scss';
@@ -20,6 +21,7 @@ const APIPage = ({ hideAuth = true, additionalParams, rootUrl, showRowLimitNotic
           url={`${rootUrl}${qs.stringify(params, { addQueryPrefix: true })}`}
           docExpansion={'list'}
           defaultModelsExpandDepth={-1}
+          plugins={[SpanOpenAPIVersion, SpanVersionStamp]}
         />
       </section>
     </>
