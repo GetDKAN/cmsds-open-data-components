@@ -6,21 +6,22 @@ import SearchItemIcon from '../../assets/icons/searchItem';
 import TransformedDate from '../TransformedDate';
 import './dataset-search-list-item.scss';
 import { truncateText } from './truncateText';
+import { Button } from '@cmsgov/design-system';
 
 type SearchItemProps = {
   title: string;
   modified: string;
   description: string;
-  theme: string[];
   identifier: string;
   downloadUrl?: string | null;
   largeFile: boolean;
   paginationEnabled: boolean;
+  dataDictionaryLinks: boolean;
 }
 
 const DatasetSearchListItem = (props: SearchItemProps) => {
   const desktop = useMediaQuery({ minWidth: 1024 });
-  const { title, modified, description, theme, identifier, downloadUrl, largeFile = false, paginationEnabled } = props;
+  const { title, modified, description, identifier, downloadUrl, largeFile = false, paginationEnabled, dataDictionaryLinks } = props;
 
   let linkContainerClasses = 'ds-l-col--12 ds-u-margin-bottom--2';
   let linkClasses = 'ds-c-button ds-u-display--block ds-u-text-align--left';
@@ -43,7 +44,25 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
         <div className="ds-l-row">
           <div className="ds-l-col--12 ds-l-md-col--12 ds-u-margin-top--2">{truncateText(description)}</div>
         </div>
-        <ul className="ds-l-row ds-u-padding--0 ds-u-flex-direction--row ds-u-margin-top--4">
+        {( downloadUrl ) ? (
+            <div className={`${linkContainerClasses} ds-u-margin-top--3 ds-u-padding-left--0`}>
+              <span className={linkClasses}>
+                {largeFile ? (
+                  <span>
+                    {<LargeFileDialog downloadUrl={downloadUrl} />}
+                  </span>
+                ) : (
+                  <Button href={downloadUrl} variation="solid" size="small">
+                    <SearchItemIcon id="download" />
+                    Download
+                  </Button>
+                )}
+              </span>
+            </div>
+          ) : (
+            ''
+          )}
+        <ul className="ds-l-row ds-u-padding--0 ds-u-flex-direction--row ds-u-margin-top--2">
           <li className={linkContainerClasses}>
             <span className={linkClasses}>
               <Link to={`/dataset/${identifier}#overview`}>
@@ -60,6 +79,16 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
               </Link>
             </span>
           </li>
+          { dataDictionaryLinks && (
+            <li className={linkContainerClasses}>
+              <span className={linkClasses}>
+              <Link to={`/dataset/${identifier}#data-dictionary`}>
+                <SearchItemIcon id="data-dictionary" />
+                Data Dictionary
+              </Link>
+              </span>
+            </li>
+          )}
           <li className={linkContainerClasses}>
             <span className={linkClasses}>
               <Link to={`/dataset/${identifier}#api`}>
@@ -68,25 +97,6 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
               </Link>
             </span>
           </li>
-          {( downloadUrl ) ? (
-            <li className={linkContainerClasses}>
-              <span className={linkClasses}>
-                {largeFile ? (
-                  <span>
-                    <SearchItemIcon id="download" />
-                    {<LargeFileDialog downloadUrl={downloadUrl} />}
-                  </span>
-                ) : (
-                  <a href={downloadUrl}>
-                    <SearchItemIcon id="download" />
-                    Download
-                  </a>
-                )}
-              </span>
-            </li>
-          ) : (
-            ''
-          )}
         </ul>
       </div>
     </li>
