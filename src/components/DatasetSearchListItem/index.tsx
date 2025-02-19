@@ -65,17 +65,17 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
         <ul className="ds-l-row ds-u-padding--0 ds-u-flex-direction--row ds-u-margin-top--2">
           <li className={linkContainerClasses}>
             <span className={linkClasses}>
-              <Link to={`/dataset/${identifier}#overview`}>
-                <SearchItemIcon id="overview" />
-                Overview
+              <Link to={`/dataset/${identifier}#data-table`}>
+                <SearchItemIcon id="data-table" />
+                Data Table
               </Link>
             </span>
           </li>
           <li className={linkContainerClasses}>
             <span className={linkClasses}>
-              <Link to={`/dataset/${identifier}#data-table`}>
-                <SearchItemIcon id="data-table" />
-                Data Table
+              <Link to={`/dataset/${identifier}#overview`}>
+                <SearchItemIcon id="overview" />
+                Overview
               </Link>
             </span>
           </li>
