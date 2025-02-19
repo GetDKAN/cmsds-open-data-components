@@ -19,7 +19,6 @@ import { TextFieldValue } from '@cmsgov/design-system/dist/react-components/type
 const DatasetSearch = (props: DatasetSearchPageProps) => {
   const {
     rootUrl,
-    surveyLink,
     additionalParams,
     enableSort = true,
     enablePagination = true,
@@ -32,6 +31,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     introText = '',
     showDownloadIcon = false,
     altMobileSearchButton,
+    dataDictionaryLinks = false,
   } = props;
   
   const sortOptions = [
@@ -348,11 +348,11 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                       title={item.title}
                       modified={item.modified}
                       description={item.description}
-                      theme={item.theme}
                       identifier={item.identifier}
                       downloadUrl={showDownloadIcon ? getDownloadUrl(item) : null}
                       largeFile={showLargeFile}
                       paginationEnabled={enablePagination}
+                      dataDictionaryLinks={dataDictionaryLinks}
                     />
                   )
                 }) : ( 

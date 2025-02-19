@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { Dialog, Button } from '@cmsgov/design-system';
+import SearchItemIcon from '../../assets/icons/searchItem';
 
 type LargeFileDialogProps = {
   downloadUrl: string;
@@ -11,7 +12,8 @@ const LargeFileDialog = (props: LargeFileDialogProps) => {
   const { downloadUrl } = props;
   return (
     <>
-      <Button variation="ghost" onClick={() => setModalOpen(true)}>
+      <Button variation="solid" size="small" onClick={() => setModalOpen(true)}>
+        <SearchItemIcon id="download" />
         Download
       </Button>
       {modalOpen && (

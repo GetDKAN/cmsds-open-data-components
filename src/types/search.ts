@@ -41,6 +41,7 @@ export type DatasetSearchPageProps = {
   introText: string;
   showDownloadIcon: boolean;
   altMobileSearchButton?: boolean;
+  dataDictionaryLinks?: boolean;
 };
 
 export type DistributionItemType = {

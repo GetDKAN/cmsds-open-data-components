@@ -15,9 +15,8 @@
   svg {
     margin-right: 8px;
   }
-  span > span > button {
+  button, span > a {
     font-weight: normal !important;
-    padding: 0 !important;
   }
   a:visited svg {
     fill: #{var(--link__color--visited)};
