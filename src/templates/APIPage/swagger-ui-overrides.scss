@@ -69,11 +69,19 @@ This document provides overrides to Swagger UI, fixing accessibility issues.
   }
 
   .info {
-    .title {
-      small {
+    .title > span {
+      span {
         background-color: #666;
-
-        &.version-stamp {
+        border-radius: 67px;
+        display: inline-block;
+        font-size: 14px;
+        color: white;
+        margin: 0 0 0 5px;
+        padding: 2px 8px;
+        position: relative;
+        top: -5px;
+        vertical-align: super;
+        &.version-stamp--openapi {
           background-color: #005830;
         }
       }
