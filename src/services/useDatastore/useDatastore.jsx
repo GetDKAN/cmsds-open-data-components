@@ -8,6 +8,7 @@ const useDatastore = (
   resourceId,
   rootAPIUrl,
   options,
+  additionalParams = {}
 ) => {
   const keys = options.keys ? options.keys : true;
   const { prepareColumns } = options;
@@ -46,6 +47,7 @@ const useDatastore = (
     sorts: sort,
     properties: properties,
     groupings: groupings,
+    ...additionalParams,
   }
   const paramsString = Object.keys(params).length ? `${qs.stringify(acaToParams(params, ACA))}` : '';
   
