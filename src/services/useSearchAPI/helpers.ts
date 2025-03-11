@@ -43,8 +43,7 @@ export function transformUrlParamsToSearchObject(searchParams: string, defaultSo
   };
 }
 
-export async function fetchDatasets(rootUrl: string, options: any) {
-  const {ACA} = useContext(ACAContext)
+export async function fetchDatasets(rootUrl: string, options: any, ACA?: string) {
   const { fulltext, selectedFacets, sort, sortOrder, page, pageSize } = options;
 
   let params = {
