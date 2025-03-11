@@ -14,9 +14,9 @@ describe('<Dataset />', () => {
   beforeEach(async () => {
     await axios.get.mockImplementation((url) => {
       switch (url) {
-        case 'http://dkan.com/api/1/metastore/schemas/dataset/items/4eaa5ebe-62f7-402e-a407-963cd380688b?show-reference-ids':
+        case 'http://dkan.com/api/1/metastore/schemas/dataset/items/4eaa5ebe-62f7-402e-a407-963cd380688b?show-reference-ids&':
           return Promise.resolve({data: dataset});
-        case 'http://dkan.com/api/1/metastore/schemas/dataset/items/df01c2f8-dc1f-4e79-96cb-8208beaf143c?show-reference-ids':
+        case 'http://dkan.com/api/1/metastore/schemas/dataset/items/df01c2f8-dc1f-4e79-96cb-8208beaf143c?show-reference-ids&':
           return Promise.resolve({data: datasetWithDictionary});
         case 'https://dkan.com/api/1/metastore/schemas/data-dictionary/items/71ec19df-f5ef-5b99-b43b-e566e22670b7?':
           return Promise.resolve({data: {}});
