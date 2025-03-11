@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import qs from 'qs';
+import { acaToParams } from "../../utilities/aca";
 
 const useDatastore = (
   resourceId,
@@ -73,7 +74,7 @@ const useDatastore = (
         count: true,
         schema: true
       }
-      return fetch(`${rootUrl}/datastore/query/${id}?${qs.stringify(unfilteredParams)}`)
+      return fetch(`${rootUrl}/datastore/query/${id}?${qs.stringify(acaToParams(unfilteredParams, additionalParams.ACA))}`)
         .then(res => res.json())
     },
   })
