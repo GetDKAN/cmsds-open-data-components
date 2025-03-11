@@ -55,8 +55,7 @@ const useSearchAPI = (
       page: Number(page),
       pageSize: pageSize,
     };
-    const {ACA} = useContext(ACAContext);
-    const results = await fetchDatasets(rootUrl, options, ACA);
+    const results = await fetchDatasets(rootUrl, options);
     const itemKeys = Object.keys(results.data.results);
     const itemsArray = itemKeys.map((key) => {
       return results.data.results[key];
