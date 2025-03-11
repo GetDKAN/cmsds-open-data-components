@@ -10,7 +10,6 @@ const FilteredResource = ({
   dist_id,
   location,
   apiDocPage,
-  additionalParams,
   customColumns,
   setDatasetTitle,
   columnSettings,
@@ -22,7 +21,7 @@ const FilteredResource = ({
 }) => {
   const [ready, setReady] = useState(false);
   const [error, setError] = useState(false);
-  const { dataset } = useMetastoreDataset(id, rootUrl, additionalParams);
+  const { dataset } = useMetastoreDataset(id, rootUrl);
   const distIndex = dist_id === 'data' ? 0 : dist_id;
   useEffect(() => {
     if (dataset.error) {
@@ -69,7 +68,7 @@ const FilteredResource = ({
               distIndex={distIndex}
               location={location}
               apiDocPage={apiDocPage}
-              additionalParams={additionalParams}
+              
               customColumns={customColumns ? customColumns : []}
               columnSettings={columnSettings}
               columnWidths={columnWidths}

@@ -23,10 +23,6 @@ export type SidebarFacetTypes = {
 export type DatasetSearchPageProps = {
   surveyLink?: string;
   rootUrl: string;
-  additionalParams: {
-    ACA: string;
-    redirect: boolean;
-  }
   enableSort: boolean;
   enablePagination: boolean;
   defaultPageSize: number,

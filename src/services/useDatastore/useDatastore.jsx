@@ -1,16 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import qs from 'qs';
 import { acaToParams } from "../../utilities/aca";
+import { ACAContext } from "../../utilities/ACAContext";
 
 const useDatastore = (
   resourceId,
   rootAPIUrl,
   options,
-  additionalParams = {},
 ) => {
   const keys = options.keys ? options.keys : true;
   const { prepareColumns } = options;
+
+  const {ACA} = useContext(ACAContext);
 
   const [values, setValues] = useState([]);
   const [id, setResource] = useState(resourceId);
@@ -44,9 +46,8 @@ const useDatastore = (
     sorts: sort,
     properties: properties,
     groupings: groupings,
-    ...additionalParams,
   }
-  const additionalParamsString = Object.keys(params).length ? `${qs.stringify(params)}` : '';
+  const paramsString = Object.keys(params).length ? `${qs.stringify(acaToParams(params, ACA))}` : '';
   
   let enabled = false;
   if (id) {
@@ -57,10 +58,10 @@ const useDatastore = (
   }
 
   const {data, isPending, error} = useQuery({
-    queryKey: ["datastore" + id + additionalParamsString],
+    queryKey: ["datastore" + id + paramsString],
     queryFn: () => {
       setCount(null)
-      return fetch(`${rootUrl}/datastore/query/${id}?${additionalParamsString}`)
+      return fetch(`${rootUrl}/datastore/query/${id}?${paramsString}`)
         .then(res => res.json())
     },
     enabled: enabled
@@ -74,7 +75,7 @@ const useDatastore = (
         count: true,
         schema: true
       }
-      return fetch(`${rootUrl}/datastore/query/${id}?${qs.stringify(acaToParams(unfilteredParams, additionalParams.ACA))}`)
+      return fetch(`${rootUrl}/datastore/query/${id}?${qs.stringify(acaToParams(unfilteredParams, ACA))}`)
         .then(res => res.json())
     },
   })

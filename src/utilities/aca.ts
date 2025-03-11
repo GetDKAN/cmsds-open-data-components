@@ -1,4 +1,4 @@
-export function acaToParams(params: any, ACA : string) {
+export function acaToParams(params: any, ACA : string | undefined) {
   if (ACA) {
     params = Object.assign(params, {
       ACA: ACA,

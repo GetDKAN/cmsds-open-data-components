@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import qs from 'qs';
 import { Link } from 'react-router-dom';
 import SwaggerUI from 'swagger-ui-react';
@@ -13,14 +13,14 @@ import TransformedDate from '../../components/TransformedDate';
 import DatasetDescription from '../../components/DatasetDescription';
 import 'swagger-ui-react/swagger-ui.css';
 import DataTableContext from '../Dataset/DataTableContext';
-import ManageColumnsContext from '../../components/ManageColumns/ManageColumnsContext';
+import { acaToParams } from '../../utilities/aca';
+import { ACAContext } from '../../utilities/ACAContext';
 
 const FilteredResourceBody = ({
   id,
   dataset,
   distIndex,
   location,
-  additionalParams,
   customColumns,
   columnSettings,
   columnWidths,
@@ -48,7 +48,6 @@ const FilteredResourceBody = ({
       ...options,
       limit: 25,
     },
-    additionalParams
   );
 
   useEffect(() => {
@@ -66,6 +65,8 @@ const FilteredResourceBody = ({
     distribution.data.title && distribution.data.title.toLowerCase() !== 'csv'
       ? distribution.data.title
       : dataset.title;
+
+  const {ACA} = useContext(ACAContext);
 
   return (
     <section className="ds-l-container ds-u-padding-bottom--3 ds-u-margin-bottom--2">
@@ -143,11 +144,7 @@ const FilteredResourceBody = ({
               <SwaggerUI
                 url={`${rootUrl}/metastore/schemas/dataset/items/${
                   dataset.identifier
-                }/docs${
-                  additionalParams && additionalParams.ACA
-                    ? '?ACA=' + additionalParams.ACA + '&redirect=false'
-                    : ''
-                }`}
+                }/docs?${qs.stringify(acaToParams({}, ACA))}`}
                 docExpansion={'list'}
                 defaultModelsExpandDepth={-1}
               />

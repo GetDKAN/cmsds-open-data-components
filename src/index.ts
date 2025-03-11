@@ -43,6 +43,7 @@ export { buildOperatorOptions, convertUTCToLocalDate, cleanText, buildCustomColH
 export { default as HeaderContext } from './templates/Header/HeaderContext';
 export { default as DataTableContext } from './templates/Dataset/DataTableContext';
 export { default as ManageColumnsContext } from './components/ManageColumns/ManageColumnsContext';
+export { ACAContext } from './utilities/ACAContext';
 
 // Services
 export { default as useSearchAPI } from './services/useSearchAPI';
