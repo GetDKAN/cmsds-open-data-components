@@ -49,7 +49,8 @@ const useDatastore = (
     groupings: groupings,
     ...additionalParams,
   }
-  const paramsString = Object.keys(params).length ? `${qs.stringify(acaToParams(params, ACA))}` : '';
+  params = acaToParams(params, ACA);
+  const paramsString = Object.keys(params).length ? `${qs.stringify(params)}` : '';
   
   let enabled = false;
   if (id) {

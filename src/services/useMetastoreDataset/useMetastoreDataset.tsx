@@ -22,7 +22,7 @@ const useMetastoreDataset = (datasetId : string, rootAPIUrl : string) => {
   const { data, isPending } = useQuery({
     queryKey: ["metastore" + id],
     queryFn: () => {
-      return axios.get(`${rootUrl}/metastore/schemas/dataset/items/${id}?show-reference-ids&${qs.stringify(acaToParams({}, ACA))}`)
+      return axios.get(`${rootUrl}/metastore/schemas/dataset/items/${id}?show-reference-ids${ACA ? '&' : ''}${qs.stringify(acaToParams({}, ACA))}`)
         .then((res) => res.data)
         .catch((error) => {return {title: dataset.title, distribution: dataset.distribution, error: error, description: dataset.description, identifier: dataset.identifier, modified: dataset.modified}});
     }
