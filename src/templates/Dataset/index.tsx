@@ -1,6 +1,5 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import DOMPurify from 'dompurify';
 import qs from 'qs';
 import { useQuery } from '@tanstack/react-query';
 import withQueryProvider from '../../utilities/QueryProvider/QueryProvider';
@@ -20,12 +19,15 @@ import './dataset.scss';
 import DataTableStateWrapper from '../../components/DatasetTableTab/DataTableStateWrapper';
 import DataTableContext from './DataTableContext';
 import DatasetDescription from '../../components/DatasetDescription';
+import { acaToParams } from '../../utilities/aca';
+import { ACAContext } from '../../utilities/ACAContext';
 
-const getDataDictionary = (dataDictionaryUrl : string, additionalParams: any) => {
+const getDataDictionary = (dataDictionaryUrl : string) => {
+  const {ACA} = useContext(ACAContext);
   const {data, isPending, error} = useQuery({
     queryKey: ["dictionary" + dataDictionaryUrl],
     queryFn: () => {
-      return fetch(`${dataDictionaryUrl}?${qs.stringify(additionalParams, {arrayFormat: 'comma',encode: false })}`).then(
+      return fetch(`${dataDictionaryUrl}?${qs.stringify(acaToParams({}, ACA), {arrayFormat: 'comma',encode: false })}`).then(
         (res) => res.json(),
       )
     }
@@ -40,7 +42,6 @@ const getDataDictionary = (dataDictionaryUrl : string, additionalParams: any) =>
 const Dataset = ({
   id,
   rootUrl,
-  additionalParams,
   customColumns,
   setDatasetTitle,
   customMetadataMapping,
@@ -60,7 +61,7 @@ const Dataset = ({
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
     : { conditions: [] };
 
-  const { dataset, isPending } = useMetastoreDataset(id, rootUrl, additionalParams);
+  const { dataset, isPending } = useMetastoreDataset(id, rootUrl);
   const title = dataset.title ? dataset.title : '';
   const metadataMapping = {
     ...defaultMetadataMapping,
@@ -79,11 +80,10 @@ const Dataset = ({
     {
       ...options,
       limit: defaultPageSize,
-    },
-    additionalParams
+    }
   ) as ResourceType;
 
-  const siteWideDataDictionary = dataDictionaryUrl ? getDataDictionary(rootUrl + dataDictionaryUrl, additionalParams).dataDictionary : null;
+  const siteWideDataDictionary = dataDictionaryUrl ? getDataDictionary(rootUrl + dataDictionaryUrl).dataDictionary : null;
 
   // compare schema fields with siteWideDataDictionary to display commonalities for now
   // until dataset level data dictionaries are implemented
@@ -226,7 +226,6 @@ const Dataset = ({
                         datasetSitewideDictionary={datasetSitewideDictionary}
                         datasetDictionaryEndpoint={distribution.data.describedBy}
                         title={"Data Dictionary"}
-                        additionalParams={additionalParams}
                         csvDownload={dataDictionaryCSV}
                       />}
                       {!displayDataDictionaryTab && <p>There is no Data Dictionary associated with this dataset.</p>}
@@ -243,7 +242,7 @@ const Dataset = ({
                       }
                       className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
                     >
-                      <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} additionalParams={additionalParams} showRowLimitNotice={showRowLimitNotice} />
+                      <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} showRowLimitNotice={showRowLimitNotice} />
                     </TabPanel>
                   )}
                 </Tabs>

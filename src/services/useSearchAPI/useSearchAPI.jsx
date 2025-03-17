@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { fetchDatasets } from "./helpers";
+import { ACAContext } from "../../utilities/ACAContext";
 
 const useSearchAPI = (
   rootUrl,
   initialSearchParams = {},
-  additionalParams = {}
 ) => {
+  const {ACA} = useContext(ACAContext);
+  
   const defaultSort = "";
   const defaultFulltext = "";
   const defaultSelectedFacets = {};
@@ -46,7 +48,7 @@ const useSearchAPI = (
       : defaultPageSize
   );
 
-  async function search() {
+  async function search(ACA) {
     const options = {
       fulltext: fulltext,
       selectedFacets: selectedFacets,
@@ -55,7 +57,7 @@ const useSearchAPI = (
       page: Number(page),
       pageSize: pageSize,
     };
-    const results = await fetchDatasets(rootUrl, options, additionalParams);
+    const results = await fetchDatasets(rootUrl, options, ACA);
     const itemKeys = Object.keys(results.data.results);
     const itemsArray = itemKeys.map((key) => {
       return results.data.results[key];
@@ -81,7 +83,7 @@ const useSearchAPI = (
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(true);
-      search();
+      search(ACA);
     }, 1000);
     return () => clearTimeout(timer);
   }, [fulltext, selectedFacets, sort, sortOrder, page, pageSize]);

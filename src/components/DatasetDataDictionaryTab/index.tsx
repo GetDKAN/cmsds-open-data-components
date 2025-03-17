@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import withQueryProvider from '../../utilities/QueryProvider/QueryProvider';
 import { useQuery } from '@tanstack/react-query';
 import qs from 'qs';
@@ -8,9 +8,11 @@ import { DatasetDictionaryItemType } from '../../types/dataset';
 import SitewideDataDictionaryTable from '../SitewideDataDictionaryTable';
 import DatasetDictionaryTable from '../DatasetDictionaryTable';
 import { Button, Spinner } from '@cmsgov/design-system';
+import { acaToParams } from '../../utilities/aca';
+import { ACAContext } from '../../utilities/ACAContext';
 
 const DataDictionary = (
-  { datasetDictionaryEndpoint, datasetSitewideDictionary, title, pageSize = 20, additionalParams, csvDownload } : 
+  { datasetDictionaryEndpoint, datasetSitewideDictionary, title, pageSize = 20, csvDownload } : 
   { 
     datasetDictionaryEndpoint: string,
     datasetSitewideDictionary: DatasetDictionaryItemType[]
@@ -19,11 +21,12 @@ const DataDictionary = (
     additionalParams: any,
     csvDownload : boolean
   }) => {
+  const {ACA} = useContext(ACAContext)
   
   const {data, isPending, error} = useQuery({
     queryKey: ["dictionary" + datasetDictionaryEndpoint],
     queryFn: () => {
-      return axios.get(`${datasetDictionaryEndpoint}?${qs.stringify(additionalParams, {arrayFormat: 'comma',encode: false })}`)
+      return axios.get(`${datasetDictionaryEndpoint}?${qs.stringify(acaToParams({}, ACA))}`)
         .then((res) => res.data)
         .catch((error) => console.error(error))
     },

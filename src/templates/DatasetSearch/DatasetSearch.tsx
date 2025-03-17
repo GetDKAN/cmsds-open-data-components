@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import qs from 'qs';
 import axios from 'axios';
@@ -15,11 +15,12 @@ import { separateFacets, transformUrlParamsToSearchObject } from '../../services
 import './dataset-search.scss';
 import { DatasetSearchPageProps, SelectedFacetsType, SidebarFacetTypes, DistributionItemType } from '../../types/search';
 import { TextFieldValue } from '@cmsgov/design-system/dist/react-components/types/TextField/TextField';
+import { acaToParams } from '../../utilities/aca';
+import { ACAContext } from '../../utilities/ACAContext';
 
 const DatasetSearch = (props: DatasetSearchPageProps) => {
   const {
     rootUrl,
-    additionalParams,
     enableSort = true,
     enablePagination = true,
     defaultPageSize = 10,
@@ -33,6 +34,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     altMobileSearchButton,
     dataDictionaryLinks = false,
   } = props;
+  const {ACA} = useContext(ACAContext);
   
   const sortOptions = [
     { label: 'Newest', value: 'newest'},
@@ -201,12 +203,11 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     ['sort-order']: sortOrder ? sortOrder : undefined,
     page: page !== 1 ? page : undefined,  //use index except for when submitting to Search API
     ['page-size']: pageSize !== 10 ? pageSize : undefined,
-    ...additionalParams
   }
   const { data, isPending, error } = useQuery({
     queryKey: ["datasets", params],
     queryFn: () => {
-      return axios.get(`${rootUrl}/search/?${qs.stringify(params, {arrayFormat: 'comma',encode: false })}`)
+      return axios.get(`${rootUrl}/search/?${qs.stringify(acaToParams(params, ACA), {arrayFormat: 'comma',encode: false })}`)
     }
   });
 

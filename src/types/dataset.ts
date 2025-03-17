@@ -59,7 +59,6 @@ export type SchemaType = {
 export type DatasetPageType = {
   id: string,
   rootUrl: string,
-  additionalParams: any,
   customColumns : Array<ColumnType>,
   setDatasetTitle : Function,
   customMetadataMapping : any, // TODO

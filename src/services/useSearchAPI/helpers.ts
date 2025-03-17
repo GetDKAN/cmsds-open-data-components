@@ -1,6 +1,9 @@
 import axios from 'axios';
 import qs from 'qs';
 import { SearchAPIFacetType, SortType } from '../../types/search';
+import { acaToParams } from '../../utilities/aca';
+import { useContext } from 'react';
+import { ACAContext } from '../../utilities/ACAContext';
 
 export function separateFacets(facets: SearchAPIFacetType[]) {
   let facetObj: any = {};
@@ -40,7 +43,7 @@ export function transformUrlParamsToSearchObject(searchParams: string, defaultSo
   };
 }
 
-export async function fetchDatasets(rootUrl: string, options: any, additionalParams: any) {
+export async function fetchDatasets(rootUrl: string, options: any, ACA?: string) {
   const { fulltext, selectedFacets, sort, sortOrder, page, pageSize } = options;
 
   let params = {
@@ -50,7 +53,6 @@ export async function fetchDatasets(rootUrl: string, options: any, additionalPar
     ['sort-order']: sortOrder ? sortOrder : undefined,
     page: page !== 1 ? page : undefined,  //use index except for when submitting to Search API
     ['page-size']: pageSize !== 10 ? pageSize : undefined,
-    ...additionalParams
   }
-  return await axios.get(`${rootUrl}/search/?${qs.stringify(params, {arrayFormat: 'comma',encode: false})}`)
+  return await axios.get(`${rootUrl}/search/?${qs.stringify(acaToParams(params, ACA), {arrayFormat: 'comma',encode: false})}`)
 }
