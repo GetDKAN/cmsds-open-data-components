@@ -65,7 +65,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
           ) : (
             ''
           )}
-        <div className={`ds-l-row ds-u-padding--0 ds-u-flex-direction--row ds-u-margin-top--3 ds-u-margin-x--0 ${!dataDictionaryLinks && 'ds-u-justify-content--center'}`}>
+        <div className={`ds-l-row ds-u-padding--0 ds-u-flex-direction--row ds-u-margin-top--3 ds-u-margin-x--0 ${!dataDictionaryLinks && 'ds-u-justify-content--center ds-u-md-justify-content--start'}`}>
           <div className={linkContainerClasses}>
             <span className={linkClasses}>
               <Link to={`/dataset/${identifier}#data-table`}>
