@@ -22,7 +22,6 @@
     fill: #{var(--link__color--visited)};
   }
 
-<<<<<<< HEAD
   .ds-c-button {
     text-decoration: none !important;
     
@@ -31,10 +30,5 @@
       fill: #{var(--color-white)};
     }
 
-=======
-  .ds-c-button svg,
-  .ds-c-button:visited svg {
-    fill: #{var(--color-white)};
->>>>>>> 16fe42d (WCMS-24523: updated button svg color)
   }
 }
