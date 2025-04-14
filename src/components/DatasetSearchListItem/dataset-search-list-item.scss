@@ -21,4 +21,9 @@
   a:visited svg {
     fill: #{var(--link__color--visited)};
   }
+
+  .ds-c-button svg,
+  .ds-c-button:visited svg {
+    fill: #{var(--color-white)};
+  }
 }
