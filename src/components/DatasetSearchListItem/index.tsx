@@ -23,11 +23,16 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
   const desktop = useMediaQuery({ minWidth: 1024 });
   const { title, modified, description, identifier, downloadUrl, largeFile = false, paginationEnabled, dataDictionaryLinks } = props;
 
-  let linkContainerClasses = 'ds-l-col--12 ds-u-margin-bottom--2';
-  let linkClasses = 'ds-c-button ds-u-display--block ds-u-text-align--left';
+  let linkContainerClasses = 'ds-u-margin-bottom--2';
+  if (dataDictionaryLinks) {
+    linkContainerClasses += ' ds-l-col--6 ds-u-padding-right--0';
+  } else {
+    linkContainerClasses += ' ds-l-col--auto ds-u-padding-left--0';
+  }
+  let linkClasses = 'ds-u-display--block ds-u-text-align--left';
   if (desktop) {
     linkContainerClasses = 'ds-l-col--auto';
-    linkClasses = 'ds-u-display--block ds-u-text-align--left';
+    linkClasses += ' ds-l-col--4 ds-l-md-col--auto';
   }
 
   return (
@@ -45,59 +50,57 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
           <div className="ds-l-col--12 ds-l-md-col--12 ds-u-margin-top--2">{truncateText(description)}</div>
         </div>
         {( downloadUrl ) ? (
-            <div className={`${linkContainerClasses} ds-u-margin-top--3 ds-u-padding-left--0`}>
-              <span className={linkClasses}>
+            <div className={`ds-u-margin-top--3 ds-u-padding-left--0`}>
                 {largeFile ? (
                   <span>
                     {<LargeFileDialog downloadUrl={downloadUrl} />}
                   </span>
                 ) : (
-                  <Button href={downloadUrl} variation="solid" size="small">
+                  <Button href={downloadUrl} variation="solid" className="ds-l-sm-col--12 ds-l-md-col--auto">
                     <SearchItemIcon id="download" />
                     Download
                   </Button>
                 )}
-              </span>
             </div>
           ) : (
             ''
           )}
-        <ul className="ds-l-row ds-u-padding--0 ds-u-flex-direction--row ds-u-margin-top--2">
-          <li className={linkContainerClasses}>
+        <div className={`ds-l-row ds-u-padding--0 ds-u-flex-direction--row ds-u-margin-top--3 ds-u-margin-x--0 ${!dataDictionaryLinks && 'ds-u-justify-content--center ds-u-md-justify-content--start'}`}>
+          <div className={linkContainerClasses}>
             <span className={linkClasses}>
               <Link to={`/dataset/${identifier}#data-table`}>
                 <SearchItemIcon id="data-table" />
                 Data Table
               </Link>
             </span>
-          </li>
-          <li className={linkContainerClasses}>
+          </div>
+          <div className={linkContainerClasses}>
             <span className={linkClasses}>
               <Link to={`/dataset/${identifier}#overview`}>
                 <SearchItemIcon id="overview" />
                 Overview
               </Link>
             </span>
-          </li>
+          </div>
           { dataDictionaryLinks && (
-            <li className={linkContainerClasses}>
+            <div className={linkContainerClasses}>
               <span className={linkClasses}>
               <Link to={`/dataset/${identifier}#data-dictionary`}>
                 <SearchItemIcon id="data-dictionary" />
                 Data Dictionary
               </Link>
               </span>
-            </li>
+            </div>
           )}
-          <li className={linkContainerClasses}>
+          <div className={linkContainerClasses}>
             <span className={linkClasses}>
               <Link to={`/dataset/${identifier}#api`}>
                 <SearchItemIcon id="api" />
                 API
               </Link>
             </span>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
     </li>
   );
