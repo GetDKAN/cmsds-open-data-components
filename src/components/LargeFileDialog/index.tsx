@@ -12,7 +12,7 @@ const LargeFileDialog = (props: LargeFileDialogProps) => {
   const { downloadUrl } = props;
   return (
     <>
-      <Button variation="solid" size="small" onClick={() => setModalOpen(true)}>
+      <Button variation="solid" className="ds-l-sm-col--12 ds-l-md-col--auto" onClick={() => setModalOpen(true)}>
         <SearchItemIcon id="download" />
         Download
       </Button>
