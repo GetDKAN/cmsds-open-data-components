@@ -22,8 +22,13 @@
     fill: #{var(--link__color--visited)};
   }
 
-  .ds-c-button svg,
-  .ds-c-button:visited svg {
-    fill: #{var(--color-white)};
+  .ds-c-button {
+    text-decoration: none !important;
+    
+    svg,
+    &:visited svg {
+      fill: #{var(--color-white)};
+    }
+
   }
 }
