@@ -1,7 +1,14 @@
 .dc-c-search-list-item {
   list-style: none;
-  div {
+  ul {
+    gap: 0;
+  }
+  li {
     list-style: none;
+
+    &:first-child > span {
+      padding-left: 0;
+    }
 
     a,
     button {
