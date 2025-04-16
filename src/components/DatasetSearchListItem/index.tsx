@@ -31,7 +31,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
   }
   let linkClasses = 'ds-u-display--block ds-u-text-align--left';
   if (desktop) {
-    linkContainerClasses = 'ds-l-col--auto';
+    linkContainerClasses = 'ds-u-padding-x--0';
     linkClasses += ' ds-l-col--4 ds-l-md-col--auto';
   }
 
@@ -56,7 +56,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
                     {<LargeFileDialog downloadUrl={downloadUrl} />}
                   </span>
                 ) : (
-                  <Button href={downloadUrl} variation="solid" className="ds-l-sm-col--12 ds-l-md-col--auto">
+                  <Button href={downloadUrl} variation="solid" className="ds-l-col--12 ds-l-md-col--auto">
                     <SearchItemIcon id="download" />
                     Download
                   </Button>
@@ -65,42 +65,42 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
           ) : (
             ''
           )}
-        <div className={`ds-l-row ds-u-padding--0 ds-u-flex-direction--row ds-u-margin-top--3 ds-u-margin-x--0 ${!dataDictionaryLinks && 'ds-u-justify-content--center ds-u-md-justify-content--start'}`}>
-          <div className={linkContainerClasses}>
+        <ul className={`ds-l-row ds-u-padding--0 ds-u-flex-direction--row ds-u-justify-content--between ds-u-md-justify-content--start ds-u-margin-top--3 ds-u-margin-x--0 ${!dataDictionaryLinks ? 'ds-u-justify-content--center ds-u-md-justify-content--start' : ''}`}>
+          <li className={linkContainerClasses}>
             <span className={linkClasses}>
               <Link to={`/dataset/${identifier}#data-table`}>
                 <SearchItemIcon id="data-table" />
                 Data Table
               </Link>
             </span>
-          </div>
-          <div className={linkContainerClasses}>
+          </li>
+          <li className={linkContainerClasses}>
             <span className={linkClasses}>
               <Link to={`/dataset/${identifier}#overview`}>
                 <SearchItemIcon id="overview" />
                 Overview
               </Link>
             </span>
-          </div>
-          { dataDictionaryLinks && (
-            <div className={linkContainerClasses}>
+          </li>
+          { dataDictionaryLinks ? (
+            <li className={linkContainerClasses}>
               <span className={linkClasses}>
               <Link to={`/dataset/${identifier}#data-dictionary`}>
                 <SearchItemIcon id="data-dictionary" />
                 Data Dictionary
               </Link>
               </span>
-            </div>
-          )}
-          <div className={linkContainerClasses}>
+            </li>
+          ) : ''}
+          <li className={linkContainerClasses}>
             <span className={linkClasses}>
               <Link to={`/dataset/${identifier}#api`}>
                 <SearchItemIcon id="api" />
                 API
               </Link>
             </span>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </li>
   );
