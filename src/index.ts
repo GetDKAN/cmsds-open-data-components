@@ -22,6 +22,7 @@ export { default as ResourceFooter } from './components/ResourceFooter';
 export { default as Breadcrumb } from './components/Breadcrumb';
 export { default as TransformedDate } from './components/TransformedDate';
 export { default as DataTable } from './components/Datatable';
+export { default as SearchInput } from './components/SearchInput';
 export { buildRows } from './components/DatasetAdditionalInformation';
 export { default as DataTablePageResults } from './components/DataTablePageResults';
 export { truncateText } from './components/DatasetSearchListItem/truncateText';
