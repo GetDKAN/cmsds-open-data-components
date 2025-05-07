@@ -28,13 +28,15 @@ const SearchInput = ({
   showMagnifyingGlass = false
 }) => {
   const [searchQuery, setSearchQuery] = useState(value)
-  //const { setSearchInputRef } = useContext(SearchContext)
   const searchInput = useRef(null)
   const isMobile = useMediaQuery({ minWidth: 0, maxWidth: 768 })
 
   useEffect(() => {
     if (defaultSubmit && value === '') {
       setSearchQuery(value)
+    } else {
+      const readableTerm = value.slice(value.indexOf('=') + 1).split('%20').join(' ')
+      setSearchQuery(readableTerm)
     }
   }, [value])
 
@@ -55,6 +57,7 @@ const SearchInput = ({
     <Button
       type='reset'
       id='inputReset'
+      aria-label='Clear search input'
       className='ds-c-button'
       onClick={() => { setSearchQuery('') }}
     >
@@ -95,15 +98,20 @@ const SearchInput = ({
         />
       <span id="searchControls">
       {showReset && searchQuery.length ? reset : null}
-      {showSubmit && <Button type='submit' className={combinedSubmitClasses} id={submitID}>
-        { !isMobile ? (
-          <>
-          {submitContent}
-          <ChevronRightIcon />
-        </>
-        ) : (
-         <MagnifyingGlassIcon />
-        )}
+      {showSubmit && 
+        <Button 
+          type='submit'
+          aria-label='Submit search'
+          className={combinedSubmitClasses}
+          id={submitID}>
+          { !isMobile ? (
+            <>
+            {submitContent}
+            <ChevronRightIcon />
+          </>
+          ) : (
+           <MagnifyingGlassIcon />
+          )}
       </Button>}
       </span>
        </InputGroup>
