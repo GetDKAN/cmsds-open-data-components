@@ -38,7 +38,7 @@ const Resource = ({ distributions, resource, title } : ResourcePropsType ) => {
                       aria-label={`Download ${dist.data.title || title} ${fileFormat}`}
                       className="ds-c-button"
                     >
-                      <i className="fa fa-file-download ds-u-color--primary ds-u-padding-right--1"></i>
+                      <i className="fa fa-file-download ds-u-padding-right--1"></i>
                       Download
                     </a>
                   </div>
