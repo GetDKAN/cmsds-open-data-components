@@ -92,7 +92,6 @@ describe('<DatasetSearch />', () => {
       screen.getByRole("checkbox", { name: "general (2)" }).click();
     });
     // Check that the URL params were updated
-    console.log('test2:', window.history.pushState.mockReturnValue);
     expect(window.history.pushState).toHaveBeenNthCalledWith(2, {}, "", expect.stringContaining("/?theme[0]=general"))
   });
 });
