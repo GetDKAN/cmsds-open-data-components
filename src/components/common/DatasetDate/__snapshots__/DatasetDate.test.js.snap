@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DatasetDate component. Matches snapshot. 1`] = `
+<div
+  className="dataset-date"
+>
+  <div
+    className="dataset-date-item"
+  >
+    <span>
+      Last Modified
+    </span>
+    : 
+    February 1, 2023
+  </div>
+  <span
+    className="bullet-point"
+  >
+    •
+  </span>
+  <div
+    className="dataset-date-item"
+  >
+    <span>
+      Released
+    </span>
+    : 
+    January 1, 2023
+  </div>
+</div>
+`;

@@ -1,0 +1,46 @@
+@use "../../../scss/modules/modules";
+@use "../../../scss/modules/colormap";
+
+.dataset-date {
+  display: flex;
+
+  .dataset-date-item {
+    color: colormap.$charcoal-90;
+    font-size: 1.4rem;
+    white-space: nowrap;
+
+    &.bold-label > span {
+      font-weight: 700;
+    }
+    .ds-c-tooltip__container {
+      position: relative;
+      bottom: 10px;
+      width: 20px;
+      display: inline-block;
+    }
+    .ds-c-tooltip__trigger-icon {
+      padding: 0
+    }
+    .ds-c-tooltip {
+      max-width: revert !important;
+      font-size: var(--theme-font-size-md, 16px);
+      font-style: normal;
+      font-weight: 700;
+      line-height: 150%; /* 24px */
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .dataset-date {
+    flex-direction: column;
+
+    .dataset-date-item {
+      margin-bottom: 0.5rem;
+    }
+
+    .bullet-point {
+      display: none;
+    }
+  }
+}

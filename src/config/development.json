@@ -1,0 +1,7 @@
+{
+  "requestLogging": true,
+  "responseLogging": true,
+  "logLevel": "DEBUG",
+  "apiSite": "https://pqdc-dkan.ddev.site/api/1",
+  "site": "https://pqdc-dkan.ddev.site/"
+}

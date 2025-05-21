@@ -1,0 +1,176 @@
+@use "../../../scss/modules/modules";
+@use "../../../scss/modules/colormap";
+
+// wrapper
+.ds-c-dialog-wrap {
+  .filter-dialog {
+    max-width: 768px;
+    padding: 16px 0px 0px 0px;
+    font-family: Muli;
+    div {
+      .ds-c-dialog__header {
+        padding: 0px;
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        .ds-c-dialog__heading {
+          // header
+          font-weight: 800;
+          align-self: center;
+          padding-left: 24px;
+          margin-bottom: 0;
+          font-size: 20px;
+        }
+        .ds-c-dialog__close {
+          // header button
+          align-self: flex-start;
+          height: 32px;
+          width: 32px;
+          margin-right: 15px;
+          margin-bottom: 6px;
+          color: colormap.$charcoal;
+        }
+      }
+      // main content
+      .ds-c-dialog__body {
+        div[id^="dialog"][id$="__content"] {
+          div {
+            // arbitrary container
+            display: flex;
+            flex-direction: column;
+            .info {
+              //padding-top: 24px;
+              padding-left: 24px;
+
+              span {
+                white-space: pre;
+                font-size: 12px;
+                font-family: Muli;
+                display: inline-block;
+              }
+            }
+            .filter-header {
+              height: 40px;
+              margin-top: 25px;
+              display: flex;
+              flex-direction: row;
+              flex: 1 1 0;
+              width: 100%;
+              align-items: center;
+              column-gap: 16px;
+              background-color: colormap.$background-color;
+              border-top: solid 1px colormap.$charcoal-10;
+              border-bottom: solid 1px colormap.$charcoal-10;
+              padding: 0 24px;
+
+              > .header-item {
+                display: flex;
+                flex-direction: row;
+                width: 30%;
+                padding-right: 16px;
+                flex-grow: 1;
+
+                h3 {
+                  font-size: 14px;
+                  font-family: Geometria;
+                  font-weight: 800;
+                }
+              }
+            }
+            .filter-container {
+              min-height: 255px;
+              max-height: 500px;
+              overflow-y: auto;
+              .filter-item {
+                display: flex;
+                flex-direction: row;
+                flex: 1 1 0px;
+                padding: 0 24px;
+                margin-top: 13px;
+                padding-bottom: 12px;
+                column-gap: 15px;
+                border-bottom: solid 1px colormap.$charcoal-20;
+                > select, > input {
+                  display: flex;
+                  padding-left: 16px;
+                  padding-right: 30px;
+                  font-size: 14px;
+                  font-family: Muli;
+                  margin: 0;
+                  max-height: 36px;
+                  padding-right: 40px;
+                  text-overflow: ellipsis;
+                  option {
+                    height: 50px;
+                  }
+                }
+                .delete-button {
+                  border: solid 1px #323a45;
+                  border-radius: 100%;
+                  background-color: #fff;
+                  max-height: 36px;
+                  cursor: pointer;
+                  svg {
+                    path {
+                      fill: #323a45;
+                    }
+                  }
+                  &.disabled {
+                    border: solid 1px colormap.$charcoal-20;
+                    svg {
+                      path {
+                        fill: colormap.$charcoal-20;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            .add-filter {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              justify-content: center;
+              border: solid 2px #c9cee6;
+              border-radius: 25px;
+              background-color: #fff;
+              margin: 13px 24px 14px 24px;
+              &:hover {
+                // background-color: #c9cee6; at 50%
+                background-color: rgba(201, 206, 230, 0.5);
+              }
+              .fa-plus-circle {
+                path {
+                  fill: #3c4fac;
+                }
+              }
+              span {
+                color: colormap.$blueberry;
+                font-size: 16;
+                font-weight: 800;
+                margin-left: 8px;
+              }
+            }
+          }
+        }
+      }
+      .ds-c-dialog__actions {
+        margin-top: 0;
+        .filter-dialog-actions {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+          border-top: solid 1px colormap.$charcoal-20;
+          padding: 12px 24px;
+          .disabled {
+            background-color: colormap.$charcoal-20;
+            &:hover {
+              color: #fff;
+              border-color: colormap.$charcoal-20;
+            }
+          }
+        }
+      }
+    }
+  }
+}

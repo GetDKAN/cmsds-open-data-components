@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon_table</title>
+    <g id="Dataset-pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="pdc_hospicedata_api" transform="translate(-111, -480)" fill="#0D2499" fill-rule="nonzero">
+            <g id="Group-6" transform="translate(95, 463)">
+                <g id="icon_table" transform="translate(16, 19)">
+                    <path d="M0,15 L0,0 L20,0 L20,15 L0,15 Z M1.25,12.5 L6.25,12.5 L6.25,1.25 L1.25,1.25 L1.25,12.5 Z M7.5,12.5 L12.5,12.5 L12.5,1.25 L7.5,1.25 L7.5,12.5 Z M13.75,12.5 L18.75,12.5 L18.75,1.25 L13.75,1.25 L13.75,12.5 Z" id="Shape" transform="translate(10, 7.5) scale(1, -1) translate(-10, -7.5)"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

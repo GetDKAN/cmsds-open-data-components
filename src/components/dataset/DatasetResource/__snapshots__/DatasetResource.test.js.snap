@@ -1,0 +1,3841 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DatasetResource component. Matches snapshot. 1`] = `
+<DocumentFragment>
+  <div
+    class="resource-table"
+    data-resource-identifier="a4eb46a4-fd19-55b0-baf4-de08c3a70abd"
+    data-testid="data-table"
+    id="resource_a4eb46a4-fd19-55b0-baf4-de08c3a70abd"
+  >
+    <div>
+      <div
+        class="resource-table-header"
+      >
+        <div
+          class="resource-table-header-container"
+        >
+          <div
+            class="data-table-results"
+          >
+            <p>
+              Viewing 
+              <span
+                class="low-result"
+              >
+                1
+              </span>
+               - 
+              <span
+                class="high-result"
+              >
+                16
+              </span>
+               of 
+              <span
+                class="total"
+              >
+                16
+              </span>
+               rows
+            </p>
+          </div>
+          <div
+            class="table-controls"
+          >
+            <div
+              class="table-control-item filter-dataset-container"
+            >
+              <span
+                class="tooltip-trigger"
+              >
+                <button
+                  aria-label="Filter dataset - Opens in a dialog"
+                  class="dataset-button"
+                >
+                  <svg
+                    aria-label="filter"
+                    class="fa fa-filter"
+                    focusable="false"
+                    height="16"
+                    role="img"
+                    viewBox="0 0 512 512"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M463.952 0H48.057C5.419 0-16.094 51.731 14.116 81.941L176 243.882V416c0 15.108 7.113 29.335 19.2 40l64 47.066c31.273 21.855 76.8 1.538 76.8-38.4V243.882L497.893 81.941C528.042 51.792 506.675 0 463.952 0zM288 224v240l-64-48V224L48 48h416L288 224z"
+                      fill="#0c2499"
+                    />
+                  </svg>
+                  <span
+                    class="dataset-button-text"
+                  >
+                    Filter dataset
+                  </span>
+                </button>
+              </span>
+            </div>
+            <div
+              class="table-control-item manage-columns-button-container"
+            >
+              <span
+                class="tooltip-trigger"
+              >
+                <button
+                  aria-label="Manage columns - Opens in a dialog"
+                  class="dataset-button"
+                >
+                  <svg
+                    aria-label="columns"
+                    class="fa fa-columns"
+                    focusable="false"
+                    height="16"
+                    role="img"
+                    viewBox="0 0 512 512"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM232 432H54a6 6 0 0 1-6-6V112h184v320zm226 0H280V112h184v314a6 6 0 0 1-6 6z"
+                      fill="#0c2499"
+                    />
+                  </svg>
+                  <span
+                    class="dataset-button-text"
+                  >
+                    Manage columns
+                  </span>
+                </button>
+              </span>
+              <div
+                class="ds-c-dialog-wrap"
+              >
+                <dialog
+                  aria-labelledby="dialog--1__heading"
+                  class="ds-c-dialog manage-col-dialog manage-col-md"
+                  id="dialog--1"
+                  role="dialog"
+                  tabindex="-1"
+                >
+                  <div
+                    class="ds-c-dialog__window"
+                  >
+                    <div
+                      class="ds-c-dialog__header"
+                    >
+                      <h2
+                        class="ds-c-dialog__heading"
+                        id="dialog--1__heading"
+                      >
+                        Manage columns
+                      </h2>
+                      <button
+                        aria-label="Close manage columns dialog"
+                        class="ds-c-close-button ds-c-dialog__close"
+                        id="dialog--1__close"
+                        type="button"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="ds-c-icon ds-c-icon--close ds-c-icon--close-thin "
+                          id="dialog--1__close__icon"
+                          viewBox="-2 -2 18 18"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 13.0332964L13.0332964 0M13.0332964 13.0332964L0 0"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-width="2"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                    <div
+                      class="ds-c-dialog__body"
+                    >
+                      <div
+                        id="dialog--1__content"
+                      >
+                        <div
+                          class="column-labels"
+                        >
+                          <span>
+                            Display column
+                          </span>
+                          <span>
+                            Reorder
+                          </span>
+                        </div>
+                        <p
+                          id="reorder-help"
+                        >
+                          Activate the reorder button and use the arrow keys to reorder the list or use your mouse to drag/reorder. Press escape to cancel the reordering.
+                        </p>
+                        <ul
+                          class="advanced-options"
+                        >
+                          <li
+                            draggable="true"
+                            style="opacity: 1;"
+                          >
+                            <div>
+                              <div
+                                class="ds-c-choice-wrapper"
+                              >
+                                <input
+                                  checked=""
+                                  class="ds-c-choice"
+                                  id="col1"
+                                  name="col1"
+                                  style="cursor: pointer;"
+                                  title="Toggle Column Visible"
+                                  type="checkbox"
+                                  value=""
+                                />
+                                <label
+                                  class="ds-c-label"
+                                  for="col1"
+                                  id="col1__label"
+                                >
+                                  col1
+                                </label>
+                              </div>
+                            </div>
+                            <button
+                              aria-describedby="reorder-help"
+                              aria-label="Reorder col1 column"
+                              class="manage-columns-reorder"
+                              type="button"
+                            >
+                              <svg
+                                aria-label="sort"
+                                class="fa fa-sort"
+                                focusable="false"
+                                height="16"
+                                role="img"
+                                viewBox="0 0 320 512"
+                                width="16"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                                  fill="#323A45"
+                                />
+                              </svg>
+                            </button>
+                          </li>
+                          <li
+                            draggable="true"
+                            style="opacity: 1;"
+                          >
+                            <div>
+                              <div
+                                class="ds-c-choice-wrapper"
+                              >
+                                <input
+                                  checked=""
+                                  class="ds-c-choice"
+                                  id="col2"
+                                  name="col2"
+                                  style="cursor: pointer;"
+                                  title="Toggle Column Visible"
+                                  type="checkbox"
+                                  value=""
+                                />
+                                <label
+                                  class="ds-c-label"
+                                  for="col2"
+                                  id="col2__label"
+                                >
+                                  col2
+                                </label>
+                              </div>
+                            </div>
+                            <button
+                              aria-describedby="reorder-help"
+                              aria-label="Reorder col2 column"
+                              class="manage-columns-reorder"
+                              type="button"
+                            >
+                              <svg
+                                aria-label="sort"
+                                class="fa fa-sort"
+                                focusable="false"
+                                height="16"
+                                role="img"
+                                viewBox="0 0 320 512"
+                                width="16"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                                  fill="#323A45"
+                                />
+                              </svg>
+                            </button>
+                          </li>
+                          <li
+                            draggable="true"
+                            style="opacity: 1;"
+                          >
+                            <div>
+                              <div
+                                class="ds-c-choice-wrapper"
+                              >
+                                <input
+                                  checked=""
+                                  class="ds-c-choice"
+                                  id="col3"
+                                  name="col3"
+                                  style="cursor: pointer;"
+                                  title="Toggle Column Visible"
+                                  type="checkbox"
+                                  value=""
+                                />
+                                <label
+                                  class="ds-c-label"
+                                  for="col3"
+                                  id="col3__label"
+                                >
+                                  col3
+                                </label>
+                              </div>
+                            </div>
+                            <button
+                              aria-describedby="reorder-help"
+                              aria-label="Reorder col3 column"
+                              class="manage-columns-reorder"
+                              type="button"
+                            >
+                              <svg
+                                aria-label="sort"
+                                class="fa fa-sort"
+                                focusable="false"
+                                height="16"
+                                role="img"
+                                viewBox="0 0 320 512"
+                                width="16"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                                  fill="#323A45"
+                                />
+                              </svg>
+                            </button>
+                          </li>
+                          <li
+                            draggable="true"
+                            style="opacity: 1;"
+                          >
+                            <div>
+                              <div
+                                class="ds-c-choice-wrapper"
+                              >
+                                <input
+                                  checked=""
+                                  class="ds-c-choice"
+                                  id="col4"
+                                  name="col4"
+                                  style="cursor: pointer;"
+                                  title="Toggle Column Visible"
+                                  type="checkbox"
+                                  value=""
+                                />
+                                <label
+                                  class="ds-c-label"
+                                  for="col4"
+                                  id="col4__label"
+                                >
+                                  col4
+                                </label>
+                              </div>
+                            </div>
+                            <button
+                              aria-describedby="reorder-help"
+                              aria-label="Reorder col4 column"
+                              class="manage-columns-reorder"
+                              type="button"
+                            >
+                              <svg
+                                aria-label="sort"
+                                class="fa fa-sort"
+                                focusable="false"
+                                height="16"
+                                role="img"
+                                viewBox="0 0 320 512"
+                                width="16"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                                  fill="#323A45"
+                                />
+                              </svg>
+                            </button>
+                          </li>
+                          <li
+                            draggable="true"
+                            style="opacity: 1;"
+                          >
+                            <div>
+                              <div
+                                class="ds-c-choice-wrapper"
+                              >
+                                <input
+                                  checked=""
+                                  class="ds-c-choice"
+                                  id="col5"
+                                  name="Column 5"
+                                  style="cursor: pointer;"
+                                  title="Toggle Column Visible"
+                                  type="checkbox"
+                                  value=""
+                                />
+                                <label
+                                  class="ds-c-label"
+                                  for="col5"
+                                  id="col5__label"
+                                >
+                                  Column 5
+                                </label>
+                              </div>
+                            </div>
+                            <button
+                              aria-describedby="reorder-help"
+                              aria-label="Reorder Column 5 column"
+                              class="manage-columns-reorder"
+                              type="button"
+                            >
+                              <svg
+                                aria-label="sort"
+                                class="fa fa-sort"
+                                focusable="false"
+                                height="16"
+                                role="img"
+                                viewBox="0 0 320 512"
+                                width="16"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                                  fill="#323A45"
+                                />
+                              </svg>
+                            </button>
+                          </li>
+                          <li
+                            draggable="true"
+                            style="opacity: 1;"
+                          >
+                            <div>
+                              <div
+                                class="ds-c-choice-wrapper"
+                              >
+                                <input
+                                  checked=""
+                                  class="ds-c-choice"
+                                  id="col6"
+                                  name="col6"
+                                  style="cursor: pointer;"
+                                  title="Toggle Column Visible"
+                                  type="checkbox"
+                                  value=""
+                                />
+                                <label
+                                  class="ds-c-label"
+                                  for="col6"
+                                  id="col6__label"
+                                >
+                                  col6
+                                </label>
+                              </div>
+                            </div>
+                            <button
+                              aria-describedby="reorder-help"
+                              aria-label="Reorder col6 column"
+                              class="manage-columns-reorder"
+                              type="button"
+                            >
+                              <svg
+                                aria-label="sort"
+                                class="fa fa-sort"
+                                focusable="false"
+                                height="16"
+                                role="img"
+                                viewBox="0 0 320 512"
+                                width="16"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                                  fill="#323A45"
+                                />
+                              </svg>
+                            </button>
+                          </li>
+                        </ul>
+                        <div
+                          aria-atomic="true"
+                          aria-live="assertive"
+                          class="sr-only aria-live-feedback"
+                        />
+                      </div>
+                      <div
+                        class="ds-c-dialog__actions"
+                      >
+                        <div
+                          class="manage-col-dialog-actions"
+                        >
+                          <div
+                            class="select-all-choice"
+                          >
+                            <div
+                              class="ds-c-choice-wrapper"
+                            >
+                              <input
+                                checked=""
+                                class="ds-c-choice"
+                                id="choice--2"
+                                name=""
+                                type="checkbox"
+                                value=""
+                              />
+                              <label
+                                class="ds-c-label"
+                                for="choice--2"
+                                id="choice--2__label"
+                              >
+                                Select all
+                              </label>
+                            </div>
+                          </div>
+                          <button
+                            class="btn blueberry"
+                          >
+                            Update columns
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </dialog>
+              </div>
+            </div>
+            <div
+              class="table-control-item display-settings"
+            >
+              <div
+                class="display-settings-1"
+              >
+                <span
+                  class="tooltip-trigger"
+                >
+                  <button
+                    aria-label="Display settings"
+                    class="dataset-button"
+                  >
+                    <svg
+                      aria-label="sliders h"
+                      class="fa fa-sliders-h"
+                      focusable="false"
+                      height="16"
+                      role="img"
+                      viewBox="0 0 576 512"
+                      width="16"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M576 252v8c0 6.6-5.4 12-12 12h-84v24c0 13.3-10.7 24-24 24h-16c-13.3 0-24-10.7-24-24v-24H12c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h404v-24c0-13.3 10.7-24 24-24h16c13.3 0 24 10.7 24 24v24h84c6.6 0 12 5.4 12 12zM564 80H128V56c0-13.3-10.7-24-24-24H88c-13.3 0-24 10.7-24 24v24H12C5.4 80 0 85.4 0 92v8c0 6.6 5.4 12 12 12h52v24c0 13.3 10.7 24 24 24h16c13.3 0 24-10.7 24-24v-24h436c6.6 0 12-5.4 12-12v-8c0-6.6-5.4-12-12-12zm0 320H288v-24c0-13.3-10.7-24-24-24h-16c-13.3 0-24 10.7-24 24v24H12c-6.6 0-12 5.4-12 12v8c0 6.6 5.4 12 12 12h212v24c0 13.3 10.7 24 24 24h16c13.3 0 24-10.7 24-24v-24h276c6.6 0 12-5.4 12-12v-8c0-6.6-5.4-12-12-12z"
+                        fill="#0c2499"
+                      />
+                    </svg>
+                    <span
+                      class="dataset-button-text"
+                    >
+                      Display settings
+                    </span>
+                    <svg
+                      aria-label="caret down"
+                      class="fa fa-caret-down"
+                      focusable="false"
+                      height="16"
+                      role="img"
+                      viewBox="0 0 320 512"
+                      width="16"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                        fill="#0c2499"
+                      />
+                    </svg>
+                  </button>
+                </span>
+              </div>
+            </div>
+            <div
+              class="table-control-item fullscreen-button-container"
+            >
+              <span
+                class="tooltip-trigger"
+              >
+                <button
+                  aria-label="Fullscreen - Opens in a dialog"
+                  class="dataset-button"
+                >
+                  <svg
+                    aria-label="expand"
+                    class="fa fa-expand"
+                    focusable="false"
+                    height="16"
+                    role="img"
+                    viewBox="0 0 448 512"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0 180V56c0-13.3 10.7-24 24-24h124c6.6 0 12 5.4 12 12v24c0 6.6-5.4 12-12 12H48v100c0 6.6-5.4 12-12 12H12c-6.6 0-12-5.4-12-12zM288 44v24c0 6.6 5.4 12 12 12h100v100c0 6.6 5.4 12 12 12h24c6.6 0 12-5.4 12-12V56c0-13.3-10.7-24-24-24H300c-6.6 0-12 5.4-12 12zm148 276h-24c-6.6 0-12 5.4-12 12v100H300c-6.6 0-12 5.4-12 12v24c0 6.6 5.4 12 12 12h124c13.3 0 24-10.7 24-24V332c0-6.6-5.4-12-12-12zM160 468v-24c0-6.6-5.4-12-12-12H48V332c0-6.6-5.4-12-12-12H12c-6.6 0-12 5.4-12 12v124c0 13.3 10.7 24 24 24h124c6.6 0 12-5.4 12-12z"
+                      fill="#0c2499"
+                    />
+                  </svg>
+                  <span
+                    class="dataset-button-text"
+                  >
+                    Fullscreen
+                  </span>
+                </button>
+              </span>
+              <div
+                class="ds-c-dialog-wrap"
+              >
+                <dialog
+                  aria-labelledby="dialog--3__heading"
+                  class="ds-c-dialog fullscreen-resource ds-c-dialog--full"
+                  id="dialog--3"
+                  role="dialog"
+                  tabindex="-1"
+                >
+                  <div
+                    class="ds-c-dialog__window"
+                  >
+                    <div
+                      class="ds-c-dialog__header"
+                    >
+                      <h2
+                        class="ds-c-dialog__heading"
+                        id="dialog--3__heading"
+                      >
+                        <span
+                          class="dataset-explorer-title"
+                        >
+                          Dataset Explorer
+                        </span>
+                      </h2>
+                      <button
+                        aria-label="Close dataset explorer dialog"
+                        class="ds-c-close-button ds-c-dialog__close"
+                        id="dialog--3__close"
+                        type="button"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          class="ds-c-icon ds-c-icon--close ds-c-icon--close-thin "
+                          id="dialog--3__close__icon"
+                          viewBox="-2 -2 18 18"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M0 13.0332964L13.0332964 0M13.0332964 13.0332964L0 0"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-width="2"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                    <div
+                      class="ds-c-dialog__body"
+                    >
+                      <div
+                        id="dialog--3__content"
+                      >
+                        <div
+                          class="fullscreen-content"
+                        >
+                          <div
+                            class="toggle-block-container toggle-block"
+                          >
+                            <h2
+                              class="toggle-block-title"
+                            >
+                              <button
+                                aria-expanded="true"
+                                type="button"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  class="svg-inline--fa fa-chevron-down fa-1x "
+                                  data-icon="chevron-down"
+                                  data-prefix="fas"
+                                  focusable="false"
+                                  role="presentation"
+                                  viewBox="0 0 512 512"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+                                    fill="currentColor"
+                                  />
+                                </svg>
+                                Medicare Plan Info Data
+                              </button>
+                            </h2>
+                            <div
+                              class="toggle-block-panel toggle-block-inner open"
+                            >
+                              <header
+                                class="dataset-header"
+                              >
+                                <div
+                                  class="dataset-description"
+                                >
+                                  A dataset showing all Medicare plan information from CMS.
+                                </div>
+                                <div
+                                  class="dataset-date"
+                                >
+                                  <div
+                                    class="dataset-date-item bold-label"
+                                  >
+                                    <span>
+                                      Last Modified
+                                    </span>
+                                    : November 29, 2021
+                                  </div>
+                                  <span
+                                    class="bullet-point"
+                                  >
+                                    •
+                                  </span>
+                                  <div
+                                    class="dataset-date-item"
+                                  >
+                                    <span>
+                                      Released
+                                    </span>
+                                    : November 29, 2021
+                                  </div>
+                                </div>
+                              </header>
+                            </div>
+                          </div>
+                          <div>
+                            <div
+                              class="resource-table-header fullscreen-resource-table-header"
+                            >
+                              <div
+                                class="resource-table-header-container fullscreen-resource-table-header-container"
+                              >
+                                <div
+                                  class="data-table-results"
+                                >
+                                  <p>
+                                    Viewing 
+                                    <span
+                                      class="low-result"
+                                    >
+                                      1
+                                    </span>
+                                     - 
+                                    <span
+                                      class="high-result"
+                                    >
+                                      16
+                                    </span>
+                                     of 
+                                    <span
+                                      class="total"
+                                    >
+                                      16
+                                    </span>
+                                     rows
+                                  </p>
+                                </div>
+                                <div
+                                  class="table-controls fullscreen-table-controls"
+                                >
+                                  <div
+                                    class="table-control-item filter-dataset-container fullscreen-table-control-item"
+                                  >
+                                    <span
+                                      class="tooltip-trigger"
+                                    >
+                                      <button
+                                        aria-label="Filter dataset - Opens in a dialog"
+                                        class="dataset-button"
+                                      >
+                                        <svg
+                                          aria-label="filter"
+                                          class="fa fa-filter"
+                                          focusable="false"
+                                          height="16"
+                                          role="img"
+                                          viewBox="0 0 512 512"
+                                          width="16"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                          <path
+                                            d="M463.952 0H48.057C5.419 0-16.094 51.731 14.116 81.941L176 243.882V416c0 15.108 7.113 29.335 19.2 40l64 47.066c31.273 21.855 76.8 1.538 76.8-38.4V243.882L497.893 81.941C528.042 51.792 506.675 0 463.952 0zM288 224v240l-64-48V224L48 48h416L288 224z"
+                                            fill="#0c2499"
+                                          />
+                                        </svg>
+                                        <span
+                                          class="dataset-button-text"
+                                        >
+                                          Filter dataset
+                                        </span>
+                                      </button>
+                                    </span>
+                                  </div>
+                                  <div
+                                    class="table-control-item manage-columns-button-container"
+                                  >
+                                    <span
+                                      class="tooltip-trigger"
+                                    >
+                                      <button
+                                        aria-label="Manage columns - Opens in a dialog"
+                                        class="dataset-button"
+                                      >
+                                        <svg
+                                          aria-label="columns"
+                                          class="fa fa-columns"
+                                          focusable="false"
+                                          height="16"
+                                          role="img"
+                                          viewBox="0 0 512 512"
+                                          width="16"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                          <path
+                                            d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM232 432H54a6 6 0 0 1-6-6V112h184v320zm226 0H280V112h184v314a6 6 0 0 1-6 6z"
+                                            fill="#0c2499"
+                                          />
+                                        </svg>
+                                        <span
+                                          class="dataset-button-text"
+                                        >
+                                          Manage columns
+                                        </span>
+                                      </button>
+                                    </span>
+                                    <div
+                                      class="ds-c-dialog-wrap"
+                                    >
+                                      <dialog
+                                        aria-labelledby="dialog--4__heading"
+                                        class="ds-c-dialog manage-col-dialog manage-col-md"
+                                        id="dialog--4"
+                                        role="dialog"
+                                        tabindex="-1"
+                                      >
+                                        <div
+                                          class="ds-c-dialog__window"
+                                        >
+                                          <div
+                                            class="ds-c-dialog__header"
+                                          >
+                                            <h2
+                                              class="ds-c-dialog__heading"
+                                              id="dialog--4__heading"
+                                            >
+                                              Manage columns
+                                            </h2>
+                                            <button
+                                              aria-label="Close manage columns dialog"
+                                              class="ds-c-close-button ds-c-dialog__close"
+                                              id="dialog--4__close"
+                                              type="button"
+                                            >
+                                              <svg
+                                                aria-hidden="true"
+                                                class="ds-c-icon ds-c-icon--close ds-c-icon--close-thin "
+                                                id="dialog--4__close__icon"
+                                                viewBox="-2 -2 18 18"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                              >
+                                                <path
+                                                  d="M0 13.0332964L13.0332964 0M13.0332964 13.0332964L0 0"
+                                                  fill="none"
+                                                  stroke="currentColor"
+                                                  stroke-linecap="round"
+                                                  stroke-width="2"
+                                                />
+                                              </svg>
+                                            </button>
+                                          </div>
+                                          <div
+                                            class="ds-c-dialog__body"
+                                          >
+                                            <div
+                                              id="dialog--4__content"
+                                            >
+                                              <div
+                                                class="column-labels"
+                                              >
+                                                <span>
+                                                  Display column
+                                                </span>
+                                                <span>
+                                                  Reorder
+                                                </span>
+                                              </div>
+                                              <p
+                                                id="reorder-help"
+                                              >
+                                                Activate the reorder button and use the arrow keys to reorder the list or use your mouse to drag/reorder. Press escape to cancel the reordering.
+                                              </p>
+                                              <ul
+                                                class="advanced-options"
+                                              >
+                                                <li
+                                                  draggable="true"
+                                                  style="opacity: 1;"
+                                                >
+                                                  <div>
+                                                    <div
+                                                      class="ds-c-choice-wrapper"
+                                                    >
+                                                      <input
+                                                        checked=""
+                                                        class="ds-c-choice"
+                                                        id="col1"
+                                                        name="col1"
+                                                        style="cursor: pointer;"
+                                                        title="Toggle Column Visible"
+                                                        type="checkbox"
+                                                        value=""
+                                                      />
+                                                      <label
+                                                        class="ds-c-label"
+                                                        for="col1"
+                                                        id="col1__label"
+                                                      >
+                                                        col1
+                                                      </label>
+                                                    </div>
+                                                  </div>
+                                                  <button
+                                                    aria-describedby="reorder-help"
+                                                    aria-label="Reorder col1 column"
+                                                    class="manage-columns-reorder"
+                                                    type="button"
+                                                  >
+                                                    <svg
+                                                      aria-label="sort"
+                                                      class="fa fa-sort"
+                                                      focusable="false"
+                                                      height="16"
+                                                      role="img"
+                                                      viewBox="0 0 320 512"
+                                                      width="16"
+                                                      xmlns="http://www.w3.org/2000/svg"
+                                                    >
+                                                      <path
+                                                        d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                                                        fill="#323A45"
+                                                      />
+                                                    </svg>
+                                                  </button>
+                                                </li>
+                                                <li
+                                                  draggable="true"
+                                                  style="opacity: 1;"
+                                                >
+                                                  <div>
+                                                    <div
+                                                      class="ds-c-choice-wrapper"
+                                                    >
+                                                      <input
+                                                        checked=""
+                                                        class="ds-c-choice"
+                                                        id="col2"
+                                                        name="col2"
+                                                        style="cursor: pointer;"
+                                                        title="Toggle Column Visible"
+                                                        type="checkbox"
+                                                        value=""
+                                                      />
+                                                      <label
+                                                        class="ds-c-label"
+                                                        for="col2"
+                                                        id="col2__label"
+                                                      >
+                                                        col2
+                                                      </label>
+                                                    </div>
+                                                  </div>
+                                                  <button
+                                                    aria-describedby="reorder-help"
+                                                    aria-label="Reorder col2 column"
+                                                    class="manage-columns-reorder"
+                                                    type="button"
+                                                  >
+                                                    <svg
+                                                      aria-label="sort"
+                                                      class="fa fa-sort"
+                                                      focusable="false"
+                                                      height="16"
+                                                      role="img"
+                                                      viewBox="0 0 320 512"
+                                                      width="16"
+                                                      xmlns="http://www.w3.org/2000/svg"
+                                                    >
+                                                      <path
+                                                        d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                                                        fill="#323A45"
+                                                      />
+                                                    </svg>
+                                                  </button>
+                                                </li>
+                                                <li
+                                                  draggable="true"
+                                                  style="opacity: 1;"
+                                                >
+                                                  <div>
+                                                    <div
+                                                      class="ds-c-choice-wrapper"
+                                                    >
+                                                      <input
+                                                        checked=""
+                                                        class="ds-c-choice"
+                                                        id="col3"
+                                                        name="col3"
+                                                        style="cursor: pointer;"
+                                                        title="Toggle Column Visible"
+                                                        type="checkbox"
+                                                        value=""
+                                                      />
+                                                      <label
+                                                        class="ds-c-label"
+                                                        for="col3"
+                                                        id="col3__label"
+                                                      >
+                                                        col3
+                                                      </label>
+                                                    </div>
+                                                  </div>
+                                                  <button
+                                                    aria-describedby="reorder-help"
+                                                    aria-label="Reorder col3 column"
+                                                    class="manage-columns-reorder"
+                                                    type="button"
+                                                  >
+                                                    <svg
+                                                      aria-label="sort"
+                                                      class="fa fa-sort"
+                                                      focusable="false"
+                                                      height="16"
+                                                      role="img"
+                                                      viewBox="0 0 320 512"
+                                                      width="16"
+                                                      xmlns="http://www.w3.org/2000/svg"
+                                                    >
+                                                      <path
+                                                        d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                                                        fill="#323A45"
+                                                      />
+                                                    </svg>
+                                                  </button>
+                                                </li>
+                                                <li
+                                                  draggable="true"
+                                                  style="opacity: 1;"
+                                                >
+                                                  <div>
+                                                    <div
+                                                      class="ds-c-choice-wrapper"
+                                                    >
+                                                      <input
+                                                        checked=""
+                                                        class="ds-c-choice"
+                                                        id="col4"
+                                                        name="col4"
+                                                        style="cursor: pointer;"
+                                                        title="Toggle Column Visible"
+                                                        type="checkbox"
+                                                        value=""
+                                                      />
+                                                      <label
+                                                        class="ds-c-label"
+                                                        for="col4"
+                                                        id="col4__label"
+                                                      >
+                                                        col4
+                                                      </label>
+                                                    </div>
+                                                  </div>
+                                                  <button
+                                                    aria-describedby="reorder-help"
+                                                    aria-label="Reorder col4 column"
+                                                    class="manage-columns-reorder"
+                                                    type="button"
+                                                  >
+                                                    <svg
+                                                      aria-label="sort"
+                                                      class="fa fa-sort"
+                                                      focusable="false"
+                                                      height="16"
+                                                      role="img"
+                                                      viewBox="0 0 320 512"
+                                                      width="16"
+                                                      xmlns="http://www.w3.org/2000/svg"
+                                                    >
+                                                      <path
+                                                        d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                                                        fill="#323A45"
+                                                      />
+                                                    </svg>
+                                                  </button>
+                                                </li>
+                                                <li
+                                                  draggable="true"
+                                                  style="opacity: 1;"
+                                                >
+                                                  <div>
+                                                    <div
+                                                      class="ds-c-choice-wrapper"
+                                                    >
+                                                      <input
+                                                        checked=""
+                                                        class="ds-c-choice"
+                                                        id="col5"
+                                                        name="Column 5"
+                                                        style="cursor: pointer;"
+                                                        title="Toggle Column Visible"
+                                                        type="checkbox"
+                                                        value=""
+                                                      />
+                                                      <label
+                                                        class="ds-c-label"
+                                                        for="col5"
+                                                        id="col5__label"
+                                                      >
+                                                        Column 5
+                                                      </label>
+                                                    </div>
+                                                  </div>
+                                                  <button
+                                                    aria-describedby="reorder-help"
+                                                    aria-label="Reorder Column 5 column"
+                                                    class="manage-columns-reorder"
+                                                    type="button"
+                                                  >
+                                                    <svg
+                                                      aria-label="sort"
+                                                      class="fa fa-sort"
+                                                      focusable="false"
+                                                      height="16"
+                                                      role="img"
+                                                      viewBox="0 0 320 512"
+                                                      width="16"
+                                                      xmlns="http://www.w3.org/2000/svg"
+                                                    >
+                                                      <path
+                                                        d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                                                        fill="#323A45"
+                                                      />
+                                                    </svg>
+                                                  </button>
+                                                </li>
+                                                <li
+                                                  draggable="true"
+                                                  style="opacity: 1;"
+                                                >
+                                                  <div>
+                                                    <div
+                                                      class="ds-c-choice-wrapper"
+                                                    >
+                                                      <input
+                                                        checked=""
+                                                        class="ds-c-choice"
+                                                        id="col6"
+                                                        name="col6"
+                                                        style="cursor: pointer;"
+                                                        title="Toggle Column Visible"
+                                                        type="checkbox"
+                                                        value=""
+                                                      />
+                                                      <label
+                                                        class="ds-c-label"
+                                                        for="col6"
+                                                        id="col6__label"
+                                                      >
+                                                        col6
+                                                      </label>
+                                                    </div>
+                                                  </div>
+                                                  <button
+                                                    aria-describedby="reorder-help"
+                                                    aria-label="Reorder col6 column"
+                                                    class="manage-columns-reorder"
+                                                    type="button"
+                                                  >
+                                                    <svg
+                                                      aria-label="sort"
+                                                      class="fa fa-sort"
+                                                      focusable="false"
+                                                      height="16"
+                                                      role="img"
+                                                      viewBox="0 0 320 512"
+                                                      width="16"
+                                                      xmlns="http://www.w3.org/2000/svg"
+                                                    >
+                                                      <path
+                                                        d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                                                        fill="#323A45"
+                                                      />
+                                                    </svg>
+                                                  </button>
+                                                </li>
+                                              </ul>
+                                              <div
+                                                aria-atomic="true"
+                                                aria-live="assertive"
+                                                class="sr-only aria-live-feedback"
+                                              />
+                                            </div>
+                                            <div
+                                              class="ds-c-dialog__actions"
+                                            >
+                                              <div
+                                                class="manage-col-dialog-actions"
+                                              >
+                                                <div
+                                                  class="select-all-choice"
+                                                >
+                                                  <div
+                                                    class="ds-c-choice-wrapper"
+                                                  >
+                                                    <input
+                                                      checked=""
+                                                      class="ds-c-choice"
+                                                      id="choice--5"
+                                                      name=""
+                                                      type="checkbox"
+                                                      value=""
+                                                    />
+                                                    <label
+                                                      class="ds-c-label"
+                                                      for="choice--5"
+                                                      id="choice--5__label"
+                                                    >
+                                                      Select all
+                                                    </label>
+                                                  </div>
+                                                </div>
+                                                <button
+                                                  class="btn blueberry"
+                                                >
+                                                  Update columns
+                                                </button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </dialog>
+                                    </div>
+                                  </div>
+                                  <div
+                                    class="table-control-item display-settings"
+                                  >
+                                    <div
+                                      class="display-settings-2"
+                                    >
+                                      <span
+                                        class="tooltip-trigger"
+                                      >
+                                        <button
+                                          aria-label="Display settings"
+                                          class="dataset-button"
+                                        >
+                                          <svg
+                                            aria-label="sliders h"
+                                            class="fa fa-sliders-h"
+                                            focusable="false"
+                                            height="16"
+                                            role="img"
+                                            viewBox="0 0 576 512"
+                                            width="16"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                          >
+                                            <path
+                                              d="M576 252v8c0 6.6-5.4 12-12 12h-84v24c0 13.3-10.7 24-24 24h-16c-13.3 0-24-10.7-24-24v-24H12c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h404v-24c0-13.3 10.7-24 24-24h16c13.3 0 24 10.7 24 24v24h84c6.6 0 12 5.4 12 12zM564 80H128V56c0-13.3-10.7-24-24-24H88c-13.3 0-24 10.7-24 24v24H12C5.4 80 0 85.4 0 92v8c0 6.6 5.4 12 12 12h52v24c0 13.3 10.7 24 24 24h16c13.3 0 24-10.7 24-24v-24h436c6.6 0 12-5.4 12-12v-8c0-6.6-5.4-12-12-12zm0 320H288v-24c0-13.3-10.7-24-24-24h-16c-13.3 0-24 10.7-24 24v24H12c-6.6 0-12 5.4-12 12v8c0 6.6 5.4 12 12 12h212v24c0 13.3 10.7 24 24 24h16c13.3 0 24-10.7 24-24v-24h276c6.6 0 12-5.4 12-12v-8c0-6.6-5.4-12-12-12z"
+                                              fill="#0c2499"
+                                            />
+                                          </svg>
+                                          <span
+                                            class="dataset-button-text"
+                                          >
+                                            Display settings
+                                          </span>
+                                          <svg
+                                            aria-label="caret down"
+                                            class="fa fa-caret-down"
+                                            focusable="false"
+                                            height="16"
+                                            role="img"
+                                            viewBox="0 0 320 512"
+                                            width="16"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                          >
+                                            <path
+                                              d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                                              fill="#0c2499"
+                                            />
+                                          </svg>
+                                        </button>
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              class="chip-list"
+                            />
+                            <p
+                              class="resize-help"
+                            >
+                              Activate the column resize button and use the right and left arrow keys to resize a column or use your mouse to drag/resize. Press escape to cancel the resizing.
+                            </p>
+                          </div>
+                          <div
+                            class="DataTable dc-datatable -striped -highlight density-2 -striped -highlight"
+                          >
+                            <div
+                              class="dc-table-container"
+                            >
+                              <div>
+                                <div
+                                  class="dc-table"
+                                  role="grid"
+                                  style="min-width: 180px;"
+                                >
+                                  <div
+                                    class="dc-thead -header"
+                                    role="rowgroup"
+                                  >
+                                    <div
+                                      class="tr"
+                                      role="row"
+                                      style="display: flex; flex: 1 0 auto; min-width: 180px;"
+                                    >
+                                      <div
+                                        class="th"
+                                        colspan="1"
+                                        role="columnheader"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                                      >
+                                        <span
+                                          class="tooltip-trigger column-title"
+                                        >
+                                          col1
+                                        </span>
+                                        <span
+                                          class="tooltip-trigger sort-icon"
+                                        >
+                                          <button
+                                            aria-label="Sort col1 column in ascending order"
+                                            style="cursor: pointer;"
+                                          >
+                                            <svg
+                                              aria-hidden="true"
+                                              aria-label="sort"
+                                              class="fa fa-sort"
+                                              focusable="false"
+                                              height="16"
+                                              role="img"
+                                              viewBox="0 0 320 512"
+                                              width="16"
+                                              xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                              <path
+                                                d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                                                fill="#323A45"
+                                              />
+                                            </svg>
+                                          </button>
+                                        </span>
+                                        <span
+                                          class="tooltip-trigger resizer-container"
+                                        >
+                                          <button
+                                            aria-label="Resize col1 column"
+                                            class="resizer "
+                                            draggable="false"
+                                            role=""
+                                            style="cursor: col-resize;"
+                                          />
+                                        </span>
+                                      </div>
+                                      <div
+                                        class="th"
+                                        colspan="1"
+                                        role="columnheader"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                                      >
+                                        <span
+                                          class="tooltip-trigger column-title"
+                                        >
+                                          col2
+                                        </span>
+                                        <span
+                                          class="tooltip-trigger sort-icon"
+                                        >
+                                          <button
+                                            aria-label="Sort col2 column in ascending order"
+                                            style="cursor: pointer;"
+                                          >
+                                            <svg
+                                              aria-hidden="true"
+                                              aria-label="sort"
+                                              class="fa fa-sort"
+                                              focusable="false"
+                                              height="16"
+                                              role="img"
+                                              viewBox="0 0 320 512"
+                                              width="16"
+                                              xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                              <path
+                                                d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                                                fill="#323A45"
+                                              />
+                                            </svg>
+                                          </button>
+                                        </span>
+                                        <span
+                                          class="tooltip-trigger resizer-container"
+                                        >
+                                          <button
+                                            aria-label="Resize col2 column"
+                                            class="resizer "
+                                            draggable="false"
+                                            role=""
+                                            style="cursor: col-resize;"
+                                          />
+                                        </span>
+                                      </div>
+                                      <div
+                                        class="th"
+                                        colspan="1"
+                                        role="columnheader"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                                      >
+                                        <span
+                                          class="tooltip-trigger column-title"
+                                        >
+                                          col3
+                                        </span>
+                                        <span
+                                          class="tooltip-trigger sort-icon"
+                                        >
+                                          <button
+                                            aria-label="Sort col3 column in ascending order"
+                                            style="cursor: pointer;"
+                                          >
+                                            <svg
+                                              aria-hidden="true"
+                                              aria-label="sort"
+                                              class="fa fa-sort"
+                                              focusable="false"
+                                              height="16"
+                                              role="img"
+                                              viewBox="0 0 320 512"
+                                              width="16"
+                                              xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                              <path
+                                                d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                                                fill="#323A45"
+                                              />
+                                            </svg>
+                                          </button>
+                                        </span>
+                                        <span
+                                          class="tooltip-trigger resizer-container"
+                                        >
+                                          <button
+                                            aria-label="Resize col3 column"
+                                            class="resizer "
+                                            draggable="false"
+                                            role=""
+                                            style="cursor: col-resize;"
+                                          />
+                                        </span>
+                                      </div>
+                                      <div
+                                        class="th"
+                                        colspan="1"
+                                        role="columnheader"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                                      >
+                                        <span
+                                          class="tooltip-trigger column-title"
+                                        >
+                                          col4
+                                        </span>
+                                        <span
+                                          class="tooltip-trigger sort-icon"
+                                        >
+                                          <button
+                                            aria-label="Sort col4 column in ascending order"
+                                            style="cursor: pointer;"
+                                          >
+                                            <svg
+                                              aria-hidden="true"
+                                              aria-label="sort"
+                                              class="fa fa-sort"
+                                              focusable="false"
+                                              height="16"
+                                              role="img"
+                                              viewBox="0 0 320 512"
+                                              width="16"
+                                              xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                              <path
+                                                d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                                                fill="#323A45"
+                                              />
+                                            </svg>
+                                          </button>
+                                        </span>
+                                        <span
+                                          class="tooltip-trigger resizer-container"
+                                        >
+                                          <button
+                                            aria-label="Resize col4 column"
+                                            class="resizer "
+                                            draggable="false"
+                                            role=""
+                                            style="cursor: col-resize;"
+                                          />
+                                        </span>
+                                      </div>
+                                      <div
+                                        class="th"
+                                        colspan="1"
+                                        role="columnheader"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                                      >
+                                        <span
+                                          class="tooltip-trigger column-title"
+                                        >
+                                          Column 5
+                                        </span>
+                                        <span
+                                          class="tooltip-trigger sort-icon"
+                                        >
+                                          <button
+                                            aria-label="Sort Column 5 column in ascending order"
+                                            style="cursor: pointer;"
+                                          >
+                                            <svg
+                                              aria-hidden="true"
+                                              aria-label="sort"
+                                              class="fa fa-sort"
+                                              focusable="false"
+                                              height="16"
+                                              role="img"
+                                              viewBox="0 0 320 512"
+                                              width="16"
+                                              xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                              <path
+                                                d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                                                fill="#323A45"
+                                              />
+                                            </svg>
+                                          </button>
+                                        </span>
+                                        <span
+                                          class="tooltip-trigger resizer-container"
+                                        >
+                                          <button
+                                            aria-label="Resize Column 5 column"
+                                            class="resizer "
+                                            draggable="false"
+                                            role=""
+                                            style="cursor: col-resize;"
+                                          />
+                                        </span>
+                                      </div>
+                                      <div
+                                        class="th"
+                                        colspan="1"
+                                        role="columnheader"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                                      >
+                                        <span
+                                          class="tooltip-trigger column-title"
+                                        >
+                                          col6
+                                        </span>
+                                        <span
+                                          class="tooltip-trigger sort-icon"
+                                        >
+                                          <button
+                                            aria-label="Sort col6 column in ascending order"
+                                            style="cursor: pointer;"
+                                          >
+                                            <svg
+                                              aria-hidden="true"
+                                              aria-label="sort"
+                                              class="fa fa-sort"
+                                              focusable="false"
+                                              height="16"
+                                              role="img"
+                                              viewBox="0 0 320 512"
+                                              width="16"
+                                              xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                              <path
+                                                d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                                                fill="#323A45"
+                                              />
+                                            </svg>
+                                          </button>
+                                        </span>
+                                        <span
+                                          class="tooltip-trigger resizer-container"
+                                        >
+                                          <button
+                                            aria-label="Resize col6 column"
+                                            class="resizer "
+                                            draggable="false"
+                                            role=""
+                                            style="cursor: col-resize;"
+                                          />
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div
+                                    class="dc-thead -filters"
+                                    role="rowgroup"
+                                  >
+                                    <div
+                                      class="tr"
+                                      role="row"
+                                      style="display: flex; flex: 1 0 auto; min-width: 180px;"
+                                    >
+                                      <div
+                                        class="th null"
+                                        colspan="1"
+                                        role="columnheader"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                                      >
+                                        <div />
+                                      </div>
+                                      <div
+                                        class="th null"
+                                        colspan="1"
+                                        role="columnheader"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                                      >
+                                        <div />
+                                      </div>
+                                      <div
+                                        class="th null"
+                                        colspan="1"
+                                        role="columnheader"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                                      >
+                                        <div />
+                                      </div>
+                                      <div
+                                        class="th null"
+                                        colspan="1"
+                                        role="columnheader"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                                      >
+                                        <div />
+                                      </div>
+                                      <div
+                                        class="th null"
+                                        colspan="1"
+                                        role="columnheader"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                                      >
+                                        <div />
+                                      </div>
+                                      <div
+                                        class="th null"
+                                        colspan="1"
+                                        role="columnheader"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                                      >
+                                        <div />
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div
+                                    class="dc-tbody"
+                                    role="rowgroup"
+                                  >
+                                    <div
+                                      class="tr dc-tr"
+                                      role="row"
+                                      style="display: flex; flex: 1 0 auto; min-width: 180px;"
+                                    >
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        00022509
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        H5050
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        022
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        0
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        1745108
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        M0023901
+                                      </div>
+                                    </div>
+                                    <div
+                                      class="tr dc-tr"
+                                      role="row"
+                                      style="display: flex; flex: 1 0 auto; min-width: 180px;"
+                                    >
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        00022225
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        S5660
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        804
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        0
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        545293
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        M0004994
+                                      </div>
+                                    </div>
+                                    <div
+                                      class="tr dc-tr"
+                                      role="row"
+                                      style="display: flex; flex: 1 0 auto; min-width: 180px;"
+                                    >
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        00022225
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        S5660
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        804
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        0
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        545293
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        M0012387
+                                      </div>
+                                    </div>
+                                    <div
+                                      class="tr dc-tr"
+                                      role="row"
+                                      style="display: flex; flex: 1 0 auto; min-width: 180px;"
+                                    >
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        00022225
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        S5660
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        806
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        0
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        1251596
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        M0004994
+                                      </div>
+                                    </div>
+                                    <div
+                                      class="tr dc-tr"
+                                      role="row"
+                                      style="display: flex; flex: 1 0 auto; min-width: 180px;"
+                                    >
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        00022509
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        H5050
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        017
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        0
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        1482814
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        M0004771
+                                      </div>
+                                    </div>
+                                    <div
+                                      class="tr dc-tr"
+                                      role="row"
+                                      style="display: flex; flex: 1 0 auto; min-width: 180px;"
+                                    >
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        00022509
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        H5050
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        802
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        0
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        795085
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        M0374010
+                                      </div>
+                                    </div>
+                                    <div
+                                      class="tr dc-tr"
+                                      role="row"
+                                      style="display: flex; flex: 1 0 auto; min-width: 180px;"
+                                    >
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        00022509
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        H5050
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        802
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        0
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        848164
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        M0023901
+                                      </div>
+                                    </div>
+                                    <div
+                                      class="tr dc-tr"
+                                      role="row"
+                                      style="display: flex; flex: 1 0 auto; min-width: 180px;"
+                                    >
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        00022225
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        S5660
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        801
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        0
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        2200177
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        M0006031
+                                      </div>
+                                    </div>
+                                    <div
+                                      class="tr dc-tr"
+                                      role="row"
+                                      style="display: flex; flex: 1 0 auto; min-width: 180px;"
+                                    >
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        00022509
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        H5050
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        021
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        0
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        1653166
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        M0023901
+                                      </div>
+                                    </div>
+                                    <div
+                                      class="tr dc-tr"
+                                      role="row"
+                                      style="display: flex; flex: 1 0 auto; min-width: 180px;"
+                                    >
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        00022225
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        S5660
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        803
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        0
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        1720881
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        M0004994
+                                      </div>
+                                    </div>
+                                    <div
+                                      class="tr dc-tr"
+                                      role="row"
+                                      style="display: flex; flex: 1 0 auto; min-width: 180px;"
+                                    >
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        00022509
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        H5050
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        009
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        0
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        1745108
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        M0023901
+                                      </div>
+                                    </div>
+                                    <div
+                                      class="tr dc-tr"
+                                      role="row"
+                                      style="display: flex; flex: 1 0 auto; min-width: 180px;"
+                                    >
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        00022509
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        H5050
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        022
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        0
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        795085
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        M0005335
+                                      </div>
+                                    </div>
+                                    <div
+                                      class="tr dc-tr"
+                                      role="row"
+                                      style="display: flex; flex: 1 0 auto; min-width: 180px;"
+                                    >
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        00022225
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        S5660
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        804
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        0
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        545293
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        M0019437
+                                      </div>
+                                    </div>
+                                    <div
+                                      class="tr dc-tr"
+                                      role="row"
+                                      style="display: flex; flex: 1 0 auto; min-width: 180px;"
+                                    >
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        00022509
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        H5050
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        004
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        0
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        795085
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        M0001750
+                                      </div>
+                                    </div>
+                                    <div
+                                      class="tr dc-tr"
+                                      role="row"
+                                      style="display: flex; flex: 1 0 auto; min-width: 180px;"
+                                    >
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        00022509
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        H5050
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        801
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        0
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        1653166
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        M0004771
+                                      </div>
+                                    </div>
+                                    <div
+                                      class="tr dc-tr"
+                                      role="row"
+                                      style="display: flex; flex: 1 0 auto; min-width: 180px;"
+                                    >
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        00022509
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        H5050
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        019
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        0
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        795085
+                                      </div>
+                                      <div
+                                        class="td dc-td"
+                                        role="cell"
+                                        style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                                      >
+                                        M0374010
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div
+                                  aria-atomic="true"
+                                  aria-live="assertive"
+                                  class="sr-only aria-live-feedback"
+                                />
+                              </div>
+                            </div>
+                            <div
+                              class="pagination-bottom"
+                            >
+                              <div
+                                class="-pagination"
+                              >
+                                <div
+                                  class="-previous"
+                                >
+                                  <button
+                                    class="-btn"
+                                    disabled=""
+                                    type="button"
+                                  >
+                                    <svg
+                                      aria-hidden="true"
+                                      aria-label="long arrow left"
+                                      class="fa fa-long-arrow-left"
+                                      focusable="false"
+                                      height="16"
+                                      role="img"
+                                      viewBox="0 0 448 512"
+                                      width="16"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M152.485 396.284l19.626-19.626c4.753-4.753 4.675-12.484-.173-17.14L91.22 282H436c6.627 0 12-5.373 12-12v-28c0-6.627-5.373-12-12-12H91.22l80.717-77.518c4.849-4.656 4.927-12.387.173-17.14l-19.626-19.626c-4.686-4.686-12.284-4.686-16.971 0L3.716 247.515c-4.686 4.686-4.686 12.284 0 16.971l131.799 131.799c4.686 4.685 12.284 4.685 16.97-.001z"
+                                        fill="#323A45"
+                                      />
+                                    </svg>
+                                    Previous 
+                                    <span
+                                      class="sr-only"
+                                    >
+                                      data page
+                                    </span>
+                                  </button>
+                                </div>
+                                <div
+                                  aria-atomic="true"
+                                  aria-live="assertive"
+                                  class="-center"
+                                >
+                                  <span
+                                    class="-pageInfo"
+                                  >
+                                    <span>
+                                      Page 
+                                    </span>
+                                    <strong>
+                                      1
+                                    </strong>
+                                    <span>
+                                       of 
+                                    </span>
+                                    <strong>
+                                      1
+                                    </strong>
+                                    <span
+                                      class="sr-only"
+                                    >
+                                       for Medicare Plan Info Data
+                                    </span>
+                                  </span>
+                                </div>
+                                <div
+                                  class="-next"
+                                >
+                                  <button
+                                    class="-btn"
+                                    disabled=""
+                                    type="button"
+                                  >
+                                    Next 
+                                    <span
+                                      class="sr-only"
+                                    >
+                                      data page
+                                    </span>
+                                    <svg
+                                      aria-hidden="true"
+                                      aria-label="long arrow right"
+                                      class="fa fa-long-arrow-right"
+                                      focusable="false"
+                                      height="16"
+                                      role="img"
+                                      viewBox="0 0 448 512"
+                                      width="16"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M295.515 115.716l-19.626 19.626c-4.753 4.753-4.675 12.484.173 17.14L356.78 230H12c-6.627 0-12 5.373-12 12v28c0 6.627 5.373 12 12 12h344.78l-80.717 77.518c-4.849 4.656-4.927 12.387-.173 17.14l19.626 19.626c4.686 4.686 12.284 4.686 16.971 0l131.799-131.799c4.686-4.686 4.686-12.284 0-16.971L312.485 115.716c-4.686-4.686-12.284-4.686-16.97 0z"
+                                        fill="#323A45"
+                                      />
+                                    </svg>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </dialog>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="chip-list"
+      />
+      <p
+        class="resize-help"
+      >
+        Activate the column resize button and use the right and left arrow keys to resize a column or use your mouse to drag/resize. Press escape to cancel the resizing.
+      </p>
+    </div>
+    <div
+      class="DataTable dc-datatable -striped -highlight density-2 -striped -highlight"
+    >
+      <div
+        class="dc-table-container"
+      >
+        <div>
+          <div
+            class="dc-table"
+            role="grid"
+            style="min-width: 180px;"
+          >
+            <div
+              class="dc-thead -header"
+              role="rowgroup"
+            >
+              <div
+                class="tr"
+                role="row"
+                style="display: flex; flex: 1 0 auto; min-width: 180px;"
+              >
+                <div
+                  class="th"
+                  colspan="1"
+                  role="columnheader"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                >
+                  <span
+                    class="tooltip-trigger column-title"
+                  >
+                    col1
+                  </span>
+                  <span
+                    class="tooltip-trigger sort-icon"
+                  >
+                    <button
+                      aria-label="Sort col1 column in ascending order"
+                      style="cursor: pointer;"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        aria-label="sort"
+                        class="fa fa-sort"
+                        focusable="false"
+                        height="16"
+                        role="img"
+                        viewBox="0 0 320 512"
+                        width="16"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                          fill="#323A45"
+                        />
+                      </svg>
+                    </button>
+                  </span>
+                  <span
+                    class="tooltip-trigger resizer-container"
+                  >
+                    <button
+                      aria-label="Resize col1 column"
+                      class="resizer "
+                      draggable="false"
+                      role=""
+                      style="cursor: col-resize;"
+                    />
+                  </span>
+                </div>
+                <div
+                  class="th"
+                  colspan="1"
+                  role="columnheader"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                >
+                  <span
+                    class="tooltip-trigger column-title"
+                  >
+                    col2
+                  </span>
+                  <span
+                    class="tooltip-trigger sort-icon"
+                  >
+                    <button
+                      aria-label="Sort col2 column in ascending order"
+                      style="cursor: pointer;"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        aria-label="sort"
+                        class="fa fa-sort"
+                        focusable="false"
+                        height="16"
+                        role="img"
+                        viewBox="0 0 320 512"
+                        width="16"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                          fill="#323A45"
+                        />
+                      </svg>
+                    </button>
+                  </span>
+                  <span
+                    class="tooltip-trigger resizer-container"
+                  >
+                    <button
+                      aria-label="Resize col2 column"
+                      class="resizer "
+                      draggable="false"
+                      role=""
+                      style="cursor: col-resize;"
+                    />
+                  </span>
+                </div>
+                <div
+                  class="th"
+                  colspan="1"
+                  role="columnheader"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                >
+                  <span
+                    class="tooltip-trigger column-title"
+                  >
+                    col3
+                  </span>
+                  <span
+                    class="tooltip-trigger sort-icon"
+                  >
+                    <button
+                      aria-label="Sort col3 column in ascending order"
+                      style="cursor: pointer;"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        aria-label="sort"
+                        class="fa fa-sort"
+                        focusable="false"
+                        height="16"
+                        role="img"
+                        viewBox="0 0 320 512"
+                        width="16"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                          fill="#323A45"
+                        />
+                      </svg>
+                    </button>
+                  </span>
+                  <span
+                    class="tooltip-trigger resizer-container"
+                  >
+                    <button
+                      aria-label="Resize col3 column"
+                      class="resizer "
+                      draggable="false"
+                      role=""
+                      style="cursor: col-resize;"
+                    />
+                  </span>
+                </div>
+                <div
+                  class="th"
+                  colspan="1"
+                  role="columnheader"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                >
+                  <span
+                    class="tooltip-trigger column-title"
+                  >
+                    col4
+                  </span>
+                  <span
+                    class="tooltip-trigger sort-icon"
+                  >
+                    <button
+                      aria-label="Sort col4 column in ascending order"
+                      style="cursor: pointer;"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        aria-label="sort"
+                        class="fa fa-sort"
+                        focusable="false"
+                        height="16"
+                        role="img"
+                        viewBox="0 0 320 512"
+                        width="16"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                          fill="#323A45"
+                        />
+                      </svg>
+                    </button>
+                  </span>
+                  <span
+                    class="tooltip-trigger resizer-container"
+                  >
+                    <button
+                      aria-label="Resize col4 column"
+                      class="resizer "
+                      draggable="false"
+                      role=""
+                      style="cursor: col-resize;"
+                    />
+                  </span>
+                </div>
+                <div
+                  class="th"
+                  colspan="1"
+                  role="columnheader"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                >
+                  <span
+                    class="tooltip-trigger column-title"
+                  >
+                    Column 5
+                  </span>
+                  <span
+                    class="tooltip-trigger sort-icon"
+                  >
+                    <button
+                      aria-label="Sort Column 5 column in ascending order"
+                      style="cursor: pointer;"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        aria-label="sort"
+                        class="fa fa-sort"
+                        focusable="false"
+                        height="16"
+                        role="img"
+                        viewBox="0 0 320 512"
+                        width="16"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                          fill="#323A45"
+                        />
+                      </svg>
+                    </button>
+                  </span>
+                  <span
+                    class="tooltip-trigger resizer-container"
+                  >
+                    <button
+                      aria-label="Resize Column 5 column"
+                      class="resizer "
+                      draggable="false"
+                      role=""
+                      style="cursor: col-resize;"
+                    />
+                  </span>
+                </div>
+                <div
+                  class="th"
+                  colspan="1"
+                  role="columnheader"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                >
+                  <span
+                    class="tooltip-trigger column-title"
+                  >
+                    col6
+                  </span>
+                  <span
+                    class="tooltip-trigger sort-icon"
+                  >
+                    <button
+                      aria-label="Sort col6 column in ascending order"
+                      style="cursor: pointer;"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        aria-label="sort"
+                        class="fa fa-sort"
+                        focusable="false"
+                        height="16"
+                        role="img"
+                        viewBox="0 0 320 512"
+                        width="16"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                          fill="#323A45"
+                        />
+                      </svg>
+                    </button>
+                  </span>
+                  <span
+                    class="tooltip-trigger resizer-container"
+                  >
+                    <button
+                      aria-label="Resize col6 column"
+                      class="resizer "
+                      draggable="false"
+                      role=""
+                      style="cursor: col-resize;"
+                    />
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="dc-thead -filters"
+              role="rowgroup"
+            >
+              <div
+                class="tr"
+                role="row"
+                style="display: flex; flex: 1 0 auto; min-width: 180px;"
+              >
+                <div
+                  class="th null"
+                  colspan="1"
+                  role="columnheader"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                >
+                  <div />
+                </div>
+                <div
+                  class="th null"
+                  colspan="1"
+                  role="columnheader"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                >
+                  <div />
+                </div>
+                <div
+                  class="th null"
+                  colspan="1"
+                  role="columnheader"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                >
+                  <div />
+                </div>
+                <div
+                  class="th null"
+                  colspan="1"
+                  role="columnheader"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                >
+                  <div />
+                </div>
+                <div
+                  class="th null"
+                  colspan="1"
+                  role="columnheader"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                >
+                  <div />
+                </div>
+                <div
+                  class="th null"
+                  colspan="1"
+                  role="columnheader"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px; position: relative;"
+                >
+                  <div />
+                </div>
+              </div>
+            </div>
+            <div
+              class="dc-tbody"
+              role="rowgroup"
+            >
+              <div
+                class="tr dc-tr"
+                role="row"
+                style="display: flex; flex: 1 0 auto; min-width: 180px;"
+              >
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  00022509
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  H5050
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  022
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  0
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  1745108
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  M0023901
+                </div>
+              </div>
+              <div
+                class="tr dc-tr"
+                role="row"
+                style="display: flex; flex: 1 0 auto; min-width: 180px;"
+              >
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  00022225
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  S5660
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  804
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  0
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  545293
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  M0004994
+                </div>
+              </div>
+              <div
+                class="tr dc-tr"
+                role="row"
+                style="display: flex; flex: 1 0 auto; min-width: 180px;"
+              >
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  00022225
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  S5660
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  804
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  0
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  545293
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  M0012387
+                </div>
+              </div>
+              <div
+                class="tr dc-tr"
+                role="row"
+                style="display: flex; flex: 1 0 auto; min-width: 180px;"
+              >
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  00022225
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  S5660
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  806
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  0
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  1251596
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  M0004994
+                </div>
+              </div>
+              <div
+                class="tr dc-tr"
+                role="row"
+                style="display: flex; flex: 1 0 auto; min-width: 180px;"
+              >
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  00022509
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  H5050
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  017
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  0
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  1482814
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  M0004771
+                </div>
+              </div>
+              <div
+                class="tr dc-tr"
+                role="row"
+                style="display: flex; flex: 1 0 auto; min-width: 180px;"
+              >
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  00022509
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  H5050
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  802
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  0
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  795085
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  M0374010
+                </div>
+              </div>
+              <div
+                class="tr dc-tr"
+                role="row"
+                style="display: flex; flex: 1 0 auto; min-width: 180px;"
+              >
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  00022509
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  H5050
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  802
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  0
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  848164
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  M0023901
+                </div>
+              </div>
+              <div
+                class="tr dc-tr"
+                role="row"
+                style="display: flex; flex: 1 0 auto; min-width: 180px;"
+              >
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  00022225
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  S5660
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  801
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  0
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  2200177
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  M0006031
+                </div>
+              </div>
+              <div
+                class="tr dc-tr"
+                role="row"
+                style="display: flex; flex: 1 0 auto; min-width: 180px;"
+              >
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  00022509
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  H5050
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  021
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  0
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  1653166
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  M0023901
+                </div>
+              </div>
+              <div
+                class="tr dc-tr"
+                role="row"
+                style="display: flex; flex: 1 0 auto; min-width: 180px;"
+              >
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  00022225
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  S5660
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  803
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  0
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  1720881
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  M0004994
+                </div>
+              </div>
+              <div
+                class="tr dc-tr"
+                role="row"
+                style="display: flex; flex: 1 0 auto; min-width: 180px;"
+              >
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  00022509
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  H5050
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  009
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  0
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  1745108
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  M0023901
+                </div>
+              </div>
+              <div
+                class="tr dc-tr"
+                role="row"
+                style="display: flex; flex: 1 0 auto; min-width: 180px;"
+              >
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  00022509
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  H5050
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  022
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  0
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  795085
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  M0005335
+                </div>
+              </div>
+              <div
+                class="tr dc-tr"
+                role="row"
+                style="display: flex; flex: 1 0 auto; min-width: 180px;"
+              >
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  00022225
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  S5660
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  804
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  0
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  545293
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  M0019437
+                </div>
+              </div>
+              <div
+                class="tr dc-tr"
+                role="row"
+                style="display: flex; flex: 1 0 auto; min-width: 180px;"
+              >
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  00022509
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  H5050
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  004
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  0
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  795085
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  M0001750
+                </div>
+              </div>
+              <div
+                class="tr dc-tr"
+                role="row"
+                style="display: flex; flex: 1 0 auto; min-width: 180px;"
+              >
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  00022509
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  H5050
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  801
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  0
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  1653166
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  M0004771
+                </div>
+              </div>
+              <div
+                class="tr dc-tr"
+                role="row"
+                style="display: flex; flex: 1 0 auto; min-width: 180px;"
+              >
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  00022509
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  H5050
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  019
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  0
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  795085
+                </div>
+                <div
+                  class="td dc-td"
+                  role="cell"
+                  style="box-sizing: border-box; flex: 150 0 auto; min-width: 30px; width: 150px;"
+                >
+                  M0374010
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            aria-atomic="true"
+            aria-live="assertive"
+            class="sr-only aria-live-feedback"
+          />
+        </div>
+      </div>
+      <div
+        class="pagination-bottom"
+      >
+        <div
+          class="-pagination"
+        >
+          <div
+            class="-previous"
+          >
+            <button
+              class="-btn"
+              disabled=""
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                aria-label="long arrow left"
+                class="fa fa-long-arrow-left"
+                focusable="false"
+                height="16"
+                role="img"
+                viewBox="0 0 448 512"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M152.485 396.284l19.626-19.626c4.753-4.753 4.675-12.484-.173-17.14L91.22 282H436c6.627 0 12-5.373 12-12v-28c0-6.627-5.373-12-12-12H91.22l80.717-77.518c4.849-4.656 4.927-12.387.173-17.14l-19.626-19.626c-4.686-4.686-12.284-4.686-16.971 0L3.716 247.515c-4.686 4.686-4.686 12.284 0 16.971l131.799 131.799c4.686 4.685 12.284 4.685 16.97-.001z"
+                  fill="#323A45"
+                />
+              </svg>
+              Previous 
+              <span
+                class="sr-only"
+              >
+                data page
+              </span>
+            </button>
+          </div>
+          <div
+            aria-atomic="true"
+            aria-live="assertive"
+            class="-center"
+          >
+            <span
+              class="-pageInfo"
+            >
+              <span>
+                Page 
+              </span>
+              <strong>
+                1
+              </strong>
+              <span>
+                 of 
+              </span>
+              <strong>
+                1
+              </strong>
+              <span
+                class="sr-only"
+              >
+                 for Medicare Plan Info Data
+              </span>
+            </span>
+          </div>
+          <div
+            class="-next"
+          >
+            <button
+              class="-btn"
+              disabled=""
+              type="button"
+            >
+              Next 
+              <span
+                class="sr-only"
+              >
+                data page
+              </span>
+              <svg
+                aria-hidden="true"
+                aria-label="long arrow right"
+                class="fa fa-long-arrow-right"
+                focusable="false"
+                height="16"
+                role="img"
+                viewBox="0 0 448 512"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M295.515 115.716l-19.626 19.626c-4.753 4.753-4.675 12.484.173 17.14L356.78 230H12c-6.627 0-12 5.373-12 12v28c0 6.627 5.373 12 12 12h344.78l-80.717 77.518c-4.849 4.656-4.927 12.387-.173 17.14l19.626 19.626c4.686 4.686 12.284 4.686 16.971 0l131.799-131.799c4.686-4.686 4.686-12.284 0-16.971L312.485 115.716c-4.686-4.686-12.284-4.686-16.97 0z"
+                  fill="#323A45"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,187 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DatasetDate component. > Matches snapshot. 1`] = `
+<div
+  className="dataset-date"
+>
+  <div
+    className="dataset-date-item"
+  >
+    <span
+      className="dataset-data-item-label"
+    >
+      <span>
+        Last Modified
+      </span>
+      : 
+      February 1, 2023
+    </span>
+    <div
+      className="ds-c-tooltip__container"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <button
+        aria-describedby="tooltip-trigger--1"
+        aria-label="Last Modified"
+        className="ds-c-tooltip__trigger ds-c-tooltip__trigger-icon ds-u-display--inline ds-u-padding-left--0 ds-uw-padding-right--0"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onTouchStart={[Function]}
+        type="button"
+      >
+        <span
+          className="ds-c-tooltip-icon__container"
+        >
+          <svg
+            aria-hidden={true}
+            className="ds-c-icon ds-c-icon--info-circle-thin ds-c-tooltip-icon"
+            viewBox="0 0 16 16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8 16c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm1-3.7V6.4H7v5.9h2zM7 4.9c0 .6.3.9 1 .9s1-.3 1-.9c0-.3-.1-.5-.2-.7-.2-.1-.5-.2-.8-.2-.3 0-.6.1-.8.2-.1.2-.2.4-.2.7z"
+              fillRule="nonzero"
+            />
+          </svg>
+        </span>
+      </button>
+      <div
+        aria-hidden={true}
+        className="ds-c-tooltip"
+        data-placement="top"
+        id="tooltip-trigger--1"
+        onBlur={[Function]}
+        role="tooltip"
+        style={
+          {
+            "maxWidth": "300px",
+            "zIndex": 9999,
+          }
+        }
+        tabIndex={null}
+      >
+        <span
+          className="ds-c-tooltip__arrow"
+          data-popper-arrow={true}
+        />
+        <div
+          className="ds-c-tooltip__content"
+        >
+          <span
+            dangerouslySetInnerHTML={
+              {
+                "__html": "<strong>Last Modified: </strong> The date the<br/>dataset was last updated.",
+              }
+            }
+          />
+        </div>
+        <span
+          className="ds-c-tooltip__interactive-border"
+          style={
+            {
+              "border": "15px solid transparent",
+              "left": "-15px",
+              "top": "-15px",
+              "zIndex": -999,
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+  <span
+    className="bullet-point"
+  >
+    •
+  </span>
+  <div
+    className="dataset-date-item"
+  >
+    <span
+      className="dataset-data-item-label"
+    >
+      <span>
+        Released
+      </span>
+      : 
+      January 1, 2023
+    </span>
+    <div
+      className="ds-c-tooltip__container"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <button
+        aria-describedby="tooltip-trigger--3"
+        aria-label="Released"
+        className="ds-c-tooltip__trigger ds-c-tooltip__trigger-icon ds-u-display--inline ds-u-padding-left--0 ds-uw-padding-right--0"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onTouchStart={[Function]}
+        type="button"
+      >
+        <span
+          className="ds-c-tooltip-icon__container"
+        >
+          <svg
+            aria-hidden={true}
+            className="ds-c-icon ds-c-icon--info-circle-thin ds-c-tooltip-icon"
+            viewBox="0 0 16 16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8 16c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm1-3.7V6.4H7v5.9h2zM7 4.9c0 .6.3.9 1 .9s1-.3 1-.9c0-.3-.1-.5-.2-.7-.2-.1-.5-.2-.8-.2-.3 0-.6.1-.8.2-.1.2-.2.4-.2.7z"
+              fillRule="nonzero"
+            />
+          </svg>
+        </span>
+      </button>
+      <div
+        aria-hidden={true}
+        className="ds-c-tooltip"
+        data-placement="top"
+        id="tooltip-trigger--3"
+        onBlur={[Function]}
+        role="tooltip"
+        style={
+          {
+            "maxWidth": "300px",
+            "zIndex": 9999,
+          }
+        }
+        tabIndex={null}
+      >
+        <span
+          className="ds-c-tooltip__arrow"
+          data-popper-arrow={true}
+        />
+        <div
+          className="ds-c-tooltip__content"
+        >
+          <span
+            dangerouslySetInnerHTML={
+              {
+                "__html": "<strong>Released: </strong> The date the most<br/>recent dataset was made available<br/>to the public.",
+              }
+            }
+          />
+        </div>
+        <span
+          className="ds-c-tooltip__interactive-border"
+          style={
+            {
+              "border": "15px solid transparent",
+              "left": "-15px",
+              "top": "-15px",
+              "zIndex": -999,
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

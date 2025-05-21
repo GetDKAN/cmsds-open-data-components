@@ -1,0 +1,348 @@
+@use "../../../scss/modules/modules";
+@use "../../../scss/modules/colormap";
+@use "../../../scss/modules/variables";
+
+.null {
+  display: none;
+}
+
+.resource-table-header {
+  display: flex;
+  width: 100%;
+  font: 400 1.4rem variables.$muli;
+  position: relative;
+
+  // General button style
+  button.dataset-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    height: 40px;
+    border: solid 1px transparent;
+    z-index: 3;
+    border-radius: 2px;
+    margin-left: 12px;
+    padding: 0 12px 0 8px;
+
+    &:hover {
+      text-decoration: underline solid colormap.$blueberry 1px;
+      text-underline-offset: 3px;
+      background-color: #f6f9fd;
+    }
+
+    &.active {
+      background-color: #f6f9fd;
+    }
+
+    .dataset-button-text {
+      margin-left: 8px;
+      color: colormap.$dataset-border;
+    }
+  }
+
+  .resource-table-header-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    flex-shrink: 0;
+    justify-content: space-between;
+    white-space: normal;
+    min-height: 56px;
+    background-color: white;
+    //margin-bottom: 1rem;
+    padding: 0 16px 0 24px;
+    border-radius: 2px;
+    border: 1px solid variables.$panel-border;
+    box-shadow: variables.$panel-shadow;
+
+    .data-table-results {
+      display: flex;
+      align-items: center;
+      margin-right: 24px;
+
+      .low-result,
+      .high-result,
+      .total {
+        font-weight: 700;
+      }
+
+      .high-result {
+        margin-right: 2px;
+      }
+
+      .total {
+        margin-left: 2px;
+      }
+
+      p {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+
+    .table-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      // Display settings
+      .display-settings {
+        .dataset-button {
+          padding: 0 8px;
+
+          .fa[class*="caret"] {
+            margin-left: 6px;
+          }
+        }
+      }
+
+      // Manage columns
+      .manage-columns-button-container {
+        .data-table-adv-options {
+          border-radius: 20px;
+          padding: 0 20px;
+
+          span {
+            padding-bottom: 2px;
+          }
+        }
+      }
+
+      // Fullscreen
+      .fullscreen-button-container {
+        .fullscreen-button {
+          width: 40px;
+          border-radius: 100%;
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+
+.resize-help {
+  font-size: .9em;
+  margin: 1em 0;
+}
+
+// Popover
+#react-tiny-popover-container,
+.react-tiny-popover-container {
+  z-index: 9999;
+  border: solid 1px colormap.$charcoal-10;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 2px;
+  padding: 0 16px;
+  background-color: white;
+  min-width: 272px;
+
+  .popover-container {
+    background-color: #fff;
+    .data-table-density {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      .density-buttons-title {
+        font-size: 14px;
+        font-family: 'Muli';
+      }
+      .density-buttons {
+        button {
+          border: solid 1px colormap.$blueberry-20;
+          background-color: #fff;
+          padding: 7px;
+        }
+        .active {
+          border: solid 1px colormap.$blueberry;
+          background-color: colormap.$blueberry-5;
+          svg {
+            path {
+              fill: colormap.$blueberry-80;
+            }
+          }
+        }
+      }
+    }
+  }
+  .popover-row {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    font-size: 14px;
+    white-space: nowrap;
+    > * {
+      width: 50%;
+    }
+
+    // Row height
+    &.data-table-density {
+      .density-buttons {
+        display: flex;
+        button {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: white;
+          min-width: 40px;
+          height: 40px;
+          margin-right: -1px;
+          border: 0;
+          padding: 0;
+          box-shadow: 0 0 0 1px colormap.$border-color inset;
+
+          &:first-child {
+            border-radius: 2px 0 0 2px;
+          }
+
+          &:last-child {
+            border-radius: 0 2px 2px 0;
+          }
+
+          &:hover {
+            z-index: 2;
+            background-color: #f6f9fd;
+          }
+
+          &:focus {
+            z-index: 3;
+
+            &:hover {
+              z-index: 2;
+            }
+          }
+
+          svg path {
+            fill: colormap.$charcoal-70;
+          }
+
+          &.active {
+            background-color: #f6f9fd;
+            box-shadow: 0 0 0 1px colormap.$blueberry inset;
+            z-index: 4;
+
+            svg path {
+              fill: colormap.$blueberry;
+            }
+          }
+        }
+      }
+    }
+
+    // Rows per page
+    &.rows-per-page {
+      select {
+        margin: 0;
+        height: 40px;
+      }
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid colormap.$charcoal-10;
+    }
+  }
+}
+
+@mixin condense-controls() {
+  .resource-table-header {
+    .resource-table-header-container {
+      min-height: 64px;
+      padding: 0 12px 0 24px;
+
+      .table-control-item.display-settings {
+        button.dataset-button {
+          // Optical correctness
+          padding: 0 6px 0 10px;
+        }
+      }
+
+      button.dataset-button {
+        width: 64px;
+        height: 48px;
+
+        svg:first-of-type {
+          width: 18px;
+          height: 18px;
+        }
+
+        .dataset-button-text {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .dataset-content {
+    @include condense-controls();
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .fullscreen-content {
+    @include condense-controls();
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+  .dataset-content,
+  .fullscreen-content {
+    .resource-table-header {
+      .resource-table-header-container {
+        flex-direction: column;
+        padding: 0;
+
+        .data-table-results {
+          margin: 0;
+          padding: 24px;
+        }
+
+        .table-controls {
+          padding: 8px;
+          flex: 1;
+          border-top: 1px solid variables.$panel-border;
+          justify-content: flex-start;
+
+          .table-control-item {
+            display: flex;
+            flex: 1;
+
+            .tooltip-trigger {
+              display: flex;
+              flex: 1;
+
+              button.dataset-button {
+                width: initial;
+                padding: 8px;
+                flex: 1;
+              }
+            }
+          }
+
+          // When tooltips are shown
+          .tooltip-trigger {
+            flex: 1;
+          }
+        }
+
+        .display-settings {
+          button.dataset-button {
+            width: 64px;
+          }
+        }
+
+        button.dataset-button {
+          padding: 8px;
+          width: 48px;
+          height: 48px;
+          flex: 1;
+          margin: 0 8px;
+        }
+      }
+    }
+  }
+}
