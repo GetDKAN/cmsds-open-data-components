@@ -1,6 +1,11 @@
 .search-input-container {
+
     width: 100%;
     position: relative;
+
+    > div:has(input) {
+        width: 100%;
+    }
     
     input {
         max-width: none;

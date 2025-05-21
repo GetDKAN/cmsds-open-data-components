@@ -12,18 +12,19 @@ const SearchInput = ({
   onDark,
   onChange,
   onSubmit,
-  onKeyDown
+  onKeyDown,
+  defaultValue = ''
 }) => (
   <div className="search-input-container">
     <TextField
-      className={`${showMagnifyingGlass && 'left-padding'} ${showSearchButton && 'right-padding'}`}
+      className={`${showMagnifyingGlass ? 'left-padding' : ''} ${showSearchButton ? 'right-padding' : ''}`}
       label={placeholder}
       labelClassName="ds-u-visibility--screen-reader"
-      name="text-field-story"
       placeholder={placeholder}
       onBlur={() => {}}
       onChange={onChange}
       onKeyDown={onKeyDown}
+      defaultValue={defaultValue}
     />
     {showMagnifyingGlass && (
       <div className="magnifying-glass-icon ds-u-visibility--hidden ds-u-sm-visibility--visible">
@@ -55,7 +56,8 @@ SearchInput.propTypes = {
   onDark: PropTypes.bool,
   onChange: PropTypes.func,
   onSubmit: PropTypes.func,
-  onKeyDown: PropTypes.func
+  onKeyDown: PropTypes.func,
+  defaultValue: PropTypes.string
 }
 
 export default SearchInput
