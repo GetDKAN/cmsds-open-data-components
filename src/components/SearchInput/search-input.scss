@@ -1,0 +1,114 @@
+.search-input-container {
+
+    width: 100%;
+    position: relative;
+
+    > div:has(input) {
+        width: 100%;
+    }
+    
+    input {
+        max-width: none;
+        width: 100%;
+        border-radius: 37px !important;
+        padding: 16px;
+    }
+
+    .left-padding input {
+        @media (min-width: 544px) {
+            padding-left: 50px;
+        }
+    }
+
+    .right-padding input {
+        padding-right: 74px;
+        @media (min-width: 544px) {
+            padding-right: 197px;
+        }
+    }
+    
+    button {
+        position: absolute;
+        right: 2px;
+        top: 4px;
+        border-radius: 37px !important;
+        padding: 16px;
+        background-color: #0D2499;
+
+        @media (max-width: 544px) {
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+        }
+
+        &:hover,
+        &:active {
+            border-color: #000f5c;
+            background-color: #000f5c !important;
+        }
+
+        &:focus {
+            background-color: #0D2499;
+        }
+        
+        span {
+            display: block;
+            height: 21px;
+        }
+
+        svg {
+            margin-top: -2px;
+        }
+
+        .magnifying-glass-icon {
+
+            @media (min-width: 544px) {
+                display: none;
+            }
+
+            path {
+                fill: #fff;
+            }
+        }
+
+        .sm-label {
+            @media (max-width: 544px) {
+                display: none;
+            }
+        }
+
+        &.on-dark {
+            border-color: #C6F6DB;
+            background-color: #C6F6DB;
+            color: var(--component-button-solid-dark-alt-color, #262626);
+
+            path {
+                fill: var(--component-button-solid-dark-alt-color, #262626);
+            }
+    
+            &:hover,
+            &:active {
+                border-color: #95cfae;
+                background-color: #95cfae !important;
+                color: var(--component-button-solid-dark-alt-color, #262626);
+            }
+        }
+    }
+
+    > .magnifying-glass-icon {
+        position: absolute;
+        left: 16px;
+        top: 16px;
+
+        path {
+            fill: #0D2499;
+        }
+    }
+
+    .rounded-border {
+        position: absolute;
+        inset: 4px 0 0;
+        border-radius: 37px;
+        border: 2px solid var(--color-granite-200, #C0C0C0);
+        pointer-events: none;
+    }
+}
