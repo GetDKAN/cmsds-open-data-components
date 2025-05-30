@@ -132,6 +132,12 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   const pageSize = defaultPageSize;
 
   useEffect(() => {
+
+    // Update browser URL with current search params
+    const params = buildSearchParams(true);
+    const url = new URL(window.location.href);
+    window.history.pushState({}, '', `${url.origin}${url.pathname}${params}`);
+    
     const baseNumber = Number(totalItems) > 0 ? 1 : 0;
     const startingNumber = baseNumber + (Number(pageSize) * Number(page) - Number(pageSize));
     const endingNumber = Number(pageSize) * Number(page);
