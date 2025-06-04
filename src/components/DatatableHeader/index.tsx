@@ -3,13 +3,13 @@ import DataTablePageResults from '../DataTablePageResults';
 import { Button, Tooltip, Dropdown } from '@cmsgov/design-system';
 import { ResourceType } from '../../types/dataset';
 
-const DataTableHeader = ({ resource, downloadURL, unfilteredDownloadURL, setPage } : {resource: ResourceType, downloadURL: string, unfilteredDownloadURL: string, setPage: Function}) => {
+const DataTableHeader = ({ resource, downloadURL, unfilteredDownloadURL, setPage, showQueryBuilder = true } : {resource: ResourceType, downloadURL: string, unfilteredDownloadURL: string, setPage: Function, showQueryBuilder?: boolean}) => {
   const { limit, offset, count, conditions, setLimit, setOffset } = resource;
   const intCount = count ? count : 0;
   const rowOptions = [10, 25, 50, 100];
-
   return (
     <div className="ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--between">
+      {showQueryBuilder && (
       <div className="dc-c-resource-header--buttons ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--end ds-l-col--12 ds-u-margin-top--2 ds-u-padding-x--0">
         <div className="ds-l-col--12 ds-l-sm-col--auto ds-u-padding-x--0 ds-u-margin-bottom--2">
           {conditions && conditions.length ? (
@@ -60,7 +60,7 @@ const DataTableHeader = ({ resource, downloadURL, unfilteredDownloadURL, setPage
             </Button>
           </div>
         </div>
-      </div>
+      </div>)}
       <div className="ds-l-col--12 ds-u-display--flex ds-u-align-items--end ds-u-flex-direction--row-reverse ds-u-sm-flex-direction--row ds-u-padding-x--0 ds-u-margin-bottom--2 ds-u-flex-wrap--wrap">
         <div className="ds-l-col--12 ds-l-sm-col--8 ds-u-padding-x--0">
           {(!resource.loading && resource.count !== null) && (
