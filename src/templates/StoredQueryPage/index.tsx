@@ -26,7 +26,9 @@ export default function StoredQueryPage({
   disableTableControls?: boolean;
 }) {
   // TODO parse from stored filter
-  const options = { conditions: query ? JSON.parse(query) : [] };
+  const options = { 
+    conditions: query ? JSON.parse(query.replaceAll('\"column\"', '\"property\"')) : [] 
+  };
 
   const { dataset, isPending } = useMetastoreDataset(id, rootUrl);
 
