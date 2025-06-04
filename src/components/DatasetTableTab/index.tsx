@@ -7,11 +7,11 @@ import { Pagination, Spinner, Alert } from '@cmsgov/design-system';
 import DataTableHeader from '../DatatableHeader';
 import QueryBuilder from '../QueryBuilder';
 import { DistributionType, ColumnType, ResourceType } from '../../types/dataset';
-import DataTableContext from "../../templates/Dataset/DataTableContext";
+import DataTableContext from '../../templates/Dataset/DataTableContext';
 import ManageColumnsContext from '../ManageColumns/ManageColumnsContext';
 
-export function prepareColumns(columns : any, schema : any) {
-  return columns.map((column : any) => ({
+export function prepareColumns(columns: any, schema: any) {
+  return columns.map((column: any) => ({
     header:
       schema && schema.fields[column].description ? schema.fields[column].description : column,
     accessor: column,
@@ -19,19 +19,34 @@ export function prepareColumns(columns : any, schema : any) {
 }
 
 type DatasetTableTabProps = {
-  id: string,
-  distribution: DistributionType,
-  resource: ResourceType,
-  rootUrl: string,
-  customColumns: Array<ColumnType>,
-  dataDictionaryBanner: boolean,
-  datasetTableControls: boolean,
-}
+  id: string;
+  distribution: DistributionType;
+  resource: ResourceType;
+  rootUrl: string;
+  customColumns: Array<ColumnType>;
+  dataDictionaryBanner: boolean;
+  datasetTableControls: boolean;
+};
 
-const DatasetTable = ({isModal = false, closeFullScreenModal} : {isModal?: boolean, closeFullScreenModal?: Function}) => {
-  const {id, distribution, resource, rootUrl, customColumns = [], dataDictionaryBanner } = useContext(DataTableContext) as DatasetTableTabProps
-  const {page, setPage} = useContext(ManageColumnsContext) as {page: number, setPage: Function}
-  
+const DatasetTable = ({
+  isModal = false,
+  closeFullScreenModal,
+  showQueryBuilder = false,
+}: {
+  isModal?: boolean;
+  closeFullScreenModal?: Function;
+  showQueryBuilder?: boolean;
+}) => {
+  const {
+    id,
+    distribution,
+    resource,
+    rootUrl,
+    customColumns = [],
+    dataDictionaryBanner,
+  } = useContext(DataTableContext) as DatasetTableTabProps;
+  const { page, setPage } = useContext(ManageColumnsContext) as { page: number; setPage: Function };
+
   const defaultPageSize = 10;
 
   const customColumnHeaders = buildCustomColHeaders(
@@ -60,8 +75,17 @@ const DatasetTable = ({isModal = false, closeFullScreenModal} : {isModal?: boole
   ) {
     return (
       <>
-        <QueryBuilder resource={resource} id={distribution.identifier} customColumns={customColumnHeaders} isModal={isModal} setPage={setPage} setOffset={setOffset} />
-        {(dataDictionaryBanner && !isModal) && (
+        {showQueryBuilder && (
+          <QueryBuilder
+            resource={resource}
+            id={distribution.identifier}
+            customColumns={customColumnHeaders}
+            isModal={isModal}
+            setPage={setPage}
+            setOffset={setOffset}
+          />
+        )}
+        {dataDictionaryBanner && !isModal && (
           <div>
             <Alert>Click on the "Data Dictionary" tab above for full column definitions</Alert>
           </div>
@@ -72,8 +96,14 @@ const DatasetTable = ({isModal = false, closeFullScreenModal} : {isModal?: boole
             downloadURL={downloadURL}
             unfilteredDownloadURL={distribution.data.downloadURL}
             setPage={setPage}
-          /> }
-        <div className={`ds-u-border-x--1 ds-u-border-bottom--1 ${isModal && 'dkan-datatable-fullscreen-mode'}`}>
+            showQueryBuilder={showQueryBuilder}
+          />
+        }
+        <div
+          className={`ds-u-border-x--1 ds-u-border-bottom--1 ${
+            isModal && 'dkan-datatable-fullscreen-mode'
+          }`}
+        >
           <DataTable
             canResize={true}
             columns={columns}
@@ -84,7 +114,7 @@ const DatasetTable = ({isModal = false, closeFullScreenModal} : {isModal?: boole
             closeFullScreenModal={closeFullScreenModal}
           />
         </div>
-        {(!resource.loading && resource.count !== null) && (
+        {!resource.loading && resource.count !== null && (
           <div className="ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--end ds-u-md-justify-content--between ds-u-margin-top--2 ds-u-align-items--center">
             <Pagination
               totalPages={Math.ceil(resource.count ? resource.count / pageSize : 1)}
@@ -99,9 +129,10 @@ const DatasetTable = ({isModal = false, closeFullScreenModal} : {isModal?: boole
             />
           </div>
         )}
-    </>
-  ) 
-  } else return <Spinner aria-valuetext="Dataset loading" role="status" className="ds-u-margin--3" />;
+      </>
+    );
+  } else
+    return <Spinner aria-valuetext="Dataset loading" role="status" className="ds-u-margin--3" />;
 };
 
 export default DatasetTable;
