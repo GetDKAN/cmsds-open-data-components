@@ -4,7 +4,7 @@ import DatasetTable from ".";
 import DataTableContext from "../../templates/Dataset/DataTableContext";
 import ManageColumnsContext from '../ManageColumns/ManageColumnsContext';
 
-const DataTableStateWrapper = () => {
+const DataTableStateWrapper = ({showQueryBuilder = true} : {showQueryBuilder?: boolean}) => {
   const { id, datasetTableControls } = useContext(DataTableContext);
   // a wrapper component to keep column state synced between full screen and regular modes
   const localStorageData = id ? JSON.parse(localStorage.getItem(id) as string) : null;
@@ -34,7 +34,7 @@ const DataTableStateWrapper = () => {
       page: page,
       setPage: setPage
     }}>
-      <DatasetTable />
+      <DatasetTable showQueryBuilder={showQueryBuilder} />
     </ManageColumnsContext.Provider>
   )
 }
