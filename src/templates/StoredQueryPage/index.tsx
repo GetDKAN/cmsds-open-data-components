@@ -15,19 +15,34 @@ export default function StoredQueryPage({
   query,
   distributionIndex = 0,
   defaultPageSize = 25,
-  disableTableControls = false
+  disableTableControls = false,
 }: {
   id: string;
   rootUrl: string;
   customColumns?: Array<ColumnType>;
-  query?: string; 
+  query?: string;
   distributionIndex?: number;
   defaultPageSize?: number;
   disableTableControls?: boolean;
 }) {
   // TODO parse from stored filter
-  const options = { 
-    conditions: query ? JSON.parse(query.replaceAll('\"column\"', '\"property\"')) : [] 
+  const options = {
+    conditions: query
+      ? JSON.parse(query).map(
+          ({ column, operator, ...rest }: { column: string; operator: string }) => ({
+            property: column,
+            operator:
+              operator === 'is'
+                ? '='
+                : operator === 'is not'
+                ? '<>'
+                : operator === 'or'
+                ? 'in'
+                : operator,
+            ...rest,
+          })
+        )
+      : [],
   };
 
   const { dataset, isPending } = useMetastoreDataset(id, rootUrl);
@@ -43,12 +58,12 @@ export default function StoredQueryPage({
     limit: defaultPageSize,
   }) as ResourceType;
 
-    useEffect(() => {
-      const localFileFormat = getFormatType(distribution);
-      if (localFileFormat === 'csv') {
-        resource.setResource(distribution.identifier);
-      }
-    }, [distribution]);
+  useEffect(() => {
+    const localFileFormat = getFormatType(distribution);
+    if (localFileFormat === 'csv') {
+      resource.setResource(distribution.identifier);
+    }
+  }, [distribution]);
 
   return (
     <DataTableContext.Provider
@@ -58,7 +73,7 @@ export default function StoredQueryPage({
         distribution: distribution,
         rootUrl: rootUrl,
         customColumns: customColumns,
-        datasetTableControls: !disableTableControls
+        datasetTableControls: !disableTableControls,
       }}
     >
       <DataTableStateWrapper showQueryBuilder={false} />
