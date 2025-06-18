@@ -9,7 +9,7 @@ import FilterChipList from '../FilterDataset/FilterChipList'
 import PopoverContent from './PopOverContent'
 import DataTablePageResults from '../DataTablePageResults/DataTablePageResults'
 import { Popover } from 'react-tiny-popover'
-import './DataTableHeader.scss'
+import './DataTableToolbar.scss'
 import Tooltip from '../../common/Tooltip/Tooltip'
 import log from '../../../log'
 import { useCurrentBreakpointName, useCurrentWidth } from 'react-socks'
@@ -19,7 +19,7 @@ import DatasetExplorerDownloadLink from '../DatasetExplorerDownloadLink/DatasetE
 const filterEnabled = true
 log.debug('filterEnabled', filterEnabled)
 
-const DataTableHeader = ({
+const DataTableToolbar = ({
   fullscreen,
   datasetTitle,
   datasetDescription,
@@ -236,7 +236,7 @@ const DataTableHeader = ({
                     datasetTitle={datasetTitle}
                     updateRows={updateRows}
                     activeDensity={activeDensity}
-                    limit={Number(limit)}
+                    limit={[20, 50, 100].includes(Number(limit)) ? Number(limit) : 20}
                   />
                 )}
                 parentElement={document.getElementsByClassName(`display-settings-${instanceId}`)[0]}
@@ -279,7 +279,7 @@ const DataTableHeader = ({
   )
 }
 
-DataTableHeader.propTypes = {
+DataTableToolbar.propTypes = {
   /**
    * `true` removes the 'Fullscreen' button.
    * Used when in fullscreen mode
@@ -312,5 +312,5 @@ DataTableHeader.propTypes = {
    */
   instanceId: PropTypes.number
 }
-DataTableHeader.displayName = 'DataTableHeader'
-export default DataTableHeader
+DataTableToolbar.displayName = 'DataTableToolbar'
+export default DataTableToolbar

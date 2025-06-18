@@ -22,7 +22,7 @@ const FontAwesomePro = (props) => {
   }, [icon])
 
   // Set default svg attribtues
-  const iconAttr = {
+  const iconAttr = { /////////////////
     'aria-hidden': ariaHidden,
     className: `fa fa-${icon}`,
     focusable: 'false',
@@ -32,10 +32,10 @@ const FontAwesomePro = (props) => {
   }
 
   // Get svgIndex export array values
-  const svgList = svgIndex.values()
+  const svgList = svgIndex.values() ////////
 
   // Loop through svgIndex export array
-  const iconMap = (ico) => {
+  const iconMap = (ico) => { //////////////
     for (const svg of svgList) {
       const key = Object.keys(svg)[0]
       if (key === ico) {
@@ -46,9 +46,9 @@ const FontAwesomePro = (props) => {
     }
   }
 
-  return (
-    iconMap(icon)
-  )
+  // return ( ///////
+  //   iconMap(icon)
+  // )
 }
 
 FontAwesomePro.propTypes = {

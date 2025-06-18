@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
 
 export default function ToggleBlock ({
-  customId = undefined,
+  customId = 'undefined',
   className = 'toggle-block',
   title,
   children,

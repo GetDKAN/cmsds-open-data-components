@@ -9,10 +9,13 @@ const DataTablePageResults = ({
   viewing = false
 }) => {
   // Add one to offset the 0 array index.
-  const page = currentPage + 1
+  const safeCurrentPage = Number.isFinite(currentPage) ? currentPage : 0
+  const safePageSize = Number.isFinite(pageSize) ? pageSize : 0
+  const page = safeCurrentPage + 1
   let displayTotal = total
-  const currentLowestResult = total <= 0 ? 0 : 1 + ((pageSize * page) - pageSize)
-  let currentHighestResult = (pageSize * page)
+
+  const currentLowestResult = total <= 0 ? 0 : 1 + ((safePageSize * page) - safePageSize)
+  let currentHighestResult = (safePageSize * page)
   if (total < 0) {
     displayTotal = 0
   }

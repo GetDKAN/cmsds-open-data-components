@@ -1,14 +1,14 @@
-import config from '../config'
+import config from '../config/index'
 import toLower from 'lodash/toLower'
 
 export const getApiBaseUrl = (withApiPath = true) => {
   const { site, apiSite, domainsNeedProviderDataPath } = config
   const { protocol, hostname } = window.location
-  const reactAppEnv = toLower(import.meta.env.VITE_ENV) || 'development'
+  const reactAppEnv = 'development'
   let baseUrl
 
   // Add 'provider-data/' to the base url for a certain set of domains
-  const providerDataPath = domainsNeedProviderDataPath.includes(hostname) ? 'provider-data/' : ''
+  const providerDataPath = ''//domainsNeedProviderDataPath.includes(hostname) ? 'provider-data/' : ''
 
   if (reactAppEnv === 'development') { // development environment only
     // site and apiSite values already have full domains included in the dev config file

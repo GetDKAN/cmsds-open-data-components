@@ -25,7 +25,7 @@ $footer-height-xs: 72px;
 .csv-download-link-dialog {
   &.ds-c-dialog {
     font-family: variables.$muli;
-    color: colormap.$charcoal;
+    // color: colormap.$charcoal;
     padding: 0;
     z-index: 12;
     border-radius: 2px;
@@ -53,7 +53,7 @@ $footer-height-xs: 72px;
       align-items: center;
       justify-content: space-between;
       padding: 0 $h-padding-md;
-      border-bottom: 1px solid colormap.$border-color;
+      // border-bottom: 1px solid colormap.$border-color;
       min-height: $header-height;
 
       h1 {
@@ -67,15 +67,15 @@ $footer-height-xs: 72px;
 
       button.ds-c-dialog__close {
         margin: 0;
-        color: colormap.$charcoal;
+        // color: colormap.$charcoal;
 
-        &:hover {
-          background-color: colormap.$charcoal-5;
-        }
+        // &:hover {
+        //   background-color: colormap.$charcoal-5;
+        // }
 
-        &::before {
-          color: colormap.$charcoal;
-        }
+        // &::before {
+        //   color: colormap.$charcoal;
+        // }
       }
     }
 

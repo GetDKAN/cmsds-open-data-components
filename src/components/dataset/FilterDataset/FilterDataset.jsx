@@ -17,7 +17,7 @@ const FilterDataset = ({
   onExit
 }) => {
   const { initOrder } = useContext(FilteredDispatch)
-
+  console.log(initOrder, "////////////")
   const applyAndClose = () => {
     applyFilter(lFilters)
     onExit()
@@ -114,6 +114,7 @@ const FilterDataset = ({
                       key={`filter-${i}`}
                       i={i}
                       columns={initOrder}
+                      
                       filter={filter}
                       filters={lFilters}
                       updateFilters={updateFilters}

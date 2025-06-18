@@ -4,11 +4,13 @@ import DataTable from '../Datatable/Datatable';
 import { transformTableSortToQuerySort } from '../../services/useDatastore/transformSorts';
 import { buildCustomColHeaders } from '../../templates/FilteredResource/functions';
 import { Pagination, Spinner, Alert } from '@cmsgov/design-system';
-import DataTableHeader from '../DatatableHeader';
-import QueryBuilder from '../QueryBuilder';
+// import DataTableHeader from '../DatatableHeader';
+// import QueryBuilder from '../QueryBuilder';
+import DataTableToolbar from '../dataset/DataTableToolbar/DataTableToolbar';
 import { DistributionType, ColumnType, ResourceType } from '../../types/dataset';
 import DataTableContext from "../../templates/Dataset/DataTableContext";
 import ManageColumnsContext from '../ManageColumns/ManageColumnsContext';
+
 
 export function prepareColumns(columns : any, schema : any) {
   return columns.map((column : any) => ({
@@ -27,6 +29,7 @@ type DatasetTableTabProps = {
   dataDictionaryBanner: boolean,
   datasetTableControls: boolean,
 }
+
 
 const DatasetTable = ({isModal = false, closeFullScreenModal} : {isModal?: boolean, closeFullScreenModal?: Function}) => {
   const {id, distribution, resource, rootUrl, customColumns = [], dataDictionaryBanner } = useContext(DataTableContext) as DatasetTableTabProps
@@ -60,19 +63,27 @@ const DatasetTable = ({isModal = false, closeFullScreenModal} : {isModal?: boole
   ) {
     return (
       <>
-        <QueryBuilder resource={resource} id={distribution.identifier} customColumns={customColumnHeaders} isModal={isModal} setPage={setPage} setOffset={setOffset} />
+        <DataTableToolbar 
+        datasetTitle="Test title"
+        datasetDescription="A dataset showing all Medicare plan information from CMS."
+        datasetModified="2021-11-29"
+        datasetReleased="2021-11-29"
+        datasetRefresh="2021-11-29"
+        instanceId={1}
+        />
+        {/* <QueryBuilder resource={resource} id={distribution.identifier} customColumns={customColumnHeaders} isModal={isModal} setPage={setPage} setOffset={setOffset} /> */}
         {(dataDictionaryBanner && !isModal) && (
           <div>
             <Alert>Click on the "Data Dictionary" tab above for full column definitions</Alert>
           </div>
         )}
-        {
+        {/* {
           <DataTableHeader
             resource={resource}
             downloadURL={downloadURL}
             unfilteredDownloadURL={distribution.data.downloadURL}
             setPage={setPage}
-          /> }
+          /> } */}
         <div className={`ds-u-border-x--1 ds-u-border-bottom--1 ${isModal && 'dkan-datatable-fullscreen-mode'}`}>
           <DataTable
             canResize={true}

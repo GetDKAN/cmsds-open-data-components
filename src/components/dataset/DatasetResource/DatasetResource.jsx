@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import DataTableHeader from '../DataTableHeader/DataTableHeader'
-import DataTable from '../DataTable/DataTable'
+import React from 'react';
+import PropTypes from 'prop-types';
+import DataTableToolbar from '../DataTableToolbar/DataTableToolbar';
+import DataTable from '../DataTable/DataTable';
 
 const DatasetResource = ({
   resource,
@@ -9,12 +9,18 @@ const DatasetResource = ({
   datasetDescription,
   datasetModified,
   datasetReleased,
-  datasetRefresh
+  datasetRefresh,
 }) => {
   return (
-    <div id={`resource_${resource.identifier}`} className='resource-table' data-testid='data-table' data-resource-identifier={resource.identifier}>
+    <div
+      id={`resource_${resource.identifier}`}
+      className="resource-table"
+      data-testid="data-table"
+      data-resource-identifier={resource.identifier}
+    >
       {/* Filter logic here */}
-      <DataTableHeader
+      
+      <DataTableToolbar
         datasetTitle={datasetTitle}
         datasetDescription={datasetDescription}
         datasetModified={datasetModified}
@@ -22,12 +28,10 @@ const DatasetResource = ({
         datasetRefresh={datasetRefresh}
         instanceId={1}
       />
-      <DataTable
-        datasetTitle={datasetTitle}
-      />
+      <DataTable datasetTitle={datasetTitle} />
     </div>
-  )
-}
+  );
+};
 
 DatasetResource.propTypes = {
   /**
@@ -53,8 +57,8 @@ DatasetResource.propTypes = {
   /**
    * Dataset anticipated refresh date string
    */
-  datasetRefresh: PropTypes.string
-}
+  datasetRefresh: PropTypes.string,
+};
 
-DatasetResource.displayName = 'DatasetResource'
-export default DatasetResource
+DatasetResource.displayName = 'DatasetResource';
+export default DatasetResource;

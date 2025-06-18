@@ -1,0 +1,114 @@
+@use "modules/colormap";
+@use "modules/variables";
+
+.pqdc-btn {
+  padding: 10px 40px;
+  background-color: white;
+  border: 2px black solid;
+  border-radius: 30px;
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  cursor: pointer;
+
+  &:hover,
+  &:not([href]):not([tabindex]):hover {
+    border-color: colormap.$blueberry;
+    color: colormap.$blueberry;
+    text-decoration: none;
+
+    svg path {
+      fill: colormap.$blueberry;
+    }
+  }
+}
+
+.full {
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+// Base Button
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 32px;
+  border: 2px solid transparent;
+  height: 48px;
+  border-radius: 24px;
+  font: bold 1.6rem variables.$muli;
+  text-decoration: none;
+  transition: variables.$d-transition;
+
+  &:hover {
+    transition: variables.$d-transition;
+  }
+
+  // Vertically frames text label
+  > span {
+    padding-bottom: 2px;
+  }
+
+  // Blueberry Button
+  &.blueberry {
+    background-color: colormap.$blueberry;
+    color: white;
+
+    svg path {
+      fill: white;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: white;
+      color: colormap.$blueberry;
+      border-color: colormap.$blueberry;
+
+      svg path {
+        fill: colormap.$blueberry;
+      }
+    }
+
+    &:active {
+      background-color: colormap.$blueberry-5;
+      color: colormap.$blueberry;
+      border-color: colormap.$blueberry;
+    }
+  }
+
+  // Blueberry Inverse Button
+  &.blueberry-inverse {
+    background-color: white;
+    color: colormap.$blueberry;
+    border-color: colormap.$blueberry;
+
+    svg path {
+      fill: colormap.$blueberry;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: colormap.$blueberry;
+      color: white;
+
+      svg path {
+        fill: white;
+      }
+    }
+  }
+
+  // Icon
+  &.icon-left {
+    svg {
+      margin-right: 8px;
+    }
+  }
+
+  &.icon-right {
+    svg {
+      margin-left: 8px;
+    }
+  }
+}

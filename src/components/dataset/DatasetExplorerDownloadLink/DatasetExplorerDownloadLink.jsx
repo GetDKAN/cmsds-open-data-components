@@ -19,11 +19,19 @@ const DatasetExplorerDownloadLink = ({ force }) => {
   } = useContext(FilteredDispatch)
 
   const [filteredURL, setFilteredURL] = useState('')
-  const datasetState = useContext(DatasetContext)
-  const { data: dataset = {}, isLoading } = datasetState
+
+  const datasetState = useContext(DatasetContext) || {}
+  const dataset = datasetState.data || {}
+  const isLoading = datasetState.isLoading || false
+
   const title = dataset?.title || ''
-  const identifier = datasetState?.data?.identifier || undefined
-  const distribution = 'distribution' in dataset ? dataset.distribution : []
+  const identifier = dataset?.identifier
+  const distribution = Array.isArray(dataset.distribution) ? dataset.distribution : []
+  // const datasetState = useContext(DatasetContext)
+  // const { data: dataset = {}, isLoading } = datasetState
+  // const title = dataset?.title || ''
+  // const identifier = datasetState?.data?.identifier || undefined
+  // const distribution = 'distribution' in dataset ? dataset.distribution : []
   let isPublic
   if (dataset.accessLevel) {
     isPublic = toLower(dataset.accessLevel) === 'public'

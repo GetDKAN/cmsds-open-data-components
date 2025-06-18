@@ -1,0 +1,36 @@
+@use "modules/variables";
+
+// Bootstrap Override
+.container {
+  max-width: variables.$max-width;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+// container-fluid | container-xl
+[class*="container-"] {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+[class*="col-"],
+.col {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.row {
+  margin-left: -16px;
+  margin-right: -16px;
+}
+
+// CMS Modal Override
+.ds-c-dialog-wrap {
+  z-index: 5000 !important;
+  position: fixed;
+  inset: 0;
+}
+
+ol, ul {
+  gap: 0;
+}

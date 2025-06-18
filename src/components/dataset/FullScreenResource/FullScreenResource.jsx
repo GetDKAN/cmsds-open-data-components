@@ -1,37 +1,47 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-import { Dialog } from '@cmsgov/design-system'
-import ToggleBlock from '../../common/ToggleBlock/ToggleBlock'
-import DataTableHeader from '../DataTableHeader/DataTableHeader'
-import DataTable from '../DataTable/DataTable'
-import DatasetHeader from '../DatasetHeader/DatasetHeader'
-import DataHeaderButton from '../DataTableHeader/DataHeaderButton'
-import Tooltip from '../../common/Tooltip/Tooltip'
-import './FullScreenResource.scss'
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { Dialog } from '@cmsgov/design-system';
+import ToggleBlock from '../../common/ToggleBlock/ToggleBlock';
+import DataTableToolbar from '../DataTableToolbar/DataTableToolbar';
+import DataTable from '../DataTable/DataTable';
+import DatasetHeader from '../DatasetHeader/DatasetHeader';
+import DataHeaderButton from '../DataTableToolbar/DataHeaderButton';
+import Tooltip from '../../common/Tooltip/Tooltip';
+import './FullScreenResource.scss';
 
 const FullScreenResource = (props) => {
-  const { datasetTitle, datasetModified, datasetReleased, datasetRefresh, datasetDescription, showTooltip } = props
-  const [modalOpen, setModalOpen] = useState(false)
+  const {
+    datasetTitle,
+    datasetModified,
+    datasetReleased,
+    datasetRefresh,
+    datasetDescription,
+    showTooltip,
+  } = props;
+  const [modalOpen, setModalOpen] = useState(false);
   const toggleModal = () => {
-    setModalOpen(!modalOpen)
-  }
+    setModalOpen(!modalOpen);
+  };
   return (
-    <div className='table-control-item fullscreen-button-container'>
-      <Tooltip tooltip='Fullscreen' position='top' trigger='hover' show={showTooltip}>
-        <DataHeaderButton icon='expand' click={toggleModal} text='Fullscreen' ariaLabel='Fullscreen - Opens in a dialog' />
+    <div className="table-control-item fullscreen-button-container">
+      <Tooltip tooltip="Fullscreen" position="top" trigger="hover" show={showTooltip}>
+        <DataHeaderButton
+          icon="expand"
+          click={toggleModal}
+          text="Fullscreen"
+          ariaLabel="Fullscreen - Opens in a dialog"
+        />
       </Tooltip>
       <div className={`ds-c-dialog-wrap${modalOpen ? ' open' : ''}`}>
         <Dialog
           isOpen={modalOpen}
-          heading={(
-            <span className='dataset-explorer-title'>Dataset Explorer</span>
-          )}
+          heading={<span className="dataset-explorer-title">Dataset Explorer</span>}
           onExit={toggleModal}
-          ariaCloseLabel='Close dataset explorer dialog'
-          size='full'
-          className='fullscreen-resource'
+          ariaCloseLabel="Close dataset explorer dialog"
+          size="full"
+          className="fullscreen-resource"
         >
-          <div className='fullscreen-content'>
+          <div className="fullscreen-content">
             <ToggleBlock title={datasetTitle}>
               <DatasetHeader
                 description={datasetDescription}
@@ -40,7 +50,7 @@ const FullScreenResource = (props) => {
                 refresh={datasetRefresh}
               />
             </ToggleBlock>
-            <DataTableHeader
+            <DataTableToolbar
               fullscreen
               datasetTitle={datasetTitle}
               datasetDescription={datasetDescription}
@@ -54,8 +64,8 @@ const FullScreenResource = (props) => {
         </Dialog>
       </div>
     </div>
-  )
-}
+  );
+};
 
 FullScreenResource.propTypes = {
   /**
@@ -81,8 +91,8 @@ FullScreenResource.propTypes = {
   /**
    * `true` shows mobile helper tooltips for button
    */
-  showTooltip: PropTypes.bool
-}
+  showTooltip: PropTypes.bool,
+};
 
-FullScreenResource.displayName = 'FullScreenResource'
-export default FullScreenResource
+FullScreenResource.displayName = 'FullScreenResource';
+export default FullScreenResource;

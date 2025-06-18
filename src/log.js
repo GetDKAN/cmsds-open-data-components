@@ -3,7 +3,7 @@ import find from 'lodash/find'
 import toUpper from 'lodash/toUpper'
 import toLower from 'lodash/toLower'
 import findIndex from 'lodash/findIndex'
-import config from './config'
+import config from './config/index'
 import { isIeUserAgent } from './utilities/displayUtilities'
 
 let { logLevel } = config

@@ -23,21 +23,21 @@
 
     &:hover {
       transition: opacity 0.1s linear;
-      background-color: colormap.$blueberry-10;
+      // background-color: colormap.$blueberry-10;
     }
 
     svg.fa-info-circle {
       font-size: initial;
 
-      path {
-        fill: colormap.$blueberry;
-      }
+      // path {
+      //   fill: colormap.$blueberry;
+      // }
     }
   }
 
   // Tooltip for term definitions in static content
   &.definition {
-    @include functions.link-underline(colormap.$charcoal);
+    // @include functions.link-underline(colormap.$charcoal);
 
     &:hover {
       cursor: help;
@@ -59,9 +59,9 @@ span.tooltip-container {
 
   &.definition {
     background: white;
-    color: colormap.$charcoal;
+    // color: colormap.$charcoal;
     padding: 16px 24px;
-    border: 1px solid colormap.$charcoal-20;
+    // border: 1px solid colormap.$charcoal-20;
     box-shadow: variables.$panel-shadow;
     max-width: 384px;
 

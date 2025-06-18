@@ -6,6 +6,7 @@ const DataHeaderButton = ({ click, text, icon, fill = '#0c2499', secondary = und
   const buttonClass = active ? 'dataset-button active' : 'dataset-button'
   return (
     <button aria-label={ariaLabel} onClick={click} className={buttonClass}>
+      {/* <span className="fas fa-filter small-text ds-u-sm-display--none" /> */}
       <FontAwesomePro icon={icon} fill={fill} />
       <span className='dataset-button-text'>{text}</span>
       {secondary && (<FontAwesomePro icon={secondary} fill={fill} size={16} />)}

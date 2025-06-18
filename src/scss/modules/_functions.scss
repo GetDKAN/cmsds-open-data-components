@@ -1,0 +1,184 @@
+@use "sass:math";
+@use "colormap";
+@use "variables";
+
+/* Opacity function
+  - Allows inline changes to the opacity of a color
+  - Usage: color: opacity(white, 90); Output: color: rgba(255, 255, 255, 0.9; */
+
+@function opacity($color, $percentage) {
+  @return rgba($color, calc($percentage / 100));
+}
+
+/* Exponent function
+  - Allows numbers to become exponents
+  - Usage: exp(2, 2);  Output: 4; */
+
+@function exp($number, $exponent) {
+  $value: 1;
+  @if $exponent > 0 {
+    @for $i from 1 through $exponent {
+      $value: $value * $number;
+    }
+  }
+  @return $value;
+}
+
+/* Rounding function
+  - Allows numbers to be rounded to specified amount.
+  - Usage: margin: rnd(1.23958) + px;  Output: margin: 1.23px; */
+
+@function rnd($input) {
+  $to: 100;
+  $value: calc(math.round($input * $to) / $to);
+  @return $value;
+}
+
+/* Headings mixin
+  - Syntax:
+    - h([headingNumber], [fontScale], [spaceScale], [spaceType], [uniformScale], [moveScale]);
+    - headingNumber: e.g. h*1*, h*2*, h*3*, etc.
+    - fontScale: Exponential interval between 'font-size' values.
+    - spaceScale: Exponential interval between spacing ('margin' or 'padding') values.
+    - spaceType: Specifies which type of spacing: 'margin' or 'padding'.
+    - uniformScale: Uniformly scales all headers by a multiple.
+    - moveScale: Moves scale - larger # moves up, smaller # moves down.
+  - Usage: @include h($i, 1.375, 0.875) or @include h(1);
+  - Note: [fontScale] and [uniformScale] are optional arguments. */
+
+@mixin h(
+  $i,
+  $f-scale: variables.$font-scale,
+  $s-scale: variables.$space-scale,
+  $s-type: variables.$space-type,
+  $u-scale: variables.$uniform-scale,
+  $m-scale: variables.$move-scale
+) {
+  $r: $m-scale - $i;
+  & {
+    font-size: rnd(exp($f-scale, $r) * $u-scale) + variables.$heading-unit;
+    #{$s-type}: rnd(exp($s-scale, $r)) + variables.$heading-unit 0;
+    letter-spacing: rnd(exp(variables.$letter-scale, $i)) + px;
+  }
+
+  @if $i < 2 {
+    & {
+      font-weight: 800;
+    }
+  } @else if $i > 1 and $i < 5 {
+    & {
+      font-weight: 700;
+    }
+  } @else if $i > 4 {
+    & {
+      font-weight: 600;
+    }
+  }
+
+  @if $s-type == padding {
+    & {
+      margin: 0;
+    }
+  }
+}
+
+/* Exponent shorthand function
+  - Syntax: e([loopVarPassIn], [multiplier]);
+    - loopVarPassIn: Allows this variable to used inside a loop.
+    - multiplier: Multiplies output by specified amount.
+  - Usage: e($r, 1.5) 
+  - Only good for use inside Section mixin below */
+
+@function e($d, $n) {
+  @return rnd(exp(variables.$section-scale, $d) * $n) + rem;
+}
+
+/* Section mixin
+  - Allows a looped var to be attached to section.
+  - This is heavily dependent on markup, see 'TopicSubPage.scss'. */
+
+@mixin section($i) {
+  $r: 4 - $i;
+
+  // 1st & 2nd sections
+  @if $i == 1 {
+    margin: e($r, 1) 0 e($r, 1.25);
+
+    // 3nd section & beyond (nested)
+  } @else {
+    margin: 0 0 e($r, 1) e($r, 1);
+
+    /* Extra margin for any section following a <ul>
+         due to the padding-left of the <ul> */
+    ul ~ section {
+      margin-left: e($r, 1.25);
+    }
+  }
+
+  /* Add margin below headers, for scenarios where
+       there are multiple header items e.g. <h2> and <p> */
+  header {
+    margin-bottom: rnd(exp(1.25, $r)) + rem;
+  }
+
+  p + section {
+    // Offset $r value by -1, lowering by one section level
+    margin-top: e(($r - 1), 1);
+  }
+}
+
+@mixin box-shadow($direction) {
+  @if ($direction == top) {
+    box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.08);
+  } @else if ($direction == bottom) {
+    box-shadow: 0 -4px 4px -2px rgba(0, 0, 0, 0.08);
+  } @else {
+    @warn "#{$direction} is not a valid input. Use 'top' or 'bottom'";
+  }
+}
+
+// Keyframes mixin
+
+@mixin keyframes($animationName) {
+  @-webkit-keyframes #{$animationName} {
+    @content;
+  }
+  @-moz-keyframes #{$animationName} {
+    @content;
+  }
+  @-o-keyframes #{$animationName} {
+    @content;
+  }
+  @keyframes #{$animationName} {
+    @content;
+  }
+}
+
+/* Focus mixin
+   $state: $focus-lt-bg || $focus-dk-bg
+   $offset: Pixel value by which to offset outline
+   $important: boolean
+   (!) Use sparingly -- some libraries use 'outline: none !important',
+       which is why this parameter is necessary */
+
+@mixin focus($state: colormap.$focus-lt-bg, $offset: 2px, $important: false) {
+  $d-outline: 2px dotted $state;
+  outline-offset: $offset;
+  box-shadow: none;
+  @if $important {
+    outline: $d-outline !important;
+  } @else {
+    outline: $d-outline;
+  }
+}
+
+// Link Underline mixin
+
+@mixin link-underline($color) {
+  text-decoration: underline dotted $color 1px;
+
+  &:hover {
+    text-decoration-style: solid;
+    text-decoration-color: $color;
+  }
+}
