@@ -7,6 +7,14 @@ import TransformedDate from '../TransformedDate';
 import './dataset-search-list-item.scss';
 import { truncateText } from './truncateText';
 import { Button } from '@cmsgov/design-system';
+import DatasetDate from '../DatasetDate';
+
+type LocationType = {
+  pathname: string;
+  search?: string;
+  hash?: string;
+  state?: any;
+};
 
 type SearchItemProps = {
   title: string;
@@ -17,11 +25,32 @@ type SearchItemProps = {
   largeFile: boolean;
   paginationEnabled: boolean;
   dataDictionaryLinks: boolean;
+  refresh?: string;
+  released?: string;
+  showTopics?: boolean;
+  showDateDetails?: boolean;
+  theme?: string[];
+  location: LocationType;
 }
 
 const DatasetSearchListItem = (props: SearchItemProps) => {
   const desktop = useMediaQuery({ minWidth: 1024 });
-  const { title, modified, description, identifier, downloadUrl, largeFile = false, paginationEnabled, dataDictionaryLinks } = props;
+  const { 
+    title, 
+    modified, 
+    description, 
+    identifier, 
+    downloadUrl, 
+    largeFile = false, 
+    paginationEnabled, 
+    dataDictionaryLinks,
+    refresh,
+    released,
+    showDateDetails = false,
+    showTopics = false,
+    theme,
+    location
+  } = props;
 
   let linkContainerClasses = 'ds-u-margin-bottom--2';
   if (dataDictionaryLinks) {
@@ -35,13 +64,55 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
     linkClasses += ' ds-l-col--4 ds-l-md-col--auto';
   }
 
+  let themes
+
+  if (theme && showTopics) {
+    themes = (
+      <ul className='theme-list item-theme'>
+        {theme.map((topic: string, index: number) => {
+          let title = topic || 'Unknown Topic'
+          if (title === 'Doctors &amp; clinicians') {
+            title = 'Doctors and clinicians'
+          }
+          const prefix = 'topics'
+          let suffix = `${title.split(' ').join('-').toLowerCase()}`
+          // address edge cases where topic does not match route
+          suffix = suffix === 'doctors-and-clinicians' ? 'doctors-clinicians' : suffix
+          suffix = suffix === 'nursing-homes-including-rehab-services' ? 'nursing-homes' : suffix
+          const link = `/${prefix}/${suffix}`
+          // conditionally render link to topics. In case of helpful contacts, return dataset link
+          return (
+            <li key={`dist-${title}-${index}`}>
+              <Link
+                to={link}
+                state={{
+                  fromUrl: location.pathname,
+                  fromTitle: false,
+                  fromSearchList: location.pathname.includes('search')
+                }}
+              >
+                {title}
+              </Link>
+            </li>)
+        })}
+      </ul>
+    )
+  }
+
+  const date: { modified?: string; released?: string; refresh?: string } = {
+    modified,
+    released,
+    refresh
+  };
+
   return (
     <li className="dc-c-search-list-item ds-u-padding-top--3">
       <div className={`dc-c-searchlist-item ${paginationEnabled ? 'ds-u-border-top--1' : 'ds-u-border-bottom--1 ds-u-padding-bottom--3'}`}>
+        {themes}
         <div className="ds-l-row ds-u-align-items--start">
-          <span id={`dataset-${identifier}-updated-date`} className={`ds-l-col--12 ds-u-text-align--right ${paginationEnabled ? 'ds-u-padding-top--2' : 'ds-u-padding-top--0'}`}>
+          {!showDateDetails && <span id={`dataset-${identifier}-updated-date`} className={`ds-l-col--12 ds-u-text-align--right ${paginationEnabled ? 'ds-u-padding-top--2' : 'ds-u-padding-top--0'}`}>
             Updated <TransformedDate date={modified} />
-          </span>
+          </span>}
           <h2 className="ds-l-col--12 ds-text-heading--2xl">
             <Link aria-describedby={`dataset-${identifier}-updated-date`} to={`/dataset/${identifier}`}>{title}</Link>
           </h2>
@@ -65,6 +136,9 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
           ) : (
             ''
           )}
+          {showDateDetails && <div className='dataset-dates'>
+            <DatasetDate date={date} displayTooltips={false}/>
+          </div>}
         <ul className={`ds-l-row ds-u-padding--0 ds-u-flex-direction--row ds-u-justify-content--between ds-u-md-justify-content--start ds-u-margin-top--3 ds-u-margin-x--0 ${!dataDictionaryLinks ? 'ds-u-justify-content--center ds-u-md-justify-content--start' : ''}`}>
           <li className={linkContainerClasses}>
             <span className={linkClasses}>

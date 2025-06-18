@@ -15,6 +15,8 @@ export { default as SidebarPage } from './templates/SidebarPage';
 export { default as SubMenu } from './components/SubMenu';
 export { default as Hero } from './components/Hero';
 export { default as DatasetSearchListItem } from './components/DatasetSearchListItem';
+export { default as DatasetDateItem } from './components/DatasetDateItem';
+export { default as DatasetDate } from './components/DatasetDate';
 export { default as ApiDocumentation } from './components/ApiDocumentation';
 export { default as ResourceHeader } from './components/ResourceHeader';
 export { default as ResourcePreview } from './components/ResourcePreview';
