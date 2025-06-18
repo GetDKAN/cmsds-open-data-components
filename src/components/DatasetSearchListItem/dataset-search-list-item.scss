@@ -38,4 +38,33 @@
     }
 
   }
+
+  .theme-list {
+    display: inline-block;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 4px;
+
+    li {
+      font-size: 1.2rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.75px;
+      color: #FFF;
+      background-color: #{var(--link__color)};
+      display: inline-block;
+      margin-right: 8px;
+      margin-bottom: 4px;
+
+      a {
+        color: #FFF;
+        text-decoration: none;
+
+        &:focus,
+        &:visited:focus {
+          outline-offset: 12px;
+        }
+      }
+    }
+  }
 }

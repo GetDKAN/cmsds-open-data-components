@@ -13,6 +13,13 @@ const singleItem = {
   keyword: ['my keyword'],
 };
 
+const mockLocation = {
+  pathname: '/search',
+  search: '',
+  hash: '',
+  state: null
+};
+
 describe('<DatasetSearchListItem />', () => {
   test('Renders correctly', () => {
     render(
@@ -23,6 +30,7 @@ describe('<DatasetSearchListItem />', () => {
           description={singleItem.description}
           theme={singleItem.theme}
           identifier={"test"}
+          location={mockLocation}
         />
       </MemoryRouter>
     );
@@ -42,10 +50,74 @@ describe('<DatasetSearchListItem />', () => {
           identifier={"test"}
           showDownload={true}
           downloadUrl={"test.com"}
+          location={mockLocation}
         />
       </MemoryRouter>
     );
     expect(screen.getByRole('link', { name: 'Download Icon Download' })).toBeInTheDocument();
+  });
+
+  test('Renders themes when showTopics is true', () => {
+    const themeData = ['Healthcare', 'Medicare'];
+
+    render(
+      <MemoryRouter>
+        <DatasetSearchListItem
+          title={singleItem.title}
+          modified={singleItem.modified}
+          description={singleItem.description}
+          theme={themeData}
+          identifier={"test"}
+          showTopics={true}
+          location={mockLocation}
+        />
+      </MemoryRouter>
+    );
+
+    expect(screen.getByText('Healthcare')).toBeInTheDocument();
+    expect(screen.getByText('Medicare')).toBeInTheDocument();
+  });
+
+  test('Does not render themes when showTopics is false', () => {
+    const themeData = ['Healthcare', 'Medicare'];
+
+    render(
+      <MemoryRouter>
+        <DatasetSearchListItem
+          title={singleItem.title}
+          modified={singleItem.modified}
+          description={singleItem.description}
+          theme={themeData}
+          identifier={"test"}
+          showTopics={false}
+          location={mockLocation}
+        />
+      </MemoryRouter>
+    );
+
+    expect(screen.queryByText('Healthcare')).not.toBeInTheDocument();
+    expect(screen.queryByText('Medicare')).not.toBeInTheDocument();
+  });
+
+  test('Handles theme with empty strings', () => {
+    const themeData = ['', 'Medicare'];
+
+    render(
+      <MemoryRouter>
+        <DatasetSearchListItem
+          title={singleItem.title}
+          modified={singleItem.modified}
+          description={singleItem.description}
+          theme={themeData}
+          identifier={"test"}
+          showTopics={true}
+          location={mockLocation}
+        />
+      </MemoryRouter>
+    );
+
+    expect(screen.getByText('Unknown Topic')).toBeInTheDocument();
+    expect(screen.getByText('Medicare')).toBeInTheDocument();
   });
 });
 
@@ -60,6 +132,7 @@ test('Renders description', () => {
         identifier={"test"}
         showDownload={true}
         downloadUrl={"test.com"}
+        location={mockLocation}
       />
     </MemoryRouter>
   );
@@ -77,6 +150,7 @@ test('Renders description text before <br/>', () => {
         identifier={"test"}
         showDownload={true}
         downloadUrl={"test.com"}
+        location={mockLocation}
       />
     </MemoryRouter>
   );
@@ -94,6 +168,7 @@ test('Renders description text without <b>', () => {
         identifier={"test"}
         showDownload={true}
         downloadUrl={"test.com"}
+        location={mockLocation}
       />
     </MemoryRouter>
   );
@@ -111,6 +186,7 @@ test('Renders description text without <p>', () => {
         identifier={"test"}
         showDownload={true}
         downloadUrl={"test.com"}
+        location={mockLocation}
       />
     </MemoryRouter>
   );
@@ -128,6 +204,7 @@ test('Renders first <p> of description text without the <p>', () => {
         identifier={"test"}
         showDownload={true}
         downloadUrl={"test.com"}
+        location={mockLocation}
       />
     </MemoryRouter>
   );
@@ -145,6 +222,7 @@ test('Renders description text before <br/> without <p>', () => {
         identifier={"test"}
         showDownload={true}
         downloadUrl={"test.com"}
+        location={mockLocation}
       />
     </MemoryRouter>
   );
@@ -162,6 +240,7 @@ test('Renders description text with up to 240 characters', () => {
         identifier={"test"}
         showDownload={true}
         downloadUrl={"test.com"}
+        location={mockLocation}
       />
     </MemoryRouter>
   );
