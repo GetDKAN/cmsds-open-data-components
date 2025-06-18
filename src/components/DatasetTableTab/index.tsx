@@ -31,11 +31,19 @@ type DatasetTableTabProps = {
 const DatasetTable = ({
   isModal = false,
   closeFullScreenModal,
-  showQueryBuilder = false,
+  showQueryBuilder = true,
+  showCopyLinkButton = true,
+  showDownloadFilteredDataButton = true,
+  showDownloadFullDataButton = true,
+  showStoredQueryDownloadButton = false,
 }: {
   isModal?: boolean;
   closeFullScreenModal?: Function;
   showQueryBuilder?: boolean;
+  showCopyLinkButton?: boolean;
+  showDownloadFilteredDataButton?: boolean;
+  showDownloadFullDataButton?: boolean;
+  showStoredQueryDownloadButton?: boolean;
 }) => {
   const {
     id,
@@ -96,7 +104,10 @@ const DatasetTable = ({
             downloadURL={downloadURL}
             unfilteredDownloadURL={distribution.data.downloadURL}
             setPage={setPage}
-            showQueryBuilder={showQueryBuilder}
+            showCopyLinkButton={showCopyLinkButton}
+            showDownloadFilteredDataButton={showDownloadFilteredDataButton}
+            showDownloadFullDataButton={showDownloadFullDataButton}
+            showStoredQueryDownloadButton={showStoredQueryDownloadButton}
           />
         }
         <div
