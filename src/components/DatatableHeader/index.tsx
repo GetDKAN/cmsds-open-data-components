@@ -20,6 +20,7 @@ const DataTableHeader = ({
   showCopyLinkButton?: boolean;
   showDownloadFilteredDataButton?: boolean;
   showDownloadFullDataButton?: boolean;
+  showStoredQueryDownloadButton?: boolean;
 }) => {
   const { limit, offset, count, conditions, setLimit, setOffset } = resource;
   const intCount = count ? count : 0;
