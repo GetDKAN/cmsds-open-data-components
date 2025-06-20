@@ -32,8 +32,8 @@ export { truncateText } from './components/DatasetSearchListItem/truncateText';
 export { default as APIPage } from './templates/APIPage';
 export { default as PageNotFound } from './templates/PageNotFound';
 export { default as DatasetSearch } from './templates/DatasetSearch';
-export { DatasetListSubmenu } from './templates/DatasetList/index';
 export { default as DatasetList } from './templates/DatasetList';
+export { default as DatasetListSubmenu } from './templates/DatasetListSubmenu'
 export { default as Dataset } from './templates/Dataset';
 export { default as DatasetTable } from './components/DatasetTableTab';
 export { default as Header } from './templates/Header';

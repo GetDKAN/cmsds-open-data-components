@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import './dataset-list-item.scss';
+import './dataset-list-submenu-item.scss';
 
 type SearchItemProps = {
   title: string;
@@ -10,7 +10,7 @@ type SearchItemProps = {
   dataDictionaryLinks: boolean;
 }
 
-const DatasetSubmenuListItem = (props: SearchItemProps) => {
+const DatasetListSubmenuItem = (props: SearchItemProps) => {
   const desktop = useMediaQuery({ minWidth: 1024 });
   const { title, identifier, paginationEnabled, dataDictionaryLinks } = props;
 
@@ -39,4 +39,4 @@ const DatasetSubmenuListItem = (props: SearchItemProps) => {
   );
 };
 
-export default DatasetSubmenuListItem;
+export default DatasetListSubmenuItem;
