@@ -39,30 +39,49 @@
 
   }
 
+  h2 a {
+    color: #323a45;
+    font-size: 2rem;
+    text-decoration: underline;
+  }
+
+  .dataset-dates {
+    margin-top: 12px;
+  }
+
+  .dataset-data-item-label span {
+    font-weight: bold;
+  }
+
+  .download-button a {
+    border-radius: 20px;
+  }
+
   .theme-list {
     display: inline-block;
     list-style: none;
     padding: 0;
-    margin-bottom: 4px;
+    margin: 0 0 15px;
 
     li {
       font-size: 1.2rem;
       padding: 3px 10px;
-      border-radius: 20px;
       letter-spacing: 0.75px;
       color: #FFF;
-      background-color: #{var(--link__color)};
       display: inline-block;
       margin-right: 8px;
       margin-bottom: 4px;
+      text-decoration: none;
 
       a {
         color: #FFF;
-        text-decoration: none;
+        text-decoration: none !important;
 
+        &:hover,
         &:focus,
         &:visited:focus {
           outline-offset: 12px;
+          text-decoration: underline !important;
         }
       }
     }

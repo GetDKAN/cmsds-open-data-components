@@ -82,7 +82,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
           const link = `/${prefix}/${suffix}`
           // conditionally render link to topics. In case of helpful contacts, return dataset link
           return (
-            <li key={`dist-${title}-${index}`}>
+            <li className='ds-u-fill--primary ds-u-radius--pill' key={`dist-${title}-${index}`}>
               <Link
                 to={link}
                 state={{
@@ -125,7 +125,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
           ) : ''}</div>
         </div>
         {( downloadUrl ) ? (
-            <div className={`ds-u-margin-top--3 ds-u-padding-left--0`}>
+            <div className={`ds-u-margin-top--3 ds-u-padding-left--0 download-button`}>
                 {largeFile ? (
                   <span>
                     {<LargeFileDialog downloadUrl={downloadUrl} />}
