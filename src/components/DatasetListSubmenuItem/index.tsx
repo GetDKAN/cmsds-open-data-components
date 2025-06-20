@@ -1,14 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import TransformedDate from '../TransformedDate';
 import './dataset-list-item.scss';
-import { truncateText } from './truncateText';
 
 type SearchItemProps = {
   title: string;
-  modified: string;
-  description: string;
   identifier: string;
   paginationEnabled: boolean;
   dataDictionaryLinks: boolean;
