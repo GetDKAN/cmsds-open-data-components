@@ -76,7 +76,13 @@ export default function StoredQueryPage({
         datasetTableControls: !disableTableControls,
       }}
     >
-      <DataTableStateWrapper showQueryBuilder={false} />
+      <DataTableStateWrapper
+        showQueryBuilder={false}
+        showCopyLinkButton={false}
+        showDownloadFilteredDataButton={false}
+        showDownloadFullDataButton={false}
+        showStoredQueryDownloadButton={true}
+      />
     </DataTableContext.Provider>
   );
 }
