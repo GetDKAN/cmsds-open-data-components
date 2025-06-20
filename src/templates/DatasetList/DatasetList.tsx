@@ -22,7 +22,7 @@ const DatasetList = (props: DatasetSearchPageProps) => {
     enablePagination = true,
     defaultPageSize = 10,
     defaultSort = { defaultSort: 'modified', defaultOrder: 'desc' },
-    pageTitle = 'Dataset Explorer',
+    pageTitle = 'What\'s New ',
     showLargeFileWarning = false,
     largeFileThemes,
     introText = '',
@@ -224,17 +224,6 @@ const DatasetList = (props: DatasetSearchPageProps) => {
                   {data && data.data.results ? Object.keys(data.data.results).map((key) => {
                     return data.data.results[key];
                   }).map((item) => {
-                    function getDownloadUrl(item: DistributionItemType) {
-                      let distribution_array = item.distribution ? item.distribution : [];
-                      return distribution_array.length ? item.distribution[0].downloadURL : null;
-                    }
-                    let showLargeFile = false;
-                    if (largeFileThemes && item.theme)
-                      largeFileThemes.forEach(theme => {
-                        if (item.theme.includes(theme))
-                          showLargeFile = true;
-                      });
-
                     return (
                       <DatasetListItem
                         key={item.identifier}

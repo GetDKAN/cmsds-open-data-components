@@ -1,12 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import LargeFileDialog from '../LargeFileDialog';
-import SearchItemIcon from '../../assets/icons/searchItem';
 import TransformedDate from '../TransformedDate';
 import './dataset-list-item.scss';
 import { truncateText } from './truncateText';
-import { Button } from '@cmsgov/design-system';
 
 type SearchItemProps = {
   title: string;
@@ -43,7 +40,7 @@ const DatasetListItem = (props: SearchItemProps) => {
           <h2 className="ds-l-col--12 ds-text-heading--2xl">{title}</h2>
         </div>
         <div className="ds-l-row">
-          <div className="ds-l-col--12 ds-l-md-col--12 ds-u-margin-top--2">{truncateText(description)}</div>
+          <div className="ds-l-col--12 ds-l-md-col--12 ds-u-margin-top--2">The {title} dataset was updated.</div>
         </div>
         <div className="ds-l-row">
           <div className="ds-l-col--12">
