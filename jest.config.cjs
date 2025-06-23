@@ -15,4 +15,17 @@ module.exports = {
     '^swagger-ui-react$': '<rootDir>/__mocks__/swaggerMock.js'
   },
   testEnvironment: "jest-environment-jsdom",
+  // Memory optimization settings
+  maxWorkers: 2,
+  workerIdleMemoryLimit: '512MB',
+  // Coverage settings to reduce memory usage
+  collectCoverageFrom: [
+    'src/**/*.{js,jsx,ts,tsx}',
+    '!src/**/*.d.ts',
+    '!src/**/*.stories.{js,jsx,ts,tsx}',
+    '!src/**/*.test.{js,jsx,ts,tsx}',
+    '!src/**/*.spec.{js,jsx,ts,tsx}'
+  ],
+  coverageReporters: ['text', 'lcov'],
+  coverageDirectory: 'coverage'
 };
