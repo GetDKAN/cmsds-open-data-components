@@ -34,25 +34,25 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     altMobileSearchButton,
     dataDictionaryLinks = false,
   } = props;
-  const {ACA} = useContext(ACAContext);
-  
+  const { ACA } = useContext(ACAContext);
+
   const sortOptions = [
-    { label: 'Newest', value: 'newest'},
-    { label: 'Oldest', value: 'oldest'},
-    { label: 'Title A-Z', value: 'titleAZ'},
-    { label: 'Title Z-A', value: 'titleZA'}
+    { label: 'Newest', value: 'newest' },
+    { label: 'Oldest', value: 'oldest' },
+    { label: 'Title A-Z', value: 'titleAZ' },
+    { label: 'Title Z-A', value: 'titleZA' }
   ];
 
   const defaultSortBy = "";
   const defaultFulltext = "";
-  const defaultSelectedFacets = {theme: [], keyword: []};
+  const defaultSelectedFacets = { theme: [], keyword: [] };
   const defaultSortOrder = "";
   const defaultPage = 1;
 
   const location = useLocation();
   const transformedParams = transformUrlParamsToSearchObject(location.search, defaultSort);
 
-  const [currentResultNumbers, setCurrentResultNumbers] = useState({total: 0, startingNumber: 0, endingNumber: 0});
+  const [currentResultNumbers, setCurrentResultNumbers] = useState({ total: 0, startingNumber: 0, endingNumber: 0 });
   const [noResults, setNoResults] = useState(false);
   const [announcementText, setAnnouncementText] = useState('');
   let [searchParams, setSearchParams] = useSearchParams();
@@ -75,14 +75,14 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     transformedParams.selectedFacets
       ? transformedParams.selectedFacets
       : {
-          theme: [],
-          keyword: [],
-        }
+        theme: [],
+        keyword: [],
+      }
   )
 
   const setSortOptions = (value: string) => {
     setSortDisplay(value)
-    switch(value) {
+    switch (value) {
       case 'newest':
         setSort('modified');
         setSortOrder('desc');
@@ -137,11 +137,11 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     const params = buildSearchParams(true);
     const url = new URL(window.location.href);
     window.history.pushState({}, '', `${url.origin}${url.pathname}${params}`);
-    
+
     const baseNumber = Number(totalItems) > 0 ? 1 : 0;
     const startingNumber = baseNumber + (Number(pageSize) * Number(page) - Number(pageSize));
     const endingNumber = Number(pageSize) * Number(page);
-    
+
     setCurrentResultNumbers({
       total: Number(totalItems),
       startingNumber: Number(totalItems) >= startingNumber ? startingNumber : 0,
@@ -213,59 +213,59 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   const { data, isPending, error } = useQuery({
     queryKey: ["datasets", params],
     queryFn: () => {
-      return axios.get(`${rootUrl}/search/?${qs.stringify(acaToParams(params, ACA), {arrayFormat: 'comma',encode: false })}`)
+      return axios.get(`${rootUrl}/search/?${qs.stringify(acaToParams(params, ACA), { arrayFormat: 'comma', encode: false })}`)
     }
   });
 
   if ((data && data.data.total) && totalItems != data.data.total) setTotalItems(data.data.total);
 
-  const facets: SidebarFacetTypes = (data && data.data.facets) ? separateFacets(data ? data.data.facets : []) :  {theme: null, keyword: null};
+  const facets: SidebarFacetTypes = (data && data.data.facets) ? separateFacets(data ? data.data.facets : []) : { theme: null, keyword: null };
 
   return (
     <>
-    <PageHeader headerText={pageTitle} />
-    <section className="ds-l-container">
-      <div className="ds-l-row">
-        <div className="ds-l-col--12">
-          {introText ? introText : null}
-          {showLargeFileWarning && (
-            <div className="ds-l-row ds-u-margin-bottom--2 ds-u-margin-top--4">
-              <div className="ds-l-md-col--12">
-                <Accordion bordered>
-                  <AccordionItem
-                    contentClassName="downloading-datasets"
-                    heading="Please read before downloading datasets"
-                  >
-                    <LargeFileInfo />
-                  </AccordionItem>
-                </Accordion>
+      <PageHeader headerText={pageTitle} />
+      <section className="ds-l-container">
+        <div className="ds-l-row">
+          <div className="ds-l-col--12">
+            {introText ? introText : null}
+            {showLargeFileWarning && (
+              <div className="ds-l-row ds-u-margin-bottom--2 ds-u-margin-top--4">
+                <div className="ds-l-md-col--12">
+                  <Accordion bordered>
+                    <AccordionItem
+                      contentClassName="downloading-datasets"
+                      heading="Please read before downloading datasets"
+                    >
+                      <LargeFileInfo />
+                    </AccordionItem>
+                  </Accordion>
+                </div>
               </div>
-            </div>
-          )}
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            setFullText(filterText);
-          }}
-          className="dkan-dataset-search ds-l-form-row ds-u-padding-bottom--4 ds-u-border-bottom--1"
-        >
-          <span className="ds-c-field__before fas fa-search ds-u-display--none ds-u-sm-display--inline-block" />
-          <TextField
-            fieldClassName="ds-u-margin--0"
-            value={filterText as TextFieldValue}
-            className={`ds-u-padding-right--2 ${altMobileSearchButton ? 'ds-l-col--12 ds-l-md-col--10 --alt-style' : 'ds-l-col--10'}`}
-            label="Search datasets"
-            labelClassName="ds-u-visibility--screen-reader"
-            placeholder="Search datasets"
-            name="dataset_fulltext_search"
-            onChange={(e) => setFilterText(e.target.value)}
-          />
-          <SearchButton altMobileStyle={altMobileSearchButton} />
-        </form>
+            )}
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                setFullText(filterText);
+              }}
+              className="dkan-dataset-search ds-l-form-row ds-u-padding-bottom--4 ds-u-border-bottom--1"
+            >
+              <span className="ds-c-field__before fas fa-search ds-u-display--none ds-u-sm-display--inline-block" />
+              <TextField
+                fieldClassName="ds-u-margin--0"
+                value={filterText as TextFieldValue}
+                className={`ds-u-padding-right--2 ${altMobileSearchButton ? 'ds-l-col--12 ds-l-md-col--10 --alt-style' : 'ds-l-col--10'}`}
+                label="Search datasets"
+                labelClassName="ds-u-visibility--screen-reader"
+                placeholder="Search datasets"
+                name="dataset_fulltext_search"
+                onChange={(e) => setFilterText(e.target.value)}
+              />
+              <SearchButton altMobileStyle={altMobileSearchButton} />
+            </form>
+          </div>
         </div>
-      </div>
-      <div className="ds-l-row ds-u-padding-top--4">
-        <div className="ds-l-col--12 ds-l-sm-col--4">
+        <div className="ds-l-row ds-u-padding-top--4">
+          <div className="ds-l-col--12 ds-l-sm-col--4">
             <Button
               className="dc-dataset-search--clear-all-filters ds-u-margin-bottom--2"
               onClick={() => resetFilters()}
@@ -288,106 +288,108 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                 selectedFacets={selectedFacets.keyword}
               />
             )}
-        </div>
-        <div className="ds-l-col--12 ds-l-sm-col--8">
-          {isPending ? (
-            <Spinner
-              className="ds-u-valign--middle"
-              aria-valuetext="Dataset Search loading"
-              role="status"
-            />
-          ) : (
-            <>
-              <div className="ds-u-display--flex ds-u-justify-content--between ds-u-align-items--end ds-u-flex-wrap--reverse ds-u-sm-flex-wrap--wrap">
-                { enablePagination && (
-                  <div className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--8">
-                    <p className="ds-u-margin-y--0" aria-hidden="true">
-                      {(currentResultNumbers && data) && (
-                        <>
-                          Showing {currentResultNumbers.startingNumber} -{' '}
-                          {currentResultNumbers.endingNumber} of {data.data.total} datasets
-                        </>
-                      )}
-                    </p>
-                    <p 
-                      className="ds-u-visibility--screen-reader" 
-                      role="status"
-                      aria-live="assertive"
-                      aria-atomic="true"
-                      data-testid="currentResults" 
-                    >
-                      {announcementText}
-                    </p>
-                  </div>
-                )}
-                {enableSort && (
-                  <div className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--4 ds-u-sm-padding-right--0">
-                    <Dropdown
-                      options={sortOptions}
-                      value={sortDisplay}
-                      label="Sort"
-                      labelClassName="ds-u-margin-top--0"
-                      name="dataset_search_sort"
-                      onChange={(e) => setSortOptions(e.target.value)}
-                    />
-                  </div>
-                )}
-              </div>
-            <ol className="dc-dataset-search-list ds-u-padding--0 ds-u-margin-top--0 ds-u-margin-bottom--4 ds-u-display--block" data-testid="results-list">
-              {noResults && <Alert variation="error" heading="No results found." />}
-              {data && data.data.results ? Object.keys(data.data.results).map((key) => {
-                  return data.data.results[key];
-                }).map((item) => {
-                  function getDownloadUrl(item: DistributionItemType) {
-                    let distribution_array = item.distribution ? item.distribution : [];
-                    return distribution_array.length ? item.distribution[0].downloadURL : null;
-                  }
-                  let showLargeFile = false;
-                  if (largeFileThemes && item.theme)
-                    largeFileThemes.forEach(theme => {
-                      if (item.theme.includes(theme))
-                        showLargeFile = true;
-                  });
-                  
-                  return (
-                    <DatasetSearchListItem 
-                      key={item.identifier}
-                      title={item.title}
-                      modified={item.modified}
-                      description={item.description}
-                      identifier={item.identifier}
-                      downloadUrl={showDownloadIcon ? getDownloadUrl(item) : null}
-                      largeFile={showLargeFile}
-                      paginationEnabled={enablePagination}
-                      dataDictionaryLinks={dataDictionaryLinks}
-                    />
-                  )
-                }) : ( 
-                  <Alert variation="error" heading="Could not connect to the API." />
-                )}
-            </ol>
-            {enablePagination && (data && data.data.total) && data.data.total != 0 && (
-              <Pagination
-                currentPage={Number(page)}
-                totalPages={Math.ceil(Number(data.data.total) / pageSize)}
-                onPageChange={(evt, page) => {
-                  evt.preventDefault();
-                  window.scroll(0, 0);
-                  setPage(page);
-                }}
-                renderHref={(page) => {
-                  const searchParams = buildSearchParams(false);
-                  const includeAnd = searchParams ? '&' : '';
-                  return `/datasets?page=${page}${includeAnd}${searchParams}`;
-                }}
-              />
-            )}
+          </div>
+          <div className="ds-l-col--12 ds-l-sm-col--8">
+            <h1> This means that the sync is working.</h1>
 
-          </>
-          )}
+            {isPending ? (
+              <Spinner
+                className="ds-u-valign--middle"
+                aria-valuetext="Dataset Search loading"
+                role="status"
+              />
+            ) : (
+              <>
+                <div className="ds-u-display--flex ds-u-justify-content--between ds-u-align-items--end ds-u-flex-wrap--reverse ds-u-sm-flex-wrap--wrap">
+                  {enablePagination && (
+                    <div className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--8">
+                      <p className="ds-u-margin-y--0" aria-hidden="true">
+                        {(currentResultNumbers && data) && (
+                          <>
+                            Showing {currentResultNumbers.startingNumber} -{' '}
+                            {currentResultNumbers.endingNumber} of {data.data.total} datasets
+                          </>
+                        )}
+                      </p>
+                      <p
+                        className="ds-u-visibility--screen-reader"
+                        role="status"
+                        aria-live="assertive"
+                        aria-atomic="true"
+                        data-testid="currentResults"
+                      >
+                        {announcementText}
+                      </p>
+                    </div>
+                  )}
+                  {enableSort && (
+                    <div className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--4 ds-u-sm-padding-right--0">
+                      <Dropdown
+                        options={sortOptions}
+                        value={sortDisplay}
+                        label="Sort"
+                        labelClassName="ds-u-margin-top--0"
+                        name="dataset_search_sort"
+                        onChange={(e) => setSortOptions(e.target.value)}
+                      />
+                    </div>
+                  )}
+                </div>
+                <ol className="dc-dataset-search-list ds-u-padding--0 ds-u-margin-top--0 ds-u-margin-bottom--4 ds-u-display--block" data-testid="results-list">
+                  {noResults && <Alert variation="error" heading="No results found." />}
+                  {data && data.data.results ? Object.keys(data.data.results).map((key) => {
+                    return data.data.results[key];
+                  }).map((item) => {
+                    function getDownloadUrl(item: DistributionItemType) {
+                      let distribution_array = item.distribution ? item.distribution : [];
+                      return distribution_array.length ? item.distribution[0].downloadURL : null;
+                    }
+                    let showLargeFile = false;
+                    if (largeFileThemes && item.theme)
+                      largeFileThemes.forEach(theme => {
+                        if (item.theme.includes(theme))
+                          showLargeFile = true;
+                      });
+
+                    return (
+                      <DatasetSearchListItem
+                        key={item.identifier}
+                        title={item.title}
+                        modified={item.modified}
+                        description={item.description}
+                        identifier={item.identifier}
+                        downloadUrl={showDownloadIcon ? getDownloadUrl(item) : null}
+                        largeFile={showLargeFile}
+                        paginationEnabled={enablePagination}
+                        dataDictionaryLinks={dataDictionaryLinks}
+                      />
+                    )
+                  }) : (
+                    <Alert variation="error" heading="Could not connect to the API." />
+                  )}
+                </ol>
+                {enablePagination && (data && data.data.total) && data.data.total != 0 && (
+                  <Pagination
+                    currentPage={Number(page)}
+                    totalPages={Math.ceil(Number(data.data.total) / pageSize)}
+                    onPageChange={(evt, page) => {
+                      evt.preventDefault();
+                      window.scroll(0, 0);
+                      setPage(page);
+                    }}
+                    renderHref={(page) => {
+                      const searchParams = buildSearchParams(false);
+                      const includeAnd = searchParams ? '&' : '';
+                      return `/datasets?page=${page}${includeAnd}${searchParams}`;
+                    }}
+                  />
+                )}
+
+              </>
+            )}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
     </>
   );
 };

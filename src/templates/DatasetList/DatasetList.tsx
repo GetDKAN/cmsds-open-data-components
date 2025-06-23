@@ -24,7 +24,6 @@ const DatasetList = (props: DatasetSearchPageProps) => {
     defaultSort = { defaultSort: 'modified', defaultOrder: 'desc' },
     pageTitle = 'What\'s New ',
     showLargeFileWarning = false,
-    largeFileThemes,
     introText = '',
     dataDictionaryLinks = false,
   } = props;
