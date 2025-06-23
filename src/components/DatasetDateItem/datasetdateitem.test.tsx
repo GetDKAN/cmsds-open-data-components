@@ -12,7 +12,9 @@ describe('<DatasetDateItem />', () => {
       />
     );
 
-    expect(screen.getByText('Last Modified: February 1, 2023')).toBeInTheDocument();
+    expect(screen.getByText((content, element) => {
+      return element?.textContent === 'Last Modified: February 1, 2023';
+    })).toBeInTheDocument();
   });
 
   test('Renders released date correctly', () => {
@@ -23,7 +25,9 @@ describe('<DatasetDateItem />', () => {
       />
     );
 
-    expect(screen.getByText('Released: January 1, 2023')).toBeInTheDocument();
+    expect(screen.getByText((content, element) => {
+      return element?.textContent === 'Released: January 1, 2023';
+    })).toBeInTheDocument();
   });
 
   test('Renders refresh date correctly', () => {
@@ -34,7 +38,9 @@ describe('<DatasetDateItem />', () => {
       />
     );
 
-    expect(screen.getByText('Planned Update: March 1, 2023')).toBeInTheDocument();
+    expect(screen.getByText((content, element) => {
+      return element?.textContent === 'Planned Update: March 1, 2023';
+    })).toBeInTheDocument();
   });
 
   test('Applies bold label class when boldLabel is true', () => {
@@ -46,7 +52,9 @@ describe('<DatasetDateItem />', () => {
       />
     );
 
-    const container = screen.getByText('Last Modified: February 1, 2023').closest('div');
+    const container = screen.getByText((content, element) => {
+      return element?.textContent === 'Last Modified: February 1, 2023';
+    }).closest('div');
     expect(container).toHaveClass('dataset-date-item bold-label');
   });
 

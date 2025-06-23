@@ -13,7 +13,7 @@ describe('<DatasetDate />', () => {
       />
     );
 
-    expect(screen.getByText('Last Modified: February 1, 2023')).toBeInTheDocument();
+    expect(screen.getByText((content, element) => element?.textContent === 'Last Modified: February 1, 2023')).toBeInTheDocument();
     expect(screen.queryByText('•')).not.toBeInTheDocument();
   });
 
@@ -27,8 +27,8 @@ describe('<DatasetDate />', () => {
       />
     );
 
-    expect(screen.getByText('Last Modified: February 1, 2023')).toBeInTheDocument();
-    expect(screen.getByText('Released: January 1, 2023')).toBeInTheDocument();
+    expect(screen.getByText((content, element) => element?.textContent === 'Last Modified: February 1, 2023')).toBeInTheDocument();
+    expect(screen.getByText((content, element) => element?.textContent === 'Released: January 1, 2023')).toBeInTheDocument();
     expect(screen.getByText('•')).toBeInTheDocument();
   });
 
@@ -43,9 +43,9 @@ describe('<DatasetDate />', () => {
       />
     );
 
-    expect(screen.getByText('Last Modified: February 1, 2023')).toBeInTheDocument();
-    expect(screen.getByText('Released: January 1, 2023')).toBeInTheDocument();
-    expect(screen.getByText('Planned Update: March 1, 2023')).toBeInTheDocument();
+    expect(screen.getByText((content, element) => element?.textContent === 'Last Modified: February 1, 2023')).toBeInTheDocument();
+    expect(screen.getByText((content, element) => element?.textContent === 'Released: January 1, 2023')).toBeInTheDocument();
+    expect(screen.getByText((content, element) => element?.textContent === 'Planned Update: March 1, 2023')).toBeInTheDocument();
     
     // Should have two bullet separators
     const bullets = screen.getAllByText('•');
@@ -64,8 +64,8 @@ describe('<DatasetDate />', () => {
       />
     );
 
-    const modifiedContainer = screen.getByText('Last Modified: February 1, 2023').closest('div');
-    const releasedContainer = screen.getByText('Released: January 1, 2023').closest('div');
+    const modifiedContainer = screen.getByText((content, element) => element?.textContent === 'Last Modified: February 1, 2023').closest('div');
+    const releasedContainer = screen.getByText((content, element) => element?.textContent === 'Released: January 1, 2023').closest('div');
     
     expect(modifiedContainer).toHaveClass('dataset-date-item bold-label');
     expect(releasedContainer).toHaveClass('dataset-date-item bold-label');
