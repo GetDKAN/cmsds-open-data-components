@@ -41,39 +41,55 @@ const DatasetDate: React.FC<DatasetDateProps> = (props) => {
 
   const { modified, released, refresh } = date;
 
-  let count = 0;
-  if (released) count++;
-  if (modified) count++;
-  if (refresh) count++;
+  // Create an array of date items to render
+  const dateItems = [];
+  
+  if (modified) {
+    dateItems.push(
+      <DatasetDateItem 
+        key="modified"
+        displayTooltips={displayTooltips} 
+        type='modified' 
+        date={modified} 
+        boldLabel={updatedBoldLabel} 
+      />
+    );
+  }
+  
+  if (released) {
+    dateItems.push(
+      <DatasetDateItem 
+        key="released"
+        displayTooltips={displayTooltips} 
+        type='released' 
+        date={released} 
+        boldLabel={releasedBoldLabel} 
+      />
+    );
+  }
+  
+  if (refresh) {
+    dateItems.push(
+      <DatasetDateItem 
+        key="refresh"
+        displayTooltips={displayTooltips} 
+        type='refresh' 
+        date={refresh} 
+        boldLabel={refreshBoldLabel} 
+      />
+    );
+  }
 
   return (
     <div className='dataset-date'>
-      {modified && (
-        <DatasetDateItem 
-          displayTooltips={displayTooltips} 
-          type='modified' 
-          date={modified} 
-          boldLabel={updatedBoldLabel} 
-        />
-      )}
-      {count > 1 && <span className='bullet-point'>&bull;</span>}
-      {released && (
-        <DatasetDateItem 
-          displayTooltips={displayTooltips} 
-          type='released' 
-          date={released} 
-          boldLabel={releasedBoldLabel} 
-        />
-      )}
-      {count > 2 && <span className='bullet-point'>&bull;</span>}
-      {refresh && (
-        <DatasetDateItem 
-          displayTooltips={displayTooltips} 
-          type='refresh' 
-          date={refresh} 
-          boldLabel={refreshBoldLabel} 
-        />
-      )}
+      {dateItems.map((item, index) => (
+        <React.Fragment key={index}>
+          {item}
+          {index < dateItems.length - 1 && (
+            <span className='bullet-point'>&bull;</span>
+          )}
+        </React.Fragment>
+      ))}
     </div>
   );
 };
