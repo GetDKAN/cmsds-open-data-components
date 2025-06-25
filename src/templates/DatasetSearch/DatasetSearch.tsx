@@ -290,8 +290,6 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
             )}
           </div>
           <div className="ds-l-col--12 ds-l-sm-col--8">
-            <h1> This means that the sync is working.</h1>
-
             {isPending ? (
               <Spinner
                 className="ds-u-valign--middle"
