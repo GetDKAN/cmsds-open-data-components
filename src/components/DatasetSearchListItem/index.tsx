@@ -74,11 +74,11 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
           if (title === 'Doctors &amp; clinicians') {
             title = 'Doctors and clinicians'
           }
-          const prefix = 'topics'
           let suffix = `${title.split(' ').join('-').toLowerCase()}`
           // address edge cases where topic does not match route
           suffix = suffix === 'doctors-and-clinicians' ? 'doctors-clinicians' : suffix
           suffix = suffix === 'nursing-homes-including-rehab-services' ? 'nursing-homes' : suffix
+          const prefix = 'topics'
           const link = `/${prefix}/${suffix}`
           // conditionally render link to topics. In case of helpful contacts, return dataset link
           return (
