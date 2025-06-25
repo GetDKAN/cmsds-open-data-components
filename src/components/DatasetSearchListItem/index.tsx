@@ -30,6 +30,7 @@ type SearchItemProps = {
   showTopics?: boolean;
   showDateDetails?: boolean;
   theme?: string[];
+  topicSlugs?: { [key: string]: string }; // Map of topic titles to their slugs
   location: LocationType;
 }
 
@@ -49,6 +50,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
     showDateDetails = false,
     showTopics = false,
     theme,
+    topicSlugs,
     location
   } = props;
 
@@ -70,17 +72,13 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
     themes = (
       <ul className='theme-list item-theme'>
         {theme.map((topic: string, index: number) => {
-          let title = topic || 'Unknown Topic'
-          if (title === 'Doctors &amp; clinicians') {
-            title = 'Doctors and clinicians'
-          }
-          let suffix = `${title.split(' ').join('-').toLowerCase()}`
-          // address edge cases where topic does not match route
-          suffix = suffix === 'doctors-and-clinicians' ? 'doctors-clinicians' : suffix
-          suffix = suffix === 'nursing-homes-including-rehab-services' ? 'nursing-homes' : suffix
+          const title = topic || 'Unknown Topic'
           const prefix = 'topics'
-          const link = `/${prefix}/${suffix}`
-          // conditionally render link to topics. In case of helpful contacts, return dataset link
+          
+          // Use the provided slug or fallback to a simple slug generation
+          const slug = topicSlugs?.[title] || title.split(' ').join('-').toLowerCase()
+          const link = `/${prefix}/${slug}`
+          
           return (
             <li className='ds-u-fill--primary ds-u-radius--pill' key={`dist-${title}-${index}`}>
               <Link
