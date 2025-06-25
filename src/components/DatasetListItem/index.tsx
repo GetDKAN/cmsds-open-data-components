@@ -8,7 +8,6 @@ import { truncateText } from './truncateText';
 type SearchItemProps = {
   title: string;
   modified: string;
-  description: string;
   identifier: string;
   paginationEnabled: boolean;
   dataDictionaryLinks: boolean;
@@ -16,7 +15,7 @@ type SearchItemProps = {
 
 const DatasetListItem = (props: SearchItemProps) => {
   const desktop = useMediaQuery({ minWidth: 1024 });
-  const { title, modified, description, identifier, paginationEnabled, dataDictionaryLinks } = props;
+  const { title, modified, identifier, paginationEnabled, dataDictionaryLinks } = props;
 
   let linkContainerClasses = 'ds-u-margin-bottom--2';
   if (dataDictionaryLinks) {

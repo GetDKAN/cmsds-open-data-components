@@ -228,7 +228,6 @@ const DatasetList = (props: DatasetSearchPageProps) => {
                         key={item.identifier}
                         title={item.title}
                         modified={item.modified}
-                        description={item.description}
                         identifier={item.identifier}
                         paginationEnabled={enablePagination}
                         dataDictionaryLinks={dataDictionaryLinks}
