@@ -32,10 +32,22 @@ const DatasetDateItem: React.FC<DatasetDateItemProps> = (props) => {
     refresh: 'Planned Update'
   };
 
-  const tooltipValue: Record<DateType, string> = {
-    modified: 'Last Modified: The date the<br/>dataset was last updated.',
-    released: 'Released: The date the most<br/>recent dataset was made available<br/>to the public.',
-    refresh: 'Planned Update: The date the<br/>dataset is scheduled to be updated.'
+  const tooltipContent: Record<DateType, React.ReactNode> = {
+    modified: (
+      <>
+        <strong>Last Modified: </strong> The date the<br/>dataset was last updated.
+      </>
+    ),
+    released: (
+      <>
+        <strong>Released: </strong> The date the most<br/>recent dataset was made available<br/>to the public.
+      </>
+    ),
+    refresh: (
+      <>
+        <strong>Planned Update:</strong> The date the<br/>dataset is scheduled to be updated.
+      </>
+    )
   };
 
   return (
@@ -47,7 +59,7 @@ const DatasetDateItem: React.FC<DatasetDateItemProps> = (props) => {
         <Tooltip
           aria-label={dateText[type]}
           className="ds-c-tooltip__trigger-icon ds-u-display--inline ds-u-padding-left--0 ds-uw-padding-right--0"
-          title={tooltipValue[type]}
+          title={tooltipContent[type]}
           placement="top"
         >
           <TooltipIcon />

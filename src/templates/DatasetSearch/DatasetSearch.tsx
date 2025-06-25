@@ -288,6 +288,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                 selectedFacets={selectedFacets.keyword}
               />
             )}
+<<<<<<< HEAD
           </div>
           <div className="ds-l-col--12 ds-l-sm-col--8">
             {isPending ? (
@@ -295,6 +296,101 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                 className="ds-u-valign--middle"
                 aria-valuetext="Dataset Search loading"
                 role="status"
+=======
+        </div>
+        <div className="ds-l-col--12 ds-l-sm-col--8">
+          {isPending ? (
+            <Spinner
+              className="ds-u-valign--middle"
+              aria-valuetext="Dataset Search loading"
+              role="status"
+            />
+          ) : (
+            <>
+              <div className="ds-u-display--flex ds-u-justify-content--between ds-u-align-items--end ds-u-flex-wrap--reverse ds-u-sm-flex-wrap--wrap">
+                { enablePagination && (
+                  <div className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--8">
+                    <p className="ds-u-margin-y--0" aria-hidden="true">
+                      {(currentResultNumbers && data) && (
+                        <>
+                          Showing {currentResultNumbers.startingNumber} -{' '}
+                          {currentResultNumbers.endingNumber} of {data.data.total} datasets
+                        </>
+                      )}
+                    </p>
+                    <p 
+                      className="ds-u-visibility--screen-reader" 
+                      role="status"
+                      aria-live="assertive"
+                      aria-atomic="true"
+                      data-testid="currentResults" 
+                    >
+                      {announcementText}
+                    </p>
+                  </div>
+                )}
+                {enableSort && (
+                  <div className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--4 ds-u-sm-padding-right--0">
+                    <Dropdown
+                      options={sortOptions}
+                      value={sortDisplay}
+                      label="Sort"
+                      labelClassName="ds-u-margin-top--0"
+                      name="dataset_search_sort"
+                      onChange={(e) => setSortOptions(e.target.value)}
+                    />
+                  </div>
+                )}
+              </div>
+            <ol className="dc-dataset-search-list ds-u-padding--0 ds-u-margin-top--0 ds-u-margin-bottom--4 ds-u-display--block" data-testid="results-list">
+              {noResults && <Alert variation="error" heading="No results found." />}
+              {data && data.data.results ? Object.keys(data.data.results).map((key) => {
+                  return data.data.results[key];
+                }).map((item) => {
+                  function getDownloadUrl(item: DistributionItemType) {
+                    let distribution_array = item.distribution ? item.distribution : [];
+                    return distribution_array.length ? item.distribution[0].downloadURL : null;
+                  }
+                  let showLargeFile = false;
+                  if (largeFileThemes && item.theme)
+                    largeFileThemes.forEach(theme => {
+                      if (item.theme.includes(theme))
+                        showLargeFile = true;
+                  });
+                  
+                  return (
+                    <DatasetSearchListItem 
+                      key={item.identifier}
+                      title={item.title}
+                      modified={item.modified}
+                      description={item.description}
+                      url={`/dataset/${item.identifier}`}
+                      downloadUrl={showDownloadIcon ? getDownloadUrl(item) : null}
+                      largeFile={showLargeFile}
+                      paginationEnabled={enablePagination}
+                      dataDictionaryLinks={dataDictionaryLinks}
+                      location={{ pathname: window.location.pathname }}
+                    />
+                  )
+                }) : ( 
+                  <Alert variation="error" heading="Could not connect to the API." />
+                )}
+            </ol>
+            {enablePagination && (data && data.data.total) && data.data.total != 0 && (
+              <Pagination
+                currentPage={Number(page)}
+                totalPages={Math.ceil(Number(data.data.total) / pageSize)}
+                onPageChange={(evt, page) => {
+                  evt.preventDefault();
+                  window.scroll(0, 0);
+                  setPage(page);
+                }}
+                renderHref={(page) => {
+                  const searchParams = buildSearchParams(false);
+                  const includeAnd = searchParams ? '&' : '';
+                  return `/datasets?page=${page}${includeAnd}${searchParams}`;
+                }}
+>>>>>>> 1074635 (WCMS-25375: updated tooltip to present html properly)
               />
             ) : (
               <>

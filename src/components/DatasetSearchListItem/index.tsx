@@ -76,7 +76,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
           const prefix = 'topics'
           
           // Use the provided slug or fallback to a simple slug generation
-          const slug = topicSlugs?.[title] || title.split(' ').join('-').toLowerCase()
+          const slug = topicSlugs?.[title]
           const link = `/${prefix}/${slug}`
           
           return (
