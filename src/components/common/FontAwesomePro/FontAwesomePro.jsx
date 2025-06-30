@@ -22,29 +22,29 @@ const FontAwesomePro = (props) => {
   }, [icon])
 
   // Set default svg attribtues
-  const iconAttr = { /////////////////
-    'aria-hidden': ariaHidden,
-    className: `fa fa-${icon}`,
-    focusable: 'false',
-    height: size || height,
-    role: 'img',
-    width: size || width
-  }
+  // const iconAttr = { /////////////////
+  //   'aria-hidden': ariaHidden,
+  //   className: `fa fa-${icon}`,
+  //   focusable: 'false',
+  //   height: size || height,
+  //   role: 'img',
+  //   width: size || width
+  // }
 
   // Get svgIndex export array values
   const svgList = svgIndex.values() ////////
 
   // Loop through svgIndex export array
-  const iconMap = (ico) => { //////////////
-    for (const svg of svgList) {
-      const key = Object.keys(svg)[0]
-      if (key === ico) {
-        // Get value from svgIndex, which is a ReactComponent
-        const Value = Object.values(svg)[0]
-        return <Value {...iconAttr} ref={ref} aria-label={icon.split('-').join(' ')} />
-      }
-    }
-  }
+  // const iconMap = (ico) => { //////////////
+  //   for (const svg of svgList) {
+  //     const key = Object.keys(svg)[0]
+  //     if (key === ico) {
+  //       // Get value from svgIndex, which is a ReactComponent
+  //       const Value = Object.values(svg)[0]
+  //       return <Value {...iconAttr} ref={ref} aria-label={icon.split('-').join(' ')} />
+  //     }
+  //   }
+  // }
 
   // return ( ///////
   //   iconMap(icon)

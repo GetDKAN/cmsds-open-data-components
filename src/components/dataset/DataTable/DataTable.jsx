@@ -412,7 +412,7 @@ const DataTable = ({ datasetTitle }) => {
               className="-btn"
             >
               <FontAwesomePro icon="long-arrow-left" aria-hidden />
-              Previous <span className="sr-only">data page</span>
+              Previous <span className="sr-only"></span>
             </button>
           </div>
           <div className="-center" aria-live="assertive" aria-atomic={true}>
@@ -433,7 +433,7 @@ const DataTable = ({ datasetTitle }) => {
               disabled={!canNextPage}
               className="-btn"
             >
-              Next <span className="sr-only">data page</span>
+              Next <span className="sr-only"></span>
               <FontAwesomePro icon="long-arrow-right" aria-hidden />
             </button>
           </div>

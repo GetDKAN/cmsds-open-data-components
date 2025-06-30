@@ -116,7 +116,7 @@ const useDatastore = (
     limit,
     offset,
     schema,
-    conditions,
+    conditions: [],
     properties,
     setProperties,
     setGroupings,

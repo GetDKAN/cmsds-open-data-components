@@ -1,5 +1,6 @@
 import React from 'react'
 import FontAwesomePro from '../../common/FontAwesomePro/FontAwesomePro'
+// import { Button } from '@cmsgov/design-system';
 import PropTypes from 'prop-types'
 
 const DeleteButton = ({ deleteFilter, enabled, i }) => {
@@ -7,10 +8,29 @@ const DeleteButton = ({ deleteFilter, enabled, i }) => {
 
   return (
     <button aria-label='delete filter' className={deleteClass} disabled={!enabled} onClick={() => deleteFilter(i)}>
-      <FontAwesomePro icon='trash' size={20} />
+      <FontAwesomePro icon='trash' size={50} />
     </button>
   )
 }
+
+
+// const DeleteButton = ({ deleteFilter, enabled, i }) => {
+//   return (
+//     <Button
+//       aria-label="Delete filter"
+//       variation="ghost"
+//       size="small"
+//       type="button"
+//       className="ds-u-margin-top--6 ds-u-padding-right--0"
+//       onClick={() => deleteFilter(i)}
+//       disabled={!enabled}
+//     >
+//       Delete filter
+//       <span className="fas fa-trash" aria-hidden="true" />
+//     </Button>
+//   )
+// }
+
 
 DeleteButton.propTypes = {
   /**

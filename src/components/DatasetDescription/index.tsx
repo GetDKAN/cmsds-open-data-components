@@ -13,6 +13,7 @@ const DatasetDescription = (
   useEffect(() => {
     let newDescription = '';
     if (customDescription) {
+    
       newDescription = customDescription(dataset, distribution, resource);
     } else {
       if(distribution.data && distribution.data.description) {

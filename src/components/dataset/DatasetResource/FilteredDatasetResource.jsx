@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { FilteredDispatch } from './FilteredDatasetContext'
 import useDatastore from '../../../hooks/useDataStore'
-import { getApiBaseUrl } from '../../../utilities/getApiBaseUrl'
+// import { getApiBaseUrl } from '../../../utilities/getApiBaseUrl'
 
 import {
   useTable,
@@ -37,7 +37,9 @@ const FilteredDatasetResource = ({
       accessor: column
     }))
   }
-  const baseUrl = getApiBaseUrl()
+  // const baseUrl = getApiBaseUrl()
+  const baseUrl = "https://data.medicaid.gov/api/1"
+  console.log("URL++++++++++======",baseUrl)
   const filteredResource = useDatastore(
     '',
     baseUrl,
@@ -51,6 +53,7 @@ const FilteredDatasetResource = ({
 
   // listen to our filter resource changing, and flip the go switch once we have the info to query.
   useEffect(() => {
+    console.log("in use effect for resource---------", resource)
     if (resource.identifier) {
       filteredResource.setResource(resource.identifier)
       filteredResource.setManual(false)
@@ -154,7 +157,15 @@ const FilteredDatasetResource = ({
       value={{
         filteredResource,
         filteredTable,
-        initOrder,
+        initOrder: [
+    {id: 'ndc_description', Header: 'NDC Description'},
+    {id: 'ndc', Header: 'NDC'},
+    {id: 'old_nadac_per_unit', Header: 'Old NADAC Per Unit'}, 
+    {id: 'new_nadac_per_unit', Header: 'New NADAC Per Unit'}, 
+    {id: 'classification_for_rate_setting', Header: 'Classification for Rate Setting'}, 
+    {id: 'percent_change', Header: 'Percent Change'}, 
+  ],
+
         curOrder,
         setCurOrder,
         setVisCol,
