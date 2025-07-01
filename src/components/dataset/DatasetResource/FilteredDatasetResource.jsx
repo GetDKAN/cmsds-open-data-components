@@ -18,7 +18,7 @@ const FilteredDatasetResource = ({
   children,
   resource
 }) => {
-  const [filters, setFilters] = useState([{ column: '', condition: '', value: '' }]) // keep track of the applied filters
+  const [filters, setFilters] = useState([{ column: 'ndc', condition: '=', value: '' }]) // keep track of the applied filters
   const [filtersApplied, setFiltersApplied] = useState([])
   const [initCol, setInitCol] = useState([]) // we want to save a reference to filter against
   const [col, setCol] = useState([]) // columns we pass to table, post filter
