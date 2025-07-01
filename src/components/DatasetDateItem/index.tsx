@@ -35,17 +35,17 @@ const DatasetDateItem: React.FC<DatasetDateItemProps> = (props) => {
   const tooltipContent: Record<DateType, React.ReactNode> = {
     modified: (
       <>
-        <strong>Last Modified: </strong> The date the<br/>dataset was last updated.
+        <strong>Last Modified: </strong> The date the <br/>dataset was last updated.
       </>
     ),
     released: (
       <>
-        <strong>Released: </strong> The date the most<br/>recent dataset was made available<br/>to the public.
+        <strong>Released: </strong> The date the most <br/>recent dataset was made available<br/>to the public.
       </>
     ),
     refresh: (
       <>
-        <strong>Planned Update:</strong> The date the<br/>dataset is scheduled to be updated.
+        <strong>Planned Update:</strong> The date the <br/>dataset is scheduled to be updated.
       </>
     )
   };
