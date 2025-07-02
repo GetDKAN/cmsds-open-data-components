@@ -1,0 +1,46 @@
+.dc-c-list-item {
+  list-style: none;
+  ul {
+    gap: 0;
+  }
+  li {
+    list-style: none;
+
+    &:first-child > span {
+      padding-left: 0;
+    }
+
+    a,
+    button {
+      text-decoration: underline !important;
+    }
+    a svg,
+    span svg {
+      fill: #{var(--link__color)};
+    }
+  }
+  svg {
+    margin-right: 8px;
+  }
+  button, span > a {
+    font-weight: normal !important;
+  }
+  a:visited svg {
+    fill: #{var(--link__color--visited)};
+  }
+
+  // If the dataset title is right after the date, remove the top margin.
+  span[id^="dataset-"] + h2 {
+    margin-top: 0;
+  }
+
+  .ds-c-button {
+    text-decoration: none !important;
+    
+    svg,
+    &:visited svg {
+      fill: #{var(--color-white)};
+    }
+
+  }
+}
