@@ -20,8 +20,8 @@ type SearchItemProps = {
   title: string;
   modified: string;
   description: string;
-  url: string;
   downloadUrl?: string | null;
+  identifier: string;
   largeFile: boolean;
   paginationEnabled: boolean;
   dataDictionaryLinks: boolean;
@@ -40,11 +40,11 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
     title, 
     modified, 
     description, 
-    url, 
     downloadUrl, 
     largeFile = false, 
     paginationEnabled, 
     dataDictionaryLinks,
+    identifier,
     refresh,
     released,
     showDateDetails = false,
@@ -103,16 +103,18 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
     refresh
   };
 
+  const url = `/dataset/${identifier}`
+
   return (
     <li className="dc-c-search-list-item ds-u-padding-top--3">
       <div className={`dc-c-searchlist-item ${paginationEnabled ? 'ds-u-border-top--1' : 'ds-u-border-bottom--1 ds-u-padding-bottom--3'}`}>
         {themes}
         <div className="ds-l-row ds-u-align-items--start">
-          {!showDateDetails && <span id={`dataset-${url}-updated-date`} className={`ds-l-col--12 ds-u-text-align--right ${paginationEnabled ? 'ds-u-padding-top--2' : 'ds-u-padding-top--0'}`}>
+          {!showDateDetails && <span id={`dataset-${identifier}-updated-date`} className={`ds-l-col--12 ds-u-text-align--right ${paginationEnabled ? 'ds-u-padding-top--2' : 'ds-u-padding-top--0'}`}>
             <span className="ds-u-font-weight--bold">Updated:</span> <TransformedDate date={modified} />
           </span>}
           <h2 className="ds-l-col--12 ds-text-heading--2xl">
-            <Link aria-describedby={`dataset-${url}-updated-date`} to={`${url}`}>{title}</Link>
+            <Link aria-describedby={`dataset-${identifier}-updated-date`} to={`${url}`}>{title}</Link>
           </h2>
         </div>
         <div className="ds-l-row">
