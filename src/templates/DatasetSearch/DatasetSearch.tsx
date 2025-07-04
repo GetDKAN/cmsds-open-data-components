@@ -288,15 +288,6 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                 selectedFacets={selectedFacets.keyword}
               />
             )}
-<<<<<<< HEAD
-          </div>
-          <div className="ds-l-col--12 ds-l-sm-col--8">
-            {isPending ? (
-              <Spinner
-                className="ds-u-valign--middle"
-                aria-valuetext="Dataset Search loading"
-                role="status"
-=======
         </div>
         <div className="ds-l-col--12 ds-l-sm-col--8">
           {isPending ? (
@@ -390,7 +381,6 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                   const includeAnd = searchParams ? '&' : '';
                   return `/datasets?page=${page}${includeAnd}${searchParams}`;
                 }}
->>>>>>> 1074635 (WCMS-25375: updated tooltip to present html properly)
               />
             ) : (
               <>
