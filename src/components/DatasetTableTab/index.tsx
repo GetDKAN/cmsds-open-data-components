@@ -6,7 +6,7 @@ import { transformTableSortToQuerySort } from '../../services/useDatastore/trans
 import { buildCustomColHeaders } from '../../templates/FilteredResource/functions';
 import { Pagination, Spinner, Alert } from '@cmsgov/design-system';
 // import DataTableHeader from '../DatatableHeader';
-// import QueryBuilder from '../QueryBuilder';
+import QueryBuilder from '../QueryBuilder';
 import DataTableToolbar from '../dataset/DataTableToolbar/DataTableToolbar';
 import { DistributionType, ColumnType, ResourceType } from '../../types/dataset';
 import DataTableContext from '../../templates/Dataset/DataTableContext';
@@ -36,8 +36,6 @@ type DatasetTableTabProps = {
   datasetTableControls: boolean;
 };
 
-
-
 const datasetContextProviderValue = {
   data: mockDatasetResponse,
   error: null,
@@ -56,13 +54,22 @@ const componentArgs = {
   instanceId: 1
 }
 
-
 const DatasetTable = ({
   isModal = false,
   closeFullScreenModal,
+  showQueryBuilder = true,
+  showCopyLinkButton = true,
+  showDownloadFilteredDataButton = true,
+  showDownloadFullDataButton = true,
+  showStoredQueryDownloadButton = false,
 }: {
   isModal?: boolean;
   closeFullScreenModal?: Function;
+  showQueryBuilder?: boolean;
+  showCopyLinkButton?: boolean;
+  showDownloadFilteredDataButton?: boolean;
+  showDownloadFullDataButton?: boolean;
+  showStoredQueryDownloadButton?: boolean;
 }) => {
   const {
     id,
@@ -119,6 +126,16 @@ const DatasetTable = ({
         instanceId={1}
         /> */}
         {/* <QueryBuilder resource={resource} id={distribution.identifier} customColumns={customColumnHeaders} isModal={isModal} setPage={setPage} setOffset={setOffset} /> */}
+        {showQueryBuilder && (
+          <QueryBuilder
+            resource={resource}
+            id={distribution.identifier}
+            customColumns={customColumnHeaders}
+            isModal={isModal}
+            setPage={setPage}
+            setOffset={setOffset}
+          />
+        )}
         {dataDictionaryBanner && !isModal && (
           <div>
             <Alert>Click on the "Data Dictionary" tab above for full column definitions</Alert>
@@ -130,7 +147,12 @@ const DatasetTable = ({
             downloadURL={downloadURL}
             unfilteredDownloadURL={distribution.data.downloadURL}
             setPage={setPage}
-          /> } */}
+          
+            showCopyLinkButton={showCopyLinkButton}
+            showDownloadFilteredDataButton={showDownloadFilteredDataButton}
+            showDownloadFullDataButton={showDownloadFullDataButton}
+            showStoredQueryDownloadButton={showStoredQueryDownloadButton}
+        /> } */}
         <div
           className={`ds-u-border-x--1 ds-u-border-bottom--1 ${
             isModal && 'dkan-datatable-fullscreen-mode'

@@ -95,4 +95,25 @@ describe('<DatasetTableTab />', () => {
     });
     expect(screen.getByRole('checkbox', {name: "Select all"})).not.toBeChecked();
   }, 10000)
+  
+  test("Renders correctly without Query Builder", () => {
+    render(
+      <DataTableContext.Provider value={{
+        resource: resource,
+        distribution: distribution.distribution[0],
+        rootUrl: "test/api/"
+      }} >
+        <DataTableStateWrapper 
+          showQueryBuilder={false}
+          showCopyLinkButton={false}
+          showDownloadFilteredDataButton={false}
+          showDownloadFullDataButton={false}
+        />
+      </DataTableContext.Provider>
+    )
+
+    expect(screen.queryByText("Data filters: none")).not.toBeInTheDocument();
+    expect(screen.getByRole("table")).toBeInTheDocument();
+    expect(screen.getByRole("navigation")).toHaveClass("ds-c-pagination");
+  });
 });

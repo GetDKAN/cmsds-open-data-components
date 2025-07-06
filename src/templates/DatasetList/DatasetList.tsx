@@ -3,35 +3,28 @@ import { useSearchParams, useLocation } from 'react-router-dom';
 import qs from 'qs';
 import axios from 'axios';
 import withQueryProvider from '../../utilities/QueryProvider/QueryProvider';
-import { Accordion, AccordionItem, TextField, Dropdown, Spinner, Button, Alert, Pagination } from '@cmsgov/design-system';
-import DatasetSearchListItem from '../../components/DatasetSearchListItem';
-import DatasetSearchFacets from '../../components/DatasetSearchFacets';
+import { Accordion, AccordionItem, Dropdown, Spinner, Alert, Pagination } from '@cmsgov/design-system';
+import DatasetListItem from '../../components/DatasetListItem';
 import LargeFileInfo from '../../components/LargeFileInfo';
-import SearchButton from '../../components/SearchButton';
 import PageHeader from '../../components/PageHeader';
 import { useQuery } from '@tanstack/react-query';
-import { separateFacets, transformUrlParamsToSearchObject } from '../../services/useSearchAPI/helpers';
+import { transformUrlParamsToSearchObject } from '../../services/useSearchAPI/helpers';
 
-import './dataset-search.scss';
-import { DatasetSearchPageProps, SelectedFacetsType, SidebarFacetTypes, DistributionItemType } from '../../types/search';
-import { TextFieldValue } from '@cmsgov/design-system/dist/react-components/types/TextField/TextField';
+// import '../DatasetSearch/dataset-search.scss';
+import { DatasetSearchPageProps, DistributionItemType } from '../../types/search';
 import { acaToParams } from '../../utilities/aca';
 import { ACAContext } from '../../utilities/ACAContext';
 
-const DatasetSearch = (props: DatasetSearchPageProps) => {
+const DatasetList = (props: DatasetSearchPageProps) => {
   const {
     rootUrl,
     enableSort = true,
     enablePagination = true,
     defaultPageSize = 10,
     defaultSort = { defaultSort: 'modified', defaultOrder: 'desc' },
-    pageTitle = 'Dataset Explorer',
-    filterTitle = 'Tags',
+    pageTitle = 'What\'s New ',
     showLargeFileWarning = false,
-    largeFileThemes,
     introText = '',
-    showDownloadIcon = false,
-    altMobileSearchButton,
     dataDictionaryLinks = false,
   } = props;
   const { ACA } = useContext(ACAContext);
@@ -44,8 +37,6 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   ];
 
   const defaultSortBy = "";
-  const defaultFulltext = "";
-  const defaultSelectedFacets = { theme: [], keyword: [] };
   const defaultSortOrder = "";
   const defaultPage = 1;
 
@@ -56,8 +47,6 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   const [noResults, setNoResults] = useState(false);
   const [announcementText, setAnnouncementText] = useState('');
   let [searchParams, setSearchParams] = useSearchParams();
-  const [fulltext, setFullText] = useState(transformedParams.fulltext);
-  const [filterText, setFilterText] = useState(transformedParams.fulltext);
   const [totalItems, setTotalItems] = useState(0);
   const [page, setPage] = useState(transformedParams.page ? transformedParams.page : defaultPage);
   const [sort, setSort] = useState(
@@ -71,14 +60,6 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   const [sortDisplay, setSortDisplay] = useState(() => {
     return sort === 'modified' ? (sortOrder === 'desc' ? 'newest' : 'oldest') : (sortOrder === 'desc' ? 'titleZA' : 'titleAZ');
   })
-  const [selectedFacets, setSelectedFacets] = useState<SelectedFacetsType>(
-    transformedParams.selectedFacets
-      ? transformedParams.selectedFacets
-      : {
-        theme: [],
-        keyword: [],
-      }
-  )
 
   const setSortOptions = (value: string) => {
     setSortDisplay(value)
@@ -100,33 +81,6 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
         setSortOrder('desc');
         break;
     }
-  }
-
-  function updateSelectedFacets(key: string, value: string) {
-    const newFacets: SelectedFacetsType = { ...selectedFacets };
-    if (key === 'theme') {
-      const existingFacet = newFacets.theme.findIndex((s) => s === value);
-      if (existingFacet > -1) {
-        newFacets.theme.splice(existingFacet, 1);
-      } else {
-        newFacets.theme.push(value);
-      }
-    }
-    if (key === 'keyword') {
-      const existingFacet = newFacets.keyword.findIndex((s) => s === value);
-      if (existingFacet > -1) {
-        newFacets.keyword.splice(existingFacet, 1);
-      } else {
-        newFacets.keyword.push(value);
-      }
-    }
-    const urlString = qs.stringify(
-      { theme: newFacets.theme, keyword: newFacets.keyword },
-      { encodeValuesOnly: true, addQueryPrefix: true }
-    );
-    setSelectedFacets(newFacets);
-    const url = new URL(window.location.href);
-    window.history.pushState({}, '', `${url.origin}${url.pathname}${urlString}`);
   }
 
   const pageSize = defaultPageSize;
@@ -160,25 +114,12 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   }, [totalItems, pageSize, page]);
 
   useEffect(() => {
-    if (page !== 1 && (transformedParams.fulltext !== fulltext || transformedParams.selectedFacets !== selectedFacets))
-      setPage(1)
-  }, [fulltext, selectedFacets]);
-
-  useEffect(() => {
     var params = buildSearchParams(true);
     if (params !== location.search) {
       setSearchParams(params);
     }
   }, [page, sort, sortOrder]);
 
-  function resetFilters() {
-    setFullText(defaultFulltext);
-    setFilterText(defaultFulltext);
-    setSelectedFacets(defaultSelectedFacets);
-    setPage(defaultPage);
-    const url = new URL(window.location.href);
-    window.history.pushState({}, '', `${url.origin}${url.pathname}`);
-  }
 
   function buildSearchParams(includePage: boolean) {
     let newParams: any = {};
@@ -191,20 +132,10 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     if (sortOrder !== defaultSort.defaultOrder) {
       newParams.sortOrder = sortOrder;
     }
-    if (fulltext !== '') {
-      newParams.fulltext = fulltext;
-    }
-    if (Object.keys(selectedFacets).length) {
-      Object.keys(selectedFacets).forEach((key) => {
-        newParams[key] = selectedFacets[key];
-      });
-    }
     return qs.stringify(newParams, { addQueryPrefix: includePage, encode: true });
   }
 
   let params = {
-    fulltext: fulltext ? fulltext : undefined,
-    ...selectedFacets,
     sort: sort ? sort : undefined,
     ['sort-order']: sortOrder ? sortOrder : undefined,
     page: page !== 1 ? page : undefined,  //use index except for when submitting to Search API
@@ -218,8 +149,6 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   });
 
   if ((data && data.data.total) && totalItems != data.data.total) setTotalItems(data.data.total);
-
-  const facets: SidebarFacetTypes = (data && data.data.facets) ? separateFacets(data ? data.data.facets : []) : { theme: null, keyword: null };
 
   return (
     <>
@@ -242,54 +171,10 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                 </div>
               </div>
             )}
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                setFullText(filterText);
-              }}
-              className="dkan-dataset-search ds-l-form-row ds-u-padding-bottom--4 ds-u-border-bottom--1"
-            >
-              <span className="ds-c-field__before fas fa-search ds-u-display--none ds-u-sm-display--inline-block" />
-              <TextField
-                fieldClassName="ds-u-margin--0"
-                value={filterText as TextFieldValue}
-                className={`ds-u-padding-right--2 ${altMobileSearchButton ? 'ds-l-col--12 ds-l-md-col--10 --alt-style' : 'ds-l-col--10'}`}
-                label="Search datasets"
-                labelClassName="ds-u-visibility--screen-reader"
-                placeholder="Search datasets"
-                name="dataset_fulltext_search"
-                onChange={(e) => setFilterText(e.target.value)}
-              />
-              <SearchButton altMobileStyle={altMobileSearchButton} />
-            </form>
           </div>
         </div>
         <div className="ds-l-row ds-u-padding-top--4">
-          <div className="ds-l-col--12 ds-l-sm-col--4">
-            <Button
-              className="dc-dataset-search--clear-all-filters ds-u-margin-bottom--2"
-              onClick={() => resetFilters()}
-            >
-              Clear all filters
-            </Button>
-            {facets.theme && (
-              <DatasetSearchFacets
-                facets={facets.theme}
-                title="Categories"
-                onClickFunction={updateSelectedFacets}
-                selectedFacets={selectedFacets.theme}
-              />
-            )}
-            {facets.keyword && (
-              <DatasetSearchFacets
-                facets={facets.keyword}
-                title={filterTitle}
-                onClickFunction={updateSelectedFacets}
-                selectedFacets={selectedFacets.keyword}
-              />
-            )}
-          </div>
-          <div className="ds-l-col--12 ds-l-sm-col--8">
+          <div className="ds-l-col--12">
             {isPending ? (
               <Spinner
                 className="ds-u-valign--middle"
@@ -338,26 +223,12 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                   {data && data.data.results ? Object.keys(data.data.results).map((key) => {
                     return data.data.results[key];
                   }).map((item) => {
-                    function getDownloadUrl(item: DistributionItemType) {
-                      let distribution_array = item.distribution ? item.distribution : [];
-                      return distribution_array.length ? item.distribution[0].downloadURL : null;
-                    }
-                    let showLargeFile = false;
-                    if (largeFileThemes && item.theme)
-                      largeFileThemes.forEach(theme => {
-                        if (item.theme.includes(theme))
-                          showLargeFile = true;
-                      });
-
                     return (
-                      <DatasetSearchListItem
+                      <DatasetListItem
                         key={item.identifier}
                         title={item.title}
                         modified={item.modified}
-                        description={item.description}
                         identifier={item.identifier}
-                        downloadUrl={showDownloadIcon ? getDownloadUrl(item) : null}
-                        largeFile={showLargeFile}
                         paginationEnabled={enablePagination}
                         dataDictionaryLinks={dataDictionaryLinks}
                       />
@@ -392,4 +263,4 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   );
 };
 
-export default withQueryProvider(DatasetSearch);
+export default withQueryProvider(DatasetList);
