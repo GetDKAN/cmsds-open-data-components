@@ -55,7 +55,7 @@ const fetchDataFromQuery = async (
       data.schema[id] && data.schema[id].fields
         ? Object.keys(data.schema[id].fields)
         : []
-console.log("Data fetched:++++++++++++", data)
+console.log("SRC-HOOKS Data fetched:++++++++++++", data)
     setValues(data.results)
     setCount(data.count)
 

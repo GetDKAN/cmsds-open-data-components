@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import qs from 'qs';
-// import DataTable from '../Datatable/Datatable'; //pdc datatable
-import DataTable from '../dataset/DataTable/DataTable'; // dkan datatable
+// import DataTable from '../Datatable/Datatable';         //pdc datatable
+import DataTable from '../dataset/DataTable/DataTable';       // dkan datatable
 import { transformTableSortToQuerySort } from '../../services/useDatastore/transformSorts';
 import { buildCustomColHeaders } from '../../templates/FilteredResource/functions';
 import { Pagination, Spinner, Alert } from '@cmsgov/design-system';

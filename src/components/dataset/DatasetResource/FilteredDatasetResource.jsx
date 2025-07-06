@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { useParams, ScrollRestoration } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { FilteredDispatch } from './FilteredDatasetContext'
 import useDatastore from '../../../hooks/useDataStore'
-// import { getApiBaseUrl } from '../../../utilities/getApiBaseUrl'
+import { getApiBaseUrl } from '../../../utilities/getApiBaseUrl'
+import useMetastoreDataset from '../../../services/useMetastoreDataset';
+
 
 import {
   useTable,
@@ -12,13 +15,13 @@ import {
   useFlexLayout,
   useResizeColumns,
   useColumnOrder
-} from 'react-table'
+} from 'react-table';
 
 const FilteredDatasetResource = ({
   children,
-  resource
+  resource,
 }) => {
-  const [filters, setFilters] = useState([{ column: 'ndc', condition: '=', value: '' }]) // keep track of the applied filters
+  const [filters, setFilters] = useState([{ column: '', condition: '', value: '' }]) // keep track of the applied filters
   const [filtersApplied, setFiltersApplied] = useState([])
   const [initCol, setInitCol] = useState([]) // we want to save a reference to filter against
   const [col, setCol] = useState([]) // columns we pass to table, post filter
@@ -31,18 +34,52 @@ const FilteredDatasetResource = ({
     sizeLabel: 'KB',
     size: 0
   })
+
+  const DistributionDataType = {
+    downloadURL: '',
+    format: '',
+    title: '',
+    description: '',
+    describedBy: '',
+    describedByType: '',
+    mediaType: '',
+    mimeType: '',
+    "%Ref:downloadURL": [],
+  }
+  
+  const DistributionType = {
+    identifier: '',
+    data: DistributionDataType,
+  }
+
+  const { id } = useParams();
+
+  // const rootUrl = import.meta.env.VITE_REACT_APP_ROOT_URL
+  // console.log("META.ENV============>", import.meta.env)
+  const rootUrl = "https://data.medicaid.gov/api/1"
+  
+  const { dataset, isPending } = useMetastoreDataset(id, rootUrl);
+
+  let distribution = DistributionType;
+    let distributions = dataset.distribution ? dataset.distribution : [];
+    if (distributions.length) {
+      distribution = distributions[0];
+    }
+    console.log("Above useEffect in FilteredDatasetResource---------========>", distribution.identifier)
+  
   const prepareColumns = (columns, schema) => {
     return columns.map((column) => ({
       Header: schema && schema.fields[column].description ? schema.fields[column].description : column,
       accessor: column
     }))
   }
+  // const baseUrl = import.meta.env.VITE_REACT_APP_ROOT_URL
   // const baseUrl = getApiBaseUrl()
-  const baseUrl = "https://data.medicaid.gov/api/1"
-  console.log("URL++++++++++======",baseUrl)
+  // const baseUrl = "https://data.medicaid.gov/api/1"
+  // console.log("URL++++++++++======",baseUrl)
   const filteredResource = useDatastore(
     '',
-    baseUrl,
+    rootUrl,
     {
       limit: 20,
       manual: true
@@ -51,18 +88,19 @@ const FilteredDatasetResource = ({
     // additionalParams
   )
 
+
   // listen to our filter resource changing, and flip the go switch once we have the info to query.
   useEffect(() => {
-    console.log("in use effect for resource---------", resource)
-    if (resource.identifier) {
-      filteredResource.setResource(resource.identifier)
+    console.log("useEffect in FilteredDatasetResource---------========>", distribution.identifier)
+    if (distribution.identifier) {
+      filteredResource.setResource(distribution.identifier)
       filteredResource.setManual(false)
     }
-    if (!resource.identifier) {
+    if (!distribution.identifier) {
       setInitOrder([])
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [resource])
+  }, [distribution])
 
   useEffect(() => {
     if (visCol.length) {
@@ -157,14 +195,15 @@ const FilteredDatasetResource = ({
       value={{
         filteredResource,
         filteredTable,
-        initOrder: [
-    {id: 'ndc_description', Header: 'NDC Description'},
-    {id: 'ndc', Header: 'NDC'},
-    {id: 'old_nadac_per_unit', Header: 'Old NADAC Per Unit'}, 
-    {id: 'new_nadac_per_unit', Header: 'New NADAC Per Unit'}, 
-    {id: 'classification_for_rate_setting', Header: 'Classification for Rate Setting'}, 
-    {id: 'percent_change', Header: 'Percent Change'}, 
-  ],
+        initOrder,
+  //       [
+  //   {id: 'ndc_description', Header: 'NDC Description'},
+  //   {id: 'ndc', Header: 'NDC'},
+  //   {id: 'old_nadac_per_unit', Header: 'Old NADAC Per Unit'}, 
+  //   {id: 'new_nadac_per_unit', Header: 'New NADAC Per Unit'}, 
+  //   {id: 'classification_for_rate_setting', Header: 'Classification for Rate Setting'}, 
+  //   {id: 'percent_change', Header: 'Percent Change'}, 
+  // ],
 
         curOrder,
         setCurOrder,

@@ -5,6 +5,7 @@ export const getApiBaseUrl = (withApiPath = true) => {
   const { site, apiSite, domainsNeedProviderDataPath } = config
   const { protocol, hostname } = window.location
   const reactAppEnv = 'development'
+// const reactAppEnv = toLower(import.meta.env.VITE_ENV) || 'development'  
   let baseUrl
 
   // Add 'provider-data/' to the base url for a certain set of domains

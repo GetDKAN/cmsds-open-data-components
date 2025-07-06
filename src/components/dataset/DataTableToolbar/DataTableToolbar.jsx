@@ -119,9 +119,9 @@ const DataTableToolbar = ({
       queryParams.append('value', filter.value);
     });
 
-    const urlQueryString = queryParams.toString();
+    // const urlQueryString = queryParams.toString();
 
-    const newUrl = `${window.location.pathname}?${urlQueryString}`;
+    const newUrl = `${window.location.pathname}?${queryParams.toString()}`;
     window.history.replaceState(null, '', newUrl);
   };
 

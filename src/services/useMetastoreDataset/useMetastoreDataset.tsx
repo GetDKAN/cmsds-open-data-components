@@ -27,6 +27,7 @@ const useMetastoreDataset = (datasetId : string, rootAPIUrl : string) => {
         .catch((error) => {return {title: dataset.title, distribution: dataset.distribution, error: error, description: dataset.description, identifier: dataset.identifier, modified: dataset.modified}});
     }
   })
+  // data.distrubution[0].identifier
   useEffect(() => {
     if (!isPending && data && data != dataset)
       setDataset(data)
