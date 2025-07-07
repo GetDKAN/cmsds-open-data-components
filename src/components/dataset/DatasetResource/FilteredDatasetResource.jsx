@@ -3,7 +3,7 @@ import { useParams, ScrollRestoration } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { FilteredDispatch } from './FilteredDatasetContext'
 import useDatastore from '../../../hooks/useDataStore'
-import { getApiBaseUrl } from '../../../utilities/getApiBaseUrl'
+// import { getApiBaseUrl } from '../../../utilities/getApiBaseUrl'
 import useMetastoreDataset from '../../../services/useMetastoreDataset';
 
 
@@ -20,6 +20,7 @@ import {
 const FilteredDatasetResource = ({
   children,
   resource,
+  rootUrl
 }) => {
   const [filters, setFilters] = useState([{ column: '', condition: '', value: '' }]) // keep track of the applied filters
   const [filtersApplied, setFiltersApplied] = useState([])
@@ -53,11 +54,6 @@ const FilteredDatasetResource = ({
   }
 
   const { id } = useParams();
-
-  // const rootUrl = import.meta.env.VITE_REACT_APP_ROOT_URL
-  // console.log("META.ENV============>", import.meta.env)
-  const rootUrl = "https://data.medicaid.gov/api/1"
-  
   const { dataset, isPending } = useMetastoreDataset(id, rootUrl);
 
   let distribution = DistributionType;
@@ -73,9 +69,7 @@ const FilteredDatasetResource = ({
       accessor: column
     }))
   }
-  // const baseUrl = import.meta.env.VITE_REACT_APP_ROOT_URL
   // const baseUrl = getApiBaseUrl()
-  // const baseUrl = "https://data.medicaid.gov/api/1"
   // console.log("URL++++++++++======",baseUrl)
   const filteredResource = useDatastore(
     '',
@@ -196,15 +190,6 @@ const FilteredDatasetResource = ({
         filteredResource,
         filteredTable,
         initOrder,
-  //       [
-  //   {id: 'ndc_description', Header: 'NDC Description'},
-  //   {id: 'ndc', Header: 'NDC'},
-  //   {id: 'old_nadac_per_unit', Header: 'Old NADAC Per Unit'}, 
-  //   {id: 'new_nadac_per_unit', Header: 'New NADAC Per Unit'}, 
-  //   {id: 'classification_for_rate_setting', Header: 'Classification for Rate Setting'}, 
-  //   {id: 'percent_change', Header: 'Percent Change'}, 
-  // ],
-
         curOrder,
         setCurOrder,
         setVisCol,

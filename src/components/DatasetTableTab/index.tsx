@@ -6,7 +6,7 @@ import { transformTableSortToQuerySort } from '../../services/useDatastore/trans
 import { buildCustomColHeaders } from '../../templates/FilteredResource/functions';
 import { Pagination, Spinner, Alert } from '@cmsgov/design-system';
 // import DataTableHeader from '../DatatableHeader';
-import QueryBuilder from '../QueryBuilder';
+// import QueryBuilder from '../QueryBuilder';
 import DataTableToolbar from '../dataset/DataTableToolbar/DataTableToolbar';
 import { DistributionType, ColumnType, ResourceType } from '../../types/dataset';
 import DataTableContext from '../../templates/Dataset/DataTableContext';
@@ -15,6 +15,7 @@ import FilteredDatasetResource from '../dataset/DatasetResource/FilteredDatasetR
 import { filteredDatasetResource } from '../../utilities/data-mocks/data-filteredDatasetResource'
 import { DatasetContext } from '../../context/DatasetContext';
 import mockDatasetResponse from '../../utilities/data-mocks/api-response-dataset.json'
+
 
 
 
@@ -111,7 +112,7 @@ const DatasetTable = ({
     return (
       <>
         <DatasetContext.Provider value={datasetContextProviderValue}>
-          <FilteredDatasetResource resource={filteredDatasetResource}>
+          <FilteredDatasetResource resource={filteredDatasetResource} rootUrl={rootUrl}> 
             <DataTableToolbar {...componentArgs} />
             <DataTable />
           </FilteredDatasetResource>
@@ -126,7 +127,7 @@ const DatasetTable = ({
         instanceId={1}
         /> */}
         {/* <QueryBuilder resource={resource} id={distribution.identifier} customColumns={customColumnHeaders} isModal={isModal} setPage={setPage} setOffset={setOffset} /> */}
-        {showQueryBuilder && (
+        {/* {showQueryBuilder && (
           <QueryBuilder
             resource={resource}
             id={distribution.identifier}
@@ -135,12 +136,13 @@ const DatasetTable = ({
             setPage={setPage}
             setOffset={setOffset}
           />
-        )}
+        )} */}
         {dataDictionaryBanner && !isModal && (
           <div>
             <Alert>Click on the "Data Dictionary" tab above for full column definitions</Alert>
           </div>
         )}
+        {/* new code that was added */}
         {/* {
           <DataTableHeader
             resource={resource}
