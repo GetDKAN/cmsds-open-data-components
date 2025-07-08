@@ -232,7 +232,7 @@ const Dataset = ({
                       {!displayDataDictionaryTab && <p>There is no Data Dictionary associated with this dataset.</p>}
                     </TabPanel>
                   )}
-                  { distribution && distribution.data && (
+                  { id (
                     <TabPanel
                       id={'storedQuery'}
                       tab={

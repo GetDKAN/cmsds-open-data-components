@@ -1,11 +1,7 @@
 import React from 'react';
+
 type DatasetStoredQueryProps = {
   id: String;
-  rootUrl: String;
-  apiUrl: string;
-  additionalParams: {
-    ACA: string,
-  }
 };
 
 
