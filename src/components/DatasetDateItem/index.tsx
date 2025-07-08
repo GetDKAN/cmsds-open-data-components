@@ -1,7 +1,6 @@
 import React from 'react';
-import moment from 'moment';
 import { Tooltip, TooltipIcon } from '@cmsgov/design-system';
-
+import TransformedDate from '../TransformedDate';
 type DateType = 'modified' | 'released' | 'refresh';
 
 type DatasetDateItemProps = {
@@ -53,7 +52,7 @@ const DatasetDateItem: React.FC<DatasetDateItemProps> = (props) => {
   return (
     <div className={`dataset-date-item${boldLabel ? ' bold-label' : ''}`}>
       <span className='dataset-data-item-label'>
-        <span>{dateText[type]}</span>: {moment(date).format('MMMM D, YYYY')}
+        <span>{dateText[type]}</span>: <TransformedDate date={date} />
       </span>
       {displayTooltips === true && (
         <Tooltip
