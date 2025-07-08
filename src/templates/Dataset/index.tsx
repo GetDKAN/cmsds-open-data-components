@@ -234,20 +234,6 @@ const Dataset = ({
                   )}
                   { distribution && distribution.data && (
                     <TabPanel
-                      id={'api'}
-                      tab={
-                        <span className="ds-u-color--primary">
-                          <SearchItemIcon id="api" />
-                          API
-                        </span>
-                      }
-                      className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
-                    >
-                      <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} showRowLimitNotice={showRowLimitNotice} />
-                    </TabPanel>
-                  )}
-                  { distribution && distribution.data && (
-                    <TabPanel
                       id={'storedQuery'}
                       tab={
                         <span className="ds-u-color--primary">
@@ -260,6 +246,21 @@ const Dataset = ({
                       <StoredQuery id={id} />
                     </TabPanel>
                   )}
+                  { distribution && distribution.data && (
+                    <TabPanel
+                      id={'api'}
+                      tab={
+                        <span className="ds-u-color--primary">
+                          <SearchItemIcon id="api" />
+                          API
+                        </span>
+                      }
+                      className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
+                    >
+                      <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} showRowLimitNotice={showRowLimitNotice} />
+                    </TabPanel>
+                  )}
+
                 </Tabs>
               )}
             </div>
