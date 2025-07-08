@@ -111,6 +111,12 @@ export type DatasetOverviewPropsType = {
   metadataMapping: any, //TODO
 }
 
+export type DatasetStoredQuery = {
+  dataset: DatasetType,
+  resource: ResourceType,
+  distributions: DistributionType[],
+}
+
 export type DatasetDictionaryItemType = {
   format: string,
   name: string,

@@ -12,6 +12,7 @@ import SearchItemIcon from '../../assets/icons/searchItem';
 import DatasetOverview from '../../components/DatasetOverviewTab';
 import DatasetAPI from '../../components/DatasetAPITab';
 import DataDictionary from '../../components/DatasetDataDictionaryTab';
+import StoredQuery from '../../components/StoredQueryTab';
 import { DatasetDictionaryItemType, DatasetPageType, DatasetDictionaryType, DistributionType, ResourceType, ColumnType } from '../../types/dataset';
 import TransformedDate from '../../components/TransformedDate';
 import { getFormatType } from '../../utilities/format';
@@ -142,7 +143,7 @@ const Dataset = ({
   }, [distribution, window.location.hash])
 
   const displayDataDictionaryTab = ((distribution.data && distribution.data.describedBy && distribution.data.describedByType === 'application/vnd.tableschema+json') || (datasetSitewideDictionary && datasetSitewideDictionary.length > 0)) as boolean;
-  
+
   return (
     <>
       {dataset.error ? (
@@ -243,6 +244,20 @@ const Dataset = ({
                       className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
                     >
                       <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} showRowLimitNotice={showRowLimitNotice} />
+                    </TabPanel>
+                  )}
+                  { distribution && distribution.data && (
+                    <TabPanel
+                      id={'storedQuery'}
+                      tab={
+                        <span className="ds-u-color--primary">
+                          <SearchItemIcon id="api" />
+                          Stored Query
+                        </span>
+                      }
+                      className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
+                    >
+                      <StoredQuery id={id} />
                     </TabPanel>
                   )}
                 </Tabs>
