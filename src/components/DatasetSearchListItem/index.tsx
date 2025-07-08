@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import LargeFileDialog from '../LargeFileDialog';
 import SearchItemIcon from '../../assets/icons/searchItem';
@@ -51,8 +51,9 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
     showTopics = false,
     theme,
     topicSlugs,
-    location
   } = props;
+
+  const location = useLocation();
 
   let linkContainerClasses = 'ds-u-margin-bottom--2';
   if (dataDictionaryLinks) {
