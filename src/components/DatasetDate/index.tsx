@@ -8,29 +8,14 @@ type DateObject = {
 };
 
 type DatasetDateProps = {
-  /**
-   * Released and modified date strings
-   */
   date: DateObject;
-  /**
-   * Apply bold style to updated label
-   */
   updatedBoldLabel?: boolean;
-  /**
-   * Apply bold style to released label
-   */
   releasedBoldLabel?: boolean;
-  /**
-   * Apply bold style to refresh label
-   */
   refreshBoldLabel?: boolean;
-  /**
-   * Display tooltips or not
-   */
   displayTooltips?: boolean;
 };
 
-const DatasetDate: React.FC<DatasetDateProps> = (props) => {
+const DatasetDate = (props: DatasetDateProps) => {
   const {
     date,
     updatedBoldLabel = false,
