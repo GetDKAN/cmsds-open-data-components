@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-type DatasetStoredQueryProps = {
-  id: String;
-};
+interface StoredQuery {
+  title?: string;
+  description?: string;
+}
 
+interface StoredQueryApiResponse {
+  storedQuery?: StoredQuery;
+}
 
-const StoredQueryViewer = ({ id }: DatasetStoredQueryProps) => {
+interface StoredQueryViewerProps {
+  id: string;
+}
 
+const StoredQueryViewer: React.FC<StoredQueryViewerProps> = ({ id }) => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [data, setData] = useState<StoredQueryApiResponse | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!id) return;
@@ -16,11 +26,11 @@ const StoredQueryViewer = ({ id }: DatasetStoredQueryProps) => {
         if (!response.ok) throw new Error('Network response was not ok');
         return response.json();
       })
-      .then((json) => {
+      .then((json: StoredQueryApiResponse) => {
         setData(json);
         setLoading(false);
       })
-      .catch((err) => {
+      .catch((err: Error) => {
         setError(err.message);
         setLoading(false);
       });
