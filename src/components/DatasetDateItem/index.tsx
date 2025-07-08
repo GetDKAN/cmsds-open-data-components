@@ -22,7 +22,7 @@ type DatasetDateItemProps = {
   displayTooltips?: boolean;
 };
 
-const DatasetDateItem: React.FC<DatasetDateItemProps> = (props) => {
+const DatasetDateItem = (props: DatasetDateItemProps) => {
   const { type, date, boldLabel = false, displayTooltips = true } = props;
 
   const dateText: Record<DateType, string> = {
@@ -31,7 +31,7 @@ const DatasetDateItem: React.FC<DatasetDateItemProps> = (props) => {
     refresh: 'Planned Update'
   };
 
-  const tooltipContent: Record<DateType, React.ReactNode> = {
+  const tooltipContent = {
     modified: (
       <>
         <strong>Last Modified: </strong> The date the <br/>dataset was last updated.
