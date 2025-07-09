@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState, useCallback, useRef, useMemo } from 'react';
-// import { DndProvider } from 'react-dnd' // need to replace with dnd-kit
-// import { HTML5Backend } from 'react-dnd-html5-backend';
+import { DndProvider } from 'react-dnd' // need to replace with dnd-kit
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -382,7 +382,7 @@ const ManageColumns = ({ datasetTitle, showTooltip, fullscreen = false }) => {
           
           <ul className="advanced-options">
             {/* need to replace with dnd-kit */}
-            {/* <DndProvider backend={HTML5Backend}> 
+            <DndProvider backend={HTML5Backend}> 
               {cards &&
                 cards.map((column, i) => {
                   return defaultCard(
@@ -396,7 +396,7 @@ const ManageColumns = ({ datasetTitle, showTooltip, fullscreen = false }) => {
                     setAriaLiveFeedback
                   );
                 })}
-            </DndProvider> */}
+            </DndProvider>
           </ul>
           <div className="sr-only aria-live-feedback" aria-live="assertive" aria-atomic="true">
             {ariaLiveFeedback}

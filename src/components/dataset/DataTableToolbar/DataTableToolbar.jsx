@@ -82,8 +82,8 @@ const DataTableToolbar = ({
   };
 
   // have columns been hidden?
-  // const hidden = filteredTable?.visibleColumns?.length !== initOrder?.length
-  const hidden = false;
+  const hidden = filteredTable?.visibleColumns?.length !== initOrder?.length
+  // const hidden = false;
   const [popoverOpen, setPopoverOpen] = useState(false);
   const togglePopover = () => {
     setPopoverOpen(!popoverOpen);
