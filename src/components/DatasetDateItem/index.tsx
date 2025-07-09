@@ -4,21 +4,9 @@ import TransformedDate from '../TransformedDate';
 type DateType = 'modified' | 'released' | 'refresh';
 
 type DatasetDateItemProps = {
-  /**
-   * Date label type
-   */
   type: DateType;
-  /**
-   * Date string
-   */
   date: string;
-  /**
-   * Apply bold style to label
-   */
   boldLabel?: boolean;
-  /**
-   * Display tooltips or not
-   */
   displayTooltips?: boolean;
 };
 
