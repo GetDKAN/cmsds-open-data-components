@@ -125,6 +125,9 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
             </>
           ) : ''}</div>
         </div>
+        {showDateDetails && <div className='dataset-dates'>
+            <DatasetDate date={date} displayTooltips={false}/>
+          </div>}
         {( downloadUrl ) ? (
             <div className={`ds-u-margin-top--3 ds-u-padding-left--0 download-button`}>
                 {largeFile ? (
@@ -141,9 +144,6 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
           ) : (
             ''
           )}
-          {showDateDetails && <div className='dataset-dates'>
-            <DatasetDate date={date} displayTooltips={false}/>
-          </div>}
         <ul className={`ds-l-row ds-u-padding--0 ds-u-flex-direction--row ds-u-justify-content--between ds-u-md-justify-content--start ds-u-margin-top--3 ds-u-margin-x--0 ${!dataDictionaryLinks ? 'ds-u-justify-content--center ds-u-md-justify-content--start' : ''}`}>
           <li className={linkContainerClasses}>
             <span className={linkClasses}>
