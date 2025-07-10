@@ -112,7 +112,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
         {themes}
         <div className="ds-l-row ds-u-align-items--start">
           {!showDateDetails && <span id={`dataset-${identifier}-updated-date`} className={`ds-l-col--12 ds-u-text-align--right ${paginationEnabled ? 'ds-u-padding-top--2' : 'ds-u-padding-top--0'}`}>
-            <span className="ds-u-font-weight--bold">Updated:</span> <TransformedDate date={modified} />
+            <span>Updated:</span> <TransformedDate date={modified} />
           </span>}
           <h2 className="ds-l-col--12 ds-text-heading--2xl">
             <Link aria-describedby={`dataset-${identifier}-updated-date`} to={`${url}`}>{title}</Link>
