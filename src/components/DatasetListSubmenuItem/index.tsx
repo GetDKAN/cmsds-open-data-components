@@ -27,13 +27,11 @@ const DatasetListSubmenuItem = (props: SearchItemProps) => {
   }
 
   return (
-    <li className="dc-c-list-item ds-u-padding-top--4">
-      <div className={`dc-c-searchlist-item ${paginationEnabled ? 'ds-u-border-top--1' : 'ds-u-border-bottom--1 ds-u-padding-bottom--3'}`}>
-        <div className="ds-l-row ds-u-align-items--start">
-          <Link aria-describedby={`dataset-${identifier}-updated-date`} to={`/dataset/${identifier}`}>
-            <h2 className="ds-l-col--12 ds-text-heading--md">{title}</h2>
-          </Link>
-        </div>
+    <li className="dc-c-list-item">
+      <div className={`dc-c-searchlist-item`}>
+        <Link className="ds-c-button ds-c-button--ghost ds-u-text-align--left" to={`/dataset/${identifier}`}>
+          <h2 className="ds-text-heading--md">{title}</h2>
+        </Link>
       </div>
     </li>
   );
