@@ -19,9 +19,8 @@ type SearchItemProps = {
   dataDictionaryLinks: boolean;
 }
 
-const DatasetSearchListItem = (props: SearchItemProps) => {
+const DatasetSearchListItem = ({ title, modified, description = '', identifier, downloadUrl, largeFile = false, paginationEnabled, dataDictionaryLinks }: SearchItemProps) => {
   const desktop = useMediaQuery({ minWidth: 1024 });
-  const { title, modified, description, identifier, downloadUrl, largeFile = false, paginationEnabled, dataDictionaryLinks } = props;
 
   let linkContainerClasses = 'ds-u-margin-bottom--2';
   if (dataDictionaryLinks) {
@@ -47,7 +46,11 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
           </h2>
         </div>
         <div className="ds-l-row">
-          <div className="ds-l-col--12 ds-l-md-col--12 ds-u-margin-top--2">{truncateText(description)}</div>
+          <div className="ds-l-col--12 ds-l-md-col--12 ds-u-margin-top--2">{truncateText(description)}{description.length > 240 ? (
+            <>
+             {' '}<Link to={`/dataset/${identifier}`}>See more</Link> 
+            </>
+          ) : ''}</div>
         </div>
         {( downloadUrl ) ? (
             <div className={`ds-u-margin-top--3 ds-u-padding-left--0`}>
