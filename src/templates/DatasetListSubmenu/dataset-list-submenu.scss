@@ -1,0 +1,33 @@
+.dkan-c-nav-submenu.has-submenu {
+  display: block !important;
+}
+
+.dc-dataset-search-list {
+  list-style: none;
+}
+
+.dataset-results-count {
+  font-weight: bold;
+}
+
+.dkan-dataset-search--facet-container .ds-c-accordion__content {
+  max-height: 32rem;
+}
+
+.dc-dataset-search--clear-all-filters {
+  width: 100%;
+}
+
+.dkan-dataset-search {
+  position: relative;
+  input {
+    min-width: 100%;
+    @media only screen and (min-width: 544px) {
+      padding-left: 32px;
+    }
+  }
+  .ds-c-field__before {
+    left: 16px;
+    top: 12px;
+  }
+}

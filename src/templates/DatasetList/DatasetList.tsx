@@ -15,18 +15,18 @@ import { DatasetSearchPageProps, DistributionItemType } from '../../types/search
 import { acaToParams } from '../../utilities/aca';
 import { ACAContext } from '../../utilities/ACAContext';
 
-const DatasetList = (props: DatasetSearchPageProps) => {
-  const {
-    rootUrl,
-    enableSort = true,
-    enablePagination = true,
-    defaultPageSize = 10,
-    defaultSort = { defaultSort: 'modified', defaultOrder: 'desc' },
-    pageTitle = 'What\'s New ',
-    showLargeFileWarning = false,
-    introText = '',
-    dataDictionaryLinks = false,
-  } = props;
+const DatasetList = ({
+  rootUrl,
+  enableSort = true,
+  enablePagination = true,
+  defaultPageSize = 10,
+  defaultSort = { defaultSort: 'modified', defaultOrder: 'desc' },
+  pageTitle = 'What\'s New ',
+  showLargeFileWarning = false,
+  introText = '',
+  dataDictionaryLinks = false,
+}: DatasetSearchPageProps) => {
+
   const { ACA } = useContext(ACAContext);
 
   const sortOptions = [
