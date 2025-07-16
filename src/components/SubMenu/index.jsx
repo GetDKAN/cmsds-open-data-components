@@ -42,7 +42,7 @@ const SubMenu = ({ link, linkClasses, subLinkClasses, wrapLabel = true }) => {
    if(link.submenu) {
     if (Array.isArray(link.submenu)) {
       submenuBlock = SubMenuStaticList(link.submenu, subLinkClasses);
-    } else if (React.isValidElement(link.submenu)) {
+    } else if (React.isValidElement(link.submenu) ) {
       const {rootUrl, location} = link.submenu.props;
       submenuBlock = <DatasetListSubmenu
         location={location}
