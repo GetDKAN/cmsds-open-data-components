@@ -50,7 +50,7 @@ const HeaderNav = (props: HeaderNavProps) => {
               )
             }
             return(
-              <li>
+              <li key={link.id || link.url}>
                 <NavLink to={link.url} className={linkClasses}>
                   <span>{link.label}</span>
                 </NavLink>
@@ -64,7 +64,7 @@ const HeaderNav = (props: HeaderNavProps) => {
           <ul className={listClasses}>
             {topNavLinks.map((link: any) => {
               return(
-                <li>
+                <li key={link.id || link.url}>
                   <NavLink to={link.url} className={linkClasses}>
                     <span>{link.label}</span>
                   </NavLink>

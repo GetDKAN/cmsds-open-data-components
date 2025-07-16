@@ -1,0 +1,139 @@
+@use "../../../scss/modules/modules";
+@use "../../../scss/modules/colormap";
+@use "../../../scss/modules/functions";
+@use "../../../scss/modules/variables";
+
+// Desktop
+$header-height: 64px;
+$subheader-height: 56px;
+$h-padding-md: 24px;
+$footer-height: 80px;
+
+// Mobile
+$subheader-height-xs: 48px;
+$h-padding-xs: 16px;
+$footer-height-xs: 72px;
+
+.ds-c-dialog-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+.csv-download-link-dialog {
+  &.ds-c-dialog {
+    font-family: variables.$muli;
+    // color: colormap.$charcoal;
+    padding: 0;
+    z-index: 12;
+    border-radius: 2px;
+    width: 100%;
+    max-width: 768px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.4);
+
+    .ds-c-dialog__window {
+      .ds-c-dialog__body {
+        height: calc(100% - (#{$header-height}));
+        display: flex;
+        flex-direction: column;
+        
+        div[id^="dialog"][id$="__content"] {
+          flex: 1;
+          overflow: scroll;
+          padding: 0 24px 20px;
+          font-size: 16px;
+        }
+      }
+    }
+
+    .ds-c-dialog__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 $h-padding-md;
+      // border-bottom: 1px solid colormap.$border-color;
+      min-height: $header-height;
+
+      h1 {
+        @include functions.h(3);
+        & {
+          margin: 0;
+          font-weight: 800;
+          font-size: 20px;
+        }
+      }
+
+      button.ds-c-dialog__close {
+        margin: 0;
+        // color: colormap.$charcoal;
+
+        // &:hover {
+        //   background-color: colormap.$charcoal-5;
+        // }
+
+        // &::before {
+        //   color: colormap.$charcoal;
+        // }
+      }
+    }
+
+    // Footer
+    .ds-c-dialog__actions {
+      @include functions.box-shadow(bottom);
+      margin: 0;
+      padding: 0 $h-padding-md;
+      display: flex;
+      align-items: center;
+      border-top: 1px solid colormap.$border-color;
+      height: $footer-height;
+      position: relative;
+      z-index: 2;
+      overflow: auto;
+
+      .csv-download-link-dialog-actions {
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex: 1;
+        background-color: #fff;
+        white-space: nowrap;
+      }
+    }
+
+    .csv-faq-link {
+      margin-top: 15px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .csv-download-link-dialog {
+    &.ds-c-dialog[class*="csv-download-link-"] {
+      height: 100%;
+      border-radius: 0;
+
+      .ds-c-dialog__window {
+        .ds-c-dialog__body {
+          height: calc(100% - (#{$header-height} + #{$footer-height-xs}));
+        }
+      }
+
+      .ds-c-dialog__header {
+        padding: 0 $h-padding-xs;
+
+        h1 {
+          @include functions.h(3);
+        }
+      }
+
+      // Footer
+      .ds-c-dialog__actions {
+        padding: 0 $h-padding-xs;
+        height: $footer-height-xs;
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "logLevel": "ERROR",
+  "requestLogging": false,
+  "responseLogging": false,
+  "useMockAdapter": false,
+  "sortOptions": [
+    {
+      "field": "search_api_relevance",
+      "order": "desc",
+      "label": "Relevance"
+    },
+    {
+      "field": "title_string",
+      "order": "asc",
+      "label": "Dataset title: A to Z"
+    },
+    {
+      "field": "title_string",
+      "order": "desc",
+      "label": "Dataset title: Z to A"
+    },
+    {
+      "field": "modified",
+      "order": "asc",
+      "label": "Last updated: Old to new"
+    },
+    {
+      "field": "modified",
+      "order": "desc",
+      "label": "Last updated: New to old"
+    }
+  ],
+  "dataDictionaryDownloadPrefix": "https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/",
+  "excludedFacets": [{ "type": "theme", "name": "helpful contacts" }],
+  "domainsDoNotNeedProviderDataPath": [
+    "pqdc-dkan.ddev.site",
+    "pdcode5.prod.acquia-sites.com",
+    "dev-edit.pdc.cms.gov",
+    "imp-edit.pdc.cms.gov",
+    "edit.pdc.cms.gov"
+  ],
+  "domainsNeedProviderDataPath": [
+    "dev.data.cms.gov",
+    "stage.data.cms.gov",
+    "data.cms.gov",
+    "test.data.cms.gov"
+  ]
+}

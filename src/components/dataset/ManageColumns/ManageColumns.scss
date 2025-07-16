@@ -1,0 +1,300 @@
+@use "sass:list";
+@use "../../../scss/modules/modules";
+@use "../../../scss/modules/colormap";
+@use "../../../scss/modules/functions";
+@use "../../../scss/modules/variables";
+
+// Desktop
+$header-height: 64px;
+$subheader-height: 56px;
+$h-padding-md: 24px;
+$footer-height: 80px;
+
+// Mobile
+$subheader-height-xs: 48px;
+$h-padding-xs: 16px;
+$footer-height-xs: 72px;
+
+.ds-c-dialog-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+.manage-col-dialog {
+  &.ds-c-dialog {
+    font-family: variables.$muli;
+    color: colormap.$charcoal;
+    padding: 0;
+    z-index: 12;
+    border-radius: 2px;
+    width: 100%;
+    max-width: 768px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.4);
+
+    // Manage columns sizers
+    $manage-col-size: sm, md, lg, xl;
+    $base-size: 40%;
+    $multiplier: 10%;
+    @for $i from 1 through list.length($manage-col-size) {
+      $element: list.nth($manage-col-size, $i);
+      &.manage-col-#{$element} {
+        height: $base-size + ($multiplier * $i);
+      }
+    }
+
+    > div {
+      height: 100%;
+
+      .ds-c-dialog__body {
+        height: calc(100% - (#{$header-height}));
+
+        display: flex;
+        flex-direction: column;
+
+        div[id^="dialog"][id$="__content"] {
+          flex: 1;
+          overflow: scroll;
+        }
+      }
+    }
+
+    .ds-c-dialog__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 $h-padding-md;
+      border-bottom: 1px solid colormap.$border-color;
+      min-height: $header-height;
+
+      h1 {
+        @include functions.h(3);
+        & {
+          margin: 0;
+          font-weight: 800;
+          font-size: 20px;
+        }
+      }
+
+      button.ds-c-dialog__close {
+        margin: 0;
+        color: colormap.$charcoal;
+
+        &:hover {
+          background-color: colormap.$charcoal-5;
+        }
+
+        &::before {
+          color: colormap.$charcoal;
+        }
+      }
+    }
+
+    .column-labels {
+      @include functions.box-shadow(top);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: $subheader-height;
+      padding: 0 $h-padding-md;
+      z-index: 2;
+      position: relative;
+      border-bottom: 1px solid colormap.$border-color;
+      background-color: colormap.$background-color;
+      font-size: 14px;
+      font-family: "Geometria", sans-serif;
+      font-weight: 800;
+    }
+
+    #reorder-help {
+      padding: .5em $h-padding-md;
+      border-bottom: 1px solid colormap.$border-color;
+      background-color: colormap.$background-color;
+      margin: 0;
+      font-size: 1em;
+      white-space: normal;
+    }
+
+    .advanced-options {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      overflow-y: auto;
+      height: calc(100% - #{$subheader-height});
+      background-color: colormap.$background-color;
+
+      > li[draggable] {
+        padding-left: 24px;
+        cursor: grab;
+        display: flex;
+        margin-bottom: -1px;
+        box-shadow: 0 1px 0 0 colormap.$charcoal-20 inset, 0 -1px 0 0 colormap.$charcoal-20 inset;
+
+        &:first-child {
+          margin-top: -1px;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        // Contains label, markup controled by CMS.gov
+        div:first-child {
+          flex: 1;
+        }
+
+        $checkbox-left-margin: $h-padding-md;
+
+        .ds-c-choice {
+          + label.ds-c-label {
+            padding: 5px 24px 5px 10px;
+            margin-top: -5px;
+            max-width: initial;
+
+            &::before {
+              transform: translateY(-50%);
+              top: 50%;
+              left: $checkbox-left-margin;
+            }
+          }
+        }
+
+        .manage-columns-reorder {
+          border: none;
+          padding: 0;
+          cursor: grab;
+          background: none;
+          display: flex;
+          align-items: center;
+          box-shadow: 1px 0 0 0 colormap.$charcoal-15 inset, 0 1px 0 0 colormap.$charcoal-15 inset,
+            0 -1px 0 0 colormap.$charcoal-15 inset;
+
+          &:hover {
+            background-color: colormap.$charcoal-20;
+            box-shadow: 1px 0 0 0 colormap.$charcoal-15 inset,
+              0 1px 0 0 colormap.$charcoal-15 inset, 0 -1px 0 0 colormap.$charcoal-15 inset;
+          }
+
+          .fa-sort {
+            margin: 0 40px;
+          }
+
+          &.grabbed {
+            background-color: colormap.$charcoal-20;
+          }
+        }
+      }
+    }
+
+    // Footer
+    .ds-c-dialog__actions {
+      @include functions.box-shadow(bottom);
+      margin: 0;
+      padding: 0 $h-padding-md;
+      display: flex;
+      align-items: center;
+      border-top: 1px solid colormap.$border-color;
+      height: $footer-height;
+      position: relative;
+      z-index: 2;
+      overflow: auto;
+
+      .manage-col-dialog-actions {
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex: 1;
+        background-color: #fff;
+        white-space: nowrap;
+
+        .select-all-choice {
+          > .ds-c-choice-wrapper {
+            display: flex;
+            flex-grow: 1;
+            justify-content: flex-end;
+          }
+
+          &.ds-c-choice--partial {
+            .ds-c-label {
+              &::before {
+                border: 1px solid colormap.$dragonfruit;
+              }
+
+              // Indeterminate dash
+              &::after {
+                content: "";
+                height: 3px;
+                width: 16px;
+                background-color: colormap.$dragonfruit;
+                position: absolute;
+                left: 0;
+                transform: translateX(50%);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .manage-col-dialog {
+    &.ds-c-dialog[class*="manage-col-"] {
+      height: 100%;
+      border-radius: 0;
+
+      > div {
+        .ds-c-dialog__body {
+          height: calc(100% - (#{$header-height} + #{$footer-height-xs}));
+        }
+      }
+
+      .ds-c-dialog__header {
+        padding: 0 $h-padding-xs;
+
+        h1 {
+          @include functions.h(3);
+        }
+      }
+
+      .column-labels {
+        min-height: $subheader-height-xs;
+        padding: 0 $h-padding-xs;
+      }
+
+      .advanced-options {
+        height: calc(100% - #{$subheader-height-xs});
+
+        > li[draggable] {
+          $checkbox-left-margin: $h-padding-xs;
+
+          .ds-c-choice {
+            + label.ds-c-label {
+              padding: 20px 24px 20px (44px + $checkbox-left-margin);
+
+              &::before {
+                left: $checkbox-left-margin;
+              }
+            }
+          }
+
+          .manage-columns-reorder {
+            .fa-sort {
+              margin: 0 32px;
+            }
+          }
+        }
+      }
+
+      // Footer
+      .ds-c-dialog__actions {
+        padding: 0 $h-padding-xs;
+        height: $footer-height-xs;
+      }
+    }
+  }
+}

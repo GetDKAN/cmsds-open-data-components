@@ -1,0 +1,37 @@
+@use "../../../scss/modules/modules";
+@use "../../../scss/modules/colormap";
+
+.dataset-explorer-download-link {
+  margin: 0;
+  padding-bottom: 8px;
+  text-align: right;
+
+  > a {
+    display: inline-flex;
+    align-items: center;
+    border: solid 2px colormap.$blueberry;
+    margin: 0;
+    border-radius: 25px;
+    font-weight: 700;
+    padding: 6px 23px;
+    max-width: 100%;
+    word-break: break-all;
+
+    span {
+      display: inline-block;
+      margin-left: 6px;
+    }
+
+    > svg {
+      flex: none;
+
+      > path {
+        fill: colormap.$blueberry;
+      }
+    }
+  }
+}
+
+.chip-list:empty + .dataset-explorer-download-link {
+  padding-top: 12px;
+}

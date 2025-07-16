@@ -1,41 +1,64 @@
-import React, {useState} from 'react'
-import { flexRender } from "@tanstack/react-table";
+import React, { useState } from 'react';
+import { flexRender } from '@tanstack/react-table';
 
-const HeaderResizeElement = ({table, header, sortElement, setAriaLiveFeedback} :
-  {table: any, header: any, sortElement?: Function, setAriaLiveFeedback: Function }) => {
+const HeaderResizeElement = ({
+  table,
+  header,
+  sortElement,
+  setAriaLiveFeedback,
+}: {
+  table: any;
+  header: any;
+  sortElement?: Function;
+  setAriaLiveFeedback: Function;
+}) => {
   const [columnResizing, setColumnResizing] = useState('');
-  return(
-    <th {
-      ...{
-        key: header.id,
-        style: {
-          width: header.getSize(),
-        }
-      }
-    }
-    className="ds-u-border-y--2 ds-u-padding--2 ds-u-border--dark  ds-u-font-weight--bold"
+  return (
+    // <th {
+    //   ...{
+    //     key: header.id,
+    //     style: {
+    //       width: header.getSize(),
+    //     }
+    //   }
+    // }
+    // className="ds-u-border-y--2 ds-u-padding--2 ds-u-border--dark  ds-u-font-weight--bold"
+    // >
+
+    <th
+      key={header.id}
+      style={{ width: header.getSize() }}
+      className="ds-u-border-y--2 ds-u-padding--2 ds-u-border--dark  ds-u-font-weight--bold"
     >
       <div className="ds-u-display--flex">
         <div>
-          <span title={typeof(header.column.columnDef.header) === "string" ? header.column.columnDef.header : ''}>
+          <span
+            title={
+              typeof header.column.columnDef.header === 'string'
+                ? header.column.columnDef.header
+                : ''
+            }
+          >
             {header.isPlaceholder
               ? null
-              : flexRender(
+              : (flexRender(
                   header.column.columnDef.header,
                   header.getContext()
-              ) as React.ReactNode}
+                ) as React.ReactNode)}
           </span>
         </div>
         {sortElement && (
-        <button
-          onClick={header.column.getToggleSortingHandler()}
-          {...{
-            className: header.column.getCanSort()
-              ? `cursor-pointer select-none ds-u-focus-visible ${sortElement(header.column.getIsSorted())}`
-              : '',
-          }}
-          aria-label={`${header.column.columnDef.header} sort order`}
-        />
+          <button
+            onClick={header.column.getToggleSortingHandler()}
+            {...{
+              className: header.column.getCanSort()
+                ? `cursor-pointer select-none ds-u-focus-visible ${sortElement(
+                    header.column.getIsSorted()
+                  )}`
+                : '',
+            }}
+            aria-label={`${header.column.columnDef.header} sort order`}
+          />
         )}
       </div>
       <button
@@ -56,47 +79,55 @@ const HeaderResizeElement = ({table, header, sortElement, setAriaLiveFeedback} :
               e.stopPropagation();
               if (columnResizing) {
                 // end resizing
-                setColumnResizing('')
-                setAriaLiveFeedback(`${header.column.columnDef.header} dropped.`)
+                setColumnResizing('');
+                setAriaLiveFeedback(`${header.column.columnDef.header} dropped.`);
               } else {
                 // start resizing
-                setColumnResizing(header.column.id)
-                setAriaLiveFeedback(`${header.column.columnDef.header} grabbed.`)
+                setColumnResizing(header.column.id);
+                setAriaLiveFeedback(`${header.column.columnDef.header} grabbed.`);
               }
               break;
 
             case 'Escape':
               if (columnResizing) {
-                setColumnResizing('')
-                setAriaLiveFeedback(`${header.column.columnDef.header} dropped.`)
+                setColumnResizing('');
+                setAriaLiveFeedback(`${header.column.columnDef.header} dropped.`);
               }
               break;
-              case 'ArrowRight':
-                e.preventDefault();
-                e.stopPropagation();
-                if (columnResizing) {
-                  columnSizingObject[header.column.id] = header.getSize() + 10;
-                  table.setColumnSizing(columnSizingObject);
-                  setAriaLiveFeedback(`${header.column.columnDef.header} has been resized. The new width is ${header.getSize()} pixels.`);
-                }
-                break;
-              case 'ArrowLeft':
-                e.preventDefault();
-                e.stopPropagation();
-                if (columnResizing) {
-                  columnSizingObject[header.column.id] = header.getSize() - 10;
-                  table.setColumnSizing(columnSizingObject);
-                  setAriaLiveFeedback(`${header.column.columnDef.header} has been resized. The new width is ${header.getSize()} pixels.`)
-                }
-                break;
+            case 'ArrowRight':
+              e.preventDefault();
+              e.stopPropagation();
+              if (columnResizing) {
+                columnSizingObject[header.column.id] = header.getSize() + 10;
+                table.setColumnSizing(columnSizingObject);
+                setAriaLiveFeedback(
+                  `${
+                    header.column.columnDef.header
+                  } has been resized. The new width is ${header.getSize()} pixels.`
+                );
+              }
+              break;
+            case 'ArrowLeft':
+              e.preventDefault();
+              e.stopPropagation();
+              if (columnResizing) {
+                columnSizingObject[header.column.id] = header.getSize() - 10;
+                table.setColumnSizing(columnSizingObject);
+                setAriaLiveFeedback(
+                  `${
+                    header.column.columnDef.header
+                  } has been resized. The new width is ${header.getSize()} pixels.`
+                );
+              }
+              break;
           }
         }}
         onBlur={() => {
-          setColumnResizing('')
+          setColumnResizing('');
         }}
       />
     </th>
-  )
-}
+  );
+};
 
-export default HeaderResizeElement
+export default HeaderResizeElement;

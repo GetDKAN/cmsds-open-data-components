@@ -1,0 +1,258 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterDataset component. Matches snapshot. 1`] = `
+<DocumentFragment>
+  <div
+    class="filter-dialog"
+  >
+    <div
+      class="ds-c-dialog-wrap open"
+    >
+      <dialog
+        aria-labelledby="dialog--1__heading"
+        class="ds-c-dialog filter-dialog"
+        id="dialog--1"
+        open=""
+        role="dialog"
+        style="z-index: 100149; top: 384px;"
+        tabindex="-1"
+      >
+        <div
+          class="ds-c-dialog__window"
+        >
+          <div
+            class="ds-c-dialog__header"
+          >
+            <h2
+              class="ds-c-dialog__heading"
+              id="dialog--1__heading"
+            >
+              Filter dataset
+            </h2>
+            <button
+              aria-label="Close filter dataset dialog"
+              class="ds-c-close-button ds-c-dialog__close"
+              id="dialog--1__close"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="ds-c-icon ds-c-icon--close ds-c-icon--close-thin "
+                id="dialog--1__close__icon"
+                viewBox="-2 -2 18 18"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0 13.0332964L13.0332964 0M13.0332964 13.0332964L0 0"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="ds-c-dialog__body"
+          >
+            <div
+              id="dialog--1__content"
+            >
+              <div>
+                <div
+                  class="info"
+                >
+                  <span>
+                    Add filters to only display data that meets your criteria. Filtered results can be downloaded.
+                  </span>
+                </div>
+                <div
+                  class="filter-header"
+                >
+                  <div
+                    class="header-item"
+                  >
+                    <h3>
+                      Column name
+                    </h3>
+                  </div>
+                  <div
+                    class="header-item"
+                  >
+                    <h3>
+                      Condition
+                    </h3>
+                  </div>
+                  <div
+                    class="header-item"
+                  >
+                    <h3>
+                      Value
+                    </h3>
+                  </div>
+                  <div
+                    style="min-width: 36px; height: 36px; border: 1px solid transparent; border-radius: 100%;"
+                  />
+                </div>
+                <div
+                  class="filter-container"
+                >
+                  <div
+                    class="filter-item"
+                  >
+                    <select
+                      aria-label="Select column"
+                      class="ds-c-field"
+                    >
+                      <option
+                        disabled=""
+                        hidden=""
+                        value=""
+                      >
+                        Select column
+                      </option>
+                      <option
+                        disabled=""
+                        value="measure_name"
+                      >
+                        Measure Name
+                      </option>
+                      <option
+                        value="measure_date_range"
+                      >
+                        Measure Date Range
+                      </option>
+                    </select>
+                    <select
+                      aria-label="Select condition"
+                      class="ds-c-field"
+                    >
+                      <option
+                        disabled=""
+                        hidden=""
+                        value=""
+                      >
+                        Select condition
+                      </option>
+                      <option
+                        value="="
+                      >
+                        ＝ Equals
+                      </option>
+                      <option
+                        value="<>"
+                      >
+                        ≠  Not Equal
+                      </option>
+                      <option
+                        value="LIKE"
+                      >
+                        Ｃ Contains
+                      </option>
+                      <option
+                        value="starts with"
+                      >
+                        ^ Starts With
+                      </option>
+                      <option
+                        value="is_empty"
+                      >
+                        Is empty
+                      </option>
+                      <option
+                        value="not_empty"
+                      >
+                        Not empty
+                      </option>
+                    </select>
+                    <input
+                      aria-label="Enter value"
+                      placeholder="Enter value"
+                      value="Average"
+                    />
+                    <button
+                      aria-label="delete filter"
+                      class="delete-button"
+                    >
+                      <svg
+                        aria-label="trash"
+                        class="fa fa-trash"
+                        data-icon="trash"
+                        data-prefix="fal"
+                        focusable="false"
+                        height="20"
+                        role="img"
+                        viewBox="0 0 448 512"
+                        width="20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          class=""
+                          d="M440 64H336l-33.6-44.8A48 48 0 0 0 264 0h-80a48 48 0 0 0-38.4 19.2L112 64H8a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h18.9l33.2 372.3a48 48 0 0 0 47.8 43.7h232.2a48 48 0 0 0 47.8-43.7L421.1 96H440a8 8 0 0 0 8-8V72a8 8 0 0 0-8-8zM171.2 38.4A16.1 16.1 0 0 1 184 32h80a16.1 16.1 0 0 1 12.8 6.4L296 64H152zm184.8 427a15.91 15.91 0 0 1-15.9 14.6H107.9A15.91 15.91 0 0 1 92 465.4L59 96h330z"
+                          fill="#323A45"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <button
+                  aria-label="Add filter"
+                  class="add-filter"
+                >
+                  <svg
+                    aria-label="plus circle"
+                    class="fa fa-plus-circle"
+                    data-icon="plus-circle"
+                    data-prefix="fal"
+                    focusable="false"
+                    height="16"
+                    role="img"
+                    viewBox="0 0 512 512"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      class=""
+                      d="M384 250v12c0 6.6-5.4 12-12 12h-98v98c0 6.6-5.4 12-12 12h-12c-6.6 0-12-5.4-12-12v-98h-98c-6.6 0-12-5.4-12-12v-12c0-6.6 5.4-12 12-12h98v-98c0-6.6 5.4-12 12-12h12c6.6 0 12 5.4 12 12v98h98c6.6 0 12 5.4 12 12zm120 6c0 137-111 248-248 248S8 393 8 256 119 8 256 8s248 111 248 248zm-32 0c0-119.9-97.3-216-216-216-119.9 0-216 97.3-216 216 0 119.9 97.3 216 216 216 119.9 0 216-97.3 216-216z"
+                      fill="#323A45"
+                    />
+                  </svg>
+                  <span>
+                    Add new filter
+                  </span>
+                </button>
+              </div>
+            </div>
+            <div
+              class="ds-c-dialog__actions"
+            >
+              <div
+                class="filter-dialog-actions"
+              >
+                <button
+                  class="btn"
+                >
+                  Reset
+                </button>
+                <button
+                  class="btn blueberry"
+                >
+                  Apply 1 Filter
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </dialog>
+      <div
+        class="backdrop"
+        style="z-index: 100148;"
+      />
+      <div
+        class="_dialog_overlay"
+        style="z-index: 100147;"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

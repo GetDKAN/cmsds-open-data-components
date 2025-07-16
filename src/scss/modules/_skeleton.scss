@@ -1,0 +1,61 @@
+@use "functions";
+
+@use 'sass:color';
+
+// Skeleton Loader
+.skeleton-box {
+  display: inline-block;
+  height: 1em;
+  position: relative;
+  overflow: hidden;
+  background-color: #f1f1f1;
+
+  &.skeleton-box-inverse {
+    background-color: #24303e;
+
+    &:after {
+      background-image: linear-gradient(
+        90deg,
+        rgba(color.adjust(#24303e, $lightness: 2.5%), 0) 0,
+        rgba(color.adjust(#2d2d35, $lightness: 2.5%), 0.2) 20%,
+        rgba(color.adjust(#24303e, $lightness: 2.5%), 0.5) 30%,
+        rgba(color.adjust(#24303e, $lightness: 2.5%), 0)
+      );
+    }
+  }
+
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      rgba(#e0e0e1, 0) 0,
+      rgba(#e0e0e1, 0.2) 20%,
+      rgba(#e0e0e1, 0.5) 30%,
+      rgba(#e0e0e1, 0)
+    );
+    animation: shimmer 2s infinite;
+    content: "";
+  }
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
+
+// Common Animations
+@include functions.keyframes(fadein) {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

@@ -8,9 +8,8 @@ export type MobileMenuButtonProps = {
   wrapperClasses?: string
 }
 
-const MobileMenuButton = (props: MobileMenuButtonProps) => {
+const MobileMenuButton = ({ wrapperClasses = "" }: MobileMenuButtonProps) => {
   const headerContext = React.useContext(HeaderContext);
-  const { wrapperClasses } = props;
   return(
     <Button
       aria-haspopup="true"

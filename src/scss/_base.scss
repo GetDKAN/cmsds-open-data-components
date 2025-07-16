@@ -1,0 +1,512 @@
+@use "modules/colormap";
+@use "modules/functions";
+@use "modules/variables";
+
+html {
+  // Convert font size to base 10 for easier calculations (1rem = 10px)
+  // 100% = 16px; 10 / 16 = 0.625 = 62.5% = 10px; 50% = 8px;
+  font-size: 62.5%;
+}
+
+.home-page {
+  overflow: visible;
+  > .hero {
+    overflow: inherit;
+  }
+}
+
+body {
+  font: variables.$base-font;
+  color: colormap.$text-color;
+  background-color: colormap.$background-color;
+}
+
+.App {
+  // Keep What's new? menu on top
+  main > div:first-child {
+    position: relative;
+    z-index: 3;
+  }
+
+  .theme-wrapper {
+    display: flex;
+    margin-bottom: 10px;
+  }
+
+  .page {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: variables.$geometria;
+  line-height: 1.375;
+}
+
+// Headings
+@for $i from 1 through 6 {
+  h#{$i} {
+    @include functions.h($i);
+
+    @media screen and (max-width: 1200px) {
+      @include functions.h($i, variables.$font-scale, variables.$space-scale, variables.$space-type, variables.$uniform-scale-sm);
+    }
+  }
+}
+.ds-c-choice-wrapper {
+  align-items: center;
+}
+// Links
+a,
+.ds-c-link {
+  color: colormap.$link-color;
+  text-decoration: none;
+  text-underline-offset: 3px;
+  text-decoration-skip-ink: auto;
+
+  &:visited {
+    color: colormap.$link-color;
+
+    &:focus {
+      @include functions.focus;
+      color: colormap.$link-color;
+      background: none;
+    }
+  }
+
+  &:hover {
+    color: colormap.$link-color;
+    text-decoration: underline solid 1px;
+  }
+
+  &:active {
+    color: colormap.$link-color;
+  }
+
+  &:focus {
+    @include functions.focus;
+    color: colormap.$link-color;
+    background: none;
+  }
+}
+
+a[target="_blank"] > svg.fa-external-link-square {
+  margin: 0px 0px 0px 5px !important;
+  position: relative;
+  top: -2px;
+}
+
+p {
+  a {
+    word-wrap: break-word;
+    @include functions.link-underline(colormap.$blueberry);
+  }
+}
+
+// Buttons
+button,
+a.btn,
+button.btn,
+.ApiDocs .swagger-ui button,
+.ds-c-button {
+  &:focus,
+  &.ds-c-button--focus,
+  &:visited.ds-c-button--focus,
+  &:visited:focus {
+    @include functions.focus;
+    background: none;
+
+    &:active {
+      text-decoration: none;
+    }
+  }
+}
+
+// Inputs & Selects
+input,
+select,
+.ReactTable .rt-thead.-filters .rt-th > input,
+input.ds-c-field,
+input.form-control,
+select.ds-c-field {
+  border: 1px solid colormap.$border-color;
+  border-radius: 2px;
+  color: colormap.$text-color;
+
+  &:hover {
+    border-color: colormap.$input-hover;
+  }
+
+  &:focus {
+    @include functions.focus;
+    border-color: colormap.$link-color;
+    border-radius: 2px;
+  }
+
+  &:disabled:hover {
+    border-color: colormap.$border-color;
+  }
+
+  &.form-control:-moz-focusring {
+    text-shadow: none;
+  }
+}
+
+// Select Icon
+select.ds-c-field {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3Cpath fill='%23323a45' d='M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41z'/%3E%3C/svg%3E") calc(100% - 10px) calc(50% - 3px) / 14px 14px no-repeat;
+  padding-right: 30px;
+}
+
+// Label
+label,
+label.ds-c-label {
+  // Resolves Firefox label/select hover bug
+  &:hover {
+    + select {
+      border-color: colormap.$border-color;
+    }
+
+    + select:focus {
+      border-color: colormap.$blueberry;
+    }
+  }
+}
+
+// Radio button / Checkbox
+.ds-c-choice {
+  &:focus {
+    + label::before {
+      @include functions.focus;
+      border: 1px solid colormap.$input-hover;
+    }
+  }
+
+  // Universal style
+  + label {
+    margin: 0;
+    padding: 8px 12px 10px 8px;
+
+    span {
+      line-height: 1.3;
+      padding-bottom: 4px;
+    }
+
+    &:hover {
+      // Label
+      > span {
+        text-decoration: underline;
+      }
+
+      &::before {
+        border-color: colormap.$input-hover;
+      }
+    }
+
+    &:active {
+      &::before {
+        background-color: colormap.$dragonfruit-2;
+      }
+    }
+
+    &::before {
+      border-color: colormap.$border-color;
+      border-width: 1px;
+      border-radius: 2px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  // Checkbox
+  &[type="checkbox"] {
+    border-width: 1px;
+    border-color: rgb(50, 58, 69);
+    &:checked {
+      &:after {
+        height: 9px;
+        width: 18px;
+        transform: rotate(-45deg) translate(3px, -1px);
+        border-width: 0 0 3px 3px;
+      }
+    }
+
+    &:checked {
+      &::before {
+        box-shadow: inset 0 0 4em 1em colormap.$dragonfruit;
+      }
+      + label.ds-c-label {
+        &::before {
+          background-color: colormap.$dragonfruit;
+          border-color: transparent;
+        }
+
+        &:hover {
+          &::before {
+            background-color: colormap.$dragonfruit-80;
+          }
+        }
+      }
+    }
+  }
+
+  // Radio button
+  &[type="radio"] {
+    border-width: 1px;
+    border-color: rgb(50, 58, 69);
+    &:checked {
+      border-color: colormap.$dragonfruit;
+      &:before {
+        box-shadow: inset 0 0 4em 1em colormap.$dragonfruit;
+        border-radius: 100%;
+        height: 24px;
+        width: 24px;
+      }
+    }
+    // Override default SVG
+    + label:active::before {
+      background-image: none;
+    }
+
+    &:checked + label {
+      &::before {
+        background-image: none;
+        background-color: white;
+        border-color: colormap.$dragonfruit;
+      }
+
+      // Inner circle
+      &::after {
+        display: none;
+      }
+
+      &:hover {
+        &::after {
+          background-color: colormap.$dragonfruit-80;
+        }
+
+        &::before {
+          border-color: colormap.$dragonfruit-80;
+        }
+      }
+    }
+  }
+}
+
+// Default bullet-point style
+.bullet-point {
+  margin: 0 8px;
+  color: colormap.$charcoal-90;
+  font-size: 1.2rem;
+  user-select: none;
+}
+
+.dataset-embed {
+  padding: 15px;
+
+  .embed-menu {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 6px;
+
+    li {
+      margin-left: 0;
+    }
+  }
+
+  a {
+    border: 1px solid #ddd;
+    background: #f4f4f4;
+    color: #333;
+    display: inline-block;
+    padding: 6px 24px;
+    text-align: center;
+
+    &:hover,
+    &:focus {
+      color: #000;
+      background: #fff;
+      border: 1px solid #ccc;
+      text-decoration: none;
+    }
+  }
+}
+
+nav.sidenav {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  header {
+    min-height: 16px;
+    flex: 0 0 auto;
+  }
+
+  // Back link height + page padding
+  $fixed-offset: 64px + 24px;
+  ul.sidenav-list {
+    overflow-y: auto;
+    list-style: none;
+    background: white;
+    border: 1px solid variables.$panel-border;
+    box-shadow: variables.$panel-shadow;
+    border-radius: 2px;
+    margin: 0;
+    padding: 0 6px;
+    max-height: calc(100vh - $fixed-offset);
+
+    > li {
+      padding: 6px 0;
+      border-bottom: 1px solid colormap.$charcoal-10;
+
+      &:last-child {
+        border: 0;
+      }
+
+      > a {
+        padding: 16px 12px;
+        width: 100%;
+        display: block;
+        font: 700 1.6rem variables.$geometria;
+        color: colormap.$charcoal;
+        border-radius: 2px;
+
+        &:hover {
+          box-shadow: 0 0 0 1px colormap.$charcoal-10 inset;
+          background-color: colormap.$charcoal-5;
+        }
+      }
+    }
+  }
+}
+
+// Toggle Block Page Sections (Topic Details, Archived Data)
+.toggle-block-container {
+  .toggle-block-panel {
+    &.closed {
+      display: none;
+    }
+
+    &.open {
+      display: block;
+    }
+  }
+}
+
+section {
+  &.page-section:not(:first-of-type) {
+    .toggle-block {
+      border-top: 1px solid colormap.$charcoal-15;
+    }
+  }
+
+  .toggle-block {
+    &.open {
+      padding-bottom: 16px;
+    }
+
+    .toggle-block-inner {
+      padding-left: 32px;
+    }
+
+    .toggle-block-title {
+      margin: 8px 0;
+      display: flex;
+      justify-content: flex-start;
+
+      button {
+        display: flex;
+        align-items: stretch;
+        flex: 1;
+        min-height: 64px;
+        font-weight: inherit;
+        color: colormap.$charcoal;
+        padding: 0;
+        background: none;
+        border: none;
+        position: relative;
+
+        .toggle-block-title-text {
+          display: flex;
+          align-items: center;
+          flex: 1;
+          padding-left: 32px;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        .toggle-block-section-header {
+          display: flex;
+          justify-content: space-between;
+          flex: 1;
+
+          .dataset-results {
+            align-self: center;
+            font: normal normal normal 1.4rem variables.$muli;
+          }
+        }
+
+        svg.svg-inline--fa {
+          width: 20px;
+          height: 20px;
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          pointer-events: none;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .App > header {
+    height: 56px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .sticky-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sticky {
+    position: sticky;
+
+    &.overflow-y {
+      overflow-y: auto;
+      max-height: calc(100vh - 48px);
+      width: 100%;
+    }
+
+    &.top-0 {
+      top: 0;
+    }
+
+    &.top-24 {
+      top: 24px;
+    }
+  }
+}
+
+.search-sidebar > .breakpoint__xl-up {
+  height: 100%;
+}
+
+// Dsign System 11.0.0 introduced fixed values for these:
+:root,:before,:after,::backdrop {
+  --font-size-sm: inherit;
+  --font-size-md: inherit;
+  --font-size-lg: inherit;
+  --font-size-xl: inherit;
+}

@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTablePageResults component. Matches snapshot. 1`] = `
+<DocumentFragment>
+  <div
+    class=""
+  >
+    <p>
+      <span
+        class="low-result"
+      >
+        1
+      </span>
+       - 
+      <span
+        class="high-result"
+      >
+        20
+      </span>
+       of 
+      <span
+        class="total"
+      >
+        100
+      </span>
+       rows
+    </p>
+  </div>
+</DocumentFragment>
+`;

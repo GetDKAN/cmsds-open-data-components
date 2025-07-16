@@ -1,0 +1,130 @@
+/* cmsgov/design-system UsaBanner component override */
+.ds-c-usa-banner__header {
+  margin: 0;
+  gap: 2px 9px;
+  font-family: Muli, sans-serif;
+}
+.ds-c-usa-banner__header-text,
+.ds-c-usa-banner__button,
+.ds-c-usa-banner__action {
+  font-size: 12px;
+}
+.ds-c-usa-banner__header-icon {
+  height: 11px;
+  width: 16px;
+}
+.ds-c-usa-banner__action-icon {
+  width: 10px;
+  height: 10px;
+  margin-inline-start: 0;
+  margin-left: 11px;
+
+  path {
+    fill: #323a45;
+  }
+}
+.ds-c-usa-banner__guidance-container {
+  margin-inline: 0;
+  font-size: 16px;
+  font-family: Muli, sans-serif;
+}
+.ds-c-usa-banner__guidance-icon {
+  width: 40px;
+  height: 40px;
+}
+.ds-c-usa-banner__guidance-container:not([hidden]) {
+  gap: 3rem;
+}
+@media (min-width: 769px) {
+  .ds-c-usa-banner__header {
+      align-items: flex-start;
+  }
+}
+@media (min-width: 544px) {
+  .ds-c-usa-banner__header {
+      min-height: 0;
+      padding-block: 4px;
+  }
+}
+
+/* cmsgov/design-system Dropdown component override */
+.ds-c-dropdown .ds-c-dropdown__menu-item-selected-indicator svg {
+  margin: 0;
+}
+
+.ds-c-dropdown__button.ds-c-field {
+  padding: 10px 6px 10px 16px;
+  border-color: #c1c3c7;
+  border-width: 1px;
+  border-radius: 0;
+  height: 40px;
+  margin: 0;
+}
+
+.search-sidebar-options .ds-c-dropdown__button.ds-c-field,
+.search-sidebar-options .ds-c-dropdown__menu-container {
+  display: none;
+}
+
+.search-sidebar-options .inner-sort--expanded .ds-c-dropdown__button.ds-c-field {
+  display: flex;
+}
+
+.search-sidebar-options .inner-sort--expanded .ds-c-dropdown__menu-container {
+  display: block;
+}
+
+.search-sidebar-options .ds-c-dropdown__menu-item--selected {
+  background-color: #3649A7;
+}
+
+.ds-c-dropdown__menu-container {
+  border-color: #c1c3c7;
+  border-width: 1px;
+}
+
+/* cmsgov/design-system Choice component override */
+.ds-c-choice-wrapper {
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+/* cmsgov/design-system Dialog component override */
+.ds-c-dialog-wrap {
+  display: none;
+
+  &.open {
+    display: flex;
+  }
+}
+.ds-c-dialog {
+  background-color: #fff;
+  border: none;
+  box-shadow: 2px 2px 4px;
+  box-sizing: border-box;
+  color: inherit;
+  display: inline-block;
+  margin: auto;
+  margin-top: 48px;
+  max-width: 768px;
+  padding: 0;
+  text-align: start;
+  width: 95%;
+  height: fit-content;
+
+  > .ds-c-dialog__window {
+    padding: 0;
+    -webkit-margin-before: 0px;
+    background: none;
+    border: none;
+    box-shadow: none;
+    box-sizing: border-box;
+    color: #323a45;
+    display: block;
+    margin: 0;
+    margin-block-start: 0px;
+    max-width: none;
+    width: auto;
+    font-size: inherit;
+  }
+}

@@ -1,0 +1,41 @@
+.DatasetHeaderLoading {
+  position: relative;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+
+  &::after {
+    content: "";
+    width: 48px;
+    height: 4px;
+    background-color: #42e288;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  > .DatasetHeaderLoading__title {
+    margin: 1.61rem 0;
+    height: 38px;
+    width: 40%;
+  }
+
+  > .DatasetHeaderLoading__desc-container {
+    > .DatasetHeaderLoading__desc_item {
+      height: 18px;
+      width: 100%;
+      margin-bottom: 3px;
+      display: block;
+
+      &:last-child {
+        width: 80%;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  > .DatasetHeaderLoading__date {
+    height: 16px;
+    width: 30%;
+    margin-top: 25px;
+  }
+}

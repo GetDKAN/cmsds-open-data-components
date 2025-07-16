@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddFilter component. Matches snapshot. 1`] = `
+<button
+  aria-label="Add filter"
+  className="add-filter"
+  onClick={[Function]}
+>
+  <svg
+    aria-label="plus circle"
+    className="fa fa-plus-circle"
+    data-icon="plus-circle"
+    data-prefix="fal"
+    focusable="false"
+    height={16}
+    role="img"
+    viewBox="0 0 512 512"
+    width={16}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      className=""
+      d="M384 250v12c0 6.6-5.4 12-12 12h-98v98c0 6.6-5.4 12-12 12h-12c-6.6 0-12-5.4-12-12v-98h-98c-6.6 0-12-5.4-12-12v-12c0-6.6 5.4-12 12-12h98v-98c0-6.6 5.4-12 12-12h12c6.6 0 12 5.4 12 12v98h98c6.6 0 12 5.4 12 12zm120 6c0 137-111 248-248 248S8 393 8 256 119 8 256 8s248 111 248 248zm-32 0c0-119.9-97.3-216-216-216-119.9 0-216 97.3-216 216 0 119.9 97.3 216 216 216 119.9 0 216-97.3 216-216z"
+      fill="currentColor"
+    />
+  </svg>
+  <span>
+    Add new filter
+  </span>
+</button>
+`;
