@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 
 const SubMenuStaticList = (submenuArray, subLinkClasses) =>  (
-  // Render a static list of submenu items as listed in the menu.json or menu.jsx object.
+  // Render a static list of submenu items as listed in the assets/menu.jsx file.
   submenuArray.map((s) => {
     return (
       <li key={s.id}>
