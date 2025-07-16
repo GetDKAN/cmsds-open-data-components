@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import qs from 'qs';
-// import DataTable from '../Datatable/Datatable';         //pdc datatable
-import DataTable from '../dataset/DataTable/DataTable';       // dkan datatable
+import DataTable from '../Datatable/Datatable';         //dkan datatable
+// import DataTable from '../dataset/DataTable/DataTable';       // pdc datatable
 import { transformTableSortToQuerySort } from '../../services/useDatastore/transformSorts';
 import { buildCustomColHeaders } from '../../templates/FilteredResource/functions';
 import { Pagination, Spinner, Alert } from '@cmsgov/design-system';
@@ -13,7 +13,7 @@ import DataTableContext from '../../templates/Dataset/DataTableContext';
 import ManageColumnsContext from '../ManageColumns/ManageColumnsContext';
 import FilteredDatasetResource from '../dataset/DatasetResource/FilteredDatasetResource';
 import { filteredDatasetResource } from '../../utilities/data-mocks/data-filteredDatasetResource'
-import { DatasetContext } from '../../context/DatasetContext';
+// import { DatasetContext } from '../../context/DatasetContext';
 import mockDatasetResponse from '../../utilities/data-mocks/api-response-dataset.json'
 
 
@@ -111,12 +111,12 @@ const DatasetTable = ({
 
     return (
       <>
-        <DatasetContext.Provider value={datasetContextProviderValue}>
+        {/* <DatasetContext.Provider value={datasetContextProviderValue}> */}
           <FilteredDatasetResource resource={filteredDatasetResource} rootUrl={rootUrl}> 
             <DataTableToolbar {...componentArgs} />
-            <DataTable />
+            {/* <DataTable /> */}
           </FilteredDatasetResource>
-        </DatasetContext.Provider>
+        {/* // </DatasetContext.Provider> */}
 
         {/* <DataTableToolbar 
         datasetTitle="Test title"
@@ -160,7 +160,7 @@ const DatasetTable = ({
             isModal && 'dkan-datatable-fullscreen-mode'
           }`}
         >
-          {/* <DataTable
+          <DataTable
             canResize={true}
             columns={columns}
             sortTransform={transformTableSortToQuerySort}
@@ -168,7 +168,7 @@ const DatasetTable = ({
             loading={resource.loading}
             isModal={isModal}
             closeFullScreenModal={closeFullScreenModal}
-          /> */}
+          />
 
           
 
