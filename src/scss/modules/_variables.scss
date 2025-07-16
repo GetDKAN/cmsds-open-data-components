@@ -1,0 +1,32 @@
+@use "colormap";
+
+// Typography
+$geometria: "Geometria", sans-serif;
+$muli: "Muli", sans-serif;
+$base-font: 400 1.6rem/1.6 $muli;
+
+// Styles
+$panel-shadow-color: rgba(50, 58, 69, 0.04);
+$panel-shadow: 0 1px 8px 0 $panel-shadow-color;
+$panel-border: colormap.$charcoal-10;
+$focus-shadow: 0 0 0 4px rgba(colormap.$blueberry-30, 0.4);
+
+// Transition
+$d-transition: all 0.05s linear;
+
+// Configuration
+
+// Headings
+$font-scale: 1.25;
+$space-scale: 1.1;
+$space-type: margin;
+$letter-scale: 0.6;
+$heading-unit: rem;
+$uniform-scale: 1;
+$uniform-scale-sm: 0.875;
+$move-scale: 6;
+
+// Content Sections
+$section-scale: 1.375;
+
+$max-width: 1280px;

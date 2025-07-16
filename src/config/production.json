@@ -1,0 +1,6 @@
+{
+  "requestLogging": false,
+  "responseLogging": false,
+  "logLevel": "ERROR",
+  "apiSite": "api/1"
+}

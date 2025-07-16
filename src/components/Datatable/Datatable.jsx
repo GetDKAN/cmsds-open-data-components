@@ -10,7 +10,7 @@ import { Spinner, Alert } from "@cmsgov/design-system";
 import TruncatedResizeableTHead from "./TruncatedResizeableTHead";
 import FixedSizeTHead from "./FixedSizeTHead";
 import "./datatable.scss";
-import DataTableControls from "../DataTableControls";
+// import DataTableControls from "../DataTableControls";
 import DataTableContext from "../../templates/Dataset/DataTableContext";
 import ManageColumnsContext from "../ManageColumns/ManageColumnsContext";
 
@@ -102,7 +102,7 @@ const DataTable = ({
 
   return(
     <>
-      { datasetTableControls && (
+      {/* { datasetTableControls && (
         <div>
           <DataTableControls
             id={id}
@@ -112,7 +112,7 @@ const DataTable = ({
             closeFullScreenModal={closeFullScreenModal}
           />
         </div>
-      )}
+      )} */}
       <div className="dc-c-datatable-wrapper" tabIndex={0} ref={dataTableWrapperElement}>
         <table
           {...{
@@ -140,11 +140,9 @@ const DataTable = ({
                     let classList = "dc-truncate ds-u-padding-x--1"
                     return (
                       <td
-                        {...{
-                          key: cell.id,
-                          style: {
+                          key={cell.id}
+                          style= {{
                             maxWidth: cell.column.getSize(),
-                          },
                         }}
                         className={`${classList} ${tablePadding}`}
                         title={cell.getValue()}

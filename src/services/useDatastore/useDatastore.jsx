@@ -98,6 +98,7 @@ const useDatastore = (
         setSchema(data.schema);
       }
     }
+    console.log("SRC-SERVICES Data fetched:++++++++++++", data)
   }, [data])
   useEffect(() => {
     if (unfiltered) {
@@ -116,7 +117,7 @@ const useDatastore = (
     limit,
     offset,
     schema,
-    conditions,
+    conditions: [],
     properties,
     setProperties,
     setGroupings,

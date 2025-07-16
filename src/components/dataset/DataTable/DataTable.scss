@@ -1,0 +1,411 @@
+@use "../../../scss/modules/modules";
+@use "../../../scss/modules/colormap";
+@use "../../../scss/modules/variables";
+
+.DataTable {
+  // Scrollbar
+  .ps {
+    // Rail
+    div[class^="ps__rail-"] {
+      opacity: 1 !important;
+      transition-duration: 0.1s;
+
+      &:hover,
+      &.ps--clicking {
+        background-color: white;
+        transition: background-color 0.1s, box-shadow 0.1s;
+
+        &[class*="-y"] {
+          box-shadow: -1px 0 0 0 colormap.$border-color;
+        }
+
+        &[class*="-x"] {
+          box-shadow: 0 -1px 0 0 colormap.$border-color;
+        }
+      }
+
+      // Thumb
+      div[class^="ps__thumb-"] {
+        background-color: colormap.$charcoal-70;
+        border-radius: 8px;
+        transition-duration: 0.1s;
+
+        &:hover {
+          background-color: colormap.$charcoal-70;
+        }
+      }
+    }
+  }
+
+  // Expanded
+  &.density-1 .dc-tbody .dc-td {
+    padding: 24px 8px;
+  }
+
+  // Normal
+  &.density-2 .dc-tbody .dc-td {
+    padding: 16px 8px;
+  }
+
+  // Compact
+  &.density-3 .dc-tbody .dc-td {
+    padding: 8px;
+  }
+
+  &.-striped {
+    .dc-tbody {
+      .tr:nth-child(odd) {
+        background: colormap.$charcoal-5;
+      }
+    }
+  }
+
+  .dc-table {
+    min-width: fit-content !important;
+    .dc-thead {
+      // position: -webkit-sticky; // for safari
+      // position: sticky;
+      // top: 0; left: 0;
+      border-bottom: solid 1px rgb(225, 226, 227);
+      background-color: #fafafa;
+      .-filters {
+        display: none;
+      }
+    }
+
+  }
+
+  .dc-table-container {
+    border-radius: 2px;
+    border: 1px solid colormap.$border-color;
+  }
+
+  .td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-right: 1px solid colormap.$charcoal-15;
+
+    &.isResizing {
+      background-color: colormap.$dragonfruit;
+    }
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  .th {
+    font-weight: 700;
+    letter-spacing: 0.25px;
+    border-right: 1px solid colormap.$charcoal-15;
+    display: flex;
+
+    &:focus {
+      outline-offset: -4px !important;
+    }
+
+    .column-title {
+      flex: 1 1 auto;
+      display: block;
+      padding: 8px;
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sort-icon {
+      flex: none;
+      display: flex;
+      padding: 4px;
+
+      button {
+        background: none;
+        border: 0;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+    }
+  }
+
+  .-header {
+    div.th {
+      display: flex;
+      height: 40px;
+      background: none;
+      text-align: left;
+      border: 0;
+      color: colormap.$charcoal;
+      position: static !important;
+
+      .resizer {
+        width: 15px;
+        border: 0;
+        padding: 0;
+        margin: 0;
+        background-color: transparent;
+        outline-offset: -2px;
+      }
+
+      &:hover {
+        .resizer {
+          background-color: colormap.$charcoal-15;
+        }
+      }
+
+      .resizer-container {
+        border-right: 1px solid colormap.$charcoal-15;
+      }
+
+      &:last-child {
+        display: flex;
+        border: 0;
+
+        .resizer-container {
+          border-right: 0;
+
+          .resizer {
+            width: 8px;
+          }
+        }
+      }
+
+      // Control cursor style while dragging
+      &.resizeCursor {
+        cursor: col-resize !important;
+        background-color: colormap.$charcoal-5;
+        text-decoration: underline;
+
+        ~ button {
+          cursor: col-resize !important;
+
+          &:hover {
+            cursor: col-resize !important;
+            text-decoration: none;
+
+            .resizer {
+              background-color: transparent;
+            }
+          }
+        }
+      }
+
+      .sort-icon {
+        display: flex;
+        align-items: center;
+        flex: 0 0 auto;
+        margin-left: 4px;
+
+        svg {
+          display: flex;
+          align-items: center;
+
+          path {
+            fill: colormap.$charcoal-70;
+          }
+        }
+      }
+
+      > span {
+        min-width: 0;
+        flex: 1 1 auto;
+      }
+
+      &.-sort-asc,
+      &.-sort-desc {
+        box-shadow: 0 2px 0 0 colormap.$dragonfruit inset;
+        background-color: colormap.$dragonfruit-2;
+
+        svg path {
+          fill: colormap.$dragonfruit;
+        }
+      }
+
+      $resizer-width: 12px;
+      .resizer-container {
+        flex: none;
+        display: flex;
+
+        .resizer {
+          display: inline-block;
+          width: $resizer-width;
+          height: 100%;
+          cursor: col-resize;
+
+          &:hover,
+          &:focus {
+            background-color: colormap.$charcoal-20;
+          }
+
+          &.isResizing {
+            background-color: colormap.$charcoal-40;
+            cursor: col-resize;
+          }
+        }
+      }
+    }
+  }
+
+  .dc-tbody {
+    .tr.dc-tr {
+      border-bottom: solid 1px colormap.$charcoal-10;
+      cursor: default;
+      &:hover {
+        background: colormap.$charcoal-10;
+      }
+    }
+  }
+
+  .-filters {
+    // border-bottom: 1px solid $charcoal-30;
+    display: none;
+    .th {
+      &:last-child {
+        border: 0;
+      }
+
+      &.filter-value {
+        background-color: colormap.$dragonfruit-2;
+
+        input {
+          padding: 8px 36px 8px 8px;
+        }
+      }
+
+      > div {
+        display: flex;
+        align-items: center;
+      }
+
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 100%;
+        border: 0;
+        background: none;
+        color: colormap.$charcoal;
+        padding: 0;
+
+        &:hover {
+          background-color: colormap.$charcoal-10;
+        }
+
+        svg {
+          font-size: inherit;
+        }
+      }
+
+      input {
+        border: 1px solid colormap.$border-color;
+        width: 100%;
+        height: 40px;
+        padding: 8px;
+        margin-right: -32px;
+
+        &:hover {
+          border-color: colormap.$input-hover;
+        }
+
+        &:focus {
+          border-color: colormap.$link-color;
+        }
+
+        // When input has value...
+        &:not(:placeholder-shown) {
+          border-color: colormap.$dragonfruit;
+        }
+
+        &::placeholder {
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+
+  .pagination-bottom {
+    width: 100%;
+
+    .-pagination {
+      display: flex;
+      align-items: center;
+      min-height: 64px;
+      padding: 16px 0;
+      border-top: 0;
+      box-shadow: none;
+      flex: 1;
+
+      .-center {
+        flex: 1;
+        text-align: center;
+      }
+
+      .-next button {
+        padding: 0 20px 2px 24px;
+
+        svg {
+          margin-left: 8px;
+        }
+      }
+
+      .-previous button {
+        padding: 0 24px 2px 20px;
+
+        svg {
+          margin-right: 8px;
+        }
+      }
+
+      button {
+        height: 40px;
+        border-radius: 20px;
+        color: colormap.$blueberry;
+        font: 700 1.6rem variables.$muli;
+        letter-spacing: 0.25px;
+        border: 1px solid colormap.$blueberry-20;
+        background-color: white;
+
+        &:hover:not(:disabled) {
+          color: colormap.$blueberry;
+          border-color: colormap.$blueberry-30;
+          background-color: colormap.$blueberry-5;
+        }
+
+        &:disabled {
+          color: colormap.$charcoal-40;
+          background-color: colormap.$charcoal-5;
+          cursor: not-allowed;
+
+          svg path {
+            fill: colormap.$charcoal-40;
+          }
+        }
+
+        svg path {
+          fill: colormap.$blueberry;
+        }
+      }
+    }
+  }
+
+  span.tooltip-wrapper {
+    /* These are overriding inline style= attributes set by the Tooltip
+        component, so they have to use !important: */
+    span.tooltip-container {
+      left: 0 !important;
+      position: absolute !important;
+      transform: none !important;
+      bottom: -80% !important;
+      background-color: black !important;
+      color: white !important;
+      width: auto;
+      white-space: nowrap;
+    }
+  }
+}

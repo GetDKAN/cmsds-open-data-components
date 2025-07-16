@@ -29,7 +29,7 @@ const CMSTopNav = (props: CMSTopNavProps) => {
           <ul className="ds-u-justify-content--end ds-u-md-align-items--center ds-u-flex-direction--column ds-u-md-flex-direction--row">
             {links.map((link: any) => {
               return(
-                <li className="ds-u-margin-x--05 ds-u-font-size--sm">
+                <li key={link.label} className="ds-u-margin-x--05 ds-u-font-size--sm">
                   <NavLink to={link.url}>
                     <span>{link.label}</span>
                   </NavLink>

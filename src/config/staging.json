@@ -1,0 +1,5 @@
+{
+  "requestLogging": false,
+  "responseLogging": false,
+  "logLevel": "ERROR"
+}

@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ManageColumnsCard component. Matches snapshot. 1`] = `
+<DocumentFragment>
+  <li
+    draggable="true"
+    style="opacity: 1;"
+  >
+    <div>
+      <div
+        class="ds-c-choice-wrapper"
+      >
+        <input
+          checked=""
+          class="ds-c-choice"
+          id="col1"
+          name="col1"
+          type="checkbox"
+          value=""
+        />
+        <label
+          class="ds-c-label"
+          for="col1"
+          id="col1__label"
+        >
+          col1
+        </label>
+      </div>
+    </div>
+    <div
+      class="manage-columns-reorder"
+    >
+      <svg
+        aria-label="sort"
+        class="fa fa-sort"
+        focusable="false"
+        height="16"
+        role="img"
+        viewBox="0 0 320 512"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+          fill="#323A45"
+        />
+      </svg>
+    </div>
+  </li>
+</DocumentFragment>
+`;
