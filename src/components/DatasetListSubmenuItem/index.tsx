@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
+import { NavLink } from 'react-router-dom';
 import './dataset-list-submenu-item.scss';
 
 type SearchItemProps = {
@@ -12,7 +12,7 @@ type SearchItemProps = {
 
 const DatasetListSubmenuItem = (props: SearchItemProps) => {
   const desktop = useMediaQuery({ minWidth: 1024 });
-  const { title, identifier, paginationEnabled, dataDictionaryLinks } = props;
+  const { title, identifier, dataDictionaryLinks } = props;
 
   let linkContainerClasses = 'ds-u-margin-bottom--2';
   if (dataDictionaryLinks) {
@@ -27,11 +27,14 @@ const DatasetListSubmenuItem = (props: SearchItemProps) => {
   }
 
   return (
-    <li className="dc-c-list-item">
+    <li className="dc-c-list-item" key={identifier}>
       <div className={`dc-c-searchlist-item`}>
-        <Link className="ds-c-button ds-c-button--ghost ds-u-text-align--left" to={`/dataset/${identifier}`}>
-          <h2 className="ds-text-heading--md">{title}</h2>
-        </Link>
+        <NavLink
+          className="ds-c-button ds-c-button--ghost ds-u-text-align--left dkan-c-header--link ds-u-padding-x--0 ds-u-margin-left--0"
+          to={`/dataset/${identifier}`}
+        >
+          <span className="ds-text-heading--md ds-u-margin-left--0">{title}</span>
+        </NavLink>
       </div>
     </li>
   );
