@@ -166,7 +166,7 @@ const DatasetTable = ({
             closeFullScreenModal={closeFullScreenModal}
           />
         </div>
-        {/* {!resource.loading && resource.count !== null && (
+        {!resource.loading && resource.count !== null && (
           <div className="ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--end ds-u-md-justify-content--between ds-u-margin-top--2 ds-u-align-items--center">
             <Pagination
               totalPages={Math.ceil(resource.count ? resource.count / pageSize : 1)}
@@ -180,7 +180,7 @@ const DatasetTable = ({
               className="ds-l-col--12 ds-u-padding-x--0"
             />
           </div>
-        )} */}
+        )}
       </>
     );
   } else
