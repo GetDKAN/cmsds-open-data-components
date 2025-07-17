@@ -155,8 +155,8 @@ const DatasetListSubmenu = (props: DatasetSearchPageProps) => {
                   </div>
                   <div className="">
                     {(data && data.data.total > 0) && (
-                      <Link className="ds-u-padding--0" to={`../whats-new`}>
-                        <h2 className=" ds-text-heading--md"> {`View all ${data.data.total} entries`} </h2>
+                      <Link className="ds-u-padding--0 ds-c-button ds-c-button--ghost dkan-c-header--link" to={`../whats-new`}>
+                        <span className=" ds-text-heading--md"> {`View all ${data.data.total} entries`} </span>
                       </Link>
                     )}
                   </div>
