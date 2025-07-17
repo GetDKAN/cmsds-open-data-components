@@ -4,7 +4,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import Tooltip from '../../common/Tooltip/Tooltip';
 import FontAwesomePro from '../../common/FontAwesomePro/FontAwesomePro';
-import { FilteredDispatch } from '../DatasetResource/FilteredDatasetContext';
+import { FilteredDispatch } from '../../DatasetResource/FilteredDatasetContext';
 import { DatasetContentLoading } from '../DatasetContentLoading/DatasetContentLoading';
 import './DataTable.scss';
 

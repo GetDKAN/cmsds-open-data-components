@@ -6,12 +6,7 @@ import { FilteredDispatch } from '../DatasetResource/FilteredDatasetContext';
 import PopoverContent from './PopOverContent';
 // import { Popover } from 'react-tiny-popover';
 import './DataTableToolbar.scss';
-import log from '../../../log';
 import { useCurrentBreakpointName, useCurrentWidth } from 'react-socks';
-
-// modify to check hostname instead.
-const filterEnabled = true;
-log.debug('filterEnabled', filterEnabled);
 
 const DataTableToolbar = ({
   fullscreen,
@@ -205,9 +200,7 @@ const DataTableToolbar = ({
           }`}
         >
           {/* ChoiceList now only takes types for radio or checkboxes. ChoiceList has been converted to an html select component */}
-          <div className={`table-controls${fullscreen ? ' fullscreen-table-controls' : ''}`}>
-
-          </div>
+          <div className={`table-controls${fullscreen ? ' fullscreen-table-controls' : ''}`}></div>
         </div>
       </div>
 

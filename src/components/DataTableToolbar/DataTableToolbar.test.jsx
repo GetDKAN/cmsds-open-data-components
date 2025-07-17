@@ -1,14 +1,14 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import DataTableToolbar from './DataTableToolbar';
 import FilteredDatasetResource from '../DatasetResource/FilteredDatasetResource';
-import { filteredDatasetResource } from '../../../utilities/data-mocks/data-filteredDatasetResource';
-import { DatasetContext } from '../../../context/DatasetContext';
+import { filteredDatasetResource } from '../../utilities/data-mocks/data-filteredDatasetResource';
+import { DatasetContext } from '../../context/DatasetContext';
 import axios from 'axios';
 
 // Mock axios
 vi.mock('axios');
 
-const mockDatasetResponse = require('../../../utilities/data-mocks/api-response-dataset.json');
+const mockDatasetResponse = require('../../utilities/data-mocks/api-response-dataset.json');
 
 // This suppresses console warnings for components
 // DataTableToolbar logs for debugging purposes

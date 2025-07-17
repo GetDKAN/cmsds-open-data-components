@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DataTableToolbar from '../DataTableToolbar/DataTableToolbar';
-import DataTable from '../DataTable/DataTable';
+import DataTable from '../dataset/DataTable/DataTable';
 
 const DatasetResource = ({
   resource,
@@ -19,7 +19,7 @@ const DatasetResource = ({
       data-resource-identifier={resource.identifier}
     >
       {/* Filter logic here */}
-      
+
       <DataTableToolbar
         datasetTitle={datasetTitle}
         datasetDescription={datasetDescription}

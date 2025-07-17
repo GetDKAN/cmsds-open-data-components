@@ -1,23 +1,20 @@
 import React, { useState, useContext } from 'react';
 import qs from 'qs';
-import DataTable from '../Datatable/Datatable';         //dkan datatable
+import DataTable from '../Datatable/Datatable'; //dkan datatable
 // import DataTable from '../dataset/DataTable/DataTable';       // pdc datatable
 import { transformTableSortToQuerySort } from '../../services/useDatastore/transformSorts';
 import { buildCustomColHeaders } from '../../templates/FilteredResource/functions';
 import { Pagination, Spinner, Alert } from '@cmsgov/design-system';
 // import DataTableHeader from '../DatatableHeader';
 // import QueryBuilder from '../QueryBuilder';
-import DataTableToolbar from '../dataset/DataTableToolbar/DataTableToolbar';
+import DataTableToolbar from '../DataTableToolbar/DataTableToolbar';
 import { DistributionType, ColumnType, ResourceType } from '../../types/dataset';
 import DataTableContext from '../../templates/Dataset/DataTableContext';
 import ManageColumnsContext from '../ManageColumns/ManageColumnsContext';
-import FilteredDatasetResource from '../dataset/DatasetResource/FilteredDatasetResource';
-import { filteredDatasetResource } from '../../utilities/data-mocks/data-filteredDatasetResource'
+import FilteredDatasetResource from '../DatasetResource/FilteredDatasetResource';
+import { filteredDatasetResource } from '../../utilities/data-mocks/data-filteredDatasetResource';
 // import { DatasetContext } from '../../context/DatasetContext';
-import mockDatasetResponse from '../../utilities/data-mocks/api-response-dataset.json'
-
-
-
+import mockDatasetResponse from '../../utilities/data-mocks/api-response-dataset.json';
 
 export function prepareColumns(columns: any, schema: any) {
   return columns.map((column: any) => ({
@@ -43,17 +40,17 @@ const datasetContextProviderValue = {
   isLoading: true,
   setDatasetState: () => {},
   resetDatasetState: () => {},
-}
-
+};
 
 const componentArgs = {
   fullscreen: false,
   datasetTitle: 'Supplier Directory Data',
-  datasetDescription: 'A list of Suppliers that indicates the supplies carried at that location and the supplier\'s Medicare participation status.',
+  datasetDescription:
+    "A list of Suppliers that indicates the supplies carried at that location and the supplier's Medicare participation status.",
   datasetModified: '2020-05-10',
   datasetReleased: '2020-05-10',
-  instanceId: 1
-}
+  instanceId: 1,
+};
 
 const DatasetTable = ({
   isModal = false,
@@ -108,14 +105,13 @@ const DatasetTable = ({
     resource.schema &&
     Object.keys(distribution).length
   ) {
-
     return (
       <>
         {/* <DatasetContext.Provider value={datasetContextProviderValue}> */}
-          <FilteredDatasetResource resource={filteredDatasetResource} rootUrl={rootUrl}> 
-            <DataTableToolbar {...componentArgs} />
-            {/* <DataTable /> */}
-          </FilteredDatasetResource>
+        <FilteredDatasetResource resource={filteredDatasetResource} rootUrl={rootUrl}>
+          <DataTableToolbar {...componentArgs} />
+          {/* <DataTable /> */}
+        </FilteredDatasetResource>
         {/* // </DatasetContext.Provider> */}
 
         {/* <DataTableToolbar 
@@ -169,10 +165,6 @@ const DatasetTable = ({
             isModal={isModal}
             closeFullScreenModal={closeFullScreenModal}
           />
-
-          
-
-
         </div>
         {/* {!resource.loading && resource.count !== null && (
           <div className="ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--end ds-u-md-justify-content--between ds-u-margin-top--2 ds-u-align-items--center">
