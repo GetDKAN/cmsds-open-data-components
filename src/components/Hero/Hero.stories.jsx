@@ -35,8 +35,8 @@ export default meta;
 
 export const Default = {
   args: {
-    title: 'Welcome to CMS Open Data',
-    description: 'Search and explore datasets from the Centers for Medicare & Medicaid Services.',
+    title: 'CMSDS',
+    description: 'Search and explore datasets.',
     searchUrl: 'datasets',
     searchKey: 'fulltext',
     textfieldLabel: 'Search for a dataset',

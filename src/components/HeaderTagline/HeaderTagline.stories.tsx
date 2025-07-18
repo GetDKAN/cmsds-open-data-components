@@ -15,7 +15,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: 'Displays a tagline in the header, styled for CMS top navigation.'
+        component: 'Displays a tagline in the header, styled for top navigation.'
       }
     }
   }
