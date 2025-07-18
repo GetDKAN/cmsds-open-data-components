@@ -6,5 +6,6 @@ dist
 docs
 .DS_Store
 .parcel-cache
-
+*storybook.log
+storybook-static
 .vscode
