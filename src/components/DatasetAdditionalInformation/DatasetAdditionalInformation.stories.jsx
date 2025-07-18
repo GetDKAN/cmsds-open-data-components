@@ -32,7 +32,7 @@ export const Default = {
   args: {
     datasetInfo: {
       publisher: 'CMS',
-      contact: 'cms@example.gov',
+      contact: 'cms@example.com',
       releaseDate: '2025-07-18',
     },
     id: 'demo-dataset',

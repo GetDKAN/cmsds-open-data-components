@@ -31,10 +31,10 @@ export const Default = {
   args: {
     org: {
       url: '/',
-      urlTitle: 'CMS.gov',
-      logoAltText: 'CMS Logo',
+      urlTitle: 'CMSDS',
+      logoAltText: 'CMSDS Logo',
       logoFilePath: '/path/to/logo.png',
-      tagline: 'Centers for Medicare & Medicaid Services',
+      tagline: 'CMSDS Tagline',
     },
     links: [
       {
@@ -67,10 +67,10 @@ export const WithManyLinks = {
   args: {
     org: {
       url: '/',
-      urlTitle: 'CMS.gov',
-      logoAltText: 'CMS Logo',
+      urlTitle: 'CMSDS',
+      logoAltText: 'CMSDS Logo',
       logoFilePath: '/path/to/logo.png',
-      tagline: 'Centers for Medicare & Medicaid Services',
+      tagline: 'CMSDS Tagline',
     },
     links: [
       {
@@ -147,10 +147,10 @@ export const NoLinks = {
   args: {
     org: {
       url: '/',
-      urlTitle: 'CMS.gov',
-      logoAltText: 'CMS Logo',
+      urlTitle: 'CMSDS',
+      logoAltText: 'CMSDS Logo',
       logoFilePath: '/path/to/logo.png',
-      tagline: 'Centers for Medicare & Medicaid Services',
+      tagline: 'CMSDS Tagline',
     },
     links: [],
   },
@@ -167,10 +167,10 @@ export const LongTagline = {
   args: {
     org: {
       url: '/',
-      urlTitle: 'CMS.gov',
-      logoAltText: 'CMS Logo',
+      urlTitle: 'CMSDS',
+      logoAltText: 'CMSDS Logo',
       logoFilePath: '/path/to/logo.png',
-      tagline: 'Centers for Medicare & Medicaid Services - A Federal Agency within the U.S. Department of Health and Human Services',
+      tagline: 'CMSDS Tagline',
     },
     links: [
       {

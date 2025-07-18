@@ -7,8 +7,8 @@ import type { StoryFn, StoryContext } from '@storybook/react';
 const sampleOrg: OrgType = {
   url: '/',
   tagline: 'Empowering Data Transparency',
-  urlTitle: 'CMS Open Data',
-  logoAltText: 'CMS Logo',
+  urlTitle: 'Open Data',
+  logoAltText: 'CMSDS Logo',
   logoFilePath: undefined,
 };
 

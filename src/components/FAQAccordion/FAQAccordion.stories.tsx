@@ -19,7 +19,7 @@ const sampleFaqs: FAQItemType[] = [
   {
     id: 'faq3',
     title: 'Who maintains the data?',
-    body: 'The CMS Open Data team maintains and updates the datasets regularly.',
+    body: 'The Open Data team maintains and updates the datasets regularly.',
     open: false,
   },
 ];
