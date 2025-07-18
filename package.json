@@ -12,7 +12,9 @@
     "watch": "parcel watch",
     "test": "jest --verbose",
     "test:watch": "npm run test -- --watch",
-    "test:coverage": "npm run test -- --coverage"
+    "test:coverage": "npm run test -- --coverage",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "author": "",
   "license": "GPL-3.0",
@@ -44,7 +46,9 @@
     "@parcel/reporter-bundle-analyzer": "^2.12.0",
     "@parcel/transformer-sass": "^2.8.3",
     "@parcel/transformer-typescript-types": "^2.8.3",
-    "@storybook/react": "^7.0.22",
+    "@storybook/addon-docs": "^9.0.16",
+    "@storybook/builder-vite": "^9.0.16",
+    "@storybook/react-vite": "^9.0.16",
     "@testing-library/dom": "^9.3.3",
     "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/react": "^14.0.0",
@@ -56,6 +60,7 @@
     "@types/react-text-truncate": "^0.14.4",
     "core-js": "^3.27.2",
     "css-loader": "^6.7.3",
+     "eslint-plugin-storybook": "^9.0.16",
     "jest": "30.0.5",
     "jest-axe": "^10.0.0",
     "jest-canvas-mock": "^2.5.2",
@@ -66,6 +71,7 @@
     "react-test-renderer": "^18.2.0",
     "sass-loader": "^13.2.0",
     "ts-jest": "^29.4.0",
+    "storybook": "^9.0.16",
     "ts-loader": "^9.4.2",
     "typescript": "^4.9.5",
     "url-loader": "^4.1.1"
