@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import svgIndex from '../../../assets/icons'
+// import svgIndex from '../../../assets/icons'
 
 const FontAwesomePro = (props) => {
   const {
@@ -32,7 +32,7 @@ const FontAwesomePro = (props) => {
   // }
 
   // Get svgIndex export array values
-  const svgList = svgIndex.values() ////////
+  // const svgList = svgIndex.values() ////////
 
   // Loop through svgIndex export array
   // const iconMap = (ico) => { //////////////

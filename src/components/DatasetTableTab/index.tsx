@@ -12,9 +12,9 @@ import { DistributionType, ColumnType, ResourceType } from '../../types/dataset'
 import DataTableContext from '../../templates/Dataset/DataTableContext';
 import ManageColumnsContext from '../ManageColumns/ManageColumnsContext';
 import FilteredDatasetResource from '../DatasetResource/FilteredDatasetResource';
-import { filteredDatasetResource } from '../../utilities/data-mocks/data-filteredDatasetResource';
+// import { filteredDatasetResource } from '../../utilities/data-mocks/data-filteredDatasetResource';
 // import { DatasetContext } from '../../context/DatasetContext';
-import mockDatasetResponse from '../../utilities/data-mocks/api-response-dataset.json';
+// import mockDatasetResponse from '../../utilities/data-mocks/api-response-dataset.json';
 
 export function prepareColumns(columns: any, schema: any) {
   return columns.map((column: any) => ({
@@ -34,23 +34,23 @@ type DatasetTableTabProps = {
   datasetTableControls: boolean;
 };
 
-const datasetContextProviderValue = {
-  data: mockDatasetResponse,
-  error: null,
-  isLoading: true,
-  setDatasetState: () => {},
-  resetDatasetState: () => {},
-};
+// const datasetContextProviderValue = {
+//   data: mockDatasetResponse,
+//   error: null,
+//   isLoading: true,
+//   setDatasetState: () => {},
+//   resetDatasetState: () => {},
+// };
 
-const componentArgs = {
-  fullscreen: false,
-  datasetTitle: 'Supplier Directory Data',
-  datasetDescription:
-    "A list of Suppliers that indicates the supplies carried at that location and the supplier's Medicare participation status.",
-  datasetModified: '2020-05-10',
-  datasetReleased: '2020-05-10',
-  instanceId: 1,
-};
+// const componentArgs = {
+//   fullscreen: false,
+//   datasetTitle: 'Supplier Directory Data',
+//   datasetDescription:
+//     "A list of Suppliers that indicates the supplies carried at that location and the supplier's Medicare participation status.",
+//   datasetModified: '2020-05-10',
+//   datasetReleased: '2020-05-10',
+//   instanceId: 1,
+// };
 
 const DatasetTable = ({
   isModal = false,
@@ -108,8 +108,8 @@ const DatasetTable = ({
     return (
       <>
         {/* <DatasetContext.Provider value={datasetContextProviderValue}> */}
-        <FilteredDatasetResource resource={filteredDatasetResource} rootUrl={rootUrl}>
-          <DataTableToolbar {...componentArgs} />
+        <FilteredDatasetResource rootUrl={rootUrl}>
+          <DataTableToolbar />
           {/* <DataTable /> */}
         </FilteredDatasetResource>
         {/* // </DatasetContext.Provider> */}

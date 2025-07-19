@@ -194,16 +194,17 @@ const DataTableToolbar = ({
       <div
         className={`resource-table-header${fullscreen ? ' fullscreen-resource-table-header' : ''}`}
       >
+       
         <div
           className={`resource-table-header-container${
             fullscreen ? ' fullscreen-resource-table-header-container' : ''
           }`}
         >
+          <h1>test case</h1>
           {/* ChoiceList now only takes types for radio or checkboxes. ChoiceList has been converted to an html select component */}
           <div className={`table-controls${fullscreen ? ' fullscreen-table-controls' : ''}`}></div>
         </div>
       </div>
-
       <p className="resize-help">
         Activate the column resize button and use the right and left arrow keys to resize a column
         or use your mouse to drag/resize. Press escape to cancel the resizing.
