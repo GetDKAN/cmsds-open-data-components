@@ -41,12 +41,17 @@ const SubMenu = ({ link, linkClasses, subLinkClasses, wrapLabel = true }) => {
 
    if(link.submenu) {
     if (Array.isArray(link.submenu)) {
-      submenuBlock = SubMenuStaticList(link.submenu, subLinkClasses);
+      submenuBlock = <SubMenuStaticList
+        submenuArray={link.submenu}
+        subLinkClasses={subLinkClasses}
+        setIsExpanded={setIsExpanded}
+      />;
     } else if (React.isValidElement(link.submenu) ) {
       const {rootUrl, location} = link.submenu.props;
       submenuBlock = <DatasetListSubmenu
         location={location}
         rootUrl={rootUrl}
+        subLinkClasses={subLinkClasses}
       />
     }
   }
@@ -67,9 +72,7 @@ const SubMenu = ({ link, linkClasses, subLinkClasses, wrapLabel = true }) => {
         {innerHtml}
         <ArrowIcon className="ds-u-margin-left--1" direction={isExpanded ? "down" : "right"} />
       </Button>
-      <ul className="dkan-c-site-menu--sub-menu">
-        {submenuBlock}
-      </ul>
+      {submenuBlock}
     </li>
   );
 };
