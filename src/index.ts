@@ -18,6 +18,7 @@ export { default as DatasetListItem } from './components/DatasetListItem';
 export { default as DatasetSearchListItem } from './components/DatasetSearchListItem';
 export { default as DatasetDateItem } from './components/DatasetDateItem';
 export { default as DatasetDate } from './components/DatasetDate';
+export { default as DatasetListSubmenu } from './components/DatasetListSubmenu'
 export { default as ApiDocumentation } from './components/ApiDocumentation';
 export { default as ResourceHeader } from './components/ResourceHeader';
 export { default as ResourcePreview } from './components/ResourcePreview';
@@ -35,7 +36,6 @@ export { default as APIPage } from './templates/APIPage';
 export { default as PageNotFound } from './templates/PageNotFound';
 export { default as DatasetSearch } from './templates/DatasetSearch';
 export { default as DatasetList } from './templates/DatasetList';
-export { default as DatasetListSubmenu } from './templates/DatasetListSubmenu'
 export { default as Dataset } from './templates/Dataset';
 export { default as DatasetTable } from './components/DatasetTableTab';
 export { default as Header } from './templates/Header';

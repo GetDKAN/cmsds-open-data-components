@@ -4,7 +4,7 @@ import qs from 'qs';
 import axios from 'axios';
 import withQueryProvider from '../../utilities/QueryProvider/QueryProvider';
 import { Spinner, Alert } from '@cmsgov/design-system';
-import DatasetListSubmenuItem from '../../components/DatasetListSubmenuItem';
+import DatasetListSubmenuItem from '../DatasetListSubmenuItem';
 import { useQuery } from '@tanstack/react-query';
 import { transformUrlParamsToSearchObject } from '../../services/useSearchAPI/helpers';
 
@@ -155,7 +155,7 @@ const DatasetListSubmenu = ({
                   <div className="">
                     {(data && data.data.total > 0) && (
                       <Link className="ds-u-padding--0 ds-c-button ds-c-button--ghost dkan-c-header--link" to={`../whats-new`}>
-                        <span className=" ds-text-heading--md"> {`View all ${data.data.total} entries`} </span>
+                        <span className="ds-text-heading--md"> {`View all ${data.data.total} entries`} </span>
                       </Link>
                     )}
                   </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Button, ArrowIcon } from '@cmsgov/design-system';
 import HeaderContext from '../../templates/Header/HeaderContext';
-import DatasetListSubmenu from '../../templates/DatasetListSubmenu';
+import DatasetListSubmenu from '../DatasetListSubmenu';
 
 import './submenu.scss';
 import SubMenuStaticList from '../SubMenuStaticList';
