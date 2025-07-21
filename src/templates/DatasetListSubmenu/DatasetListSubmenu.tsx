@@ -9,25 +9,25 @@ import { useQuery } from '@tanstack/react-query';
 import { transformUrlParamsToSearchObject } from '../../services/useSearchAPI/helpers';
 
 import "./dataset-list-submenu.scss";
-import { DatasetSearchPageProps } from '../../types/search';
+import { DatasetSubmenuListProps } from '../../types/search';
 import { acaToParams } from '../../utilities/aca';
 import { ACAContext } from '../../utilities/ACAContext';
 
-const DatasetListSubmenu = (props: DatasetSearchPageProps) => {
-  const {
-    rootUrl,
-    enablePagination = true,
-    defaultPageSize = 4,
-    defaultSort = { defaultSort: 'modified', defaultOrder: 'desc' },
-    dataDictionaryLinks = false,
-  } = props;
+const DatasetListSubmenu = ({
+  rootUrl,
+  enablePagination = true,
+  defaultPageSize = 4,
+  defaultSort = { defaultSort: 'modified', defaultOrder: 'desc' },
+  dataDictionaryLinks = false,
+  location,
+  subLinkClasses
+}: DatasetSubmenuListProps) => {
   const { ACA } = useContext(ACAContext);
 
   const defaultSortBy = "";
   const defaultSortOrder = "";
   const defaultPage = 1;
 
-  const location = useLocation();
   const transformedParams = transformUrlParamsToSearchObject(location.search, defaultSort);
 
   const [currentResultNumbers, setCurrentResultNumbers] = useState({ total: 0, startingNumber: 0, endingNumber: 0 });
@@ -114,7 +114,7 @@ const DatasetListSubmenu = (props: DatasetSearchPageProps) => {
 
   return (
     <>
-      <section className="ds-u-lg-padding-x--1">
+      <section className=" dkan-c-site-menu--sub-menu">
         {isPending ? (
           <Spinner
             className="ds-u-valign--middle"
@@ -133,8 +133,7 @@ const DatasetListSubmenu = (props: DatasetSearchPageProps) => {
                     key={item.identifier}
                     title={item.title}
                     identifier={item.identifier}
-                    paginationEnabled={enablePagination}
-                    dataDictionaryLinks={dataDictionaryLinks}
+                    linkClasses={subLinkClasses}
                   />
                 )
               }) : (
