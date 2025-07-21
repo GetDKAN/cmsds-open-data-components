@@ -1,9 +1,9 @@
 import { NavLink } from 'react-router-dom';
 
 
-const SubMenuStaticList = (submenuArray, subLinkClasses) =>  (
+const SubMenuStaticList = ({submenuArray, subLinkClasses, setIsExpanded}) =>  {
   // Render a static list of submenu items as listed in the assets/menu.jsx file.
-  submenuArray.map((s) => {
+  let submenuItems = submenuArray.map((s) => {
     return (
       <li key={s.id}>
         {s.external || s.drupalPage ? (
@@ -15,7 +15,7 @@ const SubMenuStaticList = (submenuArray, subLinkClasses) =>  (
           <NavLink
             to={s.url}
             className={`ds-u-display-flex ds-u-align-items--center ${subLinkClasses}`}
-            onClick={() => setIsExpanded(!isExpanded)}
+            onClick={() => setIsExpanded(prev => !prev)}
           >
             {s.icon ?? null}
             <span>
@@ -25,8 +25,12 @@ const SubMenuStaticList = (submenuArray, subLinkClasses) =>  (
         )}
      </li>
     )
-  }
- )
-)
+  })
+  return (
+    <ul className={`dkan-c-site-menu--sub-menu`}>
+      {submenuItems}
+    </ul>
+  );
+}
 
 export default SubMenuStaticList;
