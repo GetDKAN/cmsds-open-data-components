@@ -1,9 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 // import ManageColumns from '../../ManageColumns/ManageColumns';
-import DataHeaderButton from './DataHeaderButton';
 import { FilteredDispatch } from '../DatasetResource/FilteredDatasetContext';
-import PopoverContent from './PopOverContent';
 // import { Popover } from 'react-tiny-popover';
 import './DataTableToolbar.scss';
 import { useCurrentBreakpointName, useCurrentWidth } from 'react-socks';
@@ -30,10 +28,10 @@ const DataTableToolbar = ({
     filtersApplied,
     setFiltersApplied,
   } = useContext(FilteredDispatch);
-  const { limit, count, offset } = filteredResource;
-  const updateRows = (r) => {
-    filteredResource.setLimit(r);
-  };
+  // const { limit, count, offset } = filteredResource;
+  // const updateRows = (r) => {
+  //   filteredResource.setLimit(r);
+  // };
   // const currentBreakpoint = useCurrentBreakpointName();
   // const currentWidth = useCurrentWidth();
   // const [showTooltip, setShowTooltip] = useState(false);
@@ -202,7 +200,7 @@ const DataTableToolbar = ({
         >
           <h1>test case</h1>
           {/* ChoiceList now only takes types for radio or checkboxes. ChoiceList has been converted to an html select component */}
-          <div className={`table-controls${fullscreen ? ' fullscreen-table-controls' : ''}`}></div>
+          {/* <div className={`table-controls${fullscreen ? ' fullscreen-table-controls' : ''}`}></div> */}
         </div>
       </div>
       <p className="resize-help">

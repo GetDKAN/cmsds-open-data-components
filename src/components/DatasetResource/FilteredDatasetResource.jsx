@@ -3,18 +3,7 @@ import { useParams, ScrollRestoration } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FilteredDispatch } from './FilteredDatasetContext';
 import useDatastore from '../../hooks/useDataStore';
-// import { getApiBaseUrl } from '../../../utilities/getApiBaseUrl'
 import useMetastoreDataset from '../../services/useMetastoreDataset';
-
-// import {
-//   useTable,
-//   usePagination,
-//   useFilters,
-//   useSortBy,
-//   useFlexLayout,
-//   useResizeColumns,
-//   useColumnOrder,
-// } from 'react-table';
 
 const FilteredDatasetResource = ({ children, resource, rootUrl }) => {
   const [filters, setFilters] = useState([{ column: '', condition: '', value: '' }]); // keep track of the applied filters
@@ -68,8 +57,7 @@ const FilteredDatasetResource = ({ children, resource, rootUrl }) => {
       accessor: column,
     }));
   };
-  // const baseUrl = getApiBaseUrl()
-  // console.log("URL++++++++++======",baseUrl)
+
   const filteredResource = useDatastore(
     '',
     rootUrl,
@@ -147,38 +135,6 @@ const FilteredDatasetResource = ({ children, resource, rootUrl }) => {
     }),
     []
   );
-  // const filteredTable = useTable(
-  //   {
-  //     columns: col,
-  //     data,
-  //     initialState: {
-  //       pageIndex: Number(filteredResource.offset / filteredResource.limit),
-  //       pageSize: 20,
-  //     },
-  //     manualPagination: true,
-  //     manualSortBy: true,
-  //     manualFilters: true,
-  //     pageCount: Math.ceil(Number(filteredResource.count) / filteredResource.limit),
-  //     defaultColumn,
-  //     filterTypes,
-  //     // NextPage and previous Page are defined methods in the Dataset explorer instead
-  //   },
-  //   useFilters,
-  //   useFlexLayout,
-  //   useResizeColumns,
-  //   useColumnOrder,
-  //   useSortBy,
-  //   usePagination
-  // );
-
-  // Initialize current and init orders
-  // useEffect(() => {
-  //   if (filteredTable.allColumns.length && !initOrder.length) {
-  //     setInitOrder(filteredTable.allColumns);
-  //     setCurOrder(filteredTable.allColumns.map((d) => d.id));
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [filteredTable.allColumns.length, initOrder.length]);
 
   const resetVisibility = () => {
     const initialCol = initCol.map((item) => item.accessor);
