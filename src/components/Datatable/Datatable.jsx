@@ -12,7 +12,7 @@ import FixedSizeTHead from "./FixedSizeTHead";
 import "./datatable.scss";
 import DataTableControls from "../DataTableControls";
 import DataTableContext from "../../templates/Dataset/DataTableContext";
-import ManageColumnsContext from "../ManageColumns/ManageColumnsContext";
+import { DataTableActionsContext } from "../DatasetTableTab/DataTableActionsContext";
 
 const DataTable = ({
   columns,
@@ -24,7 +24,7 @@ const DataTable = ({
   closeFullScreenModal,
 }) => {
   const { id, resource, datasetTableControls } = useContext(DataTableContext);
-  const { columnOrder, setColumnOrder, columnVisibility, setColumnVisibility} = useContext(ManageColumnsContext);
+  const { columnOrder, setColumnOrder, columnVisibility, setColumnVisibility } = useContext(DataTableActionsContext);
 
   const data = resource.values;
   const [ sorting, setSorting ] = useState([])

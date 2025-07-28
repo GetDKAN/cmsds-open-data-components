@@ -50,7 +50,7 @@ export { buildOperatorOptions, convertUTCToLocalDate, cleanText, buildCustomColH
 // Context
 export { default as HeaderContext } from './templates/Header/HeaderContext';
 export { default as DataTableContext } from './templates/Dataset/DataTableContext';
-export { default as ManageColumnsContext } from './components/ManageColumns/ManageColumnsContext';
+export { default as DataTableActionsProvider } from './components/DatasetTableTab/DataTableActionsContext'
 export { ACAContext } from './utilities/ACAContext';
 
 // Services

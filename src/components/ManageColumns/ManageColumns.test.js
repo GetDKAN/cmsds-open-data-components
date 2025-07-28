@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, within, act } from '@testing-library/react'
 import ManageColumns from './ManageColumns'
-import ManageColumnsContext from './ManageColumnsContext';
+import { MockDataTableActionsProvider } from '../DatasetTableTab/DataTableActionsContext';
 
 // Rationale
 // We shouldn't need to rest dnd-kit functionality as that should be handled downstream in their library
@@ -93,7 +93,7 @@ describe('ManageColumns component.', () => {
   beforeEach(async () => {
     // render component and open the dialog
     render(
-      <ManageColumnsContext.Provider value={{
+      <MockDataTableActionsProvider value={{
         columnOrder: [],
         setColumnOrder: setColumnOrder,
         setColumnVisibility: setColumnVisibility
@@ -105,7 +105,7 @@ describe('ManageColumns component.', () => {
           modalOpen={true}
           setModalOpen={closeModal}
         />
-      </ManageColumnsContext.Provider>
+      </MockDataTableActionsProvider>
     )
   })
   

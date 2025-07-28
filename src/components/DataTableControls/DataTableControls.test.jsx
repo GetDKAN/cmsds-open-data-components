@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import DataTableControls from ".";
-import ManageColumnsContext from '../ManageColumns/ManageColumnsContext';
+import { MockDataTableActionsProvider } from "../DatasetTableTab/DataTableActionsContext";
 import DataTableContext from "../../templates/Dataset/DataTableContext";
 import * as resource from "../../tests/fixtures/resource.json";
 import * as distribution from "../../tests/fixtures/distribution.json";
@@ -15,7 +15,7 @@ describe('DataTableControls', () => {
         distribution: distribution.distribution[0],
         rootUrl: "test/api/",
       }}>
-        <ManageColumnsContext.Provider value={{
+        <MockDataTableActionsProvider value={{
           columnOrder: [],
           setColumnOrder: jest.fn(),
           setColumnVisibility: jest.fn()
@@ -27,7 +27,7 @@ describe('DataTableControls', () => {
             isModal={false}
             closeFullScreenModal={jest.fn()}
           />
-        </ManageColumnsContext.Provider>
+        </MockDataTableActionsProvider>
       </DataTableContext.Provider>
     )
     expect(screen.getByRole("button", {name: "Manage columns - Opens in a dialog"})).toBeInTheDocument();
@@ -71,7 +71,7 @@ describe('DataTableControls', () => {
       },
     ];
     render(
-      <ManageColumnsContext.Provider value={{
+      <MockDataTableActionsProvider value={{
         columnOrder: [],
         setColumnOrder: jest.fn(),
         setColumnVisibility: jest.fn()
@@ -83,13 +83,13 @@ describe('DataTableControls', () => {
           isModal={true}
           closeFullScreenModal={jest.fn()}
         />
-      </ManageColumnsContext.Provider>
+      </MockDataTableActionsProvider>
     );
     expect(screen.getByText("1 Columns Hidden")).toBeInTheDocument();
   })
   it('Does not render the full screen dialog if we are already in a dialog', () => {
     render(
-      <ManageColumnsContext.Provider value={{
+      <MockDataTableActionsProvider value={{
         columnOrder: [],
         setColumnOrder: jest.fn(),
         setColumnVisibility: jest.fn()
@@ -101,7 +101,7 @@ describe('DataTableControls', () => {
           isModal={true}
           closeFullScreenModal={jest.fn()}
         />
-      </ManageColumnsContext.Provider>
+      </MockDataTableActionsProvider>
     );
     expect(screen.queryByRole("button", {name: "Full Screen mode - Opens in a dialog"})).not.toBeInTheDocument();
     expect(screen.getByRole("button", {name: "Close Full Screen dialog"})).toBeInTheDocument();
