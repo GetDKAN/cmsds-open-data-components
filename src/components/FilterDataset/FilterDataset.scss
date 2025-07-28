@@ -1,0 +1,38 @@
+dialog.dkan-filter-dataset-dialog {
+  height: 80vh;
+  width: 100%;
+
+  .ds-c-dialog__window {
+    min-width: 768px;
+    padding: 0;
+
+    .ds-c-dialog__header {
+      padding: 24px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  dialog.dkan-filter-dataset-dialog  {
+    height: 100%;
+
+    .ds-c-dialog__window {
+      margin-top: 0;
+      width: 100%;
+      min-width: auto;
+      height: 100%;
+    }
+
+    .ds-c-dialog__body > div:not(.ds-c-dialog__actions) {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ds-c-dialog__actions {
+      position: absolute;
+      bottom: 0;
+      background-color: white;
+      padding-top: 16px;
+    }
+  }
+}

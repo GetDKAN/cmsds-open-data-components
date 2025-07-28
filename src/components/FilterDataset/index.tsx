@@ -15,7 +15,7 @@ const FilterDataset: React.FC<FilterDatasetProps> = ({ modalOpen, setModalOpen }
         heading='Filter Dataset'
         isOpen={modalOpen}
         onExit={() => setModalOpen(false)}
-        className="dkan-full-screen-dataset-dialog"
+        className="dkan-filter-dataset-dialog"
       >
         Filter controls go here
       </Dialog>
