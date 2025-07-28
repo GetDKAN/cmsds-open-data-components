@@ -4,7 +4,7 @@ import { SortableContext, verticalListSortingStrategy, sortableKeyboardCoordinat
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers'
 import { Button, Choice, Dialog } from '@cmsgov/design-system'
 import Card from './Card'
-import ManageColumnsContext from './ManageColumnsContext';
+import { DataTableActionsContext } from '../DatasetTableTab/DataTableActionsContext'
 import './ManageColumns.scss'
 
 class ExcludeCheckboxKeyboardSensor extends KeyboardSensor {
@@ -55,7 +55,7 @@ const ManageColumns = ({
     setModalOpen
    }) => {
   
-  const {columnOrder, setColumnOrder, setColumnVisibility} = useContext(ManageColumnsContext);
+  const {columnOrder, setColumnOrder, setColumnVisibility} = useContext(DataTableActionsContext);
 
   // maintain card state separately from table state - only sync states when the Save button is pressed
   const [cards, setCards] = useState(columns.map(c => {
