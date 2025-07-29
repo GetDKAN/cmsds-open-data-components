@@ -49,7 +49,6 @@ function updateQueryForDatastore(condition: ConditionType) {
 
 const QueryBuilder = ({resource, id, customColumns, isModal = false, setPage, setOffset}: QueryBuilderPropTypes) => {
   const { conditions, schema, setConditions } = resource;
-
   const fields = Object.keys(schema[id].fields);
 
   const [queryConditions, setQueryConditions] = useState<Array<ConditionType>>([]);

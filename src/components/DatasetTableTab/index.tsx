@@ -18,7 +18,7 @@ export function prepareColumns(columns: any, schema: any) {
   }));
 }
 
-type DatasetTableTabProps = {
+export type DatasetTableTabProps = {
   id: string;
   distribution: DistributionType;
   resource: ResourceType;
