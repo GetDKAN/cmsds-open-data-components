@@ -11,7 +11,7 @@ import { useQuery } from '@tanstack/react-query';
 import { transformUrlParamsToSearchObject } from '../../services/useSearchAPI/helpers';
 
 // import '../DatasetSearch/dataset-search.scss';
-import { DatasetSearchPageProps, DistributionItemType } from '../../types/search';
+import { DatasetSearchPageProps } from '../../types/search';
 import { acaToParams } from '../../utilities/aca';
 import { ACAContext } from '../../utilities/ACAContext';
 
@@ -156,7 +156,6 @@ const DatasetList = ({
       <section className="ds-l-container">
         <div className="ds-l-row">
           <div className="ds-l-col--12">
-            {introText ? introText : null}
             {showLargeFileWarning && (
               <div className="ds-l-row ds-u-margin-bottom--2 ds-u-margin-top--4">
                 <div className="ds-l-md-col--12">
@@ -173,7 +172,7 @@ const DatasetList = ({
             )}
           </div>
         </div>
-        <div className="ds-l-row ds-u-padding-top--4">
+        <div className="ds-l-row">
           <div className="ds-l-col--12">
             {isPending ? (
               <Spinner
@@ -184,27 +183,30 @@ const DatasetList = ({
             ) : (
               <>
                 <div className="ds-u-display--flex ds-u-justify-content--between ds-u-align-items--end ds-u-flex-wrap--reverse ds-u-sm-flex-wrap--wrap">
-                  {enablePagination && (
-                    <div className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--8 ds-u-sm-padding-left--0">
-                      <p className="ds-u-margin-y--0" aria-hidden="true">
-                        {(currentResultNumbers && data) && (
-                          <>
-                            Showing {currentResultNumbers.startingNumber} -{' '}
-                            {currentResultNumbers.endingNumber} of {data.data.total} datasets
-                          </>
-                        )}
-                      </p>
-                      <p
-                        className="ds-u-visibility--screen-reader"
-                        role="status"
-                        aria-live="assertive"
-                        aria-atomic="true"
-                        data-testid="currentResults"
-                      >
-                        {announcementText}
-                      </p>
-                    </div>
-                  )}
+                  <div className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--8 ds-u-sm-padding-left--0">
+                    <div className="ds-u-margin-bottom--3">{introText ? introText : null}</div>
+                    {enablePagination && (
+                      <div>
+                        <p className="ds-u-margin-y--0" aria-hidden="true">
+                          {(currentResultNumbers && data) && (
+                            <>
+                              Showing {currentResultNumbers.startingNumber} -{' '}
+                              {currentResultNumbers.endingNumber} of {data.data.total} datasets
+                            </>
+                          )}
+                        </p>
+                        <p
+                          className="ds-u-visibility--screen-reader"
+                          role="status"
+                          aria-live="assertive"
+                          aria-atomic="true"
+                          data-testid="currentResults"
+                        >
+                          {announcementText}
+                        </p>
+                      </div>
+                    )}
+                  </div>
                   {enableSort && (
                     <div className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--4 ds-u-sm-padding-right--0">
                       <Dropdown
