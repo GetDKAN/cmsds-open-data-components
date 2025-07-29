@@ -14,7 +14,6 @@ const DataTableControls = (
     closeFullScreenModal: Function
   }
 ) => {
-  const [filterDatasetModalOpen, setFilterDatasetModalOpen] = useState(false);
   const [manageColumnsModalOpen, setManageColumnsModalOpen] = useState(false);
   const [fullScreenModalOpen, setFullScreenModalOpen] = useState(false);
 
@@ -29,15 +28,7 @@ const DataTableControls = (
           )}
         </div>
         <div>
-          <button
-            aria-label='Filter Dataset - Opens in a dialog'
-            className="ds-c-button ds-c-button--ghost ds-u-margin-y--1"
-            onClick={() => {
-              setFilterDatasetModalOpen(true)
-            }}
-          >
-            <i className="far fa-filter ds-u-margin-right--1"></i>Filter Dataset
-          </button>
+          <FilterDataset />
           <button
             aria-label='Manage columns - Opens in a dialog'
             className="ds-c-button ds-c-button--ghost ds-u-margin-y--1"
@@ -63,10 +54,6 @@ const DataTableControls = (
         </div>
       </div>
       <div>
-        <FilterDataset
-          modalOpen={filterDatasetModalOpen}
-          setModalOpen={setFilterDatasetModalOpen}
-        />
         <ManageColumns
           id={id}
           columns={columns}

@@ -104,6 +104,17 @@ export type QueryRowType = {
   schema : SchemaType
 }
 
+export type FilterItemType = {
+  id: string;
+  condition : ConditionType;
+  index : number;
+  update : Function;
+  remove : Function;
+  propertyOptions : Array<PropertyType>;
+  schema : SchemaType;
+  classNames?: string;
+}
+
 export type DatasetOverviewPropsType = {
   dataset: DatasetType,
   resource: ResourceType,
