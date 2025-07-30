@@ -25,7 +25,7 @@ const StoredQueryViewer: React.FC<StoredQueryViewerProps> = ({ id }) => {
   useEffect(() => {
     if (!id) return;
     setLoading(true);
-    fetch(`https://medicaid.ddev.site/api/1/stored-query/items/${id}`)
+    fetch(`/api/1/stored-query/items/${id}`)
       .then((response) => {
         if (!response.ok) throw new Error('Network response was not ok');
         return response.json();
