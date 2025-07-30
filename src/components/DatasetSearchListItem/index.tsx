@@ -118,13 +118,13 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
             <Link aria-describedby={`dataset-${identifier}-updated-date`} to={`${url}`}>{title}</Link>
           </h2>
         </div>
-        <div className="ds-l-row">
+        {description && <div className="ds-l-row">
           <div className="ds-l-col--12 ds-l-md-col--12 ds-u-margin-top--2">{truncateText(description)}{description.length > 240 ? (
             <>
              {' '}<Link to={`/dataset/${identifier}`}>See more</Link> 
             </>
           ) : ''}</div>
-        </div>
+        </div>}
         {showDateDetails && <div className='dataset-dates'>
             <DatasetDate date={date} displayTooltips={false}/>
           </div>}
