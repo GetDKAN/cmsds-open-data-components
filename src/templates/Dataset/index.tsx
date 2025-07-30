@@ -54,6 +54,7 @@ const Dataset = ({
   dataDictionaryBanner = false,
   disableTableControls = false,
   hideDataDictionary = false,
+  hideStoredQuery = false,
   customDescription,
   updateAriaLive,
   showRowLimitNotice = false
@@ -232,18 +233,21 @@ const Dataset = ({
                       {!displayDataDictionaryTab && <p>There is no Data Dictionary associated with this dataset.</p>}
                     </TabPanel>
                   )}
+                  {!hideStoredQuery &&  (
                     <TabPanel
                       id={'storedQuery'}
                       tab={
                         <span className="ds-u-color--primary">
-                          <SearchItemIcon id="api" />
+                          <SearchItemIcon id="storedQuery" />
                           Stored Query
                         </span>
                       }
                       className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
                     >
+
                       <StoredQuery id={id} />
                     </TabPanel>
+                  )}
                   { distribution && distribution.data && (
                     <TabPanel
                       id={'api'}
@@ -255,6 +259,7 @@ const Dataset = ({
                       }
                       className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
                     >
+                    console.log("id", id)
                       <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} showRowLimitNotice={showRowLimitNotice} />
                     </TabPanel>
                   )}

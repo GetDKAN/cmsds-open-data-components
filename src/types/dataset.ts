@@ -70,6 +70,7 @@ export type DatasetPageType = {
   dataDictionaryBanner: boolean,
   disableTableControls: boolean,
   hideDataDictionary: boolean,
+  hideStoredQuery: boolean,
   customDescription?: Function,
   updateAriaLive?: Function,
   showRowLimitNotice?: boolean,
