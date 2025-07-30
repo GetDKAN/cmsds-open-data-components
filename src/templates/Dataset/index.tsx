@@ -232,7 +232,6 @@ const Dataset = ({
                       {!displayDataDictionaryTab && <p>There is no Data Dictionary associated with this dataset.</p>}
                     </TabPanel>
                   )}
-                  { (
                     <TabPanel
                       id={'storedQuery'}
                       tab={
@@ -245,7 +244,6 @@ const Dataset = ({
                     >
                       <StoredQuery id={id} />
                     </TabPanel>
-                  )}
                   { distribution && distribution.data && (
                     <TabPanel
                       id={'api'}
