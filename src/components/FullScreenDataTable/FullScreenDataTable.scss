@@ -1,19 +1,72 @@
-dialog.dkan-full-screen-dataset-dialog > .ds-c-dialog__window {
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-
-  form {
-    max-width: 1024px;
+.dkan-fullscreen-data-table-wrapper {
+  .fa-compress:before,
+  .fa-expand:before {
+    font-size: .75em !important;
   }
+}
 
-  .dkan-datatable-fullscreen-mode {
-    max-height: calc(100vh - 415px);
-    min-height: calc(100vh - 415px);
-    overflow: hidden;
+/*
+  Styling for dynamic full height dialog with the data table filling as
+  much vertical space as possible while staying within the full height dialog
+*/
+dialog.dkan-full-screen-dataset-dialog {
+  height: 100vh;
 
-    .dc-c-datatable-wrapper {
-      max-height: calc(100vh - 473px);
+  > .ds-c-dialog__window {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .ds-c-dialog__header {
+      width: 100%;
+      flex: 0;
+    }
+
+    .ds-c-dialog__body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+
+      > div[id^="dialog"][id$="__content"] {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow: hidden;
+
+        .dkan-datatable-fullscreen-mode {
+          height: 100%;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+
+          > div {
+            flex: 0;
+            width: 100%;
+            min-height: auto;
+            margin: 8px 0 !important;
+          }
+
+          .dc-c-datatable-wrapper {
+            height: 100%;
+            width: 100%;
+            flex: 1;
+          }
+
+          ~ div {
+            flex: 0;
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    form {
+      max-width: 1024px;
     }
   }
 }

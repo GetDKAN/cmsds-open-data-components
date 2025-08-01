@@ -112,7 +112,7 @@ export type FilterItemType = {
   remove : Function;
   propertyOptions : Array<PropertyType>;
   schema : SchemaType;
-  classNames?: string;
+  className?: string;
 }
 
 export type DatasetOverviewPropsType = {

@@ -77,7 +77,6 @@ export default function StoredQueryPage({
       }}
     >
       <DataTableStateWrapper
-        showQueryBuilder={false}
         showCopyLinkButton={false}
         showDownloadFilteredDataButton={false}
         showDownloadFullDataButton={false}

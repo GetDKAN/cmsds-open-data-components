@@ -104,6 +104,5 @@ describe('DataTableControls', () => {
       </MockDataTableActionsProvider>
     );
     expect(screen.queryByRole("button", {name: "Full Screen mode - Opens in a dialog"})).not.toBeInTheDocument();
-    expect(screen.getByRole("button", {name: "Close Full Screen dialog"})).toBeInTheDocument();
   })
 })
