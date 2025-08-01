@@ -352,6 +352,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                     return (
                       <DatasetSearchListItem
                         key={item.identifier}
+                        location={location}
                         title={item.title}
                         modified={item.modified}
                         description={item.description}
