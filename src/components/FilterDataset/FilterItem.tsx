@@ -16,7 +16,7 @@ function getStartDate(condition : ConditionType, schema : any, id : string) {
   return new Date();
 }
 
-const FilterItem = ({ id, condition, index, update, remove, propertyOptions, schema, classNames = '' } : FilterItemType) => {
+const FilterItem = ({ id, condition, index, update, remove, propertyOptions, schema, className = '' } : FilterItemType) => {
   const [operator, setOperator] = useState(condition.operator);
   const [property, setProperty] = useState(condition.property);
   const [value, setValue] = useState(condition.value);
@@ -60,7 +60,7 @@ const FilterItem = ({ id, condition, index, update, remove, propertyOptions, sch
   }, [value]);
 
   return (
-    <fieldset className={`ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--between ds-u-align-items--center ds-u-padding-x--3 ds-u-padding-y--1 ds-u-margin-top--05${classNames !== '' ? ` ${classNames}` : ''}`}>
+    <fieldset className={`ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--between ds-u-align-items--center ds-u-padding-x--3 ds-u-padding-y--1 ds-u-margin-top--05${className !== '' ? ` ${className}` : ''}`}>
       <div className="ds-l-col--12 ds-l-md-col--8 ds-u-display--flex ds-u-justify-content--between ds-u-padding-x--0">
         <Dropdown
           options={propertyOptions}

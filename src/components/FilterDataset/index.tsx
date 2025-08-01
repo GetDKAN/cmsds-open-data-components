@@ -127,9 +127,8 @@ const FilterDataset: React.FC = () => {
     window.history.pushState({}, '', `${url.origin}${url.pathname}${urlString}`);
   }
 
-  const submitConditions = (e: Event) => {
+  const submitConditions = () => {
     // only update the data conditions when "Apply filters" is pressed
-    e.preventDefault();
     const submitConditions = queryConditions
       .filter((oc: ConditionType) => {
         if (oc.property) {
@@ -141,12 +140,42 @@ const FilterDataset: React.FC = () => {
         let cond = Object.assign({}, oc);
         return updateQueryForDatastore(cond);
       });
-    setConditions(submitConditions);
-    setPage(1);
-    setOffset(0);
-    setConditionsChanged(false);
-    updateBrowserURL(submitConditions);
+    
+    const completeConditions = conditionsReadyToSubmit(submitConditions);
+    
+    if (completeConditions.length) { // Safeguard but there should always be at least one 
+      setConditions(completeConditions);
+      setPage(1);
+      setOffset(0);
+      setConditionsChanged(false);
+      updateBrowserURL(completeConditions as ConditionType[]);
+      setModalOpen(false);
+    }
   };
+
+  const conditionsReadyToSubmit = (conditions: ConditionType[]) => {
+    const isEmpty = (val: string | string[] | undefined) => {
+      if (typeof val === "string") {
+        return val.trim() === "";
+      }
+
+      if (Array.isArray(val)) {
+        return val.length === 0;
+      }
+
+      return true;
+    };
+
+    const completeConditions = conditions.filter(condition => {
+      if (condition) {
+        if (!isEmpty(condition.property) && !isEmpty(condition.operator) && !isEmpty(condition.value)) {
+          return condition;
+        }
+      }
+    });
+
+    return completeConditions;
+  }
 
   const updateCondition = (index: number, key: string, value: string) => {
     let newConditions = [...queryConditions];
@@ -161,20 +190,33 @@ const FilterDataset: React.FC = () => {
     newConditions.splice(index, 1);
     setQueryConditions(newConditions);
     setConditionsChanged(true);
+
+    if (newConditions.length === 0) {
+      setConditions([]);
+      updateBrowserURL([]);
+    }
   };
+
+  const disableFilterSubmitButton = () => {
+    return !conditionsChanged || queryConditions.length === 0 || conditionsReadyToSubmit(queryConditions).length === 0;
+  }
 
   return (
     <>
       {(Object.keys(resource).length && columns.length && resource.schema && Object.keys(distribution).length) ? (
-        <div className="filter-dataset-wrapper">
+        <div className="dkan-filter-dataset-wrapper">
           <button
-            aria-label="Filter Dataset - Opens in a dialog"
-            className="ds-c-button ds-c-button--ghost ds-u-margin-y--1"
+            aria-label="Filter dataset - Opens in a dialog"
+            className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent"
             onClick={() => {
               setModalOpen(true)
             }}
           >
-            <i className="far fa-filter ds-u-margin-right--1"></i>Filter Dataset
+            <i className="fa fa-filter ds-u-margin-right--1"></i>
+            {conditions.length > 0
+              ? `Edit Filters (${conditions.length})`
+              : 'Filter Dataset'
+            }
           </button>
           <div className={`ds-c-dialog-wrap${modalOpen ? ' open' : ''}`}>
             <Dialog
@@ -193,15 +235,15 @@ const FilterDataset: React.FC = () => {
                         updateBrowserURL([]);
                       }}
                       disableDefaultClasses
-                      classNames="ds-l-md-col--auto ds-l-col--auto ds-u-margin--right--0 ds-u-sm-margin-right--2"
+                      className="ds-l-md-col--auto ds-l-col--auto ds-u-margin--right--0 ds-u-sm-margin-right--2"
                     />
                     <Button
-                      disabled={!conditionsChanged}
+                      disabled={disableFilterSubmitButton()}
                       className="ds-u-float--right ds-l-md-col--auto ds-l-col--auto"
-                      type="submit"
+                      onClick={submitConditions}
                       variation="solid"
                     >
-                      Apply filters
+                      {`Apply ${conditionsReadyToSubmit(queryConditions).length || ''} filter${conditionsReadyToSubmit(queryConditions).length === 1 ? '' : 's'}`}
                     </Button>
                   </div>
                 </div>
@@ -229,31 +271,29 @@ const FilterDataset: React.FC = () => {
                   <div className="ds-u-md-display--none ds-u-display--block ds-u-border-bottom--1 ds-u-padding-top--1"></div>
 
                   <div className="dkan-filter-dataset-form-container ds-u-display--flex ds-u-flex-direction--column ds-u-border-bottom--1">
-                    <form onSubmit={(e) => submitConditions(e as any)}>
-                      <div className="ds-u-padding-bottom--05">
-                        {queryConditions.map((qf, index) => (
-                          <FilterItem
-                            key={qf.key}
-                            id={id}
-                            schema={schema}
-                            condition={qf}
-                            index={index}
-                            propertyOptions={propertyOptions}
-                            update={updateCondition}
-                            remove={removeCondition}
-                            classNames={index !== 0 ? "ds-u-border-top--1" : "ds-u-border--0"}
-                          />
-                        ))}
-                        <div className="ds-u-padding-x--3 ds-u-padding-y--1 ds-u-border-top--1 ds-u-margin-top--05">
-                          <Button
-                            onClick={() => addCondition(null)}
-                            className="ds-l-col--12 ds-u-radius--pill ds-u-margin-top--05"
-                          >
-                            + Add filter
-                          </Button>
-                        </div>
+                    <div className="ds-u-padding-bottom--05">
+                      {queryConditions.map((qf, index) => (
+                        <FilterItem
+                          key={qf.key}
+                          id={id}
+                          schema={schema}
+                          condition={qf}
+                          index={index}
+                          propertyOptions={propertyOptions}
+                          update={updateCondition}
+                          remove={removeCondition}
+                          className={index !== 0 ? "ds-u-border-top--1" : "ds-u-border--0"}
+                        />
+                      ))}
+                      <div className="ds-u-padding-x--3 ds-u-padding-y--1 ds-u-border-top--1 ds-u-margin-top--05">
+                        <Button
+                          onClick={() => addCondition(null)}
+                          className="ds-l-col--12 ds-u-radius--pill ds-u-margin-top--05"
+                        >
+                          + Add filter
+                        </Button>
                       </div>
-                    </form>
+                    </div>
                   </div>
               </div>
             </Dialog>

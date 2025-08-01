@@ -123,3 +123,39 @@ div.dc-c-datadictionary-table thead.dc-thead--truncated th > div > div {
 .dc-c-sort--desc::after {
   content: '\f0dd';
 }
+
+.dkan-data-table-share-container {
+  .ds-c-tooltip__arrow {
+    display: none;
+  }
+
+  .dkan-data-table-share-button {
+    .fa-chevron-down {
+      display: none;
+    }
+
+    &.dkan-data-table-share-tooltip-open {
+      .fa-chevron-up {
+        display: none;
+      }
+      .fa-chevron-down {
+        display: block;
+      }
+    }
+  }
+
+  .ds-c-tooltip {
+    border-color: var(--color-border);
+  }
+
+  .ds-c-tooltip__content {
+    padding: 16px 16px 8px;
+  }
+
+  .dkan-data-table-share-button:hover,
+  .dkan-data-table-share-button:focus {
+    color: var(--color-white);
+  }
+}
+
+

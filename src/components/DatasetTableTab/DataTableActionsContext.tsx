@@ -12,16 +12,20 @@ type DataTableActionsContextProps = {
   setColumnVisibility: React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>;
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
+  tableDensity: 'compact' | 'normal' | 'expanded';
+  setTableDensity: React.Dispatch<React.SetStateAction<'compact' | 'normal' | 'expanded'>>;
 }
 
 // Create a defaults object for reusability
-const DataTableActionsContextDefaults = {
+const DataTableActionsContextDefaults: DataTableActionsContextProps = {
   columnOrder: [],
   setColumnOrder: () => {},
   columnVisibility: {},
   setColumnVisibility: () => {},
   page: 1,
-  setPage: () => {}
+  setPage: () => {},
+  tableDensity: 'normal' as const,
+  setTableDensity: () => {}
 }
 
 // Create the context instance
@@ -43,6 +47,7 @@ const DataTableActionsProvider: React.FC<{ children: ReactNode }> = ({ children 
     if (datasetTableControls && localStorageData) return localStorageData.tableColumnVisibility;
     else return {};
   });
+  const [tableDensity, setTableDensity] = useState<DataTableActionsContextProps['tableDensity']>('normal');
 
   const providerValue: DataTableActionsContextProps = {
     columnOrder,
@@ -50,7 +55,9 @@ const DataTableActionsProvider: React.FC<{ children: ReactNode }> = ({ children 
     columnVisibility,
     setColumnVisibility,
     page,
-    setPage
+    setPage,
+    tableDensity,
+    setTableDensity
   }
 
   return (

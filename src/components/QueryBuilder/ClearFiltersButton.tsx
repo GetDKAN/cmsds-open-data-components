@@ -6,18 +6,18 @@ const ClearFiltersButton = ({
   disabled = false,
   clearFiltersFn,
   disableDefaultClasses = false,
-  classNames = ''
+  className = ''
 } : { 
   disabled?: boolean,
   clearFiltersFn: Function,
   disableDefaultClasses?: boolean,
-  classNames?: string
+  className?: string
 }) => {
   const small = useMediaQuery({ minWidth: 0, maxWidth: 544 });
   return (
     <Button
       disabled={disabled}
-      className={`${disableDefaultClasses ? '' : 'ds-u-float--right ds-l-md-col--6 ds-l-col--5'}${classNames !== '' ? ` ${classNames}` : ''}`}
+      className={`${disableDefaultClasses ? '' : 'ds-u-float--right ds-l-md-col--6 ds-l-col--5'}${className !== '' ? ` ${className}` : ''}`}
       variation={small ? 'ghost' : undefined}
       onClick={() => clearFiltersFn()}
     >

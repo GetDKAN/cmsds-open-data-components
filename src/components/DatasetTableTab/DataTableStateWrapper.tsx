@@ -3,13 +3,11 @@ import DatasetTable from '.';
 import DataTableActionsProvider from './DataTableActionsContext';
 
 const DataTableStateWrapper = ({
-  showQueryBuilder = true,
   showCopyLinkButton = true,
   showDownloadFilteredDataButton = true,
   showDownloadFullDataButton = true,
   showStoredQueryDownloadButton = false,
 }: {
-  showQueryBuilder?: boolean;
   showCopyLinkButton?: boolean;
   showDownloadFilteredDataButton?: boolean;
   showDownloadFullDataButton?: boolean;
@@ -18,7 +16,6 @@ const DataTableStateWrapper = ({
   return (
     <DataTableActionsProvider>
       <DatasetTable
-        showQueryBuilder={showQueryBuilder}
         showCopyLinkButton={showCopyLinkButton}
         showDownloadFilteredDataButton={showDownloadFilteredDataButton}
         showDownloadFullDataButton={showDownloadFullDataButton}
