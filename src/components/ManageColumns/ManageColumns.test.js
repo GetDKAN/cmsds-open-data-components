@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, within, act } from '@testing-library/react'
+import { render, screen, within, act, fireEvent } from '@testing-library/react'
 import ManageColumns from './ManageColumns'
 import { MockDataTableActionsProvider } from '../DatasetTableTab/DataTableActionsContext';
 
@@ -89,7 +89,7 @@ const setColumnVisibility = jest.fn();
 window.scrollTo = jest.fn();
 
 describe('ManageColumns component.', () => {
-  const closeModal = jest.fn();
+
   beforeEach(async () => {
     // render component and open the dialog
     render(
@@ -102,11 +102,11 @@ describe('ManageColumns component.', () => {
           id={"test"}
           columns={columns}
           defaultColumnOrder={defaultColumnOrder}
-          modalOpen={true}
-          setModalOpen={closeModal}
         />
       </MockDataTableActionsProvider>
     )
+
+    fireEvent.click(screen.getByRole("button", {name: "Manage columns - Opens in a dialog"}));
   })
   
   it('Renders correctly', async () => {
@@ -125,7 +125,8 @@ describe('ManageColumns component.', () => {
     await act(async () => {
       await screen.getByRole('button', {name: "Close modal dialog"}).click()
     });
-    expect(closeModal).toHaveBeenCalled();
+
+    await expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   })
 
   it('Sets column order and column visibility when the Save button is clicked', async () => {

@@ -6,13 +6,13 @@ import {
   createColumnHelper,
   getSortedRowModel,
 } from "@tanstack/react-table";
-import { Spinner, Alert } from "@cmsgov/design-system";
+import { Spinner, Alert, Tooltip, Button } from "@cmsgov/design-system";
 import TruncatedResizeableTHead from "./TruncatedResizeableTHead";
 import FixedSizeTHead from "./FixedSizeTHead";
 import "./datatable.scss";
-import DataTableControls from "../DataTableControls";
 import DataTableContext from "../../templates/Dataset/DataTableContext";
 import { DataTableActionsContext } from "../DatasetTableTab/DataTableActionsContext";
+import DataTableToolbar from "../DataTableToolbar";
 
 const DataTable = ({
   columns,
@@ -22,15 +22,24 @@ const DataTable = ({
   loading = false,
   isModal,
   closeFullScreenModal,
+  downloadURL,
+  unfilteredDownloadURL,
+  setPage,
+  showCopyLinkButton,
+  showDownloadFilteredDataButton,
+  showDownloadFullDataButton,
+  showStoredQueryDownloadButton,
 }) => {
-  const { id, resource, datasetTableControls } = useContext(DataTableContext);
+  const { id, resource, datasetTableControls, dataDictionaryBanner } = useContext(DataTableContext);
   const { columnOrder, setColumnOrder, columnVisibility, setColumnVisibility } = useContext(DataTableActionsContext);
+  const { conditions } = resource;
 
   const data = resource.values;
   const [ sorting, setSorting ] = useState([])
   const [ariaLiveFeedback, setAriaLiveFeedback] = useState('')
   const dataTableWrapperElement = useRef(null)
   const columnHelper = createColumnHelper()
+
   const table_columns = columns.map((col) => {
     if (col.cell) {
       return (
@@ -102,18 +111,106 @@ const DataTable = ({
 
   return(
     <>
-      { datasetTableControls && (
-        <div>
-          <DataTableControls
-            id={id}
-            columns={table.getAllLeafColumns()}
-            defaultColumnOrder={defaultColumnOrder}
-            isModal={isModal}
-            closeFullScreenModal={closeFullScreenModal}
-          />
-        </div>
+      <div className="ds-u-margin-bottom--3">
+      {showDownloadFullDataButton && (
+        <Button
+          className="ds-u-fill--primary ds-u-color--white ds-u-text-align--center ds-u-padding-x--3 ds-u-margin-x--0 ds-u-margin-y--0"
+          href={unfilteredDownloadURL}
+        >
+          <span className="ds-u-font-weight--normal ds-u-font-size--md ds-u-margin-x--0 ds-u-padding--0">
+            <i className="fas fa-file-csv"></i> Download full dataset (CSV)
+          </span>
+        </Button>
       )}
-      <div className="dc-c-datatable-wrapper" tabIndex={0} ref={dataTableWrapperElement}>
+      </div>
+      <DataTableToolbar
+        id={id}
+        columns={table.getAllLeafColumns()}
+        defaultColumnOrder={defaultColumnOrder}
+        isModal={isModal}
+        closeFullScreenModal={closeFullScreenModal}
+        resource={resource}
+        datasetTableControls={datasetTableControls}
+        columnVisibility={columnVisibility}
+        setColumnVisibility={setColumnVisibility}
+      />
+      <div className="ds-u-display--flex ds-l-col--11 ds-u-justify-content--between ds-u-padding--0 ds-u-margin-y--3">
+        <div className="ds-u-padding-right--4">
+          {dataDictionaryBanner && !isModal && (
+            <div className="ds-u-margin-bottom--3">
+              <Alert>Click on the "Data Dictionary" tab above for full column definitions</Alert>
+            </div>
+          )}
+          <p className="ds-u-margin--0">Activate the column resize button and use the right and left arrow keys to resize a column or use your mouse to drag/resize. Press escape to cancel the resizing.</p>
+        </div>
+        <div class="dkan-data-table-share-container ds-l-col--auto ds-u-padding--0">
+          <Tooltip
+            className="dkan-data-table-share-button ds-u-display--flex ds-u-align-items--center ds-u-fill--primary ds-u-radius--pill ds-u-color--white ds-u-border--0 ds-u-padding-x--3 ds-u-padding-y--1 ds-u-font-weight--bold"
+            activeClassName="dkan-data-table-share-tooltip-open"
+            dialog
+            offset={[
+              0,
+              5
+            ]}
+            placement="bottom-start"
+            maxWidth="320px"
+            title={
+              <div className="dc-c-resource-header--buttons ds-u-display--flex ds-u-flex-direction--column ds-l-col--12 ds-u-padding-x--0">
+                {showCopyLinkButton && (
+                  <>
+                    {conditions && conditions.length ? (
+                      <Tooltip
+                        onOpen={() => {
+                          navigator.clipboard.writeText(window.location.href);
+                        }}
+                        className="ds-c-button ds-u-text-align--center ds-l-col--12 ds-u-padding-x--2 ds-u-margin-x--0 ds-u-margin-bottom--1"
+                        placement="bottom"
+                        dialog
+                        ariaLabel="Copy link to filtered data"
+                        title="Link copied to clipboard"
+                        aria-disabled={!conditions || conditions.length === 0}
+                      >
+                        <span className="ds-u-font-weight--normal ds-u-font-size--md ds-u-margin-x--0 ds-u-padding--0">
+                          <i className="fas fa-copy"></i> Copy link to filtered data
+                        </span>
+                      </Tooltip>
+                    ) : (
+                      <Button
+                        aria-disabled={true}
+                        aria-label="Copy link to filtered data"
+                        className="ds-c-button ds-u-text-align--center ds-l-col--12 ds-u-padding-x--2 ds-u-margin-x--0 ds-u-margin-bottom--1"
+                      >
+                        <span className="ds-u-font-weight--normal ds-u-font-size--md ds-u-padding--0">
+                          <i className="fas fa-copy"></i> Copy link to filtered data
+                        </span>
+                      </Button>
+                    )}
+                  </>
+                )}
+                {(showDownloadFilteredDataButton || showStoredQueryDownloadButton) && (
+                  <div className="ds-l-col--12 ds-u-padding-x--0 ds-u-margin-x--0">
+                    <Button
+                      className="ds-u-text-align--center ds-u-display--inline-block ds-l-col--12 ds-u-padding-x--2 ds-u-margin-x--0 ds-u-margin-bottom--1"
+                      href={downloadURL}
+                      aria-disabled={!conditions || conditions.length === 0}
+                    >
+                      <span className="ds-u-font-weight--normal ds-u-font-size--md ds-u-padding--0">
+                        <i className="fas fa-file-csv"></i> {showDownloadFilteredDataButton ? `Download filtered data (CSV)` : `Download stored query data (CSV)`}
+                      </span>
+                    </Button>
+                  </div>
+                )}
+              </div>
+            }
+          >
+            <i className="far fa-share-alt"></i>
+            <span className="ds-u-margin-x--05">Share</span>
+            <i className="fa fa-chevron-down"></i>
+            <i className="fa fa-chevron-up"></i>
+          </Tooltip>
+        </div>
+      </div>
+      <div className="dc-c-datatable-wrapper ds-u-border-x--1 ds-u-border-bottom--1" tabIndex={0} ref={dataTableWrapperElement}>
         <table
           {...{
             style: {

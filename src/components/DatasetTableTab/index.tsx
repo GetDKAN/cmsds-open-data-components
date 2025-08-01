@@ -1,10 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import qs from 'qs';
 import DataTable from '../Datatable/Datatable';
 import { transformTableSortToQuerySort } from '../../services/useDatastore/transformSorts';
 import { buildCustomColHeaders } from '../../templates/FilteredResource/functions';
 import { Pagination, Spinner, Alert } from '@cmsgov/design-system';
-import DataTableHeader from '../DatatableHeader';
 import QueryBuilder from '../QueryBuilder';
 import { DistributionType, ColumnType, ResourceType } from '../../types/dataset';
 import DataTableContext from '../../templates/Dataset/DataTableContext';
@@ -31,7 +30,6 @@ export type DatasetTableTabProps = {
 const DatasetTable = ({
   isModal = false,
   closeFullScreenModal,
-  showQueryBuilder = true,
   showCopyLinkButton = true,
   showDownloadFilteredDataButton = true,
   showDownloadFullDataButton = true,
@@ -39,7 +37,6 @@ const DatasetTable = ({
 }: {
   isModal?: boolean;
   closeFullScreenModal?: Function;
-  showQueryBuilder?: boolean;
   showCopyLinkButton?: boolean;
   showDownloadFilteredDataButton?: boolean;
   showDownloadFullDataButton?: boolean;
@@ -83,37 +80,8 @@ const DatasetTable = ({
   ) {
     return (
       <>
-        {showQueryBuilder && (
-          <QueryBuilder
-            resource={resource}
-            id={distribution.identifier}
-            customColumns={customColumnHeaders}
-            isModal={isModal}
-            setPage={setPage}
-            setOffset={setOffset}
-          />
-        )}
-        {dataDictionaryBanner && !isModal && (
-          <div>
-            <Alert>Click on the "Data Dictionary" tab above for full column definitions</Alert>
-          </div>
-        )}
-        {
-          <DataTableHeader
-            resource={resource}
-            downloadURL={downloadURL}
-            unfilteredDownloadURL={distribution.data.downloadURL}
-            setPage={setPage}
-            showCopyLinkButton={showCopyLinkButton}
-            showDownloadFilteredDataButton={showDownloadFilteredDataButton}
-            showDownloadFullDataButton={showDownloadFullDataButton}
-            showStoredQueryDownloadButton={showStoredQueryDownloadButton}
-          />
-        }
         <div
-          className={`ds-u-border-x--1 ds-u-border-bottom--1 ${
-            isModal && 'dkan-datatable-fullscreen-mode'
-          }`}
+          className={isModal ? 'dkan-datatable-fullscreen-mode' : ''}
         >
           <DataTable
             canResize={true}
@@ -123,6 +91,13 @@ const DatasetTable = ({
             loading={resource.loading}
             isModal={isModal}
             closeFullScreenModal={closeFullScreenModal}
+            downloadURL={downloadURL}
+            unfilteredDownloadURL={distribution.data.downloadURL}
+            setPage={setPage}
+            showCopyLinkButton={showCopyLinkButton}
+            showDownloadFilteredDataButton={showDownloadFilteredDataButton}
+            showDownloadFullDataButton={showDownloadFullDataButton}
+            showStoredQueryDownloadButton={showStoredQueryDownloadButton}
           />
         </div>
         {!resource.loading && resource.count !== null && (
