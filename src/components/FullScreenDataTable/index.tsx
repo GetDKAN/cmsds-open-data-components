@@ -21,7 +21,10 @@ const FullScreenDataTable = ({isModal, closeFullScreenModal} : { isModal: boolea
           }
         }}
       >
-        <i className={`fa ${isModal ? 'fa-compress' : 'fa-expand'} ds-u-margin-right--1`}></i>{isModal ? "Exit Full Screen" : "Full Screen"}
+        <i className={`fa ${isModal ? 'fa-compress' : 'fa-expand'} ds-u-margin-right--1`}></i>
+        <span className="ds-u-display--none ds-u-lg-display--inline-block">
+          {isModal ? "Exit Full Screen" : "Full Screen"}
+        </span>
       </button>
       <div className={`ds-c-dialog-wrap${modalOpen ? ' open' : ''}`}>
         <Dialog

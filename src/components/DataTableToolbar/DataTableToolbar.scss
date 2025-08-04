@@ -1,10 +1,33 @@
 .dkan-filter-dataset-toolbar {
   box-shadow: 0 0 3px 0 #A6A6A6;
 
-  .dkan-filter-dataset-toolbar-button:hover,
-  .dkan-filter-dataset-toolbar-button:focus {
+  .dkan-filter-dataset-toolbar-button {
     border: 0;
+    line-height: normal;
     text-decoration: none !important;
     color: var(--color-primary);
+
+    > span {
+      text-decoration: underline;
+    }
+
+    &:hover > span,
+    &:focus > span {
+      text-decoration: none;
+    }
+  }
+}
+
+.dkan-clear-all-filters-button {
+  &:hover,
+  &:focus {
+    color: var(--color-primary) !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .dkan-data-table-toolbar-controls {
+    justify-content: space-between;
+    border-top: 1px solid var(--color-gray-lighter);
   }
 }

@@ -124,12 +124,25 @@ div.dc-c-datadictionary-table thead.dc-thead--truncated th > div > div {
   content: '\f0dd';
 }
 
+.dkan-data-table-download-full-dataset-button {
+  &:hover,
+  &:focus {
+    background-color: transparent !important;
+
+    span {
+      color: var(--color-primary) !important;
+    }
+  }
+}
+
 .dkan-data-table-share-container {
   .ds-c-tooltip__arrow {
     display: none;
   }
 
   .dkan-data-table-share-button {
+    border: 2px solid var(--color-primary) !important;
+
     .fa-chevron-down {
       display: none;
     }
@@ -141,6 +154,12 @@ div.dc-c-datadictionary-table thead.dc-thead--truncated th > div > div {
       .fa-chevron-down {
         display: block;
       }
+    }
+
+    &:hover,
+    &:focus {
+      background-color: transparent !important;
+      color: var(--color-primary) !important;
     }
   }
 
@@ -158,4 +177,12 @@ div.dc-c-datadictionary-table thead.dc-thead--truncated th > div > div {
   }
 }
 
+@media screen and (max-width: 767px) {
+  .dkan-data-table-share-container {
+    order: 1;
+  }
 
+  .dkan-data-table-info-container {
+    order: 2;
+  }
+}
