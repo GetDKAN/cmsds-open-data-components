@@ -70,3 +70,12 @@ dialog.dkan-full-screen-dataset-dialog {
     }
   }
 }
+
+@media screen and (max-width: 1023px) {
+  .dkan-fullscreen-data-table-wrapper {
+    .fa-compress:before,
+    .fa-expand:before {
+      font-size: 1.4em !important;
+    }
+  }
+}

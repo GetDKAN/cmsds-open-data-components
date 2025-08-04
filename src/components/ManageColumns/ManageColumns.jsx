@@ -121,7 +121,10 @@ const ManageColumns = ({
         }}
       >
         <i className="fa fa-columns ds-u-margin-right--1"></i>
-        Manage Columns {hiddenColumns ? `(${hiddenColumns})` : ''}
+        <span>
+          <span className="ds-u-display--none ds-u-lg-display--inline-block">Manage Columns</span>
+          {hiddenColumns ? ` (${hiddenColumns})` : ''}
+        </span>
       </button>
       <div className={`ds-c-dialog-wrap${modalOpen ? ' open' : ''}`}>
         <Dialog

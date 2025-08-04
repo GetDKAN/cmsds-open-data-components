@@ -213,10 +213,15 @@ const FilterDataset: React.FC = () => {
             }}
           >
             <i className="fa fa-filter ds-u-margin-right--1"></i>
-            {conditions.length > 0
-              ? `Edit Filters (${conditions.length})`
-              : 'Filter Dataset'
-            }
+            <span>
+              <span className="ds-u-display--none ds-u-lg-display--inline-block">
+                {conditions.length > 0
+                  ? `Edit Filters`
+                  : 'Filter Dataset'
+                }
+              </span>
+              {conditions.length > 0 && ` (${conditions.length})`}
+            </span>
           </button>
           <div className={`ds-c-dialog-wrap${modalOpen ? ' open' : ''}`}>
             <Dialog
@@ -226,7 +231,7 @@ const FilterDataset: React.FC = () => {
               className="dkan-filter-dataset-dialog"
               ariaCloseLabel="Close filter dataset dialog"
               actions={(
-                <div className="ds-u-display--flex ds-u-justify-content--end ds-u-padding-x--3 ds-u-padding-y--2">
+                <div className="ds-u-display--flex ds-u-justify-content--end ds-u-padding-x--2 ds-u-md-padding-x--3 ds-u-padding-y--2">
                   <div className="ds-u-display--flex ">
                     <ClearFiltersButton
                       disabled={queryConditions.length === 0}
@@ -239,7 +244,7 @@ const FilterDataset: React.FC = () => {
                     />
                     <Button
                       disabled={disableFilterSubmitButton()}
-                      className="ds-u-float--right ds-l-md-col--auto ds-l-col--auto"
+                      className="dkan-apply-dataset-filters-button ds-u-float--right ds-l-md-col--auto ds-l-col--auto"
                       onClick={submitConditions}
                       variation="solid"
                     >
@@ -250,45 +255,38 @@ const FilterDataset: React.FC = () => {
               )}
             >
               <div>
-                  <p className="ds-u-margin--0 ds-u-padding-x--3">
+                  <p className="ds-u-margin--0 ds-u-margin-top--1 ds-u-margin-bottom--2 ds-u-padding-x--2 ds-u-md-padding-x--3">
                     Add filters to only display data that meets your criteria. Filtered results can be downloaded.
                   </p>
-                  
-                  <div className="ds-u-display--none ds-u-md-display--flex ds-u-fill--gray-lightest ds-u-border-top--1 ds-u-border-bottom--1 ds-u-padding-x--3 ds-u-margin-top--3">
-                    <div className="ds-l-col--12 ds-l-md-col--8 ds-u-display--flex ds-u-padding-x--0">
-                      <div className="ds-l-col--8 ds-u-padding-left--0">
-                        <h3 className="ds-u-margin--0 ds-u-font-weight--bold ds-u-padding-y--1">Column Name</h3>
-                      </div>
-                      <div className="ds-l-col--4 ds-u-padding-x--0">
-                        <h3 className="ds-u-margin--0 ds-u-font-weight--bold ds-u-padding-y--1">Operator</h3>
-                      </div>
-                    </div>
-                    <div className="ds-l-col--12 ds-l-md-col--4 ds-u-padding-x--0 ds-u-md-padding-left--2">
-                      <h3 className="ds-u-margin--0 ds-u-font-weight--bold ds-u-padding-y--1">Value</h3>
-                    </div>
-                  </div>
 
-                  <div className="ds-u-md-display--none ds-u-display--block ds-u-border-bottom--1 ds-u-padding-top--1"></div>
+                  <div className="dkan-filter-dataset-controls-header ds-u-padding-x--2 ds-u-md-padding-x--3 ds-u-padding-y--1 ds-u-margin-top--05 ds-u-fill--gray-lightest">
+                    <h3 className="ds-u-margin--0 ds-u-font-weight--bold ds-u-padding--0">Column Name</h3>
+                    <h3 className="ds-u-margin--0 ds-u-font-weight--bold ds-u-padding--0">Condition</h3>
+                    <h3 className="ds-u-margin--0 ds-u-font-weight--bold ds-u-padding--0">Value</h3>
+                    <div className="dkan-filter-dataset-controls-header-gutter"></div>
+                  </div>
 
                   <div className="dkan-filter-dataset-form-container ds-u-display--flex ds-u-flex-direction--column ds-u-border-bottom--1">
                     <div className="ds-u-padding-bottom--05">
-                      {queryConditions.map((qf, index) => (
-                        <FilterItem
-                          key={qf.key}
-                          id={id}
-                          schema={schema}
-                          condition={qf}
-                          index={index}
-                          propertyOptions={propertyOptions}
-                          update={updateCondition}
-                          remove={removeCondition}
-                          className={index !== 0 ? "ds-u-border-top--1" : "ds-u-border--0"}
-                        />
-                      ))}
-                      <div className="ds-u-padding-x--3 ds-u-padding-y--1 ds-u-border-top--1 ds-u-margin-top--05">
+                      <div className="dkan-filter-dataset-controls">
+                        {queryConditions.map((qf, index) => (
+                          <FilterItem
+                            key={qf.key}
+                            id={id}
+                            schema={schema}
+                            condition={qf}
+                            index={index}
+                            propertyOptions={propertyOptions}
+                            update={updateCondition}
+                            remove={removeCondition}
+                            className={index !== 0 ? "ds-u-border-top--1" : "ds-u-border--0"}
+                          />
+                        ))}
+                      </div>
+                      <div className="ds-u-padding-x--2 ds-u-md-padding-x--3 ds-u-padding-y--1 ds-u-border-top--1 ds-u-margin-top--05">
                         <Button
                           onClick={() => addCondition(null)}
-                          className="ds-l-col--12 ds-u-radius--pill ds-u-margin-top--05"
+                          className="dkan-add-dataset-filter-button ds-l-col--12 ds-u-radius--pill ds-u-margin-top--05 ds-u-font-weight--normal"
                         >
                           + Add filter
                         </Button>

@@ -47,7 +47,6 @@ const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
 }) => {
   const { limit, offset, count, conditions, setConditions } = resource;
   const intCount = count ? count : 0;
-  const rowOptions = [10, 25, 50, 100];
   const hiddenColumns = Object.keys(columnVisibility).filter(key => columnVisibility[key] === false).length;
 
   const resetColumnVisibility = () => {
@@ -83,54 +82,32 @@ const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
   return (
     <div className="ds-u-margin-top--2">
       <div className="dkan-filter-dataset-toolbar ds-u-fill--white ds-u-border--1">
-        <div className="ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--between">
-          <div className="ds-l-col--12 ds-u-display--flex ds-u-justify-content--between ds-u-align-items--center ds-u-flex-wrap--wrap ds-u-padding-y--2">
-            <div>
-              <div>
-                {!resource.loading && resource.count !== null && (
-                  <DataTablePageResults
-                    totalRows={intCount}
-                    limit={limit}
-                    offset={offset}
-                    className="data-table-results ds-u-margin--0 ds-u-font-size--sm ds-u-padding-y--1"
-                  />
-                )}
-              </div>
-            </div>
-            {datasetTableControls && (
-              <div className="ds-u-display--flex ds-u-flex-wrap--wrap">
-                <FilterDataset />
-                <ManageColumns id={id} columns={columns} defaultColumnOrder={defaultColumnOrder} />
-                <DisplaySettings />
-                <FullScreenDataTable isModal={isModal} closeFullScreenModal={closeFullScreenModal} />
-              </div>
+        <div className="ds-l-col--12 ds-u-display--flex ds-u-justify-content--between ds-u-align-items--center ds-u-flex-wrap--wrap ds-u-padding-x--0 ds-u-padding-y--2">
+          <div className="ds-u-padding-x--2">
+            {!resource.loading && resource.count !== null && (
+              <DataTablePageResults
+                totalRows={intCount}
+                limit={limit}
+                offset={offset}
+                className="data-table-results ds-u-margin--0 ds-u-font-size--sm ds-u-padding-y--0 ds-u-md-padding-y--1 ds-u-padding-bottom--2 ds-u-md-padding-bottom--0"
+              />
             )}
-            {/*<div className="ds-l-col--12 ds-l-sm-col--4 ds-u-display--flex ds-u-justify-content--end ds-u-padding-x--0">
-              <div>
-                <Dropdown
-                  options={rowOptions.map((row) => ({ label: row.toString(), value: row }))}
-                  size="medium"
-                  label="Rows per page:"
-                  labelClassName="ds-u-margin-top--0"
-                  name="datatable_rows_per_page"
-                  onChange={(e) => {
-                    setLimit(parseInt(e.target.value));
-                    setPage(1);
-                    setOffset(0);
-                  }}
-                  value={limit.toString()}
-                  defaultValue={limit.toString()}
-                />
-              </div>
-            </div>*/}
           </div>
+          {datasetTableControls && (
+            <div className="dkan-data-table-toolbar-controls ds-u-display--flex ds-u-flex-wrap--wrap ds-u-align-items--center ds-l-md-col--auto ds-l-col--12 ds-u-padding-x--2 ds-u-padding-top--2 ds-u-md-padding-top--0">
+              <FilterDataset />
+              <ManageColumns id={id} columns={columns} defaultColumnOrder={defaultColumnOrder} />
+              <DisplaySettings />
+              <FullScreenDataTable isModal={isModal} closeFullScreenModal={closeFullScreenModal} />
+            </div>
+          )}
         </div>
       </div>
       {(conditions.length > 0 || hiddenColumns > 0) && (
-        <div className="ds-u-fill--white ds-u-padding-x--2 ds-u-padding-top--2">
+        <div className="ds-u-fill--white ds-u-padding-x--0 ds-u-md-padding-x--2 ds-u-padding-top--2">
           <h2 className="ds-u-margin--0 ds-u-margin-bottom--2 ds-u-font-size--lg ds-u-font-weight--bold">Selected filters</h2>
-          <div className="ds-u-display--flex ds-u-justify-content--between ds-u-align-items--end">
-            <div className="ds-u-display--flex ds-u-padding-right--4 ds-u-flex-wrap--wrap">
+          <div className="ds-u-display--flex ds-u-justify-content--between ds-u-md-align-items--end ds-u-flex-direction--column ds-u-md-flex-direction--row">
+            <div className="ds-u-display--flex ds-u-padding-right--0 ds-u-md-padding-right--4 ds-u-flex-wrap--wrap">
               {conditions.length > 0
                 ? conditions.map((condition, index) => (
                   <FilterChip
@@ -153,9 +130,9 @@ const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
                 : null
               }
             </div>
-            <div className="ds-l-col--auto">
+            <div className="ds-l-col--auto ds-u-padding--0 ds-u-display--flex ds-u-justify-content--end">
               <button
-                className="ds-u-color--primary ds-u-font-size--md ds-u-font-weight--bold ds-u-border--0 ds-u-padding--0 ds-u-margin--0 ds-u-fill--transparent ds-u-text-decoration--underline ds-u-margin-bottom--1"
+                className="dkan-clear-all-filters-button ds-u-color--primary ds-u-font-size--md ds-u-font-weight--bold ds-u-border--0 ds-u-padding--0 ds-u-margin--0 ds-u-fill--transparent ds-u-text-decoration--underline ds-u-margin-bottom--1"
                 onClick={() => {
                   setConditions([]);
                   updateBrowserURL([]);

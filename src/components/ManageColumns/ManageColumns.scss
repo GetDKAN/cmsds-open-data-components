@@ -41,6 +41,14 @@ dialog.dkan-manage-columns-dialog {
   }
 }
 
+@media screen and (max-width: 1023px) {
+  .dkan-manage-columns-wrapper {
+    .fa-columns:before {
+      font-size: 1.4em !important;
+    }
+  }
+}
+
 @media screen and (max-width: 767px) {
   dialog.dkan-manage-columns-dialog  {
     height: 100%;

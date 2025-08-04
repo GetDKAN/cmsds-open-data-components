@@ -50,7 +50,7 @@ const DatasetTable = ({
     customColumns = [],
     dataDictionaryBanner,
   } = useContext(DataTableContext) as DatasetTableTabProps;
-  const { page, setPage } = useContext(DataTableActionsContext);
+  const { page, setPage, tableDensity } = useContext(DataTableActionsContext);
 
   const defaultPageSize = 10;
 
@@ -87,7 +87,13 @@ const DatasetTable = ({
             canResize={true}
             columns={columns}
             sortTransform={transformTableSortToQuerySort}
-            tablePadding={'ds-u-padding-y--2'}
+            tablePadding={
+              tableDensity === 'normal'
+                ? 'ds-u-padding-y--2'
+                : tableDensity === 'compact'
+                  ? 'ds-u-padding-y--1'
+                  : 'ds-u-padding-y--3'
+            }
             loading={resource.loading}
             isModal={isModal}
             closeFullScreenModal={closeFullScreenModal}

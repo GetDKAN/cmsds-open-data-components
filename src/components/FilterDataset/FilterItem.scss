@@ -1,0 +1,11 @@
+.dkan-filter-dataset-control {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) 42px;
+  gap: 1rem;
+  align-items: center;
+}
+
+.dkan-delete-dataset-filter-button {
+  width: 32px;
+  height: 32px;
+}
