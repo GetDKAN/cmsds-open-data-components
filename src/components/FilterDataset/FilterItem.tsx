@@ -6,6 +6,8 @@ import { buildOperatorOptions, convertUTCToLocalDate, cleanText } from '../../te
 import 'react-datepicker/dist/react-datepicker.css';
 import { FilterItemType, ConditionType } from '../../types/dataset';
 
+import './FilterItem.scss';
+
 function getStartDate(condition : ConditionType, schema : any, id : string) {
   if (schema[id].fields[condition.property].mysql_type === 'date') {
     const newDate = new Date(condition.value.toString());
@@ -60,69 +62,66 @@ const FilterItem = ({ id, condition, index, update, remove, propertyOptions, sch
   }, [value]);
 
   return (
-    <fieldset className={`ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--between ds-u-align-items--center ds-u-padding-x--3 ds-u-padding-y--1 ds-u-margin-top--05${className !== '' ? ` ${className}` : ''}`}>
-      <div className="ds-l-col--12 ds-l-md-col--8 ds-u-display--flex ds-u-justify-content--between ds-u-padding-x--0">
-        <Dropdown
-          options={propertyOptions}
-          className="ds-l-col--8 ds-u-padding-left--0"
-          value={property}
-          label="Column Name"
-          name={`${condition.key}_property`}
-          onChange={(e) => setProperty(e.target.value)}
-        />
-        <Dropdown
-          options={buildOperatorOptions(schema[id].fields[property].mysql_type)}
-          className="ds-l-col--4 ds-u-padding-x--0"
-          value={operator}
-          label="Operator"
-          name={`${condition.key}_operator`}
-          onChange={(e) => setOperator(e.target.value)}
-        />
-      </div>
-      <div className="ds-u-margin-top--1 ds-u-md-margin-top--0 ds-l-col--12 ds-l-md-col--4 ds-u-padding-x--0 ds-u-md-padding-left--2 ds-u-display--flex ds-u-justify-content--between">
-        {schema[id].fields[property].mysql_type === 'date' ? (
-          <div>
-            <label
-              className="ds-c-label"
-              htmlFor={`${condition.key}_date_value`}
-              id={`${condition.key}_date_value-label`}
-            >
-              <span>Value</span>
-            </label>
-            <DatePicker
-              name={`${condition.key}_date_value`}
-              selected={convertUTCToLocalDate(startDate)}
-              onChange={(date : Date) => {
-                setStartDate(date);
-                setValue(date.toJSON().slice(0, 10));
-              }}
-              showMonthDropdown
-              showYearDropdown
-              dropdownMode="select"
-              className="ds-c-field"
-              withPortal
-            />
-          </div>
-        ) : (
-          <TextField
-            className="ds-l-col--10 ds-u-padding-x--0"
-            label="Value"
-            name={`${condition.key}_value`}
-            value={cleanText(value, operator)}
-            onChange={(e) => setValue(e.target.value)}
+    <fieldset className={`dkan-filter-dataset-control ds-u-padding-x--2 ds-u-md-padding-x--3 ds-u-padding-y--1 ds-u-margin-top--05${className !== '' ? ` ${className}` : ''}`}>
+      <Dropdown
+        options={propertyOptions}
+        className="ds-u-padding-x--0"
+        value={property}
+        label="Column Name"
+        name={`${condition.key}_property`}
+        onChange={(e) => setProperty(e.target.value)}
+      />
+      <Dropdown
+        options={buildOperatorOptions(schema[id].fields[property].mysql_type)}
+        className="ds-u-padding-x--0"
+        value={operator}
+        label="Operator"
+        name={`${condition.key}_operator`}
+        onChange={(e) => setOperator(e.target.value)}
+      />
+      {schema[id].fields[property].mysql_type === 'date' ? (
+        <div>
+          <label
+            className="ds-c-label"
+            htmlFor={`${condition.key}_date_value`}
+            id={`${condition.key}_date_value-label`}
+          >
+            <span>Value</span>
+          </label>
+          <DatePicker
+            name={`${condition.key}_date_value`}
+            selected={convertUTCToLocalDate(startDate)}
+            onChange={(date : Date) => {
+              setStartDate(date);
+              setValue(date.toJSON().slice(0, 10));
+            }}
+            showMonthDropdown
+            showYearDropdown
+            dropdownMode="select"
+            className="ds-c-field"
+            withPortal
           />
-        )}
+        </div>
+      ) : (
+        <TextField
+          className="ds-u-padding-x--0"
+          label="Value"
+          name={`${condition.key}_value`}
+          value={cleanText(value, operator)}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder='Enter value'
+        />
+      )}
 
-        <Button
-          variation="ghost"
-          size="small"
-          className="ds-u-padding-x--0 ds-u-margin-left--05 ds-u-margin-top--3 ds-u-md-margin-top--0 ds-l-col--2"
-          aria-label="Delete filter"
-          onClick={() => remove(index)}
-        >
-          <span className="fas fa-trash"></span>
-        </Button>
-      </div>
+      <Button
+        variation="ghost"
+        size="small"
+        className="dkan-delete-dataset-filter-button ds-u-padding-x--0 ds-u-margin-left--05 ds-u-md-margin-top--0 ds-u-border--1 ds-u-border--dark ds-u-color--black"
+        aria-label="Delete filter"
+        onClick={() => remove(index)}
+      >
+        <span className="far fa-trash"></span>
+      </Button>
     </fieldset>
   );
 };
