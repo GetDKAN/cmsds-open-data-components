@@ -143,7 +143,7 @@ const DataTable = ({
           )}
           <p className="ds-u-margin--0">Activate the column resize button and use the right and left arrow keys to resize a column or use your mouse to drag/resize. Press escape to cancel the resizing.</p>
         </div>
-        <div class="dkan-data-table-share-container ds-l-col--auto ds-u-padding--0 ds-u-margin-bottom--2 ds-u-md-margin-bottom--0">
+        <div className="dkan-data-table-share-container ds-l-col--auto ds-u-padding--0 ds-u-margin-bottom--2 ds-u-md-margin-bottom--0">
           <Tooltip
             className="dkan-data-table-share-button ds-u-display--flex ds-u-align-items--center ds-u-fill--primary ds-u-radius--pill ds-u-color--white ds-u-border--0 ds-u-padding-x--3 ds-u-padding-y--1 ds-u-font-weight--bold ds-l-col--12 ds-l-md-col--auto ds-u-justify-content--center"
             activeClassName="dkan-data-table-share-tooltip-open"
