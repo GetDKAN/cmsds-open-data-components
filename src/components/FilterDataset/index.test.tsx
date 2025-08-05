@@ -38,14 +38,12 @@ Object.defineProperty(window, 'history', {
   writable: true
 });
 
-Object.defineProperty(window, 'location', {
-  value: {
-    href: 'http://localhost:3000/test',
-    origin: 'http://localhost:3000',
-    pathname: '/test'
-  },
-  writable: true
-});
+delete (window as any).location;
+(window as any).location = {
+  href: 'http://localhost:3000/test',
+  origin: 'http://localhost:3000',
+  pathname: '/test'
+};
 
 global.scrollTo = jest.fn()
 
