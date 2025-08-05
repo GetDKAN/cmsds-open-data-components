@@ -30,7 +30,7 @@ interface DropdownProps {
 
 // Mock the @cmsgov/design-system components
 jest.mock('@cmsgov/design-system', () => ({
-  Tooltip: ({ children, title, ...props }: TooltipProps) => (
+  Tooltip: ({ children, title, maxWidth, activeClassName, dialog, offset, placement, ...props }: TooltipProps) => (
     <div data-testid="tooltip" {...props}>
       <button data-testid="tooltip-trigger">Display Settings</button>
       <div data-testid="tooltip-content" className="tooltip-content">
@@ -39,7 +39,7 @@ jest.mock('@cmsgov/design-system', () => ({
       {children}
     </div>
   ),
-  Dropdown: ({ options, onChange, value, defaultValue, ...props }: DropdownProps) => {
+  Dropdown: ({ options, onChange, value, defaultValue, size, label, labelClassName, name, ...props }: DropdownProps) => {
     const selectValue = value || defaultValue || '';
     return (
       <select 
