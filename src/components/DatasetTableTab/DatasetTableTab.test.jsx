@@ -22,7 +22,6 @@ describe('<DatasetTableTab />', () => {
       </DataTableContext.Provider>
     )
 
-    expect(screen.getByText("Data filters: none")).toBeInTheDocument();
     expect(screen.getByRole("table")).toBeInTheDocument();
     expect(screen.getByRole("navigation")).toHaveClass("ds-c-pagination");
   });

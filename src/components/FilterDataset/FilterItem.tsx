@@ -75,7 +75,7 @@ const FilterItem = ({ id, condition, index, update, remove, propertyOptions, sch
         options={buildOperatorOptions(schema[id].fields[property].mysql_type)}
         className="ds-u-padding-x--0"
         value={operator}
-        label="Operator"
+        label="Condition"
         name={`${condition.key}_operator`}
         onChange={(e) => setOperator(e.target.value)}
       />

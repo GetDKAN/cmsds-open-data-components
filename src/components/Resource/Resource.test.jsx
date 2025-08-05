@@ -9,10 +9,14 @@ import * as distributionWithCustomTitle from "../../tests/fixtures/distributionW
 describe('<Resource />', () => {
   test("Renders correctly", () => {
     resource.setResource = jest.fn();
+
+    const distributions = JSON.parse(JSON.stringify(distribution.distribution));
+    distributions[0].data.title = undefined;
+
     render(
       <Resource
         resource={resource}
-        distributions={distribution.distribution}
+        distributions={distributions}
         title={"Test title"}
         fileFormat={"csv"}
       />

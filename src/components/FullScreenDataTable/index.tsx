@@ -3,7 +3,12 @@ import { Dialog } from "@cmsgov/design-system";
 import './FullScreenDataTable.scss';
 import DatasetTable from "../DatasetTableTab";
 
-const FullScreenDataTable = ({isModal, closeFullScreenModal} : { isModal: boolean, closeFullScreenModal: Function }) => {
+export type FullScreenDataTableProps = {  
+  isModal: boolean;
+  closeFullScreenModal: Function;
+}
+
+const FullScreenDataTable: React.FC<FullScreenDataTableProps> = ({ isModal, closeFullScreenModal }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   if (isModal) return null;

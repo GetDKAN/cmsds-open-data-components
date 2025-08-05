@@ -52,7 +52,8 @@ const ManageColumns = ({
   columns,
   defaultColumnOrder
 }) => {
-  const {columnOrder, setColumnOrder, setColumnVisibility, columnVisibility} = useContext(DataTableActionsContext);
+  const {columnOrder, setColumnOrder, setColumnVisibility, columnVisibility: contextColumnVisibility} = useContext(DataTableActionsContext);
+  const columnVisibility = contextColumnVisibility || {};
   const [modalOpen, setModalOpen] = useState(false);
   // maintain card state separately from table state - only sync states when the Save button is pressed
   const [cards, setCards] = useState(columns.map(c => {

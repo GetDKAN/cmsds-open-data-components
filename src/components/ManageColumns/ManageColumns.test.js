@@ -96,7 +96,8 @@ describe('ManageColumns component.', () => {
       <MockDataTableActionsProvider value={{
         columnOrder: [],
         setColumnOrder: setColumnOrder,
-        setColumnVisibility: setColumnVisibility
+        setColumnVisibility: setColumnVisibility,
+        columnVisibility: {teaching_hospital_ccn: true, change_type: true, covered_recipient_type: true, teaching_hospital_id: true}
       }}>
         <ManageColumns
           id={"test"}

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-type DataTablePageResultsType = {
+export type DataTablePageResultsType = {
   totalRows: number;
   limit: number;
   offset: number;

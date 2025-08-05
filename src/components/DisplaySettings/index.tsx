@@ -8,11 +8,12 @@ import "./DisplaySettings.scss";
 
 const DisplaySettings: React.FC = () => {
   const { resource } = useContext(DataTableContext);
-  const { limit, setLimit, setOffset } = resource as ResourceType;
   const { setPage, tableDensity, setTableDensity } = useContext(DataTableActionsContext);
   const rowOptions = [10, 25, 50, 100];
 
   if (!resource) return null;
+
+  const { limit, setLimit, setOffset } = resource as ResourceType;
 
   return (
     <div className="dkan-display-settings-wrapper">
