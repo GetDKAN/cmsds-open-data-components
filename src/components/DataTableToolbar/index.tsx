@@ -111,6 +111,7 @@ const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
               {conditions.length > 0
                 ? conditions.map((condition, index) => (
                   <FilterChip
+                    key={index}
                     iconClass="far fa-filter"
                     text={`"${condition.property}" ${condition.operator} ${condition.value}`}
                     onClick={() => {

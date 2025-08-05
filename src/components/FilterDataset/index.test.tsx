@@ -44,6 +44,8 @@ Object.defineProperty(window, 'location', {
   writable: true
 });
 
+global.scrollTo = jest.fn()
+
 const createMockContext = ({ mainOverrides = {}, resourceOverrides = {} } = {}) => ({
   id: "test-id",
   resource: {
