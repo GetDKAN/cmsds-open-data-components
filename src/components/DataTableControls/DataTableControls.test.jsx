@@ -18,7 +18,8 @@ describe('DataTableControls', () => {
         <MockDataTableActionsProvider value={{
           columnOrder: [],
           setColumnOrder: jest.fn(),
-          setColumnVisibility: jest.fn()
+          setColumnVisibility: jest.fn(),
+          columnVisibility: {teaching_hospital_ccn: true, change_type: true, covered_recipient_type: true, teaching_hospital_id: true}
         }}>
           <DataTableControls
             id={"test"}
@@ -74,7 +75,8 @@ describe('DataTableControls', () => {
       <MockDataTableActionsProvider value={{
         columnOrder: [],
         setColumnOrder: jest.fn(),
-        setColumnVisibility: jest.fn()
+        setColumnVisibility: jest.fn(),
+        columnVisibility: {teaching_hospital_ccn: true, change_type: true, covered_recipient_type: true, teaching_hospital_id: true}
       }}>
         <DataTableControls
           id={"test"}
@@ -92,7 +94,8 @@ describe('DataTableControls', () => {
       <MockDataTableActionsProvider value={{
         columnOrder: [],
         setColumnOrder: jest.fn(),
-        setColumnVisibility: jest.fn()
+        setColumnVisibility: jest.fn(),
+        columnVisibility: {teaching_hospital_ccn: true, change_type: true, covered_recipient_type: true, teaching_hospital_id: true}
       }}>
         <DataTableControls
           id={"test"}
