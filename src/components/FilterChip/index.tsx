@@ -2,7 +2,7 @@ import React from "react";
 
 import "./FilterChip.scss";
 
-type FilterChipProps = {
+export type FilterChipProps = {
   iconClass: string;
   text: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>

@@ -47,6 +47,8 @@ const FilterDataset: React.FC = () => {
 
   const { setPage } = useContext(DataTableActionsContext);
 
+  if (!resource) return null;
+
   const customColumnHeaders = buildCustomColHeaders(
     customColumns,
     resource.columns,
@@ -62,7 +64,7 @@ const FilterDataset: React.FC = () => {
   const fields = Object.keys(schema[id].fields);
 
   const [queryConditions, setQueryConditions] = useState<Array<ConditionType>>([]);
-  const [titleConditions, setTitleConditions] = useState<Array<ConditionType>>([]); // Add use effect to load conditions on first load if needed
+  const [titleConditions, setTitleConditions] = useState<Array<ConditionType>>([]);
   const [conditionsChanged, setConditionsChanged] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 

@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from 'react';
 import DataTableContext from '../../templates/Dataset/DataTableContext';
   
 // Define context props
-type DataTableActionsContextProps = {
+export type DataTableActionsContextProps = {
   columnOrder: string[];
   setColumnOrder: React.Dispatch<React.SetStateAction<string[]>>;
   columnVisibility: {
