@@ -65,21 +65,6 @@ jest.mock('../FilterChip', () => {
   };
 });
 
-const mockPushState = jest.fn();
-Object.defineProperty(window, 'history', {
-  value: {
-    pushState: mockPushState
-  },
-  writable: true
-});
-
-delete (window as any).location;
-(window as any).location = {
-  href: 'http://localhost:3000/test',
-  origin: 'http://localhost:3000',
-  pathname: '/test'
-};
-
 const localStorageMock = {
   getItem: jest.fn(),
   setItem: jest.fn(),
@@ -248,6 +233,8 @@ describe('DataTableToolbar', () => {
   });
 
   it('calls clear all filters when "Clear all filters" button is clicked', () => {
+    const mockPushStateSpy = jest.spyOn(window.history, 'pushState').mockImplementation(() => {});
+
     const conditionsProps = {
       ...defaultProps,
       resource: {
@@ -266,7 +253,7 @@ describe('DataTableToolbar', () => {
     fireEvent.click(clearButton);
     
     expect(conditionsProps.resource.setConditions).toHaveBeenCalledWith([]);
-    expect(mockPushState).toHaveBeenCalled();
+    expect(mockPushStateSpy).toHaveBeenCalled();
     expect(conditionsProps.setColumnVisibility).toHaveBeenCalledWith({
       col1: true,
       col2: true,
@@ -312,6 +299,8 @@ describe('DataTableToolbar', () => {
   });
 
   it('updates browser URL when removing condition', () => {
+    const mockPushStateSpy = jest.spyOn(window.history, 'pushState').mockImplementation(() => {});
+
     const conditionsProps = {
       ...defaultProps,
       resource: {
@@ -324,10 +313,12 @@ describe('DataTableToolbar', () => {
     const filterChip = screen.getByTestId('filter-chip');
     fireEvent.click(filterChip);
     
-    expect(mockPushState).toHaveBeenCalledWith({}, '', 'http://localhost:3000/test');
+    expect(mockPushStateSpy).toHaveBeenCalledWith({}, '', 'http://localhost/');
   });
 
   it('updates browser URL when clearing all filters', () => {
+    const mockPushStateSpy = jest.spyOn(window.history, 'pushState').mockImplementation(() => {});
+
     const conditionsProps = {
       ...defaultProps,
       resource: {
@@ -340,7 +331,7 @@ describe('DataTableToolbar', () => {
     const clearButton = screen.getByText('Clear all filters');
     fireEvent.click(clearButton);
     
-    expect(mockPushState).toHaveBeenCalledWith({}, '', 'http://localhost:3000/test');
+    expect(mockPushStateSpy).toHaveBeenCalledWith({}, '', 'http://localhost/');
   });
 
   it('handles empty conditions array', () => {

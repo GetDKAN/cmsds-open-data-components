@@ -30,21 +30,6 @@ jest.mock('../DatasetTableTab', () => ({
   prepareColumns: jest.fn(() => [{ header: 'Test', accessor: 'test' }])
 }));
 
-const mockPushState = jest.fn();
-Object.defineProperty(window, 'history', {
-  value: {
-    pushState: mockPushState
-  },
-  writable: true
-});
-
-delete (window as any).location;
-(window as any).location = {
-  href: 'http://localhost:3000/test',
-  origin: 'http://localhost:3000',
-  pathname: '/test'
-};
-
 global.scrollTo = jest.fn()
 
 const createMockContext = ({ mainOverrides = {}, resourceOverrides = {} } = {}): DataTableContextType => ({
@@ -300,11 +285,7 @@ describe('FilterDataset', () => {
 
   it('updates browser URL when conditions are applied', async () => {
     const mockSetConditions = jest.fn();
-    const mockPushState = jest.fn();
-    Object.defineProperty(window, 'history', {
-      value: { pushState: mockPushState },
-      writable: true
-    });
+    const mockPushStateSpy = jest.spyOn(window.history, 'pushState').mockImplementation(() => {});
 
     render(
       <DataTableContext.Provider value={createMockContext({ resourceOverrides: { setConditions: mockSetConditions } })}>
@@ -326,7 +307,7 @@ describe('FilterDataset', () => {
     const applyButton = screen.getByText(/Apply/);
     await userEvent.click(applyButton);
 
-    expect(mockPushState).toHaveBeenCalled();
+    expect(mockPushStateSpy).toHaveBeenCalled();
   });
 
   it('handles Is operator', async () => {
@@ -782,9 +763,7 @@ describe('FilterDataset', () => {
 
   it('updates browser URL when conditions are applied', async () => {
     const mockSetConditions = jest.fn();
-    const originalPushState = window.history.pushState;
-    const mockPushState = jest.fn();
-    window.history.pushState = mockPushState;
+    const mockPushStateSpy = jest.spyOn(window.history, 'pushState').mockImplementation(() => {});;
     
     render(
       <DataTableContext.Provider value={createMockContext({ resourceOverrides: { setConditions: mockSetConditions } })}>
@@ -809,8 +788,6 @@ describe('FilterDataset', () => {
     const applyButton = screen.getByText(/Apply.*filter/);
     await userEvent.click(applyButton);
 
-    expect(mockPushState).toHaveBeenCalledWith({}, "", "http://localhost:3000/test?conditions[0][property]=ndc1&conditions[0][value]=test_value&conditions[0][operator]=%3D");
-    
-    window.history.pushState = originalPushState;
+    expect(mockPushStateSpy).toHaveBeenCalledWith({}, "", expect.stringContaining("?conditions[0][property]=ndc1&conditions[0][value]=test_value&conditions[0][operator]=%3D"));
   });
 });
