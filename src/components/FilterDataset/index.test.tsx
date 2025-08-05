@@ -6,6 +6,9 @@ import { MockDataTableActionsProvider } from "../DatasetTableTab/DataTableAction
 import DataTableContext from "../../templates/Dataset/DataTableContext";
 import * as resource from "../../tests/fixtures/resource.json";
 import * as distribution from "../../tests/fixtures/distribution.json";
+import { ResourceType, SchemaType } from "../../types/dataset";
+import { DataTableActionsContextProps } from "../DatasetTableTab/DataTableActionsContext";
+import { DataTableContextType } from "../../templates/Dataset/DataTableContext";
 
 jest.mock('../../templates/FilteredResource/functions', () => ({
   buildOperatorOptions: jest.fn(() => [
@@ -46,7 +49,7 @@ Object.defineProperty(window, 'location', {
 
 global.scrollTo = jest.fn()
 
-const createMockContext = ({ mainOverrides = {}, resourceOverrides = {} } = {}) => ({
+const createMockContext = ({ mainOverrides = {}, resourceOverrides = {} } = {}): DataTableContextType => ({
   id: "test-id",
   resource: {
     ...resource,
@@ -85,13 +88,13 @@ const createMockContext = ({ mainOverrides = {}, resourceOverrides = {} } = {}) 
       }
     },
     ...resourceOverrides
-  },
+  } as ResourceType,
   distribution: distribution.distribution[0],
   rootUrl: "test/api/",
   ...mainOverrides
 });
 
-const createMockActionsContext = (overrides = {}) => ({
+const createMockActionsContext = (overrides = {}): DataTableActionsContextProps => ({
   columnOrder: [],
   setColumnOrder: jest.fn(),
   setColumnVisibility: jest.fn(),
@@ -726,7 +729,7 @@ describe('FilterDataset', () => {
 
   it('handles missing schema fields', () => {
     const mockContext = createMockContext();
-    (mockContext.resource as any).schema = { 'd60b31aa-bfa8-527e-9b50-6c3f972ee9a9': { fields: { 'test_field': { mysql_type: 'varchar', description: 'Test Field', type: 'string' } } } };
+    (mockContext.resource as ResourceType).schema = { 'd60b31aa-bfa8-527e-9b50-6c3f972ee9a9': { fields: { 'test_field': { mysql_type: 'varchar', description: 'Test Field', type: 'string' } } } } as SchemaType;
 
     render(
       <DataTableContext.Provider value={mockContext}>
