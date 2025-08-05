@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { act } from 'react';
 import axios from 'axios';
-import { act } from 'react-dom/test-utils';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import DatasetSearch from './index';
