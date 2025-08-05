@@ -1,6 +1,6 @@
-import React, { act } from 'react';
+import React from 'react';
 import axios from 'axios';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import DatasetSearch from './index';
 import { MemoryRouter } from 'react-router-dom';
