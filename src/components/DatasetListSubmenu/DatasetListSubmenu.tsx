@@ -1,33 +1,33 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useSearchParams, useLocation } from 'react-router-dom';
+import { useSearchParams, useLocation, Link } from 'react-router-dom';
 import qs from 'qs';
 import axios from 'axios';
 import withQueryProvider from '../../utilities/QueryProvider/QueryProvider';
 import { Spinner, Alert } from '@cmsgov/design-system';
-import DatasetListSubmenuItem from '../../components/DatasetListSubmenuItem';
+import DatasetListSubmenuItem from '../DatasetListSubmenuItem';
 import { useQuery } from '@tanstack/react-query';
 import { transformUrlParamsToSearchObject } from '../../services/useSearchAPI/helpers';
 
-// import '../DatasetSearch/dataset-search.scss';
-import { DatasetSearchPageProps } from '../../types/search';
+import "./dataset-list-submenu.scss";
+import { DatasetSubmenuListProps } from '../../types/search';
 import { acaToParams } from '../../utilities/aca';
 import { ACAContext } from '../../utilities/ACAContext';
 
-const DatasetListSubmenu = (props: DatasetSearchPageProps) => {
-  const {
-    rootUrl,
-    enablePagination = true,
-    defaultPageSize = 3,
-    defaultSort = { defaultSort: 'modified', defaultOrder: 'desc' },
-    dataDictionaryLinks = false,
-  } = props;
+const DatasetListSubmenu = ({
+  rootUrl,
+  enablePagination = true,
+  defaultPageSize = 4,
+  defaultSort = { defaultSort: 'modified', defaultOrder: 'desc' },
+  dataDictionaryLinks = false,
+  location,
+  subLinkClasses
+}: DatasetSubmenuListProps) => {
   const { ACA } = useContext(ACAContext);
 
   const defaultSortBy = "";
   const defaultSortOrder = "";
   const defaultPage = 1;
 
-  const location = useLocation();
   const transformedParams = transformUrlParamsToSearchObject(location.search, defaultSort);
 
   const [currentResultNumbers, setCurrentResultNumbers] = useState({ total: 0, startingNumber: 0, endingNumber: 0 });
@@ -114,53 +114,56 @@ const DatasetListSubmenu = (props: DatasetSearchPageProps) => {
 
   return (
     <>
-      <section className="ds-l-container">
-        <div className="ds-l-row ds-u-padding-top--4">
-          <div className="ds-l-col--12">
-            {isPending ? (
-              <Spinner
-                className="ds-u-valign--middle"
-                aria-valuetext="Dataset Search loading"
-                role="status"
-              />
-            ) : (
-              <>
-                <h3>Test submenu list of new datasets.</h3>
-                <ol className="dc-dataset-search-list ds-u-padding--0 ds-u-margin-top--0 ds-u-margin-bottom--4 ds-u-display--block" data-testid="results-list">
-                  {noResults && <Alert variation="error" heading="No results found." />}
-                  {data && data.data.results ? Object.keys(data.data.results).map((key) => {
-                    return data.data.results[key];
-                  }).map((item) => {
-                    return (
-                      <DatasetListSubmenuItem
-                        key={item.identifier}
-                        title={item.title}
-                        identifier={item.identifier}
-                        paginationEnabled={enablePagination}
-                        dataDictionaryLinks={dataDictionaryLinks}
-                      />
-                    )
-                  }) : (
-                    <Alert variation="error" heading="Could not connect to the API." />
-                  )}
-                </ol>
-                <div className="ds-u-display--flex ds-u-justify-content--between ds-u-align-items--end ds-u-flex-wrap--reverse ds-u-sm-flex-wrap--wrap">
-                  {enablePagination && (
-                    <div className="ds-l-col--12 ds-l-sm-col--6 ds-l-md-col--8">
-                      <p className="ds-u-margin-y--0" aria-hidden="true">
-                        {(currentResultNumbers && data) && (
-                          <>
-                            Viewing {currentResultNumbers.endingNumber} of {data.data.total}
-                          </>
-                        )}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </>
-            )}
-          </div>
-        </div>
+      <section className=" dkan-c-site-menu--sub-menu">
+        {isPending ? (
+          <Spinner
+            className="ds-u-valign--middle"
+            aria-valuetext="Dataset Search loading"
+            role="status"
+          />
+        ) : (
+          <>
+            <ol className="dc-dataset-search-list ds-u-padding--0 ds-u-margin-top--0 ds-u-lg-margin-top--2 ds-u-margin-bottom--2 ds-u-display--block" data-testid="submenu-results-list">
+              {noResults && <Alert variation="error" heading="No results found." />}
+              {data && data.data.results ? Object.keys(data.data.results).map((key) => {
+                return data.data.results[key];
+              }).map((item) => {
+                return (
+                  <DatasetListSubmenuItem
+                    key={item.identifier}
+                    title={item.title}
+                    identifier={item.identifier}
+                    linkClasses={subLinkClasses}
+                  />
+                )
+              }) : (
+                <Alert variation="error" heading="Could not connect to the API." />
+              )}
+            </ol>
+            <div className="ds-u-display--flex ds-u-justify-content--between ds-u-align-items--center ds-u-border-top--1 ds-u-padding-top--3 ds-u-padding-bottom--2 ds-u-margin-x--3 ds-u-lg-margin-x--0">
+              {enablePagination && (
+                <>
+                  <div className="">
+                    <p className="ds-u-margin-y--0 ds-u-font-size--sm" aria-hidden="true">
+                      {(currentResultNumbers && data) && (
+                        <>
+                          Viewing {currentResultNumbers.endingNumber} of {data.data.total}
+                        </>
+                      )}
+                    </p>
+                  </div>
+                  <div className="">
+                    {(data && data.data.total > 0) && (
+                      <Link className="ds-u-padding--0 ds-c-button ds-c-button--ghost dkan-c-header--link" to={`../whats-new`}>
+                        <span className="ds-text-heading--md"> {`View all ${data.data.total} entries`} </span>
+                      </Link>
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
+          </>
+        )}
       </section>
     </>
   );

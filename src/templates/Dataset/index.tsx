@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import qs from 'qs';
 import { useQuery } from '@tanstack/react-query';
@@ -22,12 +22,12 @@ import DatasetDescription from '../../components/DatasetDescription';
 import { acaToParams } from '../../utilities/aca';
 import { ACAContext } from '../../utilities/ACAContext';
 
-const getDataDictionary = (dataDictionaryUrl : string) => {
-  const {ACA} = useContext(ACAContext);
-  const {data, isPending, error} = useQuery({
+const getDataDictionary = (dataDictionaryUrl: string) => {
+  const { ACA } = useContext(ACAContext);
+  const { data, isPending, error } = useQuery({
     queryKey: ["dictionary" + dataDictionaryUrl],
     queryFn: () => {
-      return fetch(`${dataDictionaryUrl}?${qs.stringify(acaToParams({}, ACA), {arrayFormat: 'comma',encode: false })}`).then(
+      return fetch(`${dataDictionaryUrl}?${qs.stringify(acaToParams({}, ACA), { arrayFormat: 'comma', encode: false })}`).then(
         (res) => res.json(),
       )
     }
@@ -56,7 +56,7 @@ const Dataset = ({
   customDescription,
   updateAriaLive,
   showRowLimitNotice = false
-} : DatasetPageType) => {
+}: DatasetPageType) => {
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
     : { conditions: [] };
@@ -88,7 +88,7 @@ const Dataset = ({
   // compare schema fields with siteWideDataDictionary to display commonalities for now
   // until dataset level data dictionaries are implemented
   const datasetSitewideDictionary = (siteWideDataDictionary && siteWideDataDictionary.data && siteWideDataDictionary.data.fields && resource && resource.schema[distribution.identifier]) ?
-    siteWideDataDictionary.data.fields.filter((field : DatasetDictionaryItemType) => {
+    siteWideDataDictionary.data.fields.filter((field: DatasetDictionaryItemType) => {
       return Object.keys(resource.schema[distribution.identifier].fields).indexOf(field.name) !== -1;
     }) : null;
 
@@ -142,7 +142,7 @@ const Dataset = ({
   }, [distribution, window.location.hash])
 
   const displayDataDictionaryTab = ((distribution.data && distribution.data.describedBy && distribution.data.describedByType === 'application/vnd.tableschema+json') || (datasetSitewideDictionary && datasetSitewideDictionary.length > 0)) as boolean;
-  
+
   return (
     <>
       {dataset.error ? (
@@ -184,7 +184,7 @@ const Dataset = ({
                           Data Table
                         </span>
                       }
-                      className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
+                      className={borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : ''}
                     >
                       <DataTableContext.Provider value={{
                         id: id,
@@ -207,7 +207,7 @@ const Dataset = ({
                         Overview
                       </span>
                     }
-                    className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
+                    className={borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : ''}
                   >
                     <DatasetOverview resource={resource} dataset={dataset} distributions={distributions} metadataMapping={metadataMapping} />
                   </TabPanel>
@@ -220,7 +220,7 @@ const Dataset = ({
                           Data Dictionary
                         </span>
                       }
-                      className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
+                      className={borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : ''}
                     >
                       {displayDataDictionaryTab && <DataDictionary
                         datasetSitewideDictionary={datasetSitewideDictionary}
@@ -231,7 +231,7 @@ const Dataset = ({
                       {!displayDataDictionaryTab && <p>There is no Data Dictionary associated with this dataset.</p>}
                     </TabPanel>
                   )}
-                  { distribution && distribution.data && (
+                  {distribution && distribution.data && (
                     <TabPanel
                       id={'api'}
                       tab={
@@ -240,7 +240,7 @@ const Dataset = ({
                           API
                         </span>
                       }
-                      className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
+                      className={borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : ''}
                     >
                       <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} showRowLimitNotice={showRowLimitNotice} />
                     </TabPanel>
