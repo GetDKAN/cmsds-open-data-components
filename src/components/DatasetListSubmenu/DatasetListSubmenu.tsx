@@ -17,14 +17,12 @@ const DatasetListSubmenu = ({
   enablePagination = true,
   defaultPageSize = 4,
   defaultSort = { defaultSort: 'modified', defaultOrder: 'desc' },
-  location,
   subLinkClasses
 }: DatasetSubmenuListProps) => {
   const { ACA } = useContext(ACAContext);
 
   const [currentResultNumbers, setCurrentResultNumbers] = useState({ total: 0, startingNumber: 0, endingNumber: 0 });
   const [noResults, setNoResults] = useState(false);
-  const [announcementText, setAnnouncementText] = useState('');
   const [totalItems, setTotalItems] = useState(0);
 
   const pageSize = defaultPageSize;
@@ -53,9 +51,9 @@ const DatasetListSubmenu = ({
   let submenuItemsCount = 0;
 
   if (data) {
-    if (data.data.total && totalItems != data.data.total) setTotalItems(data.data.total);
+    if (data.data.total && totalItems !== data.data.total) setTotalItems(data.data.total);
     let resultsCount = Object.keys(data.data.results).length;
-    // For the submenu pager, If there are less than 4 dataset item, display the dataset item count, otherwise, show "Viewing 4..".
+    // For the submenu pager, If there are fewer than 4 dataset items, display the dataset item count, otherwise, show "Viewing 4..".
     submenuItemsCount = resultsCount > defaultPageSize ? defaultPageSize : resultsCount
   }
 
