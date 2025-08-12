@@ -40,6 +40,17 @@ export type DatasetSearchPageProps = {
   dataDictionaryLinks?: boolean;
 };
 
+export type DatasetSubmenuListProps = Pick<
+  DatasetSearchPageProps,
+  'rootUrl' | 'enablePagination' | 'defaultPageSize' | 'defaultSort' | 'dataDictionaryLinks'
+> & {
+  location: {
+    search: string;
+    pathname: string;
+  };
+  subLinkClasses?: string;
+};
+
 export type DistributionItemType = {
   distribution: SearchDistributionType[]
 }

@@ -20,13 +20,13 @@ const HeaderNav = (props: HeaderNavProps) => {
   const navMenuOpenClass = `dkan-c-nav-menu--${headerContext.mobileMenuOpen ? "open" : "close"}`;
   const isMobileClass = `dkan-c-nav-menu--${headerContext.isMobile ? 'mobile' : 'desktop'}`;
   const linkClasses = 'dkan-c-header--link ds-c-button ds-c-button--ghost';
-  const listClasses= 'dkan-c-header--link-list ';
-  return(
-    <div 
-      className={`dkan-c-nav-menu ${wrapperClasses} ${navMenuOpenClass} ${isMobileClass}`} 
+  const listClasses = 'dkan-c-header--link-list ';
+  return (
+    <div
+      className={`dkan-c-nav-menu ${wrapperClasses} ${navMenuOpenClass} ${isMobileClass}`}
       ref={headerContext.menuRef}
     >
-      <Button 
+      <Button
         variation='ghost'
         onDark
         className='dkan-c-nav-menu--mobile-close-button'
@@ -49,7 +49,7 @@ const HeaderNav = (props: HeaderNavProps) => {
                 />
               )
             }
-            return(
+            return (
               <li>
                 <NavLink to={link.url} className={linkClasses}>
                   <span>{link.label}</span>
@@ -63,7 +63,7 @@ const HeaderNav = (props: HeaderNavProps) => {
         <nav className='dkan-c-top-nav'>
           <ul className={listClasses}>
             {topNavLinks.map((link: any) => {
-              return(
+              return (
                 <li>
                   <NavLink to={link.url} className={linkClasses}>
                     <span>{link.label}</span>
