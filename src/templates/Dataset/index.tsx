@@ -200,7 +200,7 @@ const Dataset = ({
                           <DataTableStateWrapper />
                         </DataTableContext.Provider>
                       ) : (
-                        <p>There is no Data Table associated with this dataset. Data Tables will only display for CSV files</p>
+                        <p>There is no Data Table associated with this dataset. Data Tables will only display for CSV files.</p>
                       )
                     }
                   </TabPanel>
