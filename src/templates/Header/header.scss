@@ -8,7 +8,7 @@
   --header-nav-link--mobile-color: #{var(--color-white)};
   --header-mobile-bg-color: #{var(--color-gray-dark)};
   --header-submenu--bg-color: #{var(--color-primary)};
-  --header-submenu--width: 300px;
+  --header-submenu--width: 333px; // This oddly specific width ensures that pagers on submenus with dataset listings have 24px width between them. See DatasetListSubmenu.tsx.
   --header-nav-search--color: #{var(--color-white)};
   --tag-line--color: #6f757c;
   --tag-line--border-color: #6f757c;

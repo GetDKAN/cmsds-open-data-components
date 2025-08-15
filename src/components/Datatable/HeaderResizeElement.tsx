@@ -13,11 +13,12 @@ const HeaderResizeElement = ({table, header, sortElement, setAriaLiveFeedback} :
         }
       }
     }
+    title={typeof(header.column.columnDef.header) === "string" ? header.column.columnDef.header : ''}
     className="ds-u-border-y--2 ds-u-padding--2 ds-u-border--dark  ds-u-font-weight--bold"
     >
       <div className="ds-u-display--flex">
         <div>
-          <span title={typeof(header.column.columnDef.header) === "string" ? header.column.columnDef.header : ''}>
+          <span>
             {header.isPlaceholder
               ? null
               : flexRender(
