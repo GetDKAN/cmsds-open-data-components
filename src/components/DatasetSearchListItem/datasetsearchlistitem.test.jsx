@@ -61,7 +61,7 @@ describe('<DatasetSearchListItem />', () => {
         />
       </MemoryRouter>
     );
-    expect(screen.getByRole('link', { name: 'Download Icon Download' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Download' })).toBeInTheDocument();
   });
 
   test('Renders themes when showTopics is true', () => {

@@ -142,6 +142,7 @@ const Dataset = ({
   }, [distribution, window.location.hash])
 
   const displayDataDictionaryTab = ((distribution.data && distribution.data.describedBy && distribution.data.describedByType === 'application/vnd.tableschema+json') || (datasetSitewideDictionary && datasetSitewideDictionary.length > 0)) as boolean;
+  const formatType = getFormatType(distribution);
 
   return (
     <>
@@ -175,30 +176,34 @@ const Dataset = ({
                   }}
                   selectedId={selectedTab}
                 >
-                  {getFormatType(distribution) === "csv" && (
-                    <TabPanel
-                      id={'data-table'}
-                      tab={
-                        <span className="ds-u-color--primary">
-                          <SearchItemIcon id="data-table" />
-                          Data Table
-                        </span>
-                      }
-                      className={borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : ''}
-                    >
-                      <DataTableContext.Provider value={{
-                        id: id,
-                        resource: resource,
-                        distribution: distribution,
-                        rootUrl: rootUrl,
-                        customColumns: customColumns,
-                        dataDictionaryBanner: (dataDictionaryBanner && displayDataDictionaryTab),
-                        datasetTableControls: !disableTableControls
-                      }}>
-                        <DataTableStateWrapper />
-                      </DataTableContext.Provider>
-                    </TabPanel>
-                  )}
+                  <TabPanel
+                    id={'data-table'}
+                    tab={
+                      <span className="ds-u-color--primary">
+                        <SearchItemIcon id="data-table" />
+                        Data Table
+                      </span>
+                    }
+                    className={borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : ''}
+                  >
+                    {getFormatType(distribution) === "csv"
+                      ? (
+                        <DataTableContext.Provider value={{
+                          id: id,
+                          resource: resource,
+                          distribution: distribution,
+                          rootUrl: rootUrl,
+                          customColumns: customColumns,
+                          dataDictionaryBanner: (dataDictionaryBanner && displayDataDictionaryTab),
+                          datasetTableControls: !disableTableControls
+                        }}>
+                          <DataTableStateWrapper />
+                        </DataTableContext.Provider>
+                      ) : (
+                        <p>There is no Data Table associated with this dataset. Data Tables will only display for CSV files.</p>
+                      )
+                    }
+                  </TabPanel>
                   <TabPanel
                     id={'overview'}
                     tab={
@@ -222,13 +227,17 @@ const Dataset = ({
                       }
                       className={borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : ''}
                     >
-                      {displayDataDictionaryTab && <DataDictionary
-                        datasetSitewideDictionary={datasetSitewideDictionary}
-                        datasetDictionaryEndpoint={distribution.data.describedBy}
-                        title={"Data Dictionary"}
-                        csvDownload={dataDictionaryCSV}
-                      />}
-                      {!displayDataDictionaryTab && <p>There is no Data Dictionary associated with this dataset.</p>}
+                      {displayDataDictionaryTab
+                        ? (
+                          <DataDictionary
+                            datasetSitewideDictionary={datasetSitewideDictionary}
+                            datasetDictionaryEndpoint={distribution.data.describedBy}
+                            title={"Data Dictionary"}
+                            csvDownload={dataDictionaryCSV}
+                          />
+                        ) : (
+                          <p>There is no Data Dictionary associated with this dataset.</p>
+                        )}
                     </TabPanel>
                   )}
                   {distribution && distribution.data && (
