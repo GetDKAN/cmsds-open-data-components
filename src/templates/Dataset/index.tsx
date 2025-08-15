@@ -54,7 +54,7 @@ const Dataset = ({
   dataDictionaryBanner = false,
   disableTableControls = false,
   hideDataDictionary = false,
-  hideStoredQuery = false,
+  hideStoredQuery = true,
   customDescription,
   updateAriaLive,
   showRowLimitNotice = false
@@ -259,7 +259,6 @@ const Dataset = ({
                       }
                       className={ borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : '' }
                     >
-                    console.log("id", id)
                       <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} showRowLimitNotice={showRowLimitNotice} />
                     </TabPanel>
                   )}
