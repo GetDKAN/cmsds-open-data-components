@@ -70,6 +70,7 @@ export type DatasetPageType = {
   dataDictionaryBanner: boolean,
   disableTableControls: boolean,
   hideDataDictionary: boolean,
+  hideStoredQuery: boolean,
   customDescription?: Function,
   updateAriaLive?: Function,
   showRowLimitNotice?: boolean,
@@ -109,6 +110,12 @@ export type DatasetOverviewPropsType = {
   resource: ResourceType,
   distributions: DistributionType[],
   metadataMapping: any, //TODO
+}
+
+export type DatasetStoredQuery = {
+  dataset: DatasetType,
+  resource: ResourceType,
+  distributions: DistributionType[],
 }
 
 export type DatasetDictionaryItemType = {
