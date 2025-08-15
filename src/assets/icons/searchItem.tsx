@@ -14,6 +14,7 @@ const SearchItemIcon = (props: IconProps) => {
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
           xmlnsXlink="http://www.w3.org/1999/xlink"
+          aria-hidden="true"
         >
           <title>Overview Icon</title>
           <g stroke="none" strokeWidth="1" fillRule="evenodd">
@@ -41,6 +42,7 @@ const SearchItemIcon = (props: IconProps) => {
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
           xmlnsXlink="http://www.w3.org/1999/xlink"
+          aria-hidden="true"
         >
           <title>Data Table Icon</title>
           <g stroke="none" strokeWidth="1" fillRule="evenodd">
@@ -63,6 +65,7 @@ const SearchItemIcon = (props: IconProps) => {
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
           xmlnsXlink="http://www.w3.org/1999/xlink"
+          aria-hidden="true"
         >
           <title>API Icon</title>
           <g stroke="none" strokeWidth="1" fillRule="evenodd">
@@ -85,6 +88,7 @@ const SearchItemIcon = (props: IconProps) => {
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
           xmlnsXlink="http://www.w3.org/1999/xlink"
+          aria-hidden="true"
         >
           <title>Download Icon</title>
           <g stroke="none" strokeWidth="1" fillRule="evenodd">
@@ -98,7 +102,7 @@ const SearchItemIcon = (props: IconProps) => {
       );
     case 'data-dictionary':
       return (
-        <svg width="14px" height="16px" viewBox="0 0 14 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+        <svg width="14px" height="16px" viewBox="0 0 14 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" aria-hidden="true">
           <title>Data Dictionary Icon</title>
           <g id="Dev-Handoff" stroke="none" strokeWidth="1" fillRule="evenodd">
               <g id="Group-15" transform="translate(0, 0)" fillRule="nonzero">

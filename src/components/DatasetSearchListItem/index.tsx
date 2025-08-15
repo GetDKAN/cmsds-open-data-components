@@ -6,8 +6,10 @@ import SearchItemIcon from '../../assets/icons/searchItem';
 import TransformedDate from '../TransformedDate';
 import './dataset-search-list-item.scss';
 import { truncateText } from './truncateText';
-import { Button } from '@cmsgov/design-system';
+import { Button, Tooltip } from '@cmsgov/design-system';
 import DatasetDate from '../DatasetDate';
+import { getFormatType } from '../../utilities/format';
+import { DistributionType } from '../../types/dataset';
 
 type LocationType = {
   pathname: string;
@@ -32,6 +34,7 @@ type SearchItemProps = {
   theme?: string[];
   topicSlugs?: { [key: string]: string }; // Map of topic titles to their slugs
   location: LocationType;
+  distribution: DistributionType | {};
 }
 
 const DatasetSearchListItem = (props: SearchItemProps) => {
@@ -51,6 +54,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
     showTopics = false,
     theme,
     topicSlugs,
+    distribution,
   } = props;
 
   const location = useLocation();
@@ -106,6 +110,70 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
 
   const url = `/dataset/${identifier}`
 
+  const DataTableLink: React.FC = () => {
+    if (getFormatType(distribution as DistributionType) === "csv") {
+      return (
+        <Link to={`${url}#data-table`}>
+          <SearchItemIcon id="data-table" />
+          Data Table
+        </Link>
+      )
+    }
+
+    return (
+      <Tooltip
+        className="dkan-disabled-link"
+        component="a"
+        offset={[
+          0,
+          5
+        ]}
+        title="There is no Data Table associated with this dataset. Data Tables will only display for CSV files."
+        aria-disabled="true"
+      >
+        <SearchItemIcon id="data-table" />
+        Data Table
+      </Tooltip>
+    )
+  }
+
+  const dataDictionaryExists = (): boolean => {
+    if ("data" in distribution) {
+      if ("describedBy" in distribution.data && "describedByType" in distribution.data) {
+        return distribution.data.describedByType === 'application/vnd.tableschema+json';
+      }
+    }
+
+    return false;
+  }
+
+  const DataDictionaryLink: React.FC = () => {
+    if (dataDictionaryExists()) {
+      return (
+        <Link to={`${url}#data-dictionary`}>
+          <SearchItemIcon id="data-dictionary" />
+          Data Dictionary
+        </Link>
+      )
+    }
+
+    return (
+      <Tooltip
+        className="dkan-disabled-link"
+        component="a"
+        offset={[
+          0,
+          5
+        ]}
+        title="There is no Data Dictionary associated with this dataset."
+        aria-disabled="true"
+      >
+        <SearchItemIcon id="data-dictionary" />
+        Data Dictionary
+      </Tooltip>
+    )
+  }
+
   return (
     <li className="dc-c-search-list-item ds-u-padding-top--3">
       <div className={`dc-c-searchlist-item ${paginationEnabled ? 'ds-u-border-top--1' : 'ds-u-border-bottom--1 ds-u-padding-bottom--3'}`}>
@@ -146,11 +214,8 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
           )}
         <ul className={`ds-l-row ds-u-padding--0 ds-u-flex-direction--row ds-u-justify-content--between ds-u-md-justify-content--start ds-u-margin-top--3 ds-u-margin-x--0 ${!dataDictionaryLinks ? 'ds-u-justify-content--center ds-u-md-justify-content--start' : ''}`}>
           <li className={linkContainerClasses}>
-            <span className={linkClasses}>
-              <Link to={`${url}#data-table`}>
-                <SearchItemIcon id="data-table" />
-                Data Table
-              </Link>
+            <span className={`${linkClasses}${getFormatType(distribution as DistributionType) === "csv" ? '' : ' dkan-disabled-link-wrapper'}`}>
+              <DataTableLink />
             </span>
           </li>
           <li className={linkContainerClasses}>
@@ -163,11 +228,8 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
           </li>
           { dataDictionaryLinks ? (
             <li className={linkContainerClasses}>
-              <span className={linkClasses}>
-              <Link to={`${url}#data-dictionary`}>
-                <SearchItemIcon id="data-dictionary" />
-                Data Dictionary
-              </Link>
+              <span className={`${linkClasses}${dataDictionaryExists() ? '' : ' dkan-disabled-link-wrapper'}`}>
+                <DataDictionaryLink />
               </span>
             </li>
           ) : ''}

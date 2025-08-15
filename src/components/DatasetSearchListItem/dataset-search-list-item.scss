@@ -38,4 +38,25 @@
     }
 
   }
+
+  .dkan-disabled-link-wrapper {
+    cursor: not-allowed;
+
+    .dkan-disabled-link {
+      pointer-events: none;
+      color: #757575;
+
+      &:active, &:hover, &:focus {
+        color: #757575;
+
+        svg {
+          fill: #757575;
+        }
+      }
+
+      svg {
+        fill: #757575;
+      }
+    }
+  }
 }

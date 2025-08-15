@@ -348,7 +348,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                         if (item.theme.includes(theme))
                           showLargeFile = true;
                       });
-
+ 
                     return (
                       <DatasetSearchListItem
                         key={item.identifier}
@@ -361,6 +361,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                         largeFile={showLargeFile}
                         paginationEnabled={enablePagination}
                         dataDictionaryLinks={dataDictionaryLinks}
+                        distribution={"%Ref:distribution" in item ? item["%Ref:distribution"][0] : {}}
                       />
                     )
                   }) : (
