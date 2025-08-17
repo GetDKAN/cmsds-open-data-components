@@ -6,16 +6,30 @@
             "@type": "dcat:Distribution",
             "format": "csv",
             "downloadURL": "https://test.gov/dataset/download.csv",
+            "title": "Test Dataset Distribution",
+            "description": "A test distribution for unit testing",
+            "describedBy": "https://test.gov/dataset/schema.json",
+            "describedByType": "application/json",
+            "mediaType": "text/csv",
+            "mimeType": "text/csv",
             "%Ref:downloadURL": [
                 {
                     "identifier": "b73d59704d7c0a099f717aad69d03063__1705940823__source",
                     "data": {
                         "filePath": "https://h-o.st/sites/default/files/uploaded_resources/mdrp-newly-rprt-drug-01-15-2024-to-01-21-2024.csv",
-                        "identifier": "b73d59704d7c0a099f717aad69d03063",
+                        "identifier": "b73d59704d7c0a099f717aad69d03063",  
+                        "downloadURL": "https://h-o.st/sites/default/files/uploaded_resources/mdrp-newly-rprt-drug-01-15-2024-to-01-21-2024.csv",
+                        "format": "csv",
+                        "title": "Test Download URL",
+                        "description": "A test download URL for unit testing",
+                        "describedBy": "https://test.gov/dataset/schema.json",
+                        "describedByType": "application/json",
+                        "mediaType": "text/csv",
                         "mimeType": "text/csv",
                         "perspective": "source",
                         "version": "1705940823",
-                        "checksum": null
+                        "checksum": null,
+                        "%Ref:downloadURL": []
                     }
                 }
             ]

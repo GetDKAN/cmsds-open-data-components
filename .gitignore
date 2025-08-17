@@ -6,5 +6,5 @@ dist
 docs
 .DS_Store
 .parcel-cache
-
+coverage
 .vscode
