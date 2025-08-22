@@ -138,7 +138,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
   }
 
   const dataDictionaryExists = (): boolean => {
-    if ("data" in distribution) {
+    if (distribution && "data" in distribution) {
       if ("describedBy" in distribution.data && "describedByType" in distribution.data) {
         return distribution.data.describedByType === 'application/vnd.tableschema+json';
       }
