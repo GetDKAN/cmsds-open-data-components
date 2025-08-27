@@ -19,6 +19,7 @@ export { default as DatasetSearchListItem } from './components/DatasetSearchList
 export { default as DatasetDateItem } from './components/DatasetDateItem';
 export { default as DatasetDate } from './components/DatasetDate';
 export { default as DatasetListSubmenu } from './components/DatasetListSubmenu'
+export { default as DatasetSearchFacets } from './components/DatasetSearchFacets'
 export { default as ApiDocumentation } from './components/ApiDocumentation';
 export { default as ResourceHeader } from './components/ResourceHeader';
 export { default as ResourcePreview } from './components/ResourcePreview';
