@@ -39,6 +39,7 @@ const HeaderSearch = (props: HeaderSearchProps) => {
       {modalSearch && (
         <Dialog
           className="dc-c-search-dialog"
+          isOpen={modalSearch}
           onExit={() => setModalSearch(false)}
           heading={`${headingText}`}
           actions= {<>

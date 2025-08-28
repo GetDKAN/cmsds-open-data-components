@@ -19,6 +19,7 @@ const LargeFileDialog = (props: LargeFileDialogProps) => {
       {modalOpen && (
         <Dialog
           onExit={() => setModalOpen(false)}
+          isOpen={modalOpen}
           heading="Notice: Large File Size"
           actions={
             <>
