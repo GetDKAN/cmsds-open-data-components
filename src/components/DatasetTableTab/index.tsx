@@ -1,14 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import qs from 'qs';
 import DataTable from '../Datatable/Datatable';
 import { transformTableSortToQuerySort } from '../../services/useDatastore/transformSorts';
 import { buildCustomColHeaders } from '../../templates/FilteredResource/functions';
 import { Pagination, Spinner, Alert } from '@cmsgov/design-system';
-import DataTableHeader from '../DatatableHeader';
 import QueryBuilder from '../QueryBuilder';
 import { DistributionType, ColumnType, ResourceType } from '../../types/dataset';
 import DataTableContext from '../../templates/Dataset/DataTableContext';
-import ManageColumnsContext from '../ManageColumns/ManageColumnsContext';
+import { DataTableActionsContext } from './DataTableActionsContext';
 
 export function prepareColumns(columns: any, schema: any) {
   return columns.map((column: any) => ({
@@ -18,7 +17,7 @@ export function prepareColumns(columns: any, schema: any) {
   }));
 }
 
-type DatasetTableTabProps = {
+export type DatasetTableTabProps = {
   id: string;
   distribution: DistributionType;
   resource: ResourceType;
@@ -31,7 +30,6 @@ type DatasetTableTabProps = {
 const DatasetTable = ({
   isModal = false,
   closeFullScreenModal,
-  showQueryBuilder = true,
   showCopyLinkButton = true,
   showDownloadFilteredDataButton = true,
   showDownloadFullDataButton = true,
@@ -39,7 +37,6 @@ const DatasetTable = ({
 }: {
   isModal?: boolean;
   closeFullScreenModal?: Function;
-  showQueryBuilder?: boolean;
   showCopyLinkButton?: boolean;
   showDownloadFilteredDataButton?: boolean;
   showDownloadFullDataButton?: boolean;
@@ -53,7 +50,7 @@ const DatasetTable = ({
     customColumns = [],
     dataDictionaryBanner,
   } = useContext(DataTableContext) as DatasetTableTabProps;
-  const { page, setPage } = useContext(ManageColumnsContext) as { page: number; setPage: Function };
+  const { page, setPage, tableDensity } = useContext(DataTableActionsContext);
 
   const defaultPageSize = 10;
 
@@ -83,24 +80,23 @@ const DatasetTable = ({
   ) {
     return (
       <>
-        {showQueryBuilder && (
-          <QueryBuilder
-            resource={resource}
-            id={distribution.identifier}
-            customColumns={customColumnHeaders}
+        <div
+          className={isModal ? 'dkan-datatable-fullscreen-mode' : ''}
+        >
+          <DataTable
+            canResize={true}
+            columns={columns}
+            sortTransform={transformTableSortToQuerySort}
+            tablePadding={
+              tableDensity === 'normal'
+                ? 'ds-u-padding-y--2'
+                : tableDensity === 'compact'
+                  ? 'ds-u-padding-y--1'
+                  : 'ds-u-padding-y--3'
+            }
+            loading={resource.loading}
             isModal={isModal}
-            setPage={setPage}
-            setOffset={setOffset}
-          />
-        )}
-        {dataDictionaryBanner && !isModal && (
-          <div>
-            <Alert>Click on the "Data Dictionary" tab above for full column definitions</Alert>
-          </div>
-        )}
-        {
-          <DataTableHeader
-            resource={resource}
+            closeFullScreenModal={closeFullScreenModal}
             downloadURL={downloadURL}
             unfilteredDownloadURL={distribution.data.downloadURL}
             setPage={setPage}
@@ -108,21 +104,6 @@ const DatasetTable = ({
             showDownloadFilteredDataButton={showDownloadFilteredDataButton}
             showDownloadFullDataButton={showDownloadFullDataButton}
             showStoredQueryDownloadButton={showStoredQueryDownloadButton}
-          />
-        }
-        <div
-          className={`ds-u-border-x--1 ds-u-border-bottom--1 ${
-            isModal && 'dkan-datatable-fullscreen-mode'
-          }`}
-        >
-          <DataTable
-            canResize={true}
-            columns={columns}
-            sortTransform={transformTableSortToQuerySort}
-            tablePadding={'ds-u-padding-y--2'}
-            loading={resource.loading}
-            isModal={isModal}
-            closeFullScreenModal={closeFullScreenModal}
           />
         </div>
         {!resource.loading && resource.count !== null && (
