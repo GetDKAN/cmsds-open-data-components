@@ -31,6 +31,7 @@ const DatasetTable = ({
   isModal = false,
   closeFullScreenModal,
   showCopyLinkButton = true,
+  showDataTableToolbar = true,
   showDownloadFilteredDataButton = true,
   showDownloadFullDataButton = true,
   showStoredQueryDownloadButton = false,
@@ -38,6 +39,7 @@ const DatasetTable = ({
   isModal?: boolean;
   closeFullScreenModal?: Function;
   showCopyLinkButton?: boolean;
+  showDataTableToolbar?: boolean;
   showDownloadFilteredDataButton?: boolean;
   showDownloadFullDataButton?: boolean;
   showStoredQueryDownloadButton?: boolean;
@@ -101,6 +103,7 @@ const DatasetTable = ({
             unfilteredDownloadURL={distribution.data.downloadURL}
             setPage={setPage}
             showCopyLinkButton={showCopyLinkButton}
+            showDataTableToolbar={showDataTableToolbar}
             showDownloadFilteredDataButton={showDownloadFilteredDataButton}
             showDownloadFullDataButton={showDownloadFullDataButton}
             showStoredQueryDownloadButton={showStoredQueryDownloadButton}
