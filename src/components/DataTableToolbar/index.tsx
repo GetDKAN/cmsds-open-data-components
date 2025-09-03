@@ -103,7 +103,7 @@ const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
           )}
         </div>
       </div>
-      {(conditions.length > 0 || hiddenColumns > 0) && (
+      {Array.isArray(conditions) && (conditions.length > 0 || hiddenColumns > 0) && (
         <div className="ds-u-fill--white ds-u-padding-x--0 ds-u-md-padding-x--2 ds-u-padding-top--2">
           <h2 className="ds-u-margin--0 ds-u-margin-bottom--2 ds-u-font-size--lg ds-u-font-weight--bold">Selected filters</h2>
           <div className="ds-u-display--flex ds-u-justify-content--between ds-u-md-align-items--end ds-u-flex-direction--column ds-u-md-flex-direction--row">
