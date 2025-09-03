@@ -148,7 +148,7 @@ const DataTable = ({
             </div>
             <div className="dkan-data-table-share-container ds-l-col--auto ds-u-padding--0 ds-u-margin-bottom--2 ds-u-md-margin-bottom--0">
               <Tooltip
-                className="ds-c-button ds-c-button--solid ds-u-display--flex ds-u-align-items--center ds-u-border--0 ds-u-padding-x--3 ds-u-padding-y--1 ds-u-font-weight--bold ds-l-col--12 ds-l-md-col--auto ds-u-justify-content--center"
+                className="ds-c-button ds-c-button--solid dkan-data-table-share-button ds-u-font-weight--bold"
                 activeClassName="dkan-data-table-share-tooltip-open"
                 dialog
                 offset={[

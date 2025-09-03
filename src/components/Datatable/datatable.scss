@@ -141,8 +141,6 @@ div.dc-c-datadictionary-table thead.dc-thead--truncated th > div > div {
   }
 
   .dkan-data-table-share-button {
-    border: 2px solid var(--color-primary) !important;
-
     .fa-chevron-down {
       display: none;
     }
@@ -158,6 +156,7 @@ div.dc-c-datadictionary-table thead.dc-thead--truncated th > div > div {
 
     &:hover,
     &:focus {
+      border: 2px solid var(--color-primary) !important;
       background-color: transparent !important;
       color: var(--color-primary) !important;
     }
