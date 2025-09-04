@@ -166,7 +166,7 @@ const DataTable = ({
                             onOpen={() => {
                               navigator.clipboard.writeText(window.location.href);
                             }}
-                            className="ds-c-button ds-c-button--solid ds-u-font-weight-bold ds-l-col--12 ds-l-md-col--auto"
+                            className="ds-c-button ds-u-text-align--center ds-l-col--12 ds-u-padding-x--2 ds-u-margin-x--0 ds-u-margin-bottom--1"
                             placement="bottom"
                             dialog
                             ariaLabel="Copy link to filtered data"
@@ -181,7 +181,7 @@ const DataTable = ({
                           <Button
                             aria-disabled={true}
                             aria-label="Copy link to filtered data"
-                            className="dkan-data-table-download-button ds-c-button ds-u-text-align--center ds-l-col--12 ds-u-padding-x--2 ds-u-margin-x--0 ds-u-margin-bottom--1"
+                            className="ds-c-button ds-u-text-align--center ds-l-col--12 ds-u-padding-x--2 ds-u-margin-x--0 ds-u-margin-bottom--1"
                           >
                             <span className="ds-u-font-weight--normal ds-u-font-size--md ds-u-padding--0">
                               <i className="fas fa-copy"></i> Copy link to filtered data
@@ -193,7 +193,7 @@ const DataTable = ({
                     {(showDownloadFilteredDataButton || showStoredQueryDownloadButton) && (
                       <div className="ds-l-col--12 ds-u-padding-x--0 ds-u-margin-x--0">
                         <Button
-                          className="dkan-data-table-download-button ds-u-text-align--center ds-u-display--inline-block ds-l-col--12 ds-u-padding-x--2 ds-u-margin-x--0 ds-u-margin-bottom--1"
+                          className="ds-u-text-align--center ds-u-display--inline-block ds-l-col--12 ds-u-padding-x--2 ds-u-margin-x--0 ds-u-margin-bottom--1"
                           href={downloadURL}
                           aria-disabled={!conditions || conditions.length === 0}
                         >
