@@ -34,9 +34,9 @@ jest.mock('../ManageColumns/ManageColumns', () => {
 });
 
 jest.mock('../FullScreenDataTable', () => {
-  return function MockFullScreenDataTable({ isModal, closeFullScreenModal }: FullScreenDataTableProps) {
+  return function MockFullScreenDataTable({ isModal }: FullScreenDataTableProps) {
     return (
-      <button data-testid="full-screen-button" onClick={() => closeFullScreenModal()}>
+      <button data-testid="full-screen-button" onClick={() => jest.fn()}>
         Full Screen - Modal: {isModal.toString()}
       </button>
     );
@@ -101,7 +101,6 @@ describe('DataTableToolbar', () => {
     ],
     defaultColumnOrder: ['col1', 'col2', 'col3'],
     isModal: false,
-    closeFullScreenModal: jest.fn(),
     datasetTableControls: true,
     columnVisibility: {
       col1: true,
@@ -259,15 +258,6 @@ describe('DataTableToolbar', () => {
       col2: true,
       col3: true
     });
-  });
-
-  it('calls closeFullScreenModal when full screen button is clicked', () => {
-    render(<DataTableToolbar {...defaultProps} />);
-    
-    const fullScreenButton = screen.getByTestId('full-screen-button');
-    fireEvent.click(fullScreenButton);
-    
-    expect(defaultProps.closeFullScreenModal).toHaveBeenCalled();
   });
 
   it('handles localStorage when no existing data', () => {

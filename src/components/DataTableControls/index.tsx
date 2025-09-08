@@ -4,12 +4,11 @@ import ManageColumns from "../ManageColumns/ManageColumns";
 import FullScreenDataTable from "../FullScreenDataTable";
 
 const DataTableControls = (
-  {id, columns, defaultColumnOrder, isModal, closeFullScreenModal} : {
+  {id, columns, defaultColumnOrder, isModal} : {
     id: string,
     columns: Array<any>,
     defaultColumnOrder: Array<string>,
     isModal: boolean,
-    closeFullScreenModal: Function
   }
 ) => {
   const hiddenColumns = columns.filter(c => c.getIsVisible() === false ).length;
@@ -23,7 +22,7 @@ const DataTableControls = (
       </div>
       <div className="ds-u-display--flex ds-u-flex-wrap--wrap">
         <ManageColumns id={id} columns={columns} defaultColumnOrder={defaultColumnOrder} />
-        <FullScreenDataTable isModal={isModal} closeFullScreenModal={closeFullScreenModal} />
+        <FullScreenDataTable isModal={isModal} />
       </div>
     </div>
   )

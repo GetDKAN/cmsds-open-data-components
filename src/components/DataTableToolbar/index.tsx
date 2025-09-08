@@ -17,7 +17,6 @@ type DataTableToolbarProps = {
   columns: Array<any>;
   defaultColumnOrder: Array<string>;
   isModal: boolean;
-  closeFullScreenModal: Function;
   datasetTableControls: boolean;
   columnVisibility: {
     [key: string]: boolean
@@ -40,7 +39,6 @@ const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
   columns,
   defaultColumnOrder,
   isModal,
-  closeFullScreenModal,
   datasetTableControls,
   columnVisibility,
   setColumnVisibility,
@@ -98,7 +96,7 @@ const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
               <FilterDataset />
               <ManageColumns id={id} columns={columns} defaultColumnOrder={defaultColumnOrder} />
               <DisplaySettings />
-              <FullScreenDataTable isModal={isModal} closeFullScreenModal={closeFullScreenModal} />
+              <FullScreenDataTable isModal={isModal} />
             </div>
           )}
         </div>

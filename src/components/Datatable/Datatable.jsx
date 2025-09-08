@@ -21,7 +21,6 @@ const DataTable = ({
   canResize,
   loading = false,
   isModal,
-  closeFullScreenModal,
   downloadURL,
   unfilteredDownloadURL,
   setPage,
@@ -131,7 +130,6 @@ const DataTable = ({
             columns={table.getAllLeafColumns()}
             defaultColumnOrder={defaultColumnOrder}
             isModal={isModal}
-            closeFullScreenModal={closeFullScreenModal}
             resource={resource}
             datasetTableControls={datasetTableControls}
             columnVisibility={columnVisibility}

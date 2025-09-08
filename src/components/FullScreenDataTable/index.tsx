@@ -5,30 +5,28 @@ import DatasetTable from "../DatasetTableTab";
 
 export type FullScreenDataTableProps = {  
   isModal: boolean;
-  closeFullScreenModal: Function;
 }
 
-const FullScreenDataTable: React.FC<FullScreenDataTableProps> = ({ isModal, closeFullScreenModal }) => {
-  const [modalOpen, setModalOpen] = useState(false);
-
+const FullScreenDataTable: React.FC<FullScreenDataTableProps> = ({ isModal }) => {
+  const [modalOpen, setModalOpen] = useState(isModal);
   if (isModal) return null;
   
   return (
     <div className="dkan-fullscreen-data-table-wrapper">
       <button
-        aria-label={isModal ? 'Close Full Screen dialog' : 'Full Screen mode - Opens in a dialog'}
+        aria-label={modalOpen ? 'Close Full Screen dialog' : 'Full Screen mode - Opens in a dialog'}
         className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent"
         onClick={() => {
-          if (isModal) {
-            closeFullScreenModal();
+          if (modalOpen) {
+            setModalOpen(false);
           } else {
             setModalOpen(true)
           }
         }}
       >
-        <i className={`fa ${isModal ? 'fa-compress' : 'fa-expand'} ds-u-margin-right--1`}></i>
+        <i className={`fa ${modalOpen ? 'fa-compress' : 'fa-expand'} ds-u-margin-right--1`}></i>
         <span className="ds-u-display--none ds-u-lg-display--inline-block">
-          {isModal ? "Exit Full Screen" : "Full Screen"}
+          {modalOpen ? "Exit Full Screen" : "Full Screen"}
         </span>
       </button>
       <div className={`ds-c-dialog-wrap${modalOpen ? ' open' : ''}`}>
@@ -38,7 +36,7 @@ const FullScreenDataTable: React.FC<FullScreenDataTableProps> = ({ isModal, clos
           onExit={() => setModalOpen(false)}
           className="dkan-full-screen-dataset-dialog"
         >
-          <DatasetTable isModal={true} closeFullScreenModal={() => setModalOpen(false)} />
+          <DatasetTable isModal={true} />
         </Dialog>
       </div>
     </div>

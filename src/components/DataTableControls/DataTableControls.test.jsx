@@ -26,7 +26,6 @@ describe('DataTableControls', () => {
             columns={[]}
             defaultColumnOrder={[]}
             isModal={false}
-            closeFullScreenModal={jest.fn()}
           />
         </MockDataTableActionsProvider>
       </DataTableContext.Provider>
@@ -83,7 +82,6 @@ describe('DataTableControls', () => {
           columns={columns}
           defaultColumnOrder={[]}
           isModal={true}
-          closeFullScreenModal={jest.fn()}
         />
       </MockDataTableActionsProvider>
     );
@@ -102,7 +100,6 @@ describe('DataTableControls', () => {
           columns={[]}
           defaultColumnOrder={[]}
           isModal={true}
-          closeFullScreenModal={jest.fn()}
         />
       </MockDataTableActionsProvider>
     );

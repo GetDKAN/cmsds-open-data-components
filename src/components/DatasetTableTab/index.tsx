@@ -29,7 +29,6 @@ export type DatasetTableTabProps = {
 
 const DatasetTable = ({
   isModal = false,
-  closeFullScreenModal,
   showCopyLinkButton = true,
   showDataTableToolbar = true,
   showDownloadFilteredDataButton = true,
@@ -37,7 +36,6 @@ const DatasetTable = ({
   showStoredQueryDownloadButton = false,
 }: {
   isModal?: boolean;
-  closeFullScreenModal?: Function;
   showCopyLinkButton?: boolean;
   showDataTableToolbar?: boolean;
   showDownloadFilteredDataButton?: boolean;
@@ -98,7 +96,6 @@ const DatasetTable = ({
             }
             loading={resource.loading}
             isModal={isModal}
-            closeFullScreenModal={closeFullScreenModal}
             downloadURL={downloadURL}
             unfilteredDownloadURL={distribution.data.downloadURL}
             setPage={setPage}
