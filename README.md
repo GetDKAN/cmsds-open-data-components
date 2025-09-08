@@ -9,6 +9,35 @@ Once you have a workspace directory, install this library inside your workspace 
 
 In the root folder for this project, run `npm run watch` to build local code. Ensure the upstream is using the same version number located in package.json of this repo. Start the upstream site locally as well, and it should load local code from this repo as the dependency. Parcel also provides hot rebuilding while `watch` is running.
 
+## Storybook
+
+This project includes Storybook for component development and documentation.
+
+### Running Storybook
+
+To start Storybook in development mode:
+```bash
+npm run storybook
+```
+
+This will start the Storybook development server, typically on `http://localhost:6006`.
+
+### Building Storybook
+
+To build a static version of Storybook for deployment:
+```bash
+npm run build-storybook
+```
+
+The built Storybook will be output to the `storybook-static` directory.
+
+### Writing Stories
+
+Stories should be placed alongside components using the naming convention:
+- `ComponentName.stories.jsx` or `ComponentName.stories.tsx`
+
+Stories use the CSF3 (Component Story Format 3) format. See existing stories in the `src/components/` directory for examples.
+
 ## Publishing new versions
 
 ### Clear out caches and previous build
