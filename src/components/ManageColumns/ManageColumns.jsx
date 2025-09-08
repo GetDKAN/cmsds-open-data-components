@@ -73,6 +73,17 @@ const ManageColumns = ({
       }))
   }, [columnOrder])
 
+  // Update cards state when columnVisibility changes
+  useEffect(() => {
+    setCards(prevCards => 
+      prevCards.map(card => ({
+        ...card,
+        visible: columnVisibility[card.id] !== false
+      }))
+    );
+  }, [columnVisibility]);
+  
+
   const sensors = useSensors(
     useSensor(ExcludeCheckboxPointerSensor, {
       activationConstraint: {
@@ -111,7 +122,6 @@ const ManageColumns = ({
   }
 
   const hiddenColumns = Object.keys(columnVisibility).filter(key => columnVisibility[key] === false).length;
-
   return (
     <div className="dkan-manage-columns-wrapper">
       <button
