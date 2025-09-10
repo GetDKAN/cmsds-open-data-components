@@ -153,13 +153,6 @@ div.dc-c-datadictionary-table thead.dc-thead--truncated th > div > div {
         display: block;
       }
     }
-
-    &:hover,
-    &:focus {
-      border: 2px solid var(--color-primary) !important;
-      background-color: transparent !important;
-      color: var(--color-primary) !important;
-    }
   }
 
   .ds-c-tooltip {
@@ -168,11 +161,6 @@ div.dc-c-datadictionary-table thead.dc-thead--truncated th > div > div {
 
   .ds-c-tooltip__content {
     padding: 16px 16px 8px;
-  }
-
-  .dkan-data-table-share-button:hover,
-  .dkan-data-table-share-button:focus {
-    color: var(--color-white);
   }
 }
 
