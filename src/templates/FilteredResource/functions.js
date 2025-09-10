@@ -59,6 +59,11 @@ export const operatorMapping = [
   { label: 'Less Than', value: '<' },
 ];
 
+export function getOperatorLabel(operatorValue) {
+  const operator = operatorMapping.find(op => op.value === operatorValue);
+  return operator ? operator.label : operatorValue; // Return original value if not found
+}
+
 export function buildOperatorOptions(type) {
   switch (type) {
     case 'text': // Will change from text to string in future update

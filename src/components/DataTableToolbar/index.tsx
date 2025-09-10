@@ -8,6 +8,7 @@ import FullScreenDataTable from "../FullScreenDataTable";
 import FilterDataset from "../FilterDataset";
 import FilterChip from "../FilterChip"
 import DisplaySettings from "../DisplaySettings";
+import { getOperatorLabel } from "../../templates/FilteredResource/functions";
 
 import "./DataTableToolbar.scss";
 
@@ -32,6 +33,8 @@ const updateBrowserURL = (newConditions: Array<ConditionType>) => {
   );
   window.history.pushState({}, '', `${url.origin}${url.pathname}${urlString}`);
 }
+
+
 
 const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
   resource,
@@ -111,7 +114,7 @@ const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
                   <FilterChip
                     key={index}
                     iconClass="far fa-filter"
-                    text={`"${condition.property}" ${condition.operator} ${condition.value}`}
+                    text={`"${condition.property}" ${getOperatorLabel(condition.operator).toLowerCase()} ${condition.value}`}
                     onClick={() => {
                       removeCondition(index);
                     }}
