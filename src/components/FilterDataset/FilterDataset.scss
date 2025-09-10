@@ -43,13 +43,6 @@ dialog.dkan-filter-dataset-dialog {
   width: 42px;
 }
 
-.dkan-apply-dataset-filters-button {
-  &:hover,
-  &:focus {
-    background-color: transparent !important;
-  }
-}
-
 @media screen and (max-width: 1023px) {
   .dkan-filter-dataset-wrapper {
     .fa-filter:before {

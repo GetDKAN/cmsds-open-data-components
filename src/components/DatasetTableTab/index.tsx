@@ -107,7 +107,19 @@ const DatasetTable = ({
           />
         </div>
         {!resource.loading && resource.count !== null && (
-          <div className="ds-u-display--flex ds-u-flex-wrap--wrap ds-u-justify-content--end ds-u-md-justify-content--between ds-u-margin-top--2 ds-u-align-items--center">
+            <div
+              className={[
+                'ds-u-display--flex',
+                'ds-u-flex-wrap--wrap',
+                'ds-u-justify-content--end',
+                'ds-u-md-justify-content--between',
+                'ds-u-margin-top--2',
+                'ds-u-align-items--center',
+                isModal && 'ds-u-margin-bottom--2',
+              ]
+                .filter(Boolean)
+                .join(' ')}
+            >
             <Pagination
               totalPages={Math.ceil(resource.count ? resource.count / pageSize : 1)}
               currentPage={Number(page)}
