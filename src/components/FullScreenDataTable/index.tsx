@@ -14,7 +14,7 @@ const FullScreenDataTable: React.FC<FullScreenDataTableProps> = ({ isModal }) =>
   return (
     <div className="dkan-fullscreen-data-table-wrapper">
       <button
-        aria-label={modalOpen ? 'Close Full Screen dialog' : 'Full Screen mode - Opens in a dialog'}
+        aria-haspopup="dialog"
         className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent"
         onClick={() => {
           if (modalOpen) {
@@ -34,6 +34,7 @@ const FullScreenDataTable: React.FC<FullScreenDataTableProps> = ({ isModal }) =>
           heading='Dataset Explorer'
           isOpen={modalOpen}
           onExit={() => setModalOpen(false)}
+          ariaCloseLabel="Close dialog"
           className="dkan-full-screen-dataset-dialog"
         >
           <DatasetTable isModal={true} />

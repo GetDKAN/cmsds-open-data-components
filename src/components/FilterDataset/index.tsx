@@ -208,7 +208,7 @@ const FilterDataset: React.FC = () => {
       {(Object.keys(resource).length && columns.length && resource.schema && Object.keys(distribution).length) ? (
         <div className="dkan-filter-dataset-wrapper">
           <button
-            aria-label="Filter dataset - Opens in a dialog"
+            aria-haspopup="dialog"
             className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent"
             onClick={() => {
               setModalOpen(true)
@@ -231,7 +231,7 @@ const FilterDataset: React.FC = () => {
               isOpen={modalOpen}
               onExit={() => setModalOpen(false)}
               className="dkan-filter-dataset-dialog"
-              ariaCloseLabel="Close filter dataset dialog"
+              ariaCloseLabel="Close dialog"
               actions={(
                 <div className="ds-u-display--flex ds-u-justify-content--end ds-u-padding-x--2 ds-u-md-padding-x--3 ds-u-padding-y--2">
                   <div className="ds-u-display--flex ">

@@ -27,7 +27,7 @@ const DisplaySettings: React.FC = () => {
         ]}
         placement="bottom-start"
         maxWidth="350px"
-        aria-label="Display Settings"
+        aria-haspopup="dialog" 
         title={
           <div className="ds-u-display--flex ds-u-flex-direction--column">
             <div className="dkan-data-table-display-settings-row ds-u-padding-bottom--1">

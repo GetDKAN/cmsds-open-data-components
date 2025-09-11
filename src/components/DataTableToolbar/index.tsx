@@ -82,7 +82,7 @@ const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
 
   return (
     <div className="ds-u-margin-top--2">
-      <div className="dkan-filter-dataset-toolbar ds-u-fill--white ds-u-border--1">
+      <div className="dkan-filter-dataset-toolbar ds-u-fill--white ds-u-border--1" role="region" aria-label="toolbar">
         <div className="ds-l-col--12 ds-u-display--flex ds-u-justify-content--between ds-u-align-items--center ds-u-flex-wrap--wrap ds-u-padding-x--0 ds-u-padding-y--2">
           <div className="ds-u-padding-x--2">
             {!resource.loading && resource.count !== null && (

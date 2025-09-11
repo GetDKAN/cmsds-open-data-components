@@ -125,7 +125,7 @@ const ManageColumns = ({
   return (
     <div className="dkan-manage-columns-wrapper">
       <button
-        aria-label='Manage columns - Opens in a dialog'
+        aria-haspopup="dialog"
         className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent"
         onClick={() => {
           setModalOpen(true)
@@ -139,8 +139,9 @@ const ManageColumns = ({
       </button>
       <div className={`ds-c-dialog-wrap${modalOpen ? ' open' : ''}`}>
         <Dialog
-        heading='Manage columns'
+          heading='Manage columns'
           isOpen={modalOpen}
+          ariaCloseLabel="Close dialog"
           onExit={() => {
             setModalOpen(false);
             resetCards();
