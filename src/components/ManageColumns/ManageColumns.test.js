@@ -107,7 +107,7 @@ describe('ManageColumns component.', () => {
       </MockDataTableActionsProvider>
     )
 
-    fireEvent.click(screen.getByRole("button", {name: "Manage columns - Opens in a dialog"}));
+    fireEvent.click(screen.getByRole("button", {name: /Manage columns/i}));
   })
   
   it('Renders correctly', async () => {
@@ -124,7 +124,7 @@ describe('ManageColumns component.', () => {
   
   it('Closes the dialog when the close button is clicked', async () => {
     await act(async () => {
-      await screen.getByRole('button', {name: "Close modal dialog"}).click()
+      await screen.getByRole('button', {name: /Close dialog/i}).click()
     });
 
     await expect(screen.queryByRole('dialog')).not.toBeInTheDocument();

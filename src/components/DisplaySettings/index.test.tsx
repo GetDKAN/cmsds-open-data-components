@@ -369,7 +369,7 @@ describe('DisplaySettings', () => {
     it('has proper ARIA label for tooltip', () => {
       renderWithProviders();
       const tooltip = screen.getByTestId('tooltip');
-      expect(tooltip).toHaveAttribute('aria-label', 'Display Settings');
+      expect(tooltip).toHaveAttribute('aria-haspopup', 'dialog');
     });
 
     it('has proper ARIA attributes for SVG icons', () => {

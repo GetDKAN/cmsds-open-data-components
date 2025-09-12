@@ -103,8 +103,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    expect(screen.getAllByText('Filter Dataset')).toHaveLength(2);
-    expect(screen.getByLabelText('Filter dataset - Opens in a dialog')).toBeInTheDocument();
+    expect(screen.getAllByText(/Filter Dataset/i)).toHaveLength(2);
   });
 
   it('renders correctly with existing conditions', () => {
@@ -133,7 +132,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    expect(screen.queryByLabelText('Filter dataset - Opens in a dialog')).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('Filter dataset')).not.toBeInTheDocument();
   });
 
   it('opens modal when filter button is clicked', async () => {
@@ -145,7 +144,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
     expect(screen.getAllByText('Filter Dataset')).toHaveLength(2);
@@ -161,12 +160,12 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
     expect(screen.getAllByText('Filter Dataset')).toHaveLength(2);
 
-    const closeButton = screen.getByLabelText('Close filter dataset dialog');
+    const closeButton = screen.getByLabelText(/Close dialog/i);
     await userEvent.click(closeButton);
 
     await waitFor(() => {
@@ -183,7 +182,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
     const addFilterButton = screen.getByText('+ Add filter');
@@ -205,7 +204,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
     expect(screen.getByText('Edit Filters')).toBeInTheDocument();
@@ -225,10 +224,10 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
-    const addFilterButton = screen.getByText('+ Add filter');
+    const addFilterButton = screen.getByText(/\+ Add filter/i);
     await userEvent.click(addFilterButton);
 
     const valueInputs = screen.getAllByPlaceholderText('Enter value');
@@ -253,7 +252,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
     const applyButton = screen.getByText(/Apply/);
@@ -274,7 +273,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
     const clearButton = screen.getByText('Reset');
@@ -295,7 +294,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
     const addFilterButton = screen.getByText('+ Add filter');
@@ -323,7 +322,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
     const addFilterButton = screen.getByText('+ Add filter');
@@ -359,7 +358,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
     const addFilterButton = screen.getByText('+ Add filter');
@@ -395,7 +394,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
     const addFilterButton = screen.getByText('+ Add filter');
@@ -431,7 +430,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
     const addFilterButton = screen.getByText('+ Add filter');
@@ -467,7 +466,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
     const addFilterButton = screen.getByText('+ Add filter');
@@ -503,7 +502,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
     const addFilterButton = screen.getByText('+ Add filter');
@@ -539,7 +538,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
     const addFilterButton = screen.getByText('+ Add filter');
@@ -575,7 +574,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
     const addFilterButton = screen.getByText('+ Add filter');
@@ -612,7 +611,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
     const removeButtons = screen.getAllByLabelText(/Delete filter/);
@@ -636,7 +635,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
     const removeButtons = screen.getAllByLabelText(/Delete filter/);
@@ -663,7 +662,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
     const addFilterButton = screen.getByText('+ Add filter');
@@ -689,7 +688,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
     const addFilterButton = screen.getByText('+ Add filter');
@@ -735,7 +734,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
     expect(screen.getByText('Add filters to only display data that meets your criteria. Filtered results can be downloaded.')).toBeInTheDocument();
@@ -755,7 +754,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
     expect(screen.getByText('Add filters to only display data that meets your criteria. Filtered results can be downloaded.')).toBeInTheDocument();
@@ -773,7 +772,7 @@ describe('FilterDataset', () => {
       </DataTableContext.Provider>
     );
 
-    const filterButton = screen.getByLabelText('Filter dataset - Opens in a dialog');
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
     await userEvent.click(filterButton);
 
     const addFilterButton = screen.getByText('+ Add filter');

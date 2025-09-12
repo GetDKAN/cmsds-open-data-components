@@ -7,6 +7,12 @@
     text-decoration: none !important;
     color: var(--color-primary);
 
+    &:focus {
+      box-shadow: 0 0 0 3px var(--color-focus-light), 0 0 4px 6px var(--color-focus-dark);
+      outline: 3px solid #0000;
+      outline-offset: 3px;
+    } 
+
     > span {
       text-decoration: underline;
     }

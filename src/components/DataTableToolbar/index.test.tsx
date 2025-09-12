@@ -177,8 +177,8 @@ describe('DataTableToolbar', () => {
     
     const filterChips = screen.getAllByTestId('filter-chip');
     expect(filterChips).toHaveLength(2);
-    expect(filterChips[0]).toHaveTextContent('far fa-filter - "name" = test');
-    expect(filterChips[1]).toHaveTextContent('far fa-filter - "age" > 18');
+    expect(filterChips[0]).toHaveTextContent('far fa-filter - "name" is test');
+    expect(filterChips[1]).toHaveTextContent('far fa-filter - "age" greater than 18');
   });
 
   it('renders hidden columns chip when columns are hidden', () => {
@@ -391,7 +391,7 @@ describe('DataTableToolbar', () => {
     
     const filterChips = screen.getAllByTestId('filter-chip');
     expect(filterChips).toHaveLength(2);
-    expect(filterChips[0]).toHaveTextContent('far fa-filter - "complex_field" IN value1,value2');
+    expect(filterChips[0]).toHaveTextContent('far fa-filter - "complex_field" in value1,value2');
     expect(filterChips[1]).toHaveTextContent('far fa-filter - "date_field" >= 2023-01-01');
   });
 

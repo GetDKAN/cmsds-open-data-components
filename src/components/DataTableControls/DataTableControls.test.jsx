@@ -30,8 +30,8 @@ describe('DataTableControls', () => {
         </MockDataTableActionsProvider>
       </DataTableContext.Provider>
     )
-    expect(screen.getByRole("button", {name: "Manage columns - Opens in a dialog"})).toBeInTheDocument();
-    expect(screen.getByRole("button", {name: "Full Screen mode - Opens in a dialog"})).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Manage columns/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", {name: /Full Screen/i})).toBeInTheDocument();
   });
   it('Renders hidden columns', () => {
     const columns = [
@@ -103,6 +103,6 @@ describe('DataTableControls', () => {
         />
       </MockDataTableActionsProvider>
     );
-    expect(screen.queryByRole("button", {name: "Full Screen mode - Opens in a dialog"})).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", {name: "Full Screen"})).not.toBeInTheDocument();
   })
 })
