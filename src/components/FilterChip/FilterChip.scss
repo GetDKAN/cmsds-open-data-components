@@ -1,0 +1,11 @@
+.dkan-filter-chip {
+  background: var(--filter-chip__background-color);
+  border: solid 1px var(--filter-chip__border-color);
+  border-radius: var(--filter-chip__border-radius);
+  color: var(--filter-chip__color);
+  white-space: nowrap;
+
+  .fa.fa-x {
+    color: var(--filter-chip-icon__color);
+  }
+}

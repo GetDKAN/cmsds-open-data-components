@@ -26,6 +26,7 @@ const Card = ({id, visible, updateVisibility}: {id: string, visible: boolean, up
       style={style}
       {...listeners}
       {...attributes}
+      tabIndex={-1}
       onPointerUp={(e) => {
         // Small hack to get around a chrome / webkit rendering bug = force chrome to repaint the checkbox
         // For whatever reason the way dnd-kit handles events doesn't work well with chrome

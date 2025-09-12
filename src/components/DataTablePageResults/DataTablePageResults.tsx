@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-type DataTablePageResultsType = {
+export type DataTablePageResultsType = {
   totalRows: number;
   limit: number;
   offset: number;
@@ -28,7 +28,7 @@ const DataTablePageResults = ({
       Displaying{' '}
       <span className="ds-u-font-weight--bold">{`${startTotal().toLocaleString()} - ${ofTotal().toLocaleString()}`}</span>{' '}
       of <span className="ds-u-font-weight--bold">{`${numTotalRows.toLocaleString()}`}</span>{' '}
-      results
+      rows
     </p>
   );
 };

@@ -22,7 +22,6 @@ describe('<DatasetTableTab />', () => {
       </DataTableContext.Provider>
     )
 
-    expect(screen.getByText("Data filters: none")).toBeInTheDocument();
     expect(screen.getByRole("table")).toBeInTheDocument();
     expect(screen.getByRole("navigation")).toHaveClass("ds-c-pagination");
   });
@@ -88,7 +87,7 @@ describe('<DatasetTableTab />', () => {
       await screen.getByRole('button', {name: 'Save'}).click();
     })
     await act(async() => {
-      await screen.getByRole('button', {name: 'Full Screen mode - Opens in a dialog'}).click();
+      await screen.getByRole('button', {name: 'Full Screen'}).click();
     })
     await act(async () => {
       await screen.queryAllByText("Manage Columns")[1].click();

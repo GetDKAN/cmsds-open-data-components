@@ -123,3 +123,53 @@ div.dc-c-datadictionary-table thead.dc-thead--truncated th > div > div {
 .dc-c-sort--desc::after {
   content: '\f0dd';
 }
+
+.dkan-data-table-download-full-dataset-button {
+  &:hover,
+  &:focus {
+    background-color: transparent !important;
+
+    span {
+      color: var(--color-primary) !important;
+    }
+  }
+}
+
+.dkan-data-table-share-container {
+  .ds-c-tooltip__arrow {
+    display: none;
+  }
+
+  .dkan-data-table-share-button {
+    .fa-chevron-down {
+      display: none;
+    }
+
+    &.dkan-data-table-share-tooltip-open {
+      .fa-chevron-up {
+        display: none;
+      }
+      .fa-chevron-down {
+        display: block;
+      }
+    }
+  }
+
+  .ds-c-tooltip {
+    border-color: var(--color-border);
+  }
+
+  .ds-c-tooltip__content {
+    padding: 16px 16px 8px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .dkan-data-table-share-container {
+    order: 1;
+  }
+
+  .dkan-data-table-info-container {
+    order: 2;
+  }
+}

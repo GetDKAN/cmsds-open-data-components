@@ -1,7 +1,7 @@
 import React from 'react';
-import { render, screen, within, act } from '@testing-library/react'
+import { render, screen, within, act, fireEvent } from '@testing-library/react'
 import ManageColumns from './ManageColumns'
-import ManageColumnsContext from './ManageColumnsContext';
+import { MockDataTableActionsProvider } from '../DatasetTableTab/DataTableActionsContext';
 
 // Rationale
 // We shouldn't need to rest dnd-kit functionality as that should be handled downstream in their library
@@ -89,24 +89,25 @@ const setColumnVisibility = jest.fn();
 window.scrollTo = jest.fn();
 
 describe('ManageColumns component.', () => {
-  const closeModal = jest.fn();
+
   beforeEach(async () => {
     // render component and open the dialog
     render(
-      <ManageColumnsContext.Provider value={{
+      <MockDataTableActionsProvider value={{
         columnOrder: [],
         setColumnOrder: setColumnOrder,
-        setColumnVisibility: setColumnVisibility
+        setColumnVisibility: setColumnVisibility,
+        columnVisibility: {teaching_hospital_ccn: true, change_type: true, covered_recipient_type: true, teaching_hospital_id: true}
       }}>
         <ManageColumns
           id={"test"}
           columns={columns}
           defaultColumnOrder={defaultColumnOrder}
-          modalOpen={true}
-          setModalOpen={closeModal}
         />
-      </ManageColumnsContext.Provider>
+      </MockDataTableActionsProvider>
     )
+
+    fireEvent.click(screen.getByRole("button", {name: /Manage columns/i}));
   })
   
   it('Renders correctly', async () => {
@@ -123,9 +124,10 @@ describe('ManageColumns component.', () => {
   
   it('Closes the dialog when the close button is clicked', async () => {
     await act(async () => {
-      await screen.getByRole('button', {name: "Close modal dialog"}).click()
+      await screen.getByRole('button', {name: /Close dialog/i}).click()
     });
-    expect(closeModal).toHaveBeenCalled();
+
+    await expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   })
 
   it('Sets column order and column visibility when the Save button is clicked', async () => {

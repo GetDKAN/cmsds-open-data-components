@@ -1,19 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { Dialog } from "@cmsgov/design-system";
 import './FullScreenDataTable.scss';
 import DatasetTable from "../DatasetTableTab";
 
-const FullScreenDataTable = ({modalOpen, setModalOpen} : {modalOpen: boolean, setModalOpen: Function}) => {
+export type FullScreenDataTableProps = {  
+  isModal: boolean;
+}
+
+const FullScreenDataTable: React.FC<FullScreenDataTableProps> = ({ isModal }) => {
+  const [modalOpen, setModalOpen] = useState(isModal);
+  if (isModal) return null;
+  
   return (
-    <div className={`ds-c-dialog-wrap${modalOpen ? ' open' : ''}`}>
-      <Dialog
-        heading='Dataset Explorer'
-        isOpen={modalOpen}
-        onExit={() => setModalOpen(false)}
-        className="dkan-full-screen-dataset-dialog"
+    <div className="dkan-fullscreen-data-table-wrapper">
+      <button
+        aria-haspopup="dialog"
+        className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent"
+        onClick={() => {
+          if (modalOpen) {
+            setModalOpen(false);
+          } else {
+            setModalOpen(true)
+          }
+        }}
       >
-        <DatasetTable isModal={true} closeFullScreenModal={() => setModalOpen(false)} />
-      </Dialog>
+        <i className={`far ${modalOpen ? 'fa-compress' : 'fa-expand'} ds-u-margin-right--1`}></i>
+        <span className="ds-u-display--none ds-u-lg-display--inline-block">
+          {modalOpen ? "Exit Full Screen" : "Full Screen"}
+        </span>
+      </button>
+      <div className={`ds-c-dialog-wrap${modalOpen ? ' open' : ''}`}>
+        <Dialog
+          heading='Dataset Explorer'
+          isOpen={modalOpen}
+          onExit={() => setModalOpen(false)}
+          ariaCloseLabel="Close dialog"
+          className="dkan-full-screen-dataset-dialog"
+        >
+          <DatasetTable isModal={true} />
+        </Dialog>
+      </div>
     </div>
   )
 }
