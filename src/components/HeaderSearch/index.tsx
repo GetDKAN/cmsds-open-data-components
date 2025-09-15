@@ -4,7 +4,7 @@ import { Button, Dialog, TextField } from "@cmsgov/design-system";
 
 import "./header-search.scss";
 
-type HeaderSearchProps = {
+export type HeaderSearchProps = {
   headingText?: string
 };
 

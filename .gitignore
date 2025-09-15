@@ -8,3 +8,5 @@ docs
 .parcel-cache
 coverage
 .vscode
+*storybook.log
+storybook-static
