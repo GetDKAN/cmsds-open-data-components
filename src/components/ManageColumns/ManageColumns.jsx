@@ -133,7 +133,7 @@ const ManageColumns = ({
       >
         <i className="fa fa-columns ds-u-margin-right--1"></i>
         <span>
-          <span className="ds-u-display--none ds-u-lg-display--inline-block">Manage Columns</span>
+          <span className="dkan-dataset-toolbar-button-label">Manage Columns</span>
           {hiddenColumns ? ` (${hiddenColumns})` : ''}
         </span>
       </button>

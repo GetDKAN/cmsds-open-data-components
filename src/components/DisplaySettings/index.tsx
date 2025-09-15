@@ -94,7 +94,7 @@ const DisplaySettings: React.FC = () => {
         }
       >
         <i className="far fa-sliders-h ds-u-margin-right--1"></i>
-        <span className="ds-u-display--none ds-u-lg-display--inline-block">Display Settings</span>
+        <span className="dkan-dataset-toolbar-button-label">Display Settings</span>
         <i className="fa fa-chevron-down ds-u-margin-left--1 ds-u-font-weight--bold"></i>
         <i className="fa fa-chevron-up ds-u-margin-left--1 ds-u-font-weight--bold"></i>
       </Tooltip>

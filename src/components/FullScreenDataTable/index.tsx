@@ -25,7 +25,7 @@ const FullScreenDataTable: React.FC<FullScreenDataTableProps> = ({ isModal }) =>
         }}
       >
         <i className={`far ${modalOpen ? 'fa-compress' : 'fa-expand'} ds-u-margin-right--1`}></i>
-        <span className="ds-u-display--none ds-u-lg-display--inline-block">
+        <span className="dkan-dataset-toolbar-button-label">
           {modalOpen ? "Exit Full Screen" : "Full Screen"}
         </span>
       </button>

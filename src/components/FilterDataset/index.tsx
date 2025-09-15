@@ -216,7 +216,7 @@ const FilterDataset: React.FC = () => {
           >
             <i className="fa fa-filter ds-u-margin-right--1"></i>
             <span>
-              <span className="ds-u-display--none ds-u-lg-display--inline-block">
+              <span className="dkan-dataset-toolbar-button-label">
                 {conditions.length > 0
                   ? `Edit Filters`
                   : 'Filter Dataset'

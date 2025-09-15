@@ -31,6 +31,21 @@
   }
 }
 
+@media screen and (max-width: 1023px) {
+  // make button labels hidden on screens smaller than 1024px
+  .dkan-dataset-toolbar-button-label {
+    clip: rect(0, 0, 0, 0);
+    word-wrap: normal;
+    border: 0;
+    height: 1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+}
+
 @media screen and (max-width: 767px) {
   .dkan-data-table-toolbar-controls {
     justify-content: space-between;
