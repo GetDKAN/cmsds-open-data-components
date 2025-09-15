@@ -38,6 +38,10 @@ Stories should be placed alongside components using the naming convention:
 
 Stories use the CSF3 (Component Story Format 3) format. See existing stories in the `src/components/` directory for examples.
 
+### Storybook Limitations
+
+Storybook integration is ongoing for this project. Some components and page templates may not yet have stories, and certain icons or styles from the CMS.gov design system might not display as intended in Storybook.
+
 ## Publishing new versions
 
 ### Clear out caches and previous build
