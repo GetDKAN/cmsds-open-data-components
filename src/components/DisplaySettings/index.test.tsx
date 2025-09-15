@@ -148,7 +148,7 @@ describe('DisplaySettings', () => {
 
     it('renders the display settings text on large screens', () => {
       renderWithProviders();
-      const displayText = screen.getByTestId('tooltip').querySelector('.ds-u-display--none.ds-u-lg-display--inline-block');
+      const displayText = screen.getByTestId('tooltip').querySelector('.dkan-dataset-toolbar-button-label');
       expect(displayText).toHaveTextContent('Display Settings');
     });
   });
