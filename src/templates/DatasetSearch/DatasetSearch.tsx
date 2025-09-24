@@ -132,12 +132,6 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   const pageSize = defaultPageSize;
 
   useEffect(() => {
-
-    // Update browser URL with current search params
-    const params = buildSearchParams(true);
-    const url = new URL(window.location.href);
-    window.history.pushState({}, '', `${url.origin}${url.pathname}${params}`);
-
     const baseNumber = Number(totalItems) > 0 ? 1 : 0;
     const startingNumber = baseNumber + (Number(pageSize) * Number(page) - Number(pageSize));
     const endingNumber = Number(pageSize) * Number(page);
@@ -165,11 +159,13 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   }, [fulltext, selectedFacets]);
 
   useEffect(() => {
-    var params = buildSearchParams(true);
-    if (params !== location.search) {
-      setSearchParams(params);
+    if (totalItems !== null && totalItems !== undefined && totalItems > 0) {
+      var params = buildSearchParams(true);
+      if (params !== location.search) {
+        setSearchParams(params);
+      }
     }
-  }, [page, sort, sortOrder]);
+  }, [page, sort, sortOrder, totalItems]);
 
   function resetFilters() {
     setFullText(defaultFulltext);
