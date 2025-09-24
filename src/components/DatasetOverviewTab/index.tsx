@@ -51,6 +51,7 @@ const DatasetOverview = ({ dataset, resource, distributions, metadataMapping } :
                       {tooltip && <span className="ds-u-font-weight--normal">
                         <Tooltip
                           title={tooltip.title}
+                          ariaLabel={r.label}
                           // @ts-ignore
                           style={{ border: 'none', background: 'none' }}
                           maxWidth="400px"
