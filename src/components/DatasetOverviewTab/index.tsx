@@ -5,7 +5,7 @@ import { Table, TableBody, TableRow, TableCell, Tooltip, TooltipIcon } from '@cm
 import Resource from '../Resource';
 import { DatasetOverviewPropsType } from '../../types/dataset';
 
-const DatasetOverview = ({ dataset, resource, distributions, metadataMapping } : DatasetOverviewPropsType) => {
+const DatasetOverview = ({ dataset, resource, distributions, metadataMapping, rootUrl } : DatasetOverviewPropsType) => {
   const md = useMediaQuery({ minWidth: 0, maxWidth: 768 });
   const rows = buildRows(metadataMapping, dataset);
 
@@ -34,6 +34,7 @@ const DatasetOverview = ({ dataset, resource, distributions, metadataMapping } :
         distributions={distributions}
         resource={resource}
         title={dataset.title}
+        rootUrl={rootUrl}
       />
       <div className="dc-c-additional-info-table ds-u-margin-bottom--6 ds-u-padding-left--0 ds-l-lg-col--7 ds-l-md-col--9 ds-l-col--12">
         <h2 className="ds-text-heading--2xl ds-text-heading--2xl">Additional Information</h2>

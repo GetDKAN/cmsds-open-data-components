@@ -12,7 +12,7 @@ type ResourcePropsType = {
   title: string
 }
 
-const Resource = ({ distributions, resource, title } : ResourcePropsType ) => {
+const Resource = ({ distributions, resource, rootUrl, title } : ResourcePropsType ) => {
   const sm = useMediaQuery({ minWidth: 0, maxWidth: 767 });
   return (
     <div className="ds-u-display--flex ds-u-flex-wrap--wrap">
@@ -47,7 +47,7 @@ const Resource = ({ distributions, resource, title } : ResourcePropsType ) => {
                       <div className="dc-c-metadata-description ds-u-margin--0" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(dist.data.description) }}/>
                     </div>
                   )}
-                  {fileFormat === "csv" && <ResourceInformation resource={resource} />}
+                  {fileFormat === "csv" && <ResourceInformation rootUrl={rootUrl} distribution={dist} />}
                 </li>
               )
             })

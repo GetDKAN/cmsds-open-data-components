@@ -120,6 +120,7 @@ export type DatasetOverviewPropsType = {
   resource: ResourceType,
   distributions: DistributionType[],
   metadataMapping: any, //TODO
+  rootUrl: string
 }
 
 export type DatasetDictionaryItemType = {
