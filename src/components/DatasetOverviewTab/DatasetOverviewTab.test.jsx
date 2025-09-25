@@ -34,6 +34,7 @@ describe('<DatasetOverview />', () => {
           distributions={distribution.distribution}
           dataset={dataset}
           metadataMapping={metadataMapping}
+          rootUrl="/"
         />
       </MemoryRouter>
     ));
