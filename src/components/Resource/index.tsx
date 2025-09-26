@@ -10,6 +10,7 @@ type ResourcePropsType = {
   distributions: DistributionType[],
   resource: ResourceType,
   title: string
+  rootUrl: string
 }
 
 const Resource = ({ distributions, resource, rootUrl, title } : ResourcePropsType ) => {
