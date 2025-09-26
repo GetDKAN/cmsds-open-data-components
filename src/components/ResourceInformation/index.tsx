@@ -19,7 +19,7 @@ const ResourceInformation = ({ distribution, rootUrl } : {distribution: Distribu
       <div className="ds-u-display--flex ds-u-text-align--center ds-u-justify-content--center ds-u-md-justify-content--start">
         <div className="ds-u-fill--gray-lightest ds-u-radius ds-u-margin-right--1 ds-u-padding--2">
           <div className="ds-u-padding-top--05">Rows</div>
-          <div className="ds-u-font-weight--bold">{resource?.count?.toLocaleString()}</div>
+          <div className="ds-u-font-weight--bold">{resource?.count ? Number(resource.count).toLocaleString() : ''}</div>
         </div>
         <div className="ds-u-fill--gray-lightest ds-u-radius ds-u-margin-right--1 ds-u-padding--2">
           <div>
