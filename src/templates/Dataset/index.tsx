@@ -214,7 +214,7 @@ const Dataset = ({
                     }
                     className={borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : ''}
                   >
-                    <DatasetOverview resource={resource} dataset={dataset} distributions={distributions} metadataMapping={metadataMapping} />
+                    <DatasetOverview resource={resource} dataset={dataset} distributions={distributions} metadataMapping={metadataMapping} rootUrl={rootUrl} />
                   </TabPanel>
                   {!hideDataDictionary && (
                     <TabPanel
