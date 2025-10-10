@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '@cmsgov/design-system';
+import { Button, ExternalLinkIcon } from '@cmsgov/design-system';
 import NavLink from '../../components/NavLink';
 
 const Footer = ({
@@ -35,7 +35,9 @@ const Footer = ({
                 <p className="ds-u-padding-bottom--2">{emailBody}</p>
               </div>
               <div className="ds-l-md-col--4 ds-u-padding-left--7">
-                <Button onDark variation="solid" href={emailLink}>{emailButton}</Button>
+                <Button onDark variation="solid" href={emailLink}>
+                  {emailButton}
+                </Button>
               </div>
             </div>
           </div>
@@ -44,12 +46,8 @@ const Footer = ({
       <div className="dc-c-footer--middle-container">
         <div className="ds-l-container">
           <div className="ds-l-row">
-            <div
-              className="dc-c-footer__resources ds-l-md-col--7 ds-l-sm-col--12 ds-u-padding-top--7 ds-u-padding-bottom--3"
-            >
-              <div
-                className="ds-u-display--flex ds-u-display--flex ds-u-sm-flex-direction--row ds-u-flex-direction--column"
-              >
+            <div className="dc-c-footer__resources ds-l-md-col--7 ds-l-sm-col--12 ds-u-padding-top--7 ds-u-padding-bottom--3">
+              <div className="ds-u-display--flex ds-u-display--flex ds-u-sm-flex-direction--row ds-u-flex-direction--column">
                 <div className="ds-u-margin-right--6 ds-u-margin-bottom--3 ds-u-sm-margin-bottom--0">
                   <h2 className="ds-text-heading--sm dc-footer--heading ds-u-margin-bottom--2">
                     Open data tools
@@ -100,9 +98,7 @@ const Footer = ({
                 </div>
               </div>
             </div>
-            <div
-              className="dc-c-footer__cms-information ds-l-md-col--5 ds-l-sm-col--12 ds-u-lg-padding-left--7 ds-u-padding-y--7"
-            >
+            <div className="dc-c-footer__cms-information ds-l-md-col--5 ds-l-sm-col--12 ds-u-lg-padding-left--7 ds-u-padding-y--7">
               <div className="ds-u-font-size--sm">
                 <div>
                   <a
@@ -320,13 +316,14 @@ const Footer = ({
       <div className="dc-c-footer__utility ds-l-container ds-u-padding-y--2 ds-u-font-size--sm">
         <div className="ds-l-row">
           <div className="ds-l-col--12 ds-u-padding-y--3">
-            <ul
-              className="ds-u-padding--0 ds-u-display--flex ds-u-lg-flex-direction--row ds-u-flex-direction--column"
-            >
+            <ul className="ds-u-padding--0 ds-u-display--flex ds-u-lg-flex-direction--row ds-u-flex-direction--column">
               {footerUtilityLinks.map((link) => (
                 <li key={link.id}>
                   <a href={link.url} className="ds-u-margin-right--2">
                     {link.label}
+                    {link?.target === '_blank' && (
+                      <ExternalLinkIcon className="ds-u-margin-left--05 ds-c-external-link-icon" />
+                    )}
                   </a>
                 </li>
               ))}
