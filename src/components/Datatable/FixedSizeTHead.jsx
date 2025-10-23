@@ -1,49 +1,57 @@
-import React from 'react';
-import {
-  useReactTable,
-  flexRender,
-  getCoreRowModel,
-  createColumnHelper,
-  ColumnResizeMode,
-  ColumnDef,
-  getSortedRowModel,
-  SortingState,
-} from "@tanstack/react-table";
+import React from "react";
+import { flexRender } from "@tanstack/react-table";
 
-const FixedSizeTHead = ({table, sortElement}) => {
-  return(
+const FixedSizeTHead = ({ table, sortElement }) => {
+  return (
     <thead className="dc-thead--fixed-size">
-      {table.getHeaderGroups().map(headerGroup => (
+      {table.getHeaderGroups().map((headerGroup) => (
         <tr key={headerGroup.id}>
-          {headerGroup.headers.map(header => {
-            return(
-              <th {
-                ...{
-                  key: header.id,
-                  style: {
-                    width: header.getSize(),
-                  },
-                  title: header.column.columnDef.header
+          {headerGroup.headers.map((header) => {
+            const canSort = header.column.getCanSort();
+            const sortState = header.column.getIsSorted();
+            return (
+              <th
+                key={header.id}
+                style={{ width: header.getSize() }}
+                title={
+                  typeof header.column.columnDef.header === "string"
+                    ? header.column.columnDef.header
+                    : ""
                 }
-              }
-              className="ds-u-border-y--2 ds-u-padding--2 ds-u-border--dark  ds-u-font-weight--bold"
+                className="ds-u-border-y--2 ds-u-padding--2 ds-u-border--dark ds-u-font-weight--bold"
+                {...(canSort && {
+                  "aria-sort":
+                    sortState === "asc"
+                      ? "ascending"
+                      : sortState === "desc"
+                      ? "descending"
+                      : "none",
+                })}
               >
-                <div onClick={header.column.getToggleSortingHandler()} className="ds-u-display--flex">
+                <div className="ds-u-display--flex ds-u-align-items--center ds-u-gap--1">
                   <span>
                     {header.isPlaceholder
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
                           header.getContext()
-                      )}
+                        )}
                   </span>
-                  <span
-                    {...{
-                      className: header.column.getCanSort()
-                        ? `cursor-pointer select-none ${sortElement(header.column.getIsSorted())}`
-                        : '',
-                    }}
-                  />
+                  {canSort && (
+                    <button
+                      type="button"
+                      onClick={header.column.getToggleSortingHandler()}
+                      className={
+                        "cursor-pointer select-none ds-u-focus-visible " +
+                        (sortElement ? sortElement(sortState) : "")
+                      }
+                      aria-label={`${
+                        typeof header.column.columnDef.header === "string"
+                          ? header.column.columnDef.header
+                          : header.column.id
+                      } sort order`}
+                    />
+                  )}
                 </div>
               </th>
             );
@@ -52,6 +60,6 @@ const FixedSizeTHead = ({table, sortElement}) => {
       ))}
     </thead>
   );
-}
+};
 
 export default FixedSizeTHead;
