@@ -42,6 +42,28 @@ Stories use the CSF3 (Component Story Format 3) format. See existing stories in 
 
 Storybook integration is ongoing for this project. Some components and page templates may not yet have stories, and certain icons or styles from the CMS.gov design system might not display as intended in Storybook.
 
+## Component Inventory
+
+This project includes an automated script that generates a comprehensive inventory of all components, templates, services, hooks, contexts, utilities, and types.
+
+### Generating the Inventory
+
+To generate the inventory report:
+```bash
+npm run generate:inventory
+```
+
+This creates `COMPONENTS_INVENTORY.md` in the root directory with:
+- Complete list of all library items
+- Public export status
+- Storybook story coverage
+- Unit test coverage
+- Quality metrics and statistics
+
+The inventory is automatically updated on every commit via a pre-commit hook.
+
+For more details, see the [Inventory Generator Documentation](scripts/README.md).
+
 ## Publishing new versions
 
 ### Clear out caches and previous build
