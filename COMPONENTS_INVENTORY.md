@@ -73,11 +73,11 @@ This document provides a comprehensive inventory of all components, services, te
 | Component | [useScrollToTop](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/useScrollToTop) | ✅ Public | ❌ No Story | ❌ No Tests |
 | | | | | |
 | **HOOKS & CONTEXTS** | | | | |
+| Context | [DataTableActionsProvider](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetTableTab/DataTableActionsContext.tsx) | ✅ Public | ❌ No Story | ❌ No Tests |
 | Hook | [useAddLoginLink](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/useAddLoginLink) | ✅ Public | ❌ No Story | ❌ No Tests |
 | Hook | [useScrollToTop](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/useScrollToTop) | ✅ Public | ❌ No Story | ❌ No Tests |
-| Context | [HeaderContext](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/Header/HeaderContext.tsx) | ✅ Public | ❌ No Story | ❌ No Tests |
 | Context | [DataTableContext](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/Dataset/DataTableContext.tsx) | ✅ Public | ❌ No Story | ❌ No Tests |
-| Context | [DataTableActionsProvider](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetTableTab/DataTableActionsContext.tsx) | ✅ Public | ❌ No Story | ❌ No Tests |
+| Context | [HeaderContext](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/Header/HeaderContext.tsx) | ✅ Public | ❌ No Story | ❌ No Tests |
 | Context | [ACAContext](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/ACAContext.ts) | ✅ Public | ❌ No Story | ❌ No Tests |
 | | | | | |
 | **SERVICES** | | | | |
@@ -114,6 +114,7 @@ This document provides a comprehensive inventory of all components, services, te
 | **ASSETS** | | | | |
 | Asset | [frequencyMap](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/assets/frequencyMap.js) | ✅ Public (commented out) | ❌ No Story | ❌ No Tests |
 | Asset | [metadataMapping](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/assets/metadataMapping.jsx) | ✅ Public | ❌ No Story | ❌ No Tests |
+| | | | | |
 
 ## Quality Metrics Summary
 
@@ -121,10 +122,10 @@ This document provides a comprehensive inventory of all components, services, te
 
 | Category | Total | With Stories | With Tests | With Both | With Neither |
 |----------|-------|--------------|------------|-----------|--------------|
-| **Components** | 64 | 36 (56%) | 23 (36%) | 9 (14%) | 14 (22%) |
-| **Templates** | 12 | 0 (0%) | 3 (25%) | 0 (0%) | 9 (75%) |
-| **Services/Hooks/Contexts** | 9 | 0 (0%) | 0 (0%) | 0 (0%) | 9 (100%) |
-| **Utilities/Types/Assets** | 10 | 0 (0%) | 0 (0%) | 0 (0%) | 10 (100%) |
+| Components | 64 | 36 (56%) | 23 (36%) | 9 (14%) | 14 (22%) |
+| Templates | 12 | 0 (0%) | 3 (25%) | 0 (0%) | 9 (75%) |
+| Services/Hooks/Contexts | 9 | 0 (0%) | 0 (0%) | 0 (0%) | 9 (100%) |
+| Utilities/Types/Assets | 10 | 0 (0%) | 0 (0%) | 0 (0%) | 10 (100%) |
 | **Project Total** | **95** | **36 (38%)** | **26 (27%)** | **9 (9%)** | **42 (44%)** |
 
 ---

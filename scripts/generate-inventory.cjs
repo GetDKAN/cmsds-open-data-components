@@ -18,6 +18,18 @@ const ROOT_DIR = path.join(__dirname, '..');
 const SRC_DIR = path.join(ROOT_DIR, 'src');
 const OUTPUT_FILE = path.join(ROOT_DIR, 'COMPONENTS_INVENTORY.md');
 
+// File pattern constants
+const STORY_FILE_PATTERNS = ['.stories.js', '.stories.jsx', '.stories.ts', '.stories.tsx'];
+const TEST_FILE_PATTERNS = ['.test.', '.spec.'];
+const TS_EXTENSIONS = ['.ts', '.tsx'];
+
+// Special case mappings for components with non-standard exports
+const EXPORT_SPECIAL_CASES = {
+  'DatasetAdditionalInformation': { exportName: 'buildRows', note: ' (buildRows)' },
+  'DatasetTableTab': { exportName: 'DatasetTable', note: ' (as DatasetTable)' },
+  'Datatable': { exportName: 'DataTable', note: '' }
+};
+
 // Read the main index.ts to determine what's publicly exported
 function getPublicExports() {
   const indexPath = path.join(SRC_DIR, 'index.ts');
@@ -55,10 +67,7 @@ function hasStory(dirPath) {
   try {
     const files = fs.readdirSync(dirPath);
     return files.some(file => 
-      file.endsWith('.stories.js') || 
-      file.endsWith('.stories.jsx') || 
-      file.endsWith('.stories.ts') || 
-      file.endsWith('.stories.tsx')
+      STORY_FILE_PATTERNS.some(pattern => file.endsWith(pattern))
     );
   } catch (e) {
     return false;
@@ -70,8 +79,7 @@ function hasTests(dirPath) {
   try {
     const files = fs.readdirSync(dirPath);
     return files.some(file => 
-      file.includes('.test.') || 
-      file.includes('.spec.')
+      TEST_FILE_PATTERNS.some(pattern => file.includes(pattern))
     );
   } catch (e) {
     return false;
@@ -90,6 +98,46 @@ function getDirectories(dirPath) {
   }
 }
 
+/**
+ * Checks if a component name is publicly exported
+ * Handles special cases where export name differs from component name
+ * @returns {Object} { isPublic: boolean, note: string }
+ */
+function isPublicComponent(name, publicExports) {
+  // Check direct match
+  if (publicExports.has(name)) {
+    return { isPublic: true, note: '' };
+  }
+  
+  // Check plural form
+  if (publicExports.has(name + 's')) {
+    return { isPublic: true, note: '' };
+  }
+  
+  // Check special cases
+  const specialCase = EXPORT_SPECIAL_CASES[name];
+  if (specialCase && publicExports.has(specialCase.exportName)) {
+    return { isPublic: true, note: specialCase.note };
+  }
+  
+  return { isPublic: false, note: '' };
+}
+
+/**
+ * Creates a standardized inventory item object
+ */
+function createInventoryItem(type, name, relativePath, isPublic, exportNote = '', hasStoryVal = null, hasTestsVal = null) {
+  return {
+    type,
+    name,
+    path: relativePath,
+    isPublic,
+    exportNote,
+    hasStory: hasStoryVal ?? false,
+    hasTests: hasTestsVal ?? false
+  };
+}
+
 // Scan components directory
 function scanComponents(publicExports) {
   const componentsDir = path.join(SRC_DIR, 'components');
@@ -97,27 +145,17 @@ function scanComponents(publicExports) {
   
   return componentDirs.map(name => {
     const dirPath = path.join(componentsDir, name);
+    const { isPublic, note } = isPublicComponent(name, publicExports);
     
-    // Check if public by various name matches
-    const isPublic = publicExports.has(name) || 
-                     publicExports.has(name + 's') || // plural form
-                     name === 'DatasetAdditionalInformation' && publicExports.has('buildRows') ||
-                     name === 'DatasetTableTab' && publicExports.has('DatasetTable') ||
-                     name === 'Datatable' && publicExports.has('DataTable'); // Handle case difference
-    
-    let exportNote = '';
-    if (name === 'DatasetAdditionalInformation') exportNote = ' (buildRows)';
-    if (name === 'DatasetTableTab') exportNote = ' (as DatasetTable)';
-    
-    return {
-      type: 'Component',
+    return createInventoryItem(
+      'Component',
       name,
-      path: `src/components/${name}`,
+      `src/components/${name}`,
       isPublic,
-      exportNote,
-      hasStory: hasStory(dirPath),
-      hasTests: hasTests(dirPath)
-    };
+      note,
+      hasStory(dirPath),
+      hasTests(dirPath)
+    );
   });
 }
 
@@ -128,17 +166,16 @@ function scanTemplates(publicExports) {
   
   return templateDirs.map(name => {
     const dirPath = path.join(templatesDir, name);
-    const isPublic = publicExports.has(name);
     
-    return {
-      type: 'Template',
+    return createInventoryItem(
+      'Template',
       name,
-      path: `src/templates/${name}`,
-      isPublic,
-      exportNote: '',
-      hasStory: hasStory(dirPath),
-      hasTests: hasTests(dirPath)
-    };
+      `src/templates/${name}`,
+      publicExports.has(name),
+      '',
+      hasStory(dirPath),
+      hasTests(dirPath)
+    );
   });
 }
 
@@ -149,17 +186,16 @@ function scanServices(publicExports) {
   
   return serviceDirs.map(name => {
     const dirPath = path.join(servicesDir, name);
-    const isPublic = publicExports.has(name);
     
-    return {
-      type: 'Service',
+    return createInventoryItem(
+      'Service',
       name,
-      path: `src/services/${name}`,
-      isPublic,
-      exportNote: '',
-      hasStory: false, // Services don't have stories
-      hasTests: hasTests(dirPath)
-    };
+      `src/services/${name}`,
+      publicExports.has(name),
+      '',
+      false, // Services don't have stories
+      hasTests(dirPath)
+    );
   });
 }
 
@@ -173,27 +209,30 @@ function scanUtilities(publicExports) {
   files.forEach(file => {
     if (file.isDirectory()) {
       const dirPath = path.join(utilitiesDir, file.name);
-      items.push({
-        type: 'Utility',
-        name: file.name,
-        path: `src/utilities/${file.name}`,
-        isPublic: publicExports.has(file.name),
-        exportNote: '',
-        hasStory: false,
-        hasTests: hasTests(dirPath)
-      });
-    } else if (file.name.endsWith('.ts') || file.name.endsWith('.tsx')) {
+      items.push(createInventoryItem(
+        'Utility',
+        file.name,
+        `src/utilities/${file.name}`,
+        publicExports.has(file.name),
+        '',
+        false,
+        hasTests(dirPath)
+      ));
+    } else if (TS_EXTENSIONS.some(ext => file.name.endsWith(ext))) {
       const name = file.name.replace(/\.(ts|tsx)$/, '');
       if (name !== 'index') {
-        items.push({
-          type: 'Utility',
+        const isPublic = publicExports.has(name) || (publicExports.has('acaToParams') && name === 'aca');
+        const exportNote = name === 'aca' ? ' (acaToParams)' : '';
+        
+        items.push(createInventoryItem(
+          'Utility',
           name,
-          path: `src/utilities/${file.name}`,
-          isPublic: publicExports.has(name) || publicExports.has('acaToParams') && name === 'aca',
-          exportNote: name === 'aca' ? ' (acaToParams)' : '',
-          hasStory: false,
-          hasTests: false
-        });
+          `src/utilities/${file.name}`,
+          isPublic,
+          exportNote,
+          false,
+          false
+        ));
       }
     }
   });
@@ -206,15 +245,17 @@ function scanTypes() {
   const typesDir = path.join(SRC_DIR, 'types');
   const files = fs.readdirSync(typesDir).filter(f => f.endsWith('.ts'));
   
-  return files.map(file => ({
-    type: 'Type Definition',
-    name: file,
-    path: `src/types/${file}`,
-    isPublic: false, // Type definitions are generally internal
-    exportNote: '',
-    hasStory: false,
-    hasTests: false
-  }));
+  return files.map(file => 
+    createInventoryItem(
+      'Type Definition',
+      file,
+      `src/types/${file}`,
+      false, // Type definitions are generally internal
+      '',
+      false,
+      false
+    )
+  );
 }
 
 // Scan assets directory
@@ -229,76 +270,179 @@ function scanAssets(publicExports) {
     const isPublic = publicExports.has(name) || publicExports.has('defaultMetadataMapping');
     const isCommented = name === 'frequencyMap'; // Based on index.ts
     
-    return {
-      type: 'Asset',
+    return createInventoryItem(
+      'Asset',
       name,
-      path: `src/assets/${file}`,
+      `src/assets/${file}`,
       isPublic,
-      exportNote: isCommented ? ' (commented out)' : '',
-      hasStory: false,
-      hasTests: false
-    };
+      isCommented ? ' (commented out)' : '',
+      false,
+      false
+    );
   });
 }
 
-// Add hooks and contexts manually based on known exports
+/**
+ * Scans for React hooks (functions starting with 'use') and Context providers
+ * Searches in components, templates, and utilities directories
+ */
 function getHooksAndContexts(publicExports) {
-  return [
-    {
-      type: 'Hook',
-      name: 'useAddLoginLink',
-      path: 'src/components/useAddLoginLink',
-      isPublic: true,
-      exportNote: '',
-      hasStory: false,
-      hasTests: false
-    },
-    {
-      type: 'Hook',
-      name: 'useScrollToTop',
-      path: 'src/components/useScrollToTop',
-      isPublic: true,
-      exportNote: '',
-      hasStory: false,
-      hasTests: false
-    },
-    {
-      type: 'Context',
-      name: 'HeaderContext',
-      path: 'src/templates/Header/HeaderContext.tsx',
-      isPublic: true,
-      exportNote: '',
-      hasStory: false,
-      hasTests: false
-    },
-    {
-      type: 'Context',
-      name: 'DataTableContext',
-      path: 'src/templates/Dataset/DataTableContext.tsx',
-      isPublic: true,
-      exportNote: '',
-      hasStory: false,
-      hasTests: false
-    },
-    {
-      type: 'Context',
-      name: 'DataTableActionsProvider',
-      path: 'src/components/DatasetTableTab/DataTableActionsContext.tsx',
-      isPublic: true,
-      exportNote: '',
-      hasStory: false,
-      hasTests: false
-    },
-    {
-      type: 'Context',
-      name: 'ACAContext',
-      path: 'src/utilities/ACAContext.ts',
-      isPublic: true,
-      exportNote: '',
-      hasStory: false,
-      hasTests: false
+  const items = [];
+  
+  // Helper to check if a file exports a hook or context
+  const scanFileForHooksAndContexts = (filePath, relativePath) => {
+    try {
+      const content = fs.readFileSync(filePath, 'utf8');
+      const fileName = path.basename(filePath, path.extname(filePath));
+      
+      // Skip test and story files
+      if (fileName.includes('.test') || fileName.includes('.spec') || fileName.includes('.stories')) {
+        return null;
+      }
+      
+      // Check if it's a hook (starts with 'use')
+      if (fileName.startsWith('use')) {
+        const isPublic = publicExports.has(fileName);
+        return {
+          type: 'Hook',
+          name: fileName,
+          path: relativePath,
+          isPublic
+        };
+      }
+      
+      // Check if it's a Context (file name ends with 'Context' and contains createContext)
+      if (fileName.endsWith('Context') && content.includes('createContext')) {
+        // Try to extract the exported context name or provider name from the file
+        // Look for: export default Name or export const Name
+        const exportDefaultMatch = content.match(/export\s+default\s+(\w+)/);
+        const exportConstMatch = content.match(/export\s+const\s+(\w*(?:Context|Provider)\w*)/);
+        const name = exportDefaultMatch?.[1] || exportConstMatch?.[1] || fileName;
+        
+        // Check if public by exported name or file name
+        const isPublic = publicExports.has(name) || publicExports.has(fileName);
+        
+        return {
+          type: 'Context',
+          name: name,
+          path: relativePath,
+          isPublic
+        };
+      }
+    } catch (e) {
+      // Skip files that can't be read
     }
-  ];
+    
+    return null;
+  };
+  
+  // Scan components directory for hooks
+  const componentsDir = path.join(SRC_DIR, 'components');
+  const componentDirs = getDirectories(componentsDir);
+  
+  componentDirs.forEach(dirName => {
+    const dirPath = path.join(componentsDir, dirName);
+    
+    // Check if directory itself is a hook (starts with 'use')
+    if (dirName.startsWith('use')) {
+      const isPublic = publicExports.has(dirName);
+      items.push(createInventoryItem(
+        'Hook',
+        dirName,
+        `src/components/${dirName}`,
+        isPublic,
+        '',
+        false,
+        false
+      ));
+    }
+    
+    // Check files in the directory for contexts
+    try {
+      const files = fs.readdirSync(dirPath);
+      files.forEach(file => {
+        if (TS_EXTENSIONS.some(ext => file.endsWith(ext))) {
+          const filePath = path.join(dirPath, file);
+          const relativePath = `src/components/${dirName}/${file}`;
+          const result = scanFileForHooksAndContexts(filePath, relativePath);
+          if (result && result.type === 'Context') {
+            items.push(createInventoryItem(
+              result.type,
+              result.name,
+              result.path,
+              result.isPublic,
+              '',
+              false,
+              false
+            ));
+          }
+        }
+      });
+    } catch (e) {
+      // Skip if directory can't be read
+    }
+  });
+  
+  // Scan templates directory for contexts
+  const templatesDir = path.join(SRC_DIR, 'templates');
+  const templateDirs = getDirectories(templatesDir);
+  
+  templateDirs.forEach(dirName => {
+    const dirPath = path.join(templatesDir, dirName);
+    
+    try {
+      const files = fs.readdirSync(dirPath);
+      files.forEach(file => {
+        if (TS_EXTENSIONS.some(ext => file.endsWith(ext))) {
+          const filePath = path.join(dirPath, file);
+          const relativePath = `src/templates/${dirName}/${file}`;
+          const result = scanFileForHooksAndContexts(filePath, relativePath);
+          if (result) {
+            items.push(createInventoryItem(
+              result.type,
+              result.name,
+              result.path,
+              result.isPublic,
+              '',
+              false,
+              false
+            ));
+          }
+        }
+      });
+    } catch (e) {
+      // Skip if directory can't be read
+    }
+  });
+  
+  // Scan utilities directory for contexts
+  const utilitiesDir = path.join(SRC_DIR, 'utilities');
+  
+  try {
+    const files = fs.readdirSync(utilitiesDir);
+    files.forEach(file => {
+      if (TS_EXTENSIONS.some(ext => file.endsWith(ext))) {
+        const filePath = path.join(utilitiesDir, file);
+        const relativePath = `src/utilities/${file}`;
+        const result = scanFileForHooksAndContexts(filePath, relativePath);
+        if (result) {
+          items.push(createInventoryItem(
+            result.type,
+            result.name,
+            result.path,
+            result.isPublic,
+            '',
+            false,
+            false
+          ));
+        }
+      }
+    });
+  } catch (e) {
+    // Skip if directory can't be read
+  }
+  
+  return items;
 }
 
 // Generate markdown table row
@@ -311,6 +455,93 @@ function generateTableRow(item) {
   const testStatus = item.hasTests ? '✅ Has Tests' : '❌ No Tests';
   
   return `| ${item.type} | [${item.name}](${githubUrl}) | ${publicStatus} | ${storyStatus} | ${testStatus} |`;
+}
+
+/**
+ * Generates markdown table section for a category
+ */
+function generateTableSection(title, items) {
+  const lines = [];
+  lines.push(`| **${title}** | | | | |`);
+  items.forEach(item => lines.push(generateTableRow(item)));
+  lines.push('| | | | | |');
+  return lines;
+}
+
+/**
+ * Generates the inventory table header
+ */
+function generateInventoryTableHeader() {
+  return [
+    '## Inventory Table',
+    '',
+    '| Type | Name | Public Export | Storybook Status | Unit Tests |',
+    '|------|------|---------------|------------------|------------|'
+  ];
+}
+
+/**
+ * Generates the quality metrics table
+ */
+function generateQualityMetricsSection(stats) {
+  const lines = [];
+  lines.push('## Quality Metrics Summary');
+  lines.push('');
+  lines.push('### Documentation & Testing Coverage');
+  lines.push('');
+  lines.push('| Category | Total | With Stories | With Tests | With Both | With Neither |');
+  lines.push('|----------|-------|--------------|------------|-----------|--------------|');
+  
+  const addRow = (label, stat) => {
+    const bold = label === 'Project Total' ? '**' : '';
+    lines.push(`| ${bold}${label}${bold} | ${bold}${stat.total}${bold} | ${bold}${stat.withStories} (${stat.storiesPercent}%)${bold} | ${bold}${stat.withTests} (${stat.testsPercent}%)${bold} | ${bold}${stat.withBoth} (${stat.bothPercent}%)${bold} | ${bold}${stat.withNeither} (${stat.neitherPercent}%)${bold} |`);
+  };
+  
+  addRow('Components', stats.components);
+  addRow('Templates', stats.templates);
+  addRow('Services/Hooks/Contexts', stats.servicesHooksContexts);
+  addRow('Utilities/Types/Assets', stats.utilitiesTypesAssets);
+  addRow('Project Total', stats.total);
+  
+  lines.push('');
+  lines.push('---');
+  lines.push('');
+  
+  return lines;
+}
+
+/**
+ * Generates the export summary section
+ */
+function generateExportSummarySection(exportSummary) {
+  const lines = [];
+  lines.push('### Export Summary');
+  
+  const pub = exportSummary.public;
+  lines.push(`- **Public**: ${pub.total} items (${pub.components} components, ${pub.templates} templates, ${pub.services} services, ${pub.hooks} hooks, ${pub.contexts} contexts, ${pub.assets} asset)`);
+  
+  const intern = exportSummary.internal;
+  lines.push(`- **Internal**: ${intern.total} items (${intern.components} components, ${intern.templates} templates, ${intern.services} services, ${intern.utilities} utilities, ${intern.types} types, ${intern.assets} asset)`);
+  
+  lines.push('');
+  lines.push('---');
+  lines.push('');
+  
+  return lines;
+}
+
+/**
+ * Generates the document footer
+ */
+function generateFooter() {
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  
+  return [
+    `*Last updated: ${dateStr}*  `,
+    '*Repository: [GetDKAN/cmsds-open-data-components](https://github.com/GetDKAN/cmsds-open-data-components)*',
+    ''
+  ];
 }
 
 // Calculate statistics
@@ -425,7 +656,7 @@ function generateReport() {
   const stats = calculateStats(allItems);
   const exportSummary = calculateExportSummary(allItems);
   
-  // Generate markdown
+  // Generate markdown sections
   const lines = [];
   
   // Header
@@ -433,76 +664,26 @@ function generateReport() {
   lines.push('');
   lines.push('This document provides a comprehensive inventory of all components, services, templates, types, and utilities available in the cmsds-open-data-components project. Each item is categorized by type and includes information about whether it is publicly exported or internal-only, has Storybook stories, and has unit tests.');
   lines.push('');
-  lines.push('## Inventory Table');
-  lines.push('');
-  lines.push('| Type | Name | Public Export | Storybook Status | Unit Tests |');
-  lines.push('|------|------|---------------|------------------|------------|');
   
-  // Components section
-  lines.push('| **COMPONENTS** | | | | |');
-  components.forEach(item => lines.push(generateTableRow(item)));
-  lines.push('| | | | | |');
-  
-  // Hooks & Contexts section
-  lines.push('| **HOOKS & CONTEXTS** | | | | |');
-  hooksAndContexts.forEach(item => lines.push(generateTableRow(item)));
-  lines.push('| | | | | |');
-  
-  // Services section
-  lines.push('| **SERVICES** | | | | |');
-  services.forEach(item => lines.push(generateTableRow(item)));
-  lines.push('| | | | | |');
-  
-  // Templates section
-  lines.push('| **TEMPLATES** | | | | |');
-  templates.forEach(item => lines.push(generateTableRow(item)));
-  lines.push('| | | | | |');
-  
-  // Types section
-  lines.push('| **TYPES** | | | | |');
-  types.forEach(item => lines.push(generateTableRow(item)));
-  lines.push('| | | | | |');
-  
-  // Utilities section
-  lines.push('| **UTILITIES** | | | | |');
-  utilities.forEach(item => lines.push(generateTableRow(item)));
-  lines.push('| | | | | |');
-  
-  // Assets section
-  lines.push('| **ASSETS** | | | | |');
-  assets.forEach(item => lines.push(generateTableRow(item)));
+  // Inventory table
+  lines.push(...generateInventoryTableHeader());
+  lines.push(...generateTableSection('COMPONENTS', components));
+  lines.push(...generateTableSection('HOOKS & CONTEXTS', hooksAndContexts));
+  lines.push(...generateTableSection('SERVICES', services));
+  lines.push(...generateTableSection('TEMPLATES', templates));
+  lines.push(...generateTableSection('TYPES', types));
+  lines.push(...generateTableSection('UTILITIES', utilities));
+  lines.push(...generateTableSection('ASSETS', assets));
   lines.push('');
   
-  // Quality Metrics Summary
-  lines.push('## Quality Metrics Summary');
-  lines.push('');
-  lines.push('### Documentation & Testing Coverage');
-  lines.push('');
-  lines.push('| Category | Total | With Stories | With Tests | With Both | With Neither |');
-  lines.push('|----------|-------|--------------|------------|-----------|--------------|');
-  lines.push(`| **Components** | ${stats.components.total} | ${stats.components.withStories} (${stats.components.storiesPercent}%) | ${stats.components.withTests} (${stats.components.testsPercent}%) | ${stats.components.withBoth} (${stats.components.bothPercent}%) | ${stats.components.withNeither} (${stats.components.neitherPercent}%) |`);
-  lines.push(`| **Templates** | ${stats.templates.total} | ${stats.templates.withStories} (${stats.templates.storiesPercent}%) | ${stats.templates.withTests} (${stats.templates.testsPercent}%) | ${stats.templates.withBoth} (${stats.templates.bothPercent}%) | ${stats.templates.withNeither} (${stats.templates.neitherPercent}%) |`);
-  lines.push(`| **Services/Hooks/Contexts** | ${stats.servicesHooksContexts.total} | ${stats.servicesHooksContexts.withStories} (${stats.servicesHooksContexts.storiesPercent}%) | ${stats.servicesHooksContexts.withTests} (${stats.servicesHooksContexts.testsPercent}%) | ${stats.servicesHooksContexts.withBoth} (${stats.servicesHooksContexts.bothPercent}%) | ${stats.servicesHooksContexts.withNeither} (${stats.servicesHooksContexts.neitherPercent}%) |`);
-  lines.push(`| **Utilities/Types/Assets** | ${stats.utilitiesTypesAssets.total} | ${stats.utilitiesTypesAssets.withStories} (${stats.utilitiesTypesAssets.storiesPercent}%) | ${stats.utilitiesTypesAssets.withTests} (${stats.utilitiesTypesAssets.testsPercent}%) | ${stats.utilitiesTypesAssets.withBoth} (${stats.utilitiesTypesAssets.bothPercent}%) | ${stats.utilitiesTypesAssets.withNeither} (${stats.utilitiesTypesAssets.neitherPercent}%) |`);
-  lines.push(`| **Project Total** | **${stats.total.total}** | **${stats.total.withStories} (${stats.total.storiesPercent}%)** | **${stats.total.withTests} (${stats.total.testsPercent}%)** | **${stats.total.withBoth} (${stats.total.bothPercent}%)** | **${stats.total.withNeither} (${stats.total.neitherPercent}%)** |`);
-  lines.push('');
-  lines.push('---');
-  lines.push('');
+  // Quality metrics
+  lines.push(...generateQualityMetricsSection(stats));
   
-  // Export Summary
-  lines.push('### Export Summary');
-  lines.push(`- **Public**: ${exportSummary.public.total} items (${exportSummary.public.components} components, ${exportSummary.public.templates} templates, ${exportSummary.public.services} services, ${exportSummary.public.hooks} hooks, ${exportSummary.public.contexts} contexts, ${exportSummary.public.assets} asset)`);
-  lines.push(`- **Internal**: ${exportSummary.internal.total} items (${exportSummary.internal.components} components, ${exportSummary.internal.templates} templates, ${exportSummary.internal.services} services, ${exportSummary.internal.utilities} utilities, ${exportSummary.internal.types} types, ${exportSummary.internal.assets} asset)`);
-  lines.push('');
-  lines.push('---');
-  lines.push('');
+  // Export summary
+  lines.push(...generateExportSummarySection(exportSummary));
   
   // Footer
-  const now = new Date();
-  const dateStr = now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  lines.push(`*Last updated: ${dateStr}*  `);
-  lines.push('*Repository: [GetDKAN/cmsds-open-data-components](https://github.com/GetDKAN/cmsds-open-data-components)*');
-  lines.push('');
+  lines.push(...generateFooter());
   
   return lines.join('\n');
 }
