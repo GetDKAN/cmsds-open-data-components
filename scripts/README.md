@@ -38,27 +38,43 @@ The script automatically scans the following directories:
 - `src/types/` - TypeScript type definitions
 - `src/assets/` - Static assets and data files
 
-It also identifies:
-- Hooks (useAddLoginLink, useScrollToTop)
-- Contexts (HeaderContext, DataTableContext, etc.)
+It also automatically detects:
+- **Hooks**: Directories or files starting with `use` (e.g., `useScrollToTop`)
+- **Contexts**: Files ending with `Context` that contain `createContext()` calls
 
 ## How It Works
 
 1. **Reads `src/index.ts`** to determine which items are publicly exported
 2. **Scans each directory** for subdirectories and files
-3. **Checks for `.stories.*` files** to determine Storybook coverage
-4. **Checks for `.test.*` and `.spec.*` files** to determine unit test coverage
-5. **Calculates statistics** for overall project quality metrics
-6. **Generates markdown** with formatted tables and summaries
+3. **Dynamically discovers hooks and contexts** by naming patterns and file content
+4. **Checks for `.stories.*` files** to determine Storybook coverage
+5. **Checks for `.test.*` and `.spec.*` files** to determine unit test coverage
+6. **Calculates statistics** for overall project quality metrics
+7. **Generates markdown** with formatted tables and summaries
 
 ## Maintenance
 
 The script is designed to automatically adapt to changes in the codebase:
 
-- New components/templates/services are automatically discovered
+- New components/templates/services/hooks/contexts are automatically discovered
 - Public export status updates when `src/index.ts` changes
 - Story and test status updates as files are added/removed
 - Statistics recalculate automatically
+
+No manual updates needed when adding or removing hooks and contexts!
+
+### Hook and Context Detection
+
+**Hooks** are detected by:
+- Directory names starting with `use` (e.g., `src/components/useScrollToTop/`)
+- File names starting with `use` (e.g., `useAddLoginLink.ts`)
+
+**Contexts** are detected by:
+- File names ending with `Context` (e.g., `HeaderContext.tsx`)
+- File must contain a `createContext()` call
+- Export name is extracted from `export default` or `export const` statements
+
+The scanner automatically excludes test and story files to prevent false positives.
 
 ### Known Special Cases
 
