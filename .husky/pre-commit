@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Generate the component inventory
+echo "🔍 Generating component inventory..."
+npm run generate:inventory
+
+# Check if COMPONENTS_INVENTORY.md was modified
+if git diff --name-only | grep -q "COMPONENTS_INVENTORY.md"; then
+  echo "✅ Component inventory updated. Adding to commit..."
+  git add COMPONENTS_INVENTORY.md
+else
+  echo "ℹ️  Component inventory unchanged."
+fi
