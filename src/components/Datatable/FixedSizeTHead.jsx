@@ -27,6 +27,13 @@ const FixedSizeTHead = ({table, sortElement}) => {
                 }
               }
               className="ds-u-border-y--2 ds-u-padding--2 ds-u-border--dark  ds-u-font-weight--bold"
+              aria-sort={
+                header.column.getIsSorted() === 'asc'
+                  ? 'ascending'
+                  : header.column.getIsSorted() === 'desc'
+                  ? 'descending'
+                  : 'none'
+              }
               >
                 <div onClick={header.column.getToggleSortingHandler()} className="ds-u-display--flex">
                   <span>
