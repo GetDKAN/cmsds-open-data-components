@@ -84,7 +84,7 @@ const DataDictionaryTable = ({tableColumns, tableData, pageSize, columnFilters} 
               <TableRow key={"header" + headerGroup.id}>
                 {headerGroup.headers.map(header => {
                   return (header.id === "titleResizable") ? (
-                    <HeaderResizeElement key={header.id + "_resize"} table={table} header={header} setAriaLiveFeedback={setAriaLiveFeedback} sortElement={sortElement} />
+                    <HeaderResizeElement key={header.id + "_resize"} table={table} header={header} setAriaLiveFeedback={setAriaLiveFeedback} sortElement={sortElement} id={'dataDictionary_' + header.id} />
                   ) : (
                     <TableCell
                       {...{

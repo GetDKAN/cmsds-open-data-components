@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import { flexRender } from "@tanstack/react-table";
 
-const HeaderResizeElement = ({table, header, sortElement, setAriaLiveFeedback} :
-  {table: any, header: any, sortElement?: Function, setAriaLiveFeedback: Function }) => {
+const HeaderResizeElement = ({table, header, sortElement, setAriaLiveFeedback, id} :
+  {table: any, header: any, sortElement?: Function, setAriaLiveFeedback: Function, id?: string }) => {
   const [columnResizing, setColumnResizing] = useState('');
   return(
     <th {
@@ -13,6 +13,7 @@ const HeaderResizeElement = ({table, header, sortElement, setAriaLiveFeedback} :
         }
       }
     }
+    id={id}
     title={typeof(header.column.columnDef.header) === "string" ? header.column.columnDef.header : ''}
     className="ds-u-border-y--2 ds-u-padding--2 ds-u-border--dark  ds-u-font-weight--bold"
     aria-sort={
