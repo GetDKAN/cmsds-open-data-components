@@ -1,6 +1,6 @@
 {
   "name": "@civicactions/cmsds-open-data-components",
-  "version": "4.0.6",
+  "version": "4.0.7",
   "description": "Components for the open data catalog frontend using CMS Design System",
   "main": "dist/main.js",
   "source": "src/index.ts",
@@ -14,7 +14,9 @@
     "test:watch": "npm run test -- --watch",
     "test:coverage": "npm run test -- --coverage",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "generate:inventory": "node scripts/generate-inventory.cjs",
+    "prepare": "husky"
   },
   "author": "",
   "license": "GPL-3.0",
@@ -62,6 +64,7 @@
     "core-js": "^3.27.2",
     "css-loader": "^6.7.3",
     "eslint-plugin-storybook": "^9.0.16",
+    "husky": "^9.1.7",
     "jest": "30.0.5",
     "jest-axe": "^10.0.0",
     "jest-canvas-mock": "^2.5.2",
