@@ -62,7 +62,36 @@ This creates `COMPONENTS_INVENTORY.md` in the root directory with:
 
 The inventory is automatically updated on every commit via a pre-commit hook.
 
-For more details, see the [Inventory Generator Documentation](scripts/README.md).
+For more details, see the [Scripts Documentation](scripts/README.md).
+
+## Component Usage Report
+
+This project includes a script that can be run in projects that use cmsds-open-data-components as a dependency to analyze component usage.
+
+### Running in Dependent Projects
+
+From a project that has `@civicactions/cmsds-open-data-components` as a dependency:
+
+```bash
+npx generate-usage-report
+```
+
+This generates `COMPONENT_USAGE_REPORT.md` showing:
+- Which components from the library are being used
+- Where each component is imported in the project
+- Summary statistics and category breakdown
+- GitHub links to component source code
+
+### Generating Sample Report (Library Development)
+
+To generate a sample report using Storybook files in this repository:
+```bash
+npm run generate:usage-report
+```
+
+This creates `SAMPLE_COMPONENT_USAGE_REPORT.md` demonstrating the report format.
+
+For more details, see the [Scripts Documentation](scripts/README.md).
 
 ## Publishing new versions
 

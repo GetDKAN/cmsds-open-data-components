@@ -1,11 +1,14 @@
 {
   "name": "@civicactions/cmsds-open-data-components",
-  "version": "4.0.7",
+  "version": "4.0.8",
   "description": "Components for the open data catalog frontend using CMS Design System",
   "main": "dist/main.js",
   "source": "src/index.ts",
   "types": "dist/types.d.ts",
   "type": "module",
+  "bin": {
+    "generate-usage-report": "./scripts/generate-usage-report.cjs"
+  },
   "scripts": {
     "build": "parcel build",
     "build:report": "parcel build --reporter @parcel/reporter-bundle-analyzer",
@@ -16,6 +19,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "generate:inventory": "node scripts/generate-inventory.cjs",
+    "generate:usage-report": "node scripts/generate-usage-report.cjs",
     "prepare": "husky"
   },
   "author": "",
