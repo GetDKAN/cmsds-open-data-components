@@ -10,3 +10,4 @@ coverage
 .vscode
 *storybook.log
 storybook-static
+SAMPLE_COMPONENT_USAGE_REPORT.md
