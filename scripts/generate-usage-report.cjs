@@ -241,7 +241,7 @@ function generateUsageRow(name, usages, category) {
   const githubUrl = `https://github.com/GetDKAN/cmsds-open-data-components/tree/main/${githubPath}`;
   const nameLink = `[${name}](${githubUrl})`;
   
-  return `| ${nameLink} | ${category} | ${count} | ${fileList} |`;
+  return `| ${nameLink} | ${count} | ${fileList} |`;
 }
 
 /**
@@ -400,26 +400,48 @@ function addCategoryBreakdown(lines, categorized) {
 }
 
 /**
- * Add detailed usage table section
+ * Add detailed usage table section grouped by category
  */
 function addUsageTable(lines, usageMap) {
   lines.push('## Component Usage Details');
   lines.push('');
-  lines.push('| Component | Type | Usage Count | Used In |');
-  lines.push('|-----------|------|-------------|---------|');
   
-  // Sort by usage count (descending)
-  const sortedComponents = Array.from(usageMap.entries())
-    .sort((a, b) => b[1].length - a[1].length);
-  
-  sortedComponents.forEach(([name, usages]) => {
+  // Categorize all components
+  const categorized = new Map();
+  usageMap.forEach((usages, name) => {
     const category = categorizeComponent(name);
-    lines.push(generateUsageRow(name, usages, category));
+    if (!categorized.has(category)) {
+      categorized.set(category, []);
+    }
+    categorized.get(category).push({ name, usages });
   });
   
-  lines.push('');
-  lines.push('---');
-  lines.push('');
+  // Generate a table for each category
+  const categories = ['Component', 'Template', 'Hook', 'Context', 'Service', 'Utility'];
+  categories.forEach(category => {
+    const items = categorized.get(category);
+    if (!items || items.length === 0) return;
+    
+    // Sort by usage count within category
+    items.sort((a, b) => b.usages.length - a.usages.length);
+    
+    // Category header
+    lines.push(`### ${category}s`);
+    lines.push('');
+    
+    // Table header
+    lines.push('| Name | Count | Used In |');
+    lines.push('|------|-------|---------|');
+    
+    // Table rows
+    items.forEach(({ name, usages }) => {
+      lines.push(generateUsageRow(name, usages, category));
+    });
+    
+    lines.push('');
+    lines.push('---');
+    lines.push('');
+  });
 }
 
 /**
