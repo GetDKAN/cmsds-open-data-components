@@ -1,0 +1,68 @@
+/**
+ * Font Awesome Pro to Free overrides for Storybook
+ * This file replaces Font Awesome Pro references with Font Awesome Free
+ * Note: Font Awesome Free 7 uses "Font Awesome 7 Free" as the font-family name
+ */
+
+/* Override header search button icon */
+.dkan-c-header-search--modal-button::before,
+.dkan-c-main-navigation--search .dkan-c-header-search--modal-button::before,
+button.dkan-c-header-search--modal-button::before {
+  font-family: "Font Awesome 7 Free" !important;
+  font-weight: 900 !important;
+  content: "\f002" !important; /* Search icon */
+}
+
+/* Override breadcrumb chevron icon */
+.dc-c-breadcrumb__list > li::after,
+nav.dc-c-breadcrumb .dc-c-breadcrumb__list > li::after {
+  font-family: "Font Awesome 7 Free" !important;
+  font-weight: 900 !important;
+  content: '\f054' !important; /* Chevron right icon */
+}
+
+/* Override mobile menu button icons */
+.dc-c-mobile-menu--open::before,
+.dc-c-mobile-menu--close::before,
+button.dkan-c-mobile-menu-button::before {
+  font-family: "Font Awesome 7 Free" !important;
+  font-weight: 900 !important;
+}
+
+/* Override back arrow icon in header nav icon link */
+.dkan-c-header-nav-icon-link.show-back-arrow a::before {
+  font-family: "Font Awesome 7 Free" !important;
+  font-weight: 900 !important;
+  content: '\f060' !important; /* Arrow left icon */
+}
+
+/* Override datatable sortable column icons */
+.datatable th.sortable::after {
+  font-family: "Font Awesome 7 Free" !important;
+  font-weight: 900 !important;
+}
+
+/* Global catch-all for any other ::before or ::after pseudo-elements */
+*[class*="dkan-"]::before,
+*[class*="dkan-"]::after,
+*[class*="dc-"]::before,
+*[class*="dc-"]::after {
+  font-family: "Font Awesome 7 Free" !important;
+}
+
+/* Ensure proper font weights for Font Awesome Free icons in component markup */
+.fas::before,
+.fa-solid::before {
+  font-weight: 900 !important; /* Solid style */
+}
+
+.far::before,
+.fa-regular::before {
+  font-weight: 400 !important; /* Regular style */
+}
+
+.fab::before,
+.fa-brands::before {
+  font-weight: 400 !important; /* Brands style */
+}
+

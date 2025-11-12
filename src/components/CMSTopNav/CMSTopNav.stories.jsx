@@ -1,6 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import CMSTopNav from './index';
+import logoImage from '../../assets/images/CMSGovLogo-O.png';
 
 const meta = {
   title: 'Components/CMSTopNav',
@@ -18,7 +19,15 @@ The CMSTopNav component provides the top navigation bar for CMS websites. It dis
   decorators: [
     (Story) => (
       <MemoryRouter>
-        <Story />
+        <div>
+          <style>{`
+            .dkan-c-header-nav-icon-link img {
+              max-width: 120px !important;
+              width: 120px !important;
+            }
+          `}</style>
+          <Story />
+        </div>
       </MemoryRouter>
     ),
   ],
@@ -33,7 +42,7 @@ export const Default = {
       url: '/',
       urlTitle: 'CMSDS',
       logoAltText: 'CMSDS Logo',
-      logoFilePath: '/path/to/logo.png',
+      logoFilePath: logoImage,
       tagline: 'CMSDS Tagline',
     },
     links: [
@@ -69,7 +78,7 @@ export const WithManyLinks = {
       url: '/',
       urlTitle: 'CMSDS',
       logoAltText: 'CMSDS Logo',
-      logoFilePath: '/path/to/logo.png',
+      logoFilePath: logoImage,
       tagline: 'CMSDS Tagline',
     },
     links: [
@@ -149,7 +158,7 @@ export const NoLinks = {
       url: '/',
       urlTitle: 'CMSDS',
       logoAltText: 'CMSDS Logo',
-      logoFilePath: '/path/to/logo.png',
+      logoFilePath: logoImage,
       tagline: 'CMSDS Tagline',
     },
     links: [],
@@ -169,7 +178,7 @@ export const LongTagline = {
       url: '/',
       urlTitle: 'CMSDS',
       logoAltText: 'CMSDS Logo',
-      logoFilePath: '/path/to/logo.png',
+      logoFilePath: logoImage,
       tagline: 'CMSDS Tagline',
     },
     links: [

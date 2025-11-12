@@ -1,9 +1,27 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Resource from './index';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      staleTime: Infinity,
+    },
+  },
+});
 
 const meta: Meta<typeof Resource> = {
   title: 'Components/Resource',
   component: Resource,
+  decorators: [
+    (Story: React.ComponentType) => (
+      <QueryClientProvider client={queryClient}>
+        <Story />
+      </QueryClientProvider>
+    ),
+  ],
   parameters: {
     layout: 'padded',
     docs: {
@@ -27,6 +45,10 @@ The Resource component displays a list of dataset resources, including download 
       control: 'text',
       description: 'Title for the resource section.',
     },
+    rootUrl: {
+      control: 'text',
+      description: 'Root URL for the datastore API.',
+    },
   },
   tags: ['autodocs'],
 };
@@ -37,6 +59,7 @@ type Story = StoryObj<typeof Resource>;
 export const Default: Story = {
   args: {
     title: 'Sample Resource',
+    rootUrl: '/api/1/datastore',
     distributions: [
       {
         identifier: 'dist-1',

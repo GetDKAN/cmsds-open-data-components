@@ -16,7 +16,7 @@ This document provides a comprehensive inventory of all components, services, te
 | Component | [DataTableDensity](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DataTableDensity) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
 | Component | [DataTablePageResults](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DataTablePageResults) | ✅ Public | ✅ Has Story | ❌ No Tests |
 | Component | [DataTableRowChanger](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DataTableRowChanger) | ❌ Internal | ❌ No Story | ✅ Has Tests |
-| Component | [DataTableToolbar](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DataTableToolbar) | ❌ Internal | ❌ No Story | ✅ Has Tests |
+| Component | [DataTableToolbar](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DataTableToolbar) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
 | Component | [DatasetAPITab](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetAPITab) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Component | [DatasetAdditionalInformation](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetAdditionalInformation) | ✅ Public (buildRows) | ✅ Has Story | ❌ No Tests |
 | Component | [DatasetDataDictionaryTab](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetDataDictionaryTab) | ❌ Internal | ❌ No Story | ✅ Has Tests |
@@ -122,11 +122,11 @@ This document provides a comprehensive inventory of all components, services, te
 
 | Category | Total | With Stories | With Tests | With Both | With Neither |
 |----------|-------|--------------|------------|-----------|--------------|
-| Components | 64 | 36 (56%) | 23 (36%) | 9 (14%) | 14 (22%) |
+| Components | 64 | 37 (58%) | 23 (36%) | 10 (16%) | 14 (22%) |
 | Templates | 12 | 0 (0%) | 3 (25%) | 0 (0%) | 9 (75%) |
 | Services/Hooks/Contexts | 9 | 0 (0%) | 0 (0%) | 0 (0%) | 9 (100%) |
 | Utilities/Types/Assets | 10 | 0 (0%) | 0 (0%) | 0 (0%) | 10 (100%) |
-| **Project Total** | **95** | **36 (38%)** | **26 (27%)** | **9 (9%)** | **42 (44%)** |
+| **Project Total** | **95** | **37 (39%)** | **26 (27%)** | **10 (11%)** | **42 (44%)** |
 
 ---
 
@@ -136,5 +136,5 @@ This document provides a comprehensive inventory of all components, services, te
 
 ---
 
-*Last updated: November 10, 2025*  
+*Last updated: November 12, 2025*  
 *Repository: [GetDKAN/cmsds-open-data-components](https://github.com/GetDKAN/cmsds-open-data-components)*
