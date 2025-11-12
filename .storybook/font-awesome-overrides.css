@@ -4,38 +4,13 @@
  * Note: Font Awesome Free 7 uses "Font Awesome 7 Free" as the font-family name
  */
 
-/* Global override for pseudo-elements using FA Pro font-family */
-.dkan-c-header-search--modal-button::before,
-button.dkan-c-mobile-menu-button::before,
-.dc-c-mobile-menu--open::before,
-.dc-c-mobile-menu--close::before,
-.dkan-c-header--mobile-menu-open::before,
-.dkan-c-header--mobile-menu-close::before,
-.dkan-c-header-nav-icon-link::before,
-.dkan-breadcrumb-item::before,
-.dc-c-breadcrumb__list > li::after,
-.datatable th.sortable::after {
-  font-family: "Font Awesome 7 Free" !important;
-  font-weight: 900 !important; /* Solid style in Free requires weight 900 */
-}
-
 /* Override header search button icon */
 .dkan-c-header-search--modal-button::before,
 .dkan-c-main-navigation--search .dkan-c-header-search--modal-button::before,
 button.dkan-c-header-search--modal-button::before {
   font-family: "Font Awesome 7 Free" !important;
   font-weight: 900 !important;
-  content: "\f002"; /* Search icon */
-  font-size: 18px;
-  padding-right: 10px;
-  display: inline-block;
-  line-height: 18px;
-  height: 18px;
-  width: 18px;
-  margin-left: 10px;
-  text-align: center;
-  vertical-align: middle;
-  box-sizing: content-box;
+  content: "\f002" !important; /* Search icon */
 }
 
 /* Override breadcrumb chevron icon */
@@ -43,40 +18,28 @@ button.dkan-c-header-search--modal-button::before {
 nav.dc-c-breadcrumb .dc-c-breadcrumb__list > li::after {
   font-family: "Font Awesome 7 Free" !important;
   font-weight: 900 !important;
-  content: '\f054'; /* Chevron right icon */
-  margin: 0 10px;
-  font-size: 10px;
+  content: '\f054' !important; /* Chevron right icon */
 }
 
 /* Override mobile menu button icons */
+.dc-c-mobile-menu--open::before,
+.dc-c-mobile-menu--close::before,
 button.dkan-c-mobile-menu-button::before {
-  font-size: 18px;
-  padding-right: 10px;
-  display: inline-block;
-  line-height: 18px;
-  height: 18px;
-  width: 18px;
-  margin-left: 10px;
-  text-align: center;
-  vertical-align: middle;
-  box-sizing: content-box;
+  font-family: "Font Awesome 7 Free" !important;
+  font-weight: 900 !important;
 }
 
 /* Override back arrow icon in header nav icon link */
 .dkan-c-header-nav-icon-link.show-back-arrow a::before {
   font-family: "Font Awesome 7 Free" !important;
   font-weight: 900 !important;
-  content: '\f060' !important; /* Arrow left icon (alternative: \f177 for arrow-circle-left) */
-  color: #323a45;
-  font-size: 18px;
-  padding-right: 10px;
-  display: inline-block;
-  line-height: 18px;
-  height: 18px;
-  width: 18px;
-  margin-left: 10px;
-  text-align: center;
-  vertical-align: middle;
+  content: '\f060' !important; /* Arrow left icon */
+}
+
+/* Override datatable sortable column icons */
+.datatable th.sortable::after {
+  font-family: "Font Awesome 7 Free" !important;
+  font-weight: 900 !important;
 }
 
 /* Global catch-all for any other ::before or ::after pseudo-elements */
@@ -87,20 +50,19 @@ button.dkan-c-mobile-menu-button::before {
   font-family: "Font Awesome 7 Free" !important;
 }
 
-/* Ensure proper font weights for Font Awesome Free */
+/* Ensure proper font weights for Font Awesome Free icons in component markup */
 .fas::before,
-.fa-solid::before,
-*[class*="fa-"]::before {
-  font-weight: 900; /* Solid style */
-}
-
-.fab::before,
-.fa-brands::before {
-  font-weight: 400; /* Brands style */
+.fa-solid::before {
+  font-weight: 900 !important; /* Solid style */
 }
 
 .far::before,
 .fa-regular::before {
-  font-weight: 400; /* Regular style (limited in Free) */
+  font-weight: 400 !important; /* Regular style */
+}
+
+.fab::before,
+.fa-brands::before {
+  font-weight: 400 !important; /* Brands style */
 }
 
