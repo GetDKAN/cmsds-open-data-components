@@ -1,8 +1,17 @@
 /**
  * Font Awesome Pro to Free overrides for Storybook
- * This file replaces Font Awesome Pro references with Font Awesome Free
- * Note: Font Awesome Free 7 uses "Font Awesome 7 Free" as the font-family name
+ * 
+ * This file replaces Font Awesome Pro 6 references with Font Awesome Free 7.
+ * All pseudo-element icons use solid weight (900) as Free doesn't include lighter weights.
+ * 
+ * Icon Mappings:
+ * - Most icons use the same Unicode values between Pro and Free
+ * - Exception: Back arrow (\f33e fa-arrow-alt-left Pro) -> (\f060 fa-arrow-left Free)
  */
+
+/* ==========================================================================
+   COMPONENT-SPECIFIC ICON OVERRIDES
+   ========================================================================== */
 
 /* Override header search button icon */
 .dkan-c-header-search--modal-button::before,
@@ -41,6 +50,20 @@ button.dkan-c-mobile-menu-button::before {
   font-family: "Font Awesome 7 Free" !important;
   font-weight: 900 !important;
 }
+
+/* ==========================================================================
+   STORYBOOK-SPECIFIC OVERRIDES
+   ========================================================================== */
+
+/* Logo size constraint for story display */
+.dkan-c-header-nav-icon-link img {
+  max-width: 120px !important;
+  width: 120px !important;
+}
+
+/* ==========================================================================
+   GLOBAL CATCH-ALL RULES
+   ========================================================================== */
 
 /* Global catch-all for any other ::before or ::after pseudo-elements */
 *[class*="dkan-"]::before,

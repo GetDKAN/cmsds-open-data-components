@@ -5,19 +5,6 @@ import logoImage from '../../assets/images/CMSGovLogo-O.png';
 export default {
   title: 'Components/HeaderNavIconLink',
   component: HeaderNavIconLink,
-  decorators: [
-    (Story: React.ComponentType) => (
-      <div>
-        <style>{`
-          .dkan-c-header-nav-icon-link img {
-            max-width: 120px !important;
-            width: 120px !important;
-          }
-        `}</style>
-        <Story />
-      </div>
-    ),
-  ],
   tags: ['autodocs'],
   argTypes: {
     url: {

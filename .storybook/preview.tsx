@@ -11,10 +11,16 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   </div>
 );
 
-// Decorator to replace Font Awesome Pro classes with Free equivalents
+/**
+ * Decorator to handle Font Awesome Pro to Free conversions
+ * 
+ * This decorator does two things:
+ * 1. Injects CSS overrides dynamically to ensure they load AFTER component SCSS
+ * 2. Replaces Pro style classes (far, fal, fad, fat) with fas (solid)
+ */
 const FontAwesomeProToFree = (Story: any) => {
   useEffect(() => {
-    // Inject critical CSS overrides to ensure they load last
+    // Inject CSS overrides to ensure they load after component SCSS
     const styleId = 'fa-pro-to-free-overrides';
     if (!document.getElementById(styleId)) {
       const style = document.createElement('style');
@@ -34,68 +40,49 @@ const FontAwesomeProToFree = (Story: any) => {
           font-family: "Font Awesome 7 Free" !important;
           font-weight: 900 !important;
         }
+        
+        /* Global catch-all for all dkan/dc prefixed pseudo-elements */
+        *[class*="dkan-"]::before,
+        *[class*="dkan-"]::after,
+        *[class*="dc-"]::before,
+        *[class*="dc-"]::after {
+          font-family: "Font Awesome 7 Free" !important;
+        }
       `;
       document.head.appendChild(style);
     }
 
-    // Map of FA Pro classes to FA Free classes
-    const proToFreeMap: { [key: string]: string } = {
-      'far': 'fas', // Regular -> Solid (most Pro regular icons exist as Free solid)
-      'fal': 'fas', // Light -> Solid
-      'fad': 'fas', // Duotone -> Solid
-      'fat': 'fas', // Thin -> Solid
-    };
-
-    // Specific icon mappings for Pro icons that don't exist in Free
-    const iconReplacements: { [key: string]: string } = {
-      'fa-circle-sort': 'fa-sort',
-      'fa-circle-sort-up': 'fa-sort-up',
-      'fa-circle-sort-down': 'fa-sort-down',
-    };
-
-    // Find all elements with FA Pro classes and replace them
-    const replaceIcons = () => {
-      const icons = document.querySelectorAll('[class*="fa-"]');
+    // Replace Pro style classes with Free equivalents
+    const replaceIconClasses = () => {
+      const icons = document.querySelectorAll('.far, .fal, .fad, .fat');
       icons.forEach((icon) => {
-        const classList = Array.from(icon.classList);
-        let modified = false;
-        
-        // Replace Pro style classes with Free equivalents
-        classList.forEach((className) => {
-          if (proToFreeMap[className]) {
-            icon.classList.remove(className);
-            icon.classList.add(proToFreeMap[className]);
-            modified = true;
-          }
-          
-          // Replace specific Pro-only icons with Free alternatives
-          if (iconReplacements[className]) {
-            icon.classList.remove(className);
-            icon.classList.add(iconReplacements[className]);
-            modified = true;
-          }
-        });
-
-        // If we haven't found a style class, default to 'fas'
-        const hasStyleClass = classList.some(c => ['fas', 'fab', 'far'].includes(c));
-        const hasFaIcon = classList.some(c => c.startsWith('fa-') && c !== 'fa');
-        
-        if (!hasStyleClass && hasFaIcon) {
+        if (icon.classList.contains('far')) {
+          icon.classList.remove('far');
+          icon.classList.add('fas');
+        }
+        if (icon.classList.contains('fal')) {
+          icon.classList.remove('fal');
+          icon.classList.add('fas');
+        }
+        if (icon.classList.contains('fad')) {
+          icon.classList.remove('fad');
+          icon.classList.add('fas');
+        }
+        if (icon.classList.contains('fat')) {
+          icon.classList.remove('fat');
           icon.classList.add('fas');
         }
       });
     };
 
     // Run on mount
-    replaceIcons();
+    replaceIconClasses();
 
     // Also run on DOM changes (for dynamically added icons)
-    const observer = new MutationObserver(replaceIcons);
+    const observer = new MutationObserver(replaceIconClasses);
     observer.observe(document.body, {
       childList: true,
       subtree: true,
-      attributes: true,
-      attributeFilter: ['class']
     });
 
     return () => observer.disconnect();

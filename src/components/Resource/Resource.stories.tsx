@@ -1,16 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import Resource from './index';
+import { createStorybookQueryClient } from '../../../.storybook/queryClient';
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-      staleTime: Infinity,
-    },
-  },
-});
+const queryClient = createStorybookQueryClient();
 
 const meta: Meta<typeof Resource> = {
   title: 'Components/Resource',

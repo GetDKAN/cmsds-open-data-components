@@ -19,15 +19,7 @@ The CMSTopNav component provides the top navigation bar for CMS websites. It dis
   decorators: [
     (Story) => (
       <MemoryRouter>
-        <div>
-          <style>{`
-            .dkan-c-header-nav-icon-link img {
-              max-width: 120px !important;
-              width: 120px !important;
-            }
-          `}</style>
-          <Story />
-        </div>
+        <Story />
       </MemoryRouter>
     ),
   ],

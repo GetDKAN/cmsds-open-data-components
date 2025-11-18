@@ -1,14 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { ResourceType, ColumnType } from '../../types/dataset';
-
-// Import the actual component to get its structure
 import DataTablePageResults from '../DataTablePageResults';
 import FilterChip from '../FilterChip';
 import { getOperatorLabel } from '../../templates/FilteredResource/functions';
 import './DataTableToolbar.scss';
 
-// Create a simplified version of DataTableToolbar for stories
+/**
+ * Simplified version of DataTableToolbar for Storybook
+ * 
+ * This is a standalone version created to avoid TanStack Query/Table dependencies
+ * in the story. It replicates the core UI and functionality without requiring
+ * complex context providers.
+ */
 type DataTableToolbarProps = {
   resource: ResourceType;
   id: string;
