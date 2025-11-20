@@ -24,7 +24,8 @@ button.dkan-c-header-search--modal-button::before {
 
 /* Override breadcrumb chevron icon */
 .dc-c-breadcrumb__list > li::after,
-nav.dc-c-breadcrumb .dc-c-breadcrumb__list > li::after {
+nav.dc-c-breadcrumb .dc-c-breadcrumb__list > li::after,
+ol.dc-c-breadcrumb__list > li::after {
   font-family: "Font Awesome 7 Free" !important;
   font-weight: 900 !important;
   content: '\f054' !important; /* Chevron right icon */
