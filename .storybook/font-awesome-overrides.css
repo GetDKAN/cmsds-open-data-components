@@ -52,6 +52,19 @@ button.dkan-c-mobile-menu-button::before {
   font-weight: 900 !important;
 }
 
+/* Override data dictionary table sort button icons */
+.dc-c-sort--default::after {
+  content: '\f0dc' !important; /* fa-sort - unsorted state */
+}
+
+.dc-c-sort--asc::after {
+  content: '\f0de' !important; /* fa-sort-up - ascending sort */
+}
+  
+.dc-c-sort--desc::after {
+  content: '\f0dd' !important; /* fa-sort-down - descending sort */
+}
+ 
 /* ==========================================================================
    STORYBOOK-SPECIFIC OVERRIDES
    ========================================================================== */

@@ -13,44 +13,30 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 
 /**
  * Decorator to handle Font Awesome Pro to Free conversions
- *
- * Replaces Pro style classes (far, fal, fad, fat) with fas (solid) for Font Awesome Free compatibility.
+ * 
+ * Replaces Pro icon classes with Free equivalents at runtime.
  * CSS overrides are loaded via font-awesome-overrides.css import.
  */
 const FontAwesomeProToFree = (Story: any) => {
   useEffect(() => {
-    // Replace Pro style classes with Free equivalents
     const replaceIconClasses = () => {
-      const icons = document.querySelectorAll('.far, .fal, .fad, .fat');
-      icons.forEach((icon) => {
-        if (icon.classList.contains('far')) {
-          icon.classList.remove('far');
-          icon.classList.add('fas');
-        }
-        if (icon.classList.contains('fal')) {
-          icon.classList.remove('fal');
-          icon.classList.add('fas');
-        }
-        if (icon.classList.contains('fad')) {
-          icon.classList.remove('fad');
-          icon.classList.add('fas');
-        }
-        if (icon.classList.contains('fat')) {
-          icon.classList.remove('fat');
-          icon.classList.add('fas');
-        }
+      // Pro weight classes → solid
+      document.querySelectorAll('.far, .fal, .fad, .fat').forEach((icon) => {
+        icon.classList.remove('far', 'fal', 'fad', 'fat');
+        icon.classList.add('fas');
+      });
+
+      // Pro icon names → Free equivalents
+      document.querySelectorAll('.fa-file-xls').forEach((icon) => {
+        icon.classList.replace('fa-file-xls', 'fa-file-excel');
       });
     };
 
-    // Run on mount
     replaceIconClasses();
 
-    // Also run on DOM changes (for dynamically added icons)
+    // Watch for dynamically added icons
     const observer = new MutationObserver(replaceIconClasses);
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
+    observer.observe(document.body, { childList: true, subtree: true });
 
     return () => observer.disconnect();
   }, []);
