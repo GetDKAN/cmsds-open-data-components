@@ -1,6 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import CMSTopNav from './index';
+import logoImage from '../../assets/images/CMSGovLogo-O.png';
 
 const meta = {
   title: 'Components/CMSTopNav',
@@ -33,7 +34,7 @@ export const Default = {
       url: '/',
       urlTitle: 'CMSDS',
       logoAltText: 'CMSDS Logo',
-      logoFilePath: '/path/to/logo.png',
+      logoFilePath: logoImage,
       tagline: 'CMSDS Tagline',
     },
     links: [
@@ -69,7 +70,7 @@ export const WithManyLinks = {
       url: '/',
       urlTitle: 'CMSDS',
       logoAltText: 'CMSDS Logo',
-      logoFilePath: '/path/to/logo.png',
+      logoFilePath: logoImage,
       tagline: 'CMSDS Tagline',
     },
     links: [
@@ -149,7 +150,7 @@ export const NoLinks = {
       url: '/',
       urlTitle: 'CMSDS',
       logoAltText: 'CMSDS Logo',
-      logoFilePath: '/path/to/logo.png',
+      logoFilePath: logoImage,
       tagline: 'CMSDS Tagline',
     },
     links: [],
@@ -169,7 +170,7 @@ export const LongTagline = {
       url: '/',
       urlTitle: 'CMSDS',
       logoAltText: 'CMSDS Logo',
-      logoFilePath: '/path/to/logo.png',
+      logoFilePath: logoImage,
       tagline: 'CMSDS Tagline',
     },
     links: [

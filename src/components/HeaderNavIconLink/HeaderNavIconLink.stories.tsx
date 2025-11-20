@@ -1,5 +1,6 @@
 import React from 'react';
 import HeaderNavIconLink, { HeaderNavIconLinkProps } from './index';
+import logoImage from '../../assets/images/CMSGovLogo-O.png';
 
 export default {
   title: 'Components/HeaderNavIconLink',
@@ -19,7 +20,7 @@ export default {
     logoFilePath: {
       control: 'text',
       description: 'Image source for the icon.',
-      defaultValue: 'https://via.placeholder.com/40x40?text=Logo',
+      defaultValue: logoImage,
     },
     logoAltText: {
       control: 'text',
@@ -45,7 +46,7 @@ export const Default = {
   args: {
     url: '/',
     urlTitle: 'CMSDS Home',
-    logoFilePath: '/path/to/logo.png',
+    logoFilePath: logoImage,
     logoAltText: 'CMSDS Logo',
     backArrow: false,
   },
@@ -56,7 +57,7 @@ export const WithBackArrow = {
   args: {
     url: '/',
     urlTitle: 'Back to CMS',
-    logoFilePath: 'https://via.placeholder.com/40x40?text=Logo',
+    logoFilePath: logoImage,
     logoAltText: 'CMSDS Logo',
     backArrow: true,
   },

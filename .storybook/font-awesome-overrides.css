@@ -1,0 +1,105 @@
+/**
+ * Font Awesome Pro to Free overrides for Storybook
+ * 
+ * This file replaces Font Awesome Pro 6 references with Font Awesome Free 7.
+ * All pseudo-element icons use solid weight (900) as Free doesn't include lighter weights.
+ * 
+ * Icon Mappings:
+ * - Most icons use the same Unicode values between Pro and Free
+ * - Exception: Back arrow (\f33e fa-arrow-alt-left Pro) -> (\f060 fa-arrow-left Free)
+ */
+
+/* ==========================================================================
+   COMPONENT-SPECIFIC ICON OVERRIDES
+   ========================================================================== */
+
+/* Override header search button icon */
+.dkan-c-header-search--modal-button::before,
+.dkan-c-main-navigation--search .dkan-c-header-search--modal-button::before,
+button.dkan-c-header-search--modal-button::before {
+  font-family: "Font Awesome 7 Free" !important;
+  font-weight: 900 !important;
+  content: "\f002" !important; /* Search icon */
+}
+
+/* Override breadcrumb chevron icon */
+.dc-c-breadcrumb__list > li::after,
+nav.dc-c-breadcrumb .dc-c-breadcrumb__list > li::after,
+ol.dc-c-breadcrumb__list > li::after {
+  font-family: "Font Awesome 7 Free" !important;
+  font-weight: 900 !important;
+  content: '\f054' !important; /* Chevron right icon */
+}
+
+/* Override mobile menu button icons */
+.dc-c-mobile-menu--open::before,
+.dc-c-mobile-menu--close::before,
+button.dkan-c-mobile-menu-button::before {
+  font-family: "Font Awesome 7 Free" !important;
+  font-weight: 900 !important;
+}
+
+/* Override back arrow icon in header nav icon link */
+.dkan-c-header-nav-icon-link.show-back-arrow a::before {
+  font-family: "Font Awesome 7 Free" !important;
+  font-weight: 900 !important;
+  content: '\f060' !important; /* Arrow left icon */
+}
+
+/* Override datatable sortable column icons */
+.datatable th.sortable::after {
+  font-family: "Font Awesome 7 Free" !important;
+  font-weight: 900 !important;
+}
+
+/* Override data dictionary table sort button icons */
+.dc-c-sort--default::after {
+  content: '\f0dc' !important; /* fa-sort - unsorted state */
+}
+
+.dc-c-sort--asc::after {
+  content: '\f0de' !important; /* fa-sort-up - ascending sort */
+}
+  
+.dc-c-sort--desc::after {
+  content: '\f0dd' !important; /* fa-sort-down - descending sort */
+}
+ 
+/* ==========================================================================
+   STORYBOOK-SPECIFIC OVERRIDES
+   ========================================================================== */
+
+/* Logo size constraint for story display */
+.dkan-c-header-nav-icon-link img {
+  max-width: 120px !important;
+  width: 120px !important;
+}
+
+/* ==========================================================================
+   GLOBAL CATCH-ALL RULES
+   ========================================================================== */
+
+/* Global catch-all for any other ::before or ::after pseudo-elements */
+*[class*="dkan-"]::before,
+*[class*="dkan-"]::after,
+*[class*="dc-"]::before,
+*[class*="dc-"]::after {
+  font-family: "Font Awesome 7 Free" !important;
+}
+
+/* Ensure proper font weights for Font Awesome Free icons in component markup */
+.fas::before,
+.fa-solid::before {
+  font-weight: 900 !important; /* Solid style */
+}
+
+.far::before,
+.fa-regular::before {
+  font-weight: 400 !important; /* Regular style */
+}
+
+.fab::before,
+.fa-brands::before {
+  font-weight: 400 !important; /* Brands style */
+}
+
