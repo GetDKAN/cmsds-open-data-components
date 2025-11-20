@@ -73,6 +73,7 @@ export type DatasetPageType = {
   customDescription?: Function,
   updateAriaLive?: Function,
   showRowLimitNotice?: boolean,
+  useDatasetAPI?: boolean,
 }
 
 
