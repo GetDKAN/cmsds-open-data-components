@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-  useReactTable,
-  flexRender,
-  getCoreRowModel,
-  createColumnHelper,
-  ColumnResizeMode,
-  ColumnDef,
-  getSortedRowModel,
-  SortingState,
-} from "@tanstack/react-table";
+import { flexRender } from "@tanstack/react-table";
 
 const FixedSizeTHead = ({table, sortElement}) => {
   return(
