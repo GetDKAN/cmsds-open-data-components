@@ -6,7 +6,7 @@ import Resource from '../Resource';
 import { DatasetOverviewPropsType } from '../../types/dataset';
 
 const DatasetOverview = ({ dataset, resource, distributions, metadataMapping, rootUrl } : DatasetOverviewPropsType) => {
-  const md = useMediaQuery({ minWidth: 0, maxWidth: 768 });
+  const md = useMediaQuery({ minWidth: 0, maxWidth: "48rem" });
   const rows = buildRows(metadataMapping, dataset);
 
   const tooltips = [

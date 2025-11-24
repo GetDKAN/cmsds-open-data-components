@@ -125,7 +125,7 @@ This document provides overrides to Swagger UI, fixing accessibility issues.
 
 // Fix issue on mobile with text on accordion looking weird.
 
-@media (width <= 544px) {
+@media (width <= 34rem) {
   .swagger-ui .opblock-tag-section .opblock-tag small {
     flex: initial;
   }

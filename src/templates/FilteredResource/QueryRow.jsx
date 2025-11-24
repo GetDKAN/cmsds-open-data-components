@@ -16,7 +16,7 @@ function getStartDate(condition, schema, id) {
 }
 
 const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schema }) => {
-  const sm = useMediaQuery({ minWidth: 0, maxWidth: 544 });
+  const sm = useMediaQuery({ minWidth: 0, maxWidth: "34rem" });
   const [operator, setOperator] = useState(condition.operator);
   const [property, setProperty] = useState(condition.property);
   const [value, setValue] = useState(condition.value);

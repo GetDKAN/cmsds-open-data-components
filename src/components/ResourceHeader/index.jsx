@@ -20,7 +20,7 @@ const ResourceHeader = ({
   tablePadding,
   downloadUrl,
 }) => {
-  const md = useMediaQuery({ minWidth: 0, maxWidth: 768 });
+  const md = useMediaQuery({ minWidth: 0, maxWidth: "48rem" });
   const { limit, offset, count, setLimit, setOffset } = resource;
   const intCount = count ? parseInt(count) : 0;
 

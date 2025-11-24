@@ -23,9 +23,9 @@ export type NavLinkArray = {
 }
 
 const Header = (props: HeaderProps) => {
-  const { topNav, children, mobileMaxWidth = 768, onDark = false } = props;
+  const { topNav, children, mobileMaxWidth = 48 onDark = false } = props;
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
-  const mobileMax = useMediaQuery({ query: `(max-width: ${mobileMaxWidth}px)` });
+  const mobileMax = useMediaQuery({ query: `(max-width: ${mobileMaxWidth}rem)` });
   const menu = useRef<HTMLDivElement>(null);
 
   function closeMobileMenu() {
@@ -44,7 +44,7 @@ const Header = (props: HeaderProps) => {
   }
 
   function handleClick(event: MouseEvent) {
-    // Links are wrapped in spans, this checks if the parent is an A, also check if in the search modal.    
+    // Links are wrapped in spans, this checks if the parent is an A, also check if in the search modal.
     if (mobileMenuOpen && menu.current && !menu.current.contains(event.target as HTMLElement)) {
       setMobileMenuOpen(false);
       closeMobileMenu()
@@ -72,12 +72,12 @@ const Header = (props: HeaderProps) => {
     if (menu.current) {
       if (!mobileMenuOpen) return;
       const focusableEls = getFocusableElements(menu.current).selectors.visible;
-      
+
       if (focusableEls.length <= 0) return;
       const firstEl = focusableEls[0];
       (firstEl as HTMLElement)?.focus();
     }
-    
+
   }
 
   const trapFocus = (event: KeyboardEvent) => {
@@ -96,7 +96,7 @@ const Header = (props: HeaderProps) => {
         }
       }
     }
-    
+
   }
 
   useEffect(() => {
@@ -107,11 +107,11 @@ const Header = (props: HeaderProps) => {
     } else {
       closeMobileMenu()
     }
-    
+
     if (menu.current) {
       menu.current.addEventListener('keydown', (evt) => trapFocus(evt));
     }
-    
+
     return () => {
       document.removeEventListener('keyup', handleMenuClose);
       document.addEventListener('mousedown', handleClick);

@@ -11,7 +11,7 @@ const DataDictionaryTable = ({tableColumns, tableData, pageSize, columnFilters} 
   const [sorting, setSorting] = useState<SortingState>([])
   const [ariaLiveFeedback, setAriaLiveFeedback] = useState('');
 
-  const mobile = useMediaQuery({ minWidth: 0, maxWidth: 544 });
+  const mobile = useMediaQuery({ minWidth: 0, maxWidth: "34rem" });
 
   const sortElement = (isSorted : string) => {
     if(isSorted === 'asc') {
@@ -113,7 +113,7 @@ const DataDictionaryTable = ({tableColumns, tableData, pageSize, columnFilters} 
             )}
           </TableHead>
           <TableBody>
-            {table.getRowModel().rows.map((row, index) => {    
+            {table.getRowModel().rows.map((row, index) => {
               return (
                 <TableRow key={index + JSON.stringify(row)}>
                   {row.getVisibleCells().map((cell) => {

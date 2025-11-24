@@ -22,7 +22,7 @@ const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schem
   const [value, setValue] = useState(condition.value);
   const [startDate, setStartDate] = React.useState(getStartDate(condition, schema, id));
 
-  const xl = useMediaQuery({minWidth: 1280})
+  const xl = useMediaQuery({minWidth: "80rem"})
 
   useEffect(() => {
     if (property !== condition.property) {

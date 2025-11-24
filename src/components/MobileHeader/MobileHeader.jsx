@@ -30,8 +30,8 @@ const MobileHeader = ({
   const { url, logo, urlTitle, logoAltText, inverseLogo } = org;
 
   const [menuOpen, setMenuOpen] = useState(false);
-  const mobile = useMediaQuery({ minWidth: 0, maxWidth: 543 });
-  const tablet = useMediaQuery({ minWidth: 544, maxWidth: 1023 });
+  const mobile = useMediaQuery({ minWidth: 0, maxWidth: "34rem" });
+  const tablet = useMediaQuery({ minWidth: "34rem", maxWidth: "64rem" });
   const menu = useRef(null);
   useEffect(() => {
 

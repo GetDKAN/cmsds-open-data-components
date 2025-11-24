@@ -6,7 +6,7 @@
     > div:has(input) {
         width: 100%;
     }
-    
+
     input {
         max-width: none;
         width: 100%;
@@ -15,18 +15,18 @@
     }
 
     .left-padding input {
-        @media (min-width: 544px) {
+        @media (min-width: 34rem) {
             padding-left: 50px;
         }
     }
 
     .right-padding input {
         padding-right: 74px;
-        @media (min-width: 544px) {
+        @media (min-width: 34rem) {
             padding-right: 197px;
         }
     }
-    
+
     button {
         position: absolute;
         right: 2px;
@@ -35,7 +35,7 @@
         padding: 16px;
         background-color: #0D2499;
 
-        @media (max-width: 544px) {
+        @media (max-width: 34rem) {
             border-top-left-radius: 0 !important;
             border-bottom-left-radius: 0 !important;
         }
@@ -49,7 +49,7 @@
         &:focus {
             background-color: #0D2499;
         }
-        
+
         span {
             display: block;
             height: 21px;
@@ -61,7 +61,7 @@
 
         .magnifying-glass-icon {
 
-            @media (min-width: 544px) {
+            @media (min-width: 34rem) {
                 display: none;
             }
 
@@ -71,7 +71,7 @@
         }
 
         .sm-label {
-            @media (max-width: 544px) {
+            @media (max-width: 34rem) {
                 display: none;
             }
         }
@@ -84,7 +84,7 @@
             path {
                 fill: var(--component-button-solid-dark-alt-color, #262626);
             }
-    
+
             &:hover,
             &:active {
                 border-color: #95cfae;

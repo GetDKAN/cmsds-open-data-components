@@ -14,11 +14,11 @@ type ResourcePropsType = {
 }
 
 const Resource = ({ distributions, resource, rootUrl, title } : ResourcePropsType ) => {
-  const sm = useMediaQuery({ minWidth: 0, maxWidth: 767 });
+  const sm = useMediaQuery({ minWidth: 0, maxWidth: "48rem" });
   return (
     <div className="ds-u-display--flex ds-u-flex-wrap--wrap">
       <h2 className="ds-l-col--12 ds-u-padding-left--0 ds-text-heading--2xl">Resources</h2>
-      {distributions.length ? ( 
+      {distributions.length ? (
         <ul className="ds-c-list ds-c-list--bare dc-c-resource-full-width">
           {
             distributions.map((dist) => {

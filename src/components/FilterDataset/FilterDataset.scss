@@ -43,7 +43,7 @@ dialog.dkan-filter-dataset-dialog {
   width: 42px;
 }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 64rem) {
   .dkan-filter-dataset-wrapper {
     .fa-filter:before {
       font-size: 1.4em !important;
@@ -51,7 +51,7 @@ dialog.dkan-filter-dataset-dialog {
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 48rem) {
   dialog.dkan-filter-dataset-dialog  {
     height: 100%;
 
@@ -95,7 +95,7 @@ dialog.dkan-filter-dataset-dialog {
             flex: 0;
             width: 100%;
           }
-  
+
           .dkan-filter-dataset-form-container {
             flex: 1;
             height: 100%;
@@ -122,7 +122,7 @@ dialog.dkan-filter-dataset-dialog {
           }
         }
       }
-  
+
       .ds-c-dialog__actions {
         width: 100%;
         flex: 0;

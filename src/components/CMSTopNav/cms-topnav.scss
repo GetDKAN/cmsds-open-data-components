@@ -22,13 +22,13 @@
   margin-left: 16px;
 }
 
-@media screen and (max-width: 544px) {
+@media screen and (max-width: 34rem) {
   .dkan-c-cms-topnav {
     display: none;
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 64rem) {
   .dkan-c-cms-topnav {
     height: 85px;
   }

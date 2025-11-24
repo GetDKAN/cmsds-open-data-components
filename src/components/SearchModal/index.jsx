@@ -11,7 +11,7 @@ const SearchModal = ({
   const navigate = useNavigate();
   const [modalSearchTerm, setModalSearchTerm] = useState('');
   const [modalSearch, setModalSearch] = useState(false);
-  const mobile = useMediaQuery({ minWidth: 0, maxWidth: 543 });
+  const mobile = useMediaQuery({ minWidth: 0, maxWidth: "34rem" });
 
   function searchForDataset(e) {
     e.preventDefault();

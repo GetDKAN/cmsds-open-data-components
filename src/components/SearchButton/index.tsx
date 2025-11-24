@@ -9,7 +9,7 @@ type SearchButtonProps = {
 
 const SearchButton = (props: SearchButtonProps) => {
   const { text, altMobileStyle } = props;
-  const sm = useMediaQuery({ minWidth: 0, maxWidth: 768 });
+  const sm = useMediaQuery({ minWidth: 0, maxWidth: "48rem" });
   return (altMobileStyle && sm) ? (
     <Button
       className="ds-u-margin-left--auto ds-u-padding-x--0 ds-c-button--solid dc-c-search-button-mobile"

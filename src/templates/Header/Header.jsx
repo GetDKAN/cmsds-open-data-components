@@ -5,8 +5,8 @@ import MobileHeader from '../../components/MobileHeader';
 import './header.scss';
 
 const Header = ({
-  mobileMaxWidth = 1023,
-  desktopMinWidth = 1024,
+  mobileMaxWidth = "64rem",
+  desktopMinWidth = "64rem",
   siteName,
   links,
   org,

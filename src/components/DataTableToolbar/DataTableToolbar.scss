@@ -11,7 +11,7 @@
       box-shadow: 0 0 0 3px var(--color-focus-light), 0 0 4px 6px var(--color-focus-dark);
       outline: 3px solid #0000;
       outline-offset: 3px;
-    } 
+    }
 
     > span {
       text-decoration: underline;
@@ -31,7 +31,7 @@
   }
 }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 64rem) {
   // make button labels hidden on screens smaller than 1024px
   .dkan-dataset-toolbar-button-label {
     clip: rect(0, 0, 0, 0);
@@ -43,10 +43,10 @@
     position: absolute;
     width: 1px;
   }
-  
+
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 48rem) {
   .dkan-data-table-toolbar-controls {
     justify-content: space-between;
     border-top: 1px solid var(--color-gray-lighter);
