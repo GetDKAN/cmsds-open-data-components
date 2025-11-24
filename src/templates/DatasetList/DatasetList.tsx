@@ -85,8 +85,36 @@ const DatasetList = ({
 
   const pageSize = defaultPageSize;
 
-  useEffect(() => {
+  function buildSearchParams(includePage: boolean) {
+    let newParams: any = {};
+    if (Number(page) !== 1 && includePage) {
+      newParams.page = page;
+    }
+    if (sort !== defaultSort.defaultSort) {
+      newParams.sort = sort;
+    }
+    if (sortOrder !== defaultSort.defaultOrder) {
+      newParams.sortOrder = sortOrder;
+    }
+    return qs.stringify(newParams, { addQueryPrefix: includePage, encode: true });
+  }
 
+  let params = {
+    sort: sort ? sort : undefined,
+    ['sort-order']: sortOrder ? sortOrder : undefined,
+    page: page !== 1 ? page : undefined,  //use index except for when submitting to Search API
+    ['page-size']: pageSize !== 10 ? pageSize : undefined,
+  }
+  const { data, isPending, error } = useQuery({
+    queryKey: ["datasets", params],
+    queryFn: () => {
+      return axios.get(`${rootUrl}/search/?${qs.stringify(acaToParams(params, ACA), { arrayFormat: 'comma', encode: false })}`)
+    }
+  });
+
+  if ((data && data.data.total) && totalItems != data.data.total) setTotalItems(data.data.total);
+
+  useEffect(() => {
     // Update browser URL with current search params
     const params = buildSearchParams(true);
     const url = new URL(window.location.href);
@@ -120,39 +148,31 @@ const DatasetList = ({
     }
   }, [page, sort, sortOrder]);
 
+  useEffect(() => {
+    if (noResults) {
+      setAnnouncementText('No results found.');
+    }
+  }, [noResults]);
 
-  function buildSearchParams(includePage: boolean) {
-    let newParams: any = {};
-    if (Number(page) !== 1 && includePage) {
-      newParams.page = page;
+  useEffect(() => {
+    if (!isPending && (!data || !data.data.results)) {
+      setAnnouncementText('Could not connect to the API.');
     }
-    if (sort !== defaultSort.defaultSort) {
-      newParams.sort = sort;
-    }
-    if (sortOrder !== defaultSort.defaultOrder) {
-      newParams.sortOrder = sortOrder;
-    }
-    return qs.stringify(newParams, { addQueryPrefix: includePage, encode: true });
-  }
-
-  let params = {
-    sort: sort ? sort : undefined,
-    ['sort-order']: sortOrder ? sortOrder : undefined,
-    page: page !== 1 ? page : undefined,  //use index except for when submitting to Search API
-    ['page-size']: pageSize !== 10 ? pageSize : undefined,
-  }
-  const { data, isPending, error } = useQuery({
-    queryKey: ["datasets", params],
-    queryFn: () => {
-      return axios.get(`${rootUrl}/search/?${qs.stringify(acaToParams(params, ACA), { arrayFormat: 'comma', encode: false })}`)
-    }
-  });
-
-  if ((data && data.data.total) && totalItems != data.data.total) setTotalItems(data.data.total);
+  }, [data, isPending]);
 
   return (
     <>
       <PageHeader headerText={pageTitle} />
+      <div>
+        <p
+          className="ds-u-visibility--screen-reader"
+          aria-live="assertive"
+          aria-atomic="true"
+          data-testid="currentResults"
+        >
+          {announcementText}
+        </p>
+      </div>
       <section className="ds-l-container">
         <div className="ds-l-row">
           <div className="ds-l-col--12">
@@ -187,22 +207,13 @@ const DatasetList = ({
                     <div className="ds-u-margin-bottom--3">{introText ? introText : null}</div>
                     {enablePagination && (
                       <div>
-                        <p className="ds-u-margin-y--0" aria-hidden="true">
+                        <p className="ds-u-margin-y--0">
                           {(currentResultNumbers && data) && (
                             <>
                               Showing {currentResultNumbers.startingNumber} -{' '}
                               {currentResultNumbers.endingNumber} of {data.data.total} datasets
                             </>
                           )}
-                        </p>
-                        <p
-                          className="ds-u-visibility--screen-reader"
-                          role="status"
-                          aria-live="assertive"
-                          aria-atomic="true"
-                          data-testid="currentResults"
-                        >
-                          {announcementText}
                         </p>
                       </div>
                     )}
@@ -221,7 +232,7 @@ const DatasetList = ({
                   )}
                 </div>
                 <ol className="dc-dataset-search-list ds-u-padding--0 ds-u-margin-top--0 ds-u-margin-bottom--4 ds-u-display--block" data-testid="datasetlist-results-list">
-                  {noResults && <Alert variation="error" heading="No results found." />}
+                  {noResults && <Alert variation="error" role="region" heading="No results found." />}
                   {data && data.data.results ? Object.keys(data.data.results).map((key) => {
                     return data.data.results[key];
                   }).map((item) => {
@@ -236,7 +247,7 @@ const DatasetList = ({
                       />
                     )
                   }) : (
-                    <Alert variation="error" heading="Could not connect to the API." />
+                    <Alert variation="error" role="region" heading="Could not connect to the API." />
                   )}
                 </ol>
                 {enablePagination && (data && data.data.total) && data.data.total != 0 && (
