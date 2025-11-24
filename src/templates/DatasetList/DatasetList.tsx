@@ -130,10 +130,6 @@ const DatasetList = ({
       endingNumber: Number(totalItems) < endingNumber ? Number(totalItems) : endingNumber,
     });
 
-    setTimeout(() => {
-      setAnnouncementText(`Showing ${startingNumber} to ${endingNumber} of ${totalItems} datasets`);
-    }, 100);
-
     if (totalItems <= 0 && currentResultNumbers !== null) {
       setNoResults(true);
     } else {
@@ -149,31 +145,36 @@ const DatasetList = ({
   }, [page, sort, sortOrder]);
 
   useEffect(() => {
+    // No results found
     if (noResults) {
       setAnnouncementText('No results found.');
     }
-  }, [noResults]);
 
-  useEffect(() => {
-    if (!isPending && (!data || !data.data.results)) {
+    // Could not connect to the API
+    else if (!isPending && (!data || !data.data.results)) {
       setAnnouncementText('Could not connect to the API.');
     }
-  }, [data, isPending]);
+
+    // Show results as normal
+    else {
+      setAnnouncementText(`Showing ${currentResultNumbers.startingNumber} to ${currentResultNumbers.endingNumber} of ${currentResultNumbers.total} datasets`);
+    }
+  }, [data, isPending, noResults, currentResultNumbers]);
 
   return (
     <>
       <PageHeader headerText={pageTitle} />
-      <div>
-        <p
-          className="ds-u-visibility--screen-reader"
-          aria-live="assertive"
-          aria-atomic="true"
-          data-testid="currentResults"
-        >
-          {announcementText}
-        </p>
-      </div>
       <section className="ds-l-container">
+        <div>
+          <p
+            className="ds-u-visibility--screen-reader"
+            aria-live="assertive"
+            aria-atomic="true"
+            data-testid="currentResults"
+          >
+            {announcementText}
+          </p>
+        </div>
         <div className="ds-l-row">
           <div className="ds-l-col--12">
             {showLargeFileWarning && (
