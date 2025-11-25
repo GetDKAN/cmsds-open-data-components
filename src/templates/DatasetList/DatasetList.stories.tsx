@@ -7,9 +7,6 @@ import { ACAContext } from '../../utilities/ACAContext';
 import { createDatasetListHandlers } from '../../../.storybook/mswHandlers';
 import { mockApiResponse } from '../../../__mocks__/mockDatasetSearchResults';
 
-console.log('STORY FILE: mockApiResponse imported as:', mockApiResponse);
-console.log('STORY FILE: mockApiResponse.total:', mockApiResponse.total);
-
 const queryClient = createStorybookQueryClient();
 
 const meta: Meta<typeof DatasetList> = {

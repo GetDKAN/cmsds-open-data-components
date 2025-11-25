@@ -5,32 +5,56 @@ import { http, HttpResponse, delay } from 'msw';
  * These handlers intercept both fetch and axios HTTP requests.
  */
 
+interface Distribution {
+  identifier: string;
+  data: {
+    downloadURL: string;
+    format: string;
+    title: string;
+  };
+}
+
+interface DatasetMetadata {
+  identifier: string;
+  title: string;
+  description?: string;
+  modified?: string;
+  distribution: Distribution[];
+}
+
+interface DatastoreRecords {
+  results: Record<string, unknown>[];
+  count: number;
+  schema: Record<string, Record<string, unknown>>;
+}
+
+interface SearchResults {
+  total: number;
+  results: Record<string, unknown>;
+}
+
 /**
- * Creates MSW handlers for StoredQueryPage stories
- * Mocks both metastore dataset metadata and datastore query results
+ * Creates MSW handlers for StoredQueryPage stories.
+ * Mocks both metastore dataset metadata and datastore query results.
  */
 export const createStoredQueryPageHandlers = (
-  datasetMetadata: any,
-  datastoreRecords: any,
-  baseUrl: string = 'https://data.cms.gov'
+  datasetMetadata: DatasetMetadata,
+  datastoreRecords: DatastoreRecords
 ) => [
   // Mock metastore dataset metadata endpoint
-  // Use wildcard pattern to match any domain/protocol
   http.get('**/metastore/schemas/dataset/items/:id', async () => {
-    await delay(500); // Simulate network latency
+    await delay(500);
     return HttpResponse.json(datasetMetadata);
   }),
 
   // Mock datastore query endpoint (both filtered and unfiltered)
-  // Use wildcard pattern to match any domain/protocol
   http.get('**/datastore/query/:resourceId', async ({ request }) => {
-    await delay(500); // Simulate network latency
+    await delay(500);
     const url = new URL(request.url);
 
     // Check if this is a metadata-only query (results=false)
     const resultsParam = url.searchParams.get('results');
     if (resultsParam === 'false') {
-      // Return only count and schema, no results
       return HttpResponse.json({
         count: datastoreRecords.count,
         schema: datastoreRecords.schema,
@@ -38,30 +62,23 @@ export const createStoredQueryPageHandlers = (
       });
     }
 
-    // Return full query results
     return HttpResponse.json(datastoreRecords);
   }),
 ];
 
 /**
- * Creates MSW handlers for DatasetList stories
- * Mocks the search API endpoint
+ * Creates MSW handlers for DatasetList stories.
+ * Mocks the search API endpoint.
  */
-export const createDatasetListHandlers = (
-  searchResults: any,
-  baseUrl: string = 'https://data.cms.gov'
-) => [
-  // Use wildcard pattern to match any domain/protocol with trailing slash
-  http.get('**/search/*', async ({ request }) => {
-    console.log('MSW intercepted DatasetList search:', request.url);
-    console.log('MSW returning data:', searchResults);
-    console.log('Data has total:', searchResults.total);
-    await delay(500); // Simulate network latency
+export const createDatasetListHandlers = (searchResults: SearchResults) => [
+  http.get('**/search/*', async () => {
+    await delay(500);
     return HttpResponse.json(searchResults);
   }),
 ];
 
 /**
- * Default empty handlers (can be overridden per story)
+ * Default empty handlers for MSW initialization.
+ * Per-story handlers are configured via parameters.msw.handlers.
  */
-export const handlers = [];
+export const handlers: ReturnType<typeof http.get>[] = [];
