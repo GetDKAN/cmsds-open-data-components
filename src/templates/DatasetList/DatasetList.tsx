@@ -85,42 +85,6 @@ const DatasetList = ({
 
   const pageSize = defaultPageSize;
 
-  useEffect(() => {
-
-    // Update browser URL with current search params
-    const params = buildSearchParams(true);
-    const url = new URL(window.location.href);
-    window.history.pushState({}, '', `${url.origin}${url.pathname}${params}`);
-
-    const baseNumber = Number(totalItems) > 0 ? 1 : 0;
-    const startingNumber = baseNumber + (Number(pageSize) * Number(page) - Number(pageSize));
-    const endingNumber = Number(pageSize) * Number(page);
-
-    setCurrentResultNumbers({
-      total: Number(totalItems),
-      startingNumber: Number(totalItems) >= startingNumber ? startingNumber : 0,
-      endingNumber: Number(totalItems) < endingNumber ? Number(totalItems) : endingNumber,
-    });
-
-    setTimeout(() => {
-      setAnnouncementText(`Showing ${startingNumber} to ${endingNumber} of ${totalItems} datasets`);
-    }, 100);
-
-    if (totalItems <= 0 && currentResultNumbers !== null) {
-      setNoResults(true);
-    } else {
-      setNoResults(false);
-    }
-  }, [totalItems, pageSize, page]);
-
-  useEffect(() => {
-    var params = buildSearchParams(true);
-    if (params !== location.search) {
-      setSearchParams(params);
-    }
-  }, [page, sort, sortOrder]);
-
-
   function buildSearchParams(includePage: boolean) {
     let newParams: any = {};
     if (Number(page) !== 1 && includePage) {
@@ -150,10 +114,67 @@ const DatasetList = ({
 
   if ((data && data.data.total) && totalItems != data.data.total) setTotalItems(data.data.total);
 
+  useEffect(() => {
+    // Update browser URL with current search params
+    const params = buildSearchParams(true);
+    const url = new URL(window.location.href);
+    window.history.pushState({}, '', `${url.origin}${url.pathname}${params}`);
+
+    const baseNumber = Number(totalItems) > 0 ? 1 : 0;
+    const startingNumber = baseNumber + (Number(pageSize) * Number(page) - Number(pageSize));
+    const endingNumber = Number(pageSize) * Number(page);
+
+    setCurrentResultNumbers({
+      total: Number(totalItems),
+      startingNumber: Number(totalItems) >= startingNumber ? startingNumber : 0,
+      endingNumber: Number(totalItems) < endingNumber ? Number(totalItems) : endingNumber,
+    });
+
+    if (totalItems <= 0 && currentResultNumbers !== null) {
+      setNoResults(true);
+    } else {
+      setNoResults(false);
+    }
+  }, [totalItems, pageSize, page]);
+
+  useEffect(() => {
+    var params = buildSearchParams(true);
+    if (params !== location.search) {
+      setSearchParams(params);
+    }
+  }, [page, sort, sortOrder]);
+
+  useEffect(() => {
+    // No results found
+    if (noResults) {
+      setAnnouncementText('No results found.');
+    }
+
+    // Could not connect to the API
+    else if (!isPending && (!data || !data.data.results)) {
+      setAnnouncementText('Could not connect to the API.');
+    }
+
+    // Show results as normal
+    else {
+      setAnnouncementText(`Showing ${currentResultNumbers.startingNumber} to ${currentResultNumbers.endingNumber} of ${currentResultNumbers.total} datasets`);
+    }
+  }, [data, isPending, noResults, currentResultNumbers]);
+
   return (
     <>
       <PageHeader headerText={pageTitle} />
       <section className="ds-l-container">
+        <div>
+          <p
+            className="ds-u-visibility--screen-reader"
+            aria-live="assertive"
+            aria-atomic="true"
+            data-testid="currentResults"
+          >
+            {announcementText}
+          </p>
+        </div>
         <div className="ds-l-row">
           <div className="ds-l-col--12">
             {showLargeFileWarning && (
@@ -187,22 +208,13 @@ const DatasetList = ({
                     <div className="ds-u-margin-bottom--3">{introText ? introText : null}</div>
                     {enablePagination && (
                       <div>
-                        <p className="ds-u-margin-y--0" aria-hidden="true">
+                        <p className="ds-u-margin-y--0">
                           {(currentResultNumbers && data) && (
                             <>
                               Showing {currentResultNumbers.startingNumber} -{' '}
                               {currentResultNumbers.endingNumber} of {data.data.total} datasets
                             </>
                           )}
-                        </p>
-                        <p
-                          className="ds-u-visibility--screen-reader"
-                          role="status"
-                          aria-live="assertive"
-                          aria-atomic="true"
-                          data-testid="currentResults"
-                        >
-                          {announcementText}
                         </p>
                       </div>
                     )}
@@ -221,7 +233,7 @@ const DatasetList = ({
                   )}
                 </div>
                 <ol className="dc-dataset-search-list ds-u-padding--0 ds-u-margin-top--0 ds-u-margin-bottom--4 ds-u-display--block" data-testid="datasetlist-results-list">
-                  {noResults && <Alert variation="error" heading="No results found." />}
+                  {noResults && <Alert variation="error" role="region" heading="No results found." />}
                   {data && data.data.results ? Object.keys(data.data.results).map((key) => {
                     return data.data.results[key];
                   }).map((item) => {
@@ -236,7 +248,7 @@ const DatasetList = ({
                       />
                     )
                   }) : (
-                    <Alert variation="error" heading="Could not connect to the API." />
+                    <Alert variation="error" role="region" heading="Could not connect to the API." />
                   )}
                 </ol>
                 {enablePagination && (data && data.data.total) && data.data.total != 0 && (
