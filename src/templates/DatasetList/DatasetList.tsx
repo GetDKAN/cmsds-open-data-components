@@ -112,6 +112,10 @@ const DatasetList = ({
     }
   });
 
+  console.log('DatasetList received data:', data);
+  console.log('DatasetList data.data:', data?.data);
+  console.log('DatasetList total:', data?.data?.total);
+
   if ((data && data.data.total) && totalItems != data.data.total) setTotalItems(data.data.total);
 
   useEffect(() => {

@@ -51,8 +51,11 @@ export const createDatasetListHandlers = (
   searchResults: any,
   baseUrl: string = 'https://data.cms.gov'
 ) => [
-  // Use wildcard pattern to match any domain/protocol
-  http.get('**/search/', async () => {
+  // Use wildcard pattern to match any domain/protocol with trailing slash
+  http.get('**/search/*', async ({ request }) => {
+    console.log('MSW intercepted DatasetList search:', request.url);
+    console.log('MSW returning data:', searchResults);
+    console.log('Data has total:', searchResults.total);
     await delay(500); // Simulate network latency
     return HttpResponse.json(searchResults);
   }),

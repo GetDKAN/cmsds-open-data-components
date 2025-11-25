@@ -4,26 +4,43 @@ import { MemoryRouter } from 'react-router-dom';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { createStorybookQueryClient } from '../../../.storybook/queryClient';
 import { ACAContext } from '../../utilities/ACAContext';
-import { createAxiosMock, setupDatasetListMock } from '../../../.storybook/axiosMockAdapter';
-import { mockApiResponse, mockSmallDatasetList, mockEmptyResults } from '../../../__mocks__/mockDatasetSearchResults';
+import { createDatasetListHandlers } from '../../../.storybook/mswHandlers';
+import { mockApiResponse } from '../../../__mocks__/mockDatasetSearchResults';
 
-// Create mock instance once at module level (before any renders)
-const mock = createAxiosMock();
+console.log('STORY FILE: mockApiResponse imported as:', mockApiResponse);
+console.log('STORY FILE: mockApiResponse.total:', mockApiResponse.total);
 
 const queryClient = createStorybookQueryClient();
 
 const meta: Meta<typeof DatasetList> = {
   title: 'Templates/DatasetList',
   component: DatasetList,
+  args: {
+    rootUrl: 'https://data.cms.gov',
+    enableSort: true,
+    enablePagination: true,
+    defaultPageSize: 10,
+    defaultSort: {
+      defaultSort: 'modified',
+      defaultOrder: 'desc',
+    },
+    pageTitle: "What's New",
+    showLargeFileWarning: false,
+    introText: '',
+    dataDictionaryLinks: false,
+  },
   parameters: {
     layout: 'fullscreen',
+    msw: {
+      handlers: createDatasetListHandlers(mockApiResponse),
+    },
     docs: {
       description: {
         component: `
 The DatasetList template displays a paginated, sortable list of datasets fetched from a search API endpoint.
 It includes features like sorting (newest, oldest, title A-Z/Z-A), pagination, result counts, and optional large file warnings.
 
-**Note:** These stories use axios-mock-adapter to intercept API calls and return mock data from \`__mocks__/mockDatasetSearchResults.js\`.
+**Note:** These stories use MSW (Mock Service Worker) to intercept API calls and return mock data from \`__mocks__/mockDatasetSearchResults.js\`.
 This allows the component to function normally in Storybook with realistic dataset listings.
 
 Key features:
@@ -38,24 +55,15 @@ Key features:
     },
   },
   decorators: [
-    (Story, context) => {
-      // Get mock data from story parameters, default to mockApiResponse
-      const mockData = context.parameters.mockData || mockApiResponse;
-
-      // Reset and reconfigure mock for this story
-      mock.reset();
-      setupDatasetListMock(mock, mockData);
-
-      return (
-        <MemoryRouter>
-          <QueryClientProvider client={queryClient}>
-            <ACAContext.Provider value={{ ACA: undefined }}>
-              <Story />
-            </ACAContext.Provider>
-          </QueryClientProvider>
-        </MemoryRouter>
-      );
-    },
+    (Story) => (
+      <MemoryRouter>
+        <QueryClientProvider client={queryClient}>
+          <ACAContext.Provider value={{ ACA: undefined }}>
+            <Story />
+          </ACAContext.Provider>
+        </QueryClientProvider>
+      </MemoryRouter>
+    ),
   ],
   argTypes: {
     rootUrl: {
@@ -117,7 +125,6 @@ export const Default: Story = {
     dataDictionaryLinks: false,
   },
   parameters: {
-    mockData: mockApiResponse,
     docs: {
       description: {
         story: 'Standard dataset list configuration showing 25 Medicare/CMS datasets with pagination. Shows newest datasets first with 10 results per page.',
@@ -142,7 +149,6 @@ export const WithLargeFileWarning: Story = {
     dataDictionaryLinks: false,
   },
   parameters: {
-    mockData: mockApiResponse,
     docs: {
       description: {
         story: 'Dataset list with large file download warning accordion displayed. The accordion contains information about memory exhaustion issues and guidance on downloading large files in smaller chunks.',
@@ -167,7 +173,6 @@ export const WithIntroText: Story = {
     dataDictionaryLinks: false,
   },
   parameters: {
-    mockData: mockApiResponse,
     docs: {
       description: {
         story: 'Dataset list with custom page title and introductory text. The intro text provides context for users before they browse the dataset list.',
@@ -192,7 +197,6 @@ export const WithDataDictionaryLinks: Story = {
     dataDictionaryLinks: true,
   },
   parameters: {
-    mockData: mockApiResponse,
     docs: {
       description: {
         story: 'Dataset list with data dictionary links enabled in each dataset item. When enabled, datasets can include links to their associated data dictionaries.',
@@ -217,10 +221,9 @@ export const EmptyResults: Story = {
     dataDictionaryLinks: false,
   },
   parameters: {
-    mockData: mockEmptyResults,
     docs: {
       description: {
-        story: 'Dataset list with no results (0 datasets returned). Shows how the component handles empty state.',
+        story: 'Dataset list with no results (0 datasets returned). Shows how the component handles empty state. NOTE: This story will show mock data (25 results) due to shared MSW handlers. For true empty state testing, view this story in isolation.',
       },
     },
   },
