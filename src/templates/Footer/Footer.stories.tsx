@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Footer from './index';
 import { MemoryRouter } from 'react-router-dom';
-import cmsLogo from '../../assets/images/CMSGovLogo-O.png';
-import hhsLogo from '../../assets/images/CMSgov@2x-white-O.png';
+import cmsLogo from '../../assets/images/cms-logo-footer.png';
+import hhsLogo from '../../assets/images/hhs-logo-footer.png';
+import './footer.scss';
 
 const meta: Meta<typeof Footer> = {
   title: 'Templates/Footer',

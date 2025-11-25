@@ -6,7 +6,7 @@ import HeaderSiteTitle from '../../components/HeaderSiteTitle';
 import HeaderNav from '../../components/HeaderNav';
 import HeaderSearch from '../../components/HeaderSearch';
 import MobileMenuButton from '../../components/MobileMenuButton';
-import cmsLogo from '../../assets/images/CMSGovLogo-O.png';
+import cmsLogo from '../../assets/images/CMSgov@2x-white-O.png';
 import type { NavLinkArray } from './index';
 import type { OrgType } from '../../types/misc';
 
