@@ -88,16 +88,16 @@ This document provides a comprehensive inventory of all components, services, te
 | **TEMPLATES** | | | | |
 | Template | [APIPage](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/APIPage) | ✅ Public | ❌ No Story | ❌ No Tests |
 | Template | [Dataset](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/Dataset) | ✅ Public | ❌ No Story | ✅ Has Tests |
-| Template | [DatasetList](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/DatasetList) | ✅ Public | ❌ No Story | ❌ No Tests |
+| Template | [DatasetList](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/DatasetList) | ✅ Public | ✅ Has Story | ❌ No Tests |
 | Template | [DatasetSearch](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/DatasetSearch) | ✅ Public | ❌ No Story | ✅ Has Tests |
-| Template | [DrupalPage](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/DrupalPage) | ❌ Internal | ❌ No Story | ❌ No Tests |
+| Template | [DrupalPage](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/DrupalPage) | ❌ Internal | ✅ Has Story | ❌ No Tests |
 | Template | [FilteredResource](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/FilteredResource) | ✅ Public | ❌ No Story | ❌ No Tests |
-| Template | [Footer](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/Footer) | ✅ Public | ❌ No Story | ❌ No Tests |
-| Template | [Header](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/Header) | ✅ Public | ❌ No Story | ❌ No Tests |
-| Template | [PageNotFound](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/PageNotFound) | ✅ Public | ❌ No Story | ❌ No Tests |
-| Template | [SidebarPage](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/SidebarPage) | ✅ Public | ❌ No Story | ❌ No Tests |
-| Template | [SpecsAndLimits](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/SpecsAndLimits) | ✅ Public | ❌ No Story | ✅ Has Tests |
-| Template | [StoredQueryPage](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/StoredQueryPage) | ✅ Public | ❌ No Story | ❌ No Tests |
+| Template | [Footer](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/Footer) | ✅ Public | ✅ Has Story | ❌ No Tests |
+| Template | [Header](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/Header) | ✅ Public | ✅ Has Story | ❌ No Tests |
+| Template | [PageNotFound](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/PageNotFound) | ✅ Public | ✅ Has Story | ❌ No Tests |
+| Template | [SidebarPage](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/SidebarPage) | ✅ Public | ✅ Has Story | ❌ No Tests |
+| Template | [SpecsAndLimits](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/SpecsAndLimits) | ✅ Public | ✅ Has Story | ✅ Has Tests |
+| Template | [StoredQueryPage](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/StoredQueryPage) | ✅ Public | ✅ Has Story | ❌ No Tests |
 | | | | | |
 | **TYPES** | | | | |
 | Type Definition | [dataset.ts](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/types/dataset.ts) | ❌ Internal | ❌ No Story | ❌ No Tests |
@@ -123,10 +123,10 @@ This document provides a comprehensive inventory of all components, services, te
 | Category | Total | With Stories | With Tests | With Both | With Neither |
 |----------|-------|--------------|------------|-----------|--------------|
 | Components | 64 | 37 (58%) | 23 (36%) | 10 (16%) | 14 (22%) |
-| Templates | 12 | 0 (0%) | 3 (25%) | 0 (0%) | 9 (75%) |
+| Templates | 12 | 8 (67%) | 3 (25%) | 1 (8%) | 2 (17%) |
 | Services/Hooks/Contexts | 9 | 0 (0%) | 0 (0%) | 0 (0%) | 9 (100%) |
 | Utilities/Types/Assets | 10 | 0 (0%) | 0 (0%) | 0 (0%) | 10 (100%) |
-| **Project Total** | **95** | **37 (39%)** | **26 (27%)** | **10 (11%)** | **42 (44%)** |
+| **Project Total** | **95** | **45 (47%)** | **26 (27%)** | **11 (12%)** | **35 (37%)** |
 
 ---
 
