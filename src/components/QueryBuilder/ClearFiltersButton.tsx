@@ -9,13 +9,13 @@ const ClearFiltersButton = ({
   clearFiltersFn,
   disableDefaultClasses = false,
   className = ''
-} : { 
+} : {
   disabled?: boolean,
   clearFiltersFn: Function,
   disableDefaultClasses?: boolean,
   className?: string
 }) => {
-  const small = useMediaQuery({ minWidth: 0, maxWidth: 544 });
+  const small = useMediaQuery({ minWidth: 0, maxWidth: "34rem" });
   return (
     <Button
       disabled={disabled}

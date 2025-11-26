@@ -14,7 +14,7 @@ type SearchItemProps = {
 }
 
 const DatasetListItem = (props: SearchItemProps) => {
-  const desktop = useMediaQuery({ minWidth: 1024 });
+  const desktop = useMediaQuery({ minWidth: "34rem" });
   const { title, modified, identifier, paginationEnabled, dataDictionaryLinks } = props;
 
   let linkContainerClasses = 'ds-u-margin-bottom--2';

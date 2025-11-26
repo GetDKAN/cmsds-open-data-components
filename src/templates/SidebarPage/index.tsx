@@ -11,8 +11,8 @@ type SidebarPageProps = {
 }
 
 const SidebarPage = (props: SidebarPageProps) => {
-  const {links, menuTitle, mobileMaxWidth = 768, children} = props;
-  const mobileMax = useMediaQuery({ query: `(max-width: ${mobileMaxWidth}px)` });
+  const {links, menuTitle, mobileMaxWidth = 48, children} = props;
+  const mobileMax = useMediaQuery({ query: `(max-width: ${mobileMaxWidth}rem)` });
   return(
     <div className={`${mobileMax ? "a" : 'ds-l-container'}`}>
       <div className={`${mobileMax ? "a" : 'ds-l-row'}`}>

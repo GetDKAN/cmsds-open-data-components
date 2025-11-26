@@ -38,14 +38,14 @@ type SearchItemProps = {
 }
 
 const DatasetSearchListItem = (props: SearchItemProps) => {
-  const desktop = useMediaQuery({ minWidth: 1024 });
-  const { 
-    title, 
-    modified, 
-    description, 
-    downloadUrl, 
-    largeFile = false, 
-    paginationEnabled, 
+  const desktop = useMediaQuery({ minWidth: "64rem" });
+  const {
+    title,
+    modified,
+    description,
+    downloadUrl,
+    largeFile = false,
+    paginationEnabled,
     dataDictionaryLinks,
     identifier,
     refresh,
@@ -79,11 +79,11 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
         {theme.map((topic: string, index: number) => {
           const title = topic || 'Unknown Topic'
           const prefix = 'topics'
-          
+
           // Use the provided slug or fallback to a simple slug generation
           const slug = topicSlugs?.[title]
           const link = `/${prefix}/${slug}`
-          
+
           return (
             <li className='ds-u-fill--primary ds-u-radius--pill' key={`dist-${title}-${index}`}>
               <Link
@@ -189,7 +189,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
         {description && <div className="ds-l-row">
           <div className="ds-l-col--12 ds-l-md-col--12 ds-u-margin-top--2">{truncateText(description)}{description.length > 240 ? (
             <>
-             {' '}<Link to={`/dataset/${identifier}`}>See more</Link> 
+             {' '}<Link to={`/dataset/${identifier}`}>See more</Link>
             </>
           ) : ''}</div>
         </div>}

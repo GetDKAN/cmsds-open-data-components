@@ -2,12 +2,12 @@
   position: relative;
   input {
     min-width: 100%;
-    @media only screen and (min-width: 544px) {
+    @media only screen and (min-width: 34rem) {
       padding-left: 32px;
     }
   }
   div.--alt-style input {
-    @media only screen and (max-width: 544px) {
+    @media only screen and (max-width: 34rem) {
       --text-input__border-radius: 50px;
       --text-input__border-color: #c6b7b7;
       height: 61px;
