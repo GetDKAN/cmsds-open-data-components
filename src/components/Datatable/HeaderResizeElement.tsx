@@ -1,9 +1,13 @@
 import React, {useState} from 'react'
 import { flexRender } from "@tanstack/react-table";
 
-const HeaderResizeElement = ({table, header, sortElement, setAriaLiveFeedback} :
-  {table: any, header: any, sortElement?: Function, setAriaLiveFeedback: Function }) => {
+const HeaderResizeElement = ({table, header, sortElement, setAriaLiveFeedback, id} :
+  {table: any, header: any, sortElement?: Function, setAriaLiveFeedback: Function, id?: string }) => {
   const [columnResizing, setColumnResizing] = useState('');
+
+  // Fix for JSX in Data Dictionary Title header cell
+  const ariaLabel = header.id === "titleResizable" ? "Title" : header.column.columnDef.header;
+
   return(
     <th {
       ...{
@@ -13,8 +17,16 @@ const HeaderResizeElement = ({table, header, sortElement, setAriaLiveFeedback} :
         }
       }
     }
+    id={id}
     title={typeof(header.column.columnDef.header) === "string" ? header.column.columnDef.header : ''}
     className="ds-u-border-y--2 ds-u-padding--2 ds-u-border--dark  ds-u-font-weight--bold"
+    aria-sort={
+      header.column.getIsSorted() === 'asc'
+        ? 'ascending'
+        : header.column.getIsSorted() === 'desc'
+        ? 'descending'
+        : 'none'
+    }
     >
       <div className="ds-u-display--flex">
         <div>
@@ -35,7 +47,7 @@ const HeaderResizeElement = ({table, header, sortElement, setAriaLiveFeedback} :
               ? `cursor-pointer select-none ds-u-focus-visible ${sortElement(header.column.getIsSorted())}`
               : '',
           }}
-          aria-label={`${header.column.columnDef.header} sort order`}
+          aria-label={`${ariaLabel} sort order`}
         />
         )}
       </div>
@@ -47,7 +59,7 @@ const HeaderResizeElement = ({table, header, sortElement, setAriaLiveFeedback} :
             header.column.getIsResizing() || header.column.id == columnResizing ? 'isResizing' : ''
           }`,
         }}
-        aria-label={`Resize ${header.column.columnDef.header} column`}
+        aria-label={`Resize ${ariaLabel} column`}
         onKeyDown={(e) => {
           const columnSizingObject = table.getState().columnSizing;
           switch (e.key) {
