@@ -27,7 +27,6 @@ const config: StorybookConfig = {
         ...config.resolve,
         alias: {
           ...config.resolve?.alias,
-          '@civicactions/data-catalog-services': path.resolve(__dirname, '../__mocks__/@civicactions/data-catalog-services.js')
         }
       }
     };
