@@ -4,6 +4,13 @@ import '@cmsgov/design-system/css/core-theme.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import './font-awesome-overrides.css';
 import { useEffect } from 'react';
+import { initialize, mswLoader } from 'msw-storybook-addon';
+import { handlers } from './mswHandlers';
+
+// Initialize MSW for Storybook
+initialize({
+  onUnhandledRequest: 'bypass', // Don't warn about unmocked requests
+}, handlers);
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px', backgroundColor: '#f9f9f9' }}>
@@ -53,6 +60,7 @@ const preview: Preview = {
       },
     },
   },
+  loaders: [mswLoader],
 };
 
 preview.decorators = [

@@ -66,6 +66,7 @@
     "@types/react": "^18.2.0",
     "@types/react-datepicker": "^4.19.5",
     "@types/react-text-truncate": "^0.14.4",
+    "@vitejs/plugin-react": "^5.1.1",
     "core-js": "^3.27.2",
     "css-loader": "^6.7.3",
     "eslint-plugin-storybook": "^9.0.16",
@@ -74,6 +75,8 @@
     "jest-axe": "^10.0.0",
     "jest-canvas-mock": "^2.5.2",
     "jest-environment-jsdom": "^30.0.5",
+    "msw": "^2.12.2",
+    "msw-storybook-addon": "^2.0.6",
     "parcel": "^2.8.3",
     "parcel-plugin-bundle-visualiser": "^0.8.2",
     "prettier": "^2.5.1",
@@ -96,5 +99,10 @@
   "files": [
     "lib",
     "dist"
-  ]
+  ],
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
+  }
 }
