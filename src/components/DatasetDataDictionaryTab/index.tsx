@@ -3,19 +3,15 @@ import withQueryProvider from '../../utilities/QueryProvider/QueryProvider';
 import { useQuery } from '@tanstack/react-query';
 import qs from 'qs';
 import axios from 'axios';
-
-import { DatasetDictionaryItemType } from '../../types/dataset';
-import SitewideDataDictionaryTable from '../SitewideDataDictionaryTable';
 import DatasetDictionaryTable from '../DatasetDictionaryTable';
-import { Button, Spinner } from '@cmsgov/design-system';
+import { Button } from '@cmsgov/design-system';
 import { acaToParams } from '../../utilities/aca';
 import { ACAContext } from '../../utilities/ACAContext';
 
 const DataDictionary = (
-  { datasetDictionaryEndpoint, datasetSitewideDictionary, title, pageSize = 20, csvDownload } : 
+  { datasetDictionaryEndpoint, title, pageSize = 20, csvDownload } : 
   { 
     datasetDictionaryEndpoint: string,
-    datasetSitewideDictionary: DatasetDictionaryItemType[]
     title: string,
     pageSize: number,
     additionalParams: any,
@@ -59,10 +55,6 @@ const DataDictionary = (
           </div>
           <DatasetDictionaryTable datasetDictionary={datasetDictionary} pageSize={pageSize}/>
         </>
-      )}
-
-      {datasetSitewideDictionary && (
-        <SitewideDataDictionaryTable datasetDictionary={datasetSitewideDictionary} pageSize={pageSize} />
       )}
     </div>
   )

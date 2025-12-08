@@ -55,8 +55,10 @@ const Dataset = ({
   hideDataDictionary = false,
   customDescription,
   updateAriaLive,
-  showRowLimitNotice = false
+  showRowLimitNotice = false,
+  tabHrefPrepend = '',
 }: DatasetPageType) => {
+  const tabHref = `/dataset/${id}`;
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
     : { conditions: [] };
@@ -82,15 +84,6 @@ const Dataset = ({
       limit: defaultPageSize,
     }
   ) as ResourceType;
-
-  const siteWideDataDictionary = dataDictionaryUrl ? getDataDictionary(rootUrl + dataDictionaryUrl).dataDictionary : null;
-
-  // compare schema fields with siteWideDataDictionary to display commonalities for now
-  // until dataset level data dictionaries are implemented
-  const datasetSitewideDictionary = (siteWideDataDictionary && siteWideDataDictionary.data && siteWideDataDictionary.data.fields && resource && resource.schema[distribution.identifier]) ?
-    siteWideDataDictionary.data.fields.filter((field: DatasetDictionaryItemType) => {
-      return Object.keys(resource.schema[distribution.identifier].fields).indexOf(field.name) !== -1;
-    }) : null;
 
   useEffect(() => {
     const localFileFormat = getFormatType(distribution);
@@ -141,8 +134,7 @@ const Dataset = ({
       setSelectedTab(window.location.hash.substring(1))
   }, [distribution, window.location.hash])
 
-  const displayDataDictionaryTab = ((distribution.data && distribution.data.describedBy && distribution.data.describedByType === 'application/vnd.tableschema+json') || (datasetSitewideDictionary && datasetSitewideDictionary.length > 0)) as boolean;
-  const formatType = getFormatType(distribution);
+  const displayDataDictionaryTab = (distribution.data && distribution.data.describedBy && distribution.data.describedByType === 'application/vnd.tableschema+json') as boolean;
 
   return (
     <>
@@ -184,6 +176,7 @@ const Dataset = ({
                         Data Table
                       </span>
                     }
+                    tabHref={`${tabHrefPrepend}${tabHref}#data-table`}
                     className={borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : ''}
                   >
                     {getFormatType(distribution) === "csv"
@@ -212,6 +205,7 @@ const Dataset = ({
                         Overview
                       </span>
                     }
+                    tabHref={`${tabHrefPrepend}${tabHref}#overview`}
                     className={borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : ''}
                   >
                     <DatasetOverview resource={resource} dataset={dataset} distributions={distributions} metadataMapping={metadataMapping} rootUrl={rootUrl} />
@@ -225,12 +219,12 @@ const Dataset = ({
                           Data Dictionary
                         </span>
                       }
+                      tabHref={`${tabHrefPrepend}${tabHref}#data-dictionary`}
                       className={borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : ''}
                     >
                       {displayDataDictionaryTab
                         ? (
                           <DataDictionary
-                            datasetSitewideDictionary={datasetSitewideDictionary}
                             datasetDictionaryEndpoint={distribution.data.describedBy}
                             title={"Data Dictionary"}
                             csvDownload={dataDictionaryCSV}
@@ -249,6 +243,7 @@ const Dataset = ({
                           API
                         </span>
                       }
+                      tabHref={`${tabHrefPrepend}${tabHref}#api`}
                       className={borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : ''}
                     >
                       <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} showRowLimitNotice={showRowLimitNotice} />
