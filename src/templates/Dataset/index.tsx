@@ -85,6 +85,15 @@ const Dataset = ({
     }
   ) as ResourceType;
 
+  const siteWideDataDictionary = dataDictionaryUrl ? getDataDictionary(rootUrl + dataDictionaryUrl).dataDictionary : null;
+
+  // compare schema fields with siteWideDataDictionary to display commonalities for now
+  // until dataset level data dictionaries are implemented
+  const datasetSitewideDictionary = (siteWideDataDictionary && siteWideDataDictionary.data && siteWideDataDictionary.data.fields && resource && resource.schema[distribution.identifier]) ?
+    siteWideDataDictionary.data.fields.filter((field: DatasetDictionaryItemType) => {
+      return Object.keys(resource.schema[distribution.identifier].fields).indexOf(field.name) !== -1;
+    }) : null;
+
   useEffect(() => {
     const localFileFormat = getFormatType(distribution);
     if (localFileFormat === 'csv') {
@@ -134,7 +143,7 @@ const Dataset = ({
       setSelectedTab(window.location.hash.substring(1))
   }, [distribution, window.location.hash])
 
-  const displayDataDictionaryTab = (distribution.data && distribution.data.describedBy && distribution.data.describedByType === 'application/vnd.tableschema+json') as boolean;
+  const displayDataDictionaryTab = ((distribution.data && distribution.data.describedBy && distribution.data.describedByType === 'application/vnd.tableschema+json') || (datasetSitewideDictionary && datasetSitewideDictionary.length > 0)) as boolean;
 
   return (
     <>
@@ -225,6 +234,7 @@ const Dataset = ({
                       {displayDataDictionaryTab
                         ? (
                           <DataDictionary
+                            datasetSitewideDictionary={datasetSitewideDictionary}
                             datasetDictionaryEndpoint={distribution.data.describedBy}
                             title={"Data Dictionary"}
                             csvDownload={dataDictionaryCSV}

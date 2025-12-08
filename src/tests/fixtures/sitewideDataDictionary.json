@@ -1,0 +1,128 @@
+{
+  "identifier": "sitewide-data-dictionary",
+  "title": "Sitewide Data-Dictionary",
+  "data": {
+      "fields": [
+          {
+              "name": "as_of_date",
+              "title": "As of Date",
+              "type": "date",
+              "format": "%m\/%d\/%Y"
+          },
+          {
+              "name": "effective_date",
+              "title": "Effective Date",
+              "type": "date",
+              "format": "%m\/%d\/%Y"
+          },
+          {
+              "name": "end_date",
+              "title": "End Date",
+              "type": "date",
+              "format": "%m\/%d\/%Y"
+          },
+          {
+              "name": "deletion_date",
+              "title": "Deletion Date",
+              "type": "date",
+              "format": "%m\/%d\/%Y"
+          },
+          {
+              "name": "fda_approval_date",
+              "title": "FDA Approval Date",
+              "type": "date",
+              "format": "%m\/%d\/%Y"
+          },
+          {
+              "name": "market_date",
+              "title": "Market Date",
+              "type": "date",
+              "format": "%m\/%d\/%Y"
+          },
+          {
+              "name": "optional_eff_date",
+              "title": "Optional EFF Date",
+              "type": "date",
+              "format": "%m\/%d\/%Y"
+          },
+          {
+              "name": "package_size_intro_date",
+              "title": "Package Size Intro Date",
+              "type": "date",
+              "format": "%m\/%d\/%Y"
+          },
+          {
+              "name": "purchased_product_date",
+              "title": "Purchased Product Date",
+              "type": "date",
+              "format": "%m\/%d\/%Y"
+          },
+          {
+              "name": "quarter_begin_date",
+              "title": "Quarter Begin Date",
+              "type": "date",
+              "format": "%m\/%d\/%Y"
+          },
+          {
+              "name": "quarter_end_date",
+              "title": "Quarter End Date",
+              "type": "date",
+              "format": "%m\/%d\/%Y"
+          },
+          {
+              "name": "reactivation_date_deactivate",
+              "title": "Reactivation Date",
+              "type": "date",
+              "format": "%m\/%d\/%Y"
+          },
+          {
+              "name": "report_date",
+              "title": "Report Date",
+              "type": "date",
+              "format": "%m\/%d\/%Y"
+          },
+          {
+              "name": "start_date",
+              "title": "Start Date",
+              "type": "date",
+              "format": "%m\/%d\/%Y"
+          },
+          {
+              "name": "termination_date",
+              "title": "Termination Date",
+              "type": "date",
+              "format": "%m\/%d\/%Y"
+          },
+          {
+              "name": "units_reimbursed",
+              "title": "Units Reimbursed",
+              "type": "number",
+              "format": "default"
+          },
+          {
+              "name": "number_of_prescriptions",
+              "title": "Number of Prescriptions",
+              "type": "number",
+              "format": "default"
+          },
+          {
+              "name": "total_amount_reimbursed",
+              "title": "Total Amount Reimbursed",
+              "type": "number",
+              "format": "default"
+          },
+          {
+              "name": "medicaid_amount_reimbursed",
+              "title": "Medicaid Amount Reimbursed",
+              "type": "number",
+              "format": "default"
+          },
+          {
+              "name": "non_medicaid_amount_reimbursed",
+              "title": "Non-medicaid Amount Reimbursed",
+              "type": "number",
+              "format": "default"
+          }
+      ]
+  }
+}
