@@ -75,6 +75,7 @@ export type DatasetPageType = {
   showRowLimitNotice?: boolean,
   useDatasetAPI?: boolean,
   enableEmptyFilters?: boolean,
+  tabHrefPrepend?: string,
 }
 
 
