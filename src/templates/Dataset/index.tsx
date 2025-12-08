@@ -55,8 +55,10 @@ const Dataset = ({
   hideDataDictionary = false,
   customDescription,
   updateAriaLive,
-  showRowLimitNotice = false
+  showRowLimitNotice = false,
+  tabHrefPrepend = '',
 }: DatasetPageType) => {
+  const tabHref = `/dataset/${id}`;
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
     : { conditions: [] };
@@ -142,7 +144,6 @@ const Dataset = ({
   }, [distribution, window.location.hash])
 
   const displayDataDictionaryTab = ((distribution.data && distribution.data.describedBy && distribution.data.describedByType === 'application/vnd.tableschema+json') || (datasetSitewideDictionary && datasetSitewideDictionary.length > 0)) as boolean;
-  const formatType = getFormatType(distribution);
 
   return (
     <>
@@ -184,6 +185,7 @@ const Dataset = ({
                         Data Table
                       </span>
                     }
+                    tabHref={`${tabHrefPrepend}${tabHref}#data-table`}
                     className={borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : ''}
                   >
                     {getFormatType(distribution) === "csv"
@@ -212,6 +214,7 @@ const Dataset = ({
                         Overview
                       </span>
                     }
+                    tabHref={`${tabHrefPrepend}${tabHref}#overview`}
                     className={borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : ''}
                   >
                     <DatasetOverview resource={resource} dataset={dataset} distributions={distributions} metadataMapping={metadataMapping} rootUrl={rootUrl} />
@@ -225,6 +228,7 @@ const Dataset = ({
                           Data Dictionary
                         </span>
                       }
+                      tabHref={`${tabHrefPrepend}${tabHref}#data-dictionary`}
                       className={borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : ''}
                     >
                       {displayDataDictionaryTab
@@ -249,6 +253,7 @@ const Dataset = ({
                           API
                         </span>
                       }
+                      tabHref={`${tabHrefPrepend}${tabHref}#api`}
                       className={borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : ''}
                     >
                       <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} showRowLimitNotice={showRowLimitNotice} />
