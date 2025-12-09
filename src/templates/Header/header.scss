@@ -1,7 +1,5 @@
 :root {
   --mobile-nav-animation-time: 1s;
-  --cms-top-nav-height: 5.438rem;
-  --main-nav-height: 6.25rem;
   --header-bg-color: #{var(--color-primary)};
   --header-bg-image: linear-gradient(90deg, var(--color-primary-darkest) 10%, var(--color-primary) 90%);
   --header-nav-link--color: #{var(--color-white)};
@@ -12,10 +10,6 @@
   --header-nav-search--color: #{var(--color-white)};
   --tag-line--color: #6f757c;
   --tag-line--border-color: #6f757c;
-}
-
-.dkan-c-main-navigation > div > div {
-  height: #{var(--main-nav-height)};
 }
 
 .dkan-c-header .dkan-c-main-navigation {
