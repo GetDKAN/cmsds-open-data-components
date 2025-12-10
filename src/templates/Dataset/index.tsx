@@ -82,7 +82,7 @@ const Dataset = ({
       limit: defaultPageSize,
     },
     {
-      datasetID: id
+      datasetID: id // pass datasetID into additional params to enable dataset API option in useDatastore
     }
   ) as ResourceType;
 
