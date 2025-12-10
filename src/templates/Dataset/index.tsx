@@ -56,7 +56,6 @@ const Dataset = ({
   customDescription,
   updateAriaLive,
   showRowLimitNotice = false,
-  useDatasetAPI = false,
 }: DatasetPageType) => {
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
@@ -81,10 +80,9 @@ const Dataset = ({
     {
       ...options,
       limit: defaultPageSize,
-      useDatasetAPI: useDatasetAPI,
     },
     {
-      datasetID: id // pass datasetID into additional params to enable dataset API option in useDatastore
+      datasetID: id
     }
   ) as ResourceType;
 
