@@ -25,7 +25,7 @@ const SpecsAndLimits = (props: PropsWithChildren<SpecsAndLimitsProps>) => {
   const defaultContent = (
     <p>
       Some datasets are extremely large and may be difficult to download and/or cause
-      computer performance issues. The Centers for Medicare and Medicaid Services (CMS)
+      computer performance issues. The Centers for Medicare & Medicaid Services (CMS)
       recommends using WinZip, WinRAR, or 7-Zip for file decompression.
     </p>
   );

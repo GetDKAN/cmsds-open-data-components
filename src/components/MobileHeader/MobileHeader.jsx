@@ -13,7 +13,7 @@ const MobileHeader = ({
   siteName,
   links,
   org = {
-    tagline: 'The Centers for Medicare and Medicaid Services',
+    tagline: 'The Centers for Medicare & Medicaid Services',
     url: 'https://cms.gov',
     urlTitle: 'CMS.gov Centers for Medicare &amp; Medicaid Services',
     logo: cmsLogo,
