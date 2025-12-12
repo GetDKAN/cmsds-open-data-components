@@ -21,6 +21,7 @@ import DataTableContext from './DataTableContext';
 import DatasetDescription from '../../components/DatasetDescription';
 import { acaToParams } from '../../utilities/aca';
 import { ACAContext } from '../../utilities/ACAContext';
+import DatasetDate from '../../components/DatasetDate';
 
 const getDataDictionary = (dataDictionaryUrl: string) => {
   const { ACA } = useContext(ACAContext);
@@ -57,6 +58,7 @@ const Dataset = ({
   updateAriaLive,
   showRowLimitNotice = false,
   tabHrefPrepend = '',
+  showDateDetails = false,
 }: DatasetPageType) => {
   const tabHref = `/dataset/${id}`;
   const options = location.search
@@ -145,6 +147,7 @@ const Dataset = ({
 
   const displayDataDictionaryTab = ((distribution.data && distribution.data.describedBy && distribution.data.describedByType === 'application/vnd.tableschema+json') || (datasetSitewideDictionary && datasetSitewideDictionary.length > 0)) as boolean;
 
+  const date = {modified: dataset.modified, released: dataset.released, refresh: dataset.nextUpdateDate};
   return (
     <>
       {dataset.error ? (
@@ -155,8 +158,15 @@ const Dataset = ({
             <div className={'ds-l-md-col--9'}>
               <h1 className="ds-text-heading--3xl">{title}</h1>
             </div>
-            <div className={'ds-l-md-col--12 ds-u-margin-y--1 ds-u-text-align--right'}>
-              <p className="ds-u-margin--0">Updated <TransformedDate date={dataset.modified} /></p>
+            <div className={'ds-l-md-col--12 ds-u-margin-y--2'}>
+              {showDateDetails ? 
+                <DatasetDate 
+                  date={date}
+                  modifiedBoldLabel
+                  displayTooltips
+                /> :
+                 <p className="ds-u-margin--0 ds-u-font-weight--bold">Updated <TransformedDate date={date.modified} /></p>}
+             
             </div>
             <div className={'ds-l-md-col--9'}>
               <DatasetDescription

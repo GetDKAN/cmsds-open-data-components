@@ -59,7 +59,7 @@ describe('<DatasetDate />', () => {
           modified: '2023-02-01',
           released: '2023-01-01'
         }}
-        updatedBoldLabel={true}
+        modifiedBoldLabel={true}
         releasedBoldLabel={true}
       />
     );
