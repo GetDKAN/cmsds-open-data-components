@@ -39,7 +39,7 @@ const DatasetDateItem = (props: DatasetDateItemProps) => {
 
   return (
     <div className='dataset-date-item'>
-      <span className={`dataset-data-item-label ${boldLabel ? 'ds-u-font-weight--bold' : ''}`}>
+      <span className={`dataset-date-item-label ${boldLabel ? 'ds-u-font-weight--bold' : ''}`}>
         <span>{dateText[type]}</span>: <TransformedDate date={date} />
       </span>
       {displayTooltips === true && (

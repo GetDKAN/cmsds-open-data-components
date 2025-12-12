@@ -64,11 +64,11 @@ describe('<DatasetDate />', () => {
       />
     );
 
-    const modifiedContainer = screen.getByText((content, element) => element?.textContent === 'Last Modified: February 1, 2023').closest('div');
-    const releasedContainer = screen.getByText((content, element) => element?.textContent === 'Released: January 1, 2023').closest('div');
+    const modifiedContainer = screen.getByText((content, element) => element?.textContent === 'Last Modified: February 1, 2023').closest('span');
+    const releasedContainer = screen.getByText((content, element) => element?.textContent === 'Released: January 1, 2023').closest('span');
     
-    expect(modifiedContainer).toHaveClass('dataset-date-item bold-label');
-    expect(releasedContainer).toHaveClass('dataset-date-item bold-label');
+    expect(modifiedContainer).toHaveClass('dataset-date-item-label ds-u-font-weight--bold');
+    expect(releasedContainer).toHaveClass('dataset-date-item-label ds-u-font-weight--bold');
   });
 
   test('Disables tooltips when displayTooltips is false', () => {
