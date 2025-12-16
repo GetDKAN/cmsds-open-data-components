@@ -33,7 +33,7 @@ const DatasetDictionaryTable = ({ datasetDictionaryEndpoint, pageSize, showDownl
 
   const datasetDictionary = data && data.data && data.data.fields && data.data.fields.length ? data.data.fields : null;
 
-  const tableData = datasetDictionary.map((item) => {
+  const tableData = datasetDictionary.map((item : {title: string, description: string, type: string}) => {
     return {
       titleResizable: item.title,
       description: item.description,

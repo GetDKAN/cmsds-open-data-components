@@ -6,7 +6,7 @@ import DatasetDictionaryJSON from "../DataDictionary/DatasetDictionaryJSON";
 import DatasetDictionaryPDF from '../DataDictionary/DatasetDictionaryPDF';
 
 const DataDictionary = (
-  { datasetDictionaryEndpoint, datasetSitewideDictionary, datasetDictionaryFileType, title, pageSize = 20, csvDownload, rootUrl } : 
+  { datasetDictionaryEndpoint, datasetSitewideDictionary, datasetDictionaryFileType, title, pageSize = 20, csvDownload } : 
   { 
     datasetDictionaryEndpoint: string,
     datasetSitewideDictionary: DatasetDictionaryItemType[],
@@ -15,7 +15,6 @@ const DataDictionary = (
     pageSize: number,
     additionalParams: any,
     csvDownload : boolean,
-    rootUrl: string,
   }) => {
   
   return (
@@ -28,7 +27,7 @@ const DataDictionary = (
         </>
       )}
       {datasetDictionaryFileType === 'application/pdf' && (
-        <DatasetDictionaryPDF datasetDictionaryEndpoint={datasetDictionaryEndpoint} rootUrl={rootUrl}/>
+        <DatasetDictionaryPDF datasetDictionaryEndpoint={datasetDictionaryEndpoint}/>
       )}
 
       {datasetSitewideDictionary && (

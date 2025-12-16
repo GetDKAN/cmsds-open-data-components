@@ -244,7 +244,6 @@ const Dataset = ({
                             datasetDictionaryFileType={distribution.data.describedByType}
                             title={"Data Dictionary"}
                             csvDownload={dataDictionaryCSV}
-                            rootUrl={rootUrl}
                           />
                         ) : (
                           <p>There is no Data Dictionary associated with this dataset.</p>
