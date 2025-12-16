@@ -39,6 +39,13 @@ const useDatastore = (
     options.properties ? options.properties : undefined
   );
 
+  // Check drupalSettings for datastore_query_api
+  const useDatasetAPI = typeof window !== 'undefined' && window.drupalSettings?.datastore_query_api === true;
+  const datasetID = additionalParams.datasetID;
+  
+  // Remove datasetID from params to avoid sending it to the API
+  const { datasetID: _, ...restAdditionalParams } = additionalParams;
+  
   let params = {
     keys: keys,
     limit: limit,
@@ -47,7 +54,7 @@ const useDatastore = (
     sorts: sort,
     properties: properties,
     groupings: groupings,
-    ...additionalParams,
+    ...restAdditionalParams,
   }
   params = acaToParams(params, ACA);
   const paramsString = Object.keys(params).length ? `${qs.stringify(params)}` : '';
@@ -59,12 +66,14 @@ const useDatastore = (
     if (conditions && conditions.length)
       enabled = true;
   }
+  // Change whether distribution API or dataset API is used based on option
+  const queryID = useDatasetAPI && datasetID ? `${datasetID}/0` : id;
 
   const {data, isPending, error} = useQuery({
     queryKey: ["datastore" + id + paramsString],
     queryFn: () => {
       setCount(null)
-      return fetch(`${rootUrl}/datastore/query/${id}?${paramsString}`)
+      return fetch(`${rootUrl}/datastore/query/${queryID}?${paramsString}`)
         .then(res => res.json())
     },
     enabled: enabled
@@ -78,7 +87,7 @@ const useDatastore = (
         count: true,
         schema: true
       }
-      return fetch(`${rootUrl}/datastore/query/${id}?${qs.stringify(acaToParams(unfilteredParams, ACA))}`)
+      return fetch(`${rootUrl}/datastore/query/${queryID}?${qs.stringify(acaToParams(unfilteredParams, ACA))}`)
         .then(res => res.json())
     },
   })
