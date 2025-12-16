@@ -48,6 +48,9 @@ const FilteredResourceBody = ({
       ...options,
       limit: 25,
     },
+    {
+      datasetID: id
+    }
   );
 
   useEffect(() => {

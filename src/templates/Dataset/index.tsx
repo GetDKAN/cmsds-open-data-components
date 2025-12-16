@@ -55,7 +55,7 @@ const Dataset = ({
   hideDataDictionary = false,
   customDescription,
   updateAriaLive,
-  showRowLimitNotice = false
+  showRowLimitNotice = false,
 }: DatasetPageType) => {
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
@@ -80,6 +80,9 @@ const Dataset = ({
     {
       ...options,
       limit: defaultPageSize,
+    },
+    {
+      datasetID: id // pass datasetID into additional params to enable dataset API option in useDatastore
     }
   ) as ResourceType;
 
@@ -142,7 +145,6 @@ const Dataset = ({
   }, [distribution, window.location.hash])
 
   const displayDataDictionaryTab = ((distribution.data && distribution.data.describedBy && distribution.data.describedByType === 'application/vnd.tableschema+json') || (datasetSitewideDictionary && datasetSitewideDictionary.length > 0)) as boolean;
-  const formatType = getFormatType(distribution);
 
   return (
     <>
