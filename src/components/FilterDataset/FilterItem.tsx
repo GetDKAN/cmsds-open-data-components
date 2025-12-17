@@ -23,8 +23,19 @@ const FilterItem = ({ id, condition, index, update, remove, propertyOptions, sch
   const [property, setProperty] = useState(condition.property);
   const [value, setValue] = useState(condition.value);
   const [startDate, setStartDate] = React.useState(getStartDate(condition, schema, id));
+  const [previousType, setPreviousType] = useState(schema[id].fields[property]?.mysql_type);
 
   const xl = useMediaQuery({minWidth: 1280})
+
+  // Reset value when mysql_type changes from date to another type
+  useEffect(() => {
+    const currentType = schema[id].fields[property]?.mysql_type;
+    if (previousType === 'date' && currentType !== 'date') {
+      setValue('');
+      update(index, 'value', '');
+    }
+    setPreviousType(currentType);
+  }, [schema, id, property, previousType, index, update]);
 
   useEffect(() => {
     if (property !== condition.property) {
@@ -60,7 +71,7 @@ const FilterItem = ({ id, condition, index, update, remove, propertyOptions, sch
       }
     }
   }, [value]);
-
+  console.log(schema[id].fields[property].mysql_type);
   return (
     <fieldset className={`dkan-filter-dataset-control ds-u-padding-x--2 ds-u-md-padding-x--3 ds-u-padding-y--1 ds-u-margin-top--05${className !== '' ? ` ${className}` : ''}`}>
       <Dropdown
