@@ -71,7 +71,7 @@ const FilterItem = ({ id, condition, index, update, remove, propertyOptions, sch
       }
     }
   }, [value]);
-  console.log(schema[id].fields[property].mysql_type);
+
   return (
     <fieldset className={`dkan-filter-dataset-control ds-u-padding-x--2 ds-u-md-padding-x--3 ds-u-padding-y--1 ds-u-margin-top--05${className !== '' ? ` ${className}` : ''}`}>
       <Dropdown
