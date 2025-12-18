@@ -36,7 +36,6 @@ const DataTable = ({
 
   const data = resource.values;
   const [ sorting, setSorting ] = useState([])
-  const [ariaLiveFeedback, setAriaLiveFeedback] = useState('')
   const dataTableWrapperElement = useRef(null)
   const columnHelper = createColumnHelper()
 
@@ -224,7 +223,7 @@ const DataTable = ({
           className="dc-c-datatable"
         >
           {canResize
-            ? <TruncatedResizeableTHead table={table} sortElement={sortElement} setAriaLiveFeedback={setAriaLiveFeedback} />
+            ? <TruncatedResizeableTHead table={table} sortElement={sortElement} />
             : <FixedSizeTHead table={table} sortElement={sortElement} />
           }
           {loading ? (
@@ -260,7 +259,6 @@ const DataTable = ({
             </tbody>
           )}
         </table>
-        <div className='sr-only' aria-live='assertive' aria-atomic='true'>{ariaLiveFeedback}</div>
       </div>
       {loading && (
         <Spinner aria-valuetext="Dataset loading" role="status" className="ds-u-margin--3" />
