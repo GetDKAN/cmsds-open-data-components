@@ -177,7 +177,13 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     }
   });
 
-  if ((data && data.data.total) && totalItems != data.data.total) setTotalItems(data.data.total);
+// Sync totalItems state with API response data
+  // Moved to useEffect to prevent state updates during render (which can cause infinite loops)
+  useEffect(() => {
+    if (data?.data?.total !== undefined && data.data.total !== totalItems) {
+      setTotalItems(data.data.total);
+    }
+  }, [data?.data?.total]);
 
   const facets: SidebarFacetTypes = (data && data.data.facets) ? separateFacets(data ? data.data.facets : []) : { theme: null, keyword: null };
 
