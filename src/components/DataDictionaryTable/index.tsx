@@ -9,7 +9,6 @@ const DataDictionaryTable = ({tableColumns, tableData, pageSize, columnFilters} 
   {tableColumns: Array<any>, tableData: Array<any>, pageSize: number, columnFilters?: ColumnFiltersState}
   ) => {
   const [sorting, setSorting] = useState<SortingState>([])
-  const [ariaLiveFeedback, setAriaLiveFeedback] = useState('');
 
   const mobile = useMediaQuery({ minWidth: 0, maxWidth: 544 });
 
@@ -84,7 +83,7 @@ const DataDictionaryTable = ({tableColumns, tableData, pageSize, columnFilters} 
               <TableRow key={"header" + headerGroup.id}>
                 {headerGroup.headers.map(header => {
                   return (header.id === "titleResizable") ? (
-                    <HeaderResizeElement key={header.id + "_resize"} table={table} header={header} setAriaLiveFeedback={setAriaLiveFeedback} sortElement={sortElement} id={'dataDictionary_' + header.id} />
+                    <HeaderResizeElement key={header.id + "_resize"} table={table} header={header} sortElement={sortElement} id={'dataDictionary_' + header.id} />
                   ) : (
                     <TableCell
                       {...{
@@ -139,7 +138,6 @@ const DataDictionaryTable = ({tableColumns, tableData, pageSize, columnFilters} 
             })}
           </TableBody>
         </Table>
-        <div className='sr-only' aria-live='assertive' aria-atomic='true'>{ariaLiveFeedback}</div>
         {table.getRowModel().rows.length === 0 && (
           <Alert variation="warn">No results found for the current filters</Alert>
         )}
