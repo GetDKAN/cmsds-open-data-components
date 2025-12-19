@@ -112,7 +112,13 @@ const DatasetList = ({
     }
   });
 
-  if ((data && data.data.total) && totalItems != data.data.total) setTotalItems(data.data.total);
+// Sync totalItems state with API response data
+  // Moved to useEffect to prevent state updates during render (which can cause infinite loops)
+  useEffect(() => {
+    if (data?.data?.total !== undefined && data.data.total !== totalItems) {
+      setTotalItems(data.data.total);
+    }
+  }, [data?.data?.total]);
 
   useEffect(() => {
     // Update browser URL with current search params

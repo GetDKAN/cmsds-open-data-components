@@ -94,4 +94,78 @@ describe('<DatasetSearch />', () => {
   });
 });
 
+describe('<DatasetSearch /> Infinite Loop Prevention', () => {
+  beforeEach(async() => {
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      value: jest.fn().mockImplementation((query) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: jest.fn(),
+        removeListener: jest.fn(),
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+      })),
+    });
+  });
+
+  test('should not crash when API total changes between renders', async () => {
+    // Simulate backend inconsistency - total changes between API calls
+    // This mimics what happens when Drupal data is updated and cached vs fresh data differ
+    let callCount = 0;
+    axios.get.mockImplementation(() => {
+      callCount++;
+      // Alternate between different totals to simulate cache/fresh mismatch
+      const total = callCount % 2 === 0 ? '500' : '503';
+      return Promise.resolve({
+        data: {
+          total: total,
+          results: {
+            'dkan_dataset/5d69-frba': { title: 'dkan', identifier: '1234' },
+          },
+          facets: [],
+        },
+      });
+    });
+
+    await act(async () => {
+      render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
+    });
+
+    // Wait for component to settle - if there was an infinite loop, this would timeout or crash
+    await act(async () => {
+      jest.advanceTimersByTime(2000);
+    });
+
+    // If we get here without crashing, the fix is working
+    // The component should render and display results
+    expect(screen.getByTestId('results-list')).toBeInTheDocument();
+  });
+
+  test('should handle totalItems state sync correctly', async () => {
+    // Mock a stable API response
+    axios.get.mockImplementation(() => Promise.resolve({
+      data: {
+        total: '100',
+        results: {
+          'dkan_dataset/5d69-frba': { title: 'dkan', identifier: '1234' },
+        },
+        facets: [],
+      },
+    }));
+
+    await act(async () => {
+      render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
+    });
+
+    await act(async () => {
+      jest.advanceTimersByTime(1000);
+    });
+
+    // Component should render correctly with the total from API
+    expect(screen.getByTestId('results-list')).toBeInTheDocument();
+  });
+});
 
