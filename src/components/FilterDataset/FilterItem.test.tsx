@@ -421,4 +421,25 @@ describe('FilterItem', () => {
     
     expect(mockUpdate).toHaveBeenCalledWith(0, 'property', 'date_property');
   });
+
+  it('should reset value when changing from date type to non-date type', async () => {
+    const user = userEvent.setup();
+    
+    const dateProps: FilterItemType = {
+      ...defaultProps,
+      condition: {
+        ...defaultProps.condition,
+        property: 'date_property',
+        value: '2023-01-01'
+      }
+    };
+    
+    render(<FilterItem {...dateProps} />);
+    mockUpdate.mockClear();
+    
+    const propertyDropdown = screen.getByTestId('test_key_property');
+    await user.selectOptions(propertyDropdown, 'test_property');
+    
+    expect(mockUpdate).toHaveBeenCalledWith(0, 'value', '');
+  });
 });
