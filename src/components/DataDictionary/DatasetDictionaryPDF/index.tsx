@@ -1,3 +1,4 @@
+import React from 'react';
 import './datasetDictionaryPDF.scss';
 
 const DatasetDictionaryPDF = ({datasetDictionaryEndpoint} : {datasetDictionaryEndpoint: string}) => {
