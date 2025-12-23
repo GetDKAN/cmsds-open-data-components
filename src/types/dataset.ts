@@ -24,6 +24,8 @@ export type DatasetType = {
   describedBy?: any, // TODO
   describedByType?: any, //TODO
   modified: string,
+  released?: string,
+  nextUpdateDate?: string,
 }
 
 export type ConditionType = {
@@ -74,6 +76,7 @@ export type DatasetPageType = {
   updateAriaLive?: Function,
   showRowLimitNotice?: boolean,
   tabHrefPrepend?: string,
+  showDateDetails?: boolean,
 }
 
 
