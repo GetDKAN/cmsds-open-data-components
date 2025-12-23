@@ -1,5 +1,8 @@
 import React from 'react';
 import DatasetDateItem from '../DatasetDateItem';
+import { JSX } from 'react/jsx-runtime';
+import './dataset-date.scss'
+
 
 type DateObject = {
   modified?: string;
@@ -9,7 +12,7 @@ type DateObject = {
 
 type DatasetDateProps = {
   date: DateObject;
-  updatedBoldLabel?: boolean;
+  modifiedBoldLabel?: boolean;
   releasedBoldLabel?: boolean;
   refreshBoldLabel?: boolean;
   displayTooltips?: boolean;
@@ -18,55 +21,32 @@ type DatasetDateProps = {
 const DatasetDate = (props: DatasetDateProps) => {
   const {
     date,
-    updatedBoldLabel = false,
+    modifiedBoldLabel = false,
     releasedBoldLabel = false,
     refreshBoldLabel = false,
     displayTooltips = true
   } = props;
 
-  const { modified, released, refresh } = date;
-
   // Create an array of date items to render
-  const dateItems = [];
+  const dateItems: JSX.Element[] = [];
   
-  if (modified) {
-    dateItems.push(
-      <DatasetDateItem 
-        key="modified"
-        displayTooltips={displayTooltips} 
-        type='modified' 
-        date={modified} 
-        boldLabel={updatedBoldLabel} 
-      />
-    );
-  }
-  
-  if (released) {
-    dateItems.push(
-      <DatasetDateItem 
-        key="released"
-        displayTooltips={displayTooltips} 
-        type='released' 
-        date={released} 
-        boldLabel={releasedBoldLabel} 
-      />
-    );
-  }
-  
-  if (refresh) {
-    dateItems.push(
-      <DatasetDateItem 
-        key="refresh"
-        displayTooltips={displayTooltips} 
-        type='refresh' 
-        date={refresh} 
-        boldLabel={refreshBoldLabel} 
-      />
-    );
-  }
+  Object.entries(date).forEach(([key, value]) => {
+    if (value) {
+      const bold = (key === "modified" && modifiedBoldLabel) || (key === "released" && releasedBoldLabel) || (key === "refresh" && refreshBoldLabel);
+      dateItems.push(
+        <DatasetDateItem
+          key={key}
+          type={key as any}
+          displayTooltips={displayTooltips}
+          date={value}
+          boldLabel={bold} 
+        />
+      )
+    }
+  })
 
   return (
-    <div className='dataset-date'>
+    <div className='dataset-date ds-u-display--flex ds-u-font-size--sm ds-u-align-items--start'>
       {dateItems.map((item, index) => (
         <React.Fragment key={index}>
           {item}
