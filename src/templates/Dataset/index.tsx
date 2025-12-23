@@ -65,6 +65,10 @@ const Dataset = ({
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
     : { conditions: [] };
+  const dataDictionaryTypes = [
+    'application/vnd.tableschema+json',
+    'application/pdf',
+  ]
 
   const { dataset, isPending } = useMetastoreDataset(id, rootUrl);
   const title = dataset.title ? dataset.title : '';
@@ -78,6 +82,7 @@ const Dataset = ({
   if (distributions.length) {
     distribution = distributions[0];
   }
+
 
   const resource = useDatastore(
     '',
@@ -149,7 +154,7 @@ const Dataset = ({
       setSelectedTab(window.location.hash.substring(1))
   }, [distribution, window.location.hash])
 
-  const displayDataDictionaryTab = ((distribution.data && distribution.data.describedBy && distribution.data.describedByType === 'application/vnd.tableschema+json') || (datasetSitewideDictionary && datasetSitewideDictionary.length > 0)) as boolean;
+  const displayDataDictionaryTab = (distribution.data && distribution.data.describedBy && dataDictionaryTypes.includes( distribution.data.describedByType) || (datasetSitewideDictionary && datasetSitewideDictionary.length > 0)) as boolean;
 
   const date = {modified: dataset.modified, released: dataset.released, refresh: dataset.nextUpdateDate};
   return (
@@ -251,6 +256,7 @@ const Dataset = ({
                           <DataDictionary
                             datasetSitewideDictionary={datasetSitewideDictionary}
                             datasetDictionaryEndpoint={distribution.data.describedBy}
+                            datasetDictionaryFileType={distribution.data.describedByType}
                             title={"Data Dictionary"}
                             csvDownload={dataDictionaryCSV}
                           />
