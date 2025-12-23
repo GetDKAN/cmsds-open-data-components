@@ -24,6 +24,8 @@ export type DatasetType = {
   describedBy?: any, // TODO
   describedByType?: any, //TODO
   modified: string,
+  released?: string,
+  nextUpdateDate?: string,
 }
 
 export type ConditionType = {
@@ -76,6 +78,7 @@ export type DatasetPageType = {
   useDatasetAPI?: boolean,
   enableEmptyFilters?: boolean,
   tabHrefPrepend?: string,
+  showDateDetails?: boolean,
 }
 
 

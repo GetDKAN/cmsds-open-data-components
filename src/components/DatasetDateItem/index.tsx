@@ -38,14 +38,14 @@ const DatasetDateItem = (props: DatasetDateItemProps) => {
   };
 
   return (
-    <div className={`dataset-date-item${boldLabel ? ' bold-label' : ''}`}>
-      <span className='dataset-data-item-label'>
+    <div className='dataset-date-item'>
+      <span className={`dataset-date-item-label ${boldLabel ? 'ds-u-font-weight--bold' : ''}`}>
         <span>{dateText[type]}</span>: <TransformedDate date={date} />
       </span>
       {displayTooltips === true && (
         <Tooltip
           aria-label={dateText[type]}
-          className="ds-c-tooltip__trigger-icon ds-u-display--inline ds-u-padding-left--0 ds-uw-padding-right--0"
+          className="ds-c-tooltip__trigger-icon ds-u-display--inline ds-u-padding-left--0 ds-uw-padding-right--0 ds-u-font-weight--normal"
           title={tooltipContent[type]}
           placement="top"
         >

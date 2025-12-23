@@ -1,0 +1,15 @@
+.dataset-date {
+  .dataset-date-item {
+    white-space: nowrap;
+
+    .ds-c-tooltip__container {
+      position: relative;
+      bottom: 10px;
+      width: 20px;
+      display: inline-block;
+    }
+  }
+  & > .bullet-point {
+    line-height: 2.2rem;
+  }
+}
