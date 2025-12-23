@@ -29,4 +29,4 @@ const DatasetDictionaryPDF = ({datasetDictionaryEndpoint} : {datasetDictionaryEn
   )
 }
 
-export default DatasetDictionaryPDF
+export default DatasetDictionaryPDF;
