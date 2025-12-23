@@ -17,6 +17,9 @@ describe('<DataDictionary />', () => {
           return Promise.resolve({data: siteWideDataDictionary});
         case 'http://dkan.com/api/1/metastore/schemas/data-dictionary/items/71ec19df-f5ef-5b99-b43b-e566e22670b7?':
           return Promise.resolve({data: datasetDictionary});
+        case 'http://dkan.com/api/1/provider-data/sites/default/files/data_dictionaries/hospital/HOSPITAL_Data_Dictionary.pdf':
+          const pdf = new Blob(["testing"], { type: "application/pdf" });
+        return pdf;
         default:
           return
       }
@@ -35,12 +38,13 @@ describe('<DataDictionary />', () => {
     expect(screen.queryByText('Description')).not.toBeInTheDocument();
     expect(screen.queryByText('Download Dictionary JSON')).not.toBeInTheDocument();
   });
-  test("Renders dataset dictionary correctly", async () => {
+  test("Renders JSON dataset dictionary correctly", async () => {
     await act(async () => {
       await render(<MemoryRouter>
         <DataDictionary
           datasetDictionaryEndpoint='http://dkan.com/api/1/metastore/schemas/data-dictionary/items/71ec19df-f5ef-5b99-b43b-e566e22670b7'
           title="Dataset test title"
+          datasetDictionaryFileType='application/vnd.tableschema+json'
         />
       </MemoryRouter>);
     });
@@ -53,4 +57,20 @@ describe('<DataDictionary />', () => {
       expect(screen.queryByText('Description')).toBeInTheDocument();
     });
   });
+  test("Renders PDF dataset dictionary correctly", async () => {
+    await render(
+      <MemoryRouter>
+        <DataDictionary
+          datasetDictionaryEndpoint='http://dkan.com/api/1/provider-data/sites/default/files/data_dictionaries/hospital/HOSPITAL_Data_Dictionary.pdf'
+          title="Dataset test PDF"
+          datasetDictionaryFileType='application/pdf'
+        />
+      </MemoryRouter>);
+    
+    expect(screen.getByRole('heading', {name: 'Dataset test PDF'}));
+    await waitFor(() => {
+      expect(axios.get).toHaveBeenCalled();
+      expect(screen.queryByText('Download Dictionary PDF')).toBeInTheDocument();
+    });
+  })
 });
