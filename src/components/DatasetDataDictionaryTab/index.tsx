@@ -21,10 +21,7 @@ const DataDictionary = (
     <div data-testid="dataset-dictionary-tab">
       <h2 className="ds-text-heading--2xl ds-u-margin-y--3">{title}</h2>
       {datasetDictionaryFileType === 'application/vnd.tableschema+json' && (
-        <>
-          
-          <DatasetDictionaryJSON datasetDictionaryEndpoint={datasetDictionaryEndpoint} pageSize={pageSize} showDownloadButton={csvDownload} />
-        </>
+        <DatasetDictionaryJSON datasetDictionaryEndpoint={datasetDictionaryEndpoint} pageSize={pageSize} showDownloadButton={csvDownload} />
       )}
       {datasetDictionaryFileType === 'application/pdf' && (
         <DatasetDictionaryPDF datasetDictionaryEndpoint={datasetDictionaryEndpoint}/>
