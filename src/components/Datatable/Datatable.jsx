@@ -36,6 +36,7 @@ const DataTable = ({
 
   const data = resource.values;
   const [ sorting, setSorting ] = useState([])
+  const [ columnSizing, setColumnSizing ] = useState({})
   const dataTableWrapperElement = useRef(null)
   const columnHelper = createColumnHelper()
 
@@ -80,11 +81,13 @@ const DataTable = ({
       columnOrder,
       columnVisibility,
       sorting,
+      columnSizing,
     },
     columnResizeMode: 'onChange',
     onSortingChange: setSorting,
     onColumnOrderChange: setColumnOrder,
     onColumnVisibilityChange: setColumnVisibility,
+    onColumnSizingChange: setColumnSizing,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     debugTable: false,
