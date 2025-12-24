@@ -14,6 +14,8 @@ import DataTableContext from "../../templates/Dataset/DataTableContext";
 import { DataTableActionsContext } from "../DatasetTableTab/DataTableActionsContext";
 import DataTableToolbar from "../DataTableToolbar";
 
+const columnHelper = createColumnHelper();
+
 const DataTable = ({
   columns,
   sortTransform,
@@ -38,9 +40,8 @@ const DataTable = ({
   const [ sorting, setSorting ] = useState([])
   const [ columnSizing, setColumnSizing ] = useState({})
   const dataTableWrapperElement = useRef(null)
-  const columnHelper = createColumnHelper()
 
-  const table_columns = columns.map((col) => {
+  const table_columns = useMemo(() => columns.map((col) => {
     if (col.cell) {
       return (
         columnHelper.accessor(col.accessor, {
@@ -54,14 +55,14 @@ const DataTable = ({
         header: col.header,
       })
     )
-  })
+  }), [columns])
 
   const [ highlightRow, setHighlightRow ] = useState(null);
 
   useEffect(() => {
     if (columnOrder && !columnOrder.length)
       setColumnOrder(table_columns.map(c => c.accessorKey))
-  }, [columnOrder])
+  }, [columnOrder, table_columns, setColumnOrder])
 
   const sortElement = (isSorted, onClickFn) => {
     if(isSorted === 'asc') {
