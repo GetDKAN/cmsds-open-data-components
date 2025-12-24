@@ -62,7 +62,8 @@ const DataTable = ({
   useEffect(() => {
     if (columnOrder && !columnOrder.length)
       setColumnOrder(table_columns.map(c => c.accessorKey))
-  }, [columnOrder, table_columns, setColumnOrder])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [columnOrder])
 
   const sortElement = (isSorted, onClickFn) => {
     if(isSorted === 'asc') {
