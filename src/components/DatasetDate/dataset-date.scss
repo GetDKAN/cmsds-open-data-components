@@ -1,6 +1,9 @@
 .dataset-date {
   .dataset-date-item {
     white-space: nowrap;
+    & > span {
+      line-height: 1.8rem;
+    }
 
     .ds-c-tooltip__container {
       position: relative;
@@ -10,6 +13,6 @@
     }
   }
   & > .bullet-point {
-    line-height: 2.2rem;
+    font-size: 1.2rem;
   }
 }
