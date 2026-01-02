@@ -75,7 +75,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
 
   if (theme && showTopics) {
     themes = (
-      <ul className='theme-list item-theme'>
+      <ul className='theme-list ds-u-font-size--sm'>
         {theme.map((topic: string, index: number) => {
           const title = topic || 'Unknown Topic'
           const prefix = 'topics'
@@ -193,7 +193,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
             </>
           ) : ''}</div>
         </div>}
-        {showDateDetails && <div className='dataset-dates'>
+        {showDateDetails && <div className='ds-u-margin-top--2'>
             <DatasetDate date={date} displayTooltips={false}/>
           </div>}
         {( downloadUrl ) ? (
