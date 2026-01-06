@@ -63,6 +63,10 @@ dialog.dkan-filter-dataset-dialog {
       display: flex;
       flex-direction: column;
 
+      .dkan-filter-dataset-controls-header {
+        display: none;
+      }
+
       .ds-c-dialog__header {
         width: 100%;
         flex: 0;
@@ -108,10 +112,45 @@ dialog.dkan-filter-dataset-dialog {
               width: 100%;
               overflow: hidden;
 
-              .dkan-filter-dataset-controls{
+              .dkan-filter-dataset-controls {
                 flex: 1;
                 height: 100%;
                 overflow: auto;
+
+                > fieldset {
+                  background-color: #F2F2F2;
+                  align-items: flex-end;
+                  gap: 0;
+                  display: flex;
+                  flex-wrap: wrap;
+                  max-width: none !important;
+                  padding-block: 16px !important;
+                  margin-block-start: 16px !important;
+                  border: 0 !important;
+
+                  > div:nth-child(1),
+                  > div:nth-child(2),
+                  > div:nth-child(3) {
+                    width: calc(100% - 48px); /* 32px for the delete button + 16px for the gutter */
+                    max-width: none !important;
+                  }
+
+                  > div:nth-child(1),
+                  > div:nth-child(2) {
+                    margin-bottom: 16px;
+                  }
+
+                  .ds-c-label {
+                    width: auto !important;
+                    height: auto !important;
+                    overflow: visible !important;
+                    max-width: none !important;
+                  }
+
+                  .ds-c-field {
+                    max-width: none !important;
+                  }
+                }
               }
 
               > div {
