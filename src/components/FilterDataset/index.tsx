@@ -10,6 +10,7 @@ import FilterItem from "./FilterItem";
 import ClearFiltersButton from "../QueryBuilder/ClearFiltersButton";
 
 import './FilterDataset.scss'
+import { restoreFullscreenDialogScrollLock } from '../../utilities/restoreFullscreenDialogScrollLock'
 
 function updateQueryForDatastore(condition: ConditionType) {
   let cond = condition;
@@ -231,14 +232,7 @@ const FilterDataset: React.FC = () => {
               isOpen={modalOpen}
               onExit={() => {
                 setModalOpen(false);
-                // Defer to run after Dialog's useLayoutEffect cleanup removes the class/style
-                setTimeout(() => {
-                  // Check for open fullscreen dialog wrapper, not just the dialog element
-                  if (document.querySelector('.dkan-fullscreen-data-table-wrapper .ds-c-dialog-wrap.open')) {
-                    document.body.classList.add('ds--dialog-open');
-                    document.body.style.setProperty('--body_top--dialog-open', '-0px');
-                  }
-                }, 0);
+                restoreFullscreenDialogScrollLock();
               }}
               className="dkan-filter-dataset-dialog"
               ariaCloseLabel="Close dialog"
