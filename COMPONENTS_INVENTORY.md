@@ -109,6 +109,7 @@ This document provides a comprehensive inventory of all components, services, te
 | Utility | [datasetSearchReq](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/datasetSearchReq) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Utility | [format](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/format.ts) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Utility | [QueryProvider](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/QueryProvider) | ❌ Internal | ❌ No Story | ❌ No Tests |
+| Utility | [restoreFullscreenDialogScrollLock](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/restoreFullscreenDialogScrollLock.ts) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | | | | | |
 | **ASSETS** | | | | |
 | Asset | [frequencyMap](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/assets/frequencyMap.js) | ✅ Public (commented out) | ❌ No Story | ❌ No Tests |
@@ -124,16 +125,16 @@ This document provides a comprehensive inventory of all components, services, te
 | Components | 64 | 37 (58%) | 23 (36%) | 10 (16%) | 14 (22%) |
 | Templates | 11 | 7 (64%) | 3 (27%) | 1 (9%) | 2 (18%) |
 | Services/Hooks/Contexts | 9 | 0 (0%) | 0 (0%) | 0 (0%) | 9 (100%) |
-| Utilities/Types/Assets | 10 | 0 (0%) | 0 (0%) | 0 (0%) | 10 (100%) |
-| **Project Total** | **94** | **44 (47%)** | **26 (28%)** | **11 (12%)** | **35 (37%)** |
+| Utilities/Types/Assets | 11 | 0 (0%) | 0 (0%) | 0 (0%) | 11 (100%) |
+| **Project Total** | **95** | **44 (46%)** | **26 (27%)** | **11 (12%)** | **36 (38%)** |
 
 ---
 
 ### Export Summary
 - **Public**: 57 items (33 components, 11 templates, 3 services, 2 hooks, 4 contexts, 2 asset)
-- **Internal**: 37 items (31 components, 0 templates, 0 services, 3 utilities, 3 types, 0 asset)
+- **Internal**: 38 items (31 components, 0 templates, 0 services, 4 utilities, 3 types, 0 asset)
 
 ---
 
-*Last updated: January 6, 2026*  
+*Last updated: January 13, 2026*  
 *Repository: [GetDKAN/cmsds-open-data-components](https://github.com/GetDKAN/cmsds-open-data-components)*

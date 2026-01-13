@@ -6,6 +6,7 @@ import { Button, Choice, Dialog } from '@cmsgov/design-system'
 import Card from './Card'
 import { DataTableActionsContext } from '../DatasetTableTab/DataTableActionsContext'
 import './ManageColumns.scss'
+import { restoreFullscreenDialogScrollLock } from '../../utilities/restoreFullscreenDialogScrollLock'
 
 class ExcludeCheckboxKeyboardSensor extends KeyboardSensor {
   // Custom function to exclude checkbox from keyboard dragging
@@ -145,6 +146,7 @@ const ManageColumns = ({
           onExit={() => {
             setModalOpen(false);
             resetCards();
+            restoreFullscreenDialogScrollLock();
           }}
           className="dkan-manage-columns-dialog"
           actions={(
@@ -175,6 +177,8 @@ const ManageColumns = ({
                     tableColumnVisibility: newColumnVisibility
                   }
                   localStorage.setItem(id, JSON.stringify(localStorageData))
+
+                  restoreFullscreenDialogScrollLock();
                 }}
                 >
                   Save
@@ -185,6 +189,7 @@ const ManageColumns = ({
                   onClick={() => {
                     setModalOpen(false)
                     resetCards();
+                    restoreFullscreenDialogScrollLock();
                   }}
                 >
                   Cancel
