@@ -153,6 +153,7 @@ const FilterDataset: React.FC = () => {
       setConditionsChanged(false);
       updateBrowserURL(completeConditions as ConditionType[]);
       setModalOpen(false);
+      restoreFullscreenDialogScrollLock();
     }
   };
 
