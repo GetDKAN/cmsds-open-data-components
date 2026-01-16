@@ -28,14 +28,21 @@
 
 .dkan-dataset-search {
   position: relative;
+  align-items: flex-start;
+
   input {
     min-width: 100%;
     @media only screen and (min-width: 544px) {
       padding-left: 32px;
     }
   }
+
   .ds-c-field__before {
     left: 16px;
     top: 12px;
+  }
+
+  .ds-c-inline-error {
+    max-width: none;
   }
 }
