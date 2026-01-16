@@ -135,5 +135,5 @@ This document provides a comprehensive inventory of all components, services, te
 
 ---
 
-*Last updated: December 2, 2025*  
+*Last updated: January 16, 2026*  
 *Repository: [GetDKAN/cmsds-open-data-components](https://github.com/GetDKAN/cmsds-open-data-components)*
