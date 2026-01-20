@@ -35,11 +35,9 @@ const ResourcePreview = ({
 }) => {
   const {resource, customColumns} = useContext(DataTableContext);
 
-  const customColumnHeaders = buildCustomColHeaders(
-    customColumns,
-    resource.columns,
-    resource.schema[id]
-  );
+  const customColumnHeaders = customColumns
+    ? buildCustomColHeaders(customColumns, resource.columns, resource.schema[id])
+    : null;
 
   const columns = customColumnHeaders
     ? customColumnHeaders
