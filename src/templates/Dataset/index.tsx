@@ -7,7 +7,7 @@ import useMetastoreDataset from '../../services/useMetastoreDataset';
 import useDatastore from '../../services/useDatastore';
 import PageNotFound from '../PageNotFound';
 import { defaultMetadataMapping } from '../../assets/metadataMapping';
-import { Tabs, TabPanel } from '@cmsgov/design-system';
+import { Tabs, TabPanel, Button } from '@cmsgov/design-system';
 import SearchItemIcon from '../../assets/icons/searchItem';
 import DatasetOverview from '../../components/DatasetOverviewTab';
 import DatasetAPI from '../../components/DatasetAPITab';
@@ -22,6 +22,7 @@ import DatasetDescription from '../../components/DatasetDescription';
 import { acaToParams } from '../../utilities/aca';
 import { ACAContext } from '../../utilities/ACAContext';
 import DatasetDate from '../../components/DatasetDate';
+import TopicInformation from '../../components/TopicInformation';
 
 const getDataDictionary = (dataDictionaryUrl: string) => {
   const { ACA } = useContext(ACAContext);
@@ -59,6 +60,8 @@ const Dataset = ({
   showRowLimitNotice = false,
   tabHrefPrepend = '',
   showDateDetails = false,
+  topicDetails = [],
+  showTagsOnOverview = false,
 }: DatasetPageType) => {
   const tabHref = `/dataset/${id}`;
   const options = location.search
@@ -153,6 +156,7 @@ const Dataset = ({
   const displayDataDictionaryTab = (distribution.data && distribution.data.describedBy && dataDictionaryTypes.includes( distribution.data.describedByType) || (datasetSitewideDictionary && datasetSitewideDictionary.length > 0)) as boolean;
 
   const date = {modified: dataset.modified, released: dataset.released, refresh: dataset.nextUpdateDate};
+
   return (
     <>
       {dataset.error ? (
@@ -163,6 +167,9 @@ const Dataset = ({
             <div className={'ds-l-md-col--9'}>
               <h1 className="ds-text-heading--3xl">{title}</h1>
             </div>
+            {(topicDetails.length  && dataset.theme) ? (
+              <TopicInformation topicDetails={topicDetails} theme={dataset.theme} />
+            ) : ''}
             <div className={'ds-l-md-col--12 ds-u-margin-y--2'}>
               {showDateDetails ? 
                 <DatasetDate 
@@ -171,7 +178,6 @@ const Dataset = ({
                   displayTooltips
                 /> :
                  <p className="ds-u-margin--0 ds-u-font-weight--bold">Updated <TransformedDate date={date.modified} /></p>}
-             
             </div>
             <div className={'ds-l-md-col--9'}>
               <DatasetDescription
@@ -232,7 +238,7 @@ const Dataset = ({
                     tabHref={`${tabHrefPrepend}${tabHref}#overview`}
                     className={borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : ''}
                   >
-                    <DatasetOverview resource={resource} dataset={dataset} distributions={distributions} metadataMapping={metadataMapping} rootUrl={rootUrl} />
+                    <DatasetOverview resource={resource} dataset={dataset} distributions={distributions} metadataMapping={metadataMapping} rootUrl={rootUrl} showTags={showTagsOnOverview} />
                   </TabPanel>
                   {!hideDataDictionary && (
                     <TabPanel
