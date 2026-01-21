@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, TextField } from '@cmsgov/design-system';
+import { isValidSearch } from '../../templates/DatasetSearch/DatasetSearch';
+import './Hero.scss';
 
 const Hero = ({
   title,
@@ -12,10 +14,18 @@ const Hero = ({
 }) => {
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = React.useState('');
+  const [invalidSearch, setInvalidSearch] = useState(false);
 
   function submitHero(e) {
     e.preventDefault();
-    navigate(`/${searchUrl}?${searchKey}=${searchValue}`);
+
+    if (searchValue && isValidSearch(searchValue)) {
+      setInvalidSearch(false);
+
+      navigate(`/${searchUrl}?${searchKey}=${searchValue}`);
+    } else {
+      setInvalidSearch(true);
+    }
   }
 
   return (
@@ -35,11 +45,16 @@ const Hero = ({
               style={{ flex: '1 1 100%', maxWidth: '100%' }}
             >
               <TextField
+                errorMessage={invalidSearch ? 'No special characters allowed. Please enter a valid search term.' : undefined}
+                errorPlacement='bottom'
                 label={textfieldLabel}
                 labelClassName="ds-u-visibility--screen-reader"
                 name="search_text_input"
                 style={{ maxWidth: 'none', height: '61px', margin: '0 20px 0 0' }}
-                onChange={(e) => setSearchValue(e.target.value)}
+                onChange={(e) => {
+                  setInvalidSearch(false);
+                  setSearchValue(e.target.value);
+                }}
               />
             </div>
             <Button className="ds-u-margin-left--auto" size="big" type="submit" variation="solid" onDark>
