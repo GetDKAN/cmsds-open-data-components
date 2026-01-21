@@ -1,11 +1,12 @@
 import React from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { buildRows } from '../DatasetAdditionalInformation';
+import { Link } from 'react-router-dom';
 import { Table, TableBody, TableRow, TableCell, Tooltip, TooltipIcon } from '@cmsgov/design-system';
+import { buildRows } from '../DatasetAdditionalInformation';
 import Resource from '../Resource';
 import { DatasetOverviewPropsType } from '../../types/dataset';
 
-const DatasetOverview = ({ dataset, resource, distributions, metadataMapping, rootUrl } : DatasetOverviewPropsType) => {
+const DatasetOverview = ({ dataset, resource, distributions, metadataMapping, rootUrl, showTags } : DatasetOverviewPropsType) => {
   const md = useMediaQuery({ minWidth: 0, maxWidth: 768 });
   const rows = buildRows(metadataMapping, dataset);
 
@@ -36,8 +37,20 @@ const DatasetOverview = ({ dataset, resource, distributions, metadataMapping, ro
         title={dataset.title}
         rootUrl={rootUrl}
       />
-      <div className="dc-c-additional-info-table ds-u-margin-bottom--6 ds-u-padding-left--0 ds-l-lg-col--7 ds-l-md-col--9 ds-l-col--12">
-        <h2 className="ds-text-heading--2xl ds-text-heading--2xl">Additional Information</h2>
+      {showTags ? (
+        <div className="ds-u-margin-top--3">
+          <h2 className="ds-text-heading--2xl">Tags</h2>
+          <div className="ds-u-display--flex ds-u-flex-direction--row ds-u-justify-content--start ds-u-flex-wrap--wrap">
+          {dataset.keyword?.map(tag => (
+            <div key={tag.identifier} className="ds-c-tag ds-u-fill--gray-lighter ds-u-display--inline-block ds-u-padding--1 ds-u-radius ds-u-margin-right--2 ds-u-margin-bottom--2">
+              <Link to={`/search?keyword=${tag.data}`} aria-label={`${tag.data} tag - Opens a new search with this filter`} className="ds-u-color--base"> {tag.data} </Link>
+            </div>
+          ))}
+          </div>
+        </div>
+      ) : ''}
+      <div className="dc-c-additional-info-table ds-u-margin-bottom--6 ds-u-margin-top--3 ds-u-padding-left--0 ds-l-lg-col--7 ds-l-md-col--9 ds-l-col--12">
+        <h2 className="ds-text-heading--2xl">Additional Information</h2>
         <Table compact stackable stackableBreakpoint="md" warningDisabled>
           <TableBody>
             {rows.map((r) => {
