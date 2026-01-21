@@ -67,6 +67,7 @@ This document provides a comprehensive inventory of all components, services, te
 | Component | [SitewideDataDictionaryTable](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/SitewideDataDictionaryTable) | ❌ Internal | ✅ Has Story | ❌ No Tests |
 | Component | [SubMenu](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/SubMenu) | ✅ Public | ❌ No Story | ❌ No Tests |
 | Component | [SubMenuStaticList](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/SubMenuStaticList) | ❌ Internal | ❌ No Story | ❌ No Tests |
+| Component | [TopicInformation](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/TopicInformation) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Component | [TransformedDate](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/TransformedDate) | ✅ Public | ✅ Has Story | ❌ No Tests |
 | Component | [useAddLoginLink](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/useAddLoginLink) | ✅ Public | ❌ No Story | ❌ No Tests |
 | Component | [useScrollToTop](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/useScrollToTop) | ✅ Public | ❌ No Story | ❌ No Tests |
