@@ -62,6 +62,7 @@ const HeaderSearch = (props: HeaderSearchProps) => {
             >
               <TextField
                 errorMessage={invalidSearch ? 'No special characters allowed. Please enter a valid search term.' : undefined}
+                errorPlacement='bottom'
                 value={modalSearchTerm}
                 fieldClassName="ds-u-display--inline-block ds-u-margin--0"
                 className="ds-l-col--9"

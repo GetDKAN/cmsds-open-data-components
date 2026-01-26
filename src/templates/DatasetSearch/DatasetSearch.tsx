@@ -293,6 +293,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
               <span className="ds-c-field__before fas fa-search ds-u-display--none ds-u-sm-display--inline-block" />
               <TextField
                 errorMessage={invalidSearch ? 'No special characters allowed. Please enter a valid search term.' : undefined}
+                errorPlacement='bottom'
                 fieldClassName="ds-u-margin--0"
                 value={filterText as TextFieldValue}
                 className={`ds-u-padding-right--2 ${altMobileSearchButton ? 'ds-l-col--12 ds-l-md-col--10 --alt-style' : 'ds-l-col--10'}`}
