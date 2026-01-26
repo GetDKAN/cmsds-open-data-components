@@ -10,6 +10,7 @@ import FilterItem from "./FilterItem";
 import ClearFiltersButton from "../QueryBuilder/ClearFiltersButton";
 
 import './FilterDataset.scss'
+import { restoreFullscreenDialogScrollLock } from '../../utilities/restoreFullscreenDialogScrollLock'
 
 function updateQueryForDatastore(condition: ConditionType) {
   let cond = condition;
@@ -152,6 +153,7 @@ const FilterDataset: React.FC = () => {
       setConditionsChanged(false);
       updateBrowserURL(completeConditions as ConditionType[]);
       setModalOpen(false);
+      restoreFullscreenDialogScrollLock();
     }
   };
 
@@ -229,7 +231,10 @@ const FilterDataset: React.FC = () => {
             <Dialog
               heading="Filter Dataset"
               isOpen={modalOpen}
-              onExit={() => setModalOpen(false)}
+              onExit={() => {
+                setModalOpen(false);
+                restoreFullscreenDialogScrollLock();
+              }}
               className="dkan-filter-dataset-dialog"
               ariaCloseLabel="Close dialog"
               actions={(

@@ -48,10 +48,17 @@ const DatasetListSubmenu = ({
     }
   });
 
+// Sync totalItems state with API response data
+  // Moved to useEffect to prevent state updates during render (which can cause infinite loops)
+  useEffect(() => {
+    if (data?.data?.total !== undefined && data.data.total !== totalItems) {
+      setTotalItems(data.data.total);
+    }
+  }, [data?.data?.total]);
+
   let submenuItemsCount = 0;
 
   if (data) {
-    if (data.data.total && totalItems !== data.data.total) setTotalItems(data.data.total);
     let resultsCount = Object.keys(data.data.results).length;
     // For the submenu pager, If there are fewer than 4 dataset items, display the dataset item count, otherwise, show "Viewing 4..".
     submenuItemsCount = resultsCount > defaultPageSize ? defaultPageSize : resultsCount

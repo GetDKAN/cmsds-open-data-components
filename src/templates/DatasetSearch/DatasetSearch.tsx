@@ -18,6 +18,12 @@ import { TextFieldValue } from '@cmsgov/design-system/dist/react-components/type
 import { acaToParams } from '../../utilities/aca';
 import { ACAContext } from '../../utilities/ACAContext';
 
+export const isValidSearch = (query: string) => {
+  // Only allow letters, numbers, and spaces
+  // A search containing any special character will be rejected
+  return /^[a-zA-Z0-9 ]+$/.test(query.trim());
+};
+
 const DatasetSearch = (props: DatasetSearchPageProps) => {
   const {
     rootUrl,
@@ -79,6 +85,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
         keyword: [],
       }
   )
+  const [invalidSearch, setInvalidSearch] = useState<boolean>(false);
 
   const setSortOptions = (value: string) => {
     setSortDisplay(value)
@@ -177,7 +184,13 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     }
   });
 
-  if ((data && data.data.total) && totalItems != data.data.total) setTotalItems(data.data.total);
+// Sync totalItems state with API response data
+  // Moved to useEffect to prevent state updates during render (which can cause infinite loops)
+  useEffect(() => {
+    if (data?.data?.total !== undefined && data.data.total !== totalItems) {
+      setTotalItems(data.data.total);
+    }
+  }, [data?.data?.total]);
 
   const facets: SidebarFacetTypes = (data && data.data.facets) ? separateFacets(data ? data.data.facets : []) : { theme: null, keyword: null };
 
@@ -264,12 +277,22 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                setFullText(filterText);
+                
+                if (filterText) {
+                  if (isValidSearch(filterText as string)) {
+                    setInvalidSearch(false);
+
+                    setFullText(filterText);
+                  } else {
+                    setInvalidSearch(true);
+                  }
+                }
               }}
               className="dkan-dataset-search ds-l-form-row ds-u-padding-bottom--4 ds-u-border-bottom--1"
             >
               <span className="ds-c-field__before fas fa-search ds-u-display--none ds-u-sm-display--inline-block" />
               <TextField
+                errorMessage={invalidSearch ? 'No special characters allowed. Please enter a valid search term.' : undefined}
                 fieldClassName="ds-u-margin--0"
                 value={filterText as TextFieldValue}
                 className={`ds-u-padding-right--2 ${altMobileSearchButton ? 'ds-l-col--12 ds-l-md-col--10 --alt-style' : 'ds-l-col--10'}`}
@@ -277,7 +300,10 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                 labelClassName="ds-u-visibility--screen-reader"
                 placeholder="Search datasets"
                 name="dataset_fulltext_search"
-                onChange={(e) => setFilterText(e.target.value)}
+                onChange={(e) => {
+                  setInvalidSearch(false);
+                  setFilterText(e.target.value)
+                }}
               />
               <SearchButton altMobileStyle={altMobileSearchButton} />
             </form>

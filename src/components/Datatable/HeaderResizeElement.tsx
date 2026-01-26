@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import { flexRender } from "@tanstack/react-table";
 
-const HeaderResizeElement = ({table, header, sortElement, setAriaLiveFeedback, id} :
-  {table: any, header: any, sortElement?: Function, setAriaLiveFeedback: Function, id?: string }) => {
+const HeaderResizeElement = ({table, header, sortElement, id} :
+  {table: any, header: any, sortElement?: Function, id?: string }) => {
   const [columnResizing, setColumnResizing] = useState('');
 
   // Fix for JSX in Data Dictionary Title header cell
@@ -70,18 +70,15 @@ const HeaderResizeElement = ({table, header, sortElement, setAriaLiveFeedback, i
               if (columnResizing) {
                 // end resizing
                 setColumnResizing('')
-                setAriaLiveFeedback(`${header.column.columnDef.header} dropped.`)
               } else {
                 // start resizing
                 setColumnResizing(header.column.id)
-                setAriaLiveFeedback(`${header.column.columnDef.header} grabbed.`)
               }
               break;
 
             case 'Escape':
               if (columnResizing) {
                 setColumnResizing('')
-                setAriaLiveFeedback(`${header.column.columnDef.header} dropped.`)
               }
               break;
               case 'ArrowRight':
@@ -90,7 +87,6 @@ const HeaderResizeElement = ({table, header, sortElement, setAriaLiveFeedback, i
                 if (columnResizing) {
                   columnSizingObject[header.column.id] = header.getSize() + 10;
                   table.setColumnSizing(columnSizingObject);
-                  setAriaLiveFeedback(`${header.column.columnDef.header} has been resized. The new width is ${header.getSize()} pixels.`);
                 }
                 break;
               case 'ArrowLeft':
@@ -99,7 +95,6 @@ const HeaderResizeElement = ({table, header, sortElement, setAriaLiveFeedback, i
                 if (columnResizing) {
                   columnSizingObject[header.column.id] = header.getSize() - 10;
                   table.setColumnSizing(columnSizingObject);
-                  setAriaLiveFeedback(`${header.column.columnDef.header} has been resized. The new width is ${header.getSize()} pixels.`)
                 }
                 break;
           }
