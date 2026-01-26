@@ -46,7 +46,7 @@ const DatasetDate = (props: DatasetDateProps) => {
   })
 
   return (
-    <div className='dataset-date ds-u-display--flex ds-u-font-size--sm ds-u-align-items--start'>
+    <div className='dataset-date ds-u-display--flex ds-u-flex-wrap--wrap ds-u-font-size--sm ds-u-align-items--start'>
       {dateItems.map((item, index) => (
         <React.Fragment key={index}>
           {item}
