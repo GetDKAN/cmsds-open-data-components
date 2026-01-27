@@ -152,6 +152,7 @@ const DataTable = ({
                   0,
                   5
                 ]}
+                aria-haspopup="dialog"
                 placement="bottom-start"
                 maxWidth="320px"
                 title={
