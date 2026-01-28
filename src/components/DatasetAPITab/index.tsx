@@ -33,7 +33,7 @@ const DatasetAPI = ({
           <a href={apiUrl}>
             View API{' '}
             <span style={{ whiteSpace: 'nowrap' }}>
-              specification <i className="fa fa-arrow-right ds-u-font-weight--bold"></i>
+              documentation <i className="fa fa-arrow-right ds-u-font-weight--bold"></i>
             </span>
           </a>
         </div>
