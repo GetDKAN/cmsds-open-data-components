@@ -129,7 +129,6 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
           5
         ]}
         title="There is no Data Table associated with this dataset. Data Tables will only display for CSV files."
-        aria-disabled="true"
       >
         <SearchItemIcon id="data-table" />
         Data Table
@@ -166,7 +165,6 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
           5
         ]}
         title="There is no Data Dictionary associated with this dataset."
-        aria-disabled="true"
       >
         <SearchItemIcon id="data-dictionary" />
         Data Dictionary
