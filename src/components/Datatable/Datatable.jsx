@@ -191,7 +191,7 @@ const DataTable = ({
                       <div className="ds-l-col--12 ds-u-padding-x--0 ds-u-margin-x--0">
                         <Button
                           className="ds-u-text-align--center ds-u-display--inline-block ds-l-col--12 ds-u-padding-x--2 ds-u-margin-x--0 ds-u-margin-bottom--1"
-                          href={downloadURL}
+                          href={(conditions && conditions.length) ? downloadURL : null}
                           aria-disabled={!conditions || conditions.length === 0}
                         >
                           <span className="ds-u-font-weight--normal ds-u-font-size--md ds-u-padding--0">
