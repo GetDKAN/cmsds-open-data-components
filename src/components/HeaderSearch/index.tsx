@@ -20,19 +20,17 @@ const HeaderSearch = (props: HeaderSearchProps) => {
     e.preventDefault();
 
     if (window) {
-      if (modalSearchTerm) {
-        if (isValidSearch(modalSearchTerm)) {
-          setInvalidSearch(false);
+      if (isValidSearch(modalSearchTerm)) {
+        setInvalidSearch(false);
 
-          if (window.location.pathname !== '/datasets') {
-            navigate(`/datasets?fulltext=${modalSearchTerm}`);
-          } else {
-            window.location.search = `fulltext=${modalSearchTerm}`;
-            setModalSearch(false);
-          }
+        if (window.location.pathname !== '/datasets') {
+          navigate(`/datasets?fulltext=${modalSearchTerm}`);
         } else {
-          setInvalidSearch(true);
+          window.location.search = `fulltext=${modalSearchTerm}`;
+          setModalSearch(false);
         }
+      } else {
+        setInvalidSearch(true);
       }
     }
   }

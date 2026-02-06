@@ -19,9 +19,9 @@ import { acaToParams } from '../../utilities/aca';
 import { ACAContext } from '../../utilities/ACAContext';
 
 export const isValidSearch = (query: string) => {
-  // Only allow letters, numbers, and spaces
+  // Only allow letters, numbers, spaces, and empty string
   // A search containing any special character will be rejected
-  return /^[a-zA-Z0-9 ]+$/.test(query.trim());
+  return /^[a-zA-Z0-9 ]*$/.test(query.trim());
 };
 
 const DatasetSearch = (props: DatasetSearchPageProps) => {

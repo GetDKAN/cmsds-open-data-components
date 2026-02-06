@@ -19,7 +19,7 @@ const Hero = ({
   function submitHero(e) {
     e.preventDefault();
 
-    if (searchValue && isValidSearch(searchValue)) {
+    if (isValidSearch(searchValue)) {
       setInvalidSearch(false);
 
       navigate(`/${searchUrl}?${searchKey}=${searchValue}`);
