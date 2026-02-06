@@ -21,7 +21,6 @@ import { ACAContext } from '../../utilities/ACAContext';
 export const isValidSearch = (query: string) => {
   // Only allow letters, numbers, spaces, and empty string
   // A search containing any special character will be rejected
-  console.log('query', query);
   return /^[a-zA-Z0-9 ]*$/.test(query.trim());
 };
 
