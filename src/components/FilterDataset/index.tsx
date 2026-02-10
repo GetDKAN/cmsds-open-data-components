@@ -219,12 +219,12 @@ const FilterDataset: React.FC = () => {
             <i className="fa fa-filter ds-u-margin-right--1"></i>
             <span>
               <span className="dkan-dataset-toolbar-button-label">
-                {conditions.length > 0
+                {conditions && conditions.length > 0
                   ? `Edit Filters`
                   : 'Filter Dataset'
                 }
               </span>
-              {conditions.length > 0 && ` (${conditions.length})`}
+              {conditions && conditions.length > 0 && ` (${conditions.length})`}
             </span>
           </button>
           <div className={`ds-c-dialog-wrap${modalOpen ? ' open' : ''}`}>
