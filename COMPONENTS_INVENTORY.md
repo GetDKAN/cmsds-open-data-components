@@ -87,7 +87,7 @@ This document provides a comprehensive inventory of all components, services, te
 | | | | | |
 | **TEMPLATES** | | | | |
 | Template | [APIPage](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/APIPage) | ✅ Public | ❌ No Story | ❌ No Tests |
-| Template | [Dataset](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/Dataset) | ✅ Public | ✅ Has Story | ✅ Has Tests |
+| Template | [Dataset](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/Dataset) | ✅ Public | ❌ No Story | ✅ Has Tests |
 | Template | [DatasetList](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/DatasetList) | ✅ Public | ✅ Has Story | ❌ No Tests |
 | Template | [DatasetSearch](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/DatasetSearch) | ✅ Public | ❌ No Story | ✅ Has Tests |
 | Template | [FilteredResource](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/FilteredResource) | ✅ Public | ❌ No Story | ❌ No Tests |
@@ -123,10 +123,10 @@ This document provides a comprehensive inventory of all components, services, te
 | Category | Total | With Stories | With Tests | With Both | With Neither |
 |----------|-------|--------------|------------|-----------|--------------|
 | Components | 64 | 37 (58%) | 23 (36%) | 10 (16%) | 14 (22%) |
-| Templates | 11 | 8 (73%) | 3 (27%) | 2 (18%) | 2 (18%) |
+| Templates | 11 | 7 (64%) | 3 (27%) | 1 (9%) | 2 (18%) |
 | Services/Hooks/Contexts | 9 | 0 (0%) | 0 (0%) | 0 (0%) | 9 (100%) |
 | Utilities/Types/Assets | 11 | 0 (0%) | 0 (0%) | 0 (0%) | 11 (100%) |
-| **Project Total** | **95** | **45 (47%)** | **26 (27%)** | **12 (13%)** | **36 (38%)** |
+| **Project Total** | **95** | **44 (46%)** | **26 (27%)** | **11 (12%)** | **36 (38%)** |
 
 ---
 
@@ -136,5 +136,5 @@ This document provides a comprehensive inventory of all components, services, te
 
 ---
 
-*Last updated: February 11, 2026*  
+*Last updated: February 6, 2026*  
 *Repository: [GetDKAN/cmsds-open-data-components](https://github.com/GetDKAN/cmsds-open-data-components)*
