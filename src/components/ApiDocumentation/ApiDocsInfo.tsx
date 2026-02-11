@@ -16,7 +16,8 @@ import ApiRowLimitNotice from '../ApiRowLimitNotice';
         </p>) : ''}
         {showRowLimitNotice && <ApiRowLimitNotice />}
       </div>
-      <div className="ds-l-col--12 ds-l-md-col--3 ds-u-font-weight--bold ds-u-margin-top--2 ds-u-md-text-align--right">
+      {isDatasetDocs ? (
+        <div className="ds-l-col--12 ds-l-md-col--3 ds-u-font-weight--bold ds-u-margin-top--2 ds-u-md-text-align--right">
         <a href={docsURL} className="ds-u-margin-bottom--1">
           View API{' '}
           <span style={{ whiteSpace: 'nowrap' }}>
@@ -24,6 +25,7 @@ import ApiRowLimitNotice from '../ApiRowLimitNotice';
           </span>
         </a>
       </div>
+      ) : '' }
       <div className="ds-l-col--12 ds-u-margin-y--1"><a href={url}>OpenAPI Specification (JSON)</a></div>
     </div>
   )
