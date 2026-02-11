@@ -35,11 +35,11 @@ function filterResultsByConditions(
   const normalized: QueryCondition[] = !conditions
     ? []
     : Array.isArray(conditions)
-      ? conditions.filter((c) => c && c.property != null)
-      : Object.keys(conditions)
-          .sort((a, b) => Number(a) - Number(b))
-          .map((k) => (conditions as Record<string, QueryCondition>)[k])
-          .filter((c) => c && c.property != null);
+    ? conditions.filter((c) => c && c.property != null)
+    : Object.keys(conditions)
+        .sort((a, b) => Number(a) - Number(b))
+        .map((k) => (conditions as Record<string, QueryCondition>)[k])
+        .filter((c) => c && c.property != null);
   if (normalized.length === 0) return results;
 
   return results.filter((row) => {
@@ -54,7 +54,9 @@ function filterResultsByConditions(
       if (val != null && !Array.isArray(val) && typeof val === 'object') {
         val = Object.values(val) as string[];
       }
-      const valStr = Array.isArray(val) ? val.map((v) => String(v).trim()) : String(val ?? '').trim();
+      const valStr = Array.isArray(val)
+        ? val.map((v) => String(v).trim())
+        : String(val ?? '').trim();
 
       if (op === '=' || op === 'is') {
         return cellStr === (Array.isArray(valStr) ? valStr[0] : valStr);
@@ -175,10 +177,13 @@ export const createDatasetPageHandlers = () => [
   }),
 
   // Data dictionary: /api/1/metastore/schemas/data-dictionary/items/22ad17f4-1b4d-4382-b940-79bddc8bb610
-  http.get('**/metastore/schemas/data-dictionary/items/22ad17f4-1b4d-4382-b940-79bddc8bb610', async () => {
-    await delay(300);
-    return HttpResponse.json(mockDatasetItemDataDictionary);
-  }),
+  http.get(
+    '**/metastore/schemas/data-dictionary/items/22ad17f4-1b4d-4382-b940-79bddc8bb610',
+    async () => {
+      await delay(300);
+      return HttpResponse.json(mockDatasetItemDataDictionary);
+    }
+  ),
 
   // Datastore query for resource 479a03e6-ccf1-5636-9fd3-cad48c11177d (distribution 1)
   http.get('**/datastore/query/479a03e6-ccf1-5636-9fd3-cad48c11177d', async ({ request }) => {
@@ -189,12 +194,18 @@ export const createDatasetPageHandlers = () => [
     const count = url.searchParams.get('count');
     const keys = url.searchParams.get('keys');
     // Parse limit (1–100, default 25) and offset (≥0) for pagination; slice mock results accordingly
-    const limit = Math.min(100, Math.max(1, parseInt(url.searchParams.get('limit') ?? '25', 10) || 25));
+    const limit = Math.min(
+      100,
+      Math.max(1, parseInt(url.searchParams.get('limit') ?? '25', 10) || 25)
+    );
     const offset = Math.max(0, parseInt(url.searchParams.get('offset') ?? '0', 10) || 0);
     // Parse conditions from query string (e.g. conditions[0][property]=npn&conditions[0][value]=214&conditions[0][operator]=contains).
     // qs yields conditions as array or object with numeric keys; filterResultsByConditions accepts both.
     const params = qs.parse(url.search, { ignoreQueryPrefix: true });
-    const rawConditions = params.conditions as QueryCondition[] | Record<string, QueryCondition> | undefined;
+    const rawConditions = params.conditions as
+      | QueryCondition[]
+      | Record<string, QueryCondition>
+      | undefined;
 
     // Metadata-only: distribution count/query info (no rows, no schema)
     if (resultsParam === 'false' && schema === 'false') {
@@ -258,6 +269,25 @@ export const createDatasetPageHandlers = () => [
       schema: {},
       results: [],
     });
+  }),
+];
+
+/**
+ * Creates MSW handlers for APIPage stories.
+ * Mocks the OpenAPI specification endpoint for Swagger UI.
+ * Returns spec with or without auth based on the authentication query param.
+ */
+export const createAPIPageHandlers = (openAPISpec: object, openAPISpecWithAuth?: object) => [
+  http.get('**/openapi.json', async ({ request }) => {
+    await delay(100);
+    const url = new URL(request.url);
+    const authParam = url.searchParams.get('authentication');
+    // When hideAuth=true, component sends authentication=false
+    // When hideAuth=false, authentication param is not sent
+    if (authParam === 'false') {
+      return HttpResponse.json(openAPISpec);
+    }
+    return HttpResponse.json(openAPISpecWithAuth ?? openAPISpec);
   }),
 ];
 

@@ -86,7 +86,7 @@ This document provides a comprehensive inventory of all components, services, te
 | Service | [useSearchAPI](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/services/useSearchAPI) | ✅ Public | ❌ No Story | ❌ No Tests |
 | | | | | |
 | **TEMPLATES** | | | | |
-| Template | [APIPage](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/APIPage) | ✅ Public | ❌ No Story | ❌ No Tests |
+| Template | [APIPage](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/APIPage) | ✅ Public | ✅ Has Story | ❌ No Tests |
 | Template | [Dataset](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/Dataset) | ✅ Public | ✅ Has Story | ✅ Has Tests |
 | Template | [DatasetList](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/DatasetList) | ✅ Public | ✅ Has Story | ❌ No Tests |
 | Template | [DatasetSearch](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/DatasetSearch) | ✅ Public | ❌ No Story | ✅ Has Tests |
@@ -123,10 +123,10 @@ This document provides a comprehensive inventory of all components, services, te
 | Category | Total | With Stories | With Tests | With Both | With Neither |
 |----------|-------|--------------|------------|-----------|--------------|
 | Components | 64 | 37 (58%) | 23 (36%) | 10 (16%) | 14 (22%) |
-| Templates | 11 | 8 (73%) | 3 (27%) | 2 (18%) | 2 (18%) |
+| Templates | 11 | 9 (82%) | 3 (27%) | 2 (18%) | 1 (9%) |
 | Services/Hooks/Contexts | 9 | 0 (0%) | 0 (0%) | 0 (0%) | 9 (100%) |
 | Utilities/Types/Assets | 11 | 0 (0%) | 0 (0%) | 0 (0%) | 11 (100%) |
-| **Project Total** | **95** | **45 (47%)** | **26 (27%)** | **12 (13%)** | **36 (38%)** |
+| **Project Total** | **95** | **46 (48%)** | **26 (27%)** | **12 (13%)** | **35 (37%)** |
 
 ---
 
