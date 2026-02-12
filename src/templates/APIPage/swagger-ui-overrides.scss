@@ -16,6 +16,8 @@ This document provides overrides to Swagger UI, fixing accessibility issues.
 }
 // State  `.swagger-ui` twice to include specificity and avoid multiple `!important` statements;
 .swagger-ui.swagger-ui {
+  font-family: inherit;
+
   .opblock {
     .opblock-summary-method {
       color: #333;
@@ -68,9 +70,8 @@ This document provides overrides to Swagger UI, fixing accessibility issues.
     }
   }
 
-  .info {
-    .title > span {
-      span {
+  .information-container {
+      span.version-stamp {
         background-color: #666;
         border-radius: 67px;
         display: inline-block;
@@ -85,7 +86,6 @@ This document provides overrides to Swagger UI, fixing accessibility issues.
           background-color: #005830;
         }
       }
-    }
 
     a {
       color: #036;
