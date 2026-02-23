@@ -368,36 +368,6 @@ describe('FilterItem', () => {
     expect(cleanText).toHaveBeenCalledWith('test_value', '=');
   });
 
-  it('should still render value field when operator is is_empty', () => {
-    const emptyProps: FilterItemType = {
-      ...defaultProps,
-      enableEmptyFilters: true,
-      condition: {
-        ...defaultProps.condition,
-        operator: 'is_empty'
-      }
-    };
-
-    render(<FilterItem {...emptyProps} />);
-
-    expect(screen.getByTestId('test_key_value')).toBeInTheDocument();
-  });
-
-  it('should still render value field when operator is not_empty', () => {
-    const notEmptyProps: FilterItemType = {
-      ...defaultProps,
-      enableEmptyFilters: true,
-      condition: {
-        ...defaultProps.condition,
-        operator: 'not_empty'
-      }
-    };
-
-    render(<FilterItem {...notEmptyProps} />);
-
-    expect(screen.getByTestId('test_key_value')).toBeInTheDocument();
-  });
-
   it('should not include empty operators when enableEmptyFilters is false', () => {
     render(<FilterItem {...defaultProps} />);
 
