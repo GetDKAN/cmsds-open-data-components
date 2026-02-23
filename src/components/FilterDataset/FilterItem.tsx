@@ -18,7 +18,7 @@ function getStartDate(condition : ConditionType, schema : any, id : string) {
   return new Date();
 }
 
-const FilterItem = ({ id, condition, index, update, remove, propertyOptions, schema, className = '' } : FilterItemType) => {
+const FilterItem = ({ id, condition, index, update, remove, propertyOptions, schema, className = '', enableEmptyFilters } : FilterItemType) => {
   const [operator, setOperator] = useState(condition.operator);
   const [property, setProperty] = useState(condition.property);
   const [value, setValue] = useState(condition.value);
@@ -83,7 +83,7 @@ const FilterItem = ({ id, condition, index, update, remove, propertyOptions, sch
         onChange={(e) => setProperty(e.target.value)}
       />
       <Dropdown
-        options={buildOperatorOptions(schema[id].fields[property].mysql_type)}
+        options={buildOperatorOptions(schema[id].fields[property].mysql_type, enableEmptyFilters)}
         className="ds-u-padding-x--0"
         value={operator}
         label="Condition"

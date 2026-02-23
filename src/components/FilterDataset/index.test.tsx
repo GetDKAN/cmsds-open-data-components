@@ -11,16 +11,25 @@ import { DataTableActionsContextProps } from "../DatasetTableTab/DataTableAction
 import { DataTableContextType } from "../../templates/Dataset/DataTableContext";
 
 jest.mock('../../templates/FilteredResource/functions', () => ({
-  buildOperatorOptions: jest.fn(() => [
-    { label: 'Is', value: '=' },
-    { label: 'Starts With', value: 'starts with' },
-    { label: 'Contains', value: 'contains' },
-    { label: 'Is Not', value: '<>' },
-    { label: 'Or', value: 'in' },
-    { label: 'Greater Than', value: '>' },
-    { label: 'Less Than', value: '<' },
-    { label: 'Like', value: 'like' },
-  ]),
+  buildOperatorOptions: jest.fn((type, enableEmptyFilters = false) => {
+    const base = [
+      { label: 'Is', value: '=' },
+      { label: 'Starts With', value: 'starts with' },
+      { label: 'Contains', value: 'contains' },
+      { label: 'Is Not', value: '<>' },
+      { label: 'Or', value: 'in' },
+      { label: 'Greater Than', value: '>' },
+      { label: 'Less Than', value: '<' },
+      { label: 'Like', value: 'like' },
+    ];
+    if (enableEmptyFilters) {
+      base.push(
+        { label: 'Is Empty', value: 'is_empty' },
+        { label: 'Not Empty', value: 'not_empty' },
+      );
+    }
+    return base;
+  }),
   buildCustomColHeaders: jest.fn(() => null),
   cleanText: jest.fn((value) => value),
   convertUTCToLocalDate: jest.fn((date) => date)
@@ -788,5 +797,79 @@ describe('FilterDataset', () => {
     await userEvent.click(applyButton);
 
     expect(mockPushStateSpy).toHaveBeenCalledWith({}, "", expect.stringContaining("?conditions[0][property]=ndc1&conditions[0][value]=test_value&conditions[0][operator]=%3D"));
+  });
+
+  it('handles Is Empty operator', async () => {
+    const mockSetConditions = jest.fn();
+    const mockSetPage = jest.fn();
+    const mockSetOffset = jest.fn();
+
+    render(
+      <DataTableContext.Provider value={createMockContext({ mainOverrides: { enableEmptyFilters: true }, resourceOverrides: { setConditions: mockSetConditions, setOffset: mockSetOffset } })}>
+        <MockDataTableActionsProvider value={createMockActionsContext({ setPage: mockSetPage })}>
+          <FilterDataset />
+        </MockDataTableActionsProvider>
+      </DataTableContext.Provider>
+    );
+
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
+    await userEvent.click(filterButton);
+
+    const addFilterButton = screen.getByText('+ Add filter');
+    await userEvent.click(addFilterButton);
+
+    const columnSelect = screen.getAllByLabelText(/column name/i)[0];
+    fireEvent.change(columnSelect, { target: { value: 'ndc1' } });
+
+    const operatorSelect = screen.getAllByLabelText(/condition/i)[0];
+    fireEvent.change(operatorSelect, { target: { value: 'is_empty' } });
+
+    await waitFor(() => {
+      expect(screen.getByText(/Apply/)).not.toBeDisabled();
+    });
+
+    const applyButton = screen.getByText(/Apply/);
+    await userEvent.click(applyButton);
+
+    expect(mockSetConditions).toHaveBeenCalledWith([{ operator: '=', property: 'ndc1', value: '' }]);
+    expect(mockSetPage).toHaveBeenCalledWith(1);
+    expect(mockSetOffset).toHaveBeenCalledWith(0);
+  });
+
+  it('handles Not Empty operator', async () => {
+    const mockSetConditions = jest.fn();
+    const mockSetPage = jest.fn();
+    const mockSetOffset = jest.fn();
+
+    render(
+      <DataTableContext.Provider value={createMockContext({ mainOverrides: { enableEmptyFilters: true }, resourceOverrides: { setConditions: mockSetConditions, setOffset: mockSetOffset } })}>
+        <MockDataTableActionsProvider value={createMockActionsContext({ setPage: mockSetPage })}>
+          <FilterDataset />
+        </MockDataTableActionsProvider>
+      </DataTableContext.Provider>
+    );
+
+    const filterButton = screen.getByLabelText(/Filter dataset/i);
+    await userEvent.click(filterButton);
+
+    const addFilterButton = screen.getByText('+ Add filter');
+    await userEvent.click(addFilterButton);
+
+    const columnSelect = screen.getAllByLabelText(/column name/i)[0];
+    fireEvent.change(columnSelect, { target: { value: 'ndc1' } });
+
+    const operatorSelect = screen.getAllByLabelText(/condition/i)[0];
+    fireEvent.change(operatorSelect, { target: { value: 'not_empty' } });
+
+    await waitFor(() => {
+      expect(screen.getByText(/Apply/)).not.toBeDisabled();
+    });
+
+    const applyButton = screen.getByText(/Apply/);
+    await userEvent.click(applyButton);
+
+    expect(mockSetConditions).toHaveBeenCalledWith([{ operator: '<>', property: 'ndc1', value: '' }]);
+    expect(mockSetPage).toHaveBeenCalledWith(1);
+    expect(mockSetOffset).toHaveBeenCalledWith(0);
   });
 });

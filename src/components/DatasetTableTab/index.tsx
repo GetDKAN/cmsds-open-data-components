@@ -25,6 +25,7 @@ export type DatasetTableTabProps = {
   customColumns: Array<ColumnType>;
   dataDictionaryBanner: boolean;
   datasetTableControls: boolean;
+  enableEmptyFilters?: boolean;
 };
 
 const DatasetTable = ({

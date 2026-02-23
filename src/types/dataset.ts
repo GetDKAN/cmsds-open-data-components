@@ -74,6 +74,7 @@ export type DatasetPageType = {
   updateAriaLive?: Function,
   showRowLimitNotice?: boolean,
   useDatasetAPI?: boolean,
+  enableEmptyFilters?: boolean,
 }
 
 
@@ -114,6 +115,7 @@ export type FilterItemType = {
   propertyOptions : Array<PropertyType>;
   schema : SchemaType;
   className?: string;
+  enableEmptyFilters?: boolean;
 }
 
 export type DatasetOverviewPropsType = {

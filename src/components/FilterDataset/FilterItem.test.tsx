@@ -85,7 +85,19 @@ jest.mock('@cmsgov/design-system', () => ({
 }));
 
 jest.mock('../../templates/FilteredResource/functions', () => ({
-  buildOperatorOptions: jest.fn(),
+  buildOperatorOptions: jest.fn((type: string, enableEmptyFilters: boolean = false) => {
+    const base = [
+      { label: 'Is', value: '=' },
+      { label: 'Is Not', value: '<>' }
+    ];
+    if (enableEmptyFilters) {
+      base.push(
+        { label: 'Is Empty', value: 'is_empty' },
+        { label: 'Not Empty', value: 'not_empty' }
+      );
+    }
+    return base;
+  }),
   convertUTCToLocalDate: jest.fn((date: Date) => date),
   cleanText: jest.fn((text: string, operator: string) => text)
 }));
@@ -129,10 +141,6 @@ describe('FilterItem', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    (buildOperatorOptions as jest.Mock).mockReturnValue([
-      { label: 'Is', value: '=' },
-      { label: 'Is Not', value: '<>' }
-    ]);
   });
 
   it('renders correctly', () => {
@@ -336,7 +344,7 @@ describe('FilterItem', () => {
   it('should call buildOperatorOptions with correct mysql_type', () => {
     render(<FilterItem {...defaultProps} />);
     
-    expect(buildOperatorOptions).toHaveBeenCalledWith('varchar');
+    expect(buildOperatorOptions).toHaveBeenCalledWith('varchar', undefined);
   });
 
   it('should call convertUTCToLocalDate for date fields', () => {
@@ -358,6 +366,54 @@ describe('FilterItem', () => {
     render(<FilterItem {...defaultProps} />);
     
     expect(cleanText).toHaveBeenCalledWith('test_value', '=');
+  });
+
+  it('should still render value field when operator is is_empty', () => {
+    const emptyProps: FilterItemType = {
+      ...defaultProps,
+      enableEmptyFilters: true,
+      condition: {
+        ...defaultProps.condition,
+        operator: 'is_empty'
+      }
+    };
+
+    render(<FilterItem {...emptyProps} />);
+
+    expect(screen.getByTestId('test_key_value')).toBeInTheDocument();
+  });
+
+  it('should still render value field when operator is not_empty', () => {
+    const notEmptyProps: FilterItemType = {
+      ...defaultProps,
+      enableEmptyFilters: true,
+      condition: {
+        ...defaultProps.condition,
+        operator: 'not_empty'
+      }
+    };
+
+    render(<FilterItem {...notEmptyProps} />);
+
+    expect(screen.getByTestId('test_key_value')).toBeInTheDocument();
+  });
+
+  it('should not include empty operators when enableEmptyFilters is false', () => {
+    render(<FilterItem {...defaultProps} />);
+
+    expect(buildOperatorOptions).toHaveBeenCalledWith('varchar', undefined);
+    const options = (buildOperatorOptions as jest.Mock).mock.results[0].value;
+    const emptyOps = options.filter((op: { value: string }) => op.value === 'is_empty' || op.value === 'not_empty');
+    expect(emptyOps).toHaveLength(0);
+  });
+
+  it('should include empty operators when enableEmptyFilters is true', () => {
+    render(<FilterItem {...defaultProps} enableEmptyFilters={true} />);
+
+    expect(buildOperatorOptions).toHaveBeenCalledWith('varchar', true);
+    const options = (buildOperatorOptions as jest.Mock).mock.results[0].value;
+    const emptyOps = options.filter((op: { value: string }) => op.value === 'is_empty' || op.value === 'not_empty');
+    expect(emptyOps).toHaveLength(2);
   });
 
   it('should handle empty property in useEffect', () => {
