@@ -15,16 +15,6 @@ import { restoreFullscreenDialogScrollLock } from '../../utilities/restoreFullsc
 function updateQueryForDatastore(condition: ConditionType) {
   let cond = condition;
   delete cond.key;
-  if (cond.operator === 'is_empty') {
-    cond.operator = '=';
-    cond.value = '';
-    return cond;
-  }
-  if (cond.operator === 'not_empty') {
-    cond.operator = '<>';
-    cond.value = '';
-    return cond;
-  }
   if (cond.operator === '=' || cond.operator === '<>') {
     if (Array.isArray(cond.value)) {
       cond.value = cond.value.join();

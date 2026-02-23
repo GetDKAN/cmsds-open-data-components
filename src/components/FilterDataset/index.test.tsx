@@ -831,7 +831,7 @@ describe('FilterDataset', () => {
     const applyButton = screen.getByText(/Apply/);
     await userEvent.click(applyButton);
 
-    expect(mockSetConditions).toHaveBeenCalledWith([{ operator: '=', property: 'ndc1', value: '' }]);
+    expect(mockSetConditions).toHaveBeenCalledWith([{ operator: 'is_empty', property: 'ndc1', value: '' }]);
     expect(mockSetPage).toHaveBeenCalledWith(1);
     expect(mockSetOffset).toHaveBeenCalledWith(0);
   });
@@ -868,7 +868,7 @@ describe('FilterDataset', () => {
     const applyButton = screen.getByText(/Apply/);
     await userEvent.click(applyButton);
 
-    expect(mockSetConditions).toHaveBeenCalledWith([{ operator: '<>', property: 'ndc1', value: '' }]);
+    expect(mockSetConditions).toHaveBeenCalledWith([{ operator: 'not_empty', property: 'ndc1', value: '' }]);
     expect(mockSetPage).toHaveBeenCalledWith(1);
     expect(mockSetOffset).toHaveBeenCalledWith(0);
   });
