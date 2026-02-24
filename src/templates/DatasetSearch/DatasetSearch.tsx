@@ -17,6 +17,7 @@ import { DatasetSearchPageProps, SelectedFacetsType, SidebarFacetTypes, Distribu
 import { TextFieldValue } from '@cmsgov/design-system/dist/react-components/types/TextField/TextField';
 import { acaToParams } from '../../utilities/aca';
 import { ACAContext } from '../../utilities/ACAContext';
+import { string } from 'prop-types';
 
 export const isValidSearch = (query: string) => {
   // Only allow letters, numbers, spaces, and empty string
@@ -39,6 +40,9 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     showDownloadIcon = false,
     altMobileSearchButton,
     dataDictionaryLinks = false,
+    showDateDetails = false,
+    showTopics = false,
+    topicSlugFunction = undefined
   } = props;
   const { ACA } = useContext(ACAContext);
 
@@ -386,6 +390,33 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                           showLargeFile = true;
                       });
  
+                    let dateDetailProps = {}
+                    if (showDateDetails) {
+                      dateDetailProps = {
+                        showDateDetails,
+                        released: item.released,
+                        refresh: item.nextUpdateDate
+                      }
+                    }
+                    
+                    let topicProps = {}
+                    if (showTopics) {
+                      // Generate topic slugs mapping for this item's themes
+                      let topicSlugs : { [key: string]: string } = {}
+                      if (item.theme && Array.isArray(item.theme)) {
+                        item.theme.forEach( (topic: string) => {
+                          if (topic) {
+                            topicSlugs[topic] = topicSlugFunction ? topicSlugFunction(topic) : topic.split(' ').join('-').toLowerCase()
+                          }
+                        })
+                      }
+                      topicProps = {
+                        showTopics,
+                        theme: item.theme,
+                        topicSlugs
+                      }
+                    }
+                    
                     return (
                       <DatasetSearchListItem
                         key={item.identifier}
@@ -399,6 +430,8 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                         paginationEnabled={enablePagination}
                         dataDictionaryLinks={dataDictionaryLinks}
                         distribution={"%Ref:distribution" in item ? item["%Ref:distribution"][0] : {}}
+                        {...dateDetailProps}
+                        {...topicProps}
                       />
                     )
                   }) : (

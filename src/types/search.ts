@@ -38,6 +38,9 @@ export type DatasetSearchPageProps = {
   showDownloadIcon: boolean;
   altMobileSearchButton?: boolean;
   dataDictionaryLinks?: boolean;
+  showDateDetails?: boolean;
+  showTopics?: boolean;
+  topicSlugFunction?: any;
 };
 
 export type DatasetSubmenuListProps = Pick<

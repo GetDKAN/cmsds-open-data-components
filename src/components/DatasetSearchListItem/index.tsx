@@ -75,7 +75,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
 
   if (theme && showTopics) {
     themes = (
-      <ul className='theme-list item-theme'>
+      <ul className='theme-list item-theme ds-u-padding-left--2 ds-u-margin-top--2 ds-u-margin-bottom--0'>
         {theme.map((topic: string, index: number) => {
           const title = topic || 'Unknown Topic'
           const prefix = 'topics'
@@ -175,14 +175,14 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
   return (
     <li className="dc-c-search-list-item ds-u-padding-top--3">
       <div className={`dc-c-searchlist-item ${paginationEnabled ? 'ds-u-border-top--1' : 'ds-u-border-bottom--1 ds-u-padding-bottom--3'}`}>
-        {themes}
         <div className="ds-l-row ds-u-align-items--start">
           {!showDateDetails && <span id={`dataset-${identifier}-updated-date`} className={`ds-l-col--12 ds-u-text-align--right ${paginationEnabled ? 'ds-u-padding-top--2' : 'ds-u-padding-top--0'}`}>
             <span>Updated:</span> <TransformedDate date={modified} />
           </span>}
-          <h2 className="ds-l-col--12 ds-text-heading--2xl">
+          <h2 className={`ds-l-col--12 ds-text-heading--2xl${showDateDetails && "ds-u-margin-top--2 ds-u-margin-bottom--0"}`}>
             <Link aria-describedby={`dataset-${identifier}-updated-date`} to={`${url}`}>{title}</Link>
           </h2>
+          {themes}
         </div>
         {description && <div className="ds-l-row">
           <div className="ds-l-col--12 ds-l-md-col--12 ds-u-margin-top--2">{truncateText(description)}{description.length > 240 ? (
@@ -191,7 +191,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
             </>
           ) : ''}</div>
         </div>}
-        {showDateDetails && <div className='dataset-dates'>
+        {showDateDetails && <div className='dataset-dates ds-u-margin-top--2'>
             <DatasetDate date={date} displayTooltips={false}/>
           </div>}
         {( downloadUrl ) ? (
