@@ -88,7 +88,16 @@ This document provides overrides to Swagger UI, fixing accessibility issues.
       }
 
     a {
-      color: #036;
+      color: var(--link__color);
+      &:visited {
+        color: var(--link__color--visited);
+      }
+      &:hover {
+        color: var(--link__color);
+      }
+      &:active {
+        color: var(--link__color--active);
+      }
     }
   }
 
