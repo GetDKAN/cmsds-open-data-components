@@ -337,42 +337,40 @@ test('Renders topic slugs', () => {
   );
   expect(screen.getByText('Home health services')).toBeInTheDocument()
 });
-test.only('Renders data dictionary link', () => {
+test('Renders disabled data dictionary link', () => {
   const props = {...singleItem}
-  props.released = '2021-10-22'
-  props.refresh = '2022-10-22'
-  props.theme = ['Home health services']
-  props.topicSlugs = { "Home health services": "home-health-services" }
+  props.distribution = {}
+  render(
+    <MemoryRouter>
+      <DatasetSearchListItem
+        title={props.title}
+        modified={props.modified}
+        released={props.released}
+        refresh={props.refresh}
+        description="test"
+        theme={props.theme}
+        url="/dataset/test"
+        downloadUrl="test.com"
+        location={mockLocation}
+        paginationEnabled={false}
+        dataDictionaryLinks={true}
+        largeFile={false}
+        distribution={props.distribution}
+      />
+    </MemoryRouter>
+  );
+  expect(screen.getByText('Data Dictionary')).toBeInTheDocument();
+  const link = screen.getByText('Data Dictionary')
+  expect(link).toHaveClass('dkan-disabled-link')
+});
+test('Renders data dictionary link from pdf', () => {
+  const props = {...singleItem}
+  props.identifier = "test"
   props.distribution = {
-    "identifier": "61872bc3-400e-5f80-bf92-d834011a0033",
     "data": {
-      "@type": "dcat:Distribution",
-      "downloadURL": "https://pqdc-dkan.ddev.site/provider-data/sites/default/files/resources/361605dd3083f31f7d25be01a9fc6260_1771347206/Test_Data_abcd_0012.csv",
-      "mediaType": "text/csv",
-      "%Ref:downloadURL": [
-        {
-          "identifier": "361605dd3083f31f7d25be01a9fc6260__1771347206__source",
-          "data": {
-            "filePath": "s3://913461122956-pdc-dev-test-minimal-data/Test_Data_abcd_0012.csv",
-            "identifier": "361605dd3083f31f7d25be01a9fc6260",
-            "mimeType": "text/csv",
-            "perspective": "source",
-            "version": "1771347206",
-            "checksum": null
-          }
-        },
-        {
-          "identifier": "361605dd3083f31f7d25be01a9fc6260__1771347206__local_url",
-          "data": {
-            "filePath": "https://h-o.st/provider-data/sites/default/files/resources/361605dd3083f31f7d25be01a9fc6260_1771347206/Test_Data_abcd_0012.csv",
-            "identifier": "361605dd3083f31f7d25be01a9fc6260",
-            "mimeType": "text/csv",
-            "perspective": "local_url",
-            "version": "1771347206",
-            "checksum": null
-          }
-        }
-      ]
+      "describedBy": "s3://913461122956-pdc-dev-test-minimal-data/attached-dictionary.pdf",
+      "describedByType": "application/pdf",
+      "%Ref:downloadURL": []
     }
   }
   render(
@@ -393,12 +391,49 @@ test.only('Renders data dictionary link', () => {
         showDateDetails
         showTopics
         topicSlugs={props.topicSlugs}
+        identifier={props.identifier}
+        distribution={props.distribution}
       />
     </MemoryRouter>
   );
-  //dkan-disabled-link
   expect(screen.getByText('Data Dictionary')).toBeInTheDocument();
   const link = screen.getByText('Data Dictionary')
-  expect(link).toHaveClass('dkan-disabled-link')
-  //expect(link).toHaveAttribute('href', '/provider-data/dataset/test#data-dictionary')
+  expect(link).toHaveAttribute('href', '/dataset/test#data-dictionary')
+});
+test('Renders data dictionary link from json', () => {
+  const props = {...singleItem}
+  props.identifier = "test"
+  props.distribution = {
+    "data": {
+      "describedBy": "https://example.com/data-dictionary.json",
+      "describedByType": "application/vnd.tableschema+json",
+      "%Ref:downloadURL": []
+    }
+  }
+  render(
+    <MemoryRouter>
+      <DatasetSearchListItem
+        title={props.title}
+        modified={props.modified}
+        released={props.released}
+        refresh={props.refresh}
+        description="test"
+        theme={props.theme}
+        url="/dataset/test"
+        downloadUrl="test.com"
+        location={mockLocation}
+        paginationEnabled={false}
+        dataDictionaryLinks={true}
+        largeFile={false}
+        showDateDetails
+        showTopics
+        topicSlugs={props.topicSlugs}
+        identifier={props.identifier}
+        distribution={props.distribution}
+      />
+    </MemoryRouter>
+  );
+  expect(screen.getByText('Data Dictionary')).toBeInTheDocument();
+  const link = screen.getByText('Data Dictionary')
+  expect(link).toHaveAttribute('href', '/dataset/test#data-dictionary')
 });
