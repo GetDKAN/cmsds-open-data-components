@@ -31,6 +31,7 @@ export type DatasetSearchPageProps = {
     defaultOrder: string;
   }
   pageTitle: string;
+  categoriesTitle: string;
   filterTitle: string;
   showLargeFileWarning?: boolean;
   largeFileThemes?: Array<string>;

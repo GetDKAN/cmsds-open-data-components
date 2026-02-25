@@ -139,7 +139,12 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
   const dataDictionaryExists = (): boolean => {
     if (distribution && "data" in distribution) {
       if ("describedBy" in distribution.data && "describedByType" in distribution.data) {
-        return distribution.data.describedByType === 'application/vnd.tableschema+json';
+        const types: string[] = [
+          'application/vnd.tableschema+json',
+          'application/pdf'
+        ]
+        const isValidType: boolean = types.includes(distribution.data.describedByType)
+        return isValidType;
       }
     }
 
@@ -179,7 +184,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
           {!showDateDetails && <span id={`dataset-${identifier}-updated-date`} className={`ds-l-col--12 ds-u-text-align--right ${paginationEnabled ? 'ds-u-padding-top--2' : 'ds-u-padding-top--0'}`}>
             <span>Updated:</span> <TransformedDate date={modified} />
           </span>}
-          <h2 className={`ds-l-col--12 ds-text-heading--2xl${showDateDetails && "ds-u-margin-top--2 ds-u-margin-bottom--0"}`}>
+          <h2 className={`ds-l-col--12 ds-text-heading--2xl ${showDateDetails ? "ds-u-margin-top--2 ds-u-margin-bottom--0" : ""}`}>
             <Link aria-describedby={`dataset-${identifier}-updated-date`} to={`${url}`}>{title}</Link>
           </h2>
           {themes}

@@ -33,6 +33,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     defaultPageSize = 10,
     defaultSort = { defaultSort: 'modified', defaultOrder: 'desc' },
     pageTitle = 'Dataset Explorer',
+    categoriesTitle = 'Categories',
     filterTitle = 'Tags',
     showLargeFileWarning = false,
     largeFileThemes,
@@ -325,7 +326,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
             {facets.theme && (
               <DatasetSearchFacets
                 facets={facets.theme}
-                title="Categories"
+                title={categoriesTitle}
                 onClickFunction={updateSelectedFacets}
                 selectedFacets={selectedFacets.theme}
               />
@@ -398,7 +399,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                         refresh: item.nextUpdateDate
                       }
                     }
-                    
+
                     let topicProps = {}
                     if (showTopics) {
                       // Generate topic slugs mapping for this item's themes
