@@ -411,6 +411,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                           }
                         })
                       }
+
                       topicProps = {
                         showTopics,
                         theme: item.theme,
