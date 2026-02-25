@@ -280,3 +280,42 @@ test('Renders description text with up to 240 characters', () => {
 test('Can overwrite truncateText textLength', () => {
   expect(truncateText('This is my description.', 8)).toBe('This...');
 });
+
+test.only('Renders date details', () => {
+  const props = {...singleItem}
+  props.released = '2021-10-22'
+  props.refresh = '2022-10-22'
+  render(
+    <MemoryRouter>
+      <DatasetSearchListItem
+        title={props.title}
+        modified={props.modified}
+        released={props.released}
+        refresh={props.refresh}
+        description={'This is my description. It is really really really really long. But we should only show a small part of it. How about we only show the first 3 lines of 80 characters. That should be something like 240 characters. I think this text is now at about 262 characters. That is less than 300, did you know that? Well now it is over 300!'}
+        theme={props.theme}
+        url="/dataset/test"
+        downloadUrl="test.com"
+        location={mockLocation}
+        paginationEnabled={false}
+        dataDictionaryLinks={false}
+        largeFile={false}
+        showDateDetails
+      />
+    </MemoryRouter>
+  );
+  expect(screen.getByText('Last Modified: October 22, 2020')).toBeInTheDocument();
+  expect(screen.getByText('Released: October 22, 2021')).toBeInTheDocument();
+  expect(screen.getByText('Planned Update: October 22, 2022')).toBeInTheDocument();
+
+  // expect(screen.getByText((content, element) => {
+  //   return element?.textContent === 'Updated: October 22, 2020';
+  // })).toBeInTheDocument();
+  // expect(screen.getByText((content, element) => {
+  //   return element?.textContent === 'Released: October 22, 2021';
+  // })).toBeInTheDocument();
+  // expect(screen.getByText((content, element) => {
+  //   return element?.textContent === 'Planned Update: October 22, 2020';
+  // })).toBeInTheDocument();
+
+});
