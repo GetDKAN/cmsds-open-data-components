@@ -17,7 +17,6 @@ import { DatasetSearchPageProps, SelectedFacetsType, SidebarFacetTypes, Distribu
 import { TextFieldValue } from '@cmsgov/design-system/dist/react-components/types/TextField/TextField';
 import { acaToParams } from '../../utilities/aca';
 import { ACAContext } from '../../utilities/ACAContext';
-import { string } from 'prop-types';
 
 export const isValidSearch = (query: string) => {
   // Only allow letters, numbers, spaces, and empty string
