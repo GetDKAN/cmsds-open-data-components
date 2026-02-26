@@ -18,7 +18,7 @@ function getStartDate(condition : ConditionType, schema : any, id : string) {
   return new Date();
 }
 
-const FilterItem = ({ id, condition, index, update, remove, propertyOptions, schema, className = '' } : FilterItemType) => {
+const FilterItem = ({ id, condition, index, update, remove, propertyOptions, schema, className = '', enableEmptyFilters } : FilterItemType) => {
   const [operator, setOperator] = useState(condition.operator);
   const [property, setProperty] = useState(condition.property);
   const [value, setValue] = useState(condition.value);
@@ -62,6 +62,15 @@ const FilterItem = ({ id, condition, index, update, remove, propertyOptions, sch
     }
   }, [operator]);
 
+  // Clear value when switching to an empty operator
+  const isEmptyOperator = operator === 'is_empty' || operator === 'not_empty';
+  useEffect(() => {
+    if (isEmptyOperator && value !== '') {
+      setValue('');
+      update(index, 'value', '');
+    }
+  }, [isEmptyOperator]);
+
   useEffect(() => {
     if (value !== condition.value) {
       if (value) {
@@ -83,45 +92,49 @@ const FilterItem = ({ id, condition, index, update, remove, propertyOptions, sch
         onChange={(e) => setProperty(e.target.value)}
       />
       <Dropdown
-        options={buildOperatorOptions(schema[id].fields[property].mysql_type)}
+        options={buildOperatorOptions(schema[id].fields[property].mysql_type, enableEmptyFilters)}
         className="ds-u-padding-x--0"
         value={operator}
         label="Condition"
         name={`${condition.key}_operator`}
         onChange={(e) => setOperator(e.target.value)}
       />
-      {schema[id].fields[property].mysql_type === 'date' ? (
-        <div>
-          <label
-            className="ds-c-label"
-            htmlFor={`${condition.key}_date_value`}
-            id={`${condition.key}_date_value-label`}
-          >
-            <span>Value</span>
-          </label>
-          <DatePicker
-            name={`${condition.key}_date_value`}
-            selected={convertUTCToLocalDate(startDate)}
-            onChange={(date : Date) => {
-              setStartDate(date);
-              setValue(date.toJSON().slice(0, 10));
-            }}
-            showMonthDropdown
-            showYearDropdown
-            dropdownMode="select"
-            className="ds-c-field"
-            withPortal
-          />
-        </div>
+      {isEmptyOperator ? (
+        <div />
       ) : (
-        <TextField
-          className="ds-u-padding-x--0"
-          label="Value"
-          name={`${condition.key}_value`}
-          value={cleanText(value, operator)}
-          onChange={(e) => setValue(e.target.value)}
-          placeholder='Enter value'
-        />
+        schema[id].fields[property].mysql_type === 'date' ? (
+          <div>
+            <label
+              className="ds-c-label"
+              htmlFor={`${condition.key}_date_value`}
+              id={`${condition.key}_date_value-label`}
+            >
+              <span>Value</span>
+            </label>
+            <DatePicker
+              name={`${condition.key}_date_value`}
+              selected={convertUTCToLocalDate(startDate)}
+              onChange={(date : Date) => {
+                setStartDate(date);
+                setValue(date.toJSON().slice(0, 10));
+              }}
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"
+              className="ds-c-field"
+              withPortal
+            />
+          </div>
+        ) : (
+          <TextField
+            className="ds-u-padding-x--0"
+            label="Value"
+            name={`${condition.key}_value`}
+            value={cleanText(value, operator)}
+            onChange={(e) => setValue(e.target.value)}
+            placeholder='Enter value'
+          />
+        )
       )}
 
       <Button

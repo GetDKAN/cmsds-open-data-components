@@ -46,11 +46,17 @@ const useDatastore = (
   // Remove datasetID from params to avoid sending it to the API
   const { datasetID: _, ...restAdditionalParams } = additionalParams;
   
+  const apiConditions = conditions?.map(c => {
+    if (c.operator === 'is_empty') return { ...c, operator: '=', value: '' };
+    if (c.operator === 'not_empty') return { ...c, operator: '<>', value: '' };
+    return c;
+  });
+
   let params = {
     keys: keys,
     limit: limit,
     offset: offset,
-    conditions: conditions,
+    conditions: apiConditions,
     sorts: sort,
     properties: properties,
     groupings: groupings,

@@ -102,7 +102,7 @@ const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
                   <FilterChip
                     key={index}
                     iconClass="far fa-filter"
-                    text={`"${condition.property}" ${getOperatorLabel(condition.operator).toLowerCase()} ${condition.value}`}
+                    text={`"${condition.property}" ${getOperatorLabel(condition.operator).toLowerCase()}${condition.value === '' || condition.operator === 'is_empty' || condition.operator === 'not_empty' ? '' : ` ${condition.value}`}`}
                     onClick={() => {
                       removeCondition(index);
                     }}

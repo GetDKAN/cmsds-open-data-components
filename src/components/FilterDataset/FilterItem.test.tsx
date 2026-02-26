@@ -85,7 +85,19 @@ jest.mock('@cmsgov/design-system', () => ({
 }));
 
 jest.mock('../../templates/FilteredResource/functions', () => ({
-  buildOperatorOptions: jest.fn(),
+  buildOperatorOptions: jest.fn((type: string, enableEmptyFilters: boolean = false) => {
+    const base = [
+      { label: 'Is', value: '=' },
+      { label: 'Is Not', value: '<>' }
+    ];
+    if (enableEmptyFilters) {
+      base.push(
+        { label: 'Is Empty', value: 'is_empty' },
+        { label: 'Not Empty', value: 'not_empty' }
+      );
+    }
+    return base;
+  }),
   convertUTCToLocalDate: jest.fn((date: Date) => date),
   cleanText: jest.fn((text: string, operator: string) => text)
 }));
@@ -129,10 +141,6 @@ describe('FilterItem', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
-    (buildOperatorOptions as jest.Mock).mockReturnValue([
-      { label: 'Is', value: '=' },
-      { label: 'Is Not', value: '<>' }
-    ]);
   });
 
   it('renders correctly', () => {
@@ -336,7 +344,7 @@ describe('FilterItem', () => {
   it('should call buildOperatorOptions with correct mysql_type', () => {
     render(<FilterItem {...defaultProps} />);
     
-    expect(buildOperatorOptions).toHaveBeenCalledWith('varchar');
+    expect(buildOperatorOptions).toHaveBeenCalledWith('varchar', undefined);
   });
 
   it('should call convertUTCToLocalDate for date fields', () => {
@@ -358,6 +366,24 @@ describe('FilterItem', () => {
     render(<FilterItem {...defaultProps} />);
     
     expect(cleanText).toHaveBeenCalledWith('test_value', '=');
+  });
+
+  it('should not include empty operators when enableEmptyFilters is false', () => {
+    render(<FilterItem {...defaultProps} />);
+
+    expect(buildOperatorOptions).toHaveBeenCalledWith('varchar', undefined);
+    const options = (buildOperatorOptions as jest.Mock).mock.results[0].value;
+    const emptyOps = options.filter((op: { value: string }) => op.value === 'is_empty' || op.value === 'not_empty');
+    expect(emptyOps).toHaveLength(0);
+  });
+
+  it('should include empty operators when enableEmptyFilters is true', () => {
+    render(<FilterItem {...defaultProps} enableEmptyFilters={true} />);
+
+    expect(buildOperatorOptions).toHaveBeenCalledWith('varchar', true);
+    const options = (buildOperatorOptions as jest.Mock).mock.results[0].value;
+    const emptyOps = options.filter((op: { value: string }) => op.value === 'is_empty' || op.value === 'not_empty');
+    expect(emptyOps).toHaveLength(2);
   });
 
   it('should handle empty property in useEffect', () => {
@@ -400,6 +426,138 @@ describe('FilterItem', () => {
     fireEvent.change(propertyDropdown, { target: { value: '' } });
     
     expect(mockUpdate).toHaveBeenCalledWith(0, 'property', '');
+  });
+
+  it('should not render value field when operator is is_empty', () => {
+    const emptyProps: FilterItemType = {
+      ...defaultProps,
+      enableEmptyFilters: true,
+      condition: {
+        ...defaultProps.condition,
+        operator: 'is_empty',
+        value: ''
+      }
+    };
+
+    render(<FilterItem {...emptyProps} />);
+
+    expect(screen.queryByTestId('test_key_value')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('date-picker')).not.toBeInTheDocument();
+  });
+
+  it('should not render value field when operator is not_empty', () => {
+    const emptyProps: FilterItemType = {
+      ...defaultProps,
+      enableEmptyFilters: true,
+      condition: {
+        ...defaultProps.condition,
+        operator: 'not_empty',
+        value: ''
+      }
+    };
+
+    render(<FilterItem {...emptyProps} />);
+
+    expect(screen.queryByTestId('test_key_value')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('date-picker')).not.toBeInTheDocument();
+  });
+
+  it('should not render date picker when date field has is_empty operator', () => {
+    const emptyDateProps: FilterItemType = {
+      ...defaultProps,
+      enableEmptyFilters: true,
+      condition: {
+        ...defaultProps.condition,
+        property: 'date_property',
+        operator: 'is_empty',
+        value: ''
+      }
+    };
+
+    render(<FilterItem {...emptyDateProps} />);
+
+    expect(screen.queryByTestId('date-picker')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('test_key_value')).not.toBeInTheDocument();
+  });
+
+  it('should keep delete button accessible when value field is hidden', async () => {
+    const user = userEvent.setup();
+    const emptyProps: FilterItemType = {
+      ...defaultProps,
+      enableEmptyFilters: true,
+      condition: {
+        ...defaultProps.condition,
+        operator: 'is_empty',
+        value: ''
+      }
+    };
+
+    render(<FilterItem {...emptyProps} />);
+
+    const deleteButton = screen.getByRole('button', { name: /delete filter/i });
+    expect(deleteButton).toBeInTheDocument();
+    await user.click(deleteButton);
+    expect(mockRemove).toHaveBeenCalledWith(0);
+  });
+
+  it('should render spacer div to preserve grid layout when operator is empty', () => {
+    const emptyProps: FilterItemType = {
+      ...defaultProps,
+      enableEmptyFilters: true,
+      condition: {
+        ...defaultProps.condition,
+        operator: 'is_empty',
+        value: ''
+      }
+    };
+
+    const { container } = render(<FilterItem {...emptyProps} />);
+    const fieldset = container.querySelector('fieldset');
+    expect(fieldset).not.toBeNull();
+    // Fieldset should have 4 children: property dropdown, operator dropdown, spacer div, delete button
+    expect(fieldset!.children).toHaveLength(4);
+  });
+
+  it('should show value field when switching from empty operator to non-empty operator', async () => {
+    const user = userEvent.setup();
+    const emptyProps: FilterItemType = {
+      ...defaultProps,
+      enableEmptyFilters: true,
+      condition: {
+        ...defaultProps.condition,
+        operator: 'is_empty',
+        value: ''
+      }
+    };
+
+    render(<FilterItem {...emptyProps} />);
+
+    expect(screen.queryByTestId('test_key_value')).not.toBeInTheDocument();
+
+    const operatorDropdown = screen.getByTestId('test_key_operator');
+    await user.selectOptions(operatorDropdown, '=');
+
+    expect(screen.getByTestId('test_key_value')).toBeInTheDocument();
+  });
+
+  it('should clear value when switching to an empty operator', async () => {
+    const user = userEvent.setup();
+    const propsWithValue: FilterItemType = {
+      ...defaultProps,
+      enableEmptyFilters: true,
+      condition: {
+        ...defaultProps.condition,
+        operator: '=',
+        value: 'some_value'
+      }
+    };
+
+    render(<FilterItem {...propsWithValue} />);
+
+    const operatorDropdown = screen.getByTestId('test_key_operator');
+    await user.selectOptions(operatorDropdown, 'is_empty');
+
+    expect(mockUpdate).toHaveBeenCalledWith(0, 'value', '');
   });
 
   it('should handle date field with empty value', async () => {
