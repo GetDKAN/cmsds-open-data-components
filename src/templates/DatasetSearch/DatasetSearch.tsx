@@ -328,7 +328,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                 facets={facets.theme}
                 title={categoriesTitle}
                 onClickFunction={updateSelectedFacets}
-                selectedFacets={selectedFacets.theme}
+                selectedFacets={Array.isArray(selectedFacets.theme) ? selectedFacets.theme : [selectedFacets.theme]}
               />
             )}
             {facets.keyword && (
