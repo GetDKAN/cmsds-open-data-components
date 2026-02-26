@@ -40,7 +40,7 @@ type Story = StoryObj<typeof FilterChip>;
 
 /** Formats a condition the same way DataTableToolbar does. */
 const formatConditionText = (condition: ConditionType): string =>
-  `"${condition.property}" ${getOperatorLabel(condition.operator).toLowerCase()}${condition.value === '' ? '' : ` ${condition.value}`}`;
+  `"${condition.property}" ${getOperatorLabel(condition.operator).toLowerCase()}${condition.value === '' || condition.operator === 'is_empty' || condition.operator === 'not_empty' ? '' : ` ${condition.value}`}`;
 
 export const Default: Story = {
   args: {
