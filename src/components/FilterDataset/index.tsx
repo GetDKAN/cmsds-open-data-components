@@ -44,6 +44,7 @@ const FilterDataset: React.FC = () => {
     distribution,
     resource,
     customColumns = [],
+    enableEmptyFilters,
   } = useContext(DataTableContext) as DatasetTableTabProps;
 
   const { setPage } = useContext(DataTableActionsContext);
@@ -81,7 +82,7 @@ const FilterDataset: React.FC = () => {
         {
           property: fields[0],
           value: '',
-          operator: buildOperatorOptions(schema[id].fields[fields[0]].mysql_type)[0].value,
+          operator: buildOperatorOptions(schema[id].fields[fields[0]].mysql_type, enableEmptyFilters)[0].value,
           key: Date.now().toString(),
         },
       ])
@@ -101,7 +102,7 @@ const FilterDataset: React.FC = () => {
         {
           property: fields[0],
           value: '',
-          operator: buildOperatorOptions(schema[id].fields[fields[0]].mysql_type)[0].value,
+          operator: buildOperatorOptions(schema[id].fields[fields[0]].mysql_type, enableEmptyFilters)[0].value,
           key: Date.now().toString(),
         },
       ]);
@@ -132,21 +133,21 @@ const FilterDataset: React.FC = () => {
 
   const submitConditions = () => {
     // only update the data conditions when "Apply filters" is pressed
-    const submitConditions = queryConditions
+    const filteredConditions = queryConditions
       .filter((oc: ConditionType) => {
         if (oc.property) {
           return oc;
         }
         return false;
-      })
+      });
+
+    const completeConditions = conditionsReadyToSubmit(filteredConditions)
       .map((oc) => {
         let cond = Object.assign({}, oc);
         return updateQueryForDatastore(cond);
       });
-    
-    const completeConditions = conditionsReadyToSubmit(submitConditions);
-    
-    if (completeConditions.length) { // Safeguard but there should always be at least one 
+
+    if (completeConditions.length) { // Safeguard but there should always be at least one
       setConditions(completeConditions);
       setPage(1);
       setOffset(0);
@@ -172,7 +173,8 @@ const FilterDataset: React.FC = () => {
 
     const completeConditions = conditions.filter(condition => {
       if (condition) {
-        if (!isEmpty(condition.property) && !isEmpty(condition.operator) && !isEmpty(condition.value)) {
+        const isEmptyOperator = condition.operator === 'is_empty' || condition.operator === 'not_empty';
+        if (!isEmpty(condition.property) && !isEmpty(condition.operator) && (isEmptyOperator || !isEmpty(condition.value))) {
           return condition;
         }
       }
@@ -287,6 +289,7 @@ const FilterDataset: React.FC = () => {
                             update={updateCondition}
                             remove={removeCondition}
                             className={index !== 0 ? "ds-u-border-top--1" : "ds-u-border--0"}
+                            enableEmptyFilters={enableEmptyFilters}
                           />
                         ))}
                       </div>

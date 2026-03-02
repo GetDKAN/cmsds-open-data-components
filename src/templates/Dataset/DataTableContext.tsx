@@ -9,7 +9,8 @@ export type DataTableContextType = {
   rootUrl?: string,
   customColumns?: Array<ColumnType>,
   dataDictionaryBanner?: boolean,
-  datasetTableControls?: boolean
+  datasetTableControls?: boolean,
+  enableEmptyFilters?: boolean
 }
 const DataTableContext = createContext<DataTableContextType>({ id: null})
 

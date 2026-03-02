@@ -37,8 +37,8 @@ This document provides a comprehensive inventory of all components, services, te
 | Component | [DisplaySettings](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DisplaySettings) | ❌ Internal | ❌ No Story | ✅ Has Tests |
 | Component | [ErrorBoundary](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/ErrorBoundary) | ✅ Public | ✅ Has Story | ❌ No Tests |
 | Component | [FAQAccordion](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/FAQAccordion) | ✅ Public | ✅ Has Story | ❌ No Tests |
-| Component | [FilterChip](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/FilterChip) | ❌ Internal | ❌ No Story | ✅ Has Tests |
-| Component | [FilterDataset](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/FilterDataset) | ❌ Internal | ❌ No Story | ✅ Has Tests |
+| Component | [FilterChip](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/FilterChip) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
+| Component | [FilterDataset](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/FilterDataset) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
 | Component | [FullScreenDataTable](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/FullScreenDataTable) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Component | [HeaderNav](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/HeaderNav) | ✅ Public | ❌ No Story | ❌ No Tests |
 | Component | [HeaderNavIconLink](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/HeaderNavIconLink) | ✅ Public | ✅ Has Story | ❌ No Tests |
@@ -122,11 +122,11 @@ This document provides a comprehensive inventory of all components, services, te
 
 | Category | Total | With Stories | With Tests | With Both | With Neither |
 |----------|-------|--------------|------------|-----------|--------------|
-| Components | 64 | 37 (58%) | 23 (36%) | 10 (16%) | 14 (22%) |
+| Components | 64 | 39 (61%) | 23 (36%) | 12 (19%) | 14 (22%) |
 | Templates | 11 | 9 (82%) | 3 (27%) | 2 (18%) | 1 (9%) |
 | Services/Hooks/Contexts | 9 | 0 (0%) | 0 (0%) | 0 (0%) | 9 (100%) |
 | Utilities/Types/Assets | 11 | 0 (0%) | 0 (0%) | 0 (0%) | 11 (100%) |
-| **Project Total** | **95** | **46 (48%)** | **26 (27%)** | **12 (13%)** | **35 (37%)** |
+| **Project Total** | **95** | **48 (51%)** | **26 (27%)** | **14 (15%)** | **35 (37%)** |
 
 ---
 

@@ -56,6 +56,7 @@ const Dataset = ({
   customDescription,
   updateAriaLive,
   showRowLimitNotice = false,
+  enableEmptyFilters = false,
 }: DatasetPageType) => {
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
@@ -197,7 +198,8 @@ const Dataset = ({
                           rootUrl: rootUrl,
                           customColumns: customColumns,
                           dataDictionaryBanner: (dataDictionaryBanner && displayDataDictionaryTab),
-                          datasetTableControls: !disableTableControls
+                          datasetTableControls: !disableTableControls,
+                          enableEmptyFilters: enableEmptyFilters
                         }}>
                           <DataTableStateWrapper />
                         </DataTableContext.Provider>

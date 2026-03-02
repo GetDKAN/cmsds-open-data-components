@@ -57,6 +57,8 @@ export const operatorMapping = [
   { label: 'Is Not', value: '<>' },
   { label: 'Greater Than', value: '>' },
   { label: 'Less Than', value: '<' },
+  { label: 'Is Empty', value: 'is_empty' },
+  { label: 'Not Empty', value: 'not_empty' },
 ];
 
 export function getOperatorLabel(operatorValue) {
@@ -64,7 +66,12 @@ export function getOperatorLabel(operatorValue) {
   return operator ? operator.label : operatorValue; // Return original value if not found
 }
 
-export function buildOperatorOptions(type) {
+export function buildOperatorOptions(type, enableEmptyFilters = false) {
+  const emptyOptions = enableEmptyFilters ? [
+    { label: 'Is Empty', value: 'is_empty' },
+    { label: 'Not Empty', value: 'not_empty' },
+  ] : [];
+
   switch (type) {
     case 'text': // Will change from text to string in future update
     case 'string':
@@ -74,6 +81,7 @@ export function buildOperatorOptions(type) {
         { label: 'Contains', value: 'contains' },
         { label: 'Is Not', value: '<>' },
         { label: 'Or', value: 'in' },
+        ...emptyOptions,
       ];
     case 'date':
       return [
@@ -81,12 +89,14 @@ export function buildOperatorOptions(type) {
         { label: 'Is Not', value: '<>' },
         { label: 'Greater Than', value: '>' },
         { label: 'Less Than', value: '<' },
+        ...emptyOptions,
       ];
     default:
       // These 2 should be safe for all data types
       return [
         { label: 'Is', value: '=' },
         { label: 'Is Not', value: '<>' },
+        ...emptyOptions,
       ];
   }
 }

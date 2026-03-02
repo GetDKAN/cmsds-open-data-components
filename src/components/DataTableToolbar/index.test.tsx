@@ -181,6 +181,27 @@ describe('DataTableToolbar', () => {
     expect(filterChips[1]).toHaveTextContent('far fa-filter - "age" greater than 18');
   });
 
+  it('does not show value in chip text for empty operators', () => {
+    const conditionsProps = {
+      ...defaultProps,
+      resource: {
+        ...defaultProps.resource,
+        conditions: [
+          { property: 'date_field', operator: 'is_empty', value: 'stale value' },
+          { property: 'name', operator: 'not_empty', value: 'leftover' }
+        ]
+      }
+    };
+    render(<DataTableToolbar {...conditionsProps} />);
+
+    const filterChips = screen.getAllByTestId('filter-chip');
+    expect(filterChips).toHaveLength(2);
+    expect(filterChips[0]).toHaveTextContent('far fa-filter - "date_field" is empty');
+    expect(filterChips[0]).not.toHaveTextContent('stale value');
+    expect(filterChips[1]).toHaveTextContent('far fa-filter - "name" not empty');
+    expect(filterChips[1]).not.toHaveTextContent('leftover');
+  });
+
   it('renders hidden columns chip when columns are hidden', () => {
     const hiddenColumnsProps = {
       ...defaultProps,
