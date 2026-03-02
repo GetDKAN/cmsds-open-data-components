@@ -41,7 +41,7 @@ export type DatasetSearchPageProps = {
   dataDictionaryLinks?: boolean;
   showDateDetails?: boolean;
   showTopics?: boolean;
-  topicSlugFunction?: any;
+  topicSlugFunction?: (topic: string) => string | undefined;
 };
 
 export type DatasetSubmenuListProps = Pick<

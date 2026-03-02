@@ -402,7 +402,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                     let topicProps = {}
                     if (showTopics) {
                       // Generate topic slugs mapping for this item's themes
-                      let topicSlugs : { [key: string]: string } = {}
+                      let topicSlugs : { [key: string]: string | undefined } = {}
                       if (item.theme && Array.isArray(item.theme)) {
                         item.theme.forEach( (topic: string) => {
                           if (topic) {
