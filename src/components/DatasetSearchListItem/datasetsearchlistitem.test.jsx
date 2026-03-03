@@ -280,3 +280,160 @@ test('Renders description text with up to 240 characters', () => {
 test('Can overwrite truncateText textLength', () => {
   expect(truncateText('This is my description.', 8)).toBe('This...');
 });
+
+test('Renders date details', () => {
+  const props = {...singleItem}
+  props.released = '2021-10-22'
+  props.refresh = '2022-10-22'
+  render(
+    <MemoryRouter>
+      <DatasetSearchListItem
+        title={props.title}
+        modified={props.modified}
+        released={props.released}
+        refresh={props.refresh}
+        description="test"
+        theme={props.theme}
+        url="/dataset/test"
+        downloadUrl="test.com"
+        location={mockLocation}
+        paginationEnabled={false}
+        dataDictionaryLinks={false}
+        largeFile={false}
+        showDateDetails
+      />
+    </MemoryRouter>
+  );
+  expect(screen.getByText((_, el) => el?.className === 'dataset-data-item-label' && el?.textContent === 'Last Modified: October 22, 2020')).toBeInTheDocument();
+  expect(screen.getByText((_, el) => el?.className === 'dataset-data-item-label' && el?.textContent === 'Released: October 22, 2021')).toBeInTheDocument();
+  expect(screen.getByText((_, el) => el?.className === 'dataset-data-item-label' && el?.textContent === 'Planned Update: October 22, 2022')).toBeInTheDocument();
+});
+test('Renders topic slugs', () => {
+  const props = {...singleItem}
+  props.released = '2021-10-22'
+  props.refresh = '2022-10-22'
+  props.theme = ['Home health services']
+  props.topicSlugs = { "Home health services": "home-health-services" }
+  render(
+    <MemoryRouter>
+      <DatasetSearchListItem
+        title={props.title}
+        modified={props.modified}
+        released={props.released}
+        refresh={props.refresh}
+        description="test"
+        theme={props.theme}
+        url="/dataset/test"
+        downloadUrl="test.com"
+        location={mockLocation}
+        paginationEnabled={false}
+        dataDictionaryLinks={false}
+        largeFile={false}
+        showDateDetails
+        showTopics
+        topicSlugs={props.topicSlugs}
+      />
+    </MemoryRouter>
+  );
+  expect(screen.getByText('Home health services')).toBeInTheDocument()
+});
+test('Renders disabled data dictionary link', () => {
+  const props = {...singleItem}
+  props.distribution = {}
+  render(
+    <MemoryRouter>
+      <DatasetSearchListItem
+        title={props.title}
+        modified={props.modified}
+        released={props.released}
+        refresh={props.refresh}
+        description="test"
+        theme={props.theme}
+        url="/dataset/test"
+        downloadUrl="test.com"
+        location={mockLocation}
+        paginationEnabled={false}
+        dataDictionaryLinks={true}
+        largeFile={false}
+        distribution={props.distribution}
+      />
+    </MemoryRouter>
+  );
+  expect(screen.getByText('Data Dictionary')).toBeInTheDocument();
+  const link = screen.getByText('Data Dictionary')
+  expect(link).toHaveClass('dkan-disabled-link')
+});
+test('Renders data dictionary link from pdf', () => {
+  const props = {...singleItem}
+  props.identifier = "test"
+  props.distribution = {
+    "data": {
+      "describedBy": "s3://913461122956-pdc-dev-test-minimal-data/attached-dictionary.pdf",
+      "describedByType": "application/pdf",
+      "%Ref:downloadURL": []
+    }
+  }
+  render(
+    <MemoryRouter>
+      <DatasetSearchListItem
+        title={props.title}
+        modified={props.modified}
+        released={props.released}
+        refresh={props.refresh}
+        description="test"
+        theme={props.theme}
+        url="/dataset/test"
+        downloadUrl="test.com"
+        location={mockLocation}
+        paginationEnabled={false}
+        dataDictionaryLinks={true}
+        largeFile={false}
+        showDateDetails
+        showTopics
+        topicSlugs={props.topicSlugs}
+        identifier={props.identifier}
+        distribution={props.distribution}
+      />
+    </MemoryRouter>
+  );
+  expect(screen.getByText('Data Dictionary')).toBeInTheDocument();
+  const link = screen.getByText('Data Dictionary')
+  expect(link).toHaveAttribute('href', '/dataset/test#data-dictionary')
+});
+test('Renders data dictionary link from json', () => {
+  const props = {...singleItem}
+  props.identifier = "test"
+  props.distribution = {
+    "data": {
+      "describedBy": "https://example.com/data-dictionary.json",
+      "describedByType": "application/vnd.tableschema+json",
+      "%Ref:downloadURL": []
+    }
+  }
+  render(
+    <MemoryRouter>
+      <DatasetSearchListItem
+        title={props.title}
+        modified={props.modified}
+        released={props.released}
+        refresh={props.refresh}
+        description="test"
+        theme={props.theme}
+        url="/dataset/test"
+        downloadUrl="test.com"
+        location={mockLocation}
+        paginationEnabled={false}
+        dataDictionaryLinks={true}
+        largeFile={false}
+        showDateDetails
+        showTopics
+        topicSlugs={props.topicSlugs}
+        identifier={props.identifier}
+        distribution={props.distribution}
+      />
+    </MemoryRouter>
+  );
+  expect(screen.getByText('Data Dictionary')).toBeInTheDocument();
+  const link = screen.getByText('Data Dictionary')
+  expect(link).toHaveAttribute('href', '/dataset/test#data-dictionary')
+});
