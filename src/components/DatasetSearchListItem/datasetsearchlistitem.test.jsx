@@ -304,9 +304,9 @@ test('Renders date details', () => {
       />
     </MemoryRouter>
   );
-  expect(screen.getByText((_, el) => el?.className === 'dataset-data-item-label' && el?.textContent === 'Last Modified: October 22, 2020')).toBeInTheDocument();
-  expect(screen.getByText((_, el) => el?.className === 'dataset-data-item-label' && el?.textContent === 'Released: October 22, 2021')).toBeInTheDocument();
-  expect(screen.getByText((_, el) => el?.className === 'dataset-data-item-label' && el?.textContent === 'Planned Update: October 22, 2022')).toBeInTheDocument();
+  expect(screen.getByText((_, el) => el?.className === 'dataset-date-item-label ' && el?.textContent === 'Last Modified: October 22, 2020')).toBeInTheDocument();
+  expect(screen.getByText((_, el) => el?.className === 'dataset-date-item-label ' && el?.textContent === 'Released: October 22, 2021')).toBeInTheDocument();
+  expect(screen.getByText((_, el) => el?.className === 'dataset-date-item-label ' && el?.textContent === 'Planned Update: October 22, 2022')).toBeInTheDocument();
 });
 test('Renders topic slugs', () => {
   const props = {...singleItem}
