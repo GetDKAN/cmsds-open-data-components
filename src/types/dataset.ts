@@ -15,6 +15,16 @@ export type DistributionType = {
   data: DistributionDataType,
 }
 
+export type Topic = {
+  identifier: string,
+  url: string,
+  topic_icon: any,
+}
+export type Theme = {
+  data: string,
+  identifier: string,
+}
+
 export type DatasetType = {
   title: string,
   distribution: DistributionType[],
@@ -24,6 +34,10 @@ export type DatasetType = {
   describedBy?: any, // TODO
   describedByType?: any, //TODO
   modified: string,
+  released?: string,
+  nextUpdateDate?: string,
+  keyword?: Array<Theme>
+  theme?: Array<Theme>
 }
 
 export type ConditionType = {
@@ -75,6 +89,10 @@ export type DatasetPageType = {
   showRowLimitNotice?: boolean,
   useDatasetAPI?: boolean,
   enableEmptyFilters?: boolean,
+  tabHrefPrepend?: string,
+  showDateDetails?: boolean,
+  topicDetails?: Array<any>
+  showTagsOnOverview?: boolean
 }
 
 
@@ -123,7 +141,8 @@ export type DatasetOverviewPropsType = {
   resource: ResourceType,
   distributions: DistributionType[],
   metadataMapping: any, //TODO
-  rootUrl: string
+  rootUrl: string,
+  showTags: boolean,
 }
 
 export type DatasetDictionaryItemType = {

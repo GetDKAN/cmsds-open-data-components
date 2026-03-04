@@ -7,7 +7,7 @@ import useMetastoreDataset from '../../services/useMetastoreDataset';
 import useDatastore from '../../services/useDatastore';
 import PageNotFound from '../PageNotFound';
 import { defaultMetadataMapping } from '../../assets/metadataMapping';
-import { Tabs, TabPanel } from '@cmsgov/design-system';
+import { Tabs, TabPanel, Button } from '@cmsgov/design-system';
 import SearchItemIcon from '../../assets/icons/searchItem';
 import DatasetOverview from '../../components/DatasetOverviewTab';
 import DatasetAPI from '../../components/DatasetAPITab';
@@ -21,6 +21,8 @@ import DataTableContext from './DataTableContext';
 import DatasetDescription from '../../components/DatasetDescription';
 import { acaToParams } from '../../utilities/aca';
 import { ACAContext } from '../../utilities/ACAContext';
+import DatasetDate from '../../components/DatasetDate';
+import TopicInformation from '../../components/TopicInformation';
 
 const getDataDictionary = (dataDictionaryUrl: string) => {
   const { ACA } = useContext(ACAContext);
@@ -57,10 +59,19 @@ const Dataset = ({
   updateAriaLive,
   showRowLimitNotice = false,
   enableEmptyFilters = false,
+  tabHrefPrepend = '',
+  showDateDetails = false,
+  topicDetails = [],
+  showTagsOnOverview = false,
 }: DatasetPageType) => {
+  const tabHref = `/dataset/${id}`;
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
     : { conditions: [] };
+  const dataDictionaryTypes = [
+    'application/vnd.tableschema+json',
+    'application/pdf',
+  ]
 
   const { dataset, isPending } = useMetastoreDataset(id, rootUrl);
   const title = dataset.title ? dataset.title : '';
@@ -74,6 +85,7 @@ const Dataset = ({
   if (distributions.length) {
     distribution = distributions[0];
   }
+
 
   const resource = useDatastore(
     '',
@@ -145,7 +157,9 @@ const Dataset = ({
       setSelectedTab(window.location.hash.substring(1))
   }, [distribution, window.location.hash])
 
-  const displayDataDictionaryTab = ((distribution.data && distribution.data.describedBy && distribution.data.describedByType === 'application/vnd.tableschema+json') || (datasetSitewideDictionary && datasetSitewideDictionary.length > 0)) as boolean;
+  const displayDataDictionaryTab = (distribution.data && distribution.data.describedBy && dataDictionaryTypes.includes( distribution.data.describedByType) || (datasetSitewideDictionary && datasetSitewideDictionary.length > 0)) as boolean;
+
+  const date = {modified: dataset.modified, released: dataset.released, refresh: dataset.nextUpdateDate};
 
   return (
     <>
@@ -157,8 +171,17 @@ const Dataset = ({
             <div className={'ds-l-md-col--9'}>
               <h1 className="ds-text-heading--3xl">{title}</h1>
             </div>
-            <div className={'ds-l-md-col--12 ds-u-margin-y--1 ds-u-text-align--right'}>
-              <p className="ds-u-margin--0">Updated <TransformedDate date={dataset.modified} /></p>
+            {(topicDetails.length  && dataset.theme) ? (
+              <TopicInformation topicDetails={topicDetails} theme={dataset.theme} />
+            ) : ''}
+            <div className={'ds-l-md-col--12 ds-u-margin-y--2'}>
+              {showDateDetails ? 
+                <DatasetDate 
+                  date={date}
+                  modifiedBoldLabel
+                  displayTooltips
+                /> :
+                 <p className="ds-u-margin--0 ds-u-font-weight--bold">Updated <TransformedDate date={date.modified} /></p>}
             </div>
             <div className={'ds-l-md-col--9'}>
               <DatasetDescription
@@ -187,6 +210,7 @@ const Dataset = ({
                         Data Table
                       </span>
                     }
+                    tabHref={`${tabHrefPrepend}${tabHref}#data-table`}
                     className={borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : ''}
                   >
                     {getFormatType(distribution) === "csv"
@@ -216,9 +240,10 @@ const Dataset = ({
                         Overview
                       </span>
                     }
+                    tabHref={`${tabHrefPrepend}${tabHref}#overview`}
                     className={borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : ''}
                   >
-                    <DatasetOverview resource={resource} dataset={dataset} distributions={distributions} metadataMapping={metadataMapping} rootUrl={rootUrl} />
+                    <DatasetOverview resource={resource} dataset={dataset} distributions={distributions} metadataMapping={metadataMapping} rootUrl={rootUrl} showTags={showTagsOnOverview} />
                   </TabPanel>
                   {!hideDataDictionary && (
                     <TabPanel
@@ -229,6 +254,7 @@ const Dataset = ({
                           Data Dictionary
                         </span>
                       }
+                      tabHref={`${tabHrefPrepend}${tabHref}#data-dictionary`}
                       className={borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : ''}
                     >
                       {displayDataDictionaryTab
@@ -236,6 +262,7 @@ const Dataset = ({
                           <DataDictionary
                             datasetSitewideDictionary={datasetSitewideDictionary}
                             datasetDictionaryEndpoint={distribution.data.describedBy}
+                            datasetDictionaryFileType={distribution.data.describedByType}
                             title={"Data Dictionary"}
                             csvDownload={dataDictionaryCSV}
                           />
@@ -253,6 +280,7 @@ const Dataset = ({
                           API
                         </span>
                       }
+                      tabHref={`${tabHrefPrepend}${tabHref}#api`}
                       className={borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : ''}
                     >
                       <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} showRowLimitNotice={showRowLimitNotice} />

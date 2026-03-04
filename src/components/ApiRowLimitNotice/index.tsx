@@ -2,7 +2,7 @@ import { Accordion, AccordionItem } from '@cmsgov/design-system';
 
 export default function ApiRowLimitNotice() {
   return (
-    <div className="ds-u-padding-top--3">
+    <div className="ds-u-padding-top--3 ds-u-margin-bottom--2">
       <Accordion bordered>
         <AccordionItem key="1" heading="Row Limit Warning">
           <p>

@@ -11,7 +11,7 @@ This document provides a comprehensive inventory of all components, services, te
 | Component | [ApiRowLimitNotice](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/ApiRowLimitNotice) | ✅ Public | ✅ Has Story | ❌ No Tests |
 | Component | [Breadcrumb](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/Breadcrumb) | ✅ Public | ✅ Has Story | ❌ No Tests |
 | Component | [CMSTopNav](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/CMSTopNav) | ✅ Public | ✅ Has Story | ❌ No Tests |
-| Component | [DataDictionaryTable](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DataDictionaryTable) | ❌ Internal | ✅ Has Story | ❌ No Tests |
+| Component | [DataDictionary](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DataDictionary) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Component | [DataTableControls](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DataTableControls) | ❌ Internal | ❌ No Story | ✅ Has Tests |
 | Component | [DataTableDensity](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DataTableDensity) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
 | Component | [DataTablePageResults](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DataTablePageResults) | ✅ Public | ✅ Has Story | ❌ No Tests |
@@ -20,10 +20,9 @@ This document provides a comprehensive inventory of all components, services, te
 | Component | [DatasetAPITab](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetAPITab) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Component | [DatasetAdditionalInformation](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetAdditionalInformation) | ✅ Public (buildRows) | ✅ Has Story | ❌ No Tests |
 | Component | [DatasetDataDictionaryTab](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetDataDictionaryTab) | ❌ Internal | ❌ No Story | ✅ Has Tests |
-| Component | [DatasetDate](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetDate) | ✅ Public | ❌ No Story | ✅ Has Tests |
+| Component | [DatasetDate](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetDate) | ✅ Public | ✅ Has Story | ✅ Has Tests |
 | Component | [DatasetDateItem](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetDateItem) | ✅ Public | ❌ No Story | ✅ Has Tests |
 | Component | [DatasetDescription](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetDescription) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
-| Component | [DatasetDictionaryTable](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetDictionaryTable) | ❌ Internal | ✅ Has Story | ❌ No Tests |
 | Component | [DatasetListItem](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetListItem) | ✅ Public | ❌ No Story | ✅ Has Tests |
 | Component | [DatasetListSubmenu](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetListSubmenu) | ✅ Public | ❌ No Story | ❌ No Tests |
 | Component | [DatasetListSubmenuItem](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetListSubmenuItem) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
@@ -68,6 +67,7 @@ This document provides a comprehensive inventory of all components, services, te
 | Component | [SitewideDataDictionaryTable](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/SitewideDataDictionaryTable) | ❌ Internal | ✅ Has Story | ❌ No Tests |
 | Component | [SubMenu](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/SubMenu) | ✅ Public | ❌ No Story | ❌ No Tests |
 | Component | [SubMenuStaticList](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/SubMenuStaticList) | ❌ Internal | ❌ No Story | ❌ No Tests |
+| Component | [TopicInformation](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/TopicInformation) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
 | Component | [TransformedDate](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/TransformedDate) | ✅ Public | ✅ Has Story | ❌ No Tests |
 | Component | [useAddLoginLink](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/useAddLoginLink) | ✅ Public | ❌ No Story | ❌ No Tests |
 | Component | [useScrollToTop](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/useScrollToTop) | ✅ Public | ❌ No Story | ❌ No Tests |
@@ -122,11 +122,11 @@ This document provides a comprehensive inventory of all components, services, te
 
 | Category | Total | With Stories | With Tests | With Both | With Neither |
 |----------|-------|--------------|------------|-----------|--------------|
-| Components | 64 | 39 (61%) | 23 (36%) | 12 (19%) | 14 (22%) |
+| Components | 64 | 39 (61%) | 24 (38%) | 14 (22%) | 15 (23%) |
 | Templates | 11 | 9 (82%) | 3 (27%) | 2 (18%) | 1 (9%) |
 | Services/Hooks/Contexts | 9 | 0 (0%) | 0 (0%) | 0 (0%) | 9 (100%) |
 | Utilities/Types/Assets | 11 | 0 (0%) | 0 (0%) | 0 (0%) | 11 (100%) |
-| **Project Total** | **95** | **48 (51%)** | **26 (27%)** | **14 (15%)** | **35 (37%)** |
+| **Project Total** | **95** | **48 (51%)** | **27 (28%)** | **16 (17%)** | **36 (38%)** |
 
 ---
 
@@ -136,5 +136,5 @@ This document provides a comprehensive inventory of all components, services, te
 
 ---
 
-*Last updated: March 3, 2026*  
+*Last updated: March 4, 2026*  
 *Repository: [GetDKAN/cmsds-open-data-components](https://github.com/GetDKAN/cmsds-open-data-components)*
