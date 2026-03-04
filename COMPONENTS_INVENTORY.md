@@ -122,11 +122,11 @@ This document provides a comprehensive inventory of all components, services, te
 
 | Category | Total | With Stories | With Tests | With Both | With Neither |
 |----------|-------|--------------|------------|-----------|--------------|
-| Components | 64 | 39 (61%) | 23 (36%) | 12 (19%) | 14 (22%) |
+| Components | 64 | 39 (61%) | 24 (38%) | 14 (22%) | 15 (23%) |
 | Templates | 11 | 9 (82%) | 3 (27%) | 2 (18%) | 1 (9%) |
 | Services/Hooks/Contexts | 9 | 0 (0%) | 0 (0%) | 0 (0%) | 9 (100%) |
 | Utilities/Types/Assets | 11 | 0 (0%) | 0 (0%) | 0 (0%) | 11 (100%) |
-| **Project Total** | **95** | **48 (51%)** | **26 (27%)** | **14 (15%)** | **35 (37%)** |
+| **Project Total** | **95** | **48 (51%)** | **27 (28%)** | **16 (17%)** | **36 (38%)** |
 
 ---
 
@@ -136,5 +136,5 @@ This document provides a comprehensive inventory of all components, services, te
 
 ---
 
-*Last updated: March 3, 2026*  
+*Last updated: March 4, 2026*  
 *Repository: [GetDKAN/cmsds-open-data-components](https://github.com/GetDKAN/cmsds-open-data-components)*
