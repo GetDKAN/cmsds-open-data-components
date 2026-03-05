@@ -4,13 +4,20 @@ import SwaggerUI from 'swagger-ui-react';
 import SpanOpenAPIVersion from '../../components/ApiDocsSwaggerUIPlugin/SpanOpenAPIVersion';
 import SpanVersionStamp from '../../components/ApiDocsSwaggerUIPlugin/SpanVersionStamp';
 import ApiRowLimitNotice from '../../components/ApiRowLimitNotice';
-import ApiDocsSwaggerUIPlugin from '../../components/ApiDocsSwaggerUIPlugin';
+import ApiDocsSwaggerUIPlugin, { ApiDocsSwaggerUIPluginProps } from '../../components/ApiDocsSwaggerUIPlugin';
 import 'swagger-ui-react/swagger-ui.css';
 import './swagger-ui-overrides.scss';
 import { acaToParams } from '../../utilities/aca';
 import { ACAContext } from '../../utilities/ACAContext';
 
-const APIPage = ({ hideAuth = true, rootUrl, showRowLimitNotice = false }) => {
+type APIPageProps = {
+  hideAuth?: boolean;
+  rootUrl: string;
+  showRowLimitNotice?: boolean;
+  swaggerButtonClassNames?: ApiDocsSwaggerUIPluginProps['buttonClassNames'];
+}
+
+const APIPage: React.FC<APIPageProps> = ({ hideAuth = true, rootUrl, showRowLimitNotice = false, swaggerButtonClassNames = {} }) => {
   let params = {
     authentication: hideAuth ? false : undefined,
   };
@@ -24,7 +31,14 @@ const APIPage = ({ hideAuth = true, rootUrl, showRowLimitNotice = false }) => {
           url={`${rootUrl}${qs.stringify(acaToParams(params, ACA), { addQueryPrefix: true })}`}
           docExpansion={'list'}
           defaultModelsExpandDepth={-1}
-          plugins={[SpanOpenAPIVersion, SpanVersionStamp, ApiDocsSwaggerUIPlugin({ showRowLimitNotice })]}
+          plugins={[
+            SpanOpenAPIVersion,
+            SpanVersionStamp,
+            ApiDocsSwaggerUIPlugin({
+              showRowLimitNotice,
+              buttonClassNames: swaggerButtonClassNames
+            })
+          ]}
         />
       </section>
     </>
