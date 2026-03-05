@@ -1,9 +1,10 @@
 type OperationSummaryProps = {
-  toggleShown: (e: React.MouseEvent<HTMLButtonElement>) => void
-  operationProps: any
+  toggleShown: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  operationProps: any;
+  buttonClassNames?: string;
 }
 
-const OperationSummary: React.FC<OperationSummaryProps> = ({ toggleShown, operationProps }) => {
+const OperationSummary: React.FC<OperationSummaryProps> = ({ toggleShown, operationProps, buttonClassNames = '' }) => {
   const { path, isShown, operationId, tag, method, summary } = operationProps.toJS()
   const readablePath = path.replace(/\//g, '\u200b/')
 
@@ -48,7 +49,7 @@ const OperationSummary: React.FC<OperationSummaryProps> = ({ toggleShown, operat
         </button>
       </div>
       <button
-        className='ds-c-button ds-u-margin-left--2 OperationSummary__try-it-out-btn'
+        className={buttonClassNames ? `${buttonClassNames}` : 'ds-c-button ds-u-margin-left--2 OperationSummary__try-it-out-btn'}
         onClick={handleTryItOutOnClick}
         aria-label={`Try it out - ${tag} ${operationId}`}
         aria-expanded={isShown}

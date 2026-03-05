@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import qs from 'qs';
 import ApiDocumentation from '../../components/ApiDocumentation';
+import { ApiDocsSwaggerUIPluginProps } from '../../components/ApiDocsSwaggerUIPlugin';
 import { ACAContext } from '../../utilities/ACAContext';
 import { acaToParams } from '../../utilities/aca';
 
@@ -9,6 +10,7 @@ type DatasetAPIProps = {
   rootUrl: String;
   apiUrl: string;
   showRowLimitNotice?: boolean;
+  swaggerButtonClassNames?: ApiDocsSwaggerUIPluginProps['buttonClassNames'];
 };
 
 const DatasetAPI = ({
@@ -16,6 +18,7 @@ const DatasetAPI = ({
   rootUrl,
   apiUrl,
   showRowLimitNotice = false,
+  swaggerButtonClassNames = {},
 }: DatasetAPIProps) => {
   const {ACA} = useContext(ACAContext)
   
@@ -25,6 +28,7 @@ const DatasetAPI = ({
         endpoint={`${rootUrl}/metastore/schemas/dataset/items/${id}/docs?${qs.stringify(acaToParams({}, ACA))}`}
         docsURL={apiUrl}
         showRowLimitNotice={showRowLimitNotice}
+        swaggerButtonClassNames={swaggerButtonClassNames}
       />
     </>
   );
