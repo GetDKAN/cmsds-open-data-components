@@ -142,83 +142,75 @@ This document provides overrides to Swagger UI, fixing accessibility issues.
 
 
 /* ApiDocsSwaggerUIPlugin styles */
-#api-docs-swagger-ui-plugin .model .property {
-  color: #6b6b6b !important;
-}
+/* General */
+#api-docs-swagger-ui-plugin {
+  .model .property {
+    color: #6b6b6b !important;
+  }
 
-#api-docs-swagger-ui-plugin pre.errors-wrapper {
-  display: none;
-}
-
-#api-docs-swagger-ui-plugin .btn {
-  transition: none;
+  pre.errors-wrapper {
+    display: none;
+  }
+  
+  .btn {
+    transition: none;
+  }
+  
+  .parameters input {
+    font-size: .8em;
+    color: #323a45;
+  }
+  
+  .execute-wrapper,
+  .btn-group {
+    padding: 12px 24px 24px;
+    display: flex;
+    justify-content: flex-start;
+  }
 }
 
 /* OperationTag */
-#api-docs-swagger-ui-plugin .OperationTag:not(:first-of-type) .toggle-block {
-  border-top: 1px solid #e1e2e3;
-}
+#api-docs-swagger-ui-plugin .OperationTag {
+  &:not(:first-of-type) .toggle-block {
+    border-top: 1px solid #e1e2e3;
+  }
 
-#api-docs-swagger-ui-plugin .OperationTag .toggle-block.open { 
-  padding-bottom: 0px;
-  margin-bottom: 30px;
-}
+  .toggle-block-title-button {
+    width: 100%;
+    flex: 1 1 auto;
+    font-weight: inherit;
+    min-height: 64px;
+    position: relative;
 
-#api-docs-swagger-ui-plugin .OperationTag .toggle-block-title {
-  margin: 8px 0;
-  display: flex;
-  justify-content: flex-start;
-  font-size: 1.1em;
-}
+    &:hover .toggle-block-title-text,
+    &:focus .toggle-block-title-text {
+      text-decoration: underline;
+    }
+    
+    &:hover .toggle-block-title-description,
+    &:focus .toggle-block-title-description {
+      text-decoration: none;
+    }
+  
+    .toggle-block-title-description {
+      margin-top: 1px;
+      color: #3B4151;
+    }
 
-#api-docs-swagger-ui-plugin .OperationTag .toggle-block-title button:hover,
-#api-docs-swagger-ui-plugin .OperationTag .toggle-block-title button:focus {
-  text-decoration: underline;
-}
+    > svg {
+      height: 20px;
+      left: 0;
+      pointer-events: none;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+    }
+  }
 
-#api-docs-swagger-ui-plugin .OperationTag .toggle-block-title-text {
-  display: flex;
-  align-items: center;
-  flex: 1;
-  padding-left: 32px;
-}
-
-#api-docs-swagger-ui-plugin .OperationTag .toggle-block-title button {
-  width: 100%;
-  background: none;
-  border: none;
-  display: flex;
-  flex: 1 1 auto;
-  font-weight: inherit;
-  min-height: 64px;
-  padding: 0;
-  position: relative;
-}
-
-#api-docs-swagger-ui-plugin .OperationTag .toggle-block-title button > svg {
-  height: 20px;
-  left: 0;
-  pointer-events: none;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20px;
-}
-
-#api-docs-swagger-ui-plugin .OperationTag .toggle-block-panel.closed {
-  display: none;
-}
-
-#api-docs-swagger-ui-plugin .OperationTag .toggle-block-panel.open {
-  display: block;
-}
-
-#api-docs-swagger-ui-plugin .OperationTag .toggle-block-panel {
-  padding-left: 32px;
-}
-
-#api-docs-swagger-ui-plugin .OperationTag .wrapper:not(:last-child) .block-desktop {
-  margin-bottom: 32px;
+  .wrapper:not(:last-child) .block-desktop {
+    margin-bottom: 32px;
+  }
 }
 
 /* OperationSummary */
@@ -267,115 +259,54 @@ This document provides overrides to Swagger UI, fixing accessibility issues.
   }
 }
 
+/* Schemas */
 #api-docs-swagger-ui-plugin .ApiDocsModels {
   width: 100%;
-}
 
-#api-docs-swagger-ui-plugin .ApiDocsModels > .model-container > .model-box {
-  width: 100%;
-  border: 1px solid #eaebec;
-  border-radius: 2px;
-  background: #fff;
-}
+  > h3 {
+    margin: 16px 0;
+  }
 
-#api-docs-swagger-ui-plugin .ApiDocsModels > .model-container > .model-box > .model-box {
-  padding: 0px;
-  background-color: #fff;
-}
+  .no-margin > .model-container {
+    > .model-box {
+      width: 100%;
+      border: 1px solid #EAEBEC;
+      border-radius: 2px;
+      background: #fff;
 
-#api-docs-swagger-ui-plugin .ApiDocsModels > .model-container > .model-box-control {
-  border: none;
-}
+      > .model-box {
+        padding: 0px;
+        background-color: #fff;
+      }
 
-#api-docs-swagger-ui-plugin .ApiDocsModels > .model-container > .model-box-control > .pointer > .model-box {
-  background: #fff;
-  padding: 0px;
-}
+      > .model-box-control {
+        border: none;
 
-#api-docs-swagger-ui-plugin .ApiDocsModels > .model-container > .model-box-control > .pointer > .model-box > .model-box {
-  width: 100%;
-  border: 1px solid #eaebec;
-  border-radius: 2px;
-  background: #fff;
-}
+        > .pointer > .model-box {
+          background: #fff;
+          padding: 0px;
 
-#api-docs-swagger-ui-plugin .ApiDocsModels > .model-container > .model-box-control > .pointer > .model-box > .model-box > .model > span > span > .model-title {
-  display: block;
-  font-weight: 600;
-}
+          > .model-box {
+            width: 100%;
+            border: 1px solid #EAEBEC;
+            border-radius: 2px;
+            background: #fff;
 
-#api-docs-swagger-ui-plugin .ApiDocsModels > .model-container > .model-box-control > .pointer > .model-box > .model-box > .model > span > span > .model-toggle {
-  display: none;
-}
+            > .model > span > span {
+              > .model-title {
+                display: block;
+                font-weight: 600;
+              }
 
-#api-docs-swagger-ui-plugin .parameters input {
-  font-size: .8em;
-  color: #323a45;
-}
-
-#api-docs-swagger-ui-plugin .execute-wrapper,
-#api-docs-swagger-ui-plugin .btn-group {
-  padding: 12px 24px 24px;
-  display: flex;
-  justify-content: flex-start;
-}
-
-/* Execute button */
-#api-docs-swagger-ui-plugin button.btn.execute.opblock-control__btn {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 0 32px;
-  border: 2px solid transparent;
-  height: 48px;
-  border-radius: 24px;
-  font-weight: 800;
-  font-size: 1em;
-  text-decoration: none;
-  /*background-color: colormap.$blueberry;*/
-  background-color: red;
-  color: white;
-  flex-grow: 0;
-  flex-shrink: 1;
-  flex-basis: 50px;
-}
-
-#api-docs-swagger-ui-plugin button.btn.execute.opblock-control__btn:hover,
-#api-docs-swagger-ui-plugin button.btn.execute.opblock-control__btn:focus {
-  /*border-color: colormap.$blueberry;*/
-  border-color: red;
-  background-color: white;
-  /*color: colormap.$blueberry;*/
-  color: red;
-  box-shadow: none;
-}
-
-#api-docs-swagger-ui-plugin button.btn.execute.opblock-control__btn:active {
-  /*background-color: colormap.$blueberry-5;*/
-  background-color: red;
-  /*color: colormap.$blueberry;*/
-  color: red;
-  /*border-color: colormap.$blueberry;*/
-  border-color: red;
-}
-
-/* Clear button */
-#api-docs-swagger-ui-plugin button.btn.btn-clear.opblock-control__btn {
-  font-weight: 800;
-  font-size: 1em;
-  text-decoration: none;
-  /*color: colormap.$blueberry;*/
-  color: red;
-  border: 0;
-  box-shadow: none;
-  flex: 0;
-  margin-left: 8px;
-  padding: 0 16px;
-}
-
-#api-docs-swagger-ui-plugin button.btn.btn-clear.opblock-control__btn:hover,
-#api-docs-swagger-ui-plugin button.btn.btn-clear.opblock-control__btn:focus {
-  text-decoration: underline;
+              > .model-toggle {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 #api-docs-swagger-ui-plugin .opblock {
