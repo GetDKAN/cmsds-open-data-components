@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import qs from 'qs';
 import SwaggerUI from 'swagger-ui-react';
-import { SpanOpenAPIVersion, SpanVersionStamp } from '@civicactions/swagger-ui-layout';
+import SpanOpenAPIVersion from '../../components/ApiDocsSwaggerUIPlugin/SpanOpenAPIVersion';
+import SpanVersionStamp from '../../components/ApiDocsSwaggerUIPlugin/SpanVersionStamp';
 import ApiRowLimitNotice from '../../components/ApiRowLimitNotice';
-import ApiDocsInfo from '../../components/ApiDocumentation/ApiDocsInfo';
+import ApiDocsSwaggerUIPlugin from '../../components/ApiDocsSwaggerUIPlugin';
 import 'swagger-ui-react/swagger-ui.css';
 import './swagger-ui-overrides.scss';
 import { acaToParams } from '../../utilities/aca';
@@ -15,27 +16,6 @@ const APIPage = ({ hideAuth = true, rootUrl, showRowLimitNotice = false }) => {
   };
   const {ACA} = useContext(ACAContext);
 
-  // this plugin is defined here rather than in swagger-ui-layout so that it can easily re-use
-  // the ApiDocsInfo component.
-  const ApiDocsSwaggerUIPlugin = (props) => {
-    return {
-      wrapComponents: {
-        VersionStamp: (Original, system) => () => {
-          const version = system.specSelectors.version();
-          const classList = "version version-stamp version-stamp--span";
-          return (
-            <span className={classList}>
-              { version }
-            </span>
-          );
-        },
-      },
-      components: {
-        info: (props) => <ApiDocsInfo {...props} />,
-      },
-    }
-  }
-
   return (
     <>
       {showRowLimitNotice && <ApiRowLimitNotice />}
@@ -44,7 +24,7 @@ const APIPage = ({ hideAuth = true, rootUrl, showRowLimitNotice = false }) => {
           url={`${rootUrl}${qs.stringify(acaToParams(params, ACA), { addQueryPrefix: true })}`}
           docExpansion={'list'}
           defaultModelsExpandDepth={-1}
-          plugins={[SpanOpenAPIVersion, SpanVersionStamp, ApiDocsSwaggerUIPlugin]}
+          plugins={[SpanOpenAPIVersion, SpanVersionStamp, ApiDocsSwaggerUIPlugin({ showRowLimitNotice })]}
         />
       </section>
     </>

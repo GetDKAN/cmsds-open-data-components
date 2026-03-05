@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import qs from 'qs';
-import ApiDocumentation from '../ApiDocumentation';
-import ApiRowLimitNotice from '../ApiRowLimitNotice';
+import ApiDocumentation from '../../components/ApiDocumentation';
 import { ACAContext } from '../../utilities/ACAContext';
 import { acaToParams } from '../../utilities/aca';
+
 type DatasetAPIProps = {
   id: String;
   rootUrl: String;
@@ -18,6 +18,7 @@ const DatasetAPI = ({
   showRowLimitNotice = false,
 }: DatasetAPIProps) => {
   const {ACA} = useContext(ACAContext)
+  
   return (
     <>
       <ApiDocumentation
