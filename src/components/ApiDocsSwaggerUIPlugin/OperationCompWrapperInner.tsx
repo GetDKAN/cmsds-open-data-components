@@ -1,18 +1,19 @@
-import { useMemo } from "react";
+import { ComponentType, useMemo } from "react";
+import type { SwaggerUIComponentProps } from './index';
 
-type OperationCompWrapperInnerProps = {
-  Original: any
-  onTryoutClick: () => void
+type OperationCompWrapperInnerProps = SwaggerUIComponentProps & {
+  Original: ComponentType<SwaggerUIComponentProps>
+  onTryoutClick?: () => void
 }
 
 const OperationCompWrapperInner = (props: OperationCompWrapperInnerProps) => {
   const { Original, onTryoutClick } = props
 
   useMemo(() => {
-    setTimeout(() => {
-      onTryoutClick()
-    }, 2000)
-  }, [onTryoutClick])
+    if (onTryoutClick) {
+      setTimeout(() => onTryoutClick(), 2000);
+    }
+  }, [onTryoutClick]);
 
   return <Original {...props} />
 }
