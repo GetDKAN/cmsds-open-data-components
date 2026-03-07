@@ -167,6 +167,64 @@ This document provides overrides to Swagger UI, fixing accessibility issues.
     display: flex;
     justify-content: flex-start;
   }
+
+  .wrapper {
+    > .block {
+      padding: 0;
+    }
+  }
+
+  .wrapper:has(+ .wrapper:last-child .block:empty) {
+    display: flow-root; // Stop margin collapse
+  }
+}
+
+/* Operation block */
+#api-docs-swagger-ui-plugin .opblock {
+  background: none;
+  border: none;
+  box-shadow: none;
+
+  .opblock-section {
+    margin-top: 25px;
+  }
+
+  .opblock-description-wrapper {
+    padding: 16px;
+    margin: 0;
+  }
+
+  .opblock-section,
+  .responses-wrapper {
+    border-radius: 2px;
+    background: #fff;
+    border: 1px solid #D6D7D9;
+    margin-left: 24px;
+
+    .opblock-section-header {
+      box-shadow: none;
+      background: #f6f9fd;
+      padding: 16px;
+
+      .opblock-title,
+      h4 {
+        font-size: .9em;
+        line-height: 16px;
+        color: #0c2499;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 800;
+        cursor: default;
+
+        > span {
+          &::after {
+            display: none !important;
+            background: none !important;
+          }
+        }
+      }
+    }
+  }
 }
 
 /* OperationTag */
@@ -309,59 +367,31 @@ This document provides overrides to Swagger UI, fixing accessibility issues.
   }
 }
 
-#api-docs-swagger-ui-plugin .opblock {
-  background: none;
-  border: none;
-  box-shadow: none;
+@media screen and (max-width: 1023px) {
+  #api-docs-swagger-ui-plugin {
+    .OperationSummary__try-it-out-btn {
+      align-self: flex-start;
+    }
+  }
 }
 
-#api-docs-swagger-ui-plugin .opblock-section {
-  margin-top: 25px;
-}
+@media screen and (max-width: 767px) {
+  #api-docs-swagger-ui-plugin .OperationSummary__path-container {
+    .OperationSummary__method {
+      width: calc(100% - 8px);
+    }
 
-#api-docs-swagger-ui-plugin .opblock-description-wrapper {
-  padding: 16px;
-  margin: 0;
-}
+    .OperationSummary__summary {
+      width: 100%;
+      max-width: none;
+    }
 
-#api-docs-swagger-ui-plugin .opblock-section,
-#api-docs-swagger-ui-plugin .responses-wrapper {
-  border-radius: 2px;
-  background: #fff;
-  border: 1px solid #d6d7d9;
-  margin-left: 24px;
-}
+    .OperationSummary__path-container_path-input {
+      width: 100%;
+    }
 
-#api-docs-swagger-ui-plugin .opblock-section .opblock-section-header,
-#api-docs-swagger-ui-plugin .responses-wrapper .opblock-section-header {
-  box-shadow: none;
-  background: #f6f9fd;
-  padding: 16px;
-}
-
-#api-docs-swagger-ui-plugin .opblock-section .opblock-section-header .opblock-title,
-#api-docs-swagger-ui-plugin .responses-wrapper .opblock-section-header h4,
-#api-docs-swagger-ui-plugin .opblock-section .opblock-section-header .opblock-title,
-#api-docs-swagger-ui-plugin .responses-wrapper .opblock-section-header h4 {
-  font-size: 1rem;
-  color: #0c2499;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 800;
-  cursor: default;
-}
-
-#api-docs-swagger-ui-plugin .opblock-section .opblock-section-header .opblock-title > span:after,
-#api-docs-swagger-ui-plugin .responses-wrapper .opblock-section-header h4 > span:after,
-#api-docs-swagger-ui-plugin .opblock-section .opblock-section-header .opblock-title > span:after,
-#api-docs-swagger-ui-plugin .responses-wrapper .opblock-section-header h4 > span:after {
-  display: none !important;
-  background: none !important;
-}
-
-#api-docs-swagger-ui-plugin .opblock-section .wrapper,
-#api-docs-swagger-ui-plugin .responses-wrapper .wrapper,
-#api-docs-swagger-ui-plugin .opblock-section .wrapper > .block,
-#api-docs-swagger-ui-plugin .responses-wrapper .wrapper > .block {
-  padding: 0;
+    .OperationSummary__path-container_copy-btn {
+      align-self: flex-end;
+    }
+  }
 }

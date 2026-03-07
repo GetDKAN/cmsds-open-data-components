@@ -18,6 +18,7 @@ export type ApiDocsSwaggerUIPluginProps = {
     tryItOutButton?: string;
     executeButton?: string;
     clearButton?: string;
+    copyToClipboardButton?: string;
   }
 }
 
@@ -71,13 +72,23 @@ const ApiDocsSwaggerUIPlugin = ({
     },
     components: {
       info: (props: SwaggerUIComponentProps) => (
-        <ApiDocsInfo {...props} isDatasetDocs={isDatasetDocs} docsURL={docsURL} showRowLimitNotice={showRowLimitNotice} />
+        <ApiDocsInfo
+          {...props}
+          isDatasetDocs={isDatasetDocs}
+          docsURL={docsURL}
+          showRowLimitNotice={showRowLimitNotice}
+          buttonClassNames={buttonClassNames}
+        />
       ),
       OperationTag: (props: SwaggerUIComponentProps) => (
         <OperationTag {...(props as ComponentProps<typeof OperationTag>)} />
       ),
       OperationSummary: (props: SwaggerUIComponentProps) => (
-        <OperationSummary {...(props as ComponentProps<typeof OperationSummary>)} buttonClassNames={buttonClassNames.tryItOutButton ?? ''} />
+        <OperationSummary
+          {...(props as ComponentProps<typeof OperationSummary>)}
+          tryItOutButtonClassNames={buttonClassNames.tryItOutButton ?? ''}
+          copyToClipboardButtonClassNames={buttonClassNames.copyToClipboardButton ?? ''}
+        />
       ),
       Models: (props: SwaggerUIComponentProps) => (
         <Models {...(props as ComponentProps<typeof Models>)} />

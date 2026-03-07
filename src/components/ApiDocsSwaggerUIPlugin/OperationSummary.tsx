@@ -1,10 +1,11 @@
 type OperationSummaryProps = {
   toggleShown: (e: React.MouseEvent<HTMLButtonElement>) => void;
   operationProps: any;
-  buttonClassNames?: string;
+  tryItOutButtonClassNames?: string;
+  copyToClipboardButtonClassNames?: string;
 }
 
-const OperationSummary: React.FC<OperationSummaryProps> = ({ toggleShown, operationProps, buttonClassNames = '' }) => {
+const OperationSummary: React.FC<OperationSummaryProps> = ({ toggleShown, operationProps, tryItOutButtonClassNames = '', copyToClipboardButtonClassNames = '' }) => {
   const { path, isShown, operationId, tag, method, summary } = operationProps.toJS()
   const readablePath = path.replace(/\//g, '\u200b/')
 
@@ -17,21 +18,21 @@ const OperationSummary: React.FC<OperationSummaryProps> = ({ toggleShown, operat
   }
 
   return (
-    <div className='OperationSummary ds-u-display--flex'>
-      <div className='OperationSummary__path-container ds-u-display--flex ds-u-align-items--center ds-u-fill--white ds-u-radius'>
+    <div className='OperationSummary ds-u-display--flex ds-u-flex-direction--column ds-u-lg-flex-direction--row'>
+      <div className='OperationSummary__path-container ds-u-display--flex ds-u-align-items--center ds-u-flex-direction--column ds-u-md-flex-direction--row ds-u-fill--white ds-u-radius'>
         <span className='OperationSummary__method ds-u-display--flex ds-u-align-items--center ds-u-justify-content--center ds-u-color--white ds-u-radius ds-u-text-transform--uppercase ds-u-font-weight--bold ds-u-font-size--md ds-u-padding--1 ds-u-margin--05'>
           {method}
         </span>
         <input
           aria-label={`${tag} ${operationId}`}
-          className='OperationSummary__path-container_path-input ds-u-border--0 ds-u-padding-y--1 ds-u-padding-x--2 ds-u-font-size--sm'
+          className='OperationSummary__path-container_path-input ds-u-border--0 ds-u-padding-y--1 ds-u-padding-x--2 ds-u-font-size--sm ds-u-md-margin-y--0 ds-u-margin-y--1'
           readOnly
           value={readablePath}
         />
-        <span className='OperationSummary__summary ds-u-font-size--sm ds-u-padding-x--1 ds-u-text-align--right'>{summary}</span>
+        <span className='OperationSummary__summary ds-u-font-size--sm ds-u-padding-x--1 ds-u-text-align--left ds-u-md-text-align--right ds-u-md-margin-bottom--0 ds-u-margin-bottom--1'>{summary}</span>
         <button
           onClick={handleCopyToClipboard}
-          className='ds-u-display--flex ds-u-align-items--center ds-u-justify-content--center ds-u-padding--0 ds-u-margin--05 ds-u-radius OperationSummary__path-container_copy-btn'
+          className={copyToClipboardButtonClassNames ? `${copyToClipboardButtonClassNames}` : 'ds-u-display--flex ds-u-align-items--center ds-u-justify-content--center ds-u-padding--0 ds-u-margin--05 ds-u-radius OperationSummary__path-container_copy-btn ds-u-color--primary'}
           aria-label={`Copy ${tag} ${operationId} to clipboard`}
         >
           {/* Copy */}
@@ -49,7 +50,7 @@ const OperationSummary: React.FC<OperationSummaryProps> = ({ toggleShown, operat
         </button>
       </div>
       <button
-        className={buttonClassNames ? `${buttonClassNames}` : 'ds-c-button ds-u-margin-left--2 OperationSummary__try-it-out-btn'}
+        className={tryItOutButtonClassNames ? `${tryItOutButtonClassNames}` : 'ds-c-button ds-u-lg-margin-left--2 ds-u-margin-top--2 ds-u-lg-margin-top--0 OperationSummary__try-it-out-btn'}
         onClick={handleTryItOutOnClick}
         aria-label={`Try it out - ${tag} ${operationId}`}
         aria-expanded={isShown}

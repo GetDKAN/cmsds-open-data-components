@@ -1,3 +1,5 @@
+import { ApiDocsSwaggerUIPluginProps } from '../components/ApiDocsSwaggerUIPlugin';
+
 export type DistributionDataType = {
   downloadURL: string,
   format: string,
@@ -93,6 +95,7 @@ export type DatasetPageType = {
   showDateDetails?: boolean,
   topicDetails?: Array<any>
   showTagsOnOverview?: boolean
+  swaggerButtonClassNames?: ApiDocsSwaggerUIPluginProps['buttonClassNames'];
 }
 
 
