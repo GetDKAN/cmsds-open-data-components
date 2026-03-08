@@ -7,7 +7,6 @@ This document provides a comprehensive inventory of all components, services, te
 | Type | Name | Public Export | Storybook Status | Unit Tests |
 |------|------|---------------|------------------|------------|
 | **COMPONENTS** | | | | |
-| Component | [ApiDocsSwaggerUIPlugin](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/ApiDocsSwaggerUIPlugin) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Component | [ApiDocumentation](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/ApiDocumentation) | ✅ Public | ❌ No Story | ❌ No Tests |
 | Component | [ApiRowLimitNotice](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/ApiRowLimitNotice) | ✅ Public | ✅ Has Story | ❌ No Tests |
 | Component | [Breadcrumb](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/Breadcrumb) | ✅ Public | ✅ Has Story | ❌ No Tests |
@@ -107,6 +106,7 @@ This document provides a comprehensive inventory of all components, services, te
 | **UTILITIES** | | | | |
 | Utility | [aca](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/aca.ts) | ✅ Public (acaToParams) | ❌ No Story | ❌ No Tests |
 | Utility | [ACAContext](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/ACAContext.ts) | ✅ Public | ❌ No Story | ❌ No Tests |
+| Utility | [ApiDocsSwaggerUIPlugin](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/ApiDocsSwaggerUIPlugin) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Utility | [datasetSearchReq](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/datasetSearchReq) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Utility | [format](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/format.ts) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Utility | [QueryProvider](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/QueryProvider) | ❌ Internal | ❌ No Story | ❌ No Tests |
@@ -123,19 +123,19 @@ This document provides a comprehensive inventory of all components, services, te
 
 | Category | Total | With Stories | With Tests | With Both | With Neither |
 |----------|-------|--------------|------------|-----------|--------------|
-| Components | 65 | 39 (60%) | 24 (37%) | 14 (22%) | 16 (25%) |
+| Components | 64 | 39 (61%) | 24 (38%) | 14 (22%) | 15 (23%) |
 | Templates | 11 | 9 (82%) | 3 (27%) | 2 (18%) | 1 (9%) |
 | Services/Hooks/Contexts | 9 | 0 (0%) | 0 (0%) | 0 (0%) | 9 (100%) |
-| Utilities/Types/Assets | 11 | 0 (0%) | 0 (0%) | 0 (0%) | 11 (100%) |
+| Utilities/Types/Assets | 12 | 0 (0%) | 0 (0%) | 0 (0%) | 12 (100%) |
 | **Project Total** | **96** | **48 (50%)** | **27 (28%)** | **16 (17%)** | **37 (39%)** |
 
 ---
 
 ### Export Summary
 - **Public**: 57 items (33 components, 11 templates, 3 services, 2 hooks, 4 contexts, 2 asset)
-- **Internal**: 39 items (32 components, 0 templates, 0 services, 4 utilities, 3 types, 0 asset)
+- **Internal**: 39 items (31 components, 0 templates, 0 services, 5 utilities, 3 types, 0 asset)
 
 ---
 
-*Last updated: March 6, 2026*  
+*Last updated: March 7, 2026*  
 *Repository: [GetDKAN/cmsds-open-data-components](https://github.com/GetDKAN/cmsds-open-data-components)*

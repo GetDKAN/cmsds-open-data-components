@@ -1,4 +1,4 @@
-import { ApiDocsSwaggerUIPluginProps } from '../components/ApiDocsSwaggerUIPlugin';
+import { ApiDocsSwaggerUIPluginProps } from '../utilities/ApiDocsSwaggerUIPlugin';
 
 export type DistributionDataType = {
   downloadURL: string,

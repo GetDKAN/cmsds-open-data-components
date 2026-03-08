@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import qs from 'qs';
 import ApiDocumentation from '../../components/ApiDocumentation';
-import { ApiDocsSwaggerUIPluginProps } from '../../components/ApiDocsSwaggerUIPlugin';
+import { ApiDocsSwaggerUIPluginProps } from '../../utilities/ApiDocsSwaggerUIPlugin';
 import { ACAContext } from '../../utilities/ACAContext';
 import { acaToParams } from '../../utilities/aca';
 

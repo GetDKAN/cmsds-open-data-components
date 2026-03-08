@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import qs from 'qs';
 import SwaggerUI from 'swagger-ui-react';
-import SpanOpenAPIVersion from '../../components/ApiDocsSwaggerUIPlugin/SpanOpenAPIVersion';
-import SpanVersionStamp from '../../components/ApiDocsSwaggerUIPlugin/SpanVersionStamp';
+import SpanOpenAPIVersion from '../../utilities/ApiDocsSwaggerUIPlugin/SpanOpenAPIVersion';
+import SpanVersionStamp from '../../utilities/ApiDocsSwaggerUIPlugin/SpanVersionStamp';
 import ApiRowLimitNotice from '../../components/ApiRowLimitNotice';
-import ApiDocsSwaggerUIPlugin, { ApiDocsSwaggerUIPluginProps } from '../../components/ApiDocsSwaggerUIPlugin';
+import ApiDocsSwaggerUIPlugin, { ApiDocsSwaggerUIPluginProps } from '../../utilities/ApiDocsSwaggerUIPlugin';
 import 'swagger-ui-react/swagger-ui.css';
 import './swagger-ui-overrides.scss';
 import { acaToParams } from '../../utilities/aca';
