@@ -106,6 +106,7 @@ This document provides a comprehensive inventory of all components, services, te
 | **UTILITIES** | | | | |
 | Utility | [aca](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/aca.ts) | ✅ Public (acaToParams) | ❌ No Story | ❌ No Tests |
 | Utility | [ACAContext](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/ACAContext.ts) | ✅ Public | ❌ No Story | ❌ No Tests |
+| Utility | [ApiDocsSwaggerUIPlugin](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/ApiDocsSwaggerUIPlugin) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Utility | [datasetSearchReq](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/datasetSearchReq) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Utility | [format](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/format.ts) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Utility | [QueryProvider](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/QueryProvider) | ❌ Internal | ❌ No Story | ❌ No Tests |
@@ -125,16 +126,16 @@ This document provides a comprehensive inventory of all components, services, te
 | Components | 64 | 39 (61%) | 24 (38%) | 14 (22%) | 15 (23%) |
 | Templates | 11 | 9 (82%) | 3 (27%) | 2 (18%) | 1 (9%) |
 | Services/Hooks/Contexts | 9 | 0 (0%) | 0 (0%) | 0 (0%) | 9 (100%) |
-| Utilities/Types/Assets | 11 | 0 (0%) | 0 (0%) | 0 (0%) | 11 (100%) |
-| **Project Total** | **95** | **48 (51%)** | **27 (28%)** | **16 (17%)** | **36 (38%)** |
+| Utilities/Types/Assets | 12 | 0 (0%) | 0 (0%) | 0 (0%) | 12 (100%) |
+| **Project Total** | **96** | **48 (50%)** | **27 (28%)** | **16 (17%)** | **37 (39%)** |
 
 ---
 
 ### Export Summary
 - **Public**: 57 items (33 components, 11 templates, 3 services, 2 hooks, 4 contexts, 2 asset)
-- **Internal**: 38 items (31 components, 0 templates, 0 services, 4 utilities, 3 types, 0 asset)
+- **Internal**: 39 items (31 components, 0 templates, 0 services, 5 utilities, 3 types, 0 asset)
 
 ---
 
-*Last updated: March 4, 2026*  
+*Last updated: March 7, 2026*  
 *Repository: [GetDKAN/cmsds-open-data-components](https://github.com/GetDKAN/cmsds-open-data-components)*

@@ -139,3 +139,259 @@ This document provides overrides to Swagger UI, fixing accessibility issues.
     flex: initial;
   }
 }
+
+
+/* ApiDocsSwaggerUIPlugin styles */
+/* General */
+#api-docs-swagger-ui-plugin {
+  .model .property {
+    color: #6b6b6b !important;
+  }
+
+  pre.errors-wrapper {
+    display: none;
+  }
+  
+  .btn {
+    transition: none;
+  }
+  
+  .parameters input {
+    font-size: .8em;
+    color: #323a45;
+  }
+  
+  .execute-wrapper,
+  .btn-group {
+    padding: 12px 24px 24px;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .wrapper {
+    > .block {
+      padding: 0;
+    }
+  }
+
+  .wrapper:has(+ .wrapper:last-child .block:empty) {
+    display: flow-root; // Stop margin collapse
+  }
+}
+
+/* Operation block */
+#api-docs-swagger-ui-plugin .opblock {
+  background: none;
+  border: none;
+  box-shadow: none;
+
+  .opblock-section {
+    margin-top: 25px;
+  }
+
+  .opblock-description-wrapper {
+    padding: 16px;
+    margin: 0;
+  }
+
+  .opblock-section,
+  .responses-wrapper {
+    border-radius: 2px;
+    background: #fff;
+    border: 1px solid #D6D7D9;
+    margin-left: 24px;
+
+    .opblock-section-header {
+      box-shadow: none;
+      background: #f6f9fd;
+      padding: 16px;
+
+      .opblock-title,
+      h4 {
+        font-size: .9em;
+        line-height: 16px;
+        color: #0c2499;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 800;
+        cursor: default;
+
+        > span {
+          &::after {
+            display: none !important;
+            background: none !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* OperationTag */
+#api-docs-swagger-ui-plugin .OperationTag {
+  &:not(:first-of-type) .toggle-block {
+    border-top: 1px solid #e1e2e3;
+  }
+
+  .toggle-block-title-button {
+    width: 100%;
+    flex: 1 1 auto;
+    font-weight: inherit;
+    min-height: 64px;
+    position: relative;
+
+    &:hover .toggle-block-title-text,
+    &:focus .toggle-block-title-text {
+      text-decoration: underline;
+    }
+    
+    &:hover .toggle-block-title-description,
+    &:focus .toggle-block-title-description {
+      text-decoration: none;
+    }
+  
+    .toggle-block-title-description {
+      margin-top: 1px;
+      color: #3B4151;
+    }
+
+    > svg {
+      height: 20px;
+      left: 0;
+      pointer-events: none;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+    }
+  }
+
+  .wrapper:not(:last-child) .block-desktop {
+    margin-bottom: 32px;
+  }
+}
+
+/* OperationSummary */
+#api-docs-swagger-ui-plugin .OperationSummary__path-container {
+  flex: 1;
+  border: 1px solid #EAEBEC;
+
+  .OperationSummary__method {
+    background: #6F7570;
+    min-width: 80px;
+    height: calc(100% - 8px);
+  }
+
+  .OperationSummary__summary {
+    color: #3B4151;
+    word-break: break-word;
+    max-width: 280px;
+  }
+
+  .OperationSummary__path-container_path-input {
+    background: none;
+    box-shadow: none;
+    flex: 1;
+    color: #323A45;
+    height: 48px;
+  
+    &:focus {
+      border: none;
+      background: none;
+      box-shadow: none;
+    }
+  }
+
+  .OperationSummary__path-container_copy-btn {
+    background: rgba(12, 36, 153, 0.02);
+    border: 1px solid rgba(12, 36, 153, 0.08);
+    box-shadow: none;
+    width: 40px;
+    height: 40px;
+  }
+
+  .OperationSummary__path-container_copy-btn:hover,
+  .OperationSummary__path-container_copy-btn:focus {
+    background: rgba(12, 36, 153, 0.08);
+    border: 1px solid rgba(12, 36, 153, 0.12);
+  }
+}
+
+/* Schemas */
+#api-docs-swagger-ui-plugin .ApiDocsModels {
+  width: 100%;
+
+  > h3 {
+    margin: 16px 0;
+  }
+
+  .no-margin > .model-container {
+    > .model-box {
+      width: 100%;
+      border: 1px solid #EAEBEC;
+      border-radius: 2px;
+      background: #fff;
+
+      > .model-box {
+        padding: 0px;
+        background-color: #fff;
+      }
+
+      > .model-box-control {
+        border: none;
+
+        > .pointer > .model-box {
+          background: #fff;
+          padding: 0px;
+
+          > .model-box {
+            width: 100%;
+            border: 1px solid #EAEBEC;
+            border-radius: 2px;
+            background: #fff;
+
+            > .model > span > span {
+              > .model-title {
+                display: block;
+                font-weight: 600;
+              }
+
+              > .model-toggle {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  #api-docs-swagger-ui-plugin {
+    .OperationSummary__try-it-out-btn {
+      align-self: flex-start;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  #api-docs-swagger-ui-plugin .OperationSummary__path-container {
+    .OperationSummary__method {
+      width: calc(100% - 8px);
+    }
+
+    .OperationSummary__summary {
+      width: 100%;
+      max-width: none;
+    }
+
+    .OperationSummary__path-container_path-input {
+      width: 100%;
+    }
+
+    .OperationSummary__path-container_copy-btn {
+      align-self: flex-end;
+    }
+  }
+}

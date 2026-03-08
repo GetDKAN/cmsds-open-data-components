@@ -1,6 +1,6 @@
 import ApiRowLimitNotice from '../ApiRowLimitNotice';
 
- const ApiDocsInfo = ({ url, getComponent, isDatasetDocs, showRowLimitNotice, docsURL } : any) => {
+const ApiDocsInfo = ({ url, getComponent, isDatasetDocs, showRowLimitNotice, docsURL } : any) => {
   const VersionStamp = getComponent("VersionStamp");
   const OpenAPIVersion = getComponent("OpenAPIVersion");
 

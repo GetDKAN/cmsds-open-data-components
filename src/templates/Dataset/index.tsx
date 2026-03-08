@@ -63,6 +63,7 @@ const Dataset = ({
   showDateDetails = false,
   topicDetails = [],
   showTagsOnOverview = false,
+  swaggerButtonClassNames = {},
 }: DatasetPageType) => {
   const tabHref = `/dataset/${id}`;
   const options = location.search
@@ -283,7 +284,7 @@ const Dataset = ({
                       tabHref={`${tabHrefPrepend}${tabHref}#api`}
                       className={borderlessTabs ? 'ds-u-border--0 ds-u-padding-x--0' : ''}
                     >
-                      <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} showRowLimitNotice={showRowLimitNotice} />
+                      <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} showRowLimitNotice={showRowLimitNotice} swaggerButtonClassNames={swaggerButtonClassNames} />
                     </TabPanel>
                   )}
                 </Tabs>
