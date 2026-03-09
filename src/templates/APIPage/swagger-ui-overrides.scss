@@ -177,6 +177,12 @@ This document provides overrides to Swagger UI, fixing accessibility issues.
   .wrapper:has(+ .wrapper:last-child .block:empty) {
     display: flow-root; // Stop margin collapse
   }
+
+  .information-container {
+    svg:not(:root) {
+      overflow: visible;
+    }
+  }
 }
 
 /* Operation block */

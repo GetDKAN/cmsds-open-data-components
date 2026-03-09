@@ -50,38 +50,24 @@ const OperationSummary: React.FC<OperationSummaryProps> = ({ toggleShown, operat
         </button>
       </div>
       <button
-        className={tryItOutButtonClassNames ? `${tryItOutButtonClassNames}` : 'ds-c-button ds-u-lg-margin-left--2 ds-u-margin-top--2 ds-u-lg-margin-top--0 OperationSummary__try-it-out-btn'}
+        className={tryItOutButtonClassNames ? `${tryItOutButtonClassNames}` : 'ds-c-button ds-u-lg-margin-left--2 ds-u-margin-top--2 ds-u-lg-margin-top--0 OperationSummary__try-it-out-btn ds-u-display--flex ds-u-align-items--center'}
         onClick={handleTryItOutOnClick}
         aria-label={`Try it out - ${tag} ${operationId}`}
         aria-expanded={isShown}
       >
-        {isShown ? (
-          /* Chevron down */
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 512 512"
-            width="20"
-            height="20"
-            aria-hidden="true"
-            role="presentation"
-            className="ds-u-margin-right--1 OperationSummary__chevron-down"
-          >
-            <path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path>
-          </svg>
-        ) : (
-          /* Chevron up */
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 512 512"
-            width="20"
-            height="20"
-            aria-hidden="true"
-            role="presentation"
-            className="OperationSummary__chevron-up"
-          >
-            <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path>
-          </svg>
-        )}
+        {/* Chevron up/down */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 16 11"
+          width="16"
+          height="11"
+          aria-hidden="true"
+          role="presentation"
+          style={{ transform: isShown ? 'rotate(180deg)' : 'none', top: '0px' }}
+          className="ds-u-margin-right--05"
+        >
+          <path fill="currentColor" ill-rule="evenodd" clip-rule="evenodd" d="M8.92377 9.70403L15.6114 3.01151C15.8698 2.76291 15.9997 2.4577 15.9997 2.08664C16.0038 1.91391 15.9713 1.74226 15.9044 1.58296C15.8375 1.42367 15.7376 1.28034 15.6114 1.16239L14.841 0.381515C14.5887 0.129223 14.2798 0 13.9167 0C13.5598 0 13.2472 0.126146 12.9814 0.381515L7.99952 5.37014L3.0109 0.381515C2.7586 0.129223 2.44908 0 2.08603 0C1.73036 0 1.41715 0.126146 1.1507 0.381515L0.381515 1.16178C0.129223 1.41407 0 1.72297 0 2.08603C0 2.44908 0.126146 2.7586 0.381515 3.0109L7.06419 9.70403C7.33063 9.95571 7.64323 10.0855 7.99952 10.0855C8.36257 10.0855 8.67209 9.9594 8.92377 9.70403Z" />
+        </svg>
         Try it out
       </button>
     </div>
