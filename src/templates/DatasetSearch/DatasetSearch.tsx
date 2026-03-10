@@ -42,7 +42,8 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     dataDictionaryLinks = false,
     showDateDetails = false,
     showTopics = false,
-    topicSlugFunction = undefined
+    topicSlugFunction = undefined,
+    children
   } = props;
   const { ACA } = useContext(ACAContext);
 
@@ -263,6 +264,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
         </div>
         <div className="ds-l-row">
           <div className="ds-l-col--12">
+            {children}
             {introText ? introText : null}
             {showLargeFileWarning && (
               <div className="ds-l-row ds-u-margin-bottom--2 ds-u-margin-top--4">
