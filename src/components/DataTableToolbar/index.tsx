@@ -23,6 +23,12 @@ type DataTableToolbarProps = {
     [key: string]: boolean
   };
   setColumnVisibility: React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>;
+  showTableResults?: boolean;
+  showFilterDatasetButton?: boolean;
+  showManageColumnsButton?: boolean;
+  showDisplaySettingsButton?: boolean;
+  showFullScreenButton?: boolean;
+  showInfoShareContainer?: boolean;
 }
 
 const updateBrowserURL = (newConditions: Array<ConditionType>) => {
@@ -34,8 +40,6 @@ const updateBrowserURL = (newConditions: Array<ConditionType>) => {
   window.history.pushState({}, '', `${url.origin}${url.pathname}${urlString}`);
 }
 
-
-
 const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
   resource,
   id,
@@ -45,8 +49,14 @@ const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
   datasetTableControls,
   columnVisibility,
   setColumnVisibility,
+  showTableResults = true,
+  showFilterDatasetButton = true,
+  showManageColumnsButton = true,
+  showDisplaySettingsButton = true,
+  showFullScreenButton = true,
+  showInfoShareContainer = true,
 }) => {
-  const { limit, offset, count, conditions, setConditions } = resource;
+  const { limit, offset, count, conditions = [], setConditions } = resource;
   const intCount = count ? count : 0;
   const hiddenColumns = Object.keys(columnVisibility).filter(key => columnVisibility[key] === false).length;
 
@@ -84,22 +94,44 @@ const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
     <div className="ds-u-margin-top--2">
       <div className="dkan-filter-dataset-toolbar ds-u-fill--white ds-u-border--1" role="region" aria-label="toolbar">
         <div className="ds-l-col--12 ds-u-display--flex ds-u-justify-content--between ds-u-align-items--center ds-u-flex-wrap--wrap ds-u-padding-x--0 ds-u-padding-y--2">
-          <div className="ds-u-padding-x--2">
-            {!resource.loading && resource.count !== null && (
-              <DataTablePageResults
-                totalRows={intCount}
-                limit={limit}
-                offset={offset}
-                className="data-table-results ds-u-margin--0 ds-u-font-size--sm ds-u-padding-y--0 ds-u-md-padding-y--1 ds-u-padding-bottom--2 ds-u-md-padding-bottom--0"
-              />
-            )}
-          </div>
+          {showTableResults && (
+            <div className="ds-u-padding-x--2">
+              {!resource.loading && resource.count !== null && (
+                <DataTablePageResults
+                  totalRows={intCount}
+                  limit={limit}
+                  offset={offset}
+                  className="data-table-results ds-u-margin--0 ds-u-font-size--sm ds-u-padding-y--0 ds-u-md-padding-y--1 ds-u-padding-bottom--2 ds-u-md-padding-bottom--0"
+                />
+              )}
+            </div>
+          )}
           {datasetTableControls && (
             <div className="dkan-data-table-toolbar-controls ds-u-display--flex ds-u-flex-wrap--wrap ds-u-align-items--center ds-l-md-col--auto ds-l-col--12 ds-u-padding-x--2 ds-u-padding-top--2 ds-u-md-padding-top--0">
-              <FilterDataset />
-              <ManageColumns id={id} columns={columns} defaultColumnOrder={defaultColumnOrder} />
-              <DisplaySettings />
-              <FullScreenDataTable isModal={isModal} />
+              {showFilterDatasetButton && (
+                <FilterDataset />
+              )}
+              {showManageColumnsButton && (
+                <ManageColumns
+                  id={id}
+                  columns={columns}
+                  defaultColumnOrder={defaultColumnOrder}
+                />
+              )}
+              {showDisplaySettingsButton && (
+                <DisplaySettings />
+              )}
+              {showFullScreenButton && (
+                <FullScreenDataTable
+                  isModal={isModal}
+                  showTableResults={showTableResults}
+                  showFilterDatasetButton={showFilterDatasetButton}
+                  showManageColumnsButton={showManageColumnsButton}
+                  showDisplaySettingsButton={showDisplaySettingsButton}
+                  showFullScreenButton={showFullScreenButton}
+                  showInfoShareContainer={showInfoShareContainer}
+                />
+              )}
             </div>
           )}
         </div>

@@ -16,7 +16,7 @@ This document provides a comprehensive inventory of all components, services, te
 | Component | [DataTableDensity](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DataTableDensity) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
 | Component | [DataTablePageResults](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DataTablePageResults) | ✅ Public | ✅ Has Story | ❌ No Tests |
 | Component | [DataTableRowChanger](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DataTableRowChanger) | ❌ Internal | ❌ No Story | ✅ Has Tests |
-| Component | [DataTableToolbar](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DataTableToolbar) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
+| Component | [DataTableToolbar](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DataTableToolbar) | ✅ Public | ✅ Has Story | ✅ Has Tests |
 | Component | [DatasetAPITab](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetAPITab) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Component | [DatasetAdditionalInformation](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetAdditionalInformation) | ✅ Public (buildRows) | ✅ Has Story | ❌ No Tests |
 | Component | [DatasetDataDictionaryTab](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetDataDictionaryTab) | ❌ Internal | ❌ No Story | ✅ Has Tests |
@@ -131,10 +131,10 @@ This document provides a comprehensive inventory of all components, services, te
 ---
 
 ### Export Summary
-- **Public**: 57 items (33 components, 11 templates, 3 services, 2 hooks, 4 contexts, 2 asset)
-- **Internal**: 38 items (31 components, 0 templates, 0 services, 4 utilities, 3 types, 0 asset)
+- **Public**: 58 items (34 components, 11 templates, 3 services, 2 hooks, 4 contexts, 2 asset)
+- **Internal**: 37 items (30 components, 0 templates, 0 services, 4 utilities, 3 types, 0 asset)
 
 ---
 
-*Last updated: March 3, 2026*  
+*Last updated: March 11, 2026*  
 *Repository: [GetDKAN/cmsds-open-data-components](https://github.com/GetDKAN/cmsds-open-data-components)*
