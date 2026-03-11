@@ -6,8 +6,8 @@ import { ACAContext } from '../../utilities/ACAContext';
 import { acaToParams } from '../../utilities/aca';
 
 type DatasetAPIProps = {
-  id: String;
-  rootUrl: String;
+  id: string;
+  rootUrl: string;
   apiUrl: string;
   showRowLimitNotice?: boolean;
   swaggerButtonClassNames?: ApiDocsSwaggerUIPluginProps['buttonClassNames'];

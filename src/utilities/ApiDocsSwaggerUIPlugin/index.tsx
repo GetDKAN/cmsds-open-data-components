@@ -37,7 +37,7 @@ const ApiDocsSwaggerUIPlugin = ({
   return {
     wrapComponents: {
       App: (Original: ComponentType<SwaggerUIComponentProps>) => (props: SwaggerUIComponentProps) => (
-        <div id='api-docs-swagger-ui-plugin'>
+        <div id='api-docs-swagger-ui-plugin' className='ds-l-container'>
           <Original {...props} />
         </div>
       ),
