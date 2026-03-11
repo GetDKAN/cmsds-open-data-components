@@ -18,6 +18,7 @@ export { default as DatasetListItem } from './components/DatasetListItem';
 export { default as DatasetSearchListItem } from './components/DatasetSearchListItem';
 export { default as DatasetDateItem } from './components/DatasetDateItem';
 export { default as DatasetDate } from './components/DatasetDate';
+export { default as DataTableToolbar } from './components/DataTableToolbar';
 export { default as DatasetListSubmenu } from './components/DatasetListSubmenu'
 export { default as DatasetSearchFacets } from './components/DatasetSearchFacets'
 export { default as ApiDocumentation } from './components/ApiDocumentation';
