@@ -35,6 +35,12 @@ const DatasetTable = ({
   showDownloadFilteredDataButton = true,
   showDownloadFullDataButton = true,
   showStoredQueryDownloadButton = false,
+  showTableResults = true,
+  showFilterDatasetButton = true,
+  showManageColumnsButton = true,
+  showDisplaySettingsButton = true,
+  showFullScreenButton = true,
+  showInfoShareContainer = true,
 }: {
   isModal?: boolean;
   showCopyLinkButton?: boolean;
@@ -42,6 +48,12 @@ const DatasetTable = ({
   showDownloadFilteredDataButton?: boolean;
   showDownloadFullDataButton?: boolean;
   showStoredQueryDownloadButton?: boolean;
+  showTableResults?: boolean;
+  showFilterDatasetButton?: boolean;
+  showManageColumnsButton?: boolean;
+  showDisplaySettingsButton?: boolean;
+  showFullScreenButton?: boolean;
+  showInfoShareContainer?: boolean;
 }) => {
   const {
     id,
@@ -105,6 +117,12 @@ const DatasetTable = ({
             showDownloadFilteredDataButton={showDownloadFilteredDataButton}
             showDownloadFullDataButton={showDownloadFullDataButton}
             showStoredQueryDownloadButton={showStoredQueryDownloadButton}
+            showTableResults={showTableResults}
+            showFilterDatasetButton={showFilterDatasetButton}
+            showManageColumnsButton={showManageColumnsButton}
+            showDisplaySettingsButton={showDisplaySettingsButton}
+            showFullScreenButton={showFullScreenButton}
+            showInfoShareContainer={showInfoShareContainer}
           />
         </div>
         {!resource.loading && resource.count !== null && (

@@ -5,6 +5,7 @@ import { transformTableSortToQuerySort} from '../../services/useDatastore/transf
 import { buildCustomColHeaders } from '../../templates/FilteredResource/functions';
 import DataTable from '../Datatable';
 import DataTableContext from "../../templates/Dataset/DataTableContext";
+import { DataTableActionsContext } from '../DatasetTableTab/DataTableActionsContext';
 
 export function prepareColumns(columns, schema) {
   return columns.map((column) => ({
@@ -32,8 +33,16 @@ const ResourcePreview = ({
   tablePadding,
   id,
   canResize = true,
+  showDataTableToolbar = false,
+  showInfoShareContainer = true,
+  showTableResults = true,
+  showFilterDatasetButton = true,
+  showManageColumnsButton = true,
+  showDisplaySettingsButton = true,
+  showFullScreenButton = true,
 }) => {
   const {resource, customColumns} = useContext(DataTableContext);
+  const { tableDensity } = useContext(DataTableActionsContext);
 
   const customColumnHeaders = customColumns
     ? buildCustomColHeaders(customColumns, resource.columns, resource.schema[id])
@@ -51,7 +60,7 @@ const ResourcePreview = ({
     return (
     <div
       id="resource-preview"
-      className="ds-u-overflow--auto ds-u-border-x--1 ds-u-border-bottom--1"
+      className="ds-u-overflow--auto"
     >
       <DataTable
         canResize={canResize}
@@ -59,10 +68,20 @@ const ResourcePreview = ({
           customColumns ? customColumns : prepareColumns(resource.columns, resource.schema[id])
         }
         sortTransform={transformTableSortToQuerySort}
-        tablePadding={tablePadding}
+        tablePadding={
+          typeof tablePadding === 'function' ? tablePadding(tableDensity) : tablePadding
+        }
         loading={resource.loading}
         className="dc-c-datatable"
         customColumnFilter={DefaultColumnFilter}
+        showDataTableToolbar={showDataTableToolbar}
+        showInfoShareContainer={showInfoShareContainer}
+        showTableResults={showTableResults}
+        showFilterDatasetButton={showFilterDatasetButton}
+        showManageColumnsButton={showManageColumnsButton}
+        showDisplaySettingsButton={showDisplaySettingsButton}
+        showFullScreenButton={showFullScreenButton}
+        isModal={false}
       />
     </div>
   )
