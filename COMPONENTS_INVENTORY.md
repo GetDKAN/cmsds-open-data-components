@@ -106,6 +106,7 @@ This document provides a comprehensive inventory of all components, services, te
 | **UTILITIES** | | | | |
 | Utility | [aca](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/aca.ts) | ✅ Public (acaToParams) | ❌ No Story | ❌ No Tests |
 | Utility | [ACAContext](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/ACAContext.ts) | ✅ Public | ❌ No Story | ❌ No Tests |
+| Utility | [ApiDocsSwaggerUIPlugin](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/ApiDocsSwaggerUIPlugin) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Utility | [datasetSearchReq](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/datasetSearchReq) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Utility | [format](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/format.ts) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Utility | [QueryProvider](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/QueryProvider) | ❌ Internal | ❌ No Story | ❌ No Tests |
