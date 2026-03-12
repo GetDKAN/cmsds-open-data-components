@@ -92,18 +92,17 @@ describe('<DatasetSearch />', () => {
     // Check that the URL params were updated
     expect(window.history.pushState).toHaveBeenNthCalledWith(1, {}, "", expect.stringContaining("/?theme[0]=general"))
   });
-});
-
-test('Renders child element', async () => {
-  render(<MemoryRouter>
-    <DatasetSearch rootUrl={rootUrl}>
-      <div data-testid="child-element">Hello, World!</div>
-    </DatasetSearch>
-  </MemoryRouter>);
-  await act(async () => {
-    jest.useFakeTimers();
+  test('Renders child element', async () => {
+    render(<MemoryRouter>
+      <DatasetSearch rootUrl={rootUrl}>
+        <div data-testid="child-element">Hello, World!</div>
+      </DatasetSearch>
+    </MemoryRouter>);
+    await act(async () => {
+      jest.useFakeTimers();
+    });
+    expect(screen.getByTestId('child-element')).toBeInTheDocument();
   });
-  expect(screen.getByTestId('child-element')).toBeInTheDocument();
 });
 
 describe('<DatasetSearch /> Infinite Loop Prevention', () => {
@@ -180,4 +179,3 @@ describe('<DatasetSearch /> Infinite Loop Prevention', () => {
     expect(screen.getByTestId('results-list')).toBeInTheDocument();
   });
 });
-
