@@ -42,6 +42,7 @@ export type DatasetSearchPageProps = {
   showDateDetails?: boolean;
   showTopics?: boolean;
   topicSlugFunction?: (topic: string) => string | undefined;
+  children?: React.ReactNode;
 };
 
 export type DatasetSubmenuListProps = Pick<

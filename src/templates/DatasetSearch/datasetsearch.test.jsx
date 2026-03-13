@@ -78,6 +78,7 @@ describe('<DatasetSearch />', () => {
     expect(['polite', 'assertive']).toContain(dataCurrentResultsElement.getAttribute('aria-live'));
 
   });
+  
   test("Updates the browser URL params when a facet is added", async () => {
     window.history.pushState = jest.fn();
     await act(async () => {
@@ -91,6 +92,18 @@ describe('<DatasetSearch />', () => {
     });
     // Check that the URL params were updated
     expect(window.history.pushState).toHaveBeenNthCalledWith(1, {}, "", expect.stringContaining("/?theme[0]=general"))
+  });
+
+  test('Renders child element', async () => {
+    render(<MemoryRouter>
+      <DatasetSearch rootUrl={rootUrl}>
+        <div data-testid="child-element">Hello, World!</div>
+      </DatasetSearch>
+    </MemoryRouter>);
+    await act(async () => {
+      jest.useFakeTimers();
+    });
+    expect(screen.getByTestId('child-element')).toBeInTheDocument();
   });
 });
 
@@ -168,4 +181,3 @@ describe('<DatasetSearch /> Infinite Loop Prevention', () => {
     expect(screen.getByTestId('results-list')).toBeInTheDocument();
   });
 });
-
