@@ -27,7 +27,11 @@ const DisplaySettings: React.FC = () => {
         ]}
         placement="bottom-start"
         maxWidth="350px"
-        aria-haspopup="dialog" 
+        aria-haspopup="dialog"
+        // @ts-ignore
+        // 'strategy' is not a valid prop for Tooltip but it does get passed on to Popper.js which tells
+        // it to position the tooltip relative to the viewport instead of the dialog’s containing block
+        strategy="fixed"
         title={
           <div className="ds-u-display--flex ds-u-flex-direction--column">
             <div className="dkan-data-table-display-settings-row ds-u-padding-bottom--1">
