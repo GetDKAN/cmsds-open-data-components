@@ -35,6 +35,12 @@ const DatasetTable = ({
   showDownloadFilteredDataButton = true,
   showDownloadFullDataButton = true,
   showStoredQueryDownloadButton = false,
+  showTableResults = true,
+  showFilterDatasetButton = true,
+  showManageColumnsButton = true,
+  showDisplaySettingsButton = true,
+  showFullScreenButton = true,
+  showInfoShareContainer = true,
 }: {
   isModal?: boolean;
   showCopyLinkButton?: boolean;
@@ -42,6 +48,12 @@ const DatasetTable = ({
   showDownloadFilteredDataButton?: boolean;
   showDownloadFullDataButton?: boolean;
   showStoredQueryDownloadButton?: boolean;
+  showTableResults?: boolean;
+  showFilterDatasetButton?: boolean;
+  showManageColumnsButton?: boolean;
+  showDisplaySettingsButton?: boolean;
+  showFullScreenButton?: boolean;
+  showInfoShareContainer?: boolean;
 }) => {
   const {
     id,
@@ -55,15 +67,14 @@ const DatasetTable = ({
 
   const defaultPageSize = 10;
 
-  const customColumnHeaders = buildCustomColHeaders(
-    customColumns,
-    resource.columns,
-    resource.schema[distribution.identifier]
-  );
-
-  const columns = customColumnHeaders
-    ? customColumnHeaders
-    : prepareColumns(resource.columns, resource.schema[id]);
+  const schema = resource?.schema?.[distribution?.identifier] ?? resource?.schema?.[id];
+  const isFullColumnDef = Array.isArray(customColumns) && customColumns.some((column: ColumnType) => column && 'header' in column);
+  
+  const columns = isFullColumnDef
+    ? customColumns
+    : schema && Array.isArray(resource?.columns)
+      ? buildCustomColHeaders(customColumns, resource.columns, schema)
+      : prepareColumns(resource.columns, resource.schema[id]);
 
   const { limit, setOffset } = resource;
   const pageSize = limit ? limit : defaultPageSize;
@@ -105,6 +116,12 @@ const DatasetTable = ({
             showDownloadFilteredDataButton={showDownloadFilteredDataButton}
             showDownloadFullDataButton={showDownloadFullDataButton}
             showStoredQueryDownloadButton={showStoredQueryDownloadButton}
+            showTableResults={showTableResults}
+            showFilterDatasetButton={showFilterDatasetButton}
+            showManageColumnsButton={showManageColumnsButton}
+            showDisplaySettingsButton={showDisplaySettingsButton}
+            showFullScreenButton={showFullScreenButton}
+            showInfoShareContainer={showInfoShareContainer}
           />
         </div>
         {!resource.loading && resource.count !== null && (

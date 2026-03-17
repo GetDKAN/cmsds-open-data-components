@@ -5,9 +5,23 @@ import DatasetTable from "../DatasetTableTab";
 
 export type FullScreenDataTableProps = {  
   isModal: boolean;
+  showTableResults?: boolean;
+  showFilterDatasetButton?: boolean;
+  showManageColumnsButton?: boolean;
+  showDisplaySettingsButton?: boolean;
+  showFullScreenButton?: boolean;
+  showInfoShareContainer?: boolean;
 }
 
-const FullScreenDataTable: React.FC<FullScreenDataTableProps> = ({ isModal }) => {
+const FullScreenDataTable: React.FC<FullScreenDataTableProps> = ({
+  isModal,
+  showTableResults = true,
+  showFilterDatasetButton = true,
+  showManageColumnsButton = true,
+  showDisplaySettingsButton = true,
+  showFullScreenButton = true,
+  showInfoShareContainer = true,
+}) => {
   const [modalOpen, setModalOpen] = useState(isModal);
   if (isModal) return null;
   
@@ -37,7 +51,15 @@ const FullScreenDataTable: React.FC<FullScreenDataTableProps> = ({ isModal }) =>
           ariaCloseLabel="Close dialog"
           className="dkan-full-screen-dataset-dialog"
         >
-          <DatasetTable isModal={true} />
+          <DatasetTable
+            isModal={true}
+            showTableResults={showTableResults}
+            showFilterDatasetButton={showFilterDatasetButton}
+            showManageColumnsButton={showManageColumnsButton}
+            showDisplaySettingsButton={showDisplaySettingsButton}
+            showFullScreenButton={showFullScreenButton}
+            showInfoShareContainer={showInfoShareContainer}
+          />
         </Dialog>
       </div>
     </div>

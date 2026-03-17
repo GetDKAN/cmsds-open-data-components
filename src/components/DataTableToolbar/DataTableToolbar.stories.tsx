@@ -24,6 +24,12 @@ type DataTableToolbarProps = {
     [key: string]: boolean
   };
   setColumnVisibility: React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>;
+  showTableResults?: boolean;
+  showFilterDatasetButton?: boolean;
+  showManageColumnsButton?: boolean;
+  showDisplaySettingsButton?: boolean;
+  showFullScreenButton?: boolean;
+  showInfoShareContainer?: boolean;
 }
 
 const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
@@ -35,6 +41,12 @@ const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
   datasetTableControls,
   columnVisibility,
   setColumnVisibility,
+  showTableResults = true,
+  showFilterDatasetButton = true,
+  showManageColumnsButton = true,
+  showDisplaySettingsButton = true,
+  showFullScreenButton = true,
+  showInfoShareContainer = true,
 }) => {
   const { limit, offset, count, conditions, setConditions } = resource;
   const intCount = count ? count : 0;
@@ -59,8 +71,9 @@ const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
   return (
     <div className="ds-u-margin-top--2">
       <div className="dkan-filter-dataset-toolbar ds-u-fill--white ds-u-border--1" role="region" aria-label="toolbar">
-        <div className="ds-l-col--12 ds-u-display--flex ds-u-justify-content--between ds-u-align-items--center ds-u-flex-wrap--wrap ds-u-padding-x--0 ds-u-padding-y--2">
-          <div className="ds-u-padding-x--2">
+        <div className={`ds-l-col--12 ds-u-display--flex ds-u-align-items--center ds-u-flex-wrap--wrap ds-u-padding-x--0 ds-u-padding-y--2${showTableResults ? ' ds-u-justify-content--between' : ' ds-u-justify-content--end'}`}>
+          {showTableResults && (
+            <div className="ds-u-padding-x--2">
             {!resource.loading && resource.count !== null && (
               <DataTablePageResults
                 totalRows={intCount}
@@ -69,30 +82,39 @@ const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
                 className="data-table-results ds-u-margin--0 ds-u-font-size--sm ds-u-padding-y--0 ds-u-md-padding-y--1 ds-u-padding-bottom--2 ds-u-md-padding-bottom--0"
               />
             )}
-          </div>
+            </div>
+          )}
           {datasetTableControls && (
             <div className="dkan-data-table-toolbar-controls ds-u-display--flex ds-u-flex-wrap--wrap ds-u-align-items--center ds-l-md-col--auto ds-l-col--12 ds-u-padding-x--2 ds-u-padding-top--2 ds-u-md-padding-top--0">
-              <button className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent">
-                <i className="far fa-filter ds-u-margin-right--1"></i>
-                <span className="dkan-dataset-toolbar-button-label">Filter Dataset</span>
-              </button>
-              <button className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent">
-                <i className="far fa-columns ds-u-margin-right--1"></i>
-                <span className="dkan-dataset-toolbar-button-label">Manage Columns</span>
-              </button>
-              <button className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent">
-                <i className="far fa-cog ds-u-margin-right--1"></i>
-                <span className="dkan-dataset-toolbar-button-label">Display Settings</span>
-              </button>
-              <button className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent">
-                <i className="far fa-expand ds-u-margin-right--1"></i>
-                <span className="dkan-dataset-toolbar-button-label">Full Screen</span>
-              </button>
+              {showFilterDatasetButton && (
+                <button className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent">
+                  <i className="far fa-filter ds-u-margin-right--1"></i>
+                  <span className="dkan-dataset-toolbar-button-label">Filter Dataset</span>
+                </button>
+              )}
+              {showManageColumnsButton && (
+                <button className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent">
+                  <i className="far fa-columns ds-u-margin-right--1"></i>
+                  <span className="dkan-dataset-toolbar-button-label">Manage Columns</span>
+                </button>
+              )}
+              {showDisplaySettingsButton && (
+                <button className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent">
+                  <i className="far fa-cog ds-u-margin-right--1"></i>
+                  <span className="dkan-dataset-toolbar-button-label">Display Settings</span>
+                </button>
+              )}
+              {showFullScreenButton && (
+                <button className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent">
+                  <i className="far fa-expand ds-u-margin-right--1"></i>
+                  <span className="dkan-dataset-toolbar-button-label">Full Screen</span>
+                </button>
+              )}
             </div>
           )}
         </div>
       </div>
-      {Array.isArray(conditions) && (conditions.length > 0 || hiddenColumns > 0) && (
+      {(showFilterDatasetButton || showManageColumnsButton) && (Array.isArray(conditions) && (conditions.length > 0 || hiddenColumns > 0)) && (
         <div className="ds-u-fill--white ds-u-padding-x--0 ds-u-md-padding-x--2 ds-u-padding-top--2">
           <h2 className="ds-u-margin--0 ds-u-margin-bottom--2 ds-u-font-size--lg ds-u-font-weight--bold">Selected filters</h2>
           <div className="ds-u-display--flex ds-u-justify-content--between ds-u-md-align-items--end ds-u-flex-direction--column ds-u-md-flex-direction--row">
@@ -183,6 +205,26 @@ The DataTableToolbar component provides controls and information for a data tabl
     setColumnVisibility: {
       control: 'function',
       description: 'Callback to update column visibility.',
+    },
+    showTableResults: {
+      control: 'boolean',
+      description: 'Whether to display table results count.',
+    },
+    showFilterDatasetButton: {
+      control: 'boolean',
+      description: 'Whether to display "Filter Dataset" button.',
+    },
+    showManageColumnsButton: {
+      control: 'boolean',
+      description: 'Whether to display "Manage Columns" button.',
+    },
+    showDisplaySettingsButton: {
+      control: 'boolean',
+      description: 'Whether to display "Display Settings" button.',
+    },
+    showFullScreenButton: {
+      control: 'boolean',
+      description: 'Whether to display "Full Screen" button.',
     },
   },
   tags: ['autodocs'],
@@ -445,6 +487,141 @@ export const LargeDataset: Story = {
     docs: {
       description: {
         story: 'Toolbar displaying pagination for a large dataset with custom offset.',
+      },
+    },
+  },
+};
+
+export const WithoutTableResults: Story = {
+  args: {
+    resource: mockResource,
+    id: 'dataset-123',
+    columns: mockColumns,
+    defaultColumnOrder: ['id', 'name', 'state', 'population', 'area'],
+    isModal: false,
+    datasetTableControls: true,
+    columnVisibility: {
+      id: true,
+      name: true,
+      state: true,
+      population: true,
+      area: true,
+    },
+    setColumnVisibility: () => {},
+    showTableResults: false,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Toolbar displayed without table results count.',
+      },
+    },
+  },
+};
+
+export const WithoutFilterDatasetButton: Story = {
+  args: {
+    resource: mockResource,
+    id: 'dataset-123',
+    columns: mockColumns,
+    defaultColumnOrder: ['id', 'name', 'state', 'population', 'area'],
+    isModal: false,
+    datasetTableControls: true,
+    columnVisibility: {
+      id: true,
+      name: true,
+      state: true,
+      population: true,
+      area: true,
+    },
+    setColumnVisibility: () => {},
+    showFilterDatasetButton: false,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Toolbar displayed without "Filter Dataset" button.',
+      },
+    },
+  },
+};
+
+export const WithoutManageColumnsButton: Story = {
+  args: {
+    resource: mockResource,
+    id: 'dataset-123',
+    columns: mockColumns,
+    defaultColumnOrder: ['id', 'name', 'state', 'population', 'area'],
+    isModal: false,
+    datasetTableControls: true,
+    columnVisibility: {
+      id: true,
+      name: true,
+      state: true,
+      population: true,
+      area: true,
+    },
+    setColumnVisibility: () => {},
+    showManageColumnsButton: false,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Toolbar displayed without "Manage Columns" button.',
+      },
+    },
+  },
+};
+
+export const WithoutDisplaySettingsButton: Story = {
+  args: {
+    resource: mockResource,
+    id: 'dataset-123',
+    columns: mockColumns,
+    defaultColumnOrder: ['id', 'name', 'state', 'population', 'area'],
+    isModal: false,
+    datasetTableControls: true,
+    columnVisibility: {
+      id: true,
+      name: true,
+      state: true,
+      population: true,
+      area: true,
+    },
+    setColumnVisibility: () => {},
+    showDisplaySettingsButton: false,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Toolbar displayed without "Display Settings" button.',
+      },
+    },
+  },
+};
+
+export const WithoutFullScreenButton: Story = {
+  args: {
+    resource: mockResource,
+    id: 'dataset-123',
+    columns: mockColumns,
+    defaultColumnOrder: ['id', 'name', 'state', 'population', 'area'],
+    isModal: false,
+    datasetTableControls: true,
+    columnVisibility: {
+      id: true,
+      name: true,
+      state: true,
+      population: true,
+      area: true,
+    },
+    setColumnVisibility: () => {},
+    showFullScreenButton: false,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Toolbar displayed without "Full Screen" button.',
       },
     },
   },

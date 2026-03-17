@@ -67,7 +67,7 @@ const ManageColumns = ({
 
   // keep state in sync
   useEffect(() => {
-    if (columnOrder.length)
+    if (columnOrder?.length)
       setCards(columnOrder.map(c => {
         const column = columns.filter(col => col.id === c)[0];
         return {id: column.id, visible: column.getIsVisible()}
