@@ -67,13 +67,14 @@ const DatasetTable = ({
 
   const defaultPageSize = 10;
 
-  const customColumnHeaders = customColumns
-    ? buildCustomColHeaders(customColumns, resource.columns, resource.schema[distribution.identifier])
-    : null;
-
-  const columns = customColumnHeaders
-    ? customColumnHeaders
-    : prepareColumns(resource.columns, resource.schema[id]);
+  const schema = resource?.schema?.[distribution?.identifier] ?? resource?.schema?.[id];
+  const isFullColumnDef = Array.isArray(customColumns) && customColumns.some((column: ColumnType) => column && 'header' in column);
+  
+  const columns = isFullColumnDef
+    ? customColumns
+    : schema && Array.isArray(resource?.columns)
+      ? buildCustomColHeaders(customColumns, resource.columns, schema)
+      : prepareColumns(resource.columns, resource.schema[id]);
 
   const { limit, setOffset } = resource;
   const pageSize = limit ? limit : defaultPageSize;
@@ -96,9 +97,7 @@ const DatasetTable = ({
         >
           <DataTable
             canResize={true}
-            columns={
-              customColumns ? customColumns : prepareColumns(resource.columns, resource.schema[id])
-            }
+            columns={columns}
             sortTransform={transformTableSortToQuerySort}
             tablePadding={
               tableDensity === 'normal'
