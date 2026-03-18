@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import qs from 'qs';
 import axios from 'axios';
@@ -10,7 +10,7 @@ import LargeFileInfo from '../../components/LargeFileInfo';
 import SearchButton from '../../components/SearchButton';
 import PageHeader from '../../components/PageHeader';
 import { useQuery } from '@tanstack/react-query';
-import { separateFacets, transformUrlParamsToSearchObject } from '../../services/useSearchAPI/helpers';
+import { separateFacets } from '../../services/useSearchAPI/helpers';
 
 import './dataset-search.scss';
 import { DatasetSearchPageProps, SelectedFacetsType, SidebarFacetTypes, DistributionItemType } from '../../types/search';
@@ -19,8 +19,6 @@ import { acaToParams } from '../../utilities/aca';
 import { ACAContext } from '../../utilities/ACAContext';
 
 export const isValidSearch = (query: string) => {
-  // Only allow letters, numbers, spaces, and empty string
-  // A search containing any special character will be rejected
   return /^[a-zA-Z0-9 ]*$/.test(query.trim());
 };
 
@@ -54,127 +52,84 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     { label: 'Title Z-A', value: 'titleZA' }
   ];
 
-  const defaultSortBy = "";
-  const defaultFulltext = "";
-  const defaultSelectedFacets = { theme: [], keyword: [] };
-  const defaultSortOrder = "";
-  const defaultPage = 1;
-
   const location = useLocation();
-  const transformedParams = transformUrlParamsToSearchObject(location.search, defaultSort);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [currentResultNumbers, setCurrentResultNumbers] = useState({ total: 0, startingNumber: 0, endingNumber: 0 });
-  const [noResults, setNoResults] = useState(false);
-  const [announcementText, setAnnouncementText] = useState('');
-  let [searchParams, setSearchParams] = useSearchParams();
-  const [fulltext, setFullText] = useState(transformedParams.fulltext);
-  const [filterText, setFilterText] = useState(transformedParams.fulltext);
-  const [totalItems, setTotalItems] = useState(0);
-  const [page, setPage] = useState(transformedParams.page ? transformedParams.page : defaultPage);
-  const [sort, setSort] = useState(
-    transformedParams.sort ? transformedParams.sort : defaultSort ? defaultSort.defaultSort : defaultSortBy
-  );
-  const [sortOrder, setSortOrder] = useState(
-    transformedParams.sortOrder
-      ? transformedParams.sortOrder
-      : defaultSort ? defaultSort.defaultOrder : defaultSortOrder
-  );
-  const [sortDisplay, setSortDisplay] = useState(() => {
-    return sort === 'modified' ? (sortOrder === 'desc' ? 'newest' : 'oldest') : (sortOrder === 'desc' ? 'titleZA' : 'titleAZ');
-  })
-  const [selectedFacets, setSelectedFacets] = useState<SelectedFacetsType>(
-    transformedParams.selectedFacets
-      ? transformedParams.selectedFacets
-      : {
-        theme: [],
-        keyword: [],
-      }
-  )
+  // Derive all search state from URL params
+  const selectedFacets: SelectedFacetsType = useMemo(() => ({
+    theme: searchParams.getAll('theme'),
+    keyword: searchParams.getAll('keyword'),
+  }), [searchParams]);
+
+  const page = Number(searchParams.get('page')) || 1;
+  const sort = searchParams.get('sort') || defaultSort.defaultSort;
+  const sortOrder = searchParams.get('sortOrder') || defaultSort.defaultOrder;
+  const fulltext = searchParams.get('fulltext') || '';
+  const sortDisplay = sort === 'modified'
+    ? (sortOrder === 'desc' ? 'newest' : 'oldest')
+    : (sortOrder === 'desc' ? 'titleZA' : 'titleAZ');
+
+  // Local UI state only
+  const [filterText, setFilterText] = useState(fulltext);
   const [invalidSearch, setInvalidSearch] = useState<boolean>(false);
 
-  const setSortOptions = (value: string) => {
-    setSortDisplay(value)
-    switch (value) {
-      case 'newest':
-        setSort('modified');
-        setSortOrder('desc');
-        break;
-      case 'oldest':
-        setSort('modified');
-        setSortOrder('asc');
-        break;
-      case 'titleAZ':
-        setSort('title');
-        setSortOrder('asc');
-        break;
-      case 'titleZA':
-        setSort('title');
-        setSortOrder('desc');
-        break;
-    }
+  // Sync filterText from URL on back/forward
+  useEffect(() => { setFilterText(fulltext); }, [fulltext]);
+
+  function buildNextParams(overrides: Record<string, string | string[] | null>) {
+    const next = new URLSearchParams(searchParams);
+    Object.entries(overrides).forEach(([key, value]) => {
+      next.delete(key);
+      if (value === null) return;
+      const values = Array.isArray(value) ? value : [value];
+      values.forEach(v => next.append(key, v));
+    });
+    return next;
   }
 
   function updateSelectedFacets(key: string, value: string) {
-    const newFacets: SelectedFacetsType = {
-      theme: [...selectedFacets.theme],
-      keyword: [...selectedFacets.keyword],
+    const current = searchParams.getAll(key);
+    const idx = current.indexOf(value);
+    const updated = idx > -1
+      ? current.filter((_, i) => i !== idx)
+      : [...current, value];
+    setSearchParams(buildNextParams({ [key]: updated.length ? updated : null, page: null }));
+  }
+
+  const setSortOptionsHandler = (value: string) => {
+    let nextSort: string;
+    let nextSortOrder: string;
+    switch (value) {
+      case 'newest':
+        nextSort = 'modified'; nextSortOrder = 'desc'; break;
+      case 'oldest':
+        nextSort = 'modified'; nextSortOrder = 'asc'; break;
+      case 'titleAZ':
+        nextSort = 'title'; nextSortOrder = 'asc'; break;
+      case 'titleZA':
+        nextSort = 'title'; nextSortOrder = 'desc'; break;
+      default: return;
+    }
+    const overrides: Record<string, string | null> = {
+      sort: nextSort === defaultSort.defaultSort ? null : nextSort,
+      sortOrder: nextSortOrder === defaultSort.defaultOrder ? null : nextSortOrder,
     };
-    if (key === 'theme') {
-      const existingFacet = newFacets.theme.findIndex((s) => s === value);
-      if (existingFacet > -1) {
-        newFacets.theme.splice(existingFacet, 1);
-      } else {
-        newFacets.theme.push(value);
-      }
-    }
-    if (key === 'keyword') {
-      const existingFacet = newFacets.keyword.findIndex((s) => s === value);
-      if (existingFacet > -1) {
-        newFacets.keyword.splice(existingFacet, 1);
-      } else {
-        newFacets.keyword.push(value);
-      }
-    }
-    setSelectedFacets(newFacets);
+    setSearchParams(buildNextParams(overrides));
+  };
+
+  function resetFilters() {
+    setFilterText('');
+    setSearchParams({});
   }
 
   const pageSize = defaultPageSize;
-
-  function resetFilters() {
-    setFullText(defaultFulltext);
-    setFilterText(defaultFulltext);
-    setSelectedFacets(defaultSelectedFacets);
-    setPage(defaultPage);
-  }
-
-  function buildSearchParams(includePage: boolean) {
-    let newParams: any = {};
-    if (Number(page) !== 1 && includePage) {
-      newParams.page = page;
-    }
-    if (sort !== defaultSort.defaultSort) {
-      newParams.sort = sort;
-    }
-    if (sortOrder !== defaultSort.defaultOrder) {
-      newParams.sortOrder = sortOrder;
-    }
-    if (fulltext !== '') {
-      newParams.fulltext = fulltext;
-    }
-    Object.keys(selectedFacets).forEach((key) => {
-      if (selectedFacets[key].length) {
-        newParams[key] = selectedFacets[key];
-      }
-    });
-    return qs.stringify(newParams, { addQueryPrefix: includePage, encode: true });
-  }
 
   let params = {
     fulltext: fulltext ? fulltext : undefined,
     ...selectedFacets,
     sort: sort ? sort : undefined,
     ['sort-order']: sortOrder ? sortOrder : undefined,
-    page: page !== 1 ? page : undefined,  //use index except for when submitting to Search API
+    page: page !== 1 ? page : undefined,
     ['page-size']: pageSize !== 10 ? pageSize : undefined,
   }
   const { data, isPending, error } = useQuery({
@@ -184,61 +139,26 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     }
   });
 
-// Sync totalItems state with API response data
-  // Moved to useEffect to prevent state updates during render (which can cause infinite loops)
-  useEffect(() => {
-    if (data?.data?.total !== undefined && data.data.total !== totalItems) {
-      setTotalItems(data.data.total);
-    }
-  }, [data?.data?.total]);
-
+  const totalItems = data?.data?.total ? Number(data.data.total) : 0;
   const facets: SidebarFacetTypes = (data && data.data.facets) ? separateFacets(data ? data.data.facets : []) : { theme: null, keyword: null };
 
-  useEffect(() => {
-    const baseNumber = Number(totalItems) > 0 ? 1 : 0;
-    const startingNumber = baseNumber + (Number(pageSize) * Number(page) - Number(pageSize));
-    const endingNumber = Number(pageSize) * Number(page);
-
-    setCurrentResultNumbers({
-      total: Number(totalItems),
-      startingNumber: Number(totalItems) >= startingNumber ? startingNumber : 0,
-      endingNumber: Number(totalItems) < endingNumber ? Number(totalItems) : endingNumber,
-    });
-
-    if (totalItems <= 0 && currentResultNumbers !== null) {
-      setNoResults(true);
-    } else {
-      setNoResults(false);
-    }
+  const currentResultNumbers = useMemo(() => {
+    const baseNumber = totalItems > 0 ? 1 : 0;
+    const startingNumber = baseNumber + (pageSize * page - pageSize);
+    const endingNumber = pageSize * page;
+    return {
+      total: totalItems,
+      startingNumber: totalItems >= startingNumber ? startingNumber : 0,
+      endingNumber: totalItems < endingNumber ? totalItems : endingNumber,
+    };
   }, [totalItems, pageSize, page]);
 
-  useEffect(() => {
-    if (page !== 1 && (transformedParams.fulltext !== fulltext || transformedParams.selectedFacets !== selectedFacets))
-      setPage(1)
-  }, [fulltext, selectedFacets]);
+  const noResults = totalItems <= 0 && !isPending;
 
-  useEffect(() => {
-    var params = buildSearchParams(true);
-    if (params !== location.search) {
-      setSearchParams(params);
-    }
-  }, [page, sort, sortOrder, fulltext, selectedFacets]);
-
-  useEffect(() => {
-    // No results found
-    if (noResults) {
-      setAnnouncementText('No results found.');
-    }
-
-    // Could not connect to the API
-    else if (!isPending && (!data || !data.data.results)) {
-      setAnnouncementText('Could not connect to the API.');
-    }
-
-    // Show results as normal
-    else {
-      setAnnouncementText(`Showing ${currentResultNumbers.startingNumber} to ${currentResultNumbers.endingNumber} of ${currentResultNumbers.total} datasets`);
-    }
+  const announcementText = useMemo(() => {
+    if (noResults) return 'No results found.';
+    if (!isPending && (!data || !data.data.results)) return 'Could not connect to the API.';
+    return `Showing ${currentResultNumbers.startingNumber} to ${currentResultNumbers.endingNumber} of ${currentResultNumbers.total} datasets`;
   }, [data, isPending, noResults, currentResultNumbers]);
 
   return (
@@ -276,12 +196,11 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                
+
                 if (filterText) {
                   if (isValidSearch(filterText as string)) {
                     setInvalidSearch(false);
-
-                    setFullText(filterText);
+                    setSearchParams(buildNextParams({ fulltext: filterText as string, page: null }));
                   } else {
                     setInvalidSearch(true);
                   }
@@ -364,7 +283,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                         label="Sort"
                         labelClassName="ds-u-margin-top--0"
                         name="dataset_search_sort"
-                        onChange={(e) => setSortOptions(e.target.value)}
+                        onChange={(e) => setSortOptionsHandler(e.target.value)}
                       />
                     </div>
                   )}
@@ -384,7 +303,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                         if (item.theme.includes(theme))
                           showLargeFile = true;
                       });
- 
+
                     let dateDetailProps = {}
                     if (showDateDetails) {
                       dateDetailProps = {
@@ -396,7 +315,6 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
 
                     let topicProps = {}
                     if (showTopics) {
-                      // Generate topic slugs mapping for this item's themes
                       let topicSlugs : { [key: string]: string | undefined } = {}
                       if (item.theme && Array.isArray(item.theme)) {
                         item.theme.forEach( (topic: string) => {
@@ -412,7 +330,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                         topicSlugs
                       }
                     }
-                    
+
                     return (
                       <DatasetSearchListItem
                         key={item.identifier}
@@ -441,12 +359,11 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                     onPageChange={(evt, page) => {
                       evt.preventDefault();
                       window.scroll(0, 0);
-                      setPage(page);
+                      setSearchParams(buildNextParams({ page: page > 1 ? String(page) : null }));
                     }}
-                    renderHref={(page) => {
-                      const searchParams = buildSearchParams(false);
-                      const includeAnd = searchParams ? '&' : '';
-                      return `/datasets?page=${page}${includeAnd}${searchParams}`;
+                    renderHref={(p) => {
+                      const next = buildNextParams({ page: p > 1 ? String(p) : null });
+                      return `/datasets?${next.toString()}`;
                     }}
                   />
                 )}
