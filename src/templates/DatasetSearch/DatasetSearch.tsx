@@ -115,7 +115,10 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   }
 
   function updateSelectedFacets(key: string, value: string) {
-    const newFacets: SelectedFacetsType = { ...selectedFacets };
+    const newFacets: SelectedFacetsType = {
+      theme: [...selectedFacets.theme],
+      keyword: [...selectedFacets.keyword],
+    };
     if (key === 'theme') {
       const existingFacet = newFacets.theme.findIndex((s) => s === value);
       if (existingFacet > -1) {
@@ -132,13 +135,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
         newFacets.keyword.push(value);
       }
     }
-    const urlString = qs.stringify(
-      { theme: newFacets.theme, keyword: newFacets.keyword },
-      { encodeValuesOnly: true, addQueryPrefix: true }
-    );
     setSelectedFacets(newFacets);
-    const url = new URL(window.location.href);
-    window.history.pushState({}, '', `${url.origin}${url.pathname}${urlString}`);
   }
 
   const pageSize = defaultPageSize;
@@ -148,8 +145,6 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     setFilterText(defaultFulltext);
     setSelectedFacets(defaultSelectedFacets);
     setPage(defaultPage);
-    const url = new URL(window.location.href);
-    window.history.pushState({}, '', `${url.origin}${url.pathname}`);
   }
 
   function buildSearchParams(includePage: boolean) {
@@ -166,11 +161,11 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     if (fulltext !== '') {
       newParams.fulltext = fulltext;
     }
-    if (Object.keys(selectedFacets).length) {
-      Object.keys(selectedFacets).forEach((key) => {
+    Object.keys(selectedFacets).forEach((key) => {
+      if (selectedFacets[key].length) {
         newParams[key] = selectedFacets[key];
-      });
-    }
+      }
+    });
     return qs.stringify(newParams, { addQueryPrefix: includePage, encode: true });
   }
 
@@ -223,13 +218,11 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   }, [fulltext, selectedFacets]);
 
   useEffect(() => {
-    if (totalItems !== null && totalItems !== undefined && totalItems > 0) {
-      var params = buildSearchParams(true);
-      if (params !== location.search) {
-        setSearchParams(params);
-      }
+    var params = buildSearchParams(true);
+    if (params !== location.search) {
+      setSearchParams(params);
     }
-  }, [page, sort, sortOrder, totalItems]);
+  }, [page, sort, sortOrder, fulltext, selectedFacets]);
 
   useEffect(() => {
     // No results found

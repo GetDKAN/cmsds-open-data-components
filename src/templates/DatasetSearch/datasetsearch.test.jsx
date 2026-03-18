@@ -79,19 +79,21 @@ describe('<DatasetSearch />', () => {
 
   });
   
-  test("Updates the browser URL params when a facet is added", async () => {
-    window.history.pushState = jest.fn();
+  test("Triggers a new search when a facet is toggled", async () => {
+    axios.get.mockClear();
     await act(async () => {
-      // debug()
       jest.useFakeTimers();
       render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
     });
-    
+    const callsBefore = axios.get.mock.calls.length;
+
     await act(() => {
       screen.getByRole("checkbox", { name: "general (2)" }).click();
     });
-    // Check that the URL params were updated
-    expect(window.history.pushState).toHaveBeenNthCalledWith(1, {}, "", expect.stringContaining("/?theme[0]=general"))
+    // Verify a new API call was made with the selected facet
+    const newCalls = axios.get.mock.calls.slice(callsBefore);
+    expect(newCalls.length).toBeGreaterThan(0);
+    expect(newCalls[newCalls.length - 1][0]).toContain('theme');
   });
 
   test('Renders child element', async () => {
