@@ -13,7 +13,7 @@ import { useQuery } from '@tanstack/react-query';
 import { separateFacets } from '../../services/useSearchAPI/helpers';
 
 import './dataset-search.scss';
-import { DatasetSearchPageProps, SelectedFacetsType, SidebarFacetTypes } from '../../types/search';
+import { DatasetSearchPageProps, SelectedFacetsType, SidebarFacetTypes, SearchResultItemType } from '../../types/search';
 import { acaToParams } from '../../utilities/aca';
 import { ACAContext } from '../../utilities/ACAContext';
 
@@ -291,14 +291,14 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                 </div>
                 <ol className="dc-dataset-search-list ds-u-padding--0 ds-u-margin-top--0 ds-u-margin-bottom--4 ds-u-display--block" data-testid="results-list">
                   {noResults && <Alert variation="error" role="region" heading="No results found." />}
-                  {data && data.data.results ? Object.values(data.data.results).map((item) => {
+                  {data && data.data.results ? (Object.values(data.data.results) as SearchResultItemType[]).map((item) => {
                     const downloadUrl = (() => {
-                      const distribution_array = item.distribution ? item.distribution : [];
-                      return distribution_array.length ? item.distribution[0].downloadURL : null;
+                      const distribution_array = item.distribution ?? [];
+                      return distribution_array.length ? distribution_array[0].downloadURL : null;
                     })();
 
                     const showLargeFile = largeFileThemes && item.theme
-                      ? largeFileThemes.some(theme => item.theme.includes(theme))
+                      ? largeFileThemes.some(theme => item.theme!.includes(theme))
                       : false;
 
                     const dateDetailProps = showDateDetails ? {
@@ -309,11 +309,12 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
 
                     const topicProps = (() => {
                       if (!showTopics) return {};
-                      const topicSlugs: { [key: string]: string | undefined } = {};
+                      const topicSlugs: { [key: string]: string } = {};
                       if (item.theme && Array.isArray(item.theme)) {
                         item.theme.forEach((topic: string) => {
                           if (topic) {
-                            topicSlugs[topic] = topicSlugFunction ? topicSlugFunction(topic) : topic.split(' ').join('-').toLowerCase();
+                            const slug = topicSlugFunction ? topicSlugFunction(topic) : topic.split(' ').join('-').toLowerCase();
+                            if (slug) topicSlugs[topic] = slug;
                           }
                         });
                       }
@@ -331,7 +332,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                         largeFile={showLargeFile}
                         paginationEnabled={enablePagination}
                         dataDictionaryLinks={dataDictionaryLinks}
-                        distribution={"%Ref:distribution" in item ? item["%Ref:distribution"][0] : {}}
+                        distribution={"%Ref:distribution" in item && item["%Ref:distribution"] ? item["%Ref:distribution"][0] : {}}
                         {...dateDetailProps}
                         {...topicProps}
                       />

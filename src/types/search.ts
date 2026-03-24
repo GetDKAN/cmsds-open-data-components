@@ -71,3 +71,25 @@ export type SortType = {
   defaultSort: string;
   defaultOrder: string;
 }
+
+export type SearchResultItemType = {
+  identifier: string;
+  title: string;
+  modified: string;
+  description: string;
+  distribution?: SearchDistributionType[];
+  theme?: string[];
+  released?: string;
+  nextUpdateDate?: string;
+  '%Ref:distribution'?: Array<{
+    identifier: string;
+    data: {
+      title: string;
+      format: string;
+      downloadURL: string;
+      describedBy?: string;
+      describedByType?: string;
+    };
+  }>;
+  [key: string]: unknown;
+}
