@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { useSearchParams, useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import qs from 'qs';
 import axios from 'axios';
 import withQueryProvider from '../../utilities/QueryProvider/QueryProvider';
@@ -13,14 +13,20 @@ import { useQuery } from '@tanstack/react-query';
 import { separateFacets } from '../../services/useSearchAPI/helpers';
 
 import './dataset-search.scss';
-import { DatasetSearchPageProps, SelectedFacetsType, SidebarFacetTypes, DistributionItemType } from '../../types/search';
-import { TextFieldValue } from '@cmsgov/design-system/dist/react-components/types/TextField/TextField';
+import { DatasetSearchPageProps, SelectedFacetsType, SidebarFacetTypes } from '../../types/search';
 import { acaToParams } from '../../utilities/aca';
 import { ACAContext } from '../../utilities/ACAContext';
 
 export const isValidSearch = (query: string) => {
   return /^[a-zA-Z0-9 ]*$/.test(query.trim());
 };
+
+const sortOptions = [
+  { label: 'Newest', value: 'newest' },
+  { label: 'Oldest', value: 'oldest' },
+  { label: 'Title A-Z', value: 'titleAZ' },
+  { label: 'Title Z-A', value: 'titleZA' }
+];
 
 const DatasetSearch = (props: DatasetSearchPageProps) => {
   const {
@@ -45,14 +51,6 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   } = props;
   const { ACA } = useContext(ACAContext);
 
-  const sortOptions = [
-    { label: 'Newest', value: 'newest' },
-    { label: 'Oldest', value: 'oldest' },
-    { label: 'Title A-Z', value: 'titleAZ' },
-    { label: 'Title Z-A', value: 'titleZA' }
-  ];
-
-  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
 
   // Derive all search state from URL params
@@ -124,7 +122,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
 
   const pageSize = defaultPageSize;
 
-  let params = {
+  const params = {
     fulltext: fulltext ? fulltext : undefined,
     ...selectedFacets,
     sort: sort ? sort : undefined,
@@ -132,7 +130,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     page: page !== 1 ? page : undefined,
     ['page-size']: pageSize !== 10 ? pageSize : undefined,
   }
-  const { data, isPending, error } = useQuery({
+  const { data, isPending } = useQuery({
     queryKey: ["datasets", params],
     queryFn: () => {
       return axios.get(`${rootUrl}/search/?${qs.stringify(acaToParams(params, ACA), { arrayFormat: 'comma', encode: false })}`)
@@ -140,7 +138,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   });
 
   const totalItems = data?.data?.total ? Number(data.data.total) : 0;
-  const facets: SidebarFacetTypes = (data && data.data.facets) ? separateFacets(data ? data.data.facets : []) : { theme: null, keyword: null };
+  const facets: SidebarFacetTypes = (data && data.data.facets) ? separateFacets(data.data.facets) : { theme: null, keyword: null };
 
   const currentResultNumbers = useMemo(() => {
     const baseNumber = totalItems > 0 ? 1 : 0;
@@ -153,7 +151,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     };
   }, [totalItems, pageSize, page]);
 
-  const noResults = totalItems <= 0 && !isPending;
+  const noResults = totalItems <= 0 && !isPending && data?.data?.results !== undefined;
 
   const announcementText = useMemo(() => {
     if (noResults) return 'No results found.';
@@ -198,12 +196,15 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                 e.preventDefault();
 
                 if (filterText) {
-                  if (isValidSearch(filterText as string)) {
+                  if (isValidSearch(filterText)) {
                     setInvalidSearch(false);
-                    setSearchParams(buildNextParams({ fulltext: filterText as string, page: null }));
+                    setSearchParams(buildNextParams({ fulltext: filterText, page: null }));
                   } else {
                     setInvalidSearch(true);
                   }
+                } else {
+                  setInvalidSearch(false);
+                  setSearchParams(buildNextParams({ fulltext: null, page: null }));
                 }
               }}
               className="dkan-dataset-search ds-l-form-row ds-u-padding-bottom--4 ds-u-border-bottom--1"
@@ -213,7 +214,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                 errorMessage={invalidSearch ? 'No special characters allowed. Please enter a valid search term.' : undefined}
                 errorPlacement='bottom'
                 fieldClassName="ds-u-margin--0"
-                value={filterText as TextFieldValue}
+                value={filterText}
                 className={`ds-u-padding-right--2 ${altMobileSearchButton ? 'ds-l-col--12 ds-l-md-col--10 --alt-style' : 'ds-l-col--10'}`}
                 label="Search datasets"
                 labelClassName="ds-u-visibility--screen-reader"
@@ -290,56 +291,43 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                 </div>
                 <ol className="dc-dataset-search-list ds-u-padding--0 ds-u-margin-top--0 ds-u-margin-bottom--4 ds-u-display--block" data-testid="results-list">
                   {noResults && <Alert variation="error" role="region" heading="No results found." />}
-                  {data && data.data.results ? Object.keys(data.data.results).map((key) => {
-                    return data.data.results[key];
-                  }).map((item) => {
-                    function getDownloadUrl(item: DistributionItemType) {
-                      let distribution_array = item.distribution ? item.distribution : [];
+                  {data && data.data.results ? Object.values(data.data.results).map((item) => {
+                    const downloadUrl = (() => {
+                      const distribution_array = item.distribution ? item.distribution : [];
                       return distribution_array.length ? item.distribution[0].downloadURL : null;
-                    }
-                    let showLargeFile = false;
-                    if (largeFileThemes && item.theme)
-                      largeFileThemes.forEach(theme => {
-                        if (item.theme.includes(theme))
-                          showLargeFile = true;
-                      });
+                    })();
 
-                    let dateDetailProps = {}
-                    if (showDateDetails) {
-                      dateDetailProps = {
-                        showDateDetails,
-                        released: item.released,
-                        refresh: item.nextUpdateDate
-                      }
-                    }
+                    const showLargeFile = largeFileThemes && item.theme
+                      ? largeFileThemes.some(theme => item.theme.includes(theme))
+                      : false;
 
-                    let topicProps = {}
-                    if (showTopics) {
-                      let topicSlugs : { [key: string]: string | undefined } = {}
+                    const dateDetailProps = showDateDetails ? {
+                      showDateDetails,
+                      released: item.released,
+                      refresh: item.nextUpdateDate
+                    } : {};
+
+                    const topicProps = (() => {
+                      if (!showTopics) return {};
+                      const topicSlugs: { [key: string]: string | undefined } = {};
                       if (item.theme && Array.isArray(item.theme)) {
-                        item.theme.forEach( (topic: string) => {
+                        item.theme.forEach((topic: string) => {
                           if (topic) {
-                            topicSlugs[topic] = topicSlugFunction ? topicSlugFunction(topic) : topic.split(' ').join('-').toLowerCase()
+                            topicSlugs[topic] = topicSlugFunction ? topicSlugFunction(topic) : topic.split(' ').join('-').toLowerCase();
                           }
-                        })
+                        });
                       }
-
-                      topicProps = {
-                        showTopics,
-                        theme: item.theme,
-                        topicSlugs
-                      }
-                    }
+                      return { showTopics, theme: item.theme, topicSlugs };
+                    })();
 
                     return (
                       <DatasetSearchListItem
                         key={item.identifier}
-                        location={location}
                         title={item.title}
                         modified={item.modified}
                         description={item.description}
                         identifier={item.identifier}
-                        downloadUrl={showDownloadIcon ? getDownloadUrl(item) : null}
+                        downloadUrl={showDownloadIcon ? downloadUrl : null}
                         largeFile={showLargeFile}
                         paginationEnabled={enablePagination}
                         dataDictionaryLinks={dataDictionaryLinks}
@@ -352,7 +340,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                     <Alert variation="error" role="region" heading="Could not connect to the API." />
                   )}
                 </ol>
-                {enablePagination && (data && data.data.total) && data.data.total != 0 && (
+                {enablePagination && (data && data.data.total) && Number(data.data.total) !== 0 && (
                   <Pagination
                     currentPage={Number(page)}
                     totalPages={Math.ceil(Number(data.data.total) / pageSize)}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Choice, Accordion, AccordionItem, AddIcon, RemoveIcon } from '@cmsgov/design-system';
+import { Choice, Accordion, AccordionItem } from '@cmsgov/design-system';
 import { SearchAPIFacetType, SearchFacetsPropTypes } from '../../types/search';
 import './dataset-search-facets.scss';
 

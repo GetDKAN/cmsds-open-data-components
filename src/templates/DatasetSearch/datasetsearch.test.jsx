@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import { render, screen, fireEvent, act, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import DatasetSearch from './index';
 import { MemoryRouter } from 'react-router-dom';
@@ -47,9 +47,9 @@ describe('<DatasetSearch />', () => {
       jest.useFakeTimers();
     });
 
-    expect(screen.getByRole('heading', { name: 'Dataset Explorer' }));
-    expect(screen.getByRole('textbox', { name: 'Search datasets' }));
-    expect(screen.getByRole('button', { name: 'Search' }));
+    expect(screen.getByRole('heading', { name: 'Dataset Explorer' })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: 'Search datasets' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Search' })).toBeInTheDocument();
   });
   test('Renders correctly after performing a search', async () => {
     await act(async () => {
@@ -63,7 +63,7 @@ describe('<DatasetSearch />', () => {
     expect(dataCurrentResultsElement).toBeInTheDocument();
     // The CMS Design System select wraps the HTML select/label in another label with a button.
     expect(screen.getAllByLabelText('Sort')).toHaveLength(2);
-    expect(screen.getByTestId('results-list'))
+    expect(screen.getByTestId('results-list')).toBeInTheDocument();
   })
 
   test('Announces search results to screen readers', async () => {
@@ -181,5 +181,141 @@ describe('<DatasetSearch /> Infinite Loop Prevention', () => {
 
     // Component should render correctly with the total from API
     expect(screen.getByTestId('results-list')).toBeInTheDocument();
+  });
+});
+
+describe('<DatasetSearch /> URL & Edge Cases', () => {
+  beforeEach(async() => {
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      value: jest.fn().mockImplementation((query) => ({
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: jest.fn(),
+        removeListener: jest.fn(),
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+      })),
+    });
+    await axios.get.mockImplementation(() => Promise.resolve(data_results));
+  });
+
+  test('Initializes from URL params', async () => {
+    await act(async () => {
+      render(
+        <MemoryRouter initialEntries={['/datasets?theme=Health&fulltext=test&page=2']}>
+          <DatasetSearch rootUrl={rootUrl} />
+        </MemoryRouter>
+      );
+    });
+
+    expect(screen.getByRole('textbox', { name: 'Search datasets' })).toHaveValue('test');
+    // Verify the API was called with fulltext and theme params
+    const lastCall = axios.get.mock.calls[axios.get.mock.calls.length - 1][0];
+    expect(lastCall).toContain('fulltext');
+    expect(lastCall).toContain('theme');
+  });
+
+  test('Empty search clears fulltext param', async () => {
+    await act(async () => {
+      render(
+        <MemoryRouter initialEntries={['/datasets?fulltext=test']}>
+          <DatasetSearch rootUrl={rootUrl} />
+        </MemoryRouter>
+      );
+    });
+
+    const input = screen.getByRole('textbox', { name: 'Search datasets' });
+    await act(() => {
+      fireEvent.change(input, { target: { value: '' } });
+    });
+    await act(() => {
+      fireEvent.submit(input.closest('form'));
+    });
+
+    // After clearing, a new API call should be made without fulltext
+    const lastCall = axios.get.mock.calls[axios.get.mock.calls.length - 1][0];
+    expect(lastCall).not.toContain('fulltext');
+  });
+
+  test('Invalid search blocks submission', async () => {
+    axios.get.mockClear();
+    await act(async () => {
+      render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
+    });
+    const callsBefore = axios.get.mock.calls.length;
+
+    const input = screen.getByRole('textbox', { name: 'Search datasets' });
+    await act(() => {
+      fireEvent.change(input, { target: { value: '!!@#$' } });
+    });
+    await act(() => {
+      fireEvent.submit(input.closest('form'));
+    });
+
+    expect(screen.getByText(/No special characters allowed/)).toBeInTheDocument();
+    // No new API call should have been triggered
+    expect(axios.get.mock.calls.length).toBe(callsBefore);
+  });
+
+  test('Sort change updates URL and triggers API call', async () => {
+    axios.get.mockClear();
+    await act(async () => {
+      render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
+    });
+    const callsBefore = axios.get.mock.calls.length;
+
+    const sortSelect = screen.getByLabelText('Sort', { selector: 'select' });
+    await act(() => {
+      fireEvent.change(sortSelect, { target: { value: 'titleAZ' } });
+    });
+
+    const newCalls = axios.get.mock.calls.slice(callsBefore);
+    expect(newCalls.length).toBeGreaterThan(0);
+    expect(newCalls[newCalls.length - 1][0]).toContain('sort=title');
+  });
+
+  test('Clear all filters resets URL', async () => {
+    await act(async () => {
+      render(
+        <MemoryRouter initialEntries={['/datasets?theme=Health&fulltext=test']}>
+          <DatasetSearch rootUrl={rootUrl} />
+        </MemoryRouter>
+      );
+    });
+
+    await act(() => {
+      screen.getByRole('button', { name: 'Clear all filters' }).click();
+    });
+
+    // After clearing, API call should have no theme or fulltext
+    const lastCall = axios.get.mock.calls[axios.get.mock.calls.length - 1][0];
+    expect(lastCall).not.toContain('fulltext');
+    expect(lastCall).not.toContain('theme');
+  });
+
+  test('API error shows error alert, not "No results found"', async () => {
+    // Use a unique fulltext to avoid react-query cache from other tests
+    axios.get.mockImplementation(() => Promise.resolve({
+      data: { total: '0', facets: [] }
+    }));
+
+    await act(async () => {
+      jest.useFakeTimers();
+      render(
+        <MemoryRouter initialEntries={['/datasets?fulltext=uniquenocache']}>
+          <DatasetSearch rootUrl={rootUrl} />
+        </MemoryRouter>
+      );
+    });
+
+    await waitFor(() => {
+      const announcement = screen.getByTestId('currentResults');
+      expect(announcement.textContent).toContain('Could not connect to the API');
+    });
+    // The "No results found" alert should not render because data.results is undefined
+    expect(screen.queryByText('No results found.')).not.toBeInTheDocument();
   });
 });
