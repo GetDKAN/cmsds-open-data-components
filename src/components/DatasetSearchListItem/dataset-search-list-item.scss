@@ -29,6 +29,36 @@
     fill: #{var(--link__color--visited)};
   }
 
+  // Style dataset download links
+  a.ds-c-button[href$='.pdf'], a.ds-c-button[href$='.csv'], a.ds-c-button[href$='.xlsx'], a.ds-c-button[href$='.zip'] {
+    position: relative;
+    
+    &::after {
+      font-family: 'Font Awesome 6 Pro', sans-serif;
+      display: inline-block;
+      height: 16px;
+      width: 16px;
+      margin-left: 5px;
+      font-weight: lighter;
+    }
+  }
+
+  a.ds-c-button[href$='.pdf']::after {
+    content: '\f1c1'; // pdf
+  }
+
+  a.ds-c-button[href$='.csv']::after {
+    content: '\f6dd'; // csv
+  }
+
+  a.ds-c-button[href$='.xlsx']::after {
+    content: '\f1c3'; // xlsx
+  }
+
+  a.ds-c-button[href$='.zip']::after {
+    content: '\e5ee'; // zip
+  }
+
   .ds-c-button {
     text-decoration: none !important;
     
