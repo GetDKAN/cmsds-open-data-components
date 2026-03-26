@@ -11,13 +11,6 @@ import DatasetDate from '../DatasetDate';
 import { getFormatType } from '../../utilities/format';
 import { DistributionType } from '../../types/dataset';
 
-type LocationType = {
-  pathname: string;
-  search?: string;
-  hash?: string;
-  state?: any;
-};
-
 type SearchItemProps = {
   title: string;
   modified: string;
@@ -32,8 +25,7 @@ type SearchItemProps = {
   showTopics?: boolean;
   showDateDetails?: boolean;
   theme?: string[];
-  topicSlugs?: { [key: string]: string }; // Map of topic titles to their slugs
-  location: LocationType;
+  topicSlugs?: { [key: string]: string };
   distribution: DistributionType | {};
 }
 

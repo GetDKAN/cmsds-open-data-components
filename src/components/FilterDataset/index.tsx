@@ -51,18 +51,21 @@ const FilterDataset: React.FC = () => {
 
   if (!resource) return null;
 
+  const id = distribution.identifier;
+  const { conditions, schema, setConditions, setOffset } = resource;
+
+  if (!schema[id]?.fields) return null;
+
   const customColumnHeaders = buildCustomColHeaders(
     customColumns,
     resource.columns,
     resource.schema[distribution.identifier]
   );
 
-  const id = distribution.identifier;
   const columns = customColumnHeaders
     ? customColumnHeaders
     : prepareColumns(resource.columns, resource.schema[id]);
 
-  const { conditions, schema, setConditions, setOffset } = resource;
   const fields = Object.keys(schema[id].fields);
 
   const [queryConditions, setQueryConditions] = useState<Array<ConditionType>>([]);
