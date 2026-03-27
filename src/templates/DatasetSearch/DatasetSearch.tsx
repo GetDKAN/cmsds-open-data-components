@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import qs from 'qs';
 import axios from 'axios';
 import withQueryProvider from '../../utilities/QueryProvider/QueryProvider';
@@ -51,13 +51,22 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   } = props;
   const { ACA } = useContext(ACAContext);
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   // Derive all search state from URL params
-  const selectedFacets: SelectedFacetsType = useMemo(() => ({
-    theme: searchParams.getAll('theme'),
-    keyword: searchParams.getAll('keyword'),
-  }), [searchParams]);
+  const selectedFacets: SelectedFacetsType = useMemo(() => {
+    const parsed = qs.parse(searchParams.toString());
+    const toArray = (val: unknown): string[] => {
+      if (Array.isArray(val)) return val.filter((v): v is string => typeof v === 'string');
+      if (typeof val === 'string') return [val];
+      return [];
+    };
+    return {
+      theme: toArray(parsed.theme),
+      keyword: toArray(parsed.keyword),
+    };
+  }, [searchParams]);
 
   const page = Number(searchParams.get('page')) || 1;
   const sort = searchParams.get('sort') || defaultSort.defaultSort;
@@ -74,24 +83,26 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   // Sync filterText from URL on back/forward
   useEffect(() => { setFilterText(fulltext); }, [fulltext]);
 
-  function buildNextParams(overrides: Record<string, string | string[] | null>) {
-    const next = new URLSearchParams(searchParams);
+  function buildNextQueryString(overrides: Record<string, string | string[] | null>): string {
+    const current = qs.parse(searchParams.toString());
+    const merged = { ...current };
     Object.entries(overrides).forEach(([key, value]) => {
-      next.delete(key);
-      if (value === null) return;
-      const values = Array.isArray(value) ? value : [value];
-      values.forEach(v => next.append(key, v));
+      if (value === null) {
+        delete merged[key];
+      } else {
+        merged[key] = value;
+      }
     });
-    return next;
+    return qs.stringify(merged, { arrayFormat: 'indices', encode: true });
   }
 
   function updateSelectedFacets(key: string, value: string) {
-    const current = searchParams.getAll(key);
+    const current = selectedFacets[key as keyof SelectedFacetsType] || [];
     const idx = current.indexOf(value);
     const updated = idx > -1
       ? current.filter((_, i) => i !== idx)
       : [...current, value];
-    setSearchParams(buildNextParams({ [key]: updated.length ? updated : null, page: null }));
+    navigate({ search: buildNextQueryString({ [key]: updated.length ? updated : null, page: null }) });
   }
 
   const setSortOptionsHandler = (value: string) => {
@@ -112,12 +123,12 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
       sort: nextSort === defaultSort.defaultSort ? null : nextSort,
       sortOrder: nextSortOrder === defaultSort.defaultOrder ? null : nextSortOrder,
     };
-    setSearchParams(buildNextParams(overrides));
+    navigate({ search: buildNextQueryString(overrides) });
   };
 
   function resetFilters() {
     setFilterText('');
-    setSearchParams({});
+    navigate({ search: '' });
   }
 
   const pageSize = defaultPageSize;
@@ -198,13 +209,13 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                 if (filterText) {
                   if (isValidSearch(filterText)) {
                     setInvalidSearch(false);
-                    setSearchParams(buildNextParams({ fulltext: filterText, page: null }));
+                    navigate({ search: buildNextQueryString({ fulltext: filterText, page: null }) });
                   } else {
                     setInvalidSearch(true);
                   }
                 } else {
                   setInvalidSearch(false);
-                  setSearchParams(buildNextParams({ fulltext: null, page: null }));
+                  navigate({ search: buildNextQueryString({ fulltext: null, page: null }) });
                 }
               }}
               className="dkan-dataset-search ds-l-form-row ds-u-padding-bottom--4 ds-u-border-bottom--1"
@@ -348,11 +359,11 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                     onPageChange={(evt, page) => {
                       evt.preventDefault();
                       window.scroll(0, 0);
-                      setSearchParams(buildNextParams({ page: page > 1 ? String(page) : null }));
+                      navigate({ search: buildNextQueryString({ page: page > 1 ? String(page) : null }) });
                     }}
                     renderHref={(p) => {
-                      const next = buildNextParams({ page: p > 1 ? String(p) : null });
-                      return `/datasets?${next.toString()}`;
+                      const nextQs = buildNextQueryString({ page: p > 1 ? String(p) : null });
+                      return `/datasets?${nextQs}`;
                     }}
                   />
                 )}
