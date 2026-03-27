@@ -123,17 +123,17 @@ This document provides a comprehensive inventory of all components, services, te
 
 | Category | Total | With Stories | With Tests | With Both | With Neither |
 |----------|-------|--------------|------------|-----------|--------------|
-| Components | 64 | 39 (61%) | 23 (36%) | 12 (19%) | 14 (22%) |
+| Components | 64 | 39 (61%) | 24 (38%) | 14 (22%) | 15 (23%) |
 | Templates | 11 | 10 (91%) | 3 (27%) | 3 (27%) | 1 (9%) |
 | Services/Hooks/Contexts | 9 | 0 (0%) | 0 (0%) | 0 (0%) | 9 (100%) |
-| Utilities/Types/Assets | 11 | 0 (0%) | 0 (0%) | 0 (0%) | 11 (100%) |
-| **Project Total** | **95** | **49 (52%)** | **26 (27%)** | **15 (16%)** | **35 (37%)** |
+| Utilities/Types/Assets | 12 | 0 (0%) | 0 (0%) | 0 (0%) | 12 (100%) |
+| **Project Total** | **96** | **49 (51%)** | **27 (28%)** | **17 (18%)** | **37 (39%)** |
 
 ---
 
 ### Export Summary
 - **Public**: 58 items (34 components, 11 templates, 3 services, 2 hooks, 4 contexts, 2 asset)
-- **Internal**: 37 items (30 components, 0 templates, 0 services, 4 utilities, 3 types, 0 asset)
+- **Internal**: 38 items (30 components, 0 templates, 0 services, 5 utilities, 3 types, 0 asset)
 
 ---
 
