@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useReactTable, flexRender, getCoreRowModel, getPaginationRowModel, getSortedRowModel, SortingState, getFilteredRowModel, ColumnFiltersState } from '@tanstack/react-table';
 import { useMediaQuery } from 'react-responsive';
 import { Table, TableHead, TableRow, TableCell, TableBody, Pagination, Dropdown, DropdownChangeObject, Alert } from '@cmsgov/design-system';
-import HeaderResizeElement from '../Datatable/HeaderResizeElement';
+import HeaderResizeElement from '../../Datatable/HeaderResizeElement';
 import './dataDictionaryTable.scss';
 
 const DataDictionaryTable = ({tableColumns, tableData, pageSize, columnFilters} :

@@ -54,8 +54,8 @@ describe('<DatasetDateItem />', () => {
 
     const container = screen.getByText((content, element) => {
       return element?.textContent === 'Last Modified: February 1, 2023';
-    }).closest('div');
-    expect(container).toHaveClass('dataset-date-item bold-label');
+    }).closest('span');
+    expect(container).toHaveClass('dataset-date-item-label ds-u-font-weight--bold');
   });
 
   test('Shows tooltip when displayTooltips is true', () => {
