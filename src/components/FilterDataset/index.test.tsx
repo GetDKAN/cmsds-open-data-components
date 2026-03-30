@@ -265,7 +265,7 @@ describe('FilterDataset', () => {
     await userEvent.click(filterButton);
 
     const applyButton = screen.getByText(/Apply/);
-    expect(applyButton).toBeDisabled();
+    expect(applyButton).toHaveAttribute('aria-disabled', 'true');
   });
 
   it('clears all conditions when clear filters is clicked', async () => {

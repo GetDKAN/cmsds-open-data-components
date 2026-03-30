@@ -255,9 +255,9 @@ const FilterDataset: React.FC = () => {
                       className="ds-l-md-col--auto ds-l-col--auto ds-u-margin--right--0 ds-u-sm-margin-right--2"
                     />
                     <Button
-                      disabled={disableFilterSubmitButton()}
+                      aria-disabled={disableFilterSubmitButton() || undefined}
                       className="dkan-apply-dataset-filters-button ds-u-float--right ds-l-md-col--auto ds-l-col--auto"
-                      onClick={submitConditions}
+                      onClick={() => { if (!disableFilterSubmitButton()) submitConditions(); }}
                       variation="solid"
                     >
                       {`Apply ${conditionsReadyToSubmit(queryConditions).length || ''} filter${conditionsReadyToSubmit(queryConditions).length === 1 ? '' : 's'}`}
