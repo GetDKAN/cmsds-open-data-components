@@ -35,7 +35,8 @@ const MobileHeader = ({
   const menu = useRef(null);
   useEffect(() => {
 
-    const trapFocus = (event, container) => {
+    const trapFocus = (event) => {
+      if (!menuOpen) return;
       const focusableEls = getFocusableElements(menu.current).selectors.visible;
       const firstEl = focusableEls[0];
       const lastEl = focusableEls[focusableEls.length - 1];
@@ -82,7 +83,7 @@ const MobileHeader = ({
     document.addEventListener('mousedown', handleClick);
     document.addEventListener('keyup', handleMenuClose);
     handleFocusIn();
-    menu.current.addEventListener('keydown', (evt) => trapFocus(evt, menu.current));
+    menu.current.addEventListener('keydown', trapFocus);
 
     return () => {
       document.removeEventListener('keyup', handleMenuClose);
