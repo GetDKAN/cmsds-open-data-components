@@ -343,7 +343,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                         largeFile={showLargeFile}
                         paginationEnabled={enablePagination}
                         dataDictionaryLinks={dataDictionaryLinks}
-                        distribution={"%Ref:distribution" in item && item["%Ref:distribution"] ? item["%Ref:distribution"][0] : {}}
+                        distribution={item.distribution?.[0] ?? {}}
                         {...dateDetailProps}
                         {...topicProps}
                       />

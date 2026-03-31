@@ -3,6 +3,16 @@ export type SearchDistributionType = {
   downloadURL: string;
 }
 
+export type SearchDistributionItemType = {
+  '@type'?: string;
+  title?: string;
+  format?: string;
+  mediaType?: string;
+  downloadURL?: string;
+  describedBy?: string;
+  describedByType?: string;
+}
+
 export type SearchAPIFacetType = {
   type: string;
   name: string;
@@ -77,19 +87,9 @@ export type SearchResultItemType = {
   title: string;
   modified: string;
   description: string;
-  distribution?: SearchDistributionType[];
+  distribution?: SearchDistributionItemType[];
   theme?: string[];
   released?: string;
   nextUpdateDate?: string;
-  '%Ref:distribution'?: Array<{
-    identifier: string;
-    data: {
-      title: string;
-      format: string;
-      downloadURL: string;
-      describedBy?: string;
-      describedByType?: string;
-    };
-  }>;
   [key: string]: unknown;
 }

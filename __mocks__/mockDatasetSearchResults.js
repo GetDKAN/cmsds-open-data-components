@@ -8,15 +8,12 @@ export const mockDatasets = {
     description: 'Provider-level data on services and procedures provided to Medicare beneficiaries.',
     modified: '2024-03-15T14:30:00',
     theme: ['Medicare'],
-    '%Ref:distribution': [{
-      identifier: 'dist-1',
-      data: {
-        title: 'CSV Download',
-        format: 'csv',
-        downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-1.csv',
-        describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-1-dd.json',
-        describedByType: 'application/vnd.tableschema+json',
-      },
+    distribution: [{
+      title: 'CSV Download',
+      format: 'csv',
+      downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-1.csv',
+      describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-1-dd.json',
+      describedByType: 'application/vnd.tableschema+json',
     }],
   },
   'dataset-2': {
@@ -25,15 +22,12 @@ export const mockDatasets = {
     description: 'National-level data on hospital quality measures and patient outcomes.',
     modified: '2024-03-10T09:15:00',
     theme: ['Hospital Quality'],
-    '%Ref:distribution': [{
-      identifier: 'dist-2',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-2.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-2-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-3': {
@@ -42,15 +36,12 @@ export const mockDatasets = {
     description: 'Prescriber-level Medicare Part D claims data including drug costs and utilization.',
     modified: '2024-03-05T16:45:00',
     theme: ['Prescription Drugs'],
-    '%Ref:distribution': [{
-      identifier: 'dist-3',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-3.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-3-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-4': {
@@ -59,15 +50,12 @@ export const mockDatasets = {
     description: 'Quality ratings and inspection results for Medicare-certified nursing homes.',
     modified: '2024-02-28T11:20:00',
     theme: ['Hospital Quality'],
-    '%Ref:distribution': [{
-      identifier: 'dist-4',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-4.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-4-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-5': {
@@ -76,15 +64,12 @@ export const mockDatasets = {
     description: 'Quality of care data for home health agencies serving Medicare patients.',
     modified: '2024-02-25T13:10:00',
     theme: ['Hospital Quality'],
-    '%Ref:distribution': [{
-      identifier: 'dist-5',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-5.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-5-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-6': {
@@ -93,15 +78,12 @@ export const mockDatasets = {
     description: 'Inpatient prospective payment system hospital charge and payment data.',
     modified: '2024-02-20T10:05:00',
     theme: ['Medicare'],
-    '%Ref:distribution': [{
-      identifier: 'dist-6',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-6.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-6-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-7': {
@@ -110,15 +92,12 @@ export const mockDatasets = {
     description: 'Information on physicians and other healthcare professionals enrolled in Medicare.',
     modified: '2024-02-15T14:55:00',
     theme: ['Medicare'],
-    '%Ref:distribution': [{
-      identifier: 'dist-7',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-7.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-7-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-8': {
@@ -127,15 +106,12 @@ export const mockDatasets = {
     description: 'Outpatient prospective payment system hospital charge and payment data.',
     modified: '2024-02-10T08:30:00',
     theme: ['Medicare'],
-    '%Ref:distribution': [{
-      identifier: 'dist-8',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-8.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-8-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-9': {
@@ -144,15 +120,12 @@ export const mockDatasets = {
     description: 'Spending data per Medicare beneficiary at the hospital and state level.',
     modified: '2024-02-05T15:25:00',
     theme: ['Medicare'],
-    '%Ref:distribution': [{
-      identifier: 'dist-9',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-9.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-9-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-10': {
@@ -161,15 +134,12 @@ export const mockDatasets = {
     description: 'Data on hospital readmission rates and payment adjustments under HRRP.',
     modified: '2024-01-30T12:40:00',
     theme: ['Hospital Quality'],
-    '%Ref:distribution': [{
-      identifier: 'dist-10',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-10.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-10-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-11': {
@@ -178,15 +148,12 @@ export const mockDatasets = {
     description: 'Monthly enrollment data for Medicare Advantage and Part D plans.',
     modified: '2024-01-25T09:50:00',
     theme: ['Medicare'],
-    '%Ref:distribution': [{
-      identifier: 'dist-11',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-11.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-11-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-12': {
@@ -195,15 +162,12 @@ export const mockDatasets = {
     description: 'Drug spending and utilization data for the Medicare Part D program.',
     modified: '2024-01-20T16:15:00',
     theme: ['Prescription Drugs', 'Medicare'],
-    '%Ref:distribution': [{
-      identifier: 'dist-12',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-12.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-12-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-13': {
@@ -212,15 +176,12 @@ export const mockDatasets = {
     description: 'Fee-for-service claims data summarized at the provider level.',
     modified: '2024-01-15T11:35:00',
     theme: ['Medicare'],
-    '%Ref:distribution': [{
-      identifier: 'dist-13',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-13.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-13-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-14': {
@@ -229,15 +190,12 @@ export const mockDatasets = {
     description: 'Geographic variation in Medicare spending, utilization, and quality.',
     modified: '2024-01-10T14:20:00',
     theme: ['Medicare'],
-    '%Ref:distribution': [{
-      identifier: 'dist-14',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-14.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-14-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-15': {
@@ -246,15 +204,12 @@ export const mockDatasets = {
     description: 'Prevalence and spending data for chronic conditions among Medicare beneficiaries.',
     modified: '2024-01-05T10:45:00',
     theme: ['Medicare'],
-    '%Ref:distribution': [{
-      identifier: 'dist-15',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-15.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-15-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-16': {
@@ -263,15 +218,12 @@ export const mockDatasets = {
     description: 'Summary demographic and enrollment data for Medicare beneficiaries.',
     modified: '2023-12-30T13:55:00',
     theme: ['Medicare'],
-    '%Ref:distribution': [{
-      identifier: 'dist-16',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-16.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-16-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-17': {
@@ -280,15 +232,12 @@ export const mockDatasets = {
     description: 'Data on providers and suppliers enrolled in the Medicare program.',
     modified: '2023-12-25T09:30:00',
     theme: ['Medicare'],
-    '%Ref:distribution': [{
-      identifier: 'dist-17',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-17.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-17-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-18': {
@@ -297,15 +246,12 @@ export const mockDatasets = {
     description: 'Aggregated Medicare claims data across inpatient, outpatient, and physician services.',
     modified: '2023-12-20T15:10:00',
     theme: ['Medicare'],
-    '%Ref:distribution': [{
-      identifier: 'dist-18',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-18.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-18-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-19': {
@@ -314,15 +260,12 @@ export const mockDatasets = {
     description: 'Quality performance measures for Medicare-participating providers.',
     modified: '2023-12-15T11:25:00',
     theme: ['Hospital Quality'],
-    '%Ref:distribution': [{
-      identifier: 'dist-19',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-19.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-19-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-20': {
@@ -331,15 +274,12 @@ export const mockDatasets = {
     description: 'Annual cost report data submitted by Medicare-certified institutional providers.',
     modified: '2023-12-10T08:40:00',
     theme: ['Medicare'],
-    '%Ref:distribution': [{
-      identifier: 'dist-20',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-20.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-20-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-21': {
@@ -348,15 +288,12 @@ export const mockDatasets = {
     description: 'Performance and financial data for accountable care organizations in MSSP.',
     modified: '2023-12-05T14:50:00',
     theme: ['Hospital Quality'],
-    '%Ref:distribution': [{
-      identifier: 'dist-21',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-21.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-21-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-22': {
@@ -365,15 +302,12 @@ export const mockDatasets = {
     description: 'Hospital performance scores and payment adjustments under the VBP program.',
     modified: '2023-11-30T10:15:00',
     theme: ['Hospital Quality'],
-    '%Ref:distribution': [{
-      identifier: 'dist-22',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-22.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-22-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-23': {
@@ -382,15 +316,12 @@ export const mockDatasets = {
     description: 'Quality measures and payment data for ambulatory surgical centers.',
     modified: '2023-11-25T16:30:00',
     theme: ['Hospital Quality'],
-    '%Ref:distribution': [{
-      identifier: 'dist-23',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-23.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-23-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-24': {
@@ -399,15 +330,12 @@ export const mockDatasets = {
     description: 'Quality ratings and clinical data for Medicare-certified dialysis facilities.',
     modified: '2023-11-20T12:45:00',
     theme: ['Prescription Drugs'],
-    '%Ref:distribution': [{
-      identifier: 'dist-24',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-24.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-24-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
   'dataset-25': {
@@ -416,15 +344,12 @@ export const mockDatasets = {
     description: 'Quality measures and survey data for Medicare-certified hospice providers.',
     modified: '2023-11-15T09:20:00',
     theme: ['Prescription Drugs'],
-    '%Ref:distribution': [{
-      identifier: 'dist-25',
-      data: {
-        title: 'CSV Download',
+    distribution: [{
+      title: 'CSV Download',
         format: 'csv',
         downloadURL: 'https://data.cms.gov/provider-data/sites/default/files/resources/dataset-25.csv',
         describedBy: 'https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/dataset-25-dd.json',
         describedByType: 'application/vnd.tableschema+json',
-      },
     }],
   },
 };
