@@ -367,11 +367,8 @@ test('Renders data dictionary link from pdf', () => {
   const props = {...singleItem}
   props.identifier = "test"
   props.distribution = {
-    "data": {
-      "describedBy": "s3://913461122956-pdc-dev-test-minimal-data/attached-dictionary.pdf",
-      "describedByType": "application/pdf",
-      "%Ref:downloadURL": []
-    }
+    "describedBy": "s3://913461122956-pdc-dev-test-minimal-data/attached-dictionary.pdf",
+    "describedByType": "application/pdf",
   }
   render(
     <MemoryRouter>
@@ -404,11 +401,8 @@ test('Renders data dictionary link from json', () => {
   const props = {...singleItem}
   props.identifier = "test"
   props.distribution = {
-    "data": {
-      "describedBy": "https://example.com/data-dictionary.json",
-      "describedByType": "application/vnd.tableschema+json",
-      "%Ref:downloadURL": []
-    }
+    "describedBy": "https://example.com/data-dictionary.json",
+    "describedByType": "application/vnd.tableschema+json",
   }
   render(
     <MemoryRouter>
