@@ -40,6 +40,7 @@ export type DatasetSearchPageProps = {
   altMobileSearchButton?: boolean;
   dataDictionaryLinks?: boolean;
   showDateDetails?: boolean;
+  updateDateMonthYearOnly?: boolean;
   showTopics?: boolean;
   topicSlugFunction?: (topic: string) => string | undefined;
   children?: React.ReactNode;

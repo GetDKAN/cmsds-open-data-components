@@ -8,7 +8,7 @@ const TransformedDate = ({
     day: 'numeric',
     timeZone: 'UTC',
   }
-}) => {
+} : {date: string, options?: any}) => {
   const rawDate = new Date(date);
   let modifiedDate = '';
   if (rawDate) {

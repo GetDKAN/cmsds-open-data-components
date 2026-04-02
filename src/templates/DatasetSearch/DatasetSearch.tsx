@@ -45,6 +45,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     altMobileSearchButton,
     dataDictionaryLinks = false,
     showDateDetails = false,
+    updateDateMonthYearOnly = false,
     showTopics = false,
     topicSlugFunction = undefined,
     children
@@ -344,6 +345,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                         paginationEnabled={enablePagination}
                         dataDictionaryLinks={dataDictionaryLinks}
                         distribution={"%Ref:distribution" in item && item["%Ref:distribution"] ? item["%Ref:distribution"][0] : {}}
+                        updateDateMonthYearOnly={updateDateMonthYearOnly}
                         {...dateDetailProps}
                         {...topicProps}
                       />

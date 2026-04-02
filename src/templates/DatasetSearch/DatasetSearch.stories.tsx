@@ -114,6 +114,10 @@ Key features:
       control: 'boolean',
       description: 'Show released and refresh dates on dataset items.',
     },
+    updateDateMonthYearOnly: {
+      control: 'boolean',
+      description: 'Do not display the day and only display the month and year for the last updated date.',
+    },
     showTopics: {
       control: 'boolean',
       description: 'Show topic pills on dataset items.',
