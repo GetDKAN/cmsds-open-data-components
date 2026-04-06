@@ -93,6 +93,7 @@ export type DatasetPageType = {
   enableEmptyFilters?: boolean,
   tabHrefPrepend?: string,
   showDateDetails?: boolean,
+  updateDateMonthYearOnly?: boolean,
   topicDetails?: Array<any>
   showTagsOnOverview?: boolean
   swaggerButtonClassNames?: ApiDocsSwaggerUIPluginProps['buttonClassNames'];
