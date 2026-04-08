@@ -290,7 +290,7 @@ const DataTable = ({
         </table>
       </div>
       {loading && (
-        <Spinner aria-valuetext="Dataset loading" role="img" className="ds-u-margin--3" />
+        <Spinner aria-valuetext="Dataset loading" role="status" className="ds-u-margin--3" />
       )}
       {!loading && table.getRowModel().rows.length === 0 && (
         <Alert variation="warn" role="region">No results found for the current filters</Alert>

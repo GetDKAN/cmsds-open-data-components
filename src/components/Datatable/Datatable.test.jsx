@@ -115,7 +115,7 @@ describe("Datatable live regions", () => {
 
     it("renders visible Spinner component when loading", () => {
       renderDataTable({ loading: true });
-      expect(screen.getByRole("img")).toBeInTheDocument();
+      expect(screen.getByRole("status")).toBeInTheDocument();
     });
   });
 
