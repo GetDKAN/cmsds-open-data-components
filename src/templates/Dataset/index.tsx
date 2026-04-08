@@ -61,6 +61,7 @@ const Dataset = ({
   enableEmptyFilters = false,
   tabHrefPrepend = '',
   showDateDetails = false,
+  updateDateMonthYearOnly = false,
   topicDetails = [],
   showTagsOnOverview = false,
   swaggerButtonClassNames = {},
@@ -142,7 +143,6 @@ const Dataset = ({
     </div>
   );
 
-
   // The below code manages the selected tab in the Design System tab group manually to ensure we can still use the
   // Data Table tab as the default since it no longer exists on initial render (By default, Overview will appear as default)
   const getDefaultTab = () => {
@@ -161,6 +161,13 @@ const Dataset = ({
   const displayDataDictionaryTab = (distribution.data && distribution.data.describedBy && dataDictionaryTypes.includes( distribution.data.describedByType) || (datasetSitewideDictionary && datasetSitewideDictionary.length > 0)) as boolean;
 
   const date = {modified: dataset.modified, released: dataset.released, refresh: dataset.nextUpdateDate};
+
+  const dateOptions = updateDateMonthYearOnly ? {
+      year: 'numeric',
+      month: 'long',
+      day: undefined,
+      timeZone: 'UTC',
+    } : undefined;
 
   return (
     <>
@@ -182,7 +189,7 @@ const Dataset = ({
                   modifiedBoldLabel
                   displayTooltips
                 /> :
-                 <p className="ds-u-margin--0 ds-u-font-weight--bold">Updated <TransformedDate date={date.modified} /></p>}
+                 <p className="ds-u-margin--0 ds-u-font-weight--bold">Updated <TransformedDate date={date.modified} options={dateOptions} /></p>}
             </div>
             <div className={'ds-l-md-col--9'}>
               <DatasetDescription

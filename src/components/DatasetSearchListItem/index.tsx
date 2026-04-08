@@ -24,6 +24,7 @@ type SearchItemProps = {
   released?: string;
   showTopics?: boolean;
   showDateDetails?: boolean;
+  updateDateMonthYearOnly?: boolean;
   theme?: string[];
   topicSlugs?: { [key: string]: string };
   distribution: DistributionType | {};
@@ -43,6 +44,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
     refresh,
     released,
     showDateDetails = false,
+    updateDateMonthYearOnly = false,
     showTopics = false,
     theme,
     topicSlugs,
@@ -169,12 +171,19 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
     )
   }
 
+  const dateOptions = updateDateMonthYearOnly ? {
+      year: 'numeric',
+      month: 'long',
+      day: undefined,
+      timeZone: 'UTC',
+    } : undefined;
+
   return (
     <li className="dc-c-search-list-item ds-u-padding-top--3">
       <div className={`dc-c-searchlist-item ${paginationEnabled ? 'ds-u-border-top--1' : 'ds-u-border-bottom--1 ds-u-padding-bottom--3'}`}>
         <div className="ds-l-row ds-u-align-items--start">
           {!showDateDetails && <span id={`dataset-${identifier}-updated-date`} className={`ds-l-col--12 ds-u-text-align--right ${paginationEnabled ? 'ds-u-padding-top--2' : 'ds-u-padding-top--0'}`}>
-            <span>Updated:</span> <TransformedDate date={modified} />
+            <span>Updated:</span> <TransformedDate date={modified} options={dateOptions} />
           </span>}
           <h2 className={`ds-l-col--12 ds-text-heading--2xl ${showDateDetails ? "ds-u-margin-top--2 ds-u-margin-bottom--0" : ""}`}>
             <Link aria-describedby={`dataset-${identifier}-updated-date`} to={`${url}`}>{title}</Link>

@@ -82,6 +82,10 @@ The default tab is Data Table when the distribution is CSV, otherwise Overview.
       control: false,
       description: 'Optional custom renderer for the dataset description section.',
     },
+    updateDateMonthYearOnly: {
+      control: 'boolean',
+      description: 'Do not display the day and only display the month and year for the last updated date.',
+    },
     updateAriaLive: {
       control: false,
       description: 'Optional callback to announce updates to screen readers (aria-live region).',
