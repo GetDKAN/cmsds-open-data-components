@@ -10,16 +10,4 @@
     color: var(--color-primary) !important;
     text-decoration: none;
   }
-
-  &.ds-c-button[aria-disabled="true"] {
-    opacity: 1;
-    color: #6c6c6c;
-    cursor: not-allowed;
-    text-decoration: underline;
-
-    &:hover,
-    &:focus {
-      color: #6c6c6c !important;
-    }
-  }
 }

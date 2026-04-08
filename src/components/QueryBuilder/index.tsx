@@ -119,7 +119,6 @@ const QueryBuilder = ({resource, id, customColumns, isModal = false, setPage, se
   const submitConditions = (e: Event) => {
     // only update the data conditions when "Apply filters" is pressed
     e.preventDefault();
-    if (!conditionsChanged) return;
     const submitConditions = queryConditions
       .filter((oc: ConditionType) => {
         if (oc.property) {
@@ -194,7 +193,7 @@ const QueryBuilder = ({resource, id, customColumns, isModal = false, setPage, se
               </div>
               <div className="ds-u-display--flex ds-u-justify-content--end ds-l-col--12 ds-l-md-col--6 ds-u-padding-x--0">
                 <Button
-                  aria-disabled={!conditionsChanged || undefined}
+                  disabled={!conditionsChanged}
                   className="ds-u-float--right ds-l-md-col--6 ds-u-margin--right--0 ds-u-sm-margin-right--2"
                   type="submit"
                   variation="solid"
