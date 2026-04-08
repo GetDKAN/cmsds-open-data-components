@@ -279,12 +279,28 @@ const DataTable = ({
           )}
         </table>
       </div>
-      {loading && (
-        <Spinner aria-valuetext="Dataset loading" role="status" className="ds-u-margin--3" />
-      )}
-      {!loading && table.getRowModel().rows.length === 0 && (
-        <Alert variation="warn">No results found for the current filters</Alert>
-      )}
+      <div
+        role="status"
+        aria-live="polite"
+        className={!loading ? "ds-u-visibility--screen-reader" : undefined}
+      >
+        {loading && (
+          <Spinner aria-valuetext="Dataset loading" className="ds-u-margin--3" />
+        )}
+      </div>
+      <div
+        role="alert"
+        aria-live="assertive"
+        className={
+          !loading && table.getRowModel().rows.length === 0
+            ? undefined
+            : "ds-u-visibility--screen-reader"
+        }
+      >
+        {!loading && table.getRowModel().rows.length === 0 && (
+          <Alert variation="warn">No results found for the current filters</Alert>
+        )}
+      </div>
     </>
   )
 }
