@@ -171,7 +171,7 @@ dialog.dkan-filter-dataset-dialog {
   }
 }
 
-.dkan-apply-dataset-filters-button[aria-disabled="true"] {
+.dkan-apply-dataset-filters-button.ds-c-button[aria-disabled="true"] {
   opacity: 1;
   background-color: #757575;
   border-color: #757575;
@@ -186,7 +186,7 @@ dialog.dkan-filter-dataset-dialog {
   }
 }
 
-.dkan-clear-dataset-filters-button[aria-disabled="true"] {
+.dkan-clear-dataset-filters-button.ds-c-button[aria-disabled="true"] {
   opacity: 1;
   color: #757575;
   cursor: not-allowed;

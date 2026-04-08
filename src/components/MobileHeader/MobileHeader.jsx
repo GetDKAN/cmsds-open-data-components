@@ -33,6 +33,13 @@ const MobileHeader = ({
   const mobile = useMediaQuery({ minWidth: 0, maxWidth: 543 });
   const tablet = useMediaQuery({ minWidth: 544, maxWidth: 1023 });
   const menu = useRef(null);
+
+  useEffect(() => {
+    if (!mobile && !tablet && menuOpen) {
+      setMenuOpen(false);
+    }
+  }, [mobile, tablet]);
+
   useEffect(() => {
 
     const trapFocus = (event) => {

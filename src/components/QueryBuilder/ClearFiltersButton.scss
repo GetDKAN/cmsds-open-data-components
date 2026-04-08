@@ -11,7 +11,7 @@
     text-decoration: none;
   }
 
-  &[aria-disabled="true"] {
+  &.ds-c-button[aria-disabled="true"] {
     opacity: 1;
     color: #6c6c6c;
     cursor: not-allowed;
