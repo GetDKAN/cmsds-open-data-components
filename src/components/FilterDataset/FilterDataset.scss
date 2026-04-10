@@ -178,8 +178,7 @@ dialog.dkan-filter-dataset-dialog {
   color: #fff;
   cursor: not-allowed;
 
-  &:hover,
-  &:focus {
+  &:is(:hover, :hover:focus, :focus, :active, :active:focus) {
     background-color: #959595;
     border-color: #959595;
     color: #fff;
