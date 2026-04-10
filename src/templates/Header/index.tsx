@@ -100,6 +100,12 @@ const Header = (props: HeaderProps) => {
   }
 
   useEffect(() => {
+    if (!mobileMax && mobileMenuOpen) {
+      setMobileMenuOpen(false);
+    }
+  }, [mobileMax]);
+
+  useEffect(() => {
     document.addEventListener('keyup', handleMenuClose);
     document.addEventListener('mousedown', handleClick);
     if(mobileMenuOpen) {
@@ -107,14 +113,14 @@ const Header = (props: HeaderProps) => {
     } else {
       closeMobileMenu()
     }
-    
+
     if (menu.current) {
-      menu.current.addEventListener('keydown', (evt) => trapFocus(evt));
+      menu.current.addEventListener('keydown', trapFocus);
     }
-    
+
     return () => {
       document.removeEventListener('keyup', handleMenuClose);
-      document.addEventListener('mousedown', handleClick);
+      document.removeEventListener('mousedown', handleClick);
       if (menu.current) {
         menu.current.removeEventListener('keydown', trapFocus);
       }

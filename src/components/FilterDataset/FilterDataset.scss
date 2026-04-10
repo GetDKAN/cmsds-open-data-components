@@ -170,3 +170,28 @@ dialog.dkan-filter-dataset-dialog {
     }
   }
 }
+
+.dkan-apply-dataset-filters-button.ds-c-button[aria-disabled="true"] {
+  opacity: 1;
+  background-color: #757575;
+  border-color: #757575;
+  color: #fff;
+  cursor: not-allowed;
+
+  &:is(:hover, :hover:focus, :focus, :active, :active:focus) {
+    background-color: #959595;
+    border-color: #959595;
+    color: #fff;
+  }
+}
+
+.dkan-clear-dataset-filters-button.ds-c-button[aria-disabled="true"] {
+  opacity: 1;
+  color: #757575;
+  cursor: not-allowed;
+
+  &:hover,
+  &:focus {
+    color: #959595;
+  }
+}

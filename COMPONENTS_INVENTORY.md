@@ -30,7 +30,7 @@ This document provides a comprehensive inventory of all components, services, te
 | Component | [DatasetSearchFacets](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetSearchFacets) | ✅ Public | ✅ Has Story | ✅ Has Tests |
 | Component | [DatasetSearchListItem](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetSearchListItem) | ✅ Public | ❌ No Story | ✅ Has Tests |
 | Component | [DatasetTableTab](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetTableTab) | ✅ Public (as DatasetTable) | ❌ No Story | ✅ Has Tests |
-| Component | [Datatable](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/Datatable) | ✅ Public | ❌ No Story | ❌ No Tests |
+| Component | [Datatable](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/Datatable) | ✅ Public | ❌ No Story | ✅ Has Tests |
 | Component | [DatatableHeader](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatatableHeader) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
 | Component | [DesktopHeader](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DesktopHeader) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Component | [DisplaySettings](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DisplaySettings) | ❌ Internal | ❌ No Story | ✅ Has Tests |
@@ -48,7 +48,7 @@ This document provides a comprehensive inventory of all components, services, te
 | Component | [LargeFileDialog](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/LargeFileDialog) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
 | Component | [LargeFileInfo](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/LargeFileInfo) | ❌ Internal | ✅ Has Story | ❌ No Tests |
 | Component | [ManageColumns](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/ManageColumns) | ❌ Internal | ❌ No Story | ✅ Has Tests |
-| Component | [MobileHeader](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/MobileHeader) | ❌ Internal | ❌ No Story | ❌ No Tests |
+| Component | [MobileHeader](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/MobileHeader) | ❌ Internal | ❌ No Story | ✅ Has Tests |
 | Component | [MobileMenuButton](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/MobileMenuButton) | ✅ Public | ✅ Has Story | ❌ No Tests |
 | Component | [NavBar](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/NavBar) | ✅ Public | ❌ No Story | ❌ No Tests |
 | Component | [NavLink](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/NavLink) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
@@ -123,11 +123,11 @@ This document provides a comprehensive inventory of all components, services, te
 
 | Category | Total | With Stories | With Tests | With Both | With Neither |
 |----------|-------|--------------|------------|-----------|--------------|
-| Components | 64 | 39 (61%) | 24 (38%) | 14 (22%) | 15 (23%) |
+| Components | 64 | 39 (61%) | 26 (41%) | 14 (22%) | 13 (20%) |
 | Templates | 11 | 10 (91%) | 3 (27%) | 3 (27%) | 1 (9%) |
 | Services/Hooks/Contexts | 9 | 0 (0%) | 0 (0%) | 0 (0%) | 9 (100%) |
 | Utilities/Types/Assets | 12 | 0 (0%) | 0 (0%) | 0 (0%) | 12 (100%) |
-| **Project Total** | **96** | **49 (51%)** | **27 (28%)** | **17 (18%)** | **37 (39%)** |
+| **Project Total** | **96** | **49 (51%)** | **29 (30%)** | **17 (18%)** | **35 (36%)** |
 
 ---
 
@@ -137,5 +137,5 @@ This document provides a comprehensive inventory of all components, services, te
 
 ---
 
-*Last updated: April 6, 2026*  
+*Last updated: April 10, 2026*  
 *Repository: [GetDKAN/cmsds-open-data-components](https://github.com/GetDKAN/cmsds-open-data-components)*

@@ -43,6 +43,16 @@ const DataTable = ({
   const data = resource.values;
   const [ sorting, setSorting ] = useState([])
   const dataTableWrapperElement = useRef(null)
+  const [loadingAnnouncement, setLoadingAnnouncement] = useState("")
+
+  useEffect(() => {
+    if (loading) {
+      setLoadingAnnouncement("Dataset loading");
+    } else if (loadingAnnouncement) {
+      const timer = setTimeout(() => setLoadingAnnouncement(""), 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [loading]);
   const columnHelper = createColumnHelper()
 
   const table_columns = columns.map((col) => {
@@ -283,8 +293,16 @@ const DataTable = ({
         <Spinner aria-valuetext="Dataset loading" role="status" className="ds-u-margin--3" />
       )}
       {!loading && table.getRowModel().rows.length === 0 && (
-        <Alert variation="warn">No results found for the current filters</Alert>
+        <Alert variation="warn" role="region">No results found for the current filters</Alert>
       )}
+      <div aria-live="polite" aria-atomic="true" data-testid="loading-announcement" className="ds-u-visibility--screen-reader">
+        {loadingAnnouncement}
+      </div>
+      <div aria-live="assertive" aria-atomic="true" data-testid="no-results-announcement" className="ds-u-visibility--screen-reader">
+        {!loading && table.getRowModel().rows.length === 0
+          ? "Warning: No results found for the current filters"
+          : ""}
+      </div>
     </>
   )
 }

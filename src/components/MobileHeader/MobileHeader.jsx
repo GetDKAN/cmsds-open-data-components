@@ -33,9 +33,17 @@ const MobileHeader = ({
   const mobile = useMediaQuery({ minWidth: 0, maxWidth: 543 });
   const tablet = useMediaQuery({ minWidth: 544, maxWidth: 1023 });
   const menu = useRef(null);
+
+  useEffect(() => {
+    if (!mobile && !tablet && menuOpen) {
+      setMenuOpen(false);
+    }
+  }, [mobile, tablet]);
+
   useEffect(() => {
 
-    const trapFocus = (event, container) => {
+    const trapFocus = (event) => {
+      if (!menuOpen) return;
       const focusableEls = getFocusableElements(menu.current).selectors.visible;
       const firstEl = focusableEls[0];
       const lastEl = focusableEls[focusableEls.length - 1];
@@ -82,7 +90,7 @@ const MobileHeader = ({
     document.addEventListener('mousedown', handleClick);
     document.addEventListener('keyup', handleMenuClose);
     handleFocusIn();
-    menu.current.addEventListener('keydown', (evt) => trapFocus(evt, menu.current));
+    menu.current.addEventListener('keydown', trapFocus);
 
     return () => {
       document.removeEventListener('keyup', handleMenuClose);
