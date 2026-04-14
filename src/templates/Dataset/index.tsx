@@ -162,7 +162,7 @@ const Dataset = ({
 
   const date = {modified: dataset.modified, released: dataset.released, refresh: dataset.nextUpdateDate};
 
-  const dateOptions = updateDateMonthYearOnly ? {
+  const dateOptions: Intl.DateTimeFormatOptions | undefined = updateDateMonthYearOnly ? {
       year: 'numeric',
       month: 'long',
       day: undefined,

@@ -14,6 +14,18 @@ This document provides overrides to Swagger UI, fixing accessibility issues.
   --su-color--red-light: rgba(211, 0, 0, .1);
   --su-color--red: rgb(211, 0, 0);
 }
+// Reset container styles when APIPage is nested inside another ds-l-container
+// (e.g., when rendered inside SidebarPage)
+.ds-l-container section.ds-l-container:has(.swagger-ui) {
+  max-width: none;
+  padding-inline: 0;
+  margin-inline: 0;
+}
+.ds-l-container #api-docs-swagger-ui-plugin.ds-l-container {
+  max-width: none;
+  padding-inline: 0;
+  margin-inline: 0;
+}
 // State  `.swagger-ui` twice to include specificity and avoid multiple `!important` statements;
 .swagger-ui.swagger-ui {
   font-family: inherit;
