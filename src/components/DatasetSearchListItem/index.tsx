@@ -171,7 +171,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
     )
   }
 
-  const dateOptions = updateDateMonthYearOnly ? {
+  const dateOptions: Intl.DateTimeFormatOptions | undefined = updateDateMonthYearOnly ? {
       year: 'numeric',
       month: 'long',
       day: undefined,
