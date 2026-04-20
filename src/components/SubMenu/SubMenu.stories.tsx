@@ -77,7 +77,9 @@ type Story = StoryObj<typeof SubMenu>;
 export const Default: Story = {
   args: {
     link: {
+      id: 'resources',
       label: 'Resources',
+      url: '/resources',
       submenu: [
         { id: 'datasets', label: 'Datasets', url: '/datasets' },
         { id: 'api', label: 'API', url: '/api' },
@@ -100,7 +102,9 @@ export const Default: Story = {
 export const WithIcons: Story = {
   args: {
     link: {
+      id: 'explore',
       label: 'Explore',
+      url: '/explore',
       submenu: [
         { id: 'datasets', label: 'Datasets', url: '/datasets', icon: <SimpleIcon /> },
         { id: 'topics', label: 'Topics', url: '/topics', icon: <SimpleIcon /> },
@@ -123,7 +127,9 @@ export const WithIcons: Story = {
 export const WithExternalLinks: Story = {
   args: {
     link: {
+      id: 'external',
       label: 'External',
+      url: '/external',
       submenu: [
         { id: 'docs', label: 'Documentation', url: 'https://example.com/docs', external: true },
         { id: 'support', label: 'Support', url: 'https://example.com/support', external: true },
@@ -145,7 +151,9 @@ export const WithExternalLinks: Story = {
 export const UnwrappedLabel: Story = {
   args: {
     link: {
+      id: 'menu',
       label: 'Menu',
+      url: '/menu',
       submenu: [
         { id: 'item1', label: 'Item One', url: '/one' },
         { id: 'item2', label: 'Item Two', url: '/two' },
@@ -167,7 +175,9 @@ export const UnwrappedLabel: Story = {
 export const OnDarkBackground: Story = {
   args: {
     link: {
+      id: 'navigation',
       label: 'Navigation',
+      url: '/navigation',
       submenu: [
         { id: 'home', label: 'Home', url: '/' },
         { id: 'data', label: 'Data', url: '/data' },

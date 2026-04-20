@@ -5,12 +5,18 @@ import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 import HeaderContext from '../../templates/Header/HeaderContext';
 import SubMenu from './index';
+import { NavLinkArray } from '../../types/misc';
+
+type MockSubMenuStaticListProps = {
+  submenuArray: NavLinkArray[];
+  subLinkClasses: string;
+};
 
 jest.mock('../SubMenuStaticList', () => {
-  return function MockSubMenuStaticList({ submenuArray, subLinkClasses }: any) {
+  return function MockSubMenuStaticList({ submenuArray, subLinkClasses }: MockSubMenuStaticListProps) {
     return (
       <ul data-testid="submenu-list" className="dkan-c-site-menu--sub-menu">
-        {submenuArray.map((item: any) => (
+        {submenuArray.map((item: NavLinkArray) => (
           <li key={item.id}>
             <a href={item.url} className={subLinkClasses}>
               {item.icon ?? null}
@@ -37,16 +43,20 @@ const mockHeaderContext = {
   onDark: false,
 };
 
-const staticSubmenuLink = {
+const staticSubmenuLink: NavLinkArray = {
+  id: 'resources',
   label: 'Resources',
+  url: '/resources',
   submenu: [
     { id: 'datasets', label: 'Datasets', url: '/datasets' },
     { id: 'api', label: 'API', url: '/api' },
   ],
 };
 
-const externalSubmenuLink = {
+const externalSubmenuLink: NavLinkArray = {
+  id: 'external',
   label: 'External',
+  url: '/external',
   submenu: [
     { id: 'docs', label: 'Documentation', url: 'https://example.com/docs', external: true },
   ],

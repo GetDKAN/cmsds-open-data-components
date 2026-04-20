@@ -1,4 +1,4 @@
-import React, { useEffect, ReactNode, ReactElement, useRef } from 'react';
+import React, { useEffect, ReactElement, ReactNode, useRef } from 'react';
 import { useMediaQuery } from 'react-responsive'
 import CMSTopNav from '../../components/CMSTopNav';
 import HeaderContext from './HeaderContext';
@@ -11,16 +11,6 @@ type HeaderProps = {
   mobileMaxWidth?: number;
   onDark?: boolean;
 };
-
-export type NavLinkArray = {
-  id: string;
-  label: string;
-  url: string;
-  target?: string;
-  submenu?: NavLinkArray[];
-  icon?: ReactNode;
-  drupalPage?: boolean;
-}
 
 const Header = (props: HeaderProps) => {
   const { topNav, children, mobileMaxWidth = 768, onDark = false } = props;

@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import { ReactElement, ReactNode } from "react"
 
 export type FAQItemType = {
   id: string,
@@ -27,5 +27,8 @@ export type NavLinkArray = {
   label: string;
   url: string;
   target?: string;
-  submenu?: NavLinkArray[]
+  submenu?: NavLinkArray[] | ReactElement;
+  icon?: ReactNode;
+  external?: boolean;
+  drupalPage?: boolean;
 }

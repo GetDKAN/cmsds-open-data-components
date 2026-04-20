@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { Button, CloseIconThin } from '@cmsgov/design-system';
 import HeaderContext from '../../templates/Header/HeaderContext';
 import SubMenu from '../SubMenu';
-import { NavLinkArray } from '../../templates/Header';
+import { NavLinkArray } from '../../types/misc';
 import HeaderSearch from '../HeaderSearch';
 import './header-nav.scss';
 
