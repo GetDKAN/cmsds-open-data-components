@@ -70,7 +70,7 @@ const SubMenu = ({ link, linkClasses, subLinkClasses, wrapLabel = true }) => {
         }}
       >
         {innerHtml}
-        <ArrowIcon className="ds-u-margin-left--1" direction={isExpanded ? "down" : "right"} />
+        <ArrowIcon className="ds-u-margin-left--1" direction={isExpanded ? "up" : "down"} />
       </Button>
       {submenuBlock}
     </li>

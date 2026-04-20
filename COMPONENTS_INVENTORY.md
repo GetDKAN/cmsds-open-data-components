@@ -65,7 +65,7 @@ This document provides a comprehensive inventory of all components, services, te
 | Component | [SearchModal](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/SearchModal) | ❌ Internal | ✅ Has Story | ❌ No Tests |
 | Component | [SidebarNavigation](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/SidebarNavigation) | ✅ Public | ✅ Has Story | ❌ No Tests |
 | Component | [SitewideDataDictionaryTable](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/SitewideDataDictionaryTable) | ❌ Internal | ✅ Has Story | ❌ No Tests |
-| Component | [SubMenu](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/SubMenu) | ✅ Public | ❌ No Story | ❌ No Tests |
+| Component | [SubMenu](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/SubMenu) | ✅ Public | ✅ Has Story | ✅ Has Tests |
 | Component | [SubMenuStaticList](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/SubMenuStaticList) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Component | [TopicInformation](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/TopicInformation) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
 | Component | [TransformedDate](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/TransformedDate) | ✅ Public | ✅ Has Story | ❌ No Tests |
@@ -123,11 +123,11 @@ This document provides a comprehensive inventory of all components, services, te
 
 | Category | Total | With Stories | With Tests | With Both | With Neither |
 |----------|-------|--------------|------------|-----------|--------------|
-| Components | 64 | 39 (61%) | 26 (41%) | 14 (22%) | 13 (20%) |
+| Components | 64 | 40 (63%) | 27 (42%) | 15 (23%) | 12 (19%) |
 | Templates | 11 | 10 (91%) | 3 (27%) | 3 (27%) | 1 (9%) |
 | Services/Hooks/Contexts | 9 | 0 (0%) | 0 (0%) | 0 (0%) | 9 (100%) |
 | Utilities/Types/Assets | 12 | 0 (0%) | 0 (0%) | 0 (0%) | 12 (100%) |
-| **Project Total** | **96** | **49 (51%)** | **29 (30%)** | **17 (18%)** | **35 (36%)** |
+| **Project Total** | **96** | **50 (52%)** | **30 (31%)** | **18 (19%)** | **34 (35%)** |
 
 ---
 
@@ -137,5 +137,5 @@ This document provides a comprehensive inventory of all components, services, te
 
 ---
 
-*Last updated: April 13, 2026*  
+*Last updated: April 20, 2026*  
 *Repository: [GetDKAN/cmsds-open-data-components](https://github.com/GetDKAN/cmsds-open-data-components)*
