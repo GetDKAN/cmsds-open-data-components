@@ -12,6 +12,7 @@ import SearchItemIcon from '../../assets/icons/searchItem';
 import DatasetOverview from '../../components/DatasetOverviewTab';
 import DatasetAPI from '../../components/DatasetAPITab';
 import DataDictionary from '../../components/DatasetDataDictionaryTab';
+import StoredQuery from '../../components/StoredQueryTab';
 import { DatasetDictionaryItemType, DatasetPageType, DatasetDictionaryType, DistributionType, ResourceType, ColumnType } from '../../types/dataset';
 import TransformedDate from '../../components/TransformedDate';
 import { getFormatType } from '../../utilities/format';
@@ -55,6 +56,7 @@ const Dataset = ({
   dataDictionaryBanner = false,
   disableTableControls = false,
   hideDataDictionary = false,
+  hideStoredQuery = true,
   customDescription,
   updateAriaLive,
   showRowLimitNotice = false,
@@ -168,6 +170,7 @@ const Dataset = ({
       day: undefined,
       timeZone: 'UTC',
     } : undefined;
+
 
   return (
     <>
@@ -294,6 +297,7 @@ const Dataset = ({
                       <DatasetAPI id={id} rootUrl={rootUrl} apiUrl={apiPageUrl} showRowLimitNotice={showRowLimitNotice} swaggerButtonClassNames={swaggerButtonClassNames} />
                     </TabPanel>
                   )}
+
                 </Tabs>
               )}
             </div>
