@@ -1,16 +1,19 @@
 :root {
   --mobile-nav-animation-time: 1s;
   --main-nav-height: 6.25rem;
-  --header-bg-color: #{var(--color-primary)};
-  --header-bg-image: linear-gradient(90deg, var(--color-primary-darkest) 10%, var(--color-primary) 90%);
-  --header-nav-link--color: #{var(--color-white)};
-  --header-nav-link--mobile-color: #{var(--color-white)};
-  --header-mobile-bg-color: #{var(--color-gray-dark)};
-  --header-submenu--bg-color: #{var(--color-primary)};
-  --header-submenu--width: 333px; // This oddly specific width ensures that pagers on submenus with dataset listings have 24px width between them. See DatasetListSubmenu.tsx.
-  --header-nav-search--color: #{var(--color-white)};
   --tag-line--color: #6f757c;
   --tag-line--border-color: #6f757c;
+  --header-bg-image: none;
+  --header-bg-color: #f7f7f7;
+  --header-mobile-bg-color: var(--color-gray-dark);
+  --header-nav-icon-link--desktop-width: 240px;
+  --header-nav-icon-link--mobile-width: 240px;
+  --header-nav-link--color: var(--color-primary);
+  --header-nav-link--mobile-color: var(--color-white);
+  --header-nav-search--color: var(--color-primary);
+  --mobile-menu-button--color: var(--color-primary);
+  --header-submenu--bg-color: var(--color-white);
+  --header-submenu--width: 450px;
 }
 
 .dkan-c-main-navigation > div > div {
