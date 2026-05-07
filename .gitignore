@@ -4,6 +4,7 @@ dist
 .idea
 .docz
 docs
+agent-docs-eval
 .DS_Store
 .parcel-cache
 coverage
