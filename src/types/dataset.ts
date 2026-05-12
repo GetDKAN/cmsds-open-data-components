@@ -101,6 +101,7 @@ export type DatasetPageType = {
 
 
 export type ResourceType = {
+  error: { status: number, message: string, stack: string } | null,
   columns: Array<string>,
   count: number | null,
   totalRows: number,

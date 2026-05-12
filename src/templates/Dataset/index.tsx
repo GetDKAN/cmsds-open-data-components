@@ -88,7 +88,6 @@ const Dataset = ({
     distribution = distributions[0];
   }
 
-
   const resource = useDatastore(
     '',
     rootUrl,
