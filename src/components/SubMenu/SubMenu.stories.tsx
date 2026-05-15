@@ -1,7 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import SubMenu from './index';
+import DatasetListSubmenu from '../DatasetListSubmenu';
 import HeaderContext from '../../templates/Header/HeaderContext';
 import { MemoryRouter } from 'react-router-dom';
+import { createDatasetListHandlers } from '../../../.storybook/mswHandlers';
+import { mockApiResponse } from '../../../__mocks__/mockDatasetSearchResults';
 
 const mockHeaderContext = {
   mobileMenuOpen: false,
@@ -167,6 +170,63 @@ export const UnwrappedLabel: Story = {
     docs: {
       description: {
         story: 'A submenu with wrapLabel set to false, rendering the button label as plain text.',
+      },
+    },
+  },
+};
+
+const MinimalSubmenu = ({ subLinkClasses }: { subLinkClasses?: string }) => (
+  <ul style={{ listStyle: 'none', padding: '8px 0' }}>
+    <li><a href="/item-1" className={subLinkClasses}>Custom item 1</a></li>
+    <li><a href="/item-2" className={subLinkClasses}>Custom item 2</a></li>
+  </ul>
+);
+
+export const WithDatasetListSubmenu: Story = {
+  args: {
+    link: {
+      id: 'datasets',
+      label: 'Datasets',
+      url: '/datasets',
+      submenu: <DatasetListSubmenu rootUrl="https://data.cms.gov" />,
+    },
+    linkClasses: '',
+    subLinkClasses: '',
+    wrapLabel: true,
+  },
+  parameters: {
+    msw: {
+      handlers: createDatasetListHandlers(mockApiResponse),
+    },
+    docs: {
+      description: {
+        story:
+          'Demonstrates passing a `ReactElement` as `link.submenu`. SubMenu renders it via ' +
+          '`React.cloneElement`, injecting `subLinkClasses`. `DatasetListSubmenu` is self-wrapped ' +
+          'with `withQueryProvider` — no extra `QueryClientProvider` decorator is needed.',
+      },
+    },
+  },
+};
+
+export const WithCustomElement: Story = {
+  args: {
+    link: {
+      id: 'custom',
+      label: 'Custom',
+      url: '/custom',
+      submenu: <MinimalSubmenu />,
+    },
+    linkClasses: '',
+    subLinkClasses: 'dkan-c-site-menu--sub-link',
+    wrapLabel: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Any component accepting `subLinkClasses?: string` can be passed as `link.submenu`. ' +
+          'SubMenu injects the prop via `cloneElement`. No data fetching or MSW required.',
       },
     },
   },

@@ -209,5 +209,37 @@ describe('<SubMenu />', () => {
 
       expect(screen.getByText('Custom item')).toHaveClass('my-link-class');
     });
+
+    it('does not render SubMenuStaticList when submenu is a ReactElement', async () => {
+      renderSubMenu({ link: reactElementSubmenuLink });
+      await userEvent.click(screen.getByRole('button', { name: /Custom/i }));
+
+      expect(screen.queryByTestId('submenu-list')).not.toBeInTheDocument();
+    });
+
+    it('preserves original element props after cloneElement injects subLinkClasses', async () => {
+      const PropPreservingSubmenu = ({
+        subLinkClasses,
+        'data-original': dataOriginal,
+      }: SubmenuElementProps & { 'data-original'?: string }) => (
+        <ul data-testid="prop-check" data-original={dataOriginal}>
+          <li className={subLinkClasses}>Item</li>
+        </ul>
+      );
+
+      const linkWithOriginalProp: NavLinkArray = {
+        id: 'prop-test',
+        label: 'PropTest',
+        url: '/prop-test',
+        submenu: <PropPreservingSubmenu data-original="preserved" />,
+      };
+
+      renderSubMenu({ link: linkWithOriginalProp, subLinkClasses: 'injected-class' });
+      await userEvent.click(screen.getByRole('button', { name: /PropTest/i }));
+
+      const list = screen.getByTestId('prop-check');
+      expect(list).toHaveAttribute('data-original', 'preserved');
+      expect(screen.getByText('Item')).toHaveClass('injected-class');
+    });
   });
 });
