@@ -5,7 +5,7 @@ import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 import HeaderContext from '../../templates/Header/HeaderContext';
 import SubMenu from './index';
-import { NavLinkArray } from '../../types/misc';
+import { NavLinkArray, SubmenuElementProps } from '../../types/misc';
 
 type MockSubMenuStaticListProps = {
   submenuArray: NavLinkArray[];
@@ -26,12 +26,6 @@ jest.mock('../SubMenuStaticList', () => {
         ))}
       </ul>
     );
-  };
-});
-
-jest.mock('../DatasetListSubmenu', () => {
-  return function MockDatasetListSubmenu() {
-    return <ul data-testid="dataset-submenu" />;
   };
 });
 
@@ -186,5 +180,34 @@ describe('<SubMenu />', () => {
     await userEvent.click(screen.getByRole('button', { name: /Explore/i }));
 
     expect(screen.getByTestId('submenu-icon')).toBeInTheDocument();
+  });
+
+  describe('ReactElement submenu via cloneElement', () => {
+    const CustomSubmenu = ({ subLinkClasses }: SubmenuElementProps) => (
+      <ul data-testid="custom-submenu">
+        <li className={subLinkClasses}>Custom item</li>
+      </ul>
+    );
+
+    const reactElementSubmenuLink: NavLinkArray = {
+      id: 'custom',
+      label: 'Custom',
+      url: '/custom',
+      submenu: <CustomSubmenu />,
+    };
+
+    it('renders the custom ReactElement, not DatasetListSubmenu', async () => {
+      renderSubMenu({ link: reactElementSubmenuLink });
+      await userEvent.click(screen.getByRole('button', { name: /Custom/i }));
+
+      expect(screen.getByTestId('custom-submenu')).toBeInTheDocument();
+    });
+
+    it('injects subLinkClasses into the cloned element', async () => {
+      renderSubMenu({ link: reactElementSubmenuLink, subLinkClasses: 'my-link-class' });
+      await userEvent.click(screen.getByRole('button', { name: /Custom/i }));
+
+      expect(screen.getByText('Custom item')).toHaveClass('my-link-class');
+    });
   });
 });
