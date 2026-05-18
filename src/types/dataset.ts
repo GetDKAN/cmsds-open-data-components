@@ -8,8 +8,20 @@ export type DistributionDataType = {
   describedBy: string,
   describedByType: string,
   mediaType: string,
+  "%Ref:downloadURL": {
+    identifier: string,
+    data: DistributionSubDataType,
+  }[],
+  "@type": string,
+}
+
+export type DistributionSubDataType = {
+  filePath: string,
+  identifier: string,
+  perspective: string,
+  version: string,
+  checksum: string | null,
   mimeType: string,
-  "%Ref:downloadURL": DistributionType[],
 }
 
 export type DistributionType = {
@@ -56,7 +68,7 @@ export type PropertyType = {
 }
 
 export type ColumnType = {
-  header: string,
+  header?: string,
   accessor: string
 }
 

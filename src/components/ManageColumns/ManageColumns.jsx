@@ -68,10 +68,14 @@ const ManageColumns = ({
   // keep state in sync
   useEffect(() => {
     if (columnOrder?.length)
-      setCards(columnOrder.map(c => {
-        const column = columns.filter(col => col.id === c)[0];
-        return {id: column.id, visible: column.getIsVisible()}
-      }))
+      setCards(columnOrder
+        .map(id => columns.find(col => col.id === id)) // Get list of cards in order
+        .filter(Boolean) // Filter out an possible undefined/non-matches
+        .map(column => ({ // Normalize the data
+          id: column.id,
+          visible: column.getIsVisible(),
+        }))
+      )
   }, [columnOrder])
 
   // Update cards state when columnVisibility changes
@@ -202,10 +206,14 @@ const ManageColumns = ({
                   onClick={() => {
                     // reset to default column order and set all cards to visible
                     // do not save this to the table state until the "Save" button is clicked
-                    setCards(defaultColumnOrder.map(column => {
-                      const card = cards.filter(c => c.id === column)[0]
-                      return {...card, visible: true }
-                    }));
+                    setCards(defaultColumnOrder
+                      .map(id => cards.find(c => c.id === id)) // Get list of cards in order
+                      .filter(Boolean) // Filter out an possible undefined/non-matches
+                      .map(card => ({ // Normalize the data
+                        ...card,
+                        visible: true,
+                      }))
+                    );
                   }}
                 >
                   Reset Columns
