@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import { render, screen, fireEvent, act, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import DatasetSearch from './index';
 import { MemoryRouter } from 'react-router-dom';
