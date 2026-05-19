@@ -126,7 +126,7 @@ Key features:
     },
     analytics: {
       control: 'boolean',
-      description: 'Fire the onAnalyticsEvent callback when a search term is submitted and/or a topic or tag is selected and/or search results are sorted.',
+      description: 'Fire the onAnalyticsEvent callback when a search term is submitted and/or a topic or tag is selected and/or search results are sorted. False by default.',
     },
     onAnalyticsEvent: {
       action: 'onAnalyticsEvent fired', // Won't actually fire because it's dependent on url querystring changes
