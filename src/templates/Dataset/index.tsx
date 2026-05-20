@@ -88,7 +88,6 @@ const Dataset = ({
     distribution = distributions[0];
   }
 
-
   const resource = useDatastore(
     '',
     rootUrl,
@@ -231,7 +230,8 @@ const Dataset = ({
                           customColumns: customColumns,
                           dataDictionaryBanner: (dataDictionaryBanner && displayDataDictionaryTab),
                           datasetTableControls: !disableTableControls,
-                          enableEmptyFilters: enableEmptyFilters
+                          enableEmptyFilters: enableEmptyFilters,
+                          relativeHomeUrlPrepend: tabHrefPrepend,
                         }}>
                           <DataTableStateWrapper />
                         </DataTableContext.Provider>

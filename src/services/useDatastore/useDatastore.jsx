@@ -75,12 +75,26 @@ const useDatastore = (
   // Change whether distribution API or dataset API is used based on option
   const queryID = useDatasetAPI && datasetID ? `${datasetID}/0` : id;
 
+  async function fetchJson(url) {
+    const res = await fetch(url);
+    const body = await res.json().catch(() => ({}));
+
+    if (!res.ok) {
+      const err = new Error(body.message || body.error || res.statusText);
+      err.status = res.status;
+
+      throw err;
+    }
+
+    return body;
+  }
+
   const {data, isPending, error} = useQuery({
     queryKey: ["datastore" + id + paramsString],
     queryFn: () => {
-      setCount(null)
-      return fetch(`${rootUrl}/datastore/query/${queryID}?${paramsString}`)
-        .then(res => res.json())
+      setCount(null);
+
+      return fetchJson(`${rootUrl}/datastore/query/${queryID}?${paramsString}`);
     },
     enabled: enabled
   })
@@ -92,12 +106,11 @@ const useDatastore = (
         results: false,
         count: true,
         schema: true
-      }
-      return fetch(`${rootUrl}/datastore/query/${queryID}?${qs.stringify(acaToParams(unfilteredParams, ACA))}`)
-        .then(res => res.json())
+      };
+
+      return fetchJson(`${rootUrl}/datastore/query/${queryID}?${qs.stringify(acaToParams(unfilteredParams, ACA))}`);
     },
   })
-  
 
   useEffect(() => {
     if(data) {
@@ -123,6 +136,7 @@ const useDatastore = (
 
   return {
     loading: enabled ? isPending : false,
+    error,
     values,
     count,
     columns,
