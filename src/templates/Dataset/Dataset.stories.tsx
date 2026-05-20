@@ -93,6 +93,10 @@ The default tab is Data Table when the distribution is CSV, otherwise Overview.
     showRowLimitNotice: {
       control: 'boolean',
       description: 'When true, shows a notice when row count is limited. Defaults to false.',
+    },
+    tabHrefPrepend: {
+      control: 'text',
+      description: 'Prepends the provided string to the relative url value of the tab href\'s on the dataset detail page.',
     }
   },
   tags: ['autodocs'],
@@ -121,7 +125,8 @@ const defaultArgs = {
   disableTableControls: false,
   hideDataDictionary: false,
   showRowLimitNotice: false,
-  dataDictionaryUrl: ''
+  dataDictionaryUrl: '',
+  tabHrefPrepend: '',
 };
 
 export const Default: Story = {

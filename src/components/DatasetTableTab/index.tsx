@@ -3,7 +3,7 @@ import qs from 'qs';
 import DataTable from '../Datatable/Datatable';
 import { transformTableSortToQuerySort } from '../../services/useDatastore/transformSorts';
 import { buildCustomColHeaders } from '../../templates/FilteredResource/functions';
-import { Pagination, Spinner, Alert } from '@cmsgov/design-system';
+import { Pagination, Spinner, Button } from '@cmsgov/design-system';
 import QueryBuilder from '../QueryBuilder';
 import { DistributionType, ColumnType, ResourceType } from '../../types/dataset';
 import DataTableContext from '../../templates/Dataset/DataTableContext';
@@ -26,6 +26,7 @@ export type DatasetTableTabProps = {
   dataDictionaryBanner: boolean;
   datasetTableControls: boolean;
   enableEmptyFilters?: boolean;
+  relativeHomeUrlPrepend?: string;
 };
 
 const DatasetTable = ({
@@ -62,6 +63,7 @@ const DatasetTable = ({
     rootUrl,
     customColumns = [],
     dataDictionaryBanner,
+    relativeHomeUrlPrepend,
   } = useContext(DataTableContext) as DatasetTableTabProps;
   const { page, setPage, tableDensity } = useContext(DataTableActionsContext);
 
@@ -84,7 +86,25 @@ const DatasetTable = ({
     { encode: true }
   )}&format=csv`;
 
+  const useDatastoreErrorMessages: {
+    [key: number]: {
+      title: string,
+      message: string
+    }
+  } = {
+    400: {
+      title: 'Data unavailable',
+      message: 'This data is not available for preview at this time. Please try again later.',
+    },
+    500: {
+      title: 'Something went wrong',
+      message: 'Something went wrong on our end. Please try again later.',
+    },
+  };
+
+  // Data loaded successfully
   if (
+    !resource.error &&
     Object.keys(resource).length &&
     columns.length &&
     resource.schema &&
@@ -153,8 +173,29 @@ const DatasetTable = ({
         )}
       </>
     );
-  } else
+
+  // useDatastore error
+  } else if (resource.error && !resource.loading) {
+    const resourceErrorStatus = resource.error.status in useDatastoreErrorMessages ? resource.error.status : 500;
+
+    return (
+      <div>
+        <h2 className="ds-text-heading--lg ds-u-margin--0 ds-u-color--primary">
+          {useDatastoreErrorMessages[resourceErrorStatus].title}
+        </h2>
+        <p className="ds-u-padding-bottom--2 ds-u-margin-bottom--7">
+          {useDatastoreErrorMessages[resourceErrorStatus].message}
+        </p>
+        <Button href={`${relativeHomeUrlPrepend}/`} variation="solid" className="">
+          Go to home
+        </Button>
+      </div>
+    );
+
+  // Data loading
+  } else {
     return <Spinner aria-valuetext="Dataset loading" role="status" className="ds-u-margin--3" />;
+  }
 };
 
 export default DatasetTable;

@@ -3,14 +3,15 @@ import { DistributionType, ResourceType, ColumnType } from '../../types/dataset'
 
 // create context
 export type DataTableContextType = {
-  id: string | null,
-  resource?: ResourceType,
-  distribution?: DistributionType,
-  rootUrl?: string,
-  customColumns?: Array<ColumnType>,
-  dataDictionaryBanner?: boolean,
-  datasetTableControls?: boolean,
-  enableEmptyFilters?: boolean
+  id: string | null;
+  resource?: ResourceType;
+  distribution?: DistributionType;
+  rootUrl?: string;
+  customColumns?: Array<ColumnType>;
+  dataDictionaryBanner?: boolean;
+  datasetTableControls?: boolean;
+  enableEmptyFilters?: boolean;
+  relativeHomeUrlPrepend?: string;
 }
 const DataTableContext = createContext<DataTableContextType>({ id: null})
 
