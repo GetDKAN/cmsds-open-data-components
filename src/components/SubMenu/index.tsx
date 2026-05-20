@@ -1,9 +1,7 @@
 import React, { ReactElement, ReactNode, useEffect, useState, useRef } from 'react';
 import { Button, ArrowIcon } from '@cmsgov/design-system';
 import HeaderContext from '../../templates/Header/HeaderContext';
-import DatasetListSubmenu from '../DatasetListSubmenu';
-import { NavLinkArray } from '../../types/misc';
-import { DatasetSubmenuListProps } from '../../types/search';
+import { NavLinkArray, SubmenuElementProps } from '../../types/misc';
 
 import './submenu.scss';
 import SubMenuStaticList from '../SubMenuStaticList';
@@ -56,12 +54,10 @@ const SubMenu = ({ link, linkClasses, subLinkClasses, wrapLabel = true }: SubMen
         setIsExpanded={setIsExpanded}
       />;
     } else if (React.isValidElement(link.submenu)) {
-      const { rootUrl, location } = (link.submenu as ReactElement<DatasetSubmenuListProps>).props;
-      submenuBlock = <DatasetListSubmenu
-        location={location}
-        rootUrl={rootUrl}
-        subLinkClasses={subLinkClasses}
-      />
+      submenuBlock = React.cloneElement(
+        link.submenu as ReactElement<SubmenuElementProps>,
+        { subLinkClasses }
+      );
     }
   }
 
