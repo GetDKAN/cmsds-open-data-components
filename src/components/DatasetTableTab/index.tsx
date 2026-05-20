@@ -26,6 +26,7 @@ export type DatasetTableTabProps = {
   dataDictionaryBanner: boolean;
   datasetTableControls: boolean;
   enableEmptyFilters?: boolean;
+  relativeHomeUrlPrepend?: string;
 };
 
 const DatasetTable = ({
@@ -41,7 +42,6 @@ const DatasetTable = ({
   showDisplaySettingsButton = true,
   showFullScreenButton = true,
   showInfoShareContainer = true,
-  errorHomeButtonHref = '/',
 }: {
   isModal?: boolean;
   showCopyLinkButton?: boolean;
@@ -55,7 +55,6 @@ const DatasetTable = ({
   showDisplaySettingsButton?: boolean;
   showFullScreenButton?: boolean;
   showInfoShareContainer?: boolean;
-  errorHomeButtonHref?: string;
 }) => {
   const {
     id,
@@ -64,6 +63,7 @@ const DatasetTable = ({
     rootUrl,
     customColumns = [],
     dataDictionaryBanner,
+    relativeHomeUrlPrepend,
   } = useContext(DataTableContext) as DatasetTableTabProps;
   const { page, setPage, tableDensity } = useContext(DataTableActionsContext);
 
@@ -186,7 +186,7 @@ const DatasetTable = ({
         <p className="ds-u-padding-bottom--2 ds-u-margin-bottom--7">
           {useDatastoreErrorMessages[resourceErrorStatus].message}
         </p>
-        <Button href={errorHomeButtonHref} variation="solid" className="">
+        <Button href={`${relativeHomeUrlPrepend}/`} variation="solid" className="">
           Go to home
         </Button>
       </div>

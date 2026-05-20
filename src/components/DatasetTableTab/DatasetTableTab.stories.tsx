@@ -13,14 +13,15 @@ import { ResourceType, DistributionType, ColumnType } from '../../types/dataset'
 // and it causes a lot of TypeScript headaches when trying to manipulate the dataTableContextProviderValue
 // in the stories
 export type MockDataTableContextType = {
-  id: string | null,
-  resource: ResourceType,
-  distribution: DistributionType,
-  rootUrl: string,
-  customColumns: Array<ColumnType>,
-  dataDictionaryBanner: boolean,
-  datasetTableControls: boolean,
-  enableEmptyFilters: boolean
+  id: string | null;
+  resource: ResourceType;
+  distribution: DistributionType;
+  rootUrl: string;
+  customColumns: Array<ColumnType>;
+  dataDictionaryBanner: boolean;
+  datasetTableControls: boolean;
+  enableEmptyFilters: boolean;
+  relativeHomeUrlPrepend: string;
 }
 
 // Mock DataTableContext.Provider value
@@ -39,6 +40,7 @@ const defaultDataTableContextProviderValue: MockDataTableContextType = {
   dataDictionaryBanner: false,
   datasetTableControls: true,
   enableEmptyFilters: false,
+  relativeHomeUrlPrepend: '',
 };
 
 // Mock DataTableActionsContext.Provider value
@@ -84,7 +86,6 @@ const meta: Meta<StoryArgs> = {
     showDisplaySettingsButton: true,
     showFullScreenButton: true,
     showInfoShareContainer: true,
-    errorHomeButtonHref: '/',
     dataTableContextProviderValue: defaultDataTableContextProviderValue,
     dataTableActionsContextProviderValue: defaultDataTableActionsContextProviderValue
   },
@@ -112,7 +113,6 @@ content includes dataset download buttons, data table toolbar component, sharing
   showInfoShareContainer
   showManageColumnsButton
   showTableResults
-  errorHomeButtonHref="/"
 />
         `,
       },
@@ -178,10 +178,6 @@ content includes dataset download buttons, data table toolbar component, sharing
       control: 'boolean',
       description: 'Whether or not to show the text information and "Share" button below data table toolbar.',
     },
-    errorHomeButtonHref: {
-      control: 'text',
-      description: 'Href value for the "Back to home" button that displays when there is a 400 or 500 API error.',
-    },
     dataTableContextProviderValue: {
       table: { disable: true }, // Don't show this in the Docs table
     },
@@ -244,13 +240,14 @@ export const Error500: Story = {
           message: 'Internal server error.',
           stack: ''
         }
-      }
+      },
+      relativeHomeUrlPrepend: '/provider-data',
     }
   },
   parameters: {
     docs: {
       description: {
-        story: 'Error message displayed for useDatastore API 500 error.',
+        story: 'Error message displayed for useDatastore API 500 error. This story also utilizes the `relativeHomeUrlPrepend` context property used to adjust the relative url of the "Back to home" button. This value is ultimately set via the `tabHrefPrepend` prop on the `Dataset` template.',
       },
     },
   },
