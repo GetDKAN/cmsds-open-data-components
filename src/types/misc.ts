@@ -22,12 +22,16 @@ export type OrgType = {
   logoFilePath?: string;
 };
 
+export type SubmenuElementProps = {
+  subLinkClasses?: string;
+};
+
 export type NavLinkArray = {
   id: string;
   label: string;
   url: string;
   target?: string;
-  submenu?: NavLinkArray[] | ReactElement;
+  submenu?: NavLinkArray[] | ReactElement<SubmenuElementProps>;
   icon?: ReactNode;
   external?: boolean;
   drupalPage?: boolean;

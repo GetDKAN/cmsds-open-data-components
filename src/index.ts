@@ -65,6 +65,9 @@ export { default as useScrollToTop } from './components/useScrollToTop';
 export { default as useMetastoreDataset } from './services/useMetastoreDataset';
 export { default as withQueryProvider } from './utilities/QueryProvider/QueryProvider'
 
+// Types
+export type { SubmenuElementProps } from './types/misc';
+
 // Utilities
 export { acaToParams } from './utilities/aca';
 
