@@ -2,8 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import DatasetTable from './index';
 import DataTableContext from '../../templates/Dataset/DataTableContext';
 import { DataTableContextType } from '../../templates/Dataset/DataTableContext';
-import { DataTableActionsContext } from './DataTableActionsContext';
-import { DataTableActionsContextProps } from './DataTableActionsContext';
+import { DataTableActionsContext, DataTableActionsContextProps } from './DataTableActionsContext';
 import { MemoryRouter } from 'react-router-dom';
 import { mockResource } from '../../../__mocks__/mockResource';
 import { mockDistribution } from '../../../__mocks__/mockDistribution';
@@ -85,6 +84,7 @@ const meta: Meta<StoryArgs> = {
     showDisplaySettingsButton: true,
     showFullScreenButton: true,
     showInfoShareContainer: true,
+    errorHomeButtonHref: '/',
     dataTableContextProviderValue: defaultDataTableContextProviderValue,
     dataTableActionsContextProviderValue: defaultDataTableActionsContextProviderValue
   },
@@ -95,6 +95,25 @@ const meta: Meta<StoryArgs> = {
         component: `
 The DatasetTableTab component renders everything under the "Data Table" tab on a dataset detail page. The rendered
 content includes dataset download buttons, data table toolbar component, sharing options, and data table with pagination controls.
+        `,
+      },
+      source: {
+        code: `
+<DatasetTable
+  isModal={false}
+  showCopyLinkButton
+  showDataTableToolbar
+  showDisplaySettingsButton
+  showDownloadFilteredDataButton
+  showDownloadFullDataButton
+  showStoredQueryDownloadButton={false}
+  showFilterDatasetButton
+  showFullScreenButton
+  showInfoShareContainer
+  showManageColumnsButton
+  showTableResults
+  errorHomeButtonHref="/"
+/>
         `,
       },
     },
@@ -158,6 +177,10 @@ content includes dataset download buttons, data table toolbar component, sharing
     showInfoShareContainer: {
       control: 'boolean',
       description: 'Whether or not to show the text information and "Share" button below data table toolbar.',
+    },
+    errorHomeButtonHref: {
+      control: 'text',
+      description: 'Href value for the "Back to home" button that displays when there is a 400 or 500 API error.',
     },
     dataTableContextProviderValue: {
       table: { disable: true }, // Don't show this in the Docs table
