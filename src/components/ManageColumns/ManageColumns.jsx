@@ -70,7 +70,7 @@ const ManageColumns = ({
     if (columnOrder?.length)
       setCards(columnOrder
         .map(id => columns.find(col => col.id === id)) // Get list of cards in order
-        .filter(Boolean) // Filter out an possible undefined/non-matches
+        .filter(Boolean) // Filter out any possible undefined/non-matches
         .map(column => ({ // Normalize the data
           id: column.id,
           visible: column.getIsVisible(),
@@ -208,7 +208,7 @@ const ManageColumns = ({
                     // do not save this to the table state until the "Save" button is clicked
                     setCards(defaultColumnOrder
                       .map(id => cards.find(c => c.id === id)) // Get list of cards in order
-                      .filter(Boolean) // Filter out an possible undefined/non-matches
+                      .filter(Boolean) // Filter out any possible undefined/non-matches
                       .map(card => ({ // Normalize the data
                         ...card,
                         visible: true,
