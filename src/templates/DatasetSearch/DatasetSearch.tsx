@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate, useLocation } from 'react-router-dom';
 import qs from 'qs';
 import axios from 'axios';
 import withQueryProvider from '../../utilities/QueryProvider/QueryProvider';
@@ -48,12 +48,15 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     updateDateMonthYearOnly = false,
     showTopics = false,
     topicSlugFunction = undefined,
+    analytics = false,
+    onAnalyticsEvent = () => {},
     children
   } = props;
   const { ACA } = useContext(ACAContext);
 
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   // Derive all search state from URL params
   const selectedFacets: SelectedFacetsType = useMemo(() => {
@@ -170,6 +173,12 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
     if (!isPending && (!data || !data.data.results)) return 'Could not connect to the API.';
     return `Showing ${currentResultNumbers.startingNumber} to ${currentResultNumbers.endingNumber} of ${currentResultNumbers.total} datasets`;
   }, [data, isPending, noResults, currentResultNumbers]);
+
+  useEffect(() => {
+    if (analytics && location.search) {
+      onAnalyticsEvent(location);
+    }
+  }, [analytics, location.search])
 
   return (
     <>

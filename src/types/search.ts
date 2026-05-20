@@ -1,3 +1,5 @@
+import { Location } from "react-router-dom";
+
 export type SearchDistributionType = {
   identifier: string;
   downloadURL: string;
@@ -43,6 +45,8 @@ export type DatasetSearchPageProps = {
   updateDateMonthYearOnly?: boolean;
   showTopics?: boolean;
   topicSlugFunction?: (topic: string) => string | undefined;
+  analytics?: boolean;
+  onAnalyticsEvent?: (url: Location) => void;
   children?: React.ReactNode;
 };
 

@@ -107,6 +107,67 @@ describe('<DatasetSearch />', () => {
     });
     expect(screen.getByTestId('child-element')).toBeInTheDocument();
   });
+
+  test('Calls onAnalyticsEvent when analytics enabled', async () => {
+    const onAnalyticsEvent = jest.fn();
+
+    await act(async () => {
+      render(
+        <MemoryRouter initialEntries={['/datasets?fulltext=test']}>
+          <DatasetSearch
+            rootUrl={rootUrl}
+            analytics
+            onAnalyticsEvent={onAnalyticsEvent}
+          />
+        </MemoryRouter>
+      );
+    });
+
+    await waitFor(() => {
+      expect(onAnalyticsEvent).toHaveBeenCalledTimes(1);
+    });
+
+    const arg = onAnalyticsEvent.mock.calls[0][0];
+
+    expect(arg.pathname).toBe('/datasets');
+    expect(arg.search).toBe('?fulltext=test');
+  });
+
+  test('Does not call onAnalyticsEvent when analytics is disabled', async () => {
+    const onAnalyticsEvent = jest.fn();
+
+    await act(async () => {
+      render(
+        <MemoryRouter initialEntries={['/datasets?fulltext=test']}>
+          <DatasetSearch
+            rootUrl={rootUrl}
+            analytics={false}
+            onAnalyticsEvent={onAnalyticsEvent}
+          />
+        </MemoryRouter>
+      );
+    });
+
+    expect(onAnalyticsEvent).not.toHaveBeenCalled();
+  });
+
+  test('Does not call onAnalyticsEvent when no search params exist', async () => {
+    const onAnalyticsEvent = jest.fn();
+
+    await act(async () => {
+      render(
+        <MemoryRouter initialEntries={['/datasets']}>
+          <DatasetSearch
+            rootUrl={rootUrl}
+            analytics
+            onAnalyticsEvent={onAnalyticsEvent}
+          />
+        </MemoryRouter>
+      );
+    });
+
+    expect(onAnalyticsEvent).not.toHaveBeenCalled();
+  });
 });
 
 describe('<DatasetSearch /> Infinite Loop Prevention', () => {

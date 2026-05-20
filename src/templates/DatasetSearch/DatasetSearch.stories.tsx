@@ -27,6 +27,8 @@ const meta: Meta<typeof DatasetSearch> = {
     dataDictionaryLinks: false,
     showDateDetails: false,
     showTopics: false,
+    analytics: true,
+    onAnalyticsEvent: () => {},
   },
   parameters: {
     layout: 'fullscreen',
@@ -122,6 +124,14 @@ Key features:
       control: 'boolean',
       description: 'Show topic pills on dataset items.',
     },
+    analytics: {
+      control: 'boolean',
+      description: 'Fire the onAnalyticsEvent callback when a search term is submitted and/or a topic or tag is selected and/or search results are sorted. False by default.',
+    },
+    onAnalyticsEvent: {
+      action: 'onAnalyticsEvent fired', // Won't actually fire because it's dependent on url querystring changes
+      description: 'Function that is fired when a search term is submitted and/or a topic or tag is selected and/or search results are sorted. A react-router-dom location object is passed as an argument.'
+    }
   },
   tags: ['autodocs'],
 };
