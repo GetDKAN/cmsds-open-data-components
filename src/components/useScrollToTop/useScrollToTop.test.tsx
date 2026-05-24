@@ -1,5 +1,8 @@
 import React from 'react';
 import { renderHook } from '@testing-library/react';
+// NOTE: this test deliberately uses `renderHook` + MemoryRouter directly rather than
+// `renderWithProviders` (which is render-based, not hook-based). Don't try to
+// "consolidate" — the hook wrapper pattern doesn't fit through that helper.
 import { MemoryRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import useScrollToTop from './index';
 

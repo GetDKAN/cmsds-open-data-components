@@ -1,7 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
+import { renderWithProviders, screen, userEvent } from '../../tests/renderWithProviders';
 import SidebarNavigation from './index';
 
 const links = [
@@ -11,10 +9,9 @@ const links = [
 ];
 
 const renderSidebar = (route = '/overview', mobileMax = false) =>
-  render(
-    <MemoryRouter initialEntries={[route]} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <SidebarNavigation title="Sections" links={links} mobileMax={mobileMax} />
-    </MemoryRouter>,
+  renderWithProviders(
+    <SidebarNavigation title="Sections" links={links} mobileMax={mobileMax} />,
+    { route },
   );
 
 describe('SidebarNavigation', () => {

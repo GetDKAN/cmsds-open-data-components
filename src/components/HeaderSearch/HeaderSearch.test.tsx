@@ -1,7 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
+import { renderWithProviders, screen, userEvent } from '../../tests/renderWithProviders';
 import HeaderSearch from './index';
 
 const mockNavigate = jest.fn();
@@ -10,12 +8,7 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigate,
 }));
 
-const renderHeaderSearch = () =>
-  render(
-    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <HeaderSearch />
-    </MemoryRouter>,
-  );
+const renderHeaderSearch = () => renderWithProviders(<HeaderSearch />);
 
 describe('HeaderSearch', () => {
   // jsdom defaults window.location.pathname to '/', which is the non-/datasets

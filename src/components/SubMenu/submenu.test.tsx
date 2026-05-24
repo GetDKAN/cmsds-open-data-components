@@ -1,8 +1,7 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
-import HeaderContext from '../../templates/Header/HeaderContext';
+import { renderWithProviders } from '../../tests/renderWithProviders';
 import SubMenu from './index';
 import { NavLinkArray, SubmenuElementProps } from '../../types/misc';
 
@@ -55,25 +54,21 @@ const externalSubmenuLink: NavLinkArray = {
   ],
 };
 
-const renderSubMenu = (props = {}) => {
-  return render(
-    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <HeaderContext.Provider value={mockHeaderContext}>
-        <nav>
-          <ul>
-            <SubMenu
-              link={staticSubmenuLink}
-              linkClasses=""
-              subLinkClasses=""
-              wrapLabel={true}
-              {...props}
-            />
-          </ul>
-        </nav>
-      </HeaderContext.Provider>
-    </MemoryRouter>
+const renderSubMenu = (props = {}) =>
+  renderWithProviders(
+    <nav>
+      <ul>
+        <SubMenu
+          link={staticSubmenuLink}
+          linkClasses=""
+          subLinkClasses=""
+          wrapLabel={true}
+          {...props}
+        />
+      </ul>
+    </nav>,
+    { headerContextValue: mockHeaderContext },
   );
-};
 
 describe('<SubMenu />', () => {
   it('renders the menu button with the link label', () => {

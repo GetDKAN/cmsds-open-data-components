@@ -1,6 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { renderWithProviders, screen } from '../../tests/renderWithProviders';
 import DesktopHeader from './DesktopHeader';
 
 jest.mock('../NavBar', () => ({ links, menuName }) => (
@@ -21,11 +20,7 @@ const links = {
 };
 
 const renderHeader = (props = {}) =>
-  render(
-    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <DesktopHeader siteName="Sample Open Data" links={links} {...props} />
-    </MemoryRouter>,
-  );
+  renderWithProviders(<DesktopHeader siteName="Sample Open Data" links={links} {...props} />);
 
 describe('DesktopHeader', () => {
   it('renders the site name as a link to /', () => {

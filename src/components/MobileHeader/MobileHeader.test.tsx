@@ -1,7 +1,6 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
+import { fireEvent } from '@testing-library/react';
+import { renderWithProviders, screen, userEvent } from '../../tests/renderWithProviders';
 import MobileHeader from './MobileHeader';
 
 jest.mock('react-responsive', () => ({
@@ -30,19 +29,16 @@ const defaultLinks = {
   ],
 };
 
-const renderMobileHeader = (props = {}) => {
-  return render(
-    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <MobileHeader
-        siteName="Test Site"
-        links={defaultLinks}
-        includeSearch={false}
-        includeTopNav={false}
-        {...props}
-      />
-    </MemoryRouter>
+const renderMobileHeader = (props = {}) =>
+  renderWithProviders(
+    <MobileHeader
+      siteName="Test Site"
+      links={defaultLinks}
+      includeSearch={false}
+      includeTopNav={false}
+      {...props}
+    />,
   );
-};
 
 describe('MobileHeader', () => {
   it('renders the site name', () => {

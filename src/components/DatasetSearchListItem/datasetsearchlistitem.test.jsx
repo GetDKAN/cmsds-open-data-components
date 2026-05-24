@@ -1,8 +1,8 @@
 import React from 'react';
-import { render, screen, within } from '@testing-library/react';
+import { within } from '@testing-library/react';
+import { renderWithProviders, screen } from '../../tests/renderWithProviders';
 import DatasetSearchListItem from './index';
 import { truncateText } from './truncateText';
-import { MemoryRouter } from 'react-router-dom';
 
 const singleItem = {
   title: 'Dataset Title',
@@ -21,20 +21,18 @@ const mockLocation = {
 
 describe('<DatasetSearchListItem />', () => {
   test('Renders correctly', () => {
-    render(
-      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-        <DatasetSearchListItem
-          title={singleItem.title}
-          modified={singleItem.modified}
-          description={singleItem.description}
-          theme={singleItem.theme}
-          url="/dataset/test"
-          location={mockLocation}
-          paginationEnabled={false}
-          dataDictionaryLinks={false}
-          largeFile={false}
-        />
-      </MemoryRouter>
+    renderWithProviders(
+      <DatasetSearchListItem
+        title={singleItem.title}
+        modified={singleItem.modified}
+        description={singleItem.description}
+        theme={singleItem.theme}
+        url="/dataset/test"
+        location={mockLocation}
+        paginationEnabled={false}
+        dataDictionaryLinks={false}
+        largeFile={false}
+      />
     );
 
     expect(screen.getByRole('heading', { name: 'Dataset Title' })).toBeInTheDocument();
@@ -44,21 +42,19 @@ describe('<DatasetSearchListItem />', () => {
     })).toBeInTheDocument();
   });
   test('Renders correctly with Download button', () => {
-    render(
-      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-        <DatasetSearchListItem
-          title={singleItem.title}
-          modified={singleItem.modified}
-          description={singleItem.description}
-          theme={singleItem.theme}
-          url="/dataset/test"
-          downloadUrl="test.com"
-          location={mockLocation}
-          paginationEnabled={false}
-          dataDictionaryLinks={false}
-          largeFile={false}
-        />
-      </MemoryRouter>
+    renderWithProviders(
+      <DatasetSearchListItem
+        title={singleItem.title}
+        modified={singleItem.modified}
+        description={singleItem.description}
+        theme={singleItem.theme}
+        url="/dataset/test"
+        downloadUrl="test.com"
+        location={mockLocation}
+        paginationEnabled={false}
+        dataDictionaryLinks={false}
+        largeFile={false}
+      />
     );
     expect(screen.getByRole('link', { name: 'Download' })).toBeInTheDocument();
   });
@@ -66,21 +62,19 @@ describe('<DatasetSearchListItem />', () => {
   test('Renders themes when showTopics is true', () => {
     const themeData = ['Healthcare', 'Medicare'];
 
-    render(
-      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-        <DatasetSearchListItem
-          title={singleItem.title}
-          modified={singleItem.modified}
-          description={singleItem.description}
-          theme={themeData}
-          url="/dataset/test"
-          showTopics={true}
-          location={mockLocation}
-          paginationEnabled={false}
-          dataDictionaryLinks={false}
-          largeFile={false}
-        />
-      </MemoryRouter>
+    renderWithProviders(
+      <DatasetSearchListItem
+        title={singleItem.title}
+        modified={singleItem.modified}
+        description={singleItem.description}
+        theme={themeData}
+        url="/dataset/test"
+        showTopics={true}
+        location={mockLocation}
+        paginationEnabled={false}
+        dataDictionaryLinks={false}
+        largeFile={false}
+      />
     );
 
     expect(screen.getByText('Healthcare')).toBeInTheDocument();
@@ -90,21 +84,19 @@ describe('<DatasetSearchListItem />', () => {
   test('Does not render themes when showTopics is false', () => {
     const themeData = ['Healthcare', 'Medicare'];
 
-    render(
-      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-        <DatasetSearchListItem
-          title={singleItem.title}
-          modified={singleItem.modified}
-          description={singleItem.description}
-          theme={themeData}
-          url="/dataset/test"
-          showTopics={false}
-          location={mockLocation}
-          paginationEnabled={false}
-          dataDictionaryLinks={false}
-          largeFile={false}
-        />
-      </MemoryRouter>
+    renderWithProviders(
+      <DatasetSearchListItem
+        title={singleItem.title}
+        modified={singleItem.modified}
+        description={singleItem.description}
+        theme={themeData}
+        url="/dataset/test"
+        showTopics={false}
+        location={mockLocation}
+        paginationEnabled={false}
+        dataDictionaryLinks={false}
+        largeFile={false}
+      />
     );
 
     expect(screen.queryByText('Healthcare')).not.toBeInTheDocument();
@@ -114,21 +106,19 @@ describe('<DatasetSearchListItem />', () => {
   test('Handles theme with empty strings', () => {
     const themeData = ['', 'Medicare'];
 
-    render(
-      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-        <DatasetSearchListItem
-          title={singleItem.title}
-          modified={singleItem.modified}
-          description={singleItem.description}
-          theme={themeData}
-          url="/dataset/test"
-          showTopics={true}
-          location={mockLocation}
-          paginationEnabled={false}
-          dataDictionaryLinks={false}
-          largeFile={false}
-        />
-      </MemoryRouter>
+    renderWithProviders(
+      <DatasetSearchListItem
+        title={singleItem.title}
+        modified={singleItem.modified}
+        description={singleItem.description}
+        theme={themeData}
+        url="/dataset/test"
+        showTopics={true}
+        location={mockLocation}
+        paginationEnabled={false}
+        dataDictionaryLinks={false}
+        largeFile={false}
+      />
     );
 
     expect(screen.getByText('Unknown Topic')).toBeInTheDocument();
@@ -137,141 +127,127 @@ describe('<DatasetSearchListItem />', () => {
 });
 
 test('Renders description', () => {
-  render(
-    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <DatasetSearchListItem
-        title={singleItem.title}
-        modified={singleItem.modified}
-        description={'This is my description.'}
-        theme={singleItem.theme}
-        url="/dataset/test"
-        downloadUrl="test.com"
-        location={mockLocation}
-        paginationEnabled={false}
-        dataDictionaryLinks={false}
-        largeFile={false}
-      />
-    </MemoryRouter>
+  renderWithProviders(
+    <DatasetSearchListItem
+      title={singleItem.title}
+      modified={singleItem.modified}
+      description={'This is my description.'}
+      theme={singleItem.theme}
+      url="/dataset/test"
+      downloadUrl="test.com"
+      location={mockLocation}
+      paginationEnabled={false}
+      dataDictionaryLinks={false}
+      largeFile={false}
+    />
   );
   expect(screen.getByText('This is my description.')).toBeInTheDocument();
 });
 
 test('Renders description text before <br/>', () => {
-  render(
-    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <DatasetSearchListItem
-        title={singleItem.title}
-        modified={singleItem.modified}
-        description={'This is my description.<br/> Some more text.'}
-        theme={singleItem.theme}
-        url="/dataset/test"
-        downloadUrl="test.com"
-        location={mockLocation}
-        paginationEnabled={false}
-        dataDictionaryLinks={false}
-        largeFile={false}
-      />
-    </MemoryRouter>
+  renderWithProviders(
+    <DatasetSearchListItem
+      title={singleItem.title}
+      modified={singleItem.modified}
+      description={'This is my description.<br/> Some more text.'}
+      theme={singleItem.theme}
+      url="/dataset/test"
+      downloadUrl="test.com"
+      location={mockLocation}
+      paginationEnabled={false}
+      dataDictionaryLinks={false}
+      largeFile={false}
+    />
   );
   expect(screen.getByText('This is my description.')).toBeInTheDocument();
 });
 
 test('Renders description text without <b>', () => {
-  render(
-    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <DatasetSearchListItem
-        title={singleItem.title}
-        modified={singleItem.modified}
-        description={'<b>This is my description.</b>'}
-        theme={singleItem.theme}
-        url="/dataset/test"
-        downloadUrl="test.com"
-        location={mockLocation}
-        paginationEnabled={false}
-        dataDictionaryLinks={false}
-        largeFile={false}
-      />
-    </MemoryRouter>
+  renderWithProviders(
+    <DatasetSearchListItem
+      title={singleItem.title}
+      modified={singleItem.modified}
+      description={'<b>This is my description.</b>'}
+      theme={singleItem.theme}
+      url="/dataset/test"
+      downloadUrl="test.com"
+      location={mockLocation}
+      paginationEnabled={false}
+      dataDictionaryLinks={false}
+      largeFile={false}
+    />
   );
   expect(screen.getByText('This is my description.')).toBeInTheDocument();
 });
 
 test('Renders description text without <p>', () => {
-  render(
-    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <DatasetSearchListItem
-        title={singleItem.title}
-        modified={singleItem.modified}
-        description={'<p>This is my description.</p>'}
-        theme={singleItem.theme}
-        url="/dataset/test"
-        downloadUrl="test.com"
-        location={mockLocation}
-        paginationEnabled={false}
-        dataDictionaryLinks={false}
-        largeFile={false}
-      />
-    </MemoryRouter>
+  renderWithProviders(
+    <DatasetSearchListItem
+      title={singleItem.title}
+      modified={singleItem.modified}
+      description={'<p>This is my description.</p>'}
+      theme={singleItem.theme}
+      url="/dataset/test"
+      downloadUrl="test.com"
+      location={mockLocation}
+      paginationEnabled={false}
+      dataDictionaryLinks={false}
+      largeFile={false}
+    />
   );
   expect(screen.getByText('This is my description.')).toBeInTheDocument();
 });
 
 test('Renders first <p> of description text without the <p>', () => {
-  render(
-    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <DatasetSearchListItem
-        title={singleItem.title}
-        modified={singleItem.modified}
-        description={'<p>This is my description.</p><p>This is some more text</p>'}
-        theme={singleItem.theme}
-        url="/dataset/test"
-        downloadUrl="test.com"
-        location={mockLocation}
-        paginationEnabled={false}
-        dataDictionaryLinks={false}
-        largeFile={false}
-      />
-    </MemoryRouter>
+  renderWithProviders(
+    <DatasetSearchListItem
+      title={singleItem.title}
+      modified={singleItem.modified}
+      description={'<p>This is my description.</p><p>This is some more text</p>'}
+      theme={singleItem.theme}
+      url="/dataset/test"
+      downloadUrl="test.com"
+      location={mockLocation}
+      paginationEnabled={false}
+      dataDictionaryLinks={false}
+      largeFile={false}
+    />
   );
   expect(screen.getByText('This is my description.')).toBeInTheDocument();
 });
 
 test('Renders description text before <br/> without <p>', () => {
-  render(
-    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <DatasetSearchListItem
-        title={singleItem.title}
-        modified={singleItem.modified}
-        description={'<p>This is my description.<br/> This is some more text.</p>'}
-        theme={singleItem.theme}
-        url="/dataset/test"
-        downloadUrl="test.com"
-        location={mockLocation}
-        paginationEnabled={false}
-        dataDictionaryLinks={false}
-        largeFile={false}
-      />
-    </MemoryRouter>
+  renderWithProviders(
+    <DatasetSearchListItem
+      title={singleItem.title}
+      modified={singleItem.modified}
+      description={'<p>This is my description.<br/> This is some more text.</p>'}
+      theme={singleItem.theme}
+      url="/dataset/test"
+      downloadUrl="test.com"
+      location={mockLocation}
+      paginationEnabled={false}
+      dataDictionaryLinks={false}
+      largeFile={false}
+    />
   );
   expect(screen.getByText('This is my description.')).toBeInTheDocument();
 });
 
 test('Renders description text with up to 240 characters', () => {
-  render(
-    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <DatasetSearchListItem
-        title={singleItem.title}
-        modified={singleItem.modified}
-        description={'This is my description. It is really really really really long. But we should only show a small part of it. How about we only show the first 3 lines of 80 characters. That should be something like 240 characters. I think this text is now at about 262 characters. That is less than 300, did you know that? Well now it is over 300!'}
-        theme={singleItem.theme}
-        url="/dataset/test"
-        downloadUrl="test.com"
-        location={mockLocation}
-        paginationEnabled={false}
-        dataDictionaryLinks={false}
-        largeFile={false}
-      />
-    </MemoryRouter>
+  renderWithProviders(
+    <DatasetSearchListItem
+      title={singleItem.title}
+      modified={singleItem.modified}
+      description={'This is my description. It is really really really really long. But we should only show a small part of it. How about we only show the first 3 lines of 80 characters. That should be something like 240 characters. I think this text is now at about 262 characters. That is less than 300, did you know that? Well now it is over 300!'}
+      theme={singleItem.theme}
+      url="/dataset/test"
+      downloadUrl="test.com"
+      location={mockLocation}
+      paginationEnabled={false}
+      dataDictionaryLinks={false}
+      largeFile={false}
+    />
   );
   expect(screen.getByText('This is my description. It is really really really really long. But we should only show a small part of it. How about we only show the first 3 lines of 80 characters. That should be something like 240 characters. I think this text is now...')).toBeInTheDocument();
 });
@@ -284,24 +260,22 @@ test('Renders date details', () => {
   const props = {...singleItem}
   props.released = '2021-10-22'
   props.refresh = '2022-10-22'
-  render(
-    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <DatasetSearchListItem
-        title={props.title}
-        modified={props.modified}
-        released={props.released}
-        refresh={props.refresh}
-        description="test"
-        theme={props.theme}
-        url="/dataset/test"
-        downloadUrl="test.com"
-        location={mockLocation}
-        paginationEnabled={false}
-        dataDictionaryLinks={false}
-        largeFile={false}
-        showDateDetails
-      />
-    </MemoryRouter>
+  renderWithProviders(
+    <DatasetSearchListItem
+      title={props.title}
+      modified={props.modified}
+      released={props.released}
+      refresh={props.refresh}
+      description="test"
+      theme={props.theme}
+      url="/dataset/test"
+      downloadUrl="test.com"
+      location={mockLocation}
+      paginationEnabled={false}
+      dataDictionaryLinks={false}
+      largeFile={false}
+      showDateDetails
+    />
   );
   expect(screen.getByText((_, el) => el?.className === 'dataset-date-item-label ' && el?.textContent === 'Last Modified: October 22, 2020')).toBeInTheDocument();
   expect(screen.getByText((_, el) => el?.className === 'dataset-date-item-label ' && el?.textContent === 'Released: October 22, 2021')).toBeInTheDocument();
@@ -313,50 +287,46 @@ test('Renders topic slugs', () => {
   props.refresh = '2022-10-22'
   props.theme = ['Home health services']
   props.topicSlugs = { "Home health services": "home-health-services" }
-  render(
-    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <DatasetSearchListItem
-        title={props.title}
-        modified={props.modified}
-        released={props.released}
-        refresh={props.refresh}
-        description="test"
-        theme={props.theme}
-        url="/dataset/test"
-        downloadUrl="test.com"
-        location={mockLocation}
-        paginationEnabled={false}
-        dataDictionaryLinks={false}
-        largeFile={false}
-        showDateDetails
-        showTopics
-        topicSlugs={props.topicSlugs}
-      />
-    </MemoryRouter>
+  renderWithProviders(
+    <DatasetSearchListItem
+      title={props.title}
+      modified={props.modified}
+      released={props.released}
+      refresh={props.refresh}
+      description="test"
+      theme={props.theme}
+      url="/dataset/test"
+      downloadUrl="test.com"
+      location={mockLocation}
+      paginationEnabled={false}
+      dataDictionaryLinks={false}
+      largeFile={false}
+      showDateDetails
+      showTopics
+      topicSlugs={props.topicSlugs}
+    />
   );
   expect(screen.getByText('Home health services')).toBeInTheDocument()
 });
 test('Renders disabled data dictionary link', () => {
   const props = {...singleItem}
   props.distribution = {}
-  render(
-    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <DatasetSearchListItem
-        title={props.title}
-        modified={props.modified}
-        released={props.released}
-        refresh={props.refresh}
-        description="test"
-        theme={props.theme}
-        url="/dataset/test"
-        downloadUrl="test.com"
-        location={mockLocation}
-        paginationEnabled={false}
-        dataDictionaryLinks={true}
-        largeFile={false}
-        distribution={props.distribution}
-      />
-    </MemoryRouter>
+  renderWithProviders(
+    <DatasetSearchListItem
+      title={props.title}
+      modified={props.modified}
+      released={props.released}
+      refresh={props.refresh}
+      description="test"
+      theme={props.theme}
+      url="/dataset/test"
+      downloadUrl="test.com"
+      location={mockLocation}
+      paginationEnabled={false}
+      dataDictionaryLinks={true}
+      largeFile={false}
+      distribution={props.distribution}
+    />
   );
   expect(screen.getByText('Data Dictionary')).toBeInTheDocument();
   const link = screen.getByText('Data Dictionary')
@@ -372,28 +342,26 @@ test('Renders data dictionary link from pdf', () => {
       "%Ref:downloadURL": []
     }
   }
-  render(
-    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <DatasetSearchListItem
-        title={props.title}
-        modified={props.modified}
-        released={props.released}
-        refresh={props.refresh}
-        description="test"
-        theme={props.theme}
-        url="/dataset/test"
-        downloadUrl="test.com"
-        location={mockLocation}
-        paginationEnabled={false}
-        dataDictionaryLinks={true}
-        largeFile={false}
-        showDateDetails
-        showTopics
-        topicSlugs={props.topicSlugs}
-        identifier={props.identifier}
-        distribution={props.distribution}
-      />
-    </MemoryRouter>
+  renderWithProviders(
+    <DatasetSearchListItem
+      title={props.title}
+      modified={props.modified}
+      released={props.released}
+      refresh={props.refresh}
+      description="test"
+      theme={props.theme}
+      url="/dataset/test"
+      downloadUrl="test.com"
+      location={mockLocation}
+      paginationEnabled={false}
+      dataDictionaryLinks={true}
+      largeFile={false}
+      showDateDetails
+      showTopics
+      topicSlugs={props.topicSlugs}
+      identifier={props.identifier}
+      distribution={props.distribution}
+    />
   );
   expect(screen.getByText('Data Dictionary')).toBeInTheDocument();
   const link = screen.getByText('Data Dictionary')
@@ -409,28 +377,26 @@ test('Renders data dictionary link from json', () => {
       "%Ref:downloadURL": []
     }
   }
-  render(
-    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <DatasetSearchListItem
-        title={props.title}
-        modified={props.modified}
-        released={props.released}
-        refresh={props.refresh}
-        description="test"
-        theme={props.theme}
-        url="/dataset/test"
-        downloadUrl="test.com"
-        location={mockLocation}
-        paginationEnabled={false}
-        dataDictionaryLinks={true}
-        largeFile={false}
-        showDateDetails
-        showTopics
-        topicSlugs={props.topicSlugs}
-        identifier={props.identifier}
-        distribution={props.distribution}
-      />
-    </MemoryRouter>
+  renderWithProviders(
+    <DatasetSearchListItem
+      title={props.title}
+      modified={props.modified}
+      released={props.released}
+      refresh={props.refresh}
+      description="test"
+      theme={props.theme}
+      url="/dataset/test"
+      downloadUrl="test.com"
+      location={mockLocation}
+      paginationEnabled={false}
+      dataDictionaryLinks={true}
+      largeFile={false}
+      showDateDetails
+      showTopics
+      topicSlugs={props.topicSlugs}
+      identifier={props.identifier}
+      distribution={props.distribution}
+    />
   );
   expect(screen.getByText('Data Dictionary')).toBeInTheDocument();
   const link = screen.getByText('Data Dictionary')

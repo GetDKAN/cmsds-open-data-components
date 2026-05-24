@@ -1,7 +1,7 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { waitFor } from '@testing-library/react';
 import axios from 'axios';
+import { renderWithProviders, screen } from '../../tests/renderWithProviders';
 import DatasetListSubmenu from './index';
 
 jest.mock('axios');
@@ -20,11 +20,7 @@ const buildResults = (count: number) => {
 };
 
 const renderSubmenu = (props: any = {}) =>
-  render(
-    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <DatasetListSubmenu rootUrl="https://example.test/api/1" {...props} />
-    </MemoryRouter>,
-  );
+  renderWithProviders(<DatasetListSubmenu rootUrl="https://example.test/api/1" {...props} />);
 
 describe('DatasetListSubmenu', () => {
   afterEach(() => jest.clearAllMocks());

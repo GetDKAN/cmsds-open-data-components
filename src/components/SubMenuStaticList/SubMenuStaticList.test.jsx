@@ -1,7 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
+import { renderWithProviders, screen, userEvent } from '../../tests/renderWithProviders';
 import SubMenuStaticList from './index';
 
 const buildItems = () => [
@@ -11,15 +9,13 @@ const buildItems = () => [
 ];
 
 const renderList = (props = {}) =>
-  render(
-    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <SubMenuStaticList
-        submenuArray={buildItems()}
-        subLinkClasses="custom-link-class"
-        setIsExpanded={jest.fn()}
-        {...props}
-      />
-    </MemoryRouter>,
+  renderWithProviders(
+    <SubMenuStaticList
+      submenuArray={buildItems()}
+      subLinkClasses="custom-link-class"
+      setIsExpanded={jest.fn()}
+      {...props}
+    />,
   );
 
 describe('SubMenuStaticList', () => {

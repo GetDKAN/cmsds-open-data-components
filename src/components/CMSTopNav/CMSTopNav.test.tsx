@@ -1,6 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { renderWithProviders, screen } from '../../tests/renderWithProviders';
 import CMSTopNav from './index';
 
 const org = {
@@ -17,11 +16,7 @@ const links = [
 ];
 
 const renderTopNav = (props = {}) =>
-  render(
-    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <CMSTopNav org={org} links={links} {...props} />
-    </MemoryRouter>,
-  );
+  renderWithProviders(<CMSTopNav org={org} links={links} {...props} />);
 
 describe('CMSTopNav', () => {
   it('renders the org tagline', () => {
