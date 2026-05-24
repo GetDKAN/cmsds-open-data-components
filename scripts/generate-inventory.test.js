@@ -346,6 +346,69 @@ export { buildOperatorOptions, convertUTCToLocalDate, cleanText } from './templa
     });
   });
 
+  describe('hasSiblingStory', () => {
+    // Mirrors the helper defined in generate-inventory.cjs
+    const STORY_FILE_PATTERNS = ['.stories.js', '.stories.jsx', '.stories.ts', '.stories.tsx'];
+    const hasSiblingStory = (dirPath, baseName) => {
+      try {
+        return fs.readdirSync(dirPath).some((file) =>
+          STORY_FILE_PATTERNS.some((p) => file === `${baseName}${p}`)
+        );
+      } catch (e) {
+        return false;
+      }
+    };
+
+    it('finds a sibling story matching the basename', () => {
+      fs.readdirSync.mockReturnValue(['Foo.tsx', 'Foo.stories.tsx']);
+      expect(hasSiblingStory('/components/Foo', 'Foo')).toBe(true);
+    });
+
+    it('returns false when only a sibling component-level story exists', () => {
+      // Parent Foo.stories.tsx must not flip FooContext's story flag.
+      fs.readdirSync.mockReturnValue(['Foo.tsx', 'FooContext.tsx', 'Foo.stories.tsx']);
+      expect(hasSiblingStory('/components/Foo', 'FooContext')).toBe(false);
+    });
+
+    it('returns false when the directory cannot be read', () => {
+      fs.readdirSync.mockImplementation(() => {
+        throw new Error('ENOENT');
+      });
+      expect(hasSiblingStory('/missing', 'Foo')).toBe(false);
+    });
+  });
+
+  describe('isContextFile', () => {
+    // Mirrors the helper defined in generate-inventory.cjs
+    const isContextFile = (fileName) => /Context\.(ts|tsx)$/.test(fileName);
+
+    it('matches Context.ts and Context.tsx', () => {
+      expect(isContextFile('ACAContext.ts')).toBe(true);
+      expect(isContextFile('DataTableContext.tsx')).toBe(true);
+    });
+
+    it('rejects non-context source files', () => {
+      expect(isContextFile('aca.ts')).toBe(false);
+      expect(isContextFile('format.ts')).toBe(false);
+      expect(isContextFile('context.ts')).toBe(false); // lowercase 'c' — only "Context" suffix
+    });
+  });
+
+  describe('scanComponents — hook directories filtered', () => {
+    // Mirrors the use-prefix filter applied in scanComponents.
+    const filterHooks = (dirs) => dirs.filter((name) => !name.startsWith('use'));
+
+    it('drops directories whose name starts with use', () => {
+      expect(filterHooks(['Foo', 'useScrollToTop', 'useAddLoginLink', 'Bar']))
+        .toEqual(['Foo', 'Bar']);
+    });
+
+    it('keeps directories that only contain the substring use', () => {
+      // 'House' contains 'use' but does not start with it.
+      expect(filterHooks(['House', 'Mouse', 'useFoo'])).toEqual(['House', 'Mouse']);
+    });
+  });
+
   describe('getDirectories', () => {
     it('should return only directories', () => {
       const mockDirents = [

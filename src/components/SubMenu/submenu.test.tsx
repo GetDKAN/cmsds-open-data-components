@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 import HeaderContext from '../../templates/Header/HeaderContext';
 import SubMenu from './index';
@@ -58,7 +57,7 @@ const externalSubmenuLink: NavLinkArray = {
 
 const renderSubMenu = (props = {}) => {
   return render(
-    <MemoryRouter>
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <HeaderContext.Provider value={mockHeaderContext}>
         <nav>
           <ul>

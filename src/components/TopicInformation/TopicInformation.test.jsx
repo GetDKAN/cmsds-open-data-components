@@ -6,7 +6,7 @@ import { MemoryRouter } from 'react-router-dom';
 describe('TopicsInformation component.', () => {
   it('Renders correctly', async () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <TopicInformation
           topicDetails = {[{
             identifier: "5628a6e0-bae4-5da6-8546-8bb13705c1d5",

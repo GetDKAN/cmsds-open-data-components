@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 import SubMenuStaticList from './index';
 
@@ -13,7 +12,7 @@ const buildItems = () => [
 
 const renderList = (props = {}) =>
   render(
-    <MemoryRouter>
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <SubMenuStaticList
         submenuArray={buildItems()}
         subLinkClasses="custom-link-class"

@@ -33,7 +33,14 @@ const wrap = (
   if (queryClient) {
     tree = <QueryClientProvider client={queryClient}>{tree}</QueryClientProvider>;
   }
-  return <MemoryRouter initialEntries={[route ?? '/']}>{tree}</MemoryRouter>;
+  return (
+    <MemoryRouter
+      initialEntries={[route ?? '/']}
+      future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+    >
+      {tree}
+    </MemoryRouter>
+  );
 };
 
 export const renderWithProviders = (ui: ReactElement, options: ProviderOptions = {}) =>

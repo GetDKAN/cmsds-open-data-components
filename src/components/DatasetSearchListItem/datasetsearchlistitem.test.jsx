@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen, within } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import DatasetSearchListItem from './index';
 import { truncateText } from './truncateText';
 import { MemoryRouter } from 'react-router-dom';
@@ -23,7 +22,7 @@ const mockLocation = {
 describe('<DatasetSearchListItem />', () => {
   test('Renders correctly', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <DatasetSearchListItem
           title={singleItem.title}
           modified={singleItem.modified}
@@ -46,7 +45,7 @@ describe('<DatasetSearchListItem />', () => {
   });
   test('Renders correctly with Download button', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <DatasetSearchListItem
           title={singleItem.title}
           modified={singleItem.modified}
@@ -68,7 +67,7 @@ describe('<DatasetSearchListItem />', () => {
     const themeData = ['Healthcare', 'Medicare'];
 
     render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <DatasetSearchListItem
           title={singleItem.title}
           modified={singleItem.modified}
@@ -92,7 +91,7 @@ describe('<DatasetSearchListItem />', () => {
     const themeData = ['Healthcare', 'Medicare'];
 
     render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <DatasetSearchListItem
           title={singleItem.title}
           modified={singleItem.modified}
@@ -116,7 +115,7 @@ describe('<DatasetSearchListItem />', () => {
     const themeData = ['', 'Medicare'];
 
     render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <DatasetSearchListItem
           title={singleItem.title}
           modified={singleItem.modified}
@@ -139,7 +138,7 @@ describe('<DatasetSearchListItem />', () => {
 
 test('Renders description', () => {
   render(
-    <MemoryRouter>
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <DatasetSearchListItem
         title={singleItem.title}
         modified={singleItem.modified}
@@ -159,7 +158,7 @@ test('Renders description', () => {
 
 test('Renders description text before <br/>', () => {
   render(
-    <MemoryRouter>
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <DatasetSearchListItem
         title={singleItem.title}
         modified={singleItem.modified}
@@ -179,7 +178,7 @@ test('Renders description text before <br/>', () => {
 
 test('Renders description text without <b>', () => {
   render(
-    <MemoryRouter>
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <DatasetSearchListItem
         title={singleItem.title}
         modified={singleItem.modified}
@@ -199,7 +198,7 @@ test('Renders description text without <b>', () => {
 
 test('Renders description text without <p>', () => {
   render(
-    <MemoryRouter>
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <DatasetSearchListItem
         title={singleItem.title}
         modified={singleItem.modified}
@@ -219,7 +218,7 @@ test('Renders description text without <p>', () => {
 
 test('Renders first <p> of description text without the <p>', () => {
   render(
-    <MemoryRouter>
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <DatasetSearchListItem
         title={singleItem.title}
         modified={singleItem.modified}
@@ -239,7 +238,7 @@ test('Renders first <p> of description text without the <p>', () => {
 
 test('Renders description text before <br/> without <p>', () => {
   render(
-    <MemoryRouter>
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <DatasetSearchListItem
         title={singleItem.title}
         modified={singleItem.modified}
@@ -259,7 +258,7 @@ test('Renders description text before <br/> without <p>', () => {
 
 test('Renders description text with up to 240 characters', () => {
   render(
-    <MemoryRouter>
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <DatasetSearchListItem
         title={singleItem.title}
         modified={singleItem.modified}
@@ -286,7 +285,7 @@ test('Renders date details', () => {
   props.released = '2021-10-22'
   props.refresh = '2022-10-22'
   render(
-    <MemoryRouter>
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <DatasetSearchListItem
         title={props.title}
         modified={props.modified}
@@ -315,7 +314,7 @@ test('Renders topic slugs', () => {
   props.theme = ['Home health services']
   props.topicSlugs = { "Home health services": "home-health-services" }
   render(
-    <MemoryRouter>
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <DatasetSearchListItem
         title={props.title}
         modified={props.modified}
@@ -341,7 +340,7 @@ test('Renders disabled data dictionary link', () => {
   const props = {...singleItem}
   props.distribution = {}
   render(
-    <MemoryRouter>
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <DatasetSearchListItem
         title={props.title}
         modified={props.modified}
@@ -374,7 +373,7 @@ test('Renders data dictionary link from pdf', () => {
     }
   }
   render(
-    <MemoryRouter>
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <DatasetSearchListItem
         title={props.title}
         modified={props.modified}
@@ -411,7 +410,7 @@ test('Renders data dictionary link from json', () => {
     }
   }
   render(
-    <MemoryRouter>
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <DatasetSearchListItem
         title={props.title}
         modified={props.modified}

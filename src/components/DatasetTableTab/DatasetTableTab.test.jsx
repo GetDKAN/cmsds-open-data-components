@@ -1,16 +1,19 @@
 import React from 'react';
 import { render, screen, act } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import DataTableStateWrapper from './DataTableStateWrapper';
 import * as resource from "../../tests/fixtures/resource.json";
 import * as distribution from "../../tests/fixtures/distribution.json";
 import DataTableContext from "../../templates/Dataset/DataTableContext";
 
 describe('<DatasetTableTab />', () => {
-  window.scrollTo = jest.fn();
+  let scrollToSpy;
   beforeEach(() => {
+    scrollToSpy = jest.spyOn(window, 'scrollTo').mockImplementation(() => {});
     resource.setSort = jest.fn();
-  })
+  });
+  afterEach(() => {
+    scrollToSpy.mockRestore();
+  });
   test("Renders correctly", () => {
     render(
       <DataTableContext.Provider value={{

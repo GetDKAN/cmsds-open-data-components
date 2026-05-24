@@ -1,11 +1,18 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { act, render, screen } from '@testing-library/react';
 import DatasetDate from './index';
 
+// The CMSDS Tooltip used by DatasetDateItem runs an async positioning effect on mount,
+// so plain `render` triggers act warnings. Route renders through this helper.
+const renderDate = async (ui: React.ReactElement) => {
+  await act(async () => {
+    render(ui);
+  });
+};
+
 describe('<DatasetDate />', () => {
-  test('Renders single modified date correctly', () => {
-    render(
+  test('Renders single modified date correctly', async () => {
+    await renderDate(
       <DatasetDate
         date={{
           modified: '2023-02-01'
@@ -17,8 +24,8 @@ describe('<DatasetDate />', () => {
     expect(screen.queryByText('•')).not.toBeInTheDocument();
   });
 
-  test('Renders modified and released dates with bullet separator', () => {
-    render(
+  test('Renders modified and released dates with bullet separator', async () => {
+    await renderDate(
       <DatasetDate
         date={{
           modified: '2023-02-01',
@@ -32,8 +39,8 @@ describe('<DatasetDate />', () => {
     expect(screen.getByText('•')).toBeInTheDocument();
   });
 
-  test('Renders all three dates with bullet separators', () => {
-    render(
+  test('Renders all three dates with bullet separators', async () => {
+    await renderDate(
       <DatasetDate
         date={{
           modified: '2023-02-01',
@@ -46,14 +53,14 @@ describe('<DatasetDate />', () => {
     expect(screen.getByText((content, element) => element?.textContent === 'Last Modified: February 1, 2023')).toBeInTheDocument();
     expect(screen.getByText((content, element) => element?.textContent === 'Released: January 1, 2023')).toBeInTheDocument();
     expect(screen.getByText((content, element) => element?.textContent === 'Planned Update: March 1, 2023')).toBeInTheDocument();
-    
+
     // Should have two bullet separators
     const bullets = screen.getAllByText('•');
     expect(bullets).toHaveLength(2);
   });
 
-  test('Applies bold labels when specified', () => {
-    render(
+  test('Applies bold labels when specified', async () => {
+    await renderDate(
       <DatasetDate
         date={{
           modified: '2023-02-01',
@@ -66,13 +73,13 @@ describe('<DatasetDate />', () => {
 
     const modifiedContainer = screen.getByText((content, element) => element?.textContent === 'Last Modified: February 1, 2023').closest('span');
     const releasedContainer = screen.getByText((content, element) => element?.textContent === 'Released: January 1, 2023').closest('span');
-    
+
     expect(modifiedContainer).toHaveClass('dataset-date-item-label ds-u-font-weight--bold');
     expect(releasedContainer).toHaveClass('dataset-date-item-label ds-u-font-weight--bold');
   });
 
-  test('Disables tooltips when displayTooltips is false', () => {
-    render(
+  test('Disables tooltips when displayTooltips is false', async () => {
+    await renderDate(
       <DatasetDate
         date={{
           modified: '2023-02-01',
@@ -86,8 +93,8 @@ describe('<DatasetDate />', () => {
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
   });
 
-  test('Shows tooltips by default', () => {
-    render(
+  test('Shows tooltips by default', async () => {
+    await renderDate(
       <DatasetDate
         date={{
           modified: '2023-02-01',
@@ -100,8 +107,8 @@ describe('<DatasetDate />', () => {
     expect(screen.getAllByRole('button')).toHaveLength(2);
   });
 
-  test('Renders nothing when no dates are provided', () => {
-    render(
+  test('Renders nothing when no dates are provided', async () => {
+    await renderDate(
       <DatasetDate
         date={{}}
       />
@@ -112,4 +119,4 @@ describe('<DatasetDate />', () => {
     expect(screen.queryByText('Planned Update:')).not.toBeInTheDocument();
     expect(screen.queryByText('•')).not.toBeInTheDocument();
   });
-}); 
+});

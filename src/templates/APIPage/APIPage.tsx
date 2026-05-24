@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import qs from 'qs';
 import SwaggerUI from 'swagger-ui-react';
 import SpanOpenAPIVersion from '../../utilities/ApiDocsSwaggerUIPlugin/SpanOpenAPIVersion';

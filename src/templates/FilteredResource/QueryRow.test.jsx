@@ -1,7 +1,6 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
 import QueryRow from './QueryRow';
 
 const schema = {
@@ -35,25 +34,33 @@ const buildProps = (overrides = {}) => ({
 });
 
 describe('QueryRow', () => {
-  it('renders a TextField value input for non-date properties', () => {
-    render(<QueryRow {...buildProps()} />);
+  it('renders a TextField value input for non-date properties', async () => {
+    await act(async () => {
+      render(<QueryRow {...buildProps()} />);
+    });
     expect(screen.getByLabelText('Value')).toBeInTheDocument();
     expect(screen.getByLabelText('Value').tagName).toBe('INPUT');
   });
 
-  it('renders a date input section for date properties', () => {
-    const { container } = render(
-      <QueryRow
-        {...buildProps({
-          condition: { key: 'row-0', operator: '=', property: 'sale_date', value: '2025-01-15' },
-        })}
-      />,
-    );
+  it('renders a date input section for date properties', async () => {
+    let container;
+    await act(async () => {
+      ({ container } = render(
+        <QueryRow
+          {...buildProps({
+            condition: { key: 'row-0', operator: '=', property: 'sale_date', value: '2025-01-15' },
+          })}
+        />,
+      ));
+    });
     expect(container.querySelector('input[name="row-0_date_value"]')).toBeInTheDocument();
   });
 
-  it('renders the property and operator dropdowns with current values', () => {
-    const { container } = render(<QueryRow {...buildProps()} />);
+  it('renders the property and operator dropdowns with current values', async () => {
+    let container;
+    await act(async () => {
+      ({ container } = render(<QueryRow {...buildProps()} />));
+    });
     const propertyDropdown = container.querySelector('select[name="row-0_property"]');
     const operatorDropdown = container.querySelector('select[name="row-0_operator"]');
     expect(propertyDropdown.value).toBe('product_name');

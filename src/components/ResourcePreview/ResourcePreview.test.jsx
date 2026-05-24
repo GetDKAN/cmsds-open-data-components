@@ -1,5 +1,4 @@
 import React from 'react';
-import '@testing-library/jest-dom';
 import { renderWithProviders, screen } from '../../tests/renderWithProviders';
 import ResourcePreview, { prepareColumns } from './index';
 import { makeResource } from '../../tests/fixtures/generic/makeResource';

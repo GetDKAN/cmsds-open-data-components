@@ -1,5 +1,4 @@
 import React from 'react';
-import '@testing-library/jest-dom';
 import { axe } from 'jest-axe';
 import { renderWithProviders, screen, userEvent } from '../../tests/renderWithProviders';
 import Hero from './index';

@@ -1,6 +1,5 @@
 import React from 'react';
 import { renderHook, waitFor, act } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ACAContext } from '../../utilities/ACAContext';
 import useDatastore from './useDatastore';

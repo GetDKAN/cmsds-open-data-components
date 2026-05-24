@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import DatasetDescription from '.';
 import * as dataset from "../../tests/fixtures/dataset.json";
 import * as distributionWithTitle from "../../tests/fixtures/distributionWithTitle.json"

@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import DatasetOverview from './index';
 import { defaultMetadataMapping } from '../../assets/metadataMapping';
 import * as resource from "../../tests/fixtures/resource.json";
@@ -28,7 +27,7 @@ describe('<DatasetOverview />', () => {
       ...defaultMetadataMapping,
     }
     const Wrapped = withQueryProvider(() => (
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <DatasetOverview
           resource={resource}
           distributions={distribution.distribution}

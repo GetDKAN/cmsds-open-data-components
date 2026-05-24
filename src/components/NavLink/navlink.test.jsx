@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import NavLink from './index';
 import { MemoryRouter } from 'react-router-dom';
@@ -10,7 +9,7 @@ expect.extend(toHaveNoViolations);
 describe('<NavLink />', () => {
   test('Renders a relative link if no http protocol in url', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <NavLink
           link={{
             url: '/about',
@@ -23,7 +22,7 @@ describe('<NavLink />', () => {
   });
   test('Renders a link if http protocol in url', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <NavLink
           link={{
             url: 'https://demo.getdkan.com',

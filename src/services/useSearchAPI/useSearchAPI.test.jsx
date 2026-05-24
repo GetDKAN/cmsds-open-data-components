@@ -1,6 +1,5 @@
 import React from 'react';
 import { renderHook, waitFor, act } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import axios from 'axios';
 import { ACAContext } from '../../utilities/ACAContext';
 import useSearchAPI from './useSearchAPI';

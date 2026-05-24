@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen, act, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import axios from 'axios';
 import Dataset from './index';
 import * as dataset from "../../tests/fixtures/dataset";
@@ -11,6 +10,9 @@ const rootUrl = 'http://dkan.com/api/1';
 jest.mock('axios');
 
 describe('<Dataset />', () => {
+  afterEach(() => {
+    jest.useRealTimers();
+  });
   beforeEach(async () => {
     await axios.get.mockImplementation((url) => {
       switch (url) {
@@ -28,7 +30,7 @@ describe('<Dataset />', () => {
   test("Renders correctly", async () => {
     await act(async () => {
       jest.useFakeTimers();
-      await render(<MemoryRouter>
+      await render(<MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Dataset
           rootUrl={rootUrl}
           id={"4eaa5ebe-62f7-402e-a407-963cd380688b"}
@@ -43,7 +45,7 @@ describe('<Dataset />', () => {
   test("Renders Data Dictionary tab if dataset has describedBy attribute", async () => {
     await act(async () => {
       jest.useFakeTimers();
-      await render(<MemoryRouter>
+      await render(<MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Dataset
           rootUrl={rootUrl}
           id={"df01c2f8-dc1f-4e79-96cb-8208beaf143c"}
@@ -58,7 +60,7 @@ describe('<Dataset />', () => {
   test("Does not render Data Dictionary if dataset does not have describedBy attribute", async () => {
     await act(async () => {
       jest.useFakeTimers();
-      await render(<MemoryRouter>
+      await render(<MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Dataset
           rootUrl={rootUrl}
           id={"4eaa5ebe-62f7-402e-a407-963cd380688b"}

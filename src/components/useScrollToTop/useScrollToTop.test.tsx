@@ -4,12 +4,16 @@ import { MemoryRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import useScrollToTop from './index';
 
 const buildWrapper = (initialRoute = '/') => ({ children }: any) => (
-  <MemoryRouter initialEntries={[initialRoute]}>{children}</MemoryRouter>
+  <MemoryRouter initialEntries={[initialRoute]} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>{children}</MemoryRouter>
 );
 
 describe('useScrollToTop', () => {
+  let scrollToSpy: jest.SpyInstance;
   beforeEach(() => {
-    window.scrollTo = jest.fn();
+    scrollToSpy = jest.spyOn(window, 'scrollTo').mockImplementation(() => {});
+  });
+  afterEach(() => {
+    scrollToSpy.mockRestore();
   });
 
   it('scrolls to the top on mount', () => {
@@ -24,7 +28,7 @@ describe('useScrollToTop', () => {
         return entry;
       },
       {
-        wrapper: ({ children }: any) => <MemoryRouter initialEntries={['/a']}>{children}</MemoryRouter>,
+        wrapper: ({ children }: any) => <MemoryRouter initialEntries={['/a']} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>{children}</MemoryRouter>,
         initialProps: { entry: '/a' },
       },
     );

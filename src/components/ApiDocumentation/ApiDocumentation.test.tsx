@@ -1,6 +1,5 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import ApiDocumentation from './index';
 
 // swagger-ui-react is mocked out via jest.config.cjs moduleNameMapper to return ''.

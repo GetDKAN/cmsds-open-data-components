@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 import axios from 'axios';
 import DatasetListSubmenu from './index';
@@ -22,7 +21,7 @@ const buildResults = (count: number) => {
 
 const renderSubmenu = (props: any = {}) =>
   render(
-    <MemoryRouter>
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <DatasetListSubmenu rootUrl="https://example.test/api/1" {...props} />
     </MemoryRouter>,
   );

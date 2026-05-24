@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 import DesktopHeader from './DesktopHeader';
 
@@ -23,7 +22,7 @@ const links = {
 
 const renderHeader = (props = {}) =>
   render(
-    <MemoryRouter>
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <DesktopHeader siteName="Sample Open Data" links={links} {...props} />
     </MemoryRouter>,
   );

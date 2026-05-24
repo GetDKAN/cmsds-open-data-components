@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 import CMSTopNav from './index';
 
@@ -19,7 +18,7 @@ const links = [
 
 const renderTopNav = (props = {}) =>
   render(
-    <MemoryRouter>
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <CMSTopNav org={org} links={links} {...props} />
     </MemoryRouter>,
   );

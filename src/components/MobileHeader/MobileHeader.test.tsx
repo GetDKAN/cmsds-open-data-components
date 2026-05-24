@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 import MobileHeader from './MobileHeader';
 
@@ -33,7 +32,7 @@ const defaultLinks = {
 
 const renderMobileHeader = (props = {}) => {
   return render(
-    <MemoryRouter>
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <MobileHeader
         siteName="Test Site"
         links={defaultLinks}

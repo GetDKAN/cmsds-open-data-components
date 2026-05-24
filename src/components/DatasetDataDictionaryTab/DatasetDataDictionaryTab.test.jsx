@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen, waitFor, act } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import axios from 'axios';
 import DataDictionary from './index';
 import * as datasetDictionary from "../../tests/fixtures/dataDictionary.json";
@@ -26,7 +25,7 @@ describe('<DataDictionary />', () => {
     });
   })
   test("Renders sitewide dictionary correctly", async () => {
-    await render(<MemoryRouter>
+    await render(<MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <DataDictionary
         datasetSitewideDictionary={siteWideDataDictionary.data.fields}
         title={"Sitewide test title"}
@@ -40,7 +39,7 @@ describe('<DataDictionary />', () => {
   });
   test("Renders JSON dataset dictionary correctly", async () => {
     await act(async () => {
-      await render(<MemoryRouter>
+      await render(<MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <DataDictionary
           datasetDictionaryEndpoint='http://dkan.com/api/1/metastore/schemas/data-dictionary/items/71ec19df-f5ef-5b99-b43b-e566e22670b7'
           title="Dataset test title"
@@ -59,7 +58,7 @@ describe('<DataDictionary />', () => {
   });
   test("Renders PDF dataset dictionary correctly", async () => {
     await render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <DataDictionary
           datasetDictionaryEndpoint='http://dkan.com/api/1/provider-data/sites/default/files/data_dictionaries/hospital/HOSPITAL_Data_Dictionary.pdf'
           title="Dataset test PDF"

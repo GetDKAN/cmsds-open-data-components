@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
 import { MemoryRouter } from 'react-router-dom';
 import HeaderNav from './index';
 import HeaderContext from '../../templates/Header/HeaderContext';
@@ -22,7 +21,7 @@ const ctx = (overrides = {}) => ({
 
 const renderNav = (props: any = {}, context = ctx()) =>
   render(
-    <MemoryRouter>
+    <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <HeaderContext.Provider value={context}>
         <HeaderNav {...props} />
       </HeaderContext.Provider>

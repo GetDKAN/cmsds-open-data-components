@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
-import '@testing-library/jest-dom';
 import QueryBuilder from './index';
 import * as resource from "../../tests/fixtures/resource.json";
 

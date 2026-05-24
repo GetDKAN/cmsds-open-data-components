@@ -1,5 +1,4 @@
 import React from 'react';
-import '@testing-library/jest-dom';
 import { renderWithProviders, screen, userEvent } from '../../tests/renderWithProviders';
 import SearchModal from './index';
 

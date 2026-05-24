@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import DatasetListItem from './index';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -19,7 +18,7 @@ const singleItem = {
 describe('<DatasetListItem />', () => {
   test('Renders correctly', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <DatasetListItem
           title={singleItem.title}
           modified={singleItem.modified}
@@ -36,7 +35,7 @@ describe('<DatasetListItem />', () => {
 
   test('Renders with pagination enabled', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <DatasetListItem
           title={singleItem.title}
           modified={singleItem.modified}
@@ -55,7 +54,7 @@ describe('<DatasetListItem />', () => {
 
   test('Renders with pagination disabled', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <DatasetListItem
           title={singleItem.title}
           modified={singleItem.modified}
@@ -76,7 +75,7 @@ describe('<DatasetListItem />', () => {
     require('react-responsive').useMediaQuery.mockImplementation(() => true);
     
     render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <DatasetListItem
           title={singleItem.title}
           modified={singleItem.modified}
@@ -90,7 +89,7 @@ describe('<DatasetListItem />', () => {
 
   test('Aria describedby attribute connects date with link', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <DatasetListItem
           title={singleItem.title}
           modified={singleItem.modified}
@@ -111,7 +110,7 @@ describe('<DatasetListItem />', () => {
 
   test('Works with undefined props using defaults', () => {
     render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <DatasetListItem
           title={singleItem.title}
           modified={singleItem.modified}
@@ -133,7 +132,7 @@ describe('<DatasetListItem />', () => {
   test('Correctly uses provided identifier in date span id', () => {
     const testId = 'special-identifier-123';
     render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <DatasetListItem
           title={singleItem.title}
           modified={singleItem.modified}
@@ -151,7 +150,7 @@ describe('<DatasetListItem />', () => {
   test('Link href points to correct dataset URL', () => {
     const testId = 'test-link-url';
     render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <DatasetListItem
           title={singleItem.title}
           modified={singleItem.modified}
@@ -167,7 +166,7 @@ describe('<DatasetListItem />', () => {
   test('Verifies presence of dataset update text', () => {
     const title = 'Special Dataset Name';
     render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <DatasetListItem
           title={title}
           modified={singleItem.modified}
@@ -183,7 +182,7 @@ describe('<DatasetListItem />', () => {
     const testId = 'special-identifier-123';
     // Pagination enabled
     const { rerender } = render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <DatasetListItem
           title={singleItem.title}
           modified={singleItem.modified}
@@ -199,7 +198,7 @@ describe('<DatasetListItem />', () => {
     
     // Pagination disabled
     rerender(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <DatasetListItem
           title={singleItem.title}
           modified={singleItem.modified}
@@ -218,7 +217,7 @@ describe('<DatasetListItem />', () => {
     require('react-responsive').useMediaQuery.mockImplementation(() => false);
     
     const { container } = render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <DatasetListItem
           title={singleItem.title}
           modified={singleItem.modified}
@@ -237,7 +236,7 @@ describe('<DatasetListItem />', () => {
     const longTitle = 'This is an extremely long dataset title that might need to be truncated in some views but should be shown in full here';
     
     render(
-      <MemoryRouter>
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <DatasetListItem
           title={longTitle}
           modified={singleItem.modified}
