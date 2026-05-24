@@ -298,6 +298,54 @@ export { buildOperatorOptions, convertUTCToLocalDate, cleanText } from './templa
     });
   });
   
+  describe('isTestFile', () => {
+    // Mirrors the helper defined in generate-inventory.cjs
+    const isTestFile = (fileName) =>
+      ['.test.', '.spec.'].some((pattern) => fileName.includes(pattern));
+
+    it('matches .test. files', () => {
+      expect(isTestFile('aca.test.ts')).toBe(true);
+      expect(isTestFile('Component.test.tsx')).toBe(true);
+    });
+
+    it('matches .spec. files', () => {
+      expect(isTestFile('component.spec.ts')).toBe(true);
+    });
+
+    it('rejects non-test source files', () => {
+      expect(isTestFile('aca.ts')).toBe(false);
+      expect(isTestFile('index.tsx')).toBe(false);
+    });
+  });
+
+  describe('hasSiblingTest', () => {
+    // Mirrors the helper defined in generate-inventory.cjs
+    const hasSiblingTest = (dirPath, baseName) => {
+      try {
+        return fs.readdirSync(dirPath).some((file) =>
+          ['.test.', '.spec.'].some((p) => file.includes(p)) && file.startsWith(`${baseName}.`)
+        );
+      } catch (e) {
+        return false;
+      }
+    };
+
+    it('finds a sibling test for a flat utility file', () => {
+      fs.readdirSync.mockReturnValue(['aca.ts', 'aca.test.ts', 'format.ts']);
+      expect(hasSiblingTest('/utilities', 'aca')).toBe(true);
+    });
+
+    it('returns false when the sibling has a different base name', () => {
+      fs.readdirSync.mockReturnValue(['aca.ts', 'format.test.ts']);
+      expect(hasSiblingTest('/utilities', 'aca')).toBe(false);
+    });
+
+    it('does not falsely match a substring prefix', () => {
+      fs.readdirSync.mockReturnValue(['format.ts', 'formatHelper.test.ts']);
+      expect(hasSiblingTest('/utilities', 'format')).toBe(false);
+    });
+  });
+
   describe('getDirectories', () => {
     it('should return only directories', () => {
       const mockDirents = [

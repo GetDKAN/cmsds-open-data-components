@@ -23,6 +23,23 @@ const STORY_FILE_PATTERNS = ['.stories.js', '.stories.jsx', '.stories.ts', '.sto
 const TEST_FILE_PATTERNS = ['.test.', '.spec.'];
 const TS_EXTENSIONS = ['.ts', '.tsx'];
 
+// True if filename looks like a Jest/spec test file.
+function isTestFile(fileName) {
+  return TEST_FILE_PATTERNS.some(pattern => fileName.includes(pattern));
+}
+
+// True if `dirPath` contains a sibling test for the source file named `baseName`
+// (e.g. baseName 'aca' matches 'aca.test.ts' or 'aca.spec.tsx').
+function hasSiblingTest(dirPath, baseName) {
+  try {
+    return fs.readdirSync(dirPath).some(file =>
+      isTestFile(file) && file.startsWith(`${baseName}.`)
+    );
+  } catch (e) {
+    return false;
+  }
+}
+
 // Special case mappings for components with non-standard exports
 const EXPORT_SPECIAL_CASES = {
   'DatasetAdditionalInformation': { exportName: 'buildRows', note: ' (buildRows)' },
@@ -78,9 +95,7 @@ function hasStory(dirPath) {
 function hasTests(dirPath) {
   try {
     const files = fs.readdirSync(dirPath);
-    return files.some(file => 
-      TEST_FILE_PATTERNS.some(pattern => file.includes(pattern))
-    );
+    return files.some(isTestFile);
   } catch (e) {
     return false;
   }
@@ -218,12 +233,12 @@ function scanUtilities(publicExports) {
         false,
         hasTests(dirPath)
       ));
-    } else if (TS_EXTENSIONS.some(ext => file.name.endsWith(ext))) {
+    } else if (TS_EXTENSIONS.some(ext => file.name.endsWith(ext)) && !isTestFile(file.name)) {
       const name = file.name.replace(/\.(ts|tsx)$/, '');
       if (name !== 'index') {
         const isPublic = publicExports.has(name) || (publicExports.has('acaToParams') && name === 'aca');
         const exportNote = name === 'aca' ? ' (acaToParams)' : '';
-        
+
         items.push(createInventoryItem(
           'Utility',
           name,
@@ -231,7 +246,7 @@ function scanUtilities(publicExports) {
           isPublic,
           exportNote,
           false,
-          false
+          hasSiblingTest(utilitiesDir, name)
         ));
       }
     }
@@ -353,7 +368,7 @@ function getHooksAndContexts(publicExports) {
         isPublic,
         '',
         false,
-        false
+        hasTests(dirPath)
       ));
     }
     
