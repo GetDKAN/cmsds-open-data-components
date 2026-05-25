@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import Header from './index';
 import { MemoryRouter } from 'react-router-dom';
 import CMSTopNav from '../../components/CMSTopNav';
@@ -6,8 +6,13 @@ import HeaderSiteTitle from '../../components/HeaderSiteTitle';
 import HeaderNav from '../../components/HeaderNav';
 import HeaderSearch from '../../components/HeaderSearch';
 import MobileMenuButton from '../../components/MobileMenuButton';
-import cmsLogo from '../../assets/images/CMSgov@2x-white-O.png';
-import type { NavLinkArray, OrgType } from '../../types/misc';
+import {
+  cmsOrg as sampleOrg,
+  cmsOrgWithLogo as sampleOrgWithLogo,
+  mainNavLinks,
+  navLinksWithSubmenus,
+  topNavLinks,
+} from '../../../.storybook/fixtures';
 
 const meta: Meta<typeof Header> = {
   title: 'Templates/Header',
@@ -60,57 +65,6 @@ Key features:
 
 export default meta;
 type Story = StoryObj<typeof Header>;
-
-// Mock data
-const sampleOrg: OrgType = {
-  url: 'https://www.cms.gov',
-  tagline: 'The Centers for Medicare & Medicaid Services',
-  urlTitle: 'CMS Open Data',
-  logoAltText: 'CMS Logo',
-};
-
-const sampleOrgWithLogo: OrgType = {
-  ...sampleOrg,
-  logoFilePath: cmsLogo,
-};
-
-const mainNavLinks: NavLinkArray[] = [
-  { id: 'home', label: 'Home', url: '/' },
-  { id: 'datasets', label: 'Datasets', url: '/datasets' },
-  { id: 'api', label: 'API Documentation', url: '/api-docs' },
-  { id: 'about', label: 'About', url: '/about' },
-];
-
-const navLinksWithSubmenus: NavLinkArray[] = [
-  { id: 'home', label: 'Home', url: '/' },
-  { id: 'datasets', label: 'Datasets', url: '/datasets' },
-  {
-    id: 'resources',
-    label: 'Resources',
-    url: '/resources',
-    submenu: [
-      { id: 'api', label: 'API Documentation', url: '/api-docs' },
-      { id: 'dictionary', label: 'Data Dictionary', url: '/data-dictionary' },
-      { id: 'guides', label: 'User Guides', url: '/guides' },
-    ],
-  },
-  {
-    id: 'about',
-    label: 'About',
-    url: '/about',
-    submenu: [
-      { id: 'mission', label: 'Our Mission', url: '/about/mission' },
-      { id: 'team', label: 'Team', url: '/about/team' },
-      { id: 'contact', label: 'Contact Us', url: '/about/contact' },
-    ],
-  },
-];
-
-const topNavLinks: NavLinkArray[] = [
-  { id: 'cms-main', label: 'CMS.gov', url: 'https://www.cms.gov', target: '_blank' },
-  { id: 'medicare', label: 'Medicare.gov', url: 'https://www.medicare.gov', target: '_blank' },
-  { id: 'medicaid', label: 'Medicaid.gov', url: 'https://www.medicaid.gov', target: '_blank' },
-];
 
 export const Default: Story = {
   args: {

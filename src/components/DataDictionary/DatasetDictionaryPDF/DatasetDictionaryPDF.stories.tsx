@@ -1,28 +1,31 @@
-import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import DatasetDictionaryPDF from './index';
 
-const meta = {
+const meta: Meta<typeof DatasetDictionaryPDF> = {
   title: 'Components/DatasetDictionaryPDF',
   component: DatasetDictionaryPDF,
   parameters: {
     layout: 'padded',
     docs: {
       description: {
-        component: `\nThe DatasetDictionaryPDF component displays an iframe to load and display a pdf data dictionary file.\n        `,
+        component: `
+The DatasetDictionaryPDF component displays an iframe to load and display a pdf data dictionary file.
+        `,
       },
     },
   },
   argTypes: {
-    datasetDictionaryEndpoing: { control: 'string', description: 'Location of the PDF file' },
+    datasetDictionaryEndpoint: { control: 'text', description: 'Location of the PDF file' },
   },
   tags: ['autodocs'],
 };
 
 export default meta;
+type Story = StoryObj<typeof DatasetDictionaryPDF>;
 
-export const Default = {
+export const Default: Story = {
   args: {
-    datasetDictionaryEndpoint: "test"
+    datasetDictionaryEndpoint: 'test',
   },
   parameters: {
     docs: {

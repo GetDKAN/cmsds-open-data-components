@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import StoredQueryPage from './index';
 import { MemoryRouter } from 'react-router-dom';
 import { QueryClientProvider } from '@tanstack/react-query';
@@ -134,6 +134,11 @@ export const WithCustomColumns: Story = {
   },
 };
 
+// Excluded from autodocs: this story uses a different datastore mock than the
+// other stories, but they share a module-scope queryClient + identical queryKeys.
+// On the docs page React Query dedupes the request and either this handler wins
+// (corrupting other stories) or the other handlers win (showing the wrong data here).
+// View standalone to see the filtered result set.
 export const WithQueryFilter: Story = {
   args: {
     id: 'provider-utilization-2023',
@@ -145,18 +150,21 @@ export const WithQueryFilter: Story = {
     defaultPageSize: 25,
     disableTableControls: false,
   },
+  tags: ['!autodocs'],
   parameters: {
     msw: {
       handlers: createStoredQueryPageHandlers(mockDatasetMetadata, mockFilteredDatastoreRecords),
     },
     docs: {
       description: {
-        story: 'StoredQueryPage with a predefined query filter (state = "CA"). Shows only 2 California providers. The query prop contains a JSON-stringified array of filter conditions that are parsed and applied to the datastore query.',
+        story: 'StoredQueryPage with a predefined query filter (state = "CA"). Shows only 2 California providers. View standalone — on the docs page the shared queryClient prevents this story from rendering with its own mock.',
       },
     },
   },
 };
 
+// Excluded from autodocs for the same reason as WithQueryFilter — different mock,
+// shared queryClient. View standalone to see the 50-row mock paginate correctly.
 export const LargeDataset: Story = {
   args: {
     id: 'provider-utilization-2023',
@@ -165,13 +173,14 @@ export const LargeDataset: Story = {
     defaultPageSize: 10,
     disableTableControls: false,
   },
+  tags: ['!autodocs'],
   parameters: {
     msw: {
       handlers: createStoredQueryPageHandlers(mockDatasetMetadata, mockLargeDatastoreRecords),
     },
     docs: {
       description: {
-        story: 'StoredQueryPage with 50 records and a page size of 10 to demonstrate pagination controls. Users can navigate between pages using the pagination toolbar.',
+        story: 'StoredQueryPage with 50 records and a page size of 10 to demonstrate pagination controls. View standalone — on the docs page the shared queryClient prevents this story from rendering with its own mock.',
       },
     },
   },

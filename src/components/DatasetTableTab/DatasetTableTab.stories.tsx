@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import DatasetTable from './index';
 import DataTableContext from '../../templates/Dataset/DataTableContext';
 import { DataTableContextType } from '../../templates/Dataset/DataTableContext';

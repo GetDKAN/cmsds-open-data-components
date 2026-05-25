@@ -1,29 +1,26 @@
-import React from 'react';
-import HeaderTagline, { HeaderTaglineProps } from './index';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import HeaderTagline from './index';
 
-export default {
+const meta: Meta<typeof HeaderTagline> = {
   title: 'Components/HeaderTagline',
   component: HeaderTagline,
   tags: ['autodocs'],
-  argTypes: {
-    tagline: {
-      control: 'text',
-      description: 'The tagline text to display.',
-      defaultValue: 'Empowering Data Transparency',
-    },
-  },
   parameters: {
+    layout: 'padded',
     docs: {
       description: {
-        component: 'Displays a tagline in the header, styled for top navigation.'
-      }
-    }
-  }
+        component: 'Displays a tagline in the header, styled for top navigation.',
+      },
+    },
+  },
+  argTypes: {
+    tagline: { control: 'text', description: 'The tagline text to display.' },
+  },
 };
 
-export const Default = {
-  args: {
-    tagline: 'Empowering Data Transparency',
-  },
-  render: (args: HeaderTaglineProps) => <HeaderTagline {...args} />,
+export default meta;
+type Story = StoryObj<typeof HeaderTagline>;
+
+export const Default: Story = {
+  args: { tagline: 'Empowering Data Transparency' },
 };

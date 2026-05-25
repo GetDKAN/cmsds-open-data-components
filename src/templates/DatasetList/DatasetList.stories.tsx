@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import DatasetList from './index';
 import { MemoryRouter } from 'react-router-dom';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { createStorybookQueryClient } from '../../../.storybook/queryClient';
 import { ACAContext } from '../../utilities/ACAContext';
 import { createDatasetListHandlers } from '../../../.storybook/mswHandlers';
-import { mockApiResponse } from '../../../__mocks__/mockDatasetSearchResults';
+import { mockApiResponse, mockEmptyResults } from '../../../__mocks__/mockDatasetSearchResults';
 
 const queryClient = createStorybookQueryClient();
 
@@ -202,6 +202,10 @@ export const WithDataDictionaryLinks: Story = {
   },
 };
 
+// Excluded from autodocs: the module-scope queryClient (defined above) is shared
+// across all stories rendered on the docs page. Combined with identical query keys,
+// this story's empty-results MSW handler would either bleed into other docs renders
+// or be overridden by them. View this story standalone to see the empty state.
 export const EmptyResults: Story = {
   args: {
     rootUrl: 'https://data.cms.gov',
@@ -217,10 +221,14 @@ export const EmptyResults: Story = {
     introText: '',
     dataDictionaryLinks: false,
   },
+  tags: ['!autodocs'],
   parameters: {
+    msw: {
+      handlers: createDatasetListHandlers(mockEmptyResults),
+    },
     docs: {
       description: {
-        story: 'Dataset list with no results (0 datasets returned). Shows how the component handles empty state. NOTE: This story will show mock data (25 results) due to shared MSW handlers. For true empty state testing, view this story in isolation.',
+        story: 'Empty API response (0 datasets returned). View this story standalone — on the docs page it shares the queryClient with other stories and can\'t render in isolation.',
       },
     },
   },

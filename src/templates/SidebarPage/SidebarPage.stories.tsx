@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import SidebarPage from './index';
 import { MemoryRouter } from 'react-router-dom';
 

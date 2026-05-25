@@ -1,14 +1,16 @@
-import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import DatasetAdditionalInformation from './index';
 
-const meta = {
+const meta: Meta<typeof DatasetAdditionalInformation> = {
   title: 'Components/DatasetAdditionalInformation',
   component: DatasetAdditionalInformation,
   parameters: {
     layout: 'padded',
     docs: {
       description: {
-        component: `\nThe DatasetAdditionalInformation component displays a table of additional metadata fields for a dataset.\n        `,
+        component: `
+The DatasetAdditionalInformation component displays a table of additional metadata fields for a dataset.
+        `,
       },
     },
   },
@@ -21,14 +23,15 @@ const meta = {
 };
 
 export default meta;
+type Story = StoryObj<typeof DatasetAdditionalInformation>;
 
 const sampleMetadataMapping = {
-  publisher: (value) => [{ label: 'Publisher', value }],
-  contact: (value) => [{ label: 'Contact', value }],
-  releaseDate: (value) => [{ label: 'Release Date', value }],
+  publisher: (value: string) => [{ label: 'Publisher', value }],
+  contact: (value: string) => [{ label: 'Contact', value }],
+  releaseDate: (value: string) => [{ label: 'Release Date', value }],
 };
 
-export const Default = {
+export const Default: Story = {
   args: {
     datasetInfo: {
       publisher: 'CMS',

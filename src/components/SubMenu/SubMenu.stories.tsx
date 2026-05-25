@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import SubMenu from './index';
 import DatasetListSubmenu from '../DatasetListSubmenu';
 import HeaderContext from '../../templates/Header/HeaderContext';

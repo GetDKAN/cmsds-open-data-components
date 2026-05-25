@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import Dataset from './index';
 import { MemoryRouter } from 'react-router-dom';
 import { createDatasetPageHandlers } from '../../../.storybook/mswHandlers';
@@ -143,7 +143,7 @@ export const Default: Story = {
   },
 };
 
-export const withoutToolbar: Story = {
+export const WithoutToolbar: Story = {
   args: { ...defaultArgs, disableTableControls: true },
   parameters: {
     msw: {
@@ -157,7 +157,7 @@ export const withoutToolbar: Story = {
   },
 };
 
-export const withDataDictionaryBanner: Story = {
+export const WithDataDictionaryBanner: Story = {
   args: { ...defaultArgs, dataDictionaryBanner: true },
   parameters: {
     msw: {
@@ -171,7 +171,7 @@ export const withDataDictionaryBanner: Story = {
   },
 };
 
-export const withoutDataDictionaryTab: Story = {
+export const WithoutDataDictionaryTab: Story = {
   args: { ...defaultArgs, hideDataDictionary: true },
   parameters: {
     msw: {
@@ -185,7 +185,7 @@ export const withoutDataDictionaryTab: Story = {
   },
 };
 
-export const withCustomDescription: Story = {
+export const WithCustomDescription: Story = {
   args: {
     ...defaultArgs,
     customDescription: () => (
@@ -210,7 +210,7 @@ export const withCustomDescription: Story = {
   },
 };
 
-export const withRowLimitNotice: Story = {
+export const WithRowLimitNotice: Story = {
   args: { ...defaultArgs, showRowLimitNotice: true },
   parameters: {
     msw: {

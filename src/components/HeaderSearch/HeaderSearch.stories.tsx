@@ -1,42 +1,41 @@
-import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { MemoryRouter } from 'react-router-dom';
 import HeaderSearch from './index';
-import type { StoryFn, StoryContext } from '@storybook/react';
-import type { HeaderSearchProps } from './index';
 
-export default {
+const meta: Meta<typeof HeaderSearch> = {
   title: 'Components/HeaderSearch',
   component: HeaderSearch,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'padded',
+    docs: {
+      description: {
+        component: 'Displays a search button in the header that opens a modal for dataset search.',
+      },
+    },
+  },
   argTypes: {
     headingText: {
       control: 'text',
       description: 'Heading text for the search modal dialog.',
-      defaultValue: 'Dataset Search',
     },
   },
-  parameters: {
-    docs: {
-      description: {
-        component: 'Displays a search button in the header that opens a modal for dataset search.'
-      }
-    }
-  },
   decorators: [
-    (Story: StoryFn, context: StoryContext) => <MemoryRouter>{Story(context.args, context)}</MemoryRouter>
+    (Story) => (
+      <MemoryRouter>
+        <Story />
+      </MemoryRouter>
+    ),
   ],
 };
 
-export const Default = {
-  args: {
-    headingText: 'Dataset Search',
-  },
-  render: (args: HeaderSearchProps) => <HeaderSearch {...args} />,
+export default meta;
+type Story = StoryObj<typeof HeaderSearch>;
+
+export const Default: Story = {
+  args: { headingText: 'Dataset Search' },
 };
 
-export const CustomHeading = {
-  args: {
-    headingText: 'Find Your Data',
-  },
-  render: (args: HeaderSearchProps) => <HeaderSearch {...args} />,
+export const CustomHeading: Story = {
+  args: { headingText: 'Find Your Data' },
 };

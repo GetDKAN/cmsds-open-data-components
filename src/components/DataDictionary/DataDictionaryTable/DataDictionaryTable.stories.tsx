@@ -1,14 +1,16 @@
-import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import DataDictionaryTable from './index';
 
-const meta = {
+const meta: Meta<typeof DataDictionaryTable> = {
   title: 'Components/DataDictionaryTable',
   component: DataDictionaryTable,
   parameters: {
     layout: 'padded',
     docs: {
       description: {
-        component: `\nThe DataDictionaryTable component displays a paginated, sortable, and filterable table for data dictionary entries.\n        `,
+        component: `
+The DataDictionaryTable component displays a paginated, sortable, and filterable table for data dictionary entries.
+        `,
       },
     },
   },
@@ -22,8 +24,9 @@ const meta = {
 };
 
 export default meta;
+type Story = StoryObj<typeof DataDictionaryTable>;
 
-export const Default = {
+export const Default: Story = {
   args: {
     tableColumns: [
       { accessorKey: 'field', header: 'Field' },

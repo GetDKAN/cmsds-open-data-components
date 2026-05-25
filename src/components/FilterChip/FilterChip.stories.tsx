@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 import FilterChip from './index';
 import { getOperatorLabel } from '../../templates/FilteredResource/functions';

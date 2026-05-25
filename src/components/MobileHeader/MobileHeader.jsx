@@ -6,7 +6,6 @@ import SearchModal from '../SearchModal';
 import NavBar from '../NavBar/Navbar';
 import cmsLogo from '../../assets/images/CMSGovLogo-O.png';
 import cmsLogoWhite from '../../assets/images/CMSgov@2x-white-O.png';
-import './mobile-header.scss';
 
 let mobileHeaderMenuClassName = "dc-c-mobile-header--menu";
 const MobileHeader = ({

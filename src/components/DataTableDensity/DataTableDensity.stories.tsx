@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import DataTableDensity from './index';
 
-const meta = {
+const meta: Meta<typeof DataTableDensity> = {
   title: 'Components/DataTableDensity',
   component: DataTableDensity,
   parameters: {
     layout: 'padded',
     docs: {
       description: {
-        component: `\nThe DataTableDensity component provides a dropdown to select display density for a data table.\n        `,
+        component: `
+The DataTableDensity component provides a dropdown to select display density for a data table.
+        `,
       },
     },
   },
@@ -20,10 +23,11 @@ const meta = {
 };
 
 export default meta;
+type Story = StoryObj<typeof DataTableDensity>;
 
-export const Default = {
+export const Default: Story = {
   render: (args) => {
-    const [tablePadding, setTablePadding] = useState('ds-u-padding-y--1');
+    const [tablePadding, setTablePadding] = useState(args.tablePadding ?? 'ds-u-padding-y--1');
     return <DataTableDensity setTablePadding={setTablePadding} tablePadding={tablePadding} />;
   },
   args: {
