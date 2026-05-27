@@ -1,4 +1,5 @@
 import React, { ReactElement, ReactNode, useEffect, useState, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Button, ArrowIcon } from '@cmsgov/design-system';
 import HeaderContext from '../../templates/Header/HeaderContext';
 import { NavLinkArray, SubmenuElementProps } from '../../types/misc';
@@ -16,6 +17,11 @@ export type SubMenuProps = {
 const SubMenu = ({ link, linkClasses, subLinkClasses, wrapLabel = true }: SubMenuProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const headerContext = React.useContext(HeaderContext);
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsExpanded(false);
+  }, [location]);
   const innerHtml: ReactNode = wrapLabel ? <span>{link.label}</span> : link.label;
   const menu = useRef<HTMLLIElement>(null);
   useEffect(() => {

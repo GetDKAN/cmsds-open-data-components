@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, useNavigate } from 'react-router-dom';
 import HeaderContext from '../../templates/Header/HeaderContext';
 import SubMenu from './index';
 import { NavLinkArray, SubmenuElementProps } from '../../types/misc';
@@ -146,6 +146,33 @@ describe('<SubMenu />', () => {
     expect(button).toHaveAttribute('aria-expanded', 'true');
 
     fireEvent.mouseDown(document.body);
+    expect(button).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('closes the submenu when the route changes', async () => {
+    const NavigationTrigger = () => {
+      const navigate = useNavigate();
+      return <button onClick={() => navigate('/new-page')}>Navigate away</button>;
+    };
+
+    render(
+      <MemoryRouter>
+        <HeaderContext.Provider value={mockHeaderContext}>
+          <nav>
+            <ul>
+              <SubMenu link={staticSubmenuLink} linkClasses="" subLinkClasses="" wrapLabel={true} />
+            </ul>
+          </nav>
+          <NavigationTrigger />
+        </HeaderContext.Provider>
+      </MemoryRouter>
+    );
+
+    const button = screen.getByRole('button', { name: /Resources/i });
+    await userEvent.click(button);
+    expect(button).toHaveAttribute('aria-expanded', 'true');
+
+    await userEvent.click(screen.getByRole('button', { name: /Navigate away/i }));
     expect(button).toHaveAttribute('aria-expanded', 'false');
   });
 
