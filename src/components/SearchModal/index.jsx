@@ -18,6 +18,7 @@ const SearchModal = ({
     if (window) {
       if (window.location.pathname !== '/datasets') {
         navigate(`/datasets?fulltext=${modalSearchTerm}`);
+        setModalSearch(false);
       } else {
         window.location.search = `fulltext=${modalSearchTerm}`;
         setModalSearch(false);
