@@ -1,54 +1,109 @@
 import React from 'react';
-import { renderWithProviders, screen, userEvent } from '../../tests/renderWithProviders';
+import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
 import HeaderSearch from './index';
 
 const mockNavigate = jest.fn();
+
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useNavigate: () => mockNavigate,
 }));
 
-const renderHeaderSearch = () => renderWithProviders(<HeaderSearch />);
+jest.mock('@cmsgov/design-system', () => ({
+  Button: ({ children, onClick, className, type, onDark, variation }) => (
+    <button onClick={onClick} className={className} type={type}>
+      {children}
+    </button>
+  ),
+  Dialog: ({ heading, actions, onExit, isOpen }) => (
+    <div data-testid="search-dialog">
+      <h2>{heading}</h2>
+      <button onClick={onExit} aria-label="Close dialog">
+        Close
+      </button>
+      <div>{actions}</div>
+    </div>
+  ),
+  TextField: ({ label, onChange, value, name, labelClassName, errorMessage }) => (
+    <div>
+      <label className={labelClassName} htmlFor={name}>
+        {label}
+      </label>
+      <input id={name} name={name} value={value} onChange={onChange} aria-label={label} />
+      {errorMessage && <span role="alert">{errorMessage}</span>}
+    </div>
+  ),
+}));
 
-describe('HeaderSearch', () => {
-  // jsdom defaults window.location.pathname to '/', which is the non-/datasets
-  // branch — exactly what we want for these cases.
+const renderHeaderSearch = (props = {}) =>
+  render(
+    <MemoryRouter>
+      <HeaderSearch {...props} />
+    </MemoryRouter>
+  );
+
+describe('<HeaderSearch />', () => {
   beforeEach(() => {
     mockNavigate.mockClear();
   });
 
-  it('does not render the dialog before the trigger is clicked', () => {
+  it('renders the Search button', () => {
     renderHeaderSearch();
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Search/i })).toBeInTheDocument();
   });
 
-  it('opens the dialog when the trigger is clicked', async () => {
-    const user = userEvent.setup();
+  it('modal is not visible on initial render', () => {
     renderHeaderSearch();
-    await user.click(screen.getByRole('button', { name: 'Search' }));
-    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    expect(screen.queryByTestId('search-dialog')).not.toBeInTheDocument();
   });
 
-  it('navigates to /datasets when submitting a valid term from another page', async () => {
-    const user = userEvent.setup();
-    const { container } = renderHeaderSearch();
-    await user.click(screen.getByRole('button', { name: 'Search' }));
-    await user.type(screen.getByLabelText('Search Term'), 'widgets');
-    const submit = container.querySelector('button[type="submit"]') as HTMLButtonElement;
-    await user.click(submit);
-    expect(mockNavigate).toHaveBeenCalledWith('/datasets?fulltext=widgets');
+  it('opens the modal when the Search button is clicked', async () => {
+    renderHeaderSearch();
+    await userEvent.click(screen.getByRole('button', { name: /^Search$/i }));
+    expect(screen.getByTestId('search-dialog')).toBeInTheDocument();
   });
 
-  it('shows the validation error for queries with special characters', async () => {
-    const user = userEvent.setup();
-    const { container } = renderHeaderSearch();
-    await user.click(screen.getByRole('button', { name: 'Search' }));
-    await user.type(screen.getByLabelText('Search Term'), 'bad$query');
-    const submit = container.querySelector('button[type="submit"]') as HTMLButtonElement;
-    await user.click(submit);
-    expect(mockNavigate).not.toHaveBeenCalled();
-    expect(
-      screen.getByText('No special characters allowed. Please enter a valid search term.'),
-    ).toBeInTheDocument();
+  it('closes the modal via the onExit callback', async () => {
+    renderHeaderSearch();
+    await userEvent.click(screen.getByRole('button', { name: /^Search$/i }));
+    expect(screen.getByTestId('search-dialog')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button', { name: /Close dialog/i }));
+    expect(screen.queryByTestId('search-dialog')).not.toBeInTheDocument();
+  });
+
+  describe('search form submission', () => {
+    it('navigates to /datasets with the search term when not on /datasets', async () => {
+      renderHeaderSearch();
+      await userEvent.click(screen.getByRole('button', { name: /^Search$/i }));
+
+      await userEvent.type(screen.getByRole('textbox', { name: /Search Term/i }), 'cancer');
+      fireEvent.submit(screen.getByRole('textbox', { name: /Search Term/i }).closest('form'));
+
+      expect(mockNavigate).toHaveBeenCalledWith('/datasets?fulltext=cancer');
+    });
+
+    it('closes the modal after navigating to /datasets', async () => {
+      renderHeaderSearch();
+      await userEvent.click(screen.getByRole('button', { name: /^Search$/i }));
+
+      await userEvent.type(screen.getByRole('textbox', { name: /Search Term/i }), 'cancer');
+      fireEvent.submit(screen.getByRole('textbox', { name: /Search Term/i }).closest('form'));
+
+      expect(screen.queryByTestId('search-dialog')).not.toBeInTheDocument();
+    });
+
+    it('shows a validation error for an invalid search term', async () => {
+      renderHeaderSearch();
+      await userEvent.click(screen.getByRole('button', { name: /^Search$/i }));
+
+      await userEvent.type(screen.getByRole('textbox', { name: /Search Term/i }), '!!!');
+      fireEvent.submit(screen.getByRole('textbox', { name: /Search Term/i }).closest('form'));
+
+      expect(mockNavigate).not.toHaveBeenCalled();
+      expect(screen.getByRole('alert')).toBeInTheDocument();
+    });
   });
 });

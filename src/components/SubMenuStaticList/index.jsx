@@ -16,7 +16,7 @@ const SubMenuStaticList = ({submenuArray, subLinkClasses, setIsExpanded}) =>  {
           <NavLink
             to={s.url}
             className={`ds-u-display-flex ds-u-align-items--center ${subLinkClasses}`}
-            onClick={() => setIsExpanded(prev => !prev)}
+            onClick={() => setIsExpanded(false)}
           >
             {s.icon ?? null}
             <span>
