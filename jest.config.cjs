@@ -15,4 +15,22 @@ module.exports = {
     '^swagger-ui-react$': '<rootDir>/__mocks__/swaggerMock.js'
   },
   testEnvironment: "jest-environment-jsdom",
+  // Exclude type-only files, stories, fixtures, and barrel re-exports from coverage.
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    '/lib/',
+    '\\.stories\\.[jt]sx?$',
+    '/tests/fixtures/',
+    '/src/types/',
+  ],
+  // Floor thresholds at current minus a small margin so routine churn doesn't trip CI,
+  // but a meaningful regression will. Bump these up as coverage rises.
+  coverageThreshold: {
+    global: {
+      statements: 75,
+      branches: 70,
+      functions: 75,
+      lines: 75,
+    },
+  },
 };

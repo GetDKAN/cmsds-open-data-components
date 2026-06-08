@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import Resource from './index';
 import * as resource from '../../tests/fixtures/resource.json';
 import * as distribution from '../../tests/fixtures/distribution.json';

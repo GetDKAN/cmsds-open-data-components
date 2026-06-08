@@ -1,12 +1,19 @@
 import React from 'react';
 import axios from 'axios';
-import { render, screen, fireEvent, act, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { fireEvent, act, waitFor } from '@testing-library/react';
+import { renderWithProviders, screen } from '../../tests/renderWithProviders';
 import DatasetSearch from './index';
-import { MemoryRouter } from 'react-router-dom';
 
 jest.mock('axios');
 jest.useFakeTimers();
+afterEach(() => {
+  // Flush any queued fake timers between tests but stay in fake-mode for the next test.
+  jest.clearAllTimers();
+});
+afterAll(() => {
+  // Restore real timers at end-of-file to avoid leaking fake-timer state into the worker.
+  jest.useRealTimers();
+});
 const rootUrl = 'http://dkan.com/api/1';
 const data_results = {
   data: {
@@ -42,7 +49,7 @@ describe('<DatasetSearch />', () => {
     await axios.get.mockImplementation(() => Promise.resolve(data_results));
   })
   test('Renders correctly', async () => {
-    render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
+    renderWithProviders(<DatasetSearch rootUrl={rootUrl} />);
     await act(async () => {
       jest.useFakeTimers();
     });
@@ -55,7 +62,7 @@ describe('<DatasetSearch />', () => {
     await act(async () => {
       // debug()
       jest.useFakeTimers();
-      render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
+      renderWithProviders(<DatasetSearch rootUrl={rootUrl} />);
     });
 
     const dataCurrentResultsElement = screen.getByTestId('currentResults');
@@ -70,7 +77,7 @@ describe('<DatasetSearch />', () => {
     await act(async () => {
       // debug()
       jest.useFakeTimers();
-      render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
+      renderWithProviders(<DatasetSearch rootUrl={rootUrl} />);
     });
 
     const dataCurrentResultsElement = screen.getByTestId('currentResults');
@@ -83,7 +90,7 @@ describe('<DatasetSearch />', () => {
     axios.get.mockClear();
     await act(async () => {
       jest.useFakeTimers();
-      render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
+      renderWithProviders(<DatasetSearch rootUrl={rootUrl} />);
     });
     const callsBefore = axios.get.mock.calls.length;
 
@@ -97,11 +104,11 @@ describe('<DatasetSearch />', () => {
   });
 
   test('Renders child element', async () => {
-    render(<MemoryRouter>
+    renderWithProviders(
       <DatasetSearch rootUrl={rootUrl}>
         <div data-testid="child-element">Hello, World!</div>
-      </DatasetSearch>
-    </MemoryRouter>);
+      </DatasetSearch>,
+    );
     await act(async () => {
       jest.useFakeTimers();
     });
@@ -112,14 +119,13 @@ describe('<DatasetSearch />', () => {
     const onAnalyticsEvent = jest.fn();
 
     await act(async () => {
-      render(
-        <MemoryRouter initialEntries={['/datasets?fulltext=test']}>
-          <DatasetSearch
-            rootUrl={rootUrl}
-            analytics
-            onAnalyticsEvent={onAnalyticsEvent}
-          />
-        </MemoryRouter>
+      renderWithProviders(
+        <DatasetSearch
+          rootUrl={rootUrl}
+          analytics
+          onAnalyticsEvent={onAnalyticsEvent}
+        />,
+        { route: '/datasets?fulltext=test' },
       );
     });
 
@@ -137,14 +143,13 @@ describe('<DatasetSearch />', () => {
     const onAnalyticsEvent = jest.fn();
 
     await act(async () => {
-      render(
-        <MemoryRouter initialEntries={['/datasets?fulltext=test']}>
-          <DatasetSearch
-            rootUrl={rootUrl}
-            analytics={false}
-            onAnalyticsEvent={onAnalyticsEvent}
-          />
-        </MemoryRouter>
+      renderWithProviders(
+        <DatasetSearch
+          rootUrl={rootUrl}
+          analytics={false}
+          onAnalyticsEvent={onAnalyticsEvent}
+        />,
+        { route: '/datasets?fulltext=test' },
       );
     });
 
@@ -155,14 +160,13 @@ describe('<DatasetSearch />', () => {
     const onAnalyticsEvent = jest.fn();
 
     await act(async () => {
-      render(
-        <MemoryRouter initialEntries={['/datasets']}>
-          <DatasetSearch
-            rootUrl={rootUrl}
-            analytics
-            onAnalyticsEvent={onAnalyticsEvent}
-          />
-        </MemoryRouter>
+      renderWithProviders(
+        <DatasetSearch
+          rootUrl={rootUrl}
+          analytics
+          onAnalyticsEvent={onAnalyticsEvent}
+        />,
+        { route: '/datasets' },
       );
     });
 
@@ -207,7 +211,7 @@ describe('<DatasetSearch /> Infinite Loop Prevention', () => {
     });
 
     await act(async () => {
-      render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
+      renderWithProviders(<DatasetSearch rootUrl={rootUrl} />);
     });
 
     // Wait for component to settle - if there was an infinite loop, this would timeout or crash
@@ -233,7 +237,7 @@ describe('<DatasetSearch /> Infinite Loop Prevention', () => {
     }));
 
     await act(async () => {
-      render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
+      renderWithProviders(<DatasetSearch rootUrl={rootUrl} />);
     });
 
     await act(async () => {
@@ -265,11 +269,9 @@ describe('<DatasetSearch /> URL & Edge Cases', () => {
 
   test('Initializes from URL params', async () => {
     await act(async () => {
-      render(
-        <MemoryRouter initialEntries={['/datasets?theme=Health&fulltext=test&page=2']}>
-          <DatasetSearch rootUrl={rootUrl} />
-        </MemoryRouter>
-      );
+      renderWithProviders(<DatasetSearch rootUrl={rootUrl} />, {
+        route: '/datasets?theme=Health&fulltext=test&page=2',
+      });
     });
 
     expect(screen.getByRole('textbox', { name: 'Search datasets' })).toHaveValue('test');
@@ -281,11 +283,9 @@ describe('<DatasetSearch /> URL & Edge Cases', () => {
 
   test('Empty search clears fulltext param', async () => {
     await act(async () => {
-      render(
-        <MemoryRouter initialEntries={['/datasets?fulltext=test']}>
-          <DatasetSearch rootUrl={rootUrl} />
-        </MemoryRouter>
-      );
+      renderWithProviders(<DatasetSearch rootUrl={rootUrl} />, {
+        route: '/datasets?fulltext=test',
+      });
     });
 
     const input = screen.getByRole('textbox', { name: 'Search datasets' });
@@ -304,7 +304,7 @@ describe('<DatasetSearch /> URL & Edge Cases', () => {
   test('Invalid search blocks submission', async () => {
     axios.get.mockClear();
     await act(async () => {
-      render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
+      renderWithProviders(<DatasetSearch rootUrl={rootUrl} />);
     });
     const callsBefore = axios.get.mock.calls.length;
 
@@ -324,7 +324,7 @@ describe('<DatasetSearch /> URL & Edge Cases', () => {
   test('Sort change updates URL and triggers API call', async () => {
     axios.get.mockClear();
     await act(async () => {
-      render(<MemoryRouter><DatasetSearch rootUrl={rootUrl} /></MemoryRouter>);
+      renderWithProviders(<DatasetSearch rootUrl={rootUrl} />);
     });
     const callsBefore = axios.get.mock.calls.length;
 
@@ -340,11 +340,9 @@ describe('<DatasetSearch /> URL & Edge Cases', () => {
 
   test('Clear all filters resets URL', async () => {
     await act(async () => {
-      render(
-        <MemoryRouter initialEntries={['/datasets?theme=Health&fulltext=test']}>
-          <DatasetSearch rootUrl={rootUrl} />
-        </MemoryRouter>
-      );
+      renderWithProviders(<DatasetSearch rootUrl={rootUrl} />, {
+        route: '/datasets?theme=Health&fulltext=test',
+      });
     });
 
     await act(() => {
@@ -365,11 +363,9 @@ describe('<DatasetSearch /> URL & Edge Cases', () => {
 
     await act(async () => {
       jest.useFakeTimers();
-      render(
-        <MemoryRouter initialEntries={['/datasets?fulltext=uniquenocache']}>
-          <DatasetSearch rootUrl={rootUrl} />
-        </MemoryRouter>
-      );
+      renderWithProviders(<DatasetSearch rootUrl={rootUrl} />, {
+        route: '/datasets?fulltext=uniquenocache',
+      });
     });
 
     await waitFor(() => {

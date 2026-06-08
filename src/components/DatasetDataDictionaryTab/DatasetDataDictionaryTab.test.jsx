@@ -1,11 +1,10 @@
 import React from 'react';
-import { render, screen, waitFor, act } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { waitFor, act } from '@testing-library/react';
 import axios from 'axios';
+import { renderWithProviders, screen } from '../../tests/renderWithProviders';
 import DataDictionary from './index';
 import * as datasetDictionary from "../../tests/fixtures/dataDictionary.json";
 import * as siteWideDataDictionary from "../../tests/fixtures/sitewideDataDictionary.json"
-import { MemoryRouter } from 'react-router-dom';
 
 jest.mock('axios');
 
@@ -26,12 +25,12 @@ describe('<DataDictionary />', () => {
     });
   })
   test("Renders sitewide dictionary correctly", async () => {
-    await render(<MemoryRouter>
+    renderWithProviders(
       <DataDictionary
         datasetSitewideDictionary={siteWideDataDictionary.data.fields}
         title={"Sitewide test title"}
-      />
-    </MemoryRouter>);
+      />,
+    );
 
     expect(screen.getByRole('heading', {name: 'Sitewide test title'}));
     expect(screen.getByText('Format')).toBeInTheDocument();
@@ -40,13 +39,13 @@ describe('<DataDictionary />', () => {
   });
   test("Renders JSON dataset dictionary correctly", async () => {
     await act(async () => {
-      await render(<MemoryRouter>
+      renderWithProviders(
         <DataDictionary
           datasetDictionaryEndpoint='http://dkan.com/api/1/metastore/schemas/data-dictionary/items/71ec19df-f5ef-5b99-b43b-e566e22670b7'
           title="Dataset test title"
           datasetDictionaryFileType='application/vnd.tableschema+json'
-        />
-      </MemoryRouter>);
+        />,
+      );
     });
 
     expect(screen.getByRole('heading', {name: 'Dataset test title'}));
@@ -58,15 +57,14 @@ describe('<DataDictionary />', () => {
     });
   });
   test("Renders PDF dataset dictionary correctly", async () => {
-    await render(
-      <MemoryRouter>
-        <DataDictionary
-          datasetDictionaryEndpoint='http://dkan.com/api/1/provider-data/sites/default/files/data_dictionaries/hospital/HOSPITAL_Data_Dictionary.pdf'
-          title="Dataset test PDF"
-          datasetDictionaryFileType='application/pdf'
-        />
-      </MemoryRouter>);
-    
+    renderWithProviders(
+      <DataDictionary
+        datasetDictionaryEndpoint='http://dkan.com/api/1/provider-data/sites/default/files/data_dictionaries/hospital/HOSPITAL_Data_Dictionary.pdf'
+        title="Dataset test PDF"
+        datasetDictionaryFileType='application/pdf'
+      />,
+    );
+
     expect(screen.getByRole('heading', {name: 'Dataset test PDF'}));
     await waitFor(() => {
       expect(axios.get).toHaveBeenCalled();
