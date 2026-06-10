@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Dialog, TextField } from "@cmsgov/design-system";
 import { isValidSearch } from "../../templates/DatasetSearch/DatasetSearch";
+import HeaderContext from "../../templates/Header/HeaderContext";
 
 import "./header-search.scss";
 
@@ -12,6 +13,7 @@ export type HeaderSearchProps = {
 const HeaderSearch = (props: HeaderSearchProps) => {
   const { headingText = "Dataset Search" } = props;
   const navigate = useNavigate();
+  const { isMobile } = useContext(HeaderContext);
   const [modalSearchTerm, setModalSearchTerm] = useState('');
   const [modalSearch, setModalSearch] = useState(false);
   const [invalidSearch, setInvalidSearch] = useState<boolean>(false);
@@ -39,9 +41,8 @@ const HeaderSearch = (props: HeaderSearchProps) => {
   return (
     <div className="dkan-c-main-navigation--search">
       <Button
-        variation="ghost"
-        onDark={true}
-        className="ds-u-border--0 dkan-c-header-search--modal-button"
+        variation={isMobile ? undefined : 'ghost'}
+        className="ds-u-lg-border--0 dkan-c-header-search--modal-button"
         onClick={() => setModalSearch(true)}
       >
         <span>Search</span>

@@ -28,7 +28,6 @@ const HeaderNav = (props: HeaderNavProps) => {
     >
       <Button
         variation='ghost'
-        onDark
         className='dkan-c-nav-menu--mobile-close-button'
         onClick={() => headerContext.setMobileMenuOpen(false)}
       >
