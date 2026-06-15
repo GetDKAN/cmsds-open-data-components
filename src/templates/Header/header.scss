@@ -139,6 +139,11 @@
     }
   }
 
+  .ds-c-button:hover {
+    background-color: transparent !important;
+    border-color: transparent !important;
+  }
+
   .dkan-c-mobile-menu-button {
     display: none;
   }
