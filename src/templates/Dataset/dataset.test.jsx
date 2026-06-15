@@ -1,16 +1,18 @@
 import React from 'react';
-import { render, screen, act, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { act, waitFor } from '@testing-library/react';
 import axios from 'axios';
+import { renderWithProviders, screen } from '../../tests/renderWithProviders';
 import Dataset from './index';
 import * as dataset from "../../tests/fixtures/dataset";
 import * as datasetWithDictionary from "../../tests/fixtures/datasetDescribedBy.json"
-import { MemoryRouter } from 'react-router-dom';
 
 const rootUrl = 'http://dkan.com/api/1';
 jest.mock('axios');
 
 describe('<Dataset />', () => {
+  afterEach(() => {
+    jest.useRealTimers();
+  });
   beforeEach(async () => {
     await axios.get.mockImplementation((url) => {
       switch (url) {
@@ -28,12 +30,12 @@ describe('<Dataset />', () => {
   test("Renders correctly", async () => {
     await act(async () => {
       jest.useFakeTimers();
-      await render(<MemoryRouter>
+      renderWithProviders(
         <Dataset
           rootUrl={rootUrl}
           id={"4eaa5ebe-62f7-402e-a407-963cd380688b"}
-        />
-      </MemoryRouter>);
+        />,
+      );
     });
     await waitFor(() => {
       expect(screen.getByRole('heading', { name: 'Product Data for Newly Reported Drugs in the Medicaid Drug Rebate Program 2024-01-08-to-2024-01-14' }));
@@ -43,12 +45,12 @@ describe('<Dataset />', () => {
   test("Renders Data Dictionary tab if dataset has describedBy attribute", async () => {
     await act(async () => {
       jest.useFakeTimers();
-      await render(<MemoryRouter>
+      renderWithProviders(
         <Dataset
           rootUrl={rootUrl}
           id={"df01c2f8-dc1f-4e79-96cb-8208beaf143c"}
-        />
-      </MemoryRouter>);
+        />,
+      );
     });
     await waitFor(() => {
       expect(screen.getByRole('heading', { name: '2022 General Payment Data' }));
@@ -58,12 +60,12 @@ describe('<Dataset />', () => {
   test("Does not render Data Dictionary if dataset does not have describedBy attribute", async () => {
     await act(async () => {
       jest.useFakeTimers();
-      await render(<MemoryRouter>
+      renderWithProviders(
         <Dataset
           rootUrl={rootUrl}
           id={"4eaa5ebe-62f7-402e-a407-963cd380688b"}
-        />
-      </MemoryRouter>);
+        />,
+      );
     });
     await waitFor(() => {
       expect(screen.queryByTestId('dataset-dictionary-tab')).not.toBeInTheDocument();

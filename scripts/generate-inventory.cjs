@@ -23,6 +23,40 @@ const STORY_FILE_PATTERNS = ['.stories.js', '.stories.jsx', '.stories.ts', '.sto
 const TEST_FILE_PATTERNS = ['.test.', '.spec.'];
 const TS_EXTENSIONS = ['.ts', '.tsx'];
 
+// True if filename looks like a Jest/spec test file.
+function isTestFile(fileName) {
+  return TEST_FILE_PATTERNS.some(pattern => fileName.includes(pattern));
+}
+
+// True if `dirPath` contains a sibling test for the source file named `baseName`
+// (e.g. baseName 'aca' matches 'aca.test.ts' or 'aca.spec.tsx').
+function hasSiblingTest(dirPath, baseName) {
+  try {
+    return fs.readdirSync(dirPath).some(file =>
+      isTestFile(file) && file.startsWith(`${baseName}.`)
+    );
+  } catch (e) {
+    return false;
+  }
+}
+
+// True if `dirPath` contains a sibling Storybook story for `baseName`
+// (e.g. baseName 'Foo' matches 'Foo.stories.tsx').
+function hasSiblingStory(dirPath, baseName) {
+  try {
+    return fs.readdirSync(dirPath).some(file =>
+      STORY_FILE_PATTERNS.some(p => file === `${baseName}${p}`)
+    );
+  } catch (e) {
+    return false;
+  }
+}
+
+// True if a file's basename (extension stripped) is a Context source file.
+function isContextFile(fileName) {
+  return /Context\.(ts|tsx)$/.test(fileName);
+}
+
 // Special case mappings for components with non-standard exports
 const EXPORT_SPECIAL_CASES = {
   'DatasetAdditionalInformation': { exportName: 'buildRows', note: ' (buildRows)' },
@@ -78,9 +112,7 @@ function hasStory(dirPath) {
 function hasTests(dirPath) {
   try {
     const files = fs.readdirSync(dirPath);
-    return files.some(file => 
-      TEST_FILE_PATTERNS.some(pattern => file.includes(pattern))
-    );
+    return files.some(isTestFile);
   } catch (e) {
     return false;
   }
@@ -138,15 +170,18 @@ function createInventoryItem(type, name, relativePath, isPublic, exportNote = ''
   };
 }
 
-// Scan components directory
+// Scan components directory.
+// Directories whose name starts with 'use' are React hooks, not components —
+// `getHooksAndContexts` reports them under the HOOKS & CONTEXTS section, so
+// filter them out here to avoid double-counting.
 function scanComponents(publicExports) {
   const componentsDir = path.join(SRC_DIR, 'components');
-  const componentDirs = getDirectories(componentsDir);
-  
+  const componentDirs = getDirectories(componentsDir).filter(name => !name.startsWith('use'));
+
   return componentDirs.map(name => {
     const dirPath = path.join(componentsDir, name);
     const { isPublic, note } = isPublicComponent(name, publicExports);
-    
+
     return createInventoryItem(
       'Component',
       name,
@@ -218,12 +253,16 @@ function scanUtilities(publicExports) {
         false,
         hasTests(dirPath)
       ));
-    } else if (TS_EXTENSIONS.some(ext => file.name.endsWith(ext))) {
+    } else if (
+      TS_EXTENSIONS.some(ext => file.name.endsWith(ext)) &&
+      !isTestFile(file.name) &&
+      !isContextFile(file.name)
+    ) {
       const name = file.name.replace(/\.(ts|tsx)$/, '');
       if (name !== 'index') {
         const isPublic = publicExports.has(name) || (publicExports.has('acaToParams') && name === 'aca');
         const exportNote = name === 'aca' ? ' (acaToParams)' : '';
-        
+
         items.push(createInventoryItem(
           'Utility',
           name,
@@ -231,7 +270,7 @@ function scanUtilities(publicExports) {
           isPublic,
           exportNote,
           false,
-          false
+          hasSiblingTest(utilitiesDir, name)
         ));
       }
     }
@@ -243,19 +282,20 @@ function scanUtilities(publicExports) {
 // Scan types directory
 function scanTypes() {
   const typesDir = path.join(SRC_DIR, 'types');
-  const files = fs.readdirSync(typesDir).filter(f => f.endsWith('.ts'));
-  
-  return files.map(file => 
-    createInventoryItem(
+  const files = fs.readdirSync(typesDir).filter(f => f.endsWith('.ts') && !isTestFile(f));
+
+  return files.map(file => {
+    const baseName = path.basename(file, '.ts');
+    return createInventoryItem(
       'Type Definition',
       file,
       `src/types/${file}`,
       false, // Type definitions are generally internal
       '',
       false,
-      false
-    )
-  );
+      hasSiblingTest(typesDir, baseName)
+    );
+  });
 }
 
 // Scan assets directory
@@ -353,7 +393,7 @@ function getHooksAndContexts(publicExports) {
         isPublic,
         '',
         false,
-        false
+        hasTests(dirPath)
       ));
     }
     
@@ -366,14 +406,15 @@ function getHooksAndContexts(publicExports) {
           const relativePath = `src/components/${dirName}/${file}`;
           const result = scanFileForHooksAndContexts(filePath, relativePath);
           if (result && result.type === 'Context') {
+            const baseName = path.basename(file, path.extname(file));
             items.push(createInventoryItem(
               result.type,
               result.name,
               result.path,
               result.isPublic,
               '',
-              false,
-              false
+              hasSiblingStory(dirPath, baseName),
+              hasSiblingTest(dirPath, baseName)
             ));
           }
         }
@@ -382,14 +423,14 @@ function getHooksAndContexts(publicExports) {
       // Skip if directory can't be read
     }
   });
-  
+
   // Scan templates directory for contexts
   const templatesDir = path.join(SRC_DIR, 'templates');
   const templateDirs = getDirectories(templatesDir);
-  
+
   templateDirs.forEach(dirName => {
     const dirPath = path.join(templatesDir, dirName);
-    
+
     try {
       const files = fs.readdirSync(dirPath);
       files.forEach(file => {
@@ -398,14 +439,15 @@ function getHooksAndContexts(publicExports) {
           const relativePath = `src/templates/${dirName}/${file}`;
           const result = scanFileForHooksAndContexts(filePath, relativePath);
           if (result) {
+            const baseName = path.basename(file, path.extname(file));
             items.push(createInventoryItem(
               result.type,
               result.name,
               result.path,
               result.isPublic,
               '',
-              false,
-              false
+              hasSiblingStory(dirPath, baseName),
+              hasSiblingTest(dirPath, baseName)
             ));
           }
         }
@@ -426,14 +468,15 @@ function getHooksAndContexts(publicExports) {
         const relativePath = `src/utilities/${file}`;
         const result = scanFileForHooksAndContexts(filePath, relativePath);
         if (result) {
+          const baseName = path.basename(file, path.extname(file));
           items.push(createInventoryItem(
             result.type,
             result.name,
             result.path,
             result.isPublic,
             '',
-            false,
-            false
+            hasSiblingStory(utilitiesDir, baseName),
+            hasSiblingTest(utilitiesDir, baseName)
           ));
         }
       }
@@ -441,8 +484,8 @@ function getHooksAndContexts(publicExports) {
   } catch (e) {
     // Skip if directory can't be read
   }
-  
-  return items;
+
+  return items.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 // Generate markdown table row

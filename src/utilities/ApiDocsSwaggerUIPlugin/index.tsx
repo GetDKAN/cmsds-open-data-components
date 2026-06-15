@@ -1,4 +1,4 @@
-import type { ComponentType, ComponentProps } from 'react';
+import React, { ComponentType, ComponentProps } from 'react';
 import ApiDocsInfo from './ApiDocsInfo';
 import OperationCompWrapperInner from './OperationCompWrapperInner';
 import OperationTag from './OperationTag';

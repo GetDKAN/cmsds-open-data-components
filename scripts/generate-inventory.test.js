@@ -298,6 +298,117 @@ export { buildOperatorOptions, convertUTCToLocalDate, cleanText } from './templa
     });
   });
   
+  describe('isTestFile', () => {
+    // Mirrors the helper defined in generate-inventory.cjs
+    const isTestFile = (fileName) =>
+      ['.test.', '.spec.'].some((pattern) => fileName.includes(pattern));
+
+    it('matches .test. files', () => {
+      expect(isTestFile('aca.test.ts')).toBe(true);
+      expect(isTestFile('Component.test.tsx')).toBe(true);
+    });
+
+    it('matches .spec. files', () => {
+      expect(isTestFile('component.spec.ts')).toBe(true);
+    });
+
+    it('rejects non-test source files', () => {
+      expect(isTestFile('aca.ts')).toBe(false);
+      expect(isTestFile('index.tsx')).toBe(false);
+    });
+  });
+
+  describe('hasSiblingTest', () => {
+    // Mirrors the helper defined in generate-inventory.cjs
+    const hasSiblingTest = (dirPath, baseName) => {
+      try {
+        return fs.readdirSync(dirPath).some((file) =>
+          ['.test.', '.spec.'].some((p) => file.includes(p)) && file.startsWith(`${baseName}.`)
+        );
+      } catch (e) {
+        return false;
+      }
+    };
+
+    it('finds a sibling test for a flat utility file', () => {
+      fs.readdirSync.mockReturnValue(['aca.ts', 'aca.test.ts', 'format.ts']);
+      expect(hasSiblingTest('/utilities', 'aca')).toBe(true);
+    });
+
+    it('returns false when the sibling has a different base name', () => {
+      fs.readdirSync.mockReturnValue(['aca.ts', 'format.test.ts']);
+      expect(hasSiblingTest('/utilities', 'aca')).toBe(false);
+    });
+
+    it('does not falsely match a substring prefix', () => {
+      fs.readdirSync.mockReturnValue(['format.ts', 'formatHelper.test.ts']);
+      expect(hasSiblingTest('/utilities', 'format')).toBe(false);
+    });
+  });
+
+  describe('hasSiblingStory', () => {
+    // Mirrors the helper defined in generate-inventory.cjs
+    const STORY_FILE_PATTERNS = ['.stories.js', '.stories.jsx', '.stories.ts', '.stories.tsx'];
+    const hasSiblingStory = (dirPath, baseName) => {
+      try {
+        return fs.readdirSync(dirPath).some((file) =>
+          STORY_FILE_PATTERNS.some((p) => file === `${baseName}${p}`)
+        );
+      } catch (e) {
+        return false;
+      }
+    };
+
+    it('finds a sibling story matching the basename', () => {
+      fs.readdirSync.mockReturnValue(['Foo.tsx', 'Foo.stories.tsx']);
+      expect(hasSiblingStory('/components/Foo', 'Foo')).toBe(true);
+    });
+
+    it('returns false when only a sibling component-level story exists', () => {
+      // Parent Foo.stories.tsx must not flip FooContext's story flag.
+      fs.readdirSync.mockReturnValue(['Foo.tsx', 'FooContext.tsx', 'Foo.stories.tsx']);
+      expect(hasSiblingStory('/components/Foo', 'FooContext')).toBe(false);
+    });
+
+    it('returns false when the directory cannot be read', () => {
+      fs.readdirSync.mockImplementation(() => {
+        throw new Error('ENOENT');
+      });
+      expect(hasSiblingStory('/missing', 'Foo')).toBe(false);
+    });
+  });
+
+  describe('isContextFile', () => {
+    // Mirrors the helper defined in generate-inventory.cjs
+    const isContextFile = (fileName) => /Context\.(ts|tsx)$/.test(fileName);
+
+    it('matches Context.ts and Context.tsx', () => {
+      expect(isContextFile('ACAContext.ts')).toBe(true);
+      expect(isContextFile('DataTableContext.tsx')).toBe(true);
+    });
+
+    it('rejects non-context source files', () => {
+      expect(isContextFile('aca.ts')).toBe(false);
+      expect(isContextFile('format.ts')).toBe(false);
+      expect(isContextFile('context.ts')).toBe(false); // lowercase 'c' — only "Context" suffix
+    });
+  });
+
+  describe('scanComponents — hook directories filtered', () => {
+    // Mirrors the use-prefix filter applied in scanComponents.
+    const filterHooks = (dirs) => dirs.filter((name) => !name.startsWith('use'));
+
+    it('drops directories whose name starts with use', () => {
+      expect(filterHooks(['Foo', 'useScrollToTop', 'useAddLoginLink', 'Bar']))
+        .toEqual(['Foo', 'Bar']);
+    });
+
+    it('keeps directories that only contain the substring use', () => {
+      // 'House' contains 'use' but does not start with it.
+      expect(filterHooks(['House', 'Mouse', 'useFoo'])).toEqual(['House', 'Mouse']);
+    });
+  });
+
   describe('getDirectories', () => {
     it('should return only directories', () => {
       const mockDirents = [
