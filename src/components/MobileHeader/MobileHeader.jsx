@@ -158,13 +158,13 @@ const MobileHeader = ({
         </div>
       )}
       <div className="dc-c-main-navigation ds-u-display--flex ds-u-justify-content--between ds-u-align-items--center">
-        <ButtonMobileMenuButton
+        <Button
           size="small"
           className="dc-c-mobile-menu--open"
           onClick={() => setMenuOpen(true)}
         >
           {mobile ? <span className="ds-u-visibility--screen-reader">Menu</span> : <>Menu</>}
-        </ButtonMobileMenuButton>
+        </Button>
         <div className="ds-u-padding-y--3 dc-c-site-title">
           <NavLink className="ds-c-link--inverse ds-text-heading--3xl" to="/">
             <span className="">{siteName}</span>
