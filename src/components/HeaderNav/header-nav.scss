@@ -60,15 +60,6 @@
   .dkan-c-nav-menu .dkan-c-top-nav {
     padding-top: 8px;
     display: inherit;
-    &::before {
-      background: #{var(--color-primary-light)};
-      content: "";
-      width: 48px;
-      height: 2px;
-      margin-left: 24px;
-      display: block;
-      position: absolute;
-    }
     
     ul {
       padding-top: 16px;

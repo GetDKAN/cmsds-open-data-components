@@ -159,8 +159,6 @@ const MobileHeader = ({
       )}
       <div className="dc-c-main-navigation ds-u-display--flex ds-u-justify-content--between ds-u-align-items--center">
         <Button
-          variation="ghost"
-          onDark
           size="small"
           className="dc-c-mobile-menu--open"
           onClick={() => setMenuOpen(true)}
@@ -194,7 +192,6 @@ const MobileHeader = ({
         <div className={`ds-u-display--flex ${mobileHeaderMenuClassName}-close ds-u-justify-content--between`}>
           <Button
             variation="ghost"
-            onDark
             size="small"
             className="dc-c-mobile-menu--close ds-u-margin-left--1 ds-u-padding-left--0"
             onClick={() => closeMobileMenu()}
