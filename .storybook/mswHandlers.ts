@@ -149,12 +149,26 @@ export const createStoredQueryPageHandlers = (
 
 /**
  * Creates MSW handlers for DatasetList stories.
- * Mocks the search API endpoint.
+ * Mocks the search API endpoint. Respects `page-size` and `page` query params
+ * so the DatasetListSubmenu (page-size=4) and paginated DatasetList views
+ * render only the slice they asked for; `total` is preserved so "View all N"
+ * links and result counts still reflect the full dataset.
  */
 export const createDatasetListHandlers = (searchResults: SearchResults) => [
-  http.get('**/search/*', async () => {
+  http.get('**/search/*', async ({ request }) => {
     await delay(500);
-    return HttpResponse.json(searchResults);
+    const url = new URL(request.url);
+    const pageSize = parseInt(url.searchParams.get('page-size') ?? '', 10);
+    const page = parseInt(url.searchParams.get('page') ?? '', 10);
+    const entries = Object.entries(searchResults.results);
+
+    if (!Number.isFinite(pageSize) || pageSize <= 0 || entries.length === 0) {
+      return HttpResponse.json(searchResults);
+    }
+
+    const offset = Number.isFinite(page) && page > 1 ? (page - 1) * pageSize : 0;
+    const sliced = Object.fromEntries(entries.slice(offset, offset + pageSize));
+    return HttpResponse.json({ ...searchResults, results: sliced });
   }),
 ];
 

@@ -1,7 +1,7 @@
-import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import LargeFileDialog from './index';
 
-const meta = {
+const meta: Meta<typeof LargeFileDialog> = {
   title: 'Components/LargeFileDialog',
   component: LargeFileDialog,
   parameters: {
@@ -21,16 +21,15 @@ The LargeFileDialog component displays a button and a dialog warning users about
 };
 
 export default meta;
+type Story = StoryObj<typeof LargeFileDialog>;
 
-export const Default = {
-  args: {
-    downloadUrl: '/largefile.csv',
-  },
+export const Default: Story = {
+  args: { downloadUrl: '/largefile.csv' },
   parameters: {
     docs: {
       description: {
-        story: 'Displays the large file download dialog with sample download URL.'
-      }
-    }
-  }
+        story: 'Displays the large file download dialog with sample download URL.',
+      },
+    },
+  },
 };

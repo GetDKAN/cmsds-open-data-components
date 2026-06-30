@@ -1,9 +1,8 @@
-
-import React from 'react';
-import SearchModal from './index';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { MemoryRouter } from 'react-router-dom';
+import SearchModal from './index';
 
-const meta = {
+const meta: Meta<typeof SearchModal> = {
   title: 'Components/SearchModal',
   component: SearchModal,
   parameters: {
@@ -27,8 +26,9 @@ The SearchModal component displays a modal dialog for searching datasets. It inc
 };
 
 export default meta;
+type Story = StoryObj<typeof SearchModal>;
 
-export const Default = {
+export const Default: Story = {
   args: {
     headingText: 'Dataset Search',
     buttonSize: null,
@@ -43,16 +43,15 @@ export const Default = {
   },
 };
 
-export const CustomHeading = {
+export const CustomHeading: Story = {
   args: {
     headingText: 'Custom Search Heading',
-    buttonSize: 'medium',
     inversedSearchButton: false,
   },
   parameters: {
     docs: {
       description: {
-        story: 'Displays the search modal with a custom heading and button size.',
+        story: 'Displays the search modal with a custom heading on a non-inverse button.',
       },
     },
   },

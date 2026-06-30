@@ -1,8 +1,7 @@
-import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { MemoryRouter } from 'react-router-dom';
-import HeaderSiteTitle, { HeaderSiteTitleProps } from './index';
+import HeaderSiteTitle from './index';
 import { OrgType } from '../../types/misc';
-import type { StoryFn, StoryContext } from '@storybook/react';
 
 const sampleOrg: OrgType = {
   url: '/',
@@ -17,54 +16,48 @@ const sampleOrgWithLogo: OrgType = {
   logoFilePath: 'https://via.placeholder.com/150x40?text=Logo',
 };
 
-export default {
+const meta: Meta<typeof HeaderSiteTitle> = {
   title: 'Components/HeaderSiteTitle',
   component: HeaderSiteTitle,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'padded',
+    docs: {
+      description: {
+        component: 'Displays the site title in the header, optionally with a logo and inverse styling.',
+      },
+    },
+  },
   argTypes: {
     inverse: {
       control: 'boolean',
       description: 'Use inverse color scheme for the site title link.',
-      defaultValue: false,
     },
     org: {
       control: 'object',
       description: 'Organization info including logo, alt text, and title.',
-      defaultValue: sampleOrg,
     },
   },
-  parameters: {
-    docs: {
-      description: {
-        component: 'Displays the site title in the header, optionally with a logo and inverse styling.'
-      }
-    }
-  },
   decorators: [
-    (Story: StoryFn, context: StoryContext) => <MemoryRouter>{Story(context.args, context)}</MemoryRouter>
+    (Story) => (
+      <MemoryRouter>
+        <Story />
+      </MemoryRouter>
+    ),
   ],
 };
 
-export const Default = {
-  args: {
-    inverse: false,
-    org: sampleOrg,
-  },
-  render: (args: HeaderSiteTitleProps) => <HeaderSiteTitle {...args} />,
+export default meta;
+type Story = StoryObj<typeof HeaderSiteTitle>;
+
+export const Default: Story = {
+  args: { inverse: false, org: sampleOrg },
 };
 
-export const WithLogo = {
-  args: {
-    inverse: false,
-    org: sampleOrgWithLogo,
-  },
-  render: (args: HeaderSiteTitleProps) => <HeaderSiteTitle {...args} />,
+export const WithLogo: Story = {
+  args: { inverse: false, org: sampleOrgWithLogo },
 };
 
-export const Inverse = {
-  args: {
-    inverse: true,
-    org: sampleOrg,
-  },
-  render: (args: HeaderSiteTitleProps) => <HeaderSiteTitle {...args} />,
+export const Inverse: Story = {
+  args: { inverse: true, org: sampleOrg },
 };

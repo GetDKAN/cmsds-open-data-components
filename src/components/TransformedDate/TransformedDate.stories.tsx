@@ -1,14 +1,16 @@
-import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import TransformedDate from './index';
 
-const meta = {
+const meta: Meta<typeof TransformedDate> = {
   title: 'Components/TransformedDate',
   component: TransformedDate,
   parameters: {
     layout: 'padded',
     docs: {
       description: {
-        component: `\nThe TransformedDate component displays a formatted date string using Intl.DateTimeFormat options.\n        `,
+        component: `
+The TransformedDate component displays a formatted date string using Intl.DateTimeFormat options.
+        `,
       },
     },
   },
@@ -20,8 +22,9 @@ const meta = {
 };
 
 export default meta;
+type Story = StoryObj<typeof TransformedDate>;
 
-export const Default = {
+export const Default: Story = {
   args: {
     date: '2025-07-18T12:00:00Z',
     options: {
@@ -33,7 +36,7 @@ export const Default = {
   },
 };
 
-export const ShortFormat = {
+export const ShortFormat: Story = {
   args: {
     date: '2025-07-18T12:00:00Z',
     options: {

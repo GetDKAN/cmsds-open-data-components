@@ -1,8 +1,8 @@
-import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { MemoryRouter } from 'react-router-dom';
 import Breadcrumb from './index';
 
-const meta = {
+const meta: Meta<typeof Breadcrumb> = {
   title: 'Components/Breadcrumb',
   component: Breadcrumb,
   parameters: {
@@ -26,8 +26,9 @@ The Breadcrumb component provides navigation links showing the user's current lo
 };
 
 export default meta;
+type Story = StoryObj<typeof Breadcrumb>;
 
-export const Default = {
+export const Default: Story = {
   args: {
     currentPage: 'Current Page',
     pageTrail: [
@@ -44,7 +45,7 @@ export const Default = {
   },
 };
 
-export const NoTrail = {
+export const NoTrail: Story = {
   args: {
     currentPage: 'Current Page',
     pageTrail: [],
@@ -58,7 +59,7 @@ export const NoTrail = {
   },
 };
 
-export const LongTrail = {
+export const LongTrail: Story = {
   args: {
     currentPage: 'Current Page',
     pageTrail: [

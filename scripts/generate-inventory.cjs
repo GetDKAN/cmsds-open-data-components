@@ -96,13 +96,21 @@ function getPublicExports() {
   return exports;
 }
 
-// Check if a component/template has a Storybook story
+// Check if a component/template has a Storybook story.
+// Recurses one level into subdirectories so wrapper components like DataDictionary
+// (which delegates to sub-components in nested folders) are correctly reported.
 function hasStory(dirPath) {
   try {
-    const files = fs.readdirSync(dirPath);
-    return files.some(file => 
-      STORY_FILE_PATTERNS.some(pattern => file.endsWith(pattern))
+    const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+    const directMatch = entries.some(e =>
+      e.isFile() && STORY_FILE_PATTERNS.some(p => e.name.endsWith(p))
     );
+    if (directMatch) return true;
+    return entries.some(e => {
+      if (!e.isDirectory()) return false;
+      const subEntries = fs.readdirSync(path.join(dirPath, e.name));
+      return subEntries.some(name => STORY_FILE_PATTERNS.some(p => name.endsWith(p)));
+    });
   } catch (e) {
     return false;
   }

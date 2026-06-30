@@ -1,48 +1,32 @@
-import React from 'react';
-import HeaderNavIconLink, { HeaderNavIconLinkProps } from './index';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import HeaderNavIconLink from './index';
 import logoImage from '../../assets/images/CMSGovLogo-O.png';
 
-export default {
+const meta: Meta<typeof HeaderNavIconLink> = {
   title: 'Components/HeaderNavIconLink',
   component: HeaderNavIconLink,
   tags: ['autodocs'],
-  argTypes: {
-    url: {
-      control: 'text',
-      description: 'Destination URL for the icon link.',
-      defaultValue: '/',
-    },
-    urlTitle: {
-      control: 'text',
-      description: 'Title attribute for the link.',
-      defaultValue: 'CMSDS Home',
-    },
-    logoFilePath: {
-      control: 'text',
-      description: 'Image source for the icon.',
-      defaultValue: logoImage,
-    },
-    logoAltText: {
-      control: 'text',
-      description: 'Alt text for the icon image.',
-      defaultValue: 'CMSDS Logo',
-    },
-    backArrow: {
-      control: 'boolean',
-      description: 'Show back arrow next to the icon.',
-      defaultValue: false,
-    },
-  },
   parameters: {
+    layout: 'padded',
     docs: {
       description: {
-        component: 'Displays a navigation icon link in the header, optionally with a back arrow.'
-      }
-    }
+        component: 'Displays a navigation icon link in the header, optionally with a back arrow.',
+      },
+    },
+  },
+  argTypes: {
+    url: { control: 'text', description: 'Destination URL for the icon link.' },
+    urlTitle: { control: 'text', description: 'Title attribute for the link.' },
+    logoFilePath: { control: 'text', description: 'Image source for the icon.' },
+    logoAltText: { control: 'text', description: 'Alt text for the icon image.' },
+    backArrow: { control: 'boolean', description: 'Show back arrow next to the icon.' },
   },
 };
 
-export const Default = {
+export default meta;
+type Story = StoryObj<typeof HeaderNavIconLink>;
+
+export const Default: Story = {
   args: {
     url: '/',
     urlTitle: 'CMSDS Home',
@@ -50,10 +34,9 @@ export const Default = {
     logoAltText: 'CMSDS Logo',
     backArrow: false,
   },
-  render: (args: HeaderNavIconLinkProps) => <HeaderNavIconLink {...args} />,
 };
 
-export const WithBackArrow = {
+export const WithBackArrow: Story = {
   args: {
     url: '/',
     urlTitle: 'Back to CMS',
@@ -61,5 +44,4 @@ export const WithBackArrow = {
     logoAltText: 'CMSDS Logo',
     backArrow: true,
   },
-  render: (args: HeaderNavIconLinkProps) => <HeaderNavIconLink {...args} />,
 };

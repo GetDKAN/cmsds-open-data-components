@@ -1,9 +1,8 @@
-import React from 'react';
-import LargeFileInfo from './index';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { MemoryRouter } from 'react-router-dom';
-import { StoryFn } from '@storybook/react';
+import LargeFileInfo from './index';
 
-const meta = {
+const meta: Meta<typeof LargeFileInfo> = {
   title: 'Components/LargeFileInfo',
   component: LargeFileInfo,
   parameters: {
@@ -20,7 +19,7 @@ The LargeFileInfo component displays information and recommendations for handlin
     className: { control: 'text', description: 'CSS class for the container.' },
   },
   decorators: [
-    (Story: StoryFn) => (
+    (Story) => (
       <MemoryRouter>
         <Story />
       </MemoryRouter>
@@ -30,16 +29,15 @@ The LargeFileInfo component displays information and recommendations for handlin
 };
 
 export default meta;
+type Story = StoryObj<typeof LargeFileInfo>;
 
-export const Default = {
-  args: {
-    className: '',
-  },
+export const Default: Story = {
+  args: { className: '' },
   parameters: {
     docs: {
       description: {
-        story: 'Displays the large file info message with default styling.'
-      }
-    }
-  }
+        story: 'Displays the large file info message with default styling.',
+      },
+    },
+  },
 };

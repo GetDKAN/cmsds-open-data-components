@@ -1,15 +1,17 @@
-import React from 'react';
-import Hero from './index';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { MemoryRouter } from 'react-router-dom';
+import Hero from './index';
 
-const meta = {
+const meta: Meta<typeof Hero> = {
   title: 'Components/Hero',
   component: Hero,
   parameters: {
     layout: 'padded',
     docs: {
       description: {
-        component: `\nThe Hero component displays a prominent header section with a title, description, and search form for datasets.\n        `,
+        component: `
+The Hero component displays a prominent header section with a title, description, and search form for datasets.
+        `,
       },
     },
   },
@@ -24,7 +26,7 @@ const meta = {
   decorators: [
     (Story) => (
       <MemoryRouter>
-        {Story()}
+        <Story />
       </MemoryRouter>
     ),
   ],
@@ -32,8 +34,9 @@ const meta = {
 };
 
 export default meta;
+type Story = StoryObj<typeof Hero>;
 
-export const Default = {
+export const Default: Story = {
   args: {
     title: 'CMSDS',
     description: 'Search and explore datasets.',
@@ -45,8 +48,8 @@ export const Default = {
   parameters: {
     docs: {
       description: {
-        story: 'Displays the hero section with a title, description, and search form.'
-      }
-    }
-  }
+        story: 'Displays the hero section with a title, description, and search form.',
+      },
+    },
+  },
 };
