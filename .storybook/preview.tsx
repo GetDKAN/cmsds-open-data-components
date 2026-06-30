@@ -113,6 +113,11 @@ const preview: Preview = {
     theme: 'core',
   },
   parameters: {
+    options: {
+      storySort: {
+        order: ['Introduction', 'Templates', 'Components', '*'],
+      },
+    },
     controls: {
       matchers: {
        color: /(background|color)$/i,

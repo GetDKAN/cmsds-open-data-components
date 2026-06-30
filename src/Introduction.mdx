@@ -1,0 +1,56 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction" />
+
+# CMSDS Open Data Components
+
+A React component and page-template library for DKAN decoupled open-data frontends, built on the
+[CMS Design System](https://design.cms.gov/) (`@cmsgov/design-system`). This Storybook is the
+living reference for what the library ships and how each piece looks and behaves.
+
+## Overview
+
+- **Storybook 9** on the `@storybook/react-vite` framework, with `@storybook/addon-docs` autodocs.
+- **Two-level tree:**
+  - **`Templates/*`** — full page compositions (Dataset, DatasetSearch, Header, Footer, …).
+  - **`Components/*`** — individual building blocks (Breadcrumb, Datatable, Hero, NavBar, …).
+- **Coverage:** see
+  [`COMPONENTS_INVENTORY.md`](https://github.com/GetDKAN/cmsds-open-data-components/blob/main/COMPONENTS_INVENTORY.md)
+  for the per-component breakdown of which components have stories and unit tests.
+- **API mocking:** data-driven stories use [MSW](https://mswjs.io/) via `msw-storybook-addon`, so
+  they render real-looking data without a live DKAN backend.
+
+## Using this Storybook
+
+- **Run locally:** `npm run storybook` (serves on port 6006). Build a static site with
+  `npm run build-storybook`; lint story files with `npm run lint:stories`.
+- **Controls:** the **Controls** tab lets you change a story's props live. The **Docs** tab
+  (autodocs) renders the prop table and usage notes for each component.
+- **Mocked data:** stories that fetch from DKAN are backed by handlers in
+  `.storybook/mswHandlers.ts` — no backend required.
+- **Layout:** stories are centered at a max width of 1200px unless they opt into full-bleed
+  rendering with `layout: 'fullscreen'` (used by the page templates).
+
+## Theme selector
+
+The toolbar **Theme** control (paintbrush icon, top of the page) switches the active CMS Design
+System theme for every story.
+
+- **Options:** **Core** (default), **Healthcare.gov**, **Medicare.gov**, **CMS.gov**.
+- **What it does:** restyles the current story live by swapping the theme's design tokens
+  (colors, typography, spacing). The selection is global and persists as you navigate between
+  stories.
+- **How it works:** each theme is a set of CSS custom-property overrides layered on the shared
+  base styles. The `themeDecorator` in `.storybook/preview.tsx` injects the active theme's CSS
+  into a single `<style id="cmsds-active-theme">` element — component markup is identical across
+  themes; only the tokens change.
+- **Why it's useful:** flip through the themes to confirm a component holds up under each agency
+  brand before shipping it.
+
+## Adding a story
+
+- Place `ComponentName.stories.tsx` next to the component it documents.
+- Set `title` to `Components/Name` or `Templates/Name` to slot it into the existing tree, and add
+  `tags: ['autodocs']` to generate a Docs page.
+- Reuse the shared helpers in `.storybook/`: mock content from `fixtures.ts`, context wrappers
+  from `decorators.tsx` (e.g. `withDataTableContexts`), and network mocks from `mswHandlers.ts`.
