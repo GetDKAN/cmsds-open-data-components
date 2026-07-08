@@ -17,10 +17,6 @@ import { DatasetSearchPageProps, SelectedFacetsType, SidebarFacetTypes, SearchRe
 import { acaToParams } from '../../utilities/aca';
 import { ACAContext } from '../../utilities/ACAContext';
 
-export const isValidSearch = (query: string) => {
-  return /^[a-zA-Z0-9 ]*$/.test(query.trim());
-};
-
 const sortOptions = [
   { label: 'Newest', value: 'newest' },
   { label: 'Oldest', value: 'oldest' },
@@ -82,7 +78,6 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
 
   // Local UI state only
   const [filterText, setFilterText] = useState(fulltext);
-  const [invalidSearch, setInvalidSearch] = useState<boolean>(false);
 
   // Sync filterText from URL on back/forward
   useEffect(() => { setFilterText(fulltext); }, [fulltext]);
@@ -217,14 +212,8 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                 e.preventDefault();
 
                 if (filterText) {
-                  if (isValidSearch(filterText)) {
-                    setInvalidSearch(false);
-                    navigate({ search: buildNextQueryString({ fulltext: filterText, page: null }) });
-                  } else {
-                    setInvalidSearch(true);
-                  }
+                  navigate({ search: buildNextQueryString({ fulltext: filterText, page: null }) });
                 } else {
-                  setInvalidSearch(false);
                   navigate({ search: buildNextQueryString({ fulltext: null, page: null }) });
                 }
               }}
@@ -232,8 +221,6 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
             >
               <span className="ds-c-field__before fas fa-search ds-u-display--none ds-u-sm-display--inline-block" />
               <TextField
-                errorMessage={invalidSearch ? 'No special characters allowed. Please enter a valid search term.' : undefined}
-                errorPlacement='bottom'
                 fieldClassName="ds-u-margin--0"
                 value={filterText}
                 className={`ds-u-padding-right--2 ${altMobileSearchButton ? 'ds-l-col--12 ds-l-md-col--10 --alt-style' : 'ds-l-col--10'}`}
@@ -242,7 +229,6 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                 placeholder="Search datasets"
                 name="dataset_fulltext_search"
                 onChange={(e) => {
-                  setInvalidSearch(false);
                   setFilterText(e.target.value)
                 }}
               />

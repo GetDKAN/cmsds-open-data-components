@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Dialog, TextField } from "@cmsgov/design-system";
-import { isValidSearch } from "../../templates/DatasetSearch/DatasetSearch";
 import HeaderContext from "../../templates/Header/HeaderContext";
 
 import "./header-search.scss";
@@ -16,24 +15,17 @@ const HeaderSearch = (props: HeaderSearchProps) => {
   const { isMobile } = useContext(HeaderContext);
   const [modalSearchTerm, setModalSearchTerm] = useState('');
   const [modalSearch, setModalSearch] = useState(false);
-  const [invalidSearch, setInvalidSearch] = useState<boolean>(false);
 
   function searchForDataset(e: React.SyntheticEvent) {
     e.preventDefault();
 
     if (window) {
-      if (isValidSearch(modalSearchTerm)) {
-        setInvalidSearch(false);
-
-        if (window.location.pathname !== '/datasets') {
-          navigate(`/datasets?fulltext=${modalSearchTerm}`);
-          setModalSearch(false);
-        } else {
-          window.location.search = `fulltext=${modalSearchTerm}`;
-          setModalSearch(false);
-        }
+      if (window.location.pathname !== '/datasets') {
+        navigate(`/datasets?fulltext=${modalSearchTerm}`);
+        setModalSearch(false);
       } else {
-        setInvalidSearch(true);
+        window.location.search = `fulltext=${modalSearchTerm}`;
+        setModalSearch(false);
       }
     }
   }
@@ -61,8 +53,6 @@ const HeaderSearch = (props: HeaderSearchProps) => {
               }}
             >
               <TextField
-                errorMessage={invalidSearch ? 'No special characters allowed. Please enter a valid search term.' : undefined}
-                errorPlacement='bottom'
                 value={modalSearchTerm}
                 fieldClassName="ds-u-display--inline-block ds-u-margin--0"
                 className="ds-l-col--9"
@@ -70,7 +60,6 @@ const HeaderSearch = (props: HeaderSearchProps) => {
                 name="search-modal"
                 labelClassName="ds-u-visibility--screen-reader"
                 onChange={(e) => {
-                  setInvalidSearch(false);
                   setModalSearchTerm(e.target.value)
                 }}
               />
