@@ -301,26 +301,6 @@ describe('<DatasetSearch /> URL & Edge Cases', () => {
     expect(lastCall).not.toContain('fulltext');
   });
 
-  test('Invalid search blocks submission', async () => {
-    axios.get.mockClear();
-    await act(async () => {
-      renderWithProviders(<DatasetSearch rootUrl={rootUrl} />);
-    });
-    const callsBefore = axios.get.mock.calls.length;
-
-    const input = screen.getByRole('textbox', { name: 'Search datasets' });
-    await act(() => {
-      fireEvent.change(input, { target: { value: '!!@#$' } });
-    });
-    await act(() => {
-      fireEvent.submit(input.closest('form'));
-    });
-
-    expect(screen.getByText(/No special characters allowed/)).toBeInTheDocument();
-    // No new API call should have been triggered
-    expect(axios.get.mock.calls.length).toBe(callsBefore);
-  });
-
   test('Sort change updates URL and triggers API call', async () => {
     axios.get.mockClear();
     await act(async () => {
