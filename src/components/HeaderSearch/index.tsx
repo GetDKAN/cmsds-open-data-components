@@ -20,13 +20,8 @@ const HeaderSearch = (props: HeaderSearchProps) => {
     e.preventDefault();
 
     if (window) {
-      if (window.location.pathname !== '/datasets') {
-        navigate(`/datasets?fulltext=${modalSearchTerm}`);
-        setModalSearch(false);
-      } else {
-        window.location.search = `fulltext=${modalSearchTerm}`;
-        setModalSearch(false);
-      }
+      navigate(`/datasets?fulltext=${modalSearchTerm}`);
+      setModalSearch(false);
     }
   }
 

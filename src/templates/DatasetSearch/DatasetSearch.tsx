@@ -143,7 +143,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   const { data, isPending } = useQuery({
     queryKey: ["datasets", params],
     queryFn: () => {
-      return axios.get(`${rootUrl}/search/?${qs.stringify(acaToParams(params, ACA), { arrayFormat: 'comma', encode: false })}`)
+      return axios.get(`${rootUrl}/search/?${qs.stringify(acaToParams(params, ACA), { arrayFormat: 'comma', encode: true })}`)
     }
   });
 
