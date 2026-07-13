@@ -1,7 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactElement } from 'react';
 import { Button, ExternalLinkIcon } from '@cmsgov/design-system';
 import NavLink from '../../components/NavLink';
+import { MenuLinkType } from '../../types/misc';
+
+type FooterPropTypes = {
+  links: {[key: string] : MenuLinkType},
+  showEmail?: boolean,
+  emailTitle?: string,
+  emailBody?: string,
+  emailLink?: string,
+  emailButton?: string,
+  socialMediaLinks?: {[key: string] : {
+    url: string,
+    title: string,
+  }} | null,
+  hhsLogo: string,
+  cmsLogo: string,
+  trademarkContent?: ReactElement
+}
 
 const Footer = ({
   links,
@@ -22,7 +38,7 @@ const Footer = ({
       <p className="ds-u-padding-bottom--2">7500 Security Boulevard, Baltimore, MD 21244</p>
     </div>
   ),
-}) => {
+} : FooterPropTypes) => {
   const { footerOpenDataToolLinks, footerAdditionalResourcesLinks, footerUtilityLinks } = links;
   return (
     <footer className="dc-c-footer">
@@ -335,54 +351,6 @@ const Footer = ({
   );
 };
 
-Footer.propTypes = {
-  showEmail: PropTypes.bool,
-  emailTitle: PropTypes.string,
-  emailBody: PropTypes.string,
-  emailLink: PropTypes.string,
-  emailButton: PropTypes.string,
-  links: PropTypes.shape({
-    footerOpenDataToolLinks: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string,
-        label: PropTypes.string,
-        url: PropTypes.string,
-        target: PropTypes.string,
-      })
-    ),
-    footerAdditionalResourcesLinks: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string,
-        label: PropTypes.string,
-        url: PropTypes.string,
-        target: PropTypes.string,
-      })
-    ),
-    footerUtilityLinks: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string,
-        label: PropTypes.string,
-        url: PropTypes.string,
-        target: PropTypes.string,
-      })
-    ),
-  }).isRequired,
-  socialMediaLinks: PropTypes.shape({
-    facebook: PropTypes.shape({
-      title: PropTypes.string,
-      url: PropTypes.string,
-    }),
-    twitter: PropTypes.shape({
-      title: PropTypes.string,
-      url: PropTypes.string,
-    }),
-    linkedin: PropTypes.shape({
-      title: PropTypes.string,
-      url: PropTypes.string,
-    }),
-  }),
-  hhsLogo: PropTypes.string.isRequired,
-  cmsLogo: PropTypes.string.isRequired,
-};
+
 
 export default Footer;

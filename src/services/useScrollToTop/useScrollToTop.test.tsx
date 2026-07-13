@@ -4,7 +4,7 @@ import { renderHook } from '@testing-library/react';
 // `renderWithProviders` (which is render-based, not hook-based). Don't try to
 // "consolidate" — the hook wrapper pattern doesn't fit through that helper.
 import { MemoryRouter, Route, Routes, useNavigate } from 'react-router-dom';
-import useScrollToTop from './index';
+import useScrollToTop from './index.jsx';
 
 const buildWrapper = (initialRoute = '/') => ({ children }: any) => (
   <MemoryRouter initialEntries={[initialRoute]} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>{children}</MemoryRouter>

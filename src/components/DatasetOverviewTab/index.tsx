@@ -69,7 +69,6 @@ const DatasetOverview = ({ dataset, resource, distributions, metadataMapping, ro
                           // @ts-ignore
                           style={{ border: 'none', background: 'none' }}
                           maxWidth="400px"
-                          placement="auto"
                         >
                         <TooltipIcon />
                         </Tooltip>

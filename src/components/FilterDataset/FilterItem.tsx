@@ -114,9 +114,11 @@ const FilterItem = ({ id, condition, index, update, remove, propertyOptions, sch
             <DatePicker
               name={`${condition.key}_date_value`}
               selected={convertUTCToLocalDate(startDate)}
-              onChange={(date : Date) => {
-                setStartDate(date);
-                setValue(date.toJSON().slice(0, 10));
+              onChange={(date : Date | null) => {
+                if (date) {
+                  setStartDate(date);
+                  setValue(date.toJSON().slice(0, 10));
+                }
               }}
               showMonthDropdown
               showYearDropdown

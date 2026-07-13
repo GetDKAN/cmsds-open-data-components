@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import qs from 'qs';
 import { useQuery } from '@tanstack/react-query';
 import withQueryProvider from '../../utilities/QueryProvider/QueryProvider';
@@ -302,11 +301,6 @@ const Dataset = ({
       )}
     </>
   );
-};
-
-Dataset.propTypes = {
-  id: PropTypes.string.isRequired,
-  rootUrl: PropTypes.string.isRequired,
 };
 
 export default withQueryProvider(Dataset);

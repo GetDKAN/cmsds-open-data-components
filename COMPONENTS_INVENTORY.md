@@ -75,12 +75,12 @@ This document provides a comprehensive inventory of all components, services, te
 | Context | [DataTableActionsProvider](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DatasetTableTab/DataTableActionsContext.tsx) | ✅ Public | ❌ No Story | ✅ Has Tests |
 | Context | [DataTableContext](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/Dataset/DataTableContext.tsx) | ✅ Public | ❌ No Story | ❌ No Tests |
 | Context | [HeaderContext](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/Header/HeaderContext.tsx) | ✅ Public | ❌ No Story | ❌ No Tests |
-| Hook | [useAddLoginLink](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/useAddLoginLink) | ✅ Public | ❌ No Story | ✅ Has Tests |
-| Hook | [useScrollToTop](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/useScrollToTop) | ✅ Public | ❌ No Story | ✅ Has Tests |
 | | | | | |
 | **SERVICES** | | | | |
+| Service | [useAddLoginLink](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/services/useAddLoginLink) | ✅ Public | ❌ No Story | ✅ Has Tests |
 | Service | [useDatastore](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/services/useDatastore) | ✅ Public | ❌ No Story | ✅ Has Tests |
 | Service | [useMetastoreDataset](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/services/useMetastoreDataset) | ✅ Public | ❌ No Story | ✅ Has Tests |
+| Service | [useScrollToTop](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/services/useScrollToTop) | ✅ Public | ❌ No Story | ✅ Has Tests |
 | Service | [useSearchAPI](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/services/useSearchAPI) | ✅ Public | ❌ No Story | ✅ Has Tests |
 | | | | | |
 | **TEMPLATES** | | | | |
@@ -129,10 +129,10 @@ This document provides a comprehensive inventory of all components, services, te
 ---
 
 ### Export Summary
-- **Public**: 55 items (32 components, 11 templates, 3 services, 2 hooks, 4 contexts, 2 asset)
+- **Public**: 55 items (32 components, 11 templates, 5 services, 0 hooks, 4 contexts, 2 asset)
 - **Internal**: 38 items (30 components, 0 templates, 0 services, 5 utilities, 3 types, 0 asset)
 
 ---
 
-*Last updated: June 15, 2026*  
+*Last updated: July 13, 2026*  
 *Repository: [GetDKAN/cmsds-open-data-components](https://github.com/GetDKAN/cmsds-open-data-components)*

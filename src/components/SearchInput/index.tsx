@@ -1,9 +1,19 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Button, TextField } from '@cmsgov/design-system'
 import MagnifyingGlassIcon from '../../assets/icons/magnifyingglass'
 import ChevronRightIcon from '../../assets/icons/chevronright'
 import './search-input.scss'
+
+type SearchInputPropTypes = {
+  placeholder?: string,
+  showMagnifyingGlass?: boolean,
+  showSearchButton?: boolean,
+  onDark?: boolean,
+  onChange?: Function,
+  onSubmit?: Function,
+  onKeyDown?: Function,
+  defaultValue?: string
+}
 
 const SearchInput = ({
   placeholder = 'Search the Data',
@@ -14,7 +24,7 @@ const SearchInput = ({
   onSubmit,
   onKeyDown,
   defaultValue = ''
-}) => (
+}: SearchInputPropTypes) => (
   <div className="search-input-container">
     <TextField
       className={`${showMagnifyingGlass ? 'left-padding' : ''} ${showSearchButton ? 'right-padding' : ''}`}
@@ -48,16 +58,5 @@ const SearchInput = ({
     <div className="rounded-border" />
   </div>
 )
-
-SearchInput.propTypes = {
-  placeholder: PropTypes.string,
-  showMagnifyingGlass: PropTypes.bool,
-  showSearchButton: PropTypes.bool,
-  onDark: PropTypes.bool,
-  onChange: PropTypes.func,
-  onSubmit: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  defaultValue: PropTypes.string
-}
 
 export default SearchInput

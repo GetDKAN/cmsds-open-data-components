@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 export type DataTablePageResultsType = {
   totalRows: number;
@@ -31,13 +30,6 @@ const DataTablePageResults = ({
       rows
     </p>
   );
-};
-
-DataTablePageResults.propTypes = {
-  className: PropTypes.string,
-  totalRows: PropTypes.number.isRequired,
-  limit: PropTypes.number.isRequired,
-  offset: PropTypes.number.isRequired,
 };
 
 export default DataTablePageResults;
