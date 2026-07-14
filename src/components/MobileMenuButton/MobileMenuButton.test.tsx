@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent } from '@testing-library/react';
+import { fireEvent, act } from '@testing-library/react';
 import { renderWithProviders, screen } from '../../tests/renderWithProviders';
 import MobileMenuButton from './index';
 
@@ -31,7 +31,10 @@ describe('MobileMenuButton', () => {
     const button = screen.getByRole('button', { name: /menu/i });
     expect(button).toHaveAttribute('aria-expanded', 'true');
     expect(button).toHaveClass('dkan-c-mobile-menu-button--close');
-    fireEvent.click(button);
+    
+    act(() => {
+      fireEvent.click(button);
+    })
     expect(ctx.setMobileMenuOpen).toHaveBeenCalledWith(false);
   });
 });
