@@ -4,7 +4,7 @@ import NavLink from '../../components/NavLink';
 import { MenuLinkType } from '../../types/misc';
 
 type FooterPropTypes = {
-  links: {[key: string] : MenuLinkType},
+  links: {[key: string] : Array<MenuLinkType>},
   showEmail?: boolean,
   emailTitle?: string,
   emailBody?: string,
@@ -156,7 +156,6 @@ const Footer = ({
                               <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
                             </svg>
                             <svg
-                              title="Facebook Icon"
                               className="svg-inline--fa fa-facebook-f fa-w-10 fa-inverse"
                               data-fa-transform="shrink-3.5"
                               aria-labelledby="svg-inline--fa-title-iRCARP7h6Kp3"
@@ -203,7 +202,6 @@ const Footer = ({
                               <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
                             </svg>
                             <svg
-                              title="Twitter Icon"
                               className="svg-inline--fa fa-twitter fa-w-16 fa-inverse"
                               data-fa-transform="shrink-3.5"
                               aria-labelledby="svg-inline--fa-title-4z03ITiPPTVF"
@@ -250,7 +248,6 @@ const Footer = ({
                               <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
                             </svg>
                             <svg
-                              title="LinkedIn Icon"
                               className="svg-inline--fa fa-linkedin-in fa-w-14 fa-inverse"
                               data-fa-transform="shrink-3.5"
                               aria-labelledby="svg-inline--fa-title-Nm2qsuSKvuRZ"
@@ -297,7 +294,6 @@ const Footer = ({
                               <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
                             </svg>
                             <svg
-                              title="youTube Icon"
                               className="svg-inline--fa fa-youtube fa-w-18 fa-inverse"
                               data-fa-transform="shrink-3.5"
                               aria-labelledby="svg-inline--fa-title-youtube"

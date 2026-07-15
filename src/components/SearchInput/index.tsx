@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { KeyboardEventHandler } from 'react'
 import { Button, TextField } from '@cmsgov/design-system'
 import MagnifyingGlassIcon from '../../assets/icons/magnifyingglass'
 import ChevronRightIcon from '../../assets/icons/chevronright'
@@ -9,9 +9,9 @@ type SearchInputPropTypes = {
   showMagnifyingGlass?: boolean,
   showSearchButton?: boolean,
   onDark?: boolean,
-  onChange?: Function,
-  onSubmit?: Function,
-  onKeyDown?: Function,
+  onChange?: ((...args: any[]) => any) | undefined,
+  onSubmit?: ((...args: any[]) => any) | undefined,
+  onKeyDown?: KeyboardEventHandler,
   defaultValue?: string
 }
 
@@ -27,6 +27,7 @@ const SearchInput = ({
 }: SearchInputPropTypes) => (
   <div className="search-input-container">
     <TextField
+      name="search"
       className={`${showMagnifyingGlass ? 'left-padding' : ''} ${showSearchButton ? 'right-padding' : ''}`}
       label={placeholder}
       labelClassName="ds-u-visibility--screen-reader"
@@ -44,7 +45,7 @@ const SearchInput = ({
     {showSearchButton && (
       <Button
         variation="solid"
-        className={onDark && 'on-dark'}
+        className={onDark ? 'on-dark' : undefined}
         onClick={onSubmit}
       >
         <span className="magnifying-glass-icon" aria-label="Search the Data">

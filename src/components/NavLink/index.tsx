@@ -2,15 +2,12 @@ import React, { MouseEventHandler } from 'react';
 import { NavLink as RRDNavLink } from 'react-router-dom';
 import { ExternalLinkIcon } from '@cmsgov/design-system';
 import './NavLink.scss';
+import { MenuLinkType } from '../../types/misc';
 
 type NavLinkPropTypes = {
-  link: {
-    label: string,
-    url: string,
-    target?: '_blank' | null
-  },
+  link: MenuLinkType,
   className: string | null,
-  wrapLabel: boolean,
+  wrapLabel?: boolean,
   clickHandler?: null | Function
 }
 
