@@ -20,7 +20,11 @@ const HeaderSearch = (props: HeaderSearchProps) => {
     e.preventDefault();
 
     if (window) {
-      navigate(`/datasets?fulltext=${modalSearchTerm}`);
+      const params = new URLSearchParams({
+        fulltext: modalSearchTerm,
+      });
+
+      navigate(`/datasets?${params.toString()}`);
       setModalSearch(false);
     }
   }

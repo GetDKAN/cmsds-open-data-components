@@ -16,7 +16,11 @@ const Hero = ({
   function submitHero(e) {
     e.preventDefault();
 
-    navigate(`/${searchUrl}?${searchKey}=${searchValue}`);
+    const params = new URLSearchParams({
+      [searchKey]: searchValue
+    });
+
+    navigate(`/${searchUrl}?${params.toString()}`);
   }
 
   return (
