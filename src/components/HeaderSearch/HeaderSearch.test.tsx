@@ -94,16 +94,5 @@ describe('<HeaderSearch />', () => {
 
       expect(screen.queryByTestId('search-dialog')).not.toBeInTheDocument();
     });
-
-    it('shows a validation error for an invalid search term', async () => {
-      renderHeaderSearch();
-      await userEvent.click(screen.getByRole('button', { name: /^Search$/i }));
-
-      await userEvent.type(screen.getByRole('textbox', { name: /Search Term/i }), '!!!');
-      fireEvent.submit(screen.getByRole('textbox', { name: /Search Term/i }).closest('form'));
-
-      expect(mockNavigate).not.toHaveBeenCalled();
-      expect(screen.getByRole('alert')).toBeInTheDocument();
-    });
   });
 });

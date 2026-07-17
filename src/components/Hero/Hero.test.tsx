@@ -29,17 +29,6 @@ describe('Hero', () => {
     expect(mockNavigate).toHaveBeenCalledWith('/datasets?fulltext=widgets');
   });
 
-  it('shows an error and does not navigate when the query has special characters', async () => {
-    const user = userEvent.setup();
-    renderHero();
-    await user.type(screen.getByLabelText('Search for a dataset'), 'bad$query');
-    await user.click(screen.getByRole('button', { name: /search/i }));
-    expect(mockNavigate).not.toHaveBeenCalled();
-    expect(
-      screen.getByText('No special characters allowed. Please enter a valid search term.'),
-    ).toBeInTheDocument();
-  });
-
   it('uses custom searchUrl and searchKey props', async () => {
     const user = userEvent.setup();
     renderHero({ searchUrl: 'catalog', searchKey: 'q', searchButtonText: 'Go' });

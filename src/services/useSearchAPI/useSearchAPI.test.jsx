@@ -85,7 +85,7 @@ describe('useSearchAPI', () => {
     });
     await waitFor(() => expect(mockedAxios.get).toHaveBeenCalled());
     const url = mockedAxios.get.mock.calls[0][0];
-    expect(url).toContain('theme=Sales,Inventory');
+    expect(url).toContain('theme=Sales%2CInventory');
   });
 
   it('resetFilters clears fulltext and selectedFacets', async () => {

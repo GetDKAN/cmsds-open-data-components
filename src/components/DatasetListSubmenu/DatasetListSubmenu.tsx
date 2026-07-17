@@ -44,7 +44,7 @@ const DatasetListSubmenu = ({
   const { data, isPending, error } = useQuery({
     queryKey: ["datasets", params],
     queryFn: () => {
-      return axios.get(`${rootUrl}/search/?${qs.stringify(acaToParams(params, ACA), { arrayFormat: 'comma', encode: false })}`)
+      return axios.get(`${rootUrl}/search/?${qs.stringify(acaToParams(params, ACA), { arrayFormat: 'comma', encode: true })}`)
     }
   });
 

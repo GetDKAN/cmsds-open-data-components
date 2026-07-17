@@ -54,5 +54,5 @@ export async function fetchDatasets(rootUrl: string, options: any, ACA?: string)
     page: page !== 1 ? page : undefined,  //use index except for when submitting to Search API
     ['page-size']: pageSize !== 10 ? pageSize : undefined,
   }
-  return await axios.get(`${rootUrl}/search/?${qs.stringify(acaToParams(params, ACA), {arrayFormat: 'comma',encode: false})}`)
+  return await axios.get(`${rootUrl}/search/?${qs.stringify(acaToParams(params, ACA), {arrayFormat: 'comma',encode: true})}`)
 }
