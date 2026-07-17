@@ -73,7 +73,7 @@ const mockLinks = {
     {
       'id': 'cmscontactinfo',
       'label': 'CMS contact info',
-      'url': 'https://www.cms.gov/apps/contacts/'
+      'url': 'https://www.cms.gov/about-cms/contact/directory'
     },
     {
       'id': 'helpwithfile',
