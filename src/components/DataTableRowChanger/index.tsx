@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Dropdown, DropdownValue, DropdownOption } from '@cmsgov/design-system';
 
 type DataTableRowChangerProps = {
@@ -22,12 +21,6 @@ const DataTableRowChanger = ({limit, rowOptions = [10, 25, 50, 100], setLimit} :
       />
     </div>
   );
-};
-
-DataTableRowChanger.propTypes = {
-  rowOptions: PropTypes.arrayOf(PropTypes.number),
-  setLimit: PropTypes.func.isRequired,
-  limit: PropTypes.number,
 };
 
 export default DataTableRowChanger;

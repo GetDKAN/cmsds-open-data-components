@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import useAddLoginLink from './index';
+import useAddLoginLink from './index.jsx';
 
 // jest+jsdom defaults window.location.host to 'localhost' — we use that as
 // the "matching host" instead of mocking, which is fragile under modern jsdom.

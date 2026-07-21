@@ -1,6 +1,7 @@
 import React from 'react';
 import { act, render, screen } from '@testing-library/react';
 import DatasetDate from './index';
+import { textMatcher } from '../../tests/textMatcher';
 
 // The CMSDS Tooltip used by DatasetDateItem runs an async positioning effect on mount,
 // so plain `render` triggers act warnings. Route renders through this helper.
@@ -20,7 +21,7 @@ describe('<DatasetDate />', () => {
       />
     );
 
-    expect(screen.getByText((content, element) => element?.textContent === 'Last Modified: February 1, 2023')).toBeInTheDocument();
+    expect(screen.getByText((content, element) => textMatcher(element, 'Last Modified: February 1, 2023'))).toBeInTheDocument();
     expect(screen.queryByText('•')).not.toBeInTheDocument();
   });
 
@@ -34,8 +35,8 @@ describe('<DatasetDate />', () => {
       />
     );
 
-    expect(screen.getByText((content, element) => element?.textContent === 'Last Modified: February 1, 2023')).toBeInTheDocument();
-    expect(screen.getByText((content, element) => element?.textContent === 'Released: January 1, 2023')).toBeInTheDocument();
+    expect(screen.getByText((content, element) => textMatcher(element, 'Last Modified: February 1, 2023'))).toBeInTheDocument();
+    expect(screen.getByText((content, element) => textMatcher(element, 'Released: January 1, 2023'))).toBeInTheDocument();
     expect(screen.getByText('•')).toBeInTheDocument();
   });
 
@@ -50,9 +51,9 @@ describe('<DatasetDate />', () => {
       />
     );
 
-    expect(screen.getByText((content, element) => element?.textContent === 'Last Modified: February 1, 2023')).toBeInTheDocument();
-    expect(screen.getByText((content, element) => element?.textContent === 'Released: January 1, 2023')).toBeInTheDocument();
-    expect(screen.getByText((content, element) => element?.textContent === 'Planned Update: March 1, 2023')).toBeInTheDocument();
+    expect(screen.getByText((content, element) => textMatcher(element, 'Last Modified: February 1, 2023'))).toBeInTheDocument();
+    expect(screen.getByText((content, element) => textMatcher(element, 'Released: January 1, 2023'))).toBeInTheDocument();
+    expect(screen.getByText((content, element) => textMatcher(element, 'Planned Update: March 1, 2023'))).toBeInTheDocument();
 
     // Should have two bullet separators
     const bullets = screen.getAllByText('•');
@@ -71,8 +72,8 @@ describe('<DatasetDate />', () => {
       />
     );
 
-    const modifiedContainer = screen.getByText((content, element) => element?.textContent === 'Last Modified: February 1, 2023').closest('span');
-    const releasedContainer = screen.getByText((content, element) => element?.textContent === 'Released: January 1, 2023').closest('span');
+    const modifiedContainer = screen.getByText((content, element) => textMatcher(element, 'Last Modified: February 1, 2023')).closest('span');
+    const releasedContainer = screen.getByText((content, element) => textMatcher(element, 'Released: January 1, 2023')).closest('span');
 
     expect(modifiedContainer).toHaveClass('dataset-date-item-label ds-u-font-weight--bold');
     expect(releasedContainer).toHaveClass('dataset-date-item-label ds-u-font-weight--bold');
@@ -114,9 +115,9 @@ describe('<DatasetDate />', () => {
       />
     );
 
-    expect(screen.queryByText('Last Modified:')).not.toBeInTheDocument();
-    expect(screen.queryByText('Released:')).not.toBeInTheDocument();
-    expect(screen.queryByText('Planned Update:')).not.toBeInTheDocument();
+    expect(screen.queryByText('Last Modified')).not.toBeInTheDocument();
+    expect(screen.queryByText('Released')).not.toBeInTheDocument();
+    expect(screen.queryByText('Planned Update')).not.toBeInTheDocument();
     expect(screen.queryByText('•')).not.toBeInTheDocument();
   });
 });

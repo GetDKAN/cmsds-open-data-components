@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import DatasetDateItem from './index';
+import { textMatcher } from '../../tests/textMatcher';
 
 describe('<DatasetDateItem />', () => {
   test('Renders modified date correctly', () => {
@@ -11,9 +12,7 @@ describe('<DatasetDateItem />', () => {
       />
     );
 
-    expect(screen.getByText((content, element) => {
-      return element?.textContent === 'Last Modified: February 1, 2023';
-    })).toBeInTheDocument();
+    expect(screen.getByText((content, element) => textMatcher(element, 'Last Modified: February 1, 2023'))).toBeInTheDocument();
   });
 
   test('Renders released date correctly', () => {
@@ -24,9 +23,7 @@ describe('<DatasetDateItem />', () => {
       />
     );
 
-    expect(screen.getByText((content, element) => {
-      return element?.textContent === 'Released: January 1, 2023';
-    })).toBeInTheDocument();
+    expect(screen.getByText((content, element) => textMatcher(element, 'Released: January 1, 2023'))).toBeInTheDocument();
   });
 
   test('Renders refresh date correctly', () => {
@@ -37,9 +34,7 @@ describe('<DatasetDateItem />', () => {
       />
     );
 
-    expect(screen.getByText((content, element) => {
-      return element?.textContent === 'Planned Update: March 1, 2023';
-    })).toBeInTheDocument();
+    expect(screen.getByText((content, element) => textMatcher(element, 'Planned Update: March 1, 2023'))).toBeInTheDocument();
   });
 
   test('Applies bold label class when boldLabel is true', () => {
@@ -51,9 +46,7 @@ describe('<DatasetDateItem />', () => {
       />
     );
 
-    const container = screen.getByText((content, element) => {
-      return element?.textContent === 'Last Modified: February 1, 2023';
-    }).closest('span');
+    const container = screen.getByText((content, element) => textMatcher(element, 'Last Modified: February 1, 2023')).closest('span');
     expect(container).toHaveClass('dataset-date-item-label ds-u-font-weight--bold');
   });
 

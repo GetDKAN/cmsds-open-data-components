@@ -1,7 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactElement } from 'react';
 import { Button, ExternalLinkIcon } from '@cmsgov/design-system';
 import NavLink from '../../components/NavLink';
+import { MenuLinkType } from '../../types/misc';
+
+type FooterPropTypes = {
+  links: {[key: string] : Array<MenuLinkType>},
+  showEmail?: boolean,
+  emailTitle?: string,
+  emailBody?: string,
+  emailLink?: string,
+  emailButton?: string,
+  socialMediaLinks?: {[key: string] : {
+    url: string,
+    title: string,
+  }} | null,
+  hhsLogo: string,
+  cmsLogo: string,
+  trademarkContent?: ReactElement
+}
 
 const Footer = ({
   links,
@@ -22,7 +38,7 @@ const Footer = ({
       <p className="ds-u-padding-bottom--2">7500 Security Boulevard, Baltimore, MD 21244</p>
     </div>
   ),
-}) => {
+} : FooterPropTypes) => {
   const { footerOpenDataToolLinks, footerAdditionalResourcesLinks, footerUtilityLinks } = links;
   return (
     <footer className="dc-c-footer">
@@ -140,7 +156,6 @@ const Footer = ({
                               <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
                             </svg>
                             <svg
-                              title="Facebook Icon"
                               className="svg-inline--fa fa-facebook-f fa-w-10 fa-inverse"
                               data-fa-transform="shrink-3.5"
                               aria-labelledby="svg-inline--fa-title-iRCARP7h6Kp3"
@@ -187,7 +202,6 @@ const Footer = ({
                               <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
                             </svg>
                             <svg
-                              title="Twitter Icon"
                               className="svg-inline--fa fa-twitter fa-w-16 fa-inverse"
                               data-fa-transform="shrink-3.5"
                               aria-labelledby="svg-inline--fa-title-4z03ITiPPTVF"
@@ -234,7 +248,6 @@ const Footer = ({
                               <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
                             </svg>
                             <svg
-                              title="LinkedIn Icon"
                               className="svg-inline--fa fa-linkedin-in fa-w-14 fa-inverse"
                               data-fa-transform="shrink-3.5"
                               aria-labelledby="svg-inline--fa-title-Nm2qsuSKvuRZ"
@@ -281,7 +294,6 @@ const Footer = ({
                               <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
                             </svg>
                             <svg
-                              title="youTube Icon"
                               className="svg-inline--fa fa-youtube fa-w-18 fa-inverse"
                               data-fa-transform="shrink-3.5"
                               aria-labelledby="svg-inline--fa-title-youtube"
@@ -335,54 +347,6 @@ const Footer = ({
   );
 };
 
-Footer.propTypes = {
-  showEmail: PropTypes.bool,
-  emailTitle: PropTypes.string,
-  emailBody: PropTypes.string,
-  emailLink: PropTypes.string,
-  emailButton: PropTypes.string,
-  links: PropTypes.shape({
-    footerOpenDataToolLinks: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string,
-        label: PropTypes.string,
-        url: PropTypes.string,
-        target: PropTypes.string,
-      })
-    ),
-    footerAdditionalResourcesLinks: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string,
-        label: PropTypes.string,
-        url: PropTypes.string,
-        target: PropTypes.string,
-      })
-    ),
-    footerUtilityLinks: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string,
-        label: PropTypes.string,
-        url: PropTypes.string,
-        target: PropTypes.string,
-      })
-    ),
-  }).isRequired,
-  socialMediaLinks: PropTypes.shape({
-    facebook: PropTypes.shape({
-      title: PropTypes.string,
-      url: PropTypes.string,
-    }),
-    twitter: PropTypes.shape({
-      title: PropTypes.string,
-      url: PropTypes.string,
-    }),
-    linkedin: PropTypes.shape({
-      title: PropTypes.string,
-      url: PropTypes.string,
-    }),
-  }),
-  hhsLogo: PropTypes.string.isRequired,
-  cmsLogo: PropTypes.string.isRequired,
-};
+
 
 export default Footer;

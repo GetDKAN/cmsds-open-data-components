@@ -1,9 +1,25 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import NavBar from '../NavBar';
 import SearchModal from '../SearchModal';
 import cmsLogo from '../../assets/images/CMSGovLogo-O.png';
+import { OrgType } from '../../types/misc';
+
+type DesktopHeaderPropTypes = {
+  siteName: string,
+  headerClasses?: string,
+  linkClasses?: string,
+  links?: {
+    topnav: string,
+    main: string
+  },
+  org?: OrgType,
+  searchModalText?: string,
+  customSearch?: boolean,
+  includeTopNav?: boolean,
+  inversedModalButton?: boolean,
+  inversedSearchButton?: boolean,
+}
 
 const DesktopHeader = ({
   siteName,
@@ -22,7 +38,7 @@ const DesktopHeader = ({
   includeTopNav = true,
   inversedModalButton,
   inversedSearchButton,
-}) => {
+}: DesktopHeaderPropTypes) => {
   const { url, tagline, logo, urlTitle, logoAltText } = org;
   const headerClassString = headerClasses ?? 'dc-c-header ds-base';
   return (
@@ -81,13 +97,6 @@ const DesktopHeader = ({
       </div>
     </header>
   );
-};
-
-DesktopHeader.propTypes = {
-  siteName: PropTypes.node.isRequired,
-  includeTopNav: PropTypes.bool,
-  linkClasses: PropTypes.string,
-  includeSearch: PropTypes.bool,
 };
 
 export default DesktopHeader;

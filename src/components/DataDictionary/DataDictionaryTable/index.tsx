@@ -86,9 +86,7 @@ const DataDictionaryTable = ({tableColumns, tableData, pageSize, columnFilters} 
                     <HeaderResizeElement key={header.id + "_resize"} table={table} header={header} sortElement={sortElement} id={'dataDictionary_' + header.id} />
                   ) : (
                     <TableCell
-                      {...{
-                        key: header.id
-                      }}
+                      key={header.id}
                       className= {`ds-u-border-y--2 ds-u-border--dark ds-u-border-x--0`}
                       id={'dataDictionary_' + header.id}
                     >
@@ -118,8 +116,8 @@ const DataDictionaryTable = ({tableColumns, tableData, pageSize, columnFilters} 
                   {row.getVisibleCells().map((cell) => {
                     return (
                       <TableCell
+                        key={cell.id}
                       {...{
-                        key: cell.id,
                         style: {
                           maxWidth: mobile ? '100%' : cell.column.getSize(),
                           whiteSpace: cell.column.id === "description" ? 'pre-wrap' : 'normal'

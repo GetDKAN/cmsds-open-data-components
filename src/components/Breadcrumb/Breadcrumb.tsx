@@ -1,9 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './breadcrumb.scss';
 
-const Breadcrumb = ({ currentPage, pageTrail = [] }) => {
+type PageTrail = {
+  path: string,
+  title: string,
+}
+
+const Breadcrumb = ({ currentPage, pageTrail = [] } : {currentPage: string, pageTrail: Array<PageTrail>} ) => {
   const pageTrailContent = pageTrail.map((page) => (
     <li key={page.path} className="dc-c-breadcrumb__list-item">
       <Link to={page.path} className="dc-c-breadcrumb__link">
@@ -26,16 +30,6 @@ const Breadcrumb = ({ currentPage, pageTrail = [] }) => {
       </ol>
     </nav>
   );
-};
-
-Breadcrumb.propTypes = {
-  currentPage: PropTypes.string.isRequired,
-  pageTrail: PropTypes.arrayOf(
-    PropTypes.shape({
-      path: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-    })
-  ),
 };
 
 export default Breadcrumb;

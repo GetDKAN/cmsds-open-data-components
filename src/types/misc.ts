@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from "react"
+import { MouseEventHandler, ReactElement, ReactNode } from "react"
 
 export type FAQItemType = {
   id: string,
@@ -11,7 +11,12 @@ export type MenuLinkType = {
   id: string,
   label: string,
   url: string,
-  target: string
+  target: string,
+  onClick?: MouseEventHandler,
+  dataTag?: {
+    name: string,
+    value: string,
+  }
 }
 
 export type OrgType = {

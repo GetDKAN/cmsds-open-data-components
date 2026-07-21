@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Dropdown } from '@cmsgov/design-system';
 
-const DataTableDensity = ({ setTablePadding, tablePadding }) => {
+const DataTableDensity = ({ setTablePadding, tablePadding } : {setTablePadding: Function, tablePadding?: string}) => {
   return (
     <div className="ds-u-display--flex">
       <Dropdown
@@ -19,10 +18,6 @@ const DataTableDensity = ({ setTablePadding, tablePadding }) => {
       />
     </div>
   );
-};
-
-DataTableDensity.propTypes = {
-  setTablePadding: PropTypes.func.isRequired,
 };
 
 export default DataTableDensity;

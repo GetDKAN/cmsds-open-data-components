@@ -1,9 +1,19 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { KeyboardEventHandler } from 'react'
 import { Button, TextField } from '@cmsgov/design-system'
 import MagnifyingGlassIcon from '../../assets/icons/magnifyingglass'
 import ChevronRightIcon from '../../assets/icons/chevronright'
 import './search-input.scss'
+
+type SearchInputPropTypes = {
+  placeholder?: string,
+  showMagnifyingGlass?: boolean,
+  showSearchButton?: boolean,
+  onDark?: boolean,
+  onChange?: ((...args: any[]) => any) | undefined,
+  onSubmit?: ((...args: any[]) => any) | undefined,
+  onKeyDown?: KeyboardEventHandler,
+  defaultValue?: string
+}
 
 const SearchInput = ({
   placeholder = 'Search the Data',
@@ -14,9 +24,10 @@ const SearchInput = ({
   onSubmit,
   onKeyDown,
   defaultValue = ''
-}) => (
+}: SearchInputPropTypes) => (
   <div className="search-input-container">
     <TextField
+      name="search"
       className={`${showMagnifyingGlass ? 'left-padding' : ''} ${showSearchButton ? 'right-padding' : ''}`}
       label={placeholder}
       labelClassName="ds-u-visibility--screen-reader"
@@ -34,7 +45,7 @@ const SearchInput = ({
     {showSearchButton && (
       <Button
         variation="solid"
-        className={onDark && 'on-dark'}
+        className={onDark ? 'on-dark' : undefined}
         onClick={onSubmit}
       >
         <span className="magnifying-glass-icon" aria-label="Search the Data">
@@ -48,16 +59,5 @@ const SearchInput = ({
     <div className="rounded-border" />
   </div>
 )
-
-SearchInput.propTypes = {
-  placeholder: PropTypes.string,
-  showMagnifyingGlass: PropTypes.bool,
-  showSearchButton: PropTypes.bool,
-  onDark: PropTypes.bool,
-  onChange: PropTypes.func,
-  onSubmit: PropTypes.func,
-  onKeyDown: PropTypes.func,
-  defaultValue: PropTypes.string
-}
 
 export default SearchInput

@@ -1,3 +1,5 @@
+// <reference path="./globals.d.ts" />
+
 // Components
 export { default as ApiRowLimitNotice } from './components/ApiRowLimitNotice';
 export { default as CMSTopNav } from './components/CMSTopNav';
@@ -60,8 +62,8 @@ export { default as useDatastore } from './services/useDatastore';
 export { transformTableSortToQuerySort } from './services/useDatastore/transformSorts';
 
 // Hooks
-export { default as useAddLoginLink } from './components/useAddLoginLink';
-export { default as useScrollToTop } from './components/useScrollToTop';
+export { default as useAddLoginLink } from './services/useAddLoginLink';
+export { default as useScrollToTop } from './services/useScrollToTop';
 export { default as useMetastoreDataset } from './services/useMetastoreDataset';
 export { default as withQueryProvider } from './utilities/QueryProvider/QueryProvider'
 
