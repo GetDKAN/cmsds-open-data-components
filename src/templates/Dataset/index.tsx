@@ -209,6 +209,7 @@ const Dataset = ({
                   selectedId={selectedTab}
                 >
                   <TabPanel
+                    key={id + '-data-table'}
                     id={'data-table'}
                     tab={
                       <span className="ds-u-color--primary">
@@ -240,6 +241,7 @@ const Dataset = ({
                     }
                   </TabPanel>
                   <TabPanel
+                    key={id + '-overview'}
                     id={'overview'}
                     tab={
                       <span className="ds-u-color--primary">
@@ -254,6 +256,7 @@ const Dataset = ({
                   </TabPanel>
                   {!hideDataDictionary && (
                     <TabPanel
+                      key={id + '-data-dictionary'}
                       id={'data-dictionary'}
                       tab={
                         <span className="ds-u-color--primary">
@@ -280,6 +283,7 @@ const Dataset = ({
                   )}
                   {distribution && distribution.data && (
                     <TabPanel
+                      key={id + '-api'}
                       id={'api'}
                       tab={
                         <span className="ds-u-color--primary">
