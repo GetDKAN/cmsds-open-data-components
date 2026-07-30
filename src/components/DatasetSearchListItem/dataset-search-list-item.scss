@@ -18,6 +18,9 @@
     span svg {
       fill: #{var(--link__color)};
     }
+    a.dkan-disabled-link {
+      pointer-events: all !important;
+    }
   }
   svg {
     margin-right: 8px;
