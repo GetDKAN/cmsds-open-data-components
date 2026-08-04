@@ -1,0 +1,10 @@
+.dc-page-not-found {
+  padding-top: 4em;
+  padding-bottom: 9em;
+}
+
+@media (min-width: 1024px) {
+  .dc-page-not-found--measure {
+    max-width: 850px;
+  }
+}

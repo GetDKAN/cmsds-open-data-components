@@ -1,26 +1,24 @@
 import React from 'react';
+import { Button } from '@cmsgov/design-system';
+import './page-not-found.scss';
 
 const PageNotFound = ({ siteUrl, content }) => {
   return (
-    <section className="ds-l-container ds-u-padding-top--3">
+    <section className="dc-page-not-found ds-l-container">
       {content ? (
         content
       ) : (
         <>
-          <h1 className="ds-text-heading--4xl">Error: Page not found</h1>
-          <p>
-            We're sorry, but there is no {siteUrl} web page that matches your entry. You may have
-            been directed here because:
+          <h1 className="ds-text-heading--3xl ds-u-color--primary ds-u-font-weight--bold ds-u-margin-bottom--2">Page Not Found</h1>
+          <p className="dc-page-not-found--measure ds-u-color--black ds-u-margin-top--0 ds-u-margin-bottom--4">
+            Sorry, we can't find this page. It may have moved or been renamed. Check that the address is correct and update any bookmarks when you find the page you want.
           </p>
-          <ol>
-            <li>The address you typed contains a typo;</li>
-            <li>The requested page may have expired or;</li>
-            <li>The requested page may have been moved.</li>
-          </ol>
-          <p>
-            <span className="ds-u-font-weight--bold">Note:</span> If you were using a bookmark,
-            please reset it once you find the correct page.
-          </p>
+          <Button
+            variation="solid"
+            href={siteUrl || "/"}
+          >
+            Home
+          </Button>
         </>
       )}
     </section>
