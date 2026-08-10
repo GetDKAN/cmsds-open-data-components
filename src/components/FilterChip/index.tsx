@@ -11,9 +11,9 @@ export type FilterChipProps = {
 const FliterChip: React.FC<FilterChipProps> = ({ iconClass, text, onClick }) => {
   return (
     <button className="dkan-filter-chip ds-u-display--flex ds-u-font-size--sm ds-u-align-items--center ds-u-padding-x--1 ds-u-padding-y--05 ds-u-margin--0 ds-u-margin-right--1 ds-u-margin-bottom--1" onClick={onClick}>
-      <i className={`${iconClass} ds-u-color--primary ds-u-margin-right--1`} />
+      <i className={`${iconClass} ds-u-color--primary ds-u-margin-right--1`} aria-hidden={true} />
       {text}
-      <i className="fa fa-xmark ds-u-font-size--sm ds-u-margin-left--1" />
+      <i className="fa fa-xmark ds-u-font-size--sm ds-u-margin-left--1" role="img" aria-label="remove" />
     </button>
   )
 }

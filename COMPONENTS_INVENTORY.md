@@ -65,6 +65,7 @@ This document provides a comprehensive inventory of all components, services, te
 | Component | [SearchModal](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/SearchModal) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
 | Component | [SidebarNavigation](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/SidebarNavigation) | ✅ Public | ✅ Has Story | ✅ Has Tests |
 | Component | [SitewideDataDictionaryTable](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/SitewideDataDictionaryTable) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
+| Component | [Skeleton](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/Skeleton) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Component | [SubMenu](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/SubMenu) | ✅ Public | ✅ Has Story | ✅ Has Tests |
 | Component | [SubMenuStaticList](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/SubMenuStaticList) | ❌ Internal | ❌ No Story | ✅ Has Tests |
 | Component | [TopicInformation](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/TopicInformation) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
@@ -120,19 +121,19 @@ This document provides a comprehensive inventory of all components, services, te
 
 | Category | Total | With Stories | With Tests | With Both | With Neither |
 |----------|-------|--------------|------------|-----------|--------------|
-| Components | 62 | 41 (66%) | 61 (98%) | 41 (66%) | 1 (2%) |
+| Components | 63 | 41 (65%) | 61 (97%) | 41 (65%) | 2 (3%) |
 | Templates | 11 | 10 (91%) | 11 (100%) | 10 (91%) | 0 (0%) |
 | Services/Hooks/Contexts | 9 | 0 (0%) | 6 (67%) | 0 (0%) | 3 (33%) |
 | Utilities/Types/Assets | 11 | 0 (0%) | 6 (55%) | 0 (0%) | 5 (45%) |
-| **Project Total** | **93** | **51 (55%)** | **84 (90%)** | **51 (55%)** | **9 (10%)** |
+| **Project Total** | **94** | **51 (54%)** | **84 (89%)** | **51 (54%)** | **10 (11%)** |
 
 ---
 
 ### Export Summary
 - **Public**: 55 items (32 components, 11 templates, 5 services, 0 hooks, 4 contexts, 2 asset)
-- **Internal**: 38 items (30 components, 0 templates, 0 services, 5 utilities, 3 types, 0 asset)
+- **Internal**: 39 items (31 components, 0 templates, 0 services, 5 utilities, 3 types, 0 asset)
 
 ---
 
-*Last updated: July 30, 2026*  
+*Last updated: August 10, 2026*  
 *Repository: [GetDKAN/cmsds-open-data-components](https://github.com/GetDKAN/cmsds-open-data-components)*
