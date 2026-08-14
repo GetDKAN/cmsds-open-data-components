@@ -4,10 +4,14 @@ import { Accordion, AccordionItem, Button } from "@cmsgov/design-system";
 
 type FAQProps = {
   faqs: FAQItemType[]
+  /** Invoked whenever a single FAQ item is expanded or collapsed. */
+  onItemToggle?: (id: string, isOpen: boolean) => void
+  /** Invoked when the "Expand/Collapse all FAQs" button is used. */
+  onToggleAll?: (isOpen: boolean) => void
 }
 
 const FAQAccordion = (props: FAQProps) => {
-  const { faqs } = props;
+  const { faqs, onItemToggle, onToggleAll } = props;
   const [expanded, setExpanded] = React.useState(false);
   const [faqItems, setFaqItems] = React.useState(faqs);
 
@@ -16,14 +20,16 @@ const FAQAccordion = (props: FAQProps) => {
       const newFaqs = faqItems.map((item) => ({...item, open: false}));
       setFaqItems(newFaqs);
       setExpanded(false);
+      onToggleAll?.(false);
     } else {
       const newFaqs = faqItems.map((item) => ({...item, open: true}));
       setFaqItems(newFaqs);
       setExpanded(true);
+      onToggleAll?.(true);
     }
   }
 
-  function toggleAccordionItem(id: string) {
+   function toggleAccordionItem(id: string) {
     const currentFaqIndex = faqItems.findIndex((item) => item.id === id);
     const updatedFaq = {
       ...faqItems[currentFaqIndex],
@@ -43,6 +49,8 @@ const FAQAccordion = (props: FAQProps) => {
     } else {
       setExpanded(false);
     }
+
+    onItemToggle?.(id, updatedFaq.open);
   }
 
   return(
