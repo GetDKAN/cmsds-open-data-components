@@ -10,7 +10,7 @@ export default function ApiSchemaNotice() {
             <strong>PLEASE NOTE:</strong>
           </p>
           <p>
-            This site will be publishing its metadata catalog, available at [/data.json], using the new DCAT-US v3.0 standard starting from September 2026.
+            This site is publishing its metadata catalog, available at [/data.json], using the new DCAT-US v3.0 standard starting from September 2026.
           </p>
           <p>
             The legacy DCAT-US 1.1 catalog endpoint is still available and can now be found here: [/v1-1-data.json].
