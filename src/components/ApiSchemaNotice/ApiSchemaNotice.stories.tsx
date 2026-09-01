@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import ApiRowLimitNotice from './index';
+import ApiSchemaNotice from './index';
 
-const meta: Meta<typeof ApiRowLimitNotice> = {
-  title: 'Components/ApiRowLimitNotice',
-  component: ApiRowLimitNotice,
+const meta: Meta<typeof ApiSchemaNotice> = {
+  title: 'Components/ApiSchemaNotice',
+  component: ApiSchemaNotice,
   parameters: {
     layout: 'padded',
     docs: {
       description: {
         component: `
-The ApiRowLimitNotice component displays important information about API row limits and how to handle 500 responses due to memory exhaustion. It uses an accordion layout to present the warning information in a collapsible format.
+The ApiSchemaNotice component displays important information about the data.json endpoint moving to DCAT-US v3.0 and the location of the legacy DCAT-US 1.1 endpoint. It uses an accordion layout to present the notice in a collapsible format.
         `,
       },
     },
@@ -18,13 +18,13 @@ The ApiRowLimitNotice component displays important information about API row lim
 };
 
 export default meta;
-type Story = StoryObj<typeof ApiRowLimitNotice>;
+type Story = StoryObj<typeof ApiSchemaNotice>;
 
 export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'The default ApiRowLimitNotice component with standard styling and content.',
+        story: 'The default ApiSchemaNotice component with the data.json endpoint change notice.',
       },
     },
   },
