@@ -10,6 +10,7 @@ import Models from './Models';
 export type ApiDocsSwaggerUIPluginProps = {
   docsURL?: string;
   showRowLimitNotice?: boolean;
+  showSchemaNotice?: boolean;
   isDatasetDocs?: boolean;
   // We can optionally pass in class names for the try it out, execute, and clear buttons.
   // All Open Data sites should style these buttons automatically to match their theme
@@ -31,6 +32,7 @@ export interface SwaggerUIComponentProps extends Record<string, unknown> {}
 const ApiDocsSwaggerUIPlugin = ({
   docsURL = '',
   showRowLimitNotice = false,
+  showSchemaNotice = false,
   isDatasetDocs = false,
   buttonClassNames = {}
 }: ApiDocsSwaggerUIPluginProps) => (system: SwaggerUISystem) => {
@@ -77,6 +79,7 @@ const ApiDocsSwaggerUIPlugin = ({
           isDatasetDocs={isDatasetDocs}
           docsURL={docsURL}
           showRowLimitNotice={showRowLimitNotice}
+          showSchemaNotice={showSchemaNotice}
           buttonClassNames={buttonClassNames}
         />
       ),
