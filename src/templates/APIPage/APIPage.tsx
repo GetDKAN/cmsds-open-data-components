@@ -13,10 +13,11 @@ type APIPageProps = {
   hideAuth?: boolean;
   rootUrl: string;
   showRowLimitNotice?: boolean;
+  showSchemaNotice?: boolean;
   swaggerButtonClassNames?: ApiDocsSwaggerUIPluginProps['buttonClassNames'];
 }
 
-const APIPage: React.FC<APIPageProps> = ({ hideAuth = true, rootUrl, showRowLimitNotice = false, swaggerButtonClassNames = {} }) => {
+const APIPage: React.FC<APIPageProps> = ({ hideAuth = true, rootUrl, showRowLimitNotice = false, showSchemaNotice = false, swaggerButtonClassNames = {} }) => {
   let params = {
     authentication: hideAuth ? false : undefined,
   };
@@ -34,6 +35,7 @@ const APIPage: React.FC<APIPageProps> = ({ hideAuth = true, rootUrl, showRowLimi
             SpanVersionStamp,
             ApiDocsSwaggerUIPlugin({
               showRowLimitNotice,
+              showSchemaNotice,
               buttonClassNames: swaggerButtonClassNames
             })
           ]}

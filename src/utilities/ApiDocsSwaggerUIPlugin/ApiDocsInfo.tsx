@@ -1,6 +1,7 @@
 import ApiRowLimitNotice from '../../components/ApiRowLimitNotice';
+import ApiSchemaNotice from '../../components/ApiSchemaNotice';
 
-const ApiDocsInfo = ({ url, getComponent, isDatasetDocs, showRowLimitNotice, docsURL } : any) => {
+const ApiDocsInfo = ({ url, getComponent, isDatasetDocs, showRowLimitNotice, showSchemaNotice, docsURL } : any) => {
   const VersionStamp = getComponent("VersionStamp");
   const OpenAPIVersion = getComponent("OpenAPIVersion");
 
@@ -15,6 +16,7 @@ const ApiDocsInfo = ({ url, getComponent, isDatasetDocs, showRowLimitNotice, doc
           ability to filter, query, and aggregate data.
         </p>) : ''}
         {showRowLimitNotice && <ApiRowLimitNotice />}
+        {showSchemaNotice && <ApiSchemaNotice />}
       </div>
       {isDatasetDocs ? (
         <div className="ds-l-col--12 ds-l-md-col--3 ds-u-font-weight--bold ds-u-margin-top--2 ds-u-md-text-align--right">
