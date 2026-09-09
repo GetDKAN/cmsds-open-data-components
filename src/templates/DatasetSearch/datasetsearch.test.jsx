@@ -103,6 +103,27 @@ describe('<DatasetSearch />', () => {
     expect(newCalls[newCalls.length - 1][0]).toContain('theme');
   });
 
+  test('Normalizes a differently-cased facet value in the URL to match the API facet casing', async () => {
+    axios.get.mockClear();
+    await act(async () => {
+      jest.useFakeTimers();
+      renderWithProviders(<DatasetSearch rootUrl={rootUrl} />, {
+        route: '/datasets?theme=GENERAL',
+      });
+    });
+
+    // Checkbox reflects the selected facet immediately despite the case mismatch.
+    await waitFor(() => {
+      expect(screen.getByRole('checkbox', { name: 'general (2)', checked: true })).toBeInTheDocument();
+    });
+
+    // The URL/query gets rewritten to the canonical casing, so the API is queried correctly.
+    await waitFor(() => {
+      const lastCall = axios.get.mock.calls[axios.get.mock.calls.length - 1][0];
+      expect(lastCall).toContain('theme=general');
+    });
+  });
+
   test('Renders child element', async () => {
     renderWithProviders(
       <DatasetSearch rootUrl={rootUrl}>
