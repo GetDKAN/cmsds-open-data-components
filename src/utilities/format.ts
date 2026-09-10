@@ -11,7 +11,7 @@ export function getFormatType(dist : DistributionType) {
         return mediaType[1].toLowerCase();
       }
     }
-    if(dist["%Ref:downloadURL"].length && dist["%Ref:downloadURL"][0].data) {
+    if(dist["%Ref:downloadURL"] && dist["%Ref:downloadURL"].length && dist["%Ref:downloadURL"][0].data) {
       if(dist["%Ref:downloadURL"][0].data.mimeType) {
         const mimeType = dist["%Ref:downloadURL"][0].data.mimeType.split("/");
         if (mimeType.length && mimeType[1]) {
