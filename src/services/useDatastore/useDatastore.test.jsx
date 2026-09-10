@@ -107,8 +107,7 @@ describe('useDatastore', () => {
     expect(result.current.loading).toBe(false);
   });
 
-  it('uses {datasetID}/0 in the URL when drupalSettings.datastore_query_api is true', async () => {
-    window.drupalSettings = { datastore_query_api: true };
+  it('uses {datasetID}/0 in the URL is true', async () => {
     mockFetch(datasetResponse);
     renderHook(
       () =>

@@ -61,7 +61,7 @@ export default function StoredQueryPage({
   useEffect(() => {
     const localFileFormat = getFormatType(distribution);
     if (localFileFormat === 'csv') {
-      resource.setResource(distribution.identifier);
+      resource.setResource(0);
     }
   }, [distribution]);
 

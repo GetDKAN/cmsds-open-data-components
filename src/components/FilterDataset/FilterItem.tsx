@@ -29,7 +29,7 @@ const FilterItem = ({ id, condition, index, update, remove, propertyOptions, sch
 
   // Reset value when mysql_type changes from date to another type
   useEffect(() => {
-    const currentType = schema[id].fields[property]?.mysql_type;
+    const currentType = schema[0].fields[property]?.mysql_type;
     if (previousType === 'date' && currentType !== 'date') {
       setValue('');
       update(index, 'value', '');
@@ -44,7 +44,7 @@ const FilterItem = ({ id, condition, index, update, remove, propertyOptions, sch
       } else {
         update(index, 'property', '');
       }
-      if (schema[id].fields[condition.property].mysql_type === 'date') {
+      if (schema[0].fields[condition.property].mysql_type === 'date') {
         if (!value) {
           setValue(startDate.toJSON().slice(0, 10));
         }

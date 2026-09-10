@@ -9,8 +9,8 @@ import { ACAContext } from '../../utilities/ACAContext';
 const ResourceInformation = ({ distribution, rootUrl } : {distribution: DistributionType, rootUrl: string}) => {
   const { ACA } = useContext(ACAContext);
   const { data: resource } = useQuery({
-    queryKey: ['resource-information', distribution.identifier],
-    queryFn: () => axios.get(`${rootUrl}/datastore/query/${distribution.identifier}?${qs.stringify(acaToParams({results: false, schema: false}, ACA))}`).then(res => res.data)
+    queryKey: ['resource-information', distribution],
+    queryFn: () => axios.get(`${rootUrl}/datastore/query/${distribution}?${qs.stringify(acaToParams({results: false, schema: false}, ACA))}`).then(res => res.data)
   });
 
   return (

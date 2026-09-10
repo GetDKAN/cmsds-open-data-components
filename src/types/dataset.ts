@@ -1,6 +1,15 @@
 import { ApiDocsSwaggerUIPluginProps } from '../utilities/ApiDocsSwaggerUIPlugin';
 
-export type DistributionDataType = {
+export type DistributionSubDataType = {
+  filePath: string,
+  identifier: string,
+  perspective: string,
+  version: string,
+  checksum: string | null,
+  mimeType: string,
+}
+
+export type DistributionType = {
   downloadURL: string,
   format: string,
   title: string,
@@ -13,20 +22,6 @@ export type DistributionDataType = {
     data: DistributionSubDataType,
   }[],
   "@type": string,
-}
-
-export type DistributionSubDataType = {
-  filePath: string,
-  identifier: string,
-  perspective: string,
-  version: string,
-  checksum: string | null,
-  mimeType: string,
-}
-
-export type DistributionType = {
-  identifier: string,
-  data: DistributionDataType,
 }
 
 export type Topic = {
@@ -101,7 +96,6 @@ export type DatasetPageType = {
   customDescription?: Function,
   updateAriaLive?: Function,
   showRowLimitNotice?: boolean,
-  useDatasetAPI?: boolean,
   enableEmptyFilters?: boolean,
   tabHrefPrepend?: string,
   showDateDetails?: boolean,
