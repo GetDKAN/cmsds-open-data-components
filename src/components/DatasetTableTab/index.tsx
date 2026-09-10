@@ -69,7 +69,7 @@ const DatasetTable = ({
 
   const defaultPageSize = 10;
 
-  const schema = resource?.schema?.[distribution?.identifier] ?? resource?.schema?.[id];
+  const schema = resource?.schema?.[id];
   const isFullColumnDef = Array.isArray(customColumns) && customColumns.some((column: ColumnType) => column && 'header' in column);
   
   const columns = isFullColumnDef
@@ -129,7 +129,7 @@ const DatasetTable = ({
             loading={resource.loading}
             isModal={isModal}
             downloadURL={downloadURL}
-            unfilteredDownloadURL={distribution.data.downloadURL}
+            unfilteredDownloadURL={distribution.downloadURL}
             setPage={setPage}
             showCopyLinkButton={showCopyLinkButton}
             showDataTableToolbar={showDataTableToolbar}

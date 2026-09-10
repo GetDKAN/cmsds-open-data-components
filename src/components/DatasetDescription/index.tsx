@@ -19,8 +19,8 @@ const DatasetDescription = (
     if (customDescription) {
       newDescription = customDescription(dataset, distribution, resource);
     } else {
-      if(distribution.data && distribution.data.description) {
-        newDescription = distribution.data.description;
+      if(distribution && distribution.description) {
+        newDescription = distribution.description;
       } else if(dataset.description) {
         newDescription = dataset.description;
       }

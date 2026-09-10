@@ -54,8 +54,8 @@ const FilteredResourceBody = ({
   );
 
   useEffect(() => {
-    if (distribution.identifier) {
-      resource.setResource(distribution.identifier);
+    if (distribution) {
+      resource.setResource(0);
     }
   }, [distribution]);
   const downloadUrl = `${
@@ -65,8 +65,8 @@ const FilteredResourceBody = ({
     { encode: true }
   )}&format=csv`;
   const pageTitle =
-    distribution.data.title && distribution.data.title.toLowerCase() !== 'csv'
-      ? distribution.data.title
+    distribution.title && distribution.title.toLowerCase() !== 'csv'
+      ? distribution.title
       : dataset.title;
 
   const {ACA} = useContext(ACAContext);
@@ -100,7 +100,7 @@ const FilteredResourceBody = ({
             {Object.keys(resource).length && resource.columns && Object.keys(resource.schema).length ? (
               <QueryBuilder
                 resource={resource}
-                id={distribution.identifier}
+                id={dataset.id}
                 customColumns={customColumns}
                 setOffset={resource.setOffset}
               />
@@ -128,7 +128,7 @@ const FilteredResourceBody = ({
                   includeDownload
                 />
                   <ResourcePreview
-                    id={distribution.identifier}
+                    id={dataset.id}
                     tablePadding={tablePadding}
                     columnSettings={columnSettings}
                     columnWidths={columnWidths}

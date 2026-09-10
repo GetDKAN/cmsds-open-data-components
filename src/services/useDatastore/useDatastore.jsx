@@ -39,8 +39,6 @@ const useDatastore = (
     options.properties ? options.properties : undefined
   );
 
-  // Check drupalSettings for datastore_query_api
-  const useDatasetAPI = typeof window !== 'undefined' && window.drupalSettings?.datastore_query_api === true;
   const datasetID = additionalParams.datasetID;
   
   // Remove datasetID from params to avoid sending it to the API
@@ -72,8 +70,6 @@ const useDatastore = (
     if (conditions && conditions.length)
       enabled = true;
   }
-  // Change whether distribution API or dataset API is used based on option
-  const queryID = useDatasetAPI && datasetID ? `${datasetID}/0` : id;
 
   async function fetchJson(url) {
     const res = await fetch(url);
@@ -94,7 +90,7 @@ const useDatastore = (
     queryFn: () => {
       setCount(null);
 
-      return fetchJson(`${rootUrl}/datastore/query/${queryID}?${paramsString}`);
+      return fetchJson(`${rootUrl}/datastore/query/${datasetID}/0?${paramsString}`);
     },
     enabled: enabled
   })
@@ -108,7 +104,7 @@ const useDatastore = (
         schema: true
       };
 
-      return fetchJson(`${rootUrl}/datastore/query/${queryID}?${qs.stringify(acaToParams(unfilteredParams, ACA))}`);
+      return fetchJson(`${rootUrl}/datastore/query/${datasetID}/0?${qs.stringify(acaToParams(unfilteredParams, ACA))}`);
     },
   })
 
