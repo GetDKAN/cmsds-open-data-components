@@ -9,7 +9,8 @@ import { FilterItemType, ConditionType } from '../../types/dataset';
 import './FilterItem.scss';
 
 function getStartDate(condition : ConditionType, schema : any, id : string) {
-  if (schema[id].fields[condition.property].mysql_type === 'date') {
+  const schemaID = Object.keys(schema)[0];
+  if (schema[schemaID].fields[condition.property].mysql_type === 'date') {
     const newDate = new Date(condition.value.toString());
     if (newDate instanceof Date && !isNaN(newDate.getTime())) {
       return newDate;
@@ -19,17 +20,18 @@ function getStartDate(condition : ConditionType, schema : any, id : string) {
 }
 
 const FilterItem = ({ id, condition, index, update, remove, propertyOptions, schema, className = '', enableEmptyFilters } : FilterItemType) => {
+  const schemaID = Object.keys(schema)[0];
   const [operator, setOperator] = useState(condition.operator);
   const [property, setProperty] = useState(condition.property);
   const [value, setValue] = useState(condition.value);
   const [startDate, setStartDate] = React.useState(getStartDate(condition, schema, id));
-  const [previousType, setPreviousType] = useState(schema[id].fields[property]?.mysql_type);
+  const [previousType, setPreviousType] = useState(schema[schemaID].fields[property]?.mysql_type);
 
   const xl = useMediaQuery({minWidth: 1280})
 
   // Reset value when mysql_type changes from date to another type
   useEffect(() => {
-    const currentType = schema[0].fields[property]?.mysql_type;
+    const currentType = schema[schemaID].fields[property]?.mysql_type;
     if (previousType === 'date' && currentType !== 'date') {
       setValue('');
       update(index, 'value', '');
@@ -44,7 +46,7 @@ const FilterItem = ({ id, condition, index, update, remove, propertyOptions, sch
       } else {
         update(index, 'property', '');
       }
-      if (schema[0].fields[condition.property].mysql_type === 'date') {
+      if (schema[schemaID].fields[condition.property].mysql_type === 'date') {
         if (!value) {
           setValue(startDate.toJSON().slice(0, 10));
         }
@@ -92,7 +94,7 @@ const FilterItem = ({ id, condition, index, update, remove, propertyOptions, sch
         onChange={(e) => setProperty(e.target.value)}
       />
       <Dropdown
-        options={buildOperatorOptions(schema[id].fields[property].mysql_type, enableEmptyFilters)}
+        options={buildOperatorOptions(schema[schemaID].fields[property].mysql_type, enableEmptyFilters)}
         className="ds-u-padding-x--0"
         value={operator}
         label="Condition"
@@ -102,7 +104,7 @@ const FilterItem = ({ id, condition, index, update, remove, propertyOptions, sch
       {isEmptyOperator ? (
         <div />
       ) : (
-        schema[id].fields[property].mysql_type === 'date' ? (
+        schema[schemaID].fields[property].mysql_type === 'date' ? (
           <div>
             <label
               className="ds-c-label"

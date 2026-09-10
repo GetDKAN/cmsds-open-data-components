@@ -103,7 +103,7 @@ const Dataset = ({
 
   // compare schema fields with siteWideDataDictionary to display commonalities for now
   // until dataset level data dictionaries are implemented
-  const datasetSitewideDictionary = (siteWideDataDictionary && siteWideDataDictionary.data && siteWideDataDictionary.data.fields && resource && resource.schema[distribution.identifier]) ?
+  const datasetSitewideDictionary = (siteWideDataDictionary && siteWideDataDictionary.data && siteWideDataDictionary.data.fields && resource && resource.schema[0]) ?
     siteWideDataDictionary.data.fields.filter((field: DatasetDictionaryItemType) => {
       return Object.keys(resource.schema[0].fields).indexOf(field.name) !== -1;
     }) : null;
@@ -157,6 +157,8 @@ const Dataset = ({
     else if (window.location.hash.substring(1) != selectedTab)
       setSelectedTab(window.location.hash.substring(1))
   }, [distribution, window.location.hash])
+
+  console.log(distribution)
 
   const displayDataDictionaryTab = (distribution && distribution.describedBy && dataDictionaryTypes.includes( distribution.describedByType) || (datasetSitewideDictionary && datasetSitewideDictionary.length > 0)) as boolean;
 

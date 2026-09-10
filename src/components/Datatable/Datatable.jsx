@@ -45,6 +45,7 @@ const DataTable = ({
   const dataTableWrapperElement = useRef(null)
   const [loadingAnnouncement, setLoadingAnnouncement] = useState("")
 
+
   useEffect(() => {
     if (loading) {
       setLoadingAnnouncement("Dataset loading");
@@ -124,6 +125,7 @@ const DataTable = ({
     setHighlightRow(null);
   }, [data])
 
+  console.log(showFilterDatasetButton)
   return(
     <>
       {showDataTableToolbar && (

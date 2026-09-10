@@ -33,6 +33,7 @@ const DatasetOverview = ({ dataset, resource, distributions, metadataMapping, ro
     <>
       <Resource
         distributions={distributions}
+        datasetID={dataset.identifier}
         resource={resource}
         title={dataset.title}
         rootUrl={rootUrl}
