@@ -3,6 +3,9 @@ import axios from 'axios';
 import { fireEvent, act, waitFor } from '@testing-library/react';
 import { renderWithProviders, screen } from '../../tests/renderWithProviders';
 import DatasetSearch from './index';
+import { useLocation } from 'react-router-dom';
+
+const LocationSearch = () => <span data-testid="location-search">{useLocation().search}</span>;
 
 jest.mock('axios');
 jest.useFakeTimers();
@@ -103,6 +106,47 @@ describe('<DatasetSearch />', () => {
     expect(newCalls[newCalls.length - 1][0]).toContain('theme');
   });
 
+  test('Normalizes a differently-cased facet value in the URL to match the API facet casing', async () => {
+    axios.get.mockClear();
+    await act(async () => {
+      jest.useFakeTimers();
+      renderWithProviders(<DatasetSearch rootUrl={rootUrl} />, {
+        route: '/datasets?theme=GENERAL',
+      });
+    });
+
+    // Checkbox reflects the selected facet immediately despite the case mismatch.
+    await waitFor(() => {
+      expect(screen.getByRole('checkbox', { name: 'general (2)', checked: true })).toBeInTheDocument();
+    });
+
+    // The URL/query gets rewritten to the canonical casing, so the API is queried correctly.
+    await waitFor(() => {
+      const lastCall = axios.get.mock.calls[axios.get.mock.calls.length - 1][0];
+      expect(lastCall).toContain('theme=general');
+    });
+  });
+
+  test('Removes a differently-cased selected theme when the category is unchecked', async () => {
+    await act(async () => {
+      jest.useFakeTimers();
+      renderWithProviders(<DatasetSearch rootUrl={rootUrl} />, {
+        route: '/datasets?theme=GENERAL',
+      });
+    });
+
+    await waitFor(() => {
+      expect(screen.getByRole('checkbox', { name: 'general (2)', checked: true })).toBeInTheDocument();
+    });
+    await act(async () => {
+      screen.getByRole('checkbox', { name: 'general (2)' }).click();
+    });
+
+    await waitFor(() => {
+      expect(screen.getByRole('checkbox', { name: 'general (2)' })).not.toBeChecked();
+    });
+  });
+
   test('Renders child element', async () => {
     renderWithProviders(
       <DatasetSearch rootUrl={rootUrl}>
@@ -171,6 +215,26 @@ describe('<DatasetSearch />', () => {
     });
 
     expect(onAnalyticsEvent).not.toHaveBeenCalled();
+  });
+
+  test('Does not emit a second analytics event when facet casing is normalized', async () => {
+    const onAnalyticsEvent = jest.fn();
+
+    await act(async () => {
+      renderWithProviders(
+        <DatasetSearch rootUrl={rootUrl} analytics onAnalyticsEvent={onAnalyticsEvent}>
+          <LocationSearch />
+        </DatasetSearch>,
+        { route: '/datasets?theme=GENERAL' },
+      );
+    });
+
+    await waitFor(() => {
+      expect(screen.getByTestId('location-search')).toHaveTextContent('?theme%5B0%5D=general');
+    });
+
+    expect(onAnalyticsEvent).toHaveBeenCalledTimes(1);
+    expect(onAnalyticsEvent.mock.calls[0][0].search).toBe('?theme=GENERAL');
   });
 });
 
