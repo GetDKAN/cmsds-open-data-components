@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState, useRef } from 'react';
 import { useSearchParams, useNavigate, useLocation } from 'react-router-dom';
 import qs from 'qs';
 import axios from 'axios';
@@ -53,6 +53,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();
+  const suppressNextAnalyticsCall = useRef<string | null>(null);
 
   // Derive all search state from URL params
   const selectedFacets: SelectedFacetsType = useMemo(() => {
@@ -171,7 +172,9 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
       if (changed) overrides[key] = normalized;
     });
     if (Object.keys(overrides).length) {
-      navigate({ search: buildNextQueryString(overrides) }, { replace: true });
+      const nextSearch = buildNextQueryString(overrides);
+      suppressNextAnalyticsCall.current = `?${nextSearch}`;
+      navigate({ search: nextSearch }, { replace: true });
     }
   }, [facets.theme, facets.keyword]);
 
@@ -195,6 +198,10 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   }, [data, isPending, noResults, currentResultNumbers]);
 
   useEffect(() => {
+    if (suppressNextAnalyticsCall.current === location.search) {
+      suppressNextAnalyticsCall.current = null;
+      return;
+    }
     if (analytics && location.search) {
       onAnalyticsEvent(location);
     }
