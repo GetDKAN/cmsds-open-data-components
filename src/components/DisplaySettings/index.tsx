@@ -18,7 +18,7 @@ const DisplaySettings: React.FC = () => {
   return (
     <div className="dkan-display-settings-wrapper">
       <Tooltip
-        className="dkan-filter-dataset-toolbar-button ds-u-display--flex ds-u-align-items--center ds-u-color--primary ds-u-border--0 ds-u-padding--0 ds-u-padding-x--2 ds-u-margin--0 ds-u-fill--transparent ds-u-font-size--sm"
+        className="dkan-filter-dataset-toolbar-button ds-u-display--flex ds-u-align-items--center ds-u-color--primary ds-u-border--0 ds-u-padding--0 ds-u-sm-padding-x--2 ds-u-margin--0 ds-u-fill--transparent ds-u-font-size--sm"
         activeClassName="dkan-data-table-display-settings-tooltip-open"
         dialog
         offset={[
