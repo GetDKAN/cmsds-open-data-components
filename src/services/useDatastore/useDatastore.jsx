@@ -39,8 +39,6 @@ const useDatastore = (
     options.properties ? options.properties : undefined
   );
 
-  // Check drupalSettings for datastore_query_api
-  const useDatasetAPI = typeof window !== 'undefined' && window.drupalSettings?.datastore_query_api === true;
   const datasetID = additionalParams.datasetID;
   
   // Remove datasetID from params to avoid sending it to the API
@@ -72,10 +70,9 @@ const useDatastore = (
     if (conditions && conditions.length)
       enabled = true;
   }
-  // Change whether distribution API or dataset API is used based on option
-  const queryID = useDatasetAPI && datasetID ? `${datasetID}/0` : id;
 
   async function fetchJson(url) {
+    console.log(url)
     const res = await fetch(url);
     const body = await res.json().catch(() => ({}));
 
@@ -85,18 +82,16 @@ const useDatastore = (
 
       throw err;
     }
-
     return body;
   }
 
   const {data, isPending, error} = useQuery({
-    queryKey: ["datastore" + id + paramsString],
+    queryKey: ["datastore" + datasetID + '/0' + paramsString],
     queryFn: () => {
       setCount(null);
-
-      return fetchJson(`${rootUrl}/datastore/query/${queryID}?${paramsString}`);
+      return fetchJson(`${rootUrl}/datastore/query/${datasetID}/0?${paramsString}`);
     },
-    enabled: enabled
+    enabled: true // TODO
   })
 
   const{data: unfiltered} = useQuery({
@@ -107,16 +102,16 @@ const useDatastore = (
         count: true,
         schema: true
       };
-
-      return fetchJson(`${rootUrl}/datastore/query/${queryID}?${qs.stringify(acaToParams(unfilteredParams, ACA))}`);
+      return fetchJson(`${rootUrl}/datastore/query/${datasetID}/0?${qs.stringify(acaToParams(unfilteredParams, ACA))}`);
     },
   })
 
   useEffect(() => {
     if(data) {
+      const schemaID = Object.keys(data.schema)[0];
       const propertyKeys =
-        data.schema && data.schema[id] && data.schema[id].fields
-          ? Object.keys(data.schema[id].fields)
+        data.schema && data.schema[schemaID] && data.schema[schemaID].fields
+          ? Object.keys(data.schema[schemaID].fields)
           : [];
       setValues(data.results), setCount(data.count);
       if (propertyKeys.length) {
@@ -127,12 +122,14 @@ const useDatastore = (
       }
     }
   }, [data])
+
   useEffect(() => {
     if (unfiltered) {
       if (unfiltered.count) setTotalRows(unfiltered.count);
       if (unfiltered.schema && unfiltered.schema[id] && unfiltered.schema[id].fields) setTotalColumns(Object.keys(unfiltered.schema[id].fields).length);
     }
   }, [unfiltered])
+
 
   return {
     loading: enabled ? isPending : false,

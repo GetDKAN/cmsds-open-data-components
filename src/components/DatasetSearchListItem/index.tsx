@@ -132,12 +132,12 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
 
   const dataDictionaryExists = (): boolean => {
     if (distribution && "data" in distribution) {
-      if ("describedBy" in distribution.data && "describedByType" in distribution.data) {
+      if ("describedBy" in distribution && "describedByType" in distribution) {
         const types: string[] = [
           'application/vnd.tableschema+json',
           'application/pdf'
         ]
-        const isValidType: boolean = types.includes(distribution.data.describedByType)
+        const isValidType: boolean = types.includes(distribution.describedByType)
         return isValidType;
       }
     }

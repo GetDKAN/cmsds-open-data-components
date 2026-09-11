@@ -103,15 +103,17 @@ const Dataset = ({
 
   // compare schema fields with siteWideDataDictionary to display commonalities for now
   // until dataset level data dictionaries are implemented
-  const datasetSitewideDictionary = (siteWideDataDictionary && siteWideDataDictionary.data && siteWideDataDictionary.data.fields && resource && resource.schema[distribution.identifier]) ?
+  const datasetSitewideDictionary = (siteWideDataDictionary && siteWideDataDictionary.data && siteWideDataDictionary.data.fields && resource && resource.schema[0]) ?
     siteWideDataDictionary.data.fields.filter((field: DatasetDictionaryItemType) => {
-      return Object.keys(resource.schema[distribution.identifier].fields).indexOf(field.name) !== -1;
+      return Object.keys(resource.schema[0].fields).indexOf(field.name) !== -1;
     }) : null;
 
   useEffect(() => {
-    const localFileFormat = getFormatType(distribution);
-    if (localFileFormat === 'csv') {
-      resource.setResource(distribution.identifier);
+    if (distribution) {
+      const localFileFormat = getFormatType(distribution);
+      if (localFileFormat === 'csv') {
+        resource.setResource(0);
+      }
     }
   }, [distribution]);
 
@@ -156,7 +158,9 @@ const Dataset = ({
       setSelectedTab(window.location.hash.substring(1))
   }, [distribution, window.location.hash])
 
-  const displayDataDictionaryTab = (distribution.data && distribution.data.describedBy && dataDictionaryTypes.includes( distribution.data.describedByType) || (datasetSitewideDictionary && datasetSitewideDictionary.length > 0)) as boolean;
+  console.log(distribution)
+
+  const displayDataDictionaryTab = (distribution && distribution.describedBy && dataDictionaryTypes.includes( distribution.describedByType) || (datasetSitewideDictionary && datasetSitewideDictionary.length > 0)) as boolean;
 
   const date = {modified: dataset.modified, released: dataset.released, refresh: dataset.nextUpdateDate};
 
@@ -271,8 +275,8 @@ const Dataset = ({
                         ? (
                           <DataDictionary
                             datasetSitewideDictionary={datasetSitewideDictionary}
-                            datasetDictionaryEndpoint={distribution.data.describedBy}
-                            datasetDictionaryFileType={distribution.data.describedByType}
+                            datasetDictionaryEndpoint={distribution.describedBy}
+                            datasetDictionaryFileType={distribution.describedByType}
                             title={"Data Dictionary"}
                             csvDownload={dataDictionaryCSV}
                           />
@@ -281,7 +285,7 @@ const Dataset = ({
                         )}
                     </TabPanel>
                   )}
-                  {distribution && distribution.data && (
+                  {distribution && (
                     <TabPanel
                       key={id + '-api'}
                       id={'api'}

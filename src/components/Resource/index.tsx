@@ -7,13 +7,13 @@ import { getFormatType } from '../../utilities/format';
 import './Resource.scss';
 
 type ResourcePropsType = {
-  distributions: DistributionType[],
+  distributions: DistributionType[]
   resource: ResourceType,
   title: string
   rootUrl: string
 }
 
-const Resource = ({ distributions, resource, rootUrl, title } : ResourcePropsType ) => {
+const Resource = ({ datasetID, distributions, resource, rootUrl, title } : ResourcePropsType ) => {
   const sm = useMediaQuery({ minWidth: 0, maxWidth: 767 });
   return (
     <div className="ds-u-display--flex ds-u-flex-wrap--wrap">
@@ -21,34 +21,34 @@ const Resource = ({ distributions, resource, rootUrl, title } : ResourcePropsTyp
       {distributions.length ? ( 
         <ul className="ds-c-list ds-c-list--bare dc-c-resource-full-width">
           {
-            distributions.map((dist) => {
+            distributions.map((dist, index) => {
               const fileFormat = getFormatType(dist)
               return (
-                <li key={dist.identifier} className={`ds-u-display--flex ds-u-flex-wrap--wrap ${fileFormat !== "csv" && "ds-u-margin-bottom--2"}`}>
+                <li key={dist.description} className={`ds-u-display--flex ds-u-flex-wrap--wrap ${fileFormat !== "csv" && "ds-u-margin-bottom--2"}`}>
                   <div className="ds-u-font-weight--bold ds-u-font-size--lg ds-l-col--12 ds-l-md-col--6 ds-u-padding-left--0 ds-u-align-items--center ds-u-display--flex">
                     <i className={'fa ds-u-color--primary ds-u-padding-right--1 ds-u-font-size--3xl ' + 'fa-file-' + (fileFormat == "xlsx" ? "xls" : fileFormat)}></i>
-                    <p className="ds-u-margin-top--0">{dist.data.title ? dist.data.title : title}{" (" + fileFormat.toUpperCase() + ")"}</p>
+                    <p className="ds-u-margin-top--0">{dist.title ? dist.title : title}{" (" + fileFormat.toUpperCase() + ")"}</p>
                   </div>
                   <div className="ds-l-col--12 ds-l-md-col--6 ds-u-text-align--center ds-u-md-text-align--right ds-u-margin-top--2 ds-u-md-margin-top--0">
                     <a
-                      href={dist.data.downloadURL}
+                      href={dist.downloadURL}
                       style={{
                         order: sm ? '1' : '0',
                         width: sm ? '100%' : 'auto'
                       }}
-                      aria-label={`Download ${dist.data.title || title} ${fileFormat}`}
+                      aria-label={`Download ${dist.title || title} ${fileFormat}`}
                       className="ds-c-button"
                     >
                       <i className="fa fa-file-download ds-u-padding-right--1"></i>
                       Download
                     </a>
                   </div>
-                  {dist.data.description && (
+                  {dist.description && (
                     <div className={'ds-u-measure--wide ds-u-margin-bottom--7'}>
-                      <div className="dc-c-metadata-description ds-u-margin--0" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(dist.data.description) }}/>
+                      <div className="dc-c-metadata-description ds-u-margin--0" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(dist.description) }}/>
                     </div>
                   )}
-                  {fileFormat === "csv" && <ResourceInformation rootUrl={rootUrl} distribution={dist} />}
+                  {fileFormat === "csv" && <ResourceInformation rootUrl={rootUrl} datasetID={datasetID} distribution={index} />}
                 </li>
               )
             })
