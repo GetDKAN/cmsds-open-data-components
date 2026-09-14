@@ -131,7 +131,7 @@ const ManageColumns = ({
     <div className="dkan-manage-columns-wrapper">
       <button
         aria-haspopup="dialog"
-        className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-sm-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent"
+        className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--0 ds-u-sm-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent"
         onClick={() => {
           setModalOpen(true)
         }}

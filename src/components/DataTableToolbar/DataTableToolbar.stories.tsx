@@ -87,25 +87,25 @@ const DataTableToolbar: React.FC<DataTableToolbarProps> = ({
           {datasetTableControls && (
             <div className="dkan-data-table-toolbar-controls ds-u-display--flex ds-u-flex-wrap--wrap ds-u-align-items--center ds-l-md-col--auto ds-l-col--12 ds-u-padding-x--2 ds-u-padding-top--2 ds-u-md-padding-top--0">
               {showFilterDatasetButton && (
-                <button className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent">
+                <button className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--0 ds-u-sm-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent">
                   <i className="far fa-filter ds-u-margin-right--1"></i>
                   <span className="dkan-dataset-toolbar-button-label">Filter Dataset</span>
                 </button>
               )}
               {showManageColumnsButton && (
-                <button className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent">
+                <button className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--0 ds-u-sm-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent">
                   <i className="far fa-columns ds-u-margin-right--1"></i>
                   <span className="dkan-dataset-toolbar-button-label">Manage Columns</span>
                 </button>
               )}
               {showDisplaySettingsButton && (
-                <button className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent">
+                <button className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--0 ds-u-sm-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent">
                   <i className="far fa-cog ds-u-margin-right--1"></i>
                   <span className="dkan-dataset-toolbar-button-label">Display Settings</span>
                 </button>
               )}
               {showFullScreenButton && (
-                <button className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--2 ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent">
+                <button className="dkan-filter-dataset-toolbar-button ds-u-color--primary ds-u-text-decoration--underline ds-u-font-size--sm ds-u-padding-x--0 ds-u-sm-padding-x--2å ds-u-margin--0 ds-u-border--0 ds-u-fill--transparent">
                   <i className="far fa-expand ds-u-margin-right--1"></i>
                   <span className="dkan-dataset-toolbar-button-label">Full Screen</span>
                 </button>
