@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState, useRef } from 'react';
 import { useSearchParams, useNavigate, useLocation } from 'react-router-dom';
 import qs from 'qs';
 import axios from 'axios';
@@ -53,6 +53,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();
+  const suppressNextAnalyticsCall = useRef<string | null>(null);
 
   // Derive all search state from URL params
   const selectedFacets: SelectedFacetsType = useMemo(() => {
@@ -97,7 +98,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
 
   function updateSelectedFacets(key: string, value: string) {
     const current = selectedFacets[key as keyof SelectedFacetsType] || [];
-    const idx = current.indexOf(value);
+    const idx = current.findIndex((v) => v.toLowerCase() === value.toLowerCase());
     const updated = idx > -1
       ? current.filter((_, i) => i !== idx)
       : [...current, value];
@@ -150,6 +151,33 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   const totalItems = data?.data?.total ? Number(data.data.total) : 0;
   const facets: SidebarFacetTypes = (data && data.data.facets) ? separateFacets(data.data.facets) : { theme: null, keyword: null };
 
+  // Facet values in the URL may not match the API's casing (e.g. a hand-edited link);
+  // once the real facet list loads, rewrite the URL to the canonical casing so the
+  // API query (and therefore result filtering) is case-insensitive end-to-end.
+  useEffect(() => {
+    const overrides: Record<string, string[] | null> = {};
+    (['theme', 'keyword'] as const).forEach((key) => {
+      const available = facets[key];
+      const selected = selectedFacets[key];
+      if (!available || !selected.length) return;
+      let changed = false;
+      const normalized = selected.map((value) => {
+        const match = available.find((f) => f.name.toLowerCase() === value.toLowerCase());
+        if (match && match.name !== value) {
+          changed = true;
+          return match.name;
+        }
+        return value;
+      });
+      if (changed) overrides[key] = normalized;
+    });
+    if (Object.keys(overrides).length) {
+      const nextSearch = buildNextQueryString(overrides);
+      suppressNextAnalyticsCall.current = `?${nextSearch}`;
+      navigate({ search: nextSearch }, { replace: true });
+    }
+  }, [facets.theme, facets.keyword]);
+
   const currentResultNumbers = useMemo(() => {
     const baseNumber = totalItems > 0 ? 1 : 0;
     const startingNumber = baseNumber + (pageSize * page - pageSize);
@@ -170,6 +198,10 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
   }, [data, isPending, noResults, currentResultNumbers]);
 
   useEffect(() => {
+    if (suppressNextAnalyticsCall.current === location.search) {
+      suppressNextAnalyticsCall.current = null;
+      return;
+    }
     if (analytics && location.search) {
       onAnalyticsEvent(location);
     }

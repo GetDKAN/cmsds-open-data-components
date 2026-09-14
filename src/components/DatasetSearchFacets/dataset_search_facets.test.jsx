@@ -36,6 +36,35 @@ describe('<DatasetSearchFacets />', () => {
       screen.getByRole('checkbox', { name: 'facet-1 (2)', checked: true })
     ).toBeInTheDocument();
   });
+  test('Checkbox is checked when selectedFacets differs only in case', () => {
+    const handleClick = jest.fn();
+    render(
+      <DatasetSearchFacets
+        title="Facets"
+        facets={testFacets}
+        onClickFunction={handleClick}
+        selectedFacets={['FACET-1']}
+      />
+    );
+    expect(
+      screen.getByRole('checkbox', { name: 'facet-1 (2)', checked: true })
+    ).toBeInTheDocument();
+  });
+  test('Zero-total facet is retained when selected with a different case', () => {
+    const handleClick = jest.fn();
+    const zeroTotalFacets = [...testFacets, { type: 'theme', name: 'facet-3', total: '0' }];
+    render(
+      <DatasetSearchFacets
+        title="Facets"
+        facets={zeroTotalFacets}
+        onClickFunction={handleClick}
+        selectedFacets={['FACET-3']}
+      />
+    );
+    expect(
+      screen.getByRole('checkbox', { name: 'facet-3 (0)', checked: true })
+    ).toBeInTheDocument();
+  });
   test('Accordion svgs are hidden', () => {
     const handleClick = jest.fn();
     render(

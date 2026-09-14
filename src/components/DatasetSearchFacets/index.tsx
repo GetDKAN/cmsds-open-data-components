@@ -5,8 +5,10 @@ import './dataset-search-facets.scss';
 
 const SearchFacets = (props: SearchFacetsPropTypes) => {
   const { facets, title, onClickFunction, selectedFacets = [] } = props;
+  const isSelected = (name: string) =>
+    selectedFacets.findIndex((s) => s.toLowerCase() === name.toLowerCase()) > -1;
   const filteredFacets = facets .filter((f: SearchAPIFacetType) => {
-    return Number(f.total) > 0 || selectedFacets.findIndex((i) => i === f.name) !== -1;
+    return Number(f.total) > 0 || isSelected(f.name);
   });
 
   return (
@@ -27,7 +29,7 @@ const SearchFacets = (props: SearchFacetsPropTypes) => {
                     <li key={f.name as React.Key}>
                       <Choice
                         className="ds-u-margin-y--1"
-                        checked={selectedFacets.findIndex((s) => s === f.name) > -1 ? true : false}
+                        checked={isSelected(f.name)}
                         name={`facet_theme_${f.name}`}
                         type="checkbox"
                         label={`${f.name} (${f.total})`}
