@@ -7,13 +7,13 @@ import { getFormatType } from '../../utilities/format';
 import './Resource.scss';
 
 type ResourcePropsType = {
+  datasetID: string
   distributions: DistributionType[]
-  resource: ResourceType,
   title: string
   rootUrl: string
 }
 
-const Resource = ({ datasetID, distributions, resource, rootUrl, title } : ResourcePropsType ) => {
+const Resource = ({ datasetID, distributions, rootUrl, title } : ResourcePropsType ) => {
   const sm = useMediaQuery({ minWidth: 0, maxWidth: 767 });
   return (
     <div className="ds-u-display--flex ds-u-flex-wrap--wrap">

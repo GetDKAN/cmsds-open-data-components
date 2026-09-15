@@ -19,12 +19,12 @@ function getStartDate(condition : ConditionType, schema : any, id : string) {
   return new Date();
 }
 
-const FilterItem = ({ id, condition, index, update, remove, propertyOptions, schema, className = '', enableEmptyFilters } : FilterItemType) => {
+const FilterItem = ({condition, index, update, remove, propertyOptions, schema, className = '', enableEmptyFilters } : FilterItemType) => {
   const schemaID = Object.keys(schema)[0];
   const [operator, setOperator] = useState(condition.operator);
   const [property, setProperty] = useState(condition.property);
   const [value, setValue] = useState(condition.value);
-  const [startDate, setStartDate] = React.useState(getStartDate(condition, schema, id));
+  const [startDate, setStartDate] = React.useState(getStartDate(condition, schema, '0'));
   const [previousType, setPreviousType] = useState(schema[schemaID].fields[property]?.mysql_type);
 
   const xl = useMediaQuery({minWidth: 1280})
@@ -37,7 +37,7 @@ const FilterItem = ({ id, condition, index, update, remove, propertyOptions, sch
       update(index, 'value', '');
     }
     setPreviousType(currentType);
-  }, [schema, id, property, previousType, index, update]);
+  }, [schema, property, previousType, index, update]);
 
   useEffect(() => {
     if (property !== condition.property) {
@@ -52,7 +52,7 @@ const FilterItem = ({ id, condition, index, update, remove, propertyOptions, sch
         }
       }
     }
-  }, [property, value, startDate, schema, id, condition]);
+  }, [property, value, startDate, schema, condition]);
 
   useEffect(() => {
     if (operator !== condition.operator) {

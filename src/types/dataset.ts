@@ -136,7 +136,6 @@ export type QueryRowType = {
 }
 
 export type FilterItemType = {
-  id: string;
   condition : ConditionType;
   index : number;
   update : Function;

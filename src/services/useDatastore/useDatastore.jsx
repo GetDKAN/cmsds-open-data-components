@@ -64,7 +64,7 @@ const useDatastore = (
   const paramsString = Object.keys(params).length ? `${qs.stringify(params)}` : '';
   
   let enabled = false;
-  if (id) {
+  if (id !== '') {
     if (!requireConditions)
       enabled = true;
     if (conditions && conditions.length)
@@ -72,7 +72,6 @@ const useDatastore = (
   }
 
   async function fetchJson(url) {
-    console.log(url)
     const res = await fetch(url);
     const body = await res.json().catch(() => ({}));
 
@@ -91,7 +90,7 @@ const useDatastore = (
       setCount(null);
       return fetchJson(`${rootUrl}/datastore/query/${datasetID}/0?${paramsString}`);
     },
-    enabled: true // TODO
+    enabled: enabled
   })
 
   const{data: unfiltered} = useQuery({
