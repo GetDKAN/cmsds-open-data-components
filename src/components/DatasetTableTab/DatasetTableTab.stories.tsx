@@ -6,7 +6,7 @@ import { DataTableActionsContext, DataTableActionsContextProps } from './DataTab
 import { MemoryRouter } from 'react-router-dom';
 import { mockResource } from '../../../__mocks__/mockResource';
 import { mockDistribution } from '../../../__mocks__/mockDistribution';
-import { ResourceType, DistributionType, ColumnType } from '../../types/dataset';
+import { ResourceType, DatasetDistributionType, ColumnType } from '../../types/dataset';
 
 // Created a "mocked" version of this type instead of importing it because most of the
 // properties are optional in the type defined in src/templates/Dataset/DataTableContext.tsx
@@ -15,7 +15,7 @@ import { ResourceType, DistributionType, ColumnType } from '../../types/dataset'
 export type MockDataTableContextType = {
   id: string | null;
   resource: ResourceType;
-  distribution: DistributionType;
+  distribution: DatasetDistributionType;
   rootUrl: string;
   customColumns: Array<ColumnType>;
   dataDictionaryBanner: boolean;

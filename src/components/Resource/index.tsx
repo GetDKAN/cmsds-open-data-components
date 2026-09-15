@@ -2,13 +2,13 @@ import React from 'react';
 import DOMPurify from 'dompurify';
 import { useMediaQuery } from 'react-responsive';
 import ResourceInformation from '../ResourceInformation';
-import { DistributionType, ResourceType } from '../../types/dataset';
+import { MetastoreDistributionType } from '../../types/dataset';
 import { getFormatType } from '../../utilities/format';
 import './Resource.scss';
 
 type ResourcePropsType = {
   datasetID: string
-  distributions: DistributionType[]
+  distributions: MetastoreDistributionType[]
   title: string
   rootUrl: string
 }
@@ -21,7 +21,9 @@ const Resource = ({ datasetID, distributions, rootUrl, title } : ResourcePropsTy
       {distributions.length ? ( 
         <ul className="ds-c-list ds-c-list--bare dc-c-resource-full-width">
           {
-            distributions.map((dist, index) => {
+            distributions.map((distribution, index) => {
+              const dist = distribution.data;
+              console.log(dist)
               const fileFormat = getFormatType(dist)
               return (
                 <li key={dist.description} className={`ds-u-display--flex ds-u-flex-wrap--wrap ${fileFormat !== "csv" && "ds-u-margin-bottom--2"}`}>

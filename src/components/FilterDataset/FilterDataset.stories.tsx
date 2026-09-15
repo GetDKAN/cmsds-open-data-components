@@ -3,11 +3,11 @@ import React from 'react';
 import FilterDataset from './index';
 import DataTableContext, { DataTableContextType } from '../../templates/Dataset/DataTableContext';
 import { DataTableActionsContext, DataTableActionsContextProps } from '../DatasetTableTab/DataTableActionsContext';
-import { ResourceType, DistributionType } from '../../types/dataset';
+import { ResourceType,DatasetDistributionType } from '../../types/dataset';
 
 const DISTRIBUTION_ID = 'story-distribution-id';
 
-const mockDistribution: DistributionType = {
+const mockDistribution: DatasetDistributionType = {
   identifier: DISTRIBUTION_ID,
   data: {
     downloadURL: 'https://example.gov/data.csv',

@@ -6,7 +6,7 @@ import '../Dataset/dataset.scss';
 import useMetastoreDataset from '../../services/useMetastoreDataset';
 import useDatastore from '../../services/useDatastore';
 import { getFormatType } from '../../utilities/format';
-import { ColumnType, DistributionType, ResourceType } from '../../types/dataset';
+import { ColumnType, DatasetDistributionType, ResourceType } from '../../types/dataset';
 
 export default function StoredQueryPage({
   id,
@@ -47,10 +47,10 @@ export default function StoredQueryPage({
 
   const { dataset, isPending } = useMetastoreDataset(id, rootUrl);
 
-  let distribution = {} as DistributionType;
+  let distribution = {} as DatasetDistributionType;
   let distributions = dataset.distribution ? dataset.distribution : [];
   if (distributions.length) {
-    distribution = distributions[distributionIndex];
+    distribution = distributions[distributionIndex].data;
   }
 
   const resource = useDatastore('', rootUrl, {

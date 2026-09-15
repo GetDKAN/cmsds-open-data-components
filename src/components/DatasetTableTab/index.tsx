@@ -5,7 +5,7 @@ import { transformTableSortToQuerySort } from '../../services/useDatastore/trans
 import { buildCustomColHeaders } from '../../templates/FilteredResource/functions';
 import { Pagination, Spinner, Button } from '@cmsgov/design-system';
 import QueryBuilder from '../QueryBuilder';
-import { DistributionType, ColumnType, ResourceType } from '../../types/dataset';
+import {DatasetDistributionType, ColumnType, ResourceType } from '../../types/dataset';
 import DataTableContext from '../../templates/Dataset/DataTableContext';
 import { DataTableActionsContext } from './DataTableActionsContext';
 
@@ -19,7 +19,7 @@ export function prepareColumns(columns: any, schema: any) {
 
 export type DatasetTableTabProps = {
   id: string;
-  distribution: DistributionType;
+  distribution: DatasetDistributionType;
   resource: ResourceType;
   rootUrl: string;
   customColumns: Array<ColumnType>;

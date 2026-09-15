@@ -28,7 +28,7 @@ const DatasetOverview = ({ dataset, distributions, metadataMapping, rootUrl, sho
       title: "The entity responsible for publishing the dataset."
     }
   ]
-  
+
   return (
     <>
       <Resource

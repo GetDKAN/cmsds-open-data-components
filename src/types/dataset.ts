@@ -9,7 +9,7 @@ export type DistributionSubDataType = {
   mimeType: string,
 }
 
-export type DistributionType = {
+export type DatasetDistributionType = {
   downloadURL: string,
   format: string,
   title: string,
@@ -24,6 +24,11 @@ export type DistributionType = {
   "@type": string,
 }
 
+export type MetastoreDistributionType = {
+  identifier: string,
+  data:DatasetDistributionType
+}
+
 export type Topic = {
   identifier: string,
   url: string,
@@ -36,7 +41,7 @@ export type Theme = {
 
 export type DatasetType = {
   title: string,
-  distribution: DistributionType[],
+  distribution: MetastoreDistributionType[],
   error: string,
   description: string,
   identifier: string,
@@ -149,7 +154,7 @@ export type FilterItemType = {
 export type DatasetOverviewPropsType = {
   dataset: DatasetType,
   resource: ResourceType,
-  distributions: DistributionType[],
+  distributions: MetastoreDistributionType[],
   metadataMapping: any, //TODO
   rootUrl: string,
   showTags: boolean,
@@ -173,7 +178,7 @@ export type DatasetDictionaryType = {
 }
 
 export type DatasetDescriptionType = {
-  distribution: DistributionType,
+  distribution:DatasetDistributionType,
   dataset: DatasetType,
   resource: ResourceType,
   customDescription?: Function,
