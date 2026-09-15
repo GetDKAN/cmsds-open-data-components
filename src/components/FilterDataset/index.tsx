@@ -46,7 +46,6 @@ const FilterDataset: React.FC = () => {
     customColumns = [],
     enableEmptyFilters,
   } = useContext(DataTableContext) as DatasetTableTabProps;
-  console.log(resource)
 
   const { setPage } = useContext(DataTableActionsContext);
 
@@ -210,7 +209,6 @@ const FilterDataset: React.FC = () => {
   const disableFilterSubmitButton = () => {
     return !conditionsChanged || queryConditions.length === 0 || conditionsReadyToSubmit(queryConditions).length === 0;
   }
-  console.log(resource)
   return (
     <>
       {(Object.keys(resource).length && columns.length && resource.schema && Object.keys(distribution).length) ? (
@@ -285,7 +283,6 @@ const FilterDataset: React.FC = () => {
                         {queryConditions.map((qf, index) => (
                           <FilterItem
                             key={qf.key}
-                            id={0}
                             schema={schema}
                             condition={qf}
                             index={index}

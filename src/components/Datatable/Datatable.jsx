@@ -125,7 +125,6 @@ const DataTable = ({
     setHighlightRow(null);
   }, [data])
 
-  console.log(showFilterDatasetButton)
   return(
     <>
       {showDataTableToolbar && (

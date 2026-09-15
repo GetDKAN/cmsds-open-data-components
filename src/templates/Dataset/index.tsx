@@ -158,8 +158,6 @@ const Dataset = ({
       setSelectedTab(window.location.hash.substring(1))
   }, [distribution, window.location.hash])
 
-  console.log(distribution)
-
   const displayDataDictionaryTab = (distribution && distribution.describedBy && dataDictionaryTypes.includes( distribution.describedByType) || (datasetSitewideDictionary && datasetSitewideDictionary.length > 0)) as boolean;
 
   const date = {modified: dataset.modified, released: dataset.released, refresh: dataset.nextUpdateDate};
