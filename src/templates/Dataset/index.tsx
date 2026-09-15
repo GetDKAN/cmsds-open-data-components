@@ -11,7 +11,7 @@ import SearchItemIcon from '../../assets/icons/searchItem';
 import DatasetOverview from '../../components/DatasetOverviewTab';
 import DatasetAPI from '../../components/DatasetAPITab';
 import DataDictionary from '../../components/DatasetDataDictionaryTab';
-import { DatasetDictionaryItemType, DatasetPageType, DatasetDictionaryType, DistributionType, ResourceType, ColumnType } from '../../types/dataset';
+import { DatasetDictionaryItemType, DatasetPageType, DatasetDictionaryType, DatasetDistributionType, ResourceType } from '../../types/dataset';
 import TransformedDate from '../../components/TransformedDate';
 import { getFormatType } from '../../utilities/format';
 import './dataset.scss';
@@ -81,10 +81,10 @@ const Dataset = ({
     ...customMetadataMapping,
   };
 
-  let distribution = {} as DistributionType;
+  let distribution = {} as DatasetDistributionType;
   let distributions = dataset.distribution ? dataset.distribution : [];
   if (distributions.length) {
-    distribution = distributions[0];
+    distribution = distributions[0].data;
   }
 
   const resource = useDatastore(

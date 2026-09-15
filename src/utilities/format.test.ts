@@ -1,20 +1,17 @@
 import { getFormatType } from './format';
-import { DistributionType } from '../types/dataset';
+import {DatasetDistributionType, MetastoreDistributionType } from '../types/dataset';
 
-const baseDist = (overrides: Partial<DistributionType['data']> = {}): DistributionType => ({
-  identifier: 'd1',
-  data: {
-    '@type': 'dcat:Distribution',
-    format: '',
-    title: '',
-    description: '',
-    downloadURL: '',
-    describedBy: '',
-    describedByType: '',
-    mediaType: '',
-    '%Ref:downloadURL': [],
-    ...overrides,
-  },
+const baseDist = (overrides: Partial<DatasetDistributionType['data']> = {}):DatasetDistributionType => ({
+  '@type': 'dcat:Distribution',
+  format: '',
+  title: '',
+  description: '',
+  downloadURL: '',
+  describedBy: '',
+  describedByType: '',
+  mediaType: '',
+  '%Ref:downloadURL': [],
+  ...overrides,
 });
 
 describe('getFormatType', () => {
@@ -50,6 +47,6 @@ describe('getFormatType', () => {
   });
 
   it('returns empty string when distribution has no data', () => {
-    expect(getFormatType({ identifier: 'x' } as DistributionType)).toBe('');
+    expect(getFormatType({})).toBe('');
   });
 });

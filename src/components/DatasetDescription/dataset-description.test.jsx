@@ -9,7 +9,7 @@ describe('<DatasetDescription />', () => {
     render(
       <DatasetDescription
         dataset={dataset}
-        distribution={distributionWithTitle.distribution[0]}
+        distribution={distributionWithTitle.distribution[0].data}
       />
     );
     expect(screen.getByText("Test Custom Description")).toBeInTheDocument();
@@ -18,7 +18,7 @@ describe('<DatasetDescription />', () => {
     render(
       <DatasetDescription
         dataset={dataset}
-        distribution={dataset.distribution[0]}
+        distribution={dataset.distribution[0].data}
       />
     );
     expect(screen.getByText("The data below contains newly reported, active covered outpatient drugs which were reported by participating drug manufacturers since the last quarterly update of the Drug Products in the Medicaid Drug Rebate Program (MDRP) database.")).toBeInTheDocument();
@@ -31,7 +31,7 @@ describe('<DatasetDescription />', () => {
     render(
       <DatasetDescription
         dataset={dataset}
-        distribution={distributionWithTitle.distribution[0]}
+        distribution={distributionWithTitle.distribution[0].data}
         customDescription={() => "My custom description."}
       />
     );
