@@ -5,7 +5,7 @@ import { acaToParams } from "../../utilities/aca";
 import { ACAContext } from "../../utilities/ACAContext";
 
 const useDatastore = (
-  resourceId,
+  datasetID,
   rootAPIUrl,
   options,
   additionalParams = {}
@@ -16,7 +16,8 @@ const useDatastore = (
   const {ACA} = useContext(ACAContext);
 
   const [values, setValues] = useState([]);
-  const [id, setResource] = useState(resourceId);
+  // confirm a CSV distribution exists from the metastore call before doing a datastore call
+  const [csvDistribution, setCSVDistribution] = useState(false);
   const [rootUrl, setRootUrl] = useState(rootAPIUrl);
   const [limit, setLimit] = useState(options.limit ? options.limit : 20);
   const [count, setCount] = useState(null);
@@ -39,7 +40,11 @@ const useDatastore = (
     options.properties ? options.properties : undefined
   );
 
-  const datasetID = additionalParams.datasetID;
+  //const datasetID = additionalParams.datasetID;
+  // Allow immediate override for testing or other situations where there isn't a metastore calls
+  if (additionalParams.CSVDistribution && !csvDistribution) {
+    setCSVDistribution(true);
+  }
   
   // Remove datasetID from params to avoid sending it to the API
   const { datasetID: _, ...restAdditionalParams } = additionalParams;
@@ -64,7 +69,7 @@ const useDatastore = (
   const paramsString = Object.keys(params).length ? `${qs.stringify(params)}` : '';
   
   let enabled = false;
-  if (id !== '') {
+  if (csvDistribution) {
     if (!requireConditions)
       enabled = true;
     if (conditions && conditions.length)
@@ -94,7 +99,7 @@ const useDatastore = (
   })
 
   const{data: unfiltered} = useQuery({
-    queryKey: ["datastore" + id + "-unfilteredRowsAndCols"],
+    queryKey: ["datastore" + datasetID + "-unfilteredRowsAndCols"],
     queryFn: () => {
       const unfilteredParams = {
         results: false,
@@ -103,6 +108,7 @@ const useDatastore = (
       };
       return fetchJson(`${rootUrl}/datastore/query/${datasetID}/0?${qs.stringify(acaToParams(unfilteredParams, ACA))}`);
     },
+    enabled: enabled
   })
 
   useEffect(() => {
@@ -125,7 +131,7 @@ const useDatastore = (
   useEffect(() => {
     if (unfiltered) {
       if (unfiltered.count) setTotalRows(unfiltered.count);
-      if (unfiltered.schema && unfiltered.schema[id] && unfiltered.schema[id].fields) setTotalColumns(Object.keys(unfiltered.schema[id].fields).length);
+      if (unfiltered.schema && unfiltered.schema[datasetID] && unfiltered.schema[datasetID].fields) setTotalColumns(Object.keys(unfiltered.schema[datasetID].fields).length);
     }
   }, [unfiltered])
 
@@ -143,9 +149,9 @@ const useDatastore = (
     schema,
     conditions,
     properties,
+    setCSVDistribution,
     setProperties,
     setGroupings,
-    setResource,
     setRootUrl,
     setLimit,
     setOffset,

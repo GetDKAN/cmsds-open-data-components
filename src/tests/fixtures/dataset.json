@@ -26,26 +26,23 @@
   ],
   "distribution": [
       {
-          "identifier": "d60b31aa-bfa8-527e-9b50-6c3f972ee9a9",
-          "data": {
-              "@type": "dcat:Distribution",
-              "title": "Product Data for Newly Reported Drugs in the Medicaid Drug Rebate Program 2024-01-08-to-2024-01-14",
-              "format": "csv",
-              "downloadURL": "https://data.medicaid.gov/sites/default/files/uploaded_resources/mdrp-newly-rprt-drug-01-08-2024-to-01-14-2024.csv",
-              "%Ref:downloadURL": [
-                  {
-                      "identifier": "04c61553dab96573d64c62281d8c9c00__1705431154__source",
-                      "data": {
-                          "filePath": "https://h-o.st/sites/default/files/uploaded_resources/mdrp-newly-rprt-drug-01-08-2024-to-01-14-2024.csv",
-                          "identifier": "04c61553dab96573d64c62281d8c9c00",
-                          "mimeType": "text/csv",
-                          "perspective": "source",
-                          "version": "1705431154",
-                          "checksum": null
-                      }
-                  }
-              ]
-          }
+        "@type": "dcat:Distribution",
+        "title": "Product Data for Newly Reported Drugs in the Medicaid Drug Rebate Program 2024-01-08-to-2024-01-14",
+        "format": "csv",
+        "downloadURL": "https://data.medicaid.gov/sites/default/files/uploaded_resources/mdrp-newly-rprt-drug-01-08-2024-to-01-14-2024.csv",
+        "%Ref:downloadURL": [
+            {
+                "identifier": "04c61553dab96573d64c62281d8c9c00__1705431154__source",
+                "data": {
+                    "filePath": "https://h-o.st/sites/default/files/uploaded_resources/mdrp-newly-rprt-drug-01-08-2024-to-01-14-2024.csv",
+                    "identifier": "04c61553dab96573d64c62281d8c9c00",
+                    "mimeType": "text/csv",
+                    "perspective": "source",
+                    "version": "1705431154",
+                    "checksum": null
+                }
+            }
+        ]
       }
   ],
   "bureauCode": [

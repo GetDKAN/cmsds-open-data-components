@@ -9,7 +9,7 @@ import { truncateText } from './truncateText';
 import { Button, Tooltip } from '@cmsgov/design-system';
 import DatasetDate from '../DatasetDate';
 import { getFormatType } from '../../utilities/format';
-import { MetastoreDistributionType } from '../../types/dataset';
+import { DistributionType } from '../../types/dataset';
 
 type SearchItemProps = {
   title: string;
@@ -27,7 +27,7 @@ type SearchItemProps = {
   updateDateMonthYearOnly?: boolean;
   theme?: string[];
   topicSlugs?: { [key: string]: string };
-  distribution: MetastoreDistributionType | {};
+  distribution?: DistributionType | undefined;
 }
 
 const DatasetSearchListItem = (props: SearchItemProps) => {
@@ -105,7 +105,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
   const url = `/dataset/${identifier}`
 
   const DataTableLink: React.FC = () => {
-    if (distribution && "data" in distribution && getFormatType(distribution.data) === "csv") {
+    if (distribution && getFormatType(distribution) === "csv") {
       return (
         <Link to={`${url}#data-table`}>
           <SearchItemIcon id="data-table" />
@@ -131,13 +131,13 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
   }
 
   const dataDictionaryExists = (): boolean => {
-    if (distribution && "data" in distribution) {
-      if ("describedBy" in distribution.data && "describedByType" in distribution.data) {
+    if (distribution) {
+      if ("describedBy" in distribution && "describedByType" in distribution) {
         const types: string[] = [
           'application/vnd.tableschema+json',
           'application/pdf'
         ]
-        const isValidType: boolean = types.includes(distribution.data.describedByType)
+        const isValidType: boolean = types.includes(distribution.describedByType)
         return isValidType;
       }
     }
@@ -218,7 +218,7 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
           )}
         <ul className={`ds-l-row ds-u-padding--0 ds-u-flex-direction--row ds-u-justify-content--between ds-u-md-justify-content--start ds-u-margin-top--3 ds-u-margin-x--0 ${!dataDictionaryLinks ? 'ds-u-justify-content--center ds-u-md-justify-content--start' : ''}`}>
           <li className={linkContainerClasses}>
-            <span className={`${linkClasses}${(distribution && "data" in distribution && getFormatType(distribution.data) === "csv") ? '' : ' dkan-disabled-link-wrapper'}`}>
+            <span className={`${linkClasses}${(distribution && getFormatType(distribution) === "csv") ? '' : ' dkan-disabled-link-wrapper'}`}>
               <DataTableLink />
             </span>
           </li>

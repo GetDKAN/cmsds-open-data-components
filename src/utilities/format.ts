@@ -1,6 +1,6 @@
-import { DatasetDistributionType } from "../types/dataset";
+import { DistributionType } from "../types/dataset";
 
-export function getFormatType(dist :DatasetDistributionType) {
+export function getFormatType(dist: DistributionType) {
   if (dist) {
     if(dist.format) {
       return  dist.format.toLowerCase()

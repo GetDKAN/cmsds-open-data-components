@@ -1,7 +1,7 @@
 import { getFormatType } from './format';
-import {DatasetDistributionType, MetastoreDistributionType } from '../types/dataset';
+import {DistributionType } from '../types/dataset';
 
-const baseDist = (overrides: Partial<DatasetDistributionType['data']> = {}):DatasetDistributionType => ({
+const baseDist = (overrides: Partial<DistributionType> = {}):DistributionType => ({
   '@type': 'dcat:Distribution',
   format: '',
   title: '',

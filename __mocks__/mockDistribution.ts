@@ -1,6 +1,6 @@
-import {DatasetDistributionType } from '../src/types/dataset';
+import {DistributionType } from '../src/types/dataset';
 
-export const mockDistribution: DatasetDistributionType = {
+export const mockDistribution: DistributionType = {
   "@type": "dcat:Distribution",
   "title": "Registration Completion List for 2016- Present",
   "description": " ",

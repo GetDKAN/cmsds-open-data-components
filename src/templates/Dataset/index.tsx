@@ -6,12 +6,12 @@ import useMetastoreDataset from '../../services/useMetastoreDataset';
 import useDatastore from '../../services/useDatastore';
 import PageNotFound from '../PageNotFound';
 import { defaultMetadataMapping } from '../../assets/metadataMapping';
-import { Tabs, TabPanel, Button } from '@cmsgov/design-system';
+import { Tabs, TabPanel } from '@cmsgov/design-system';
 import SearchItemIcon from '../../assets/icons/searchItem';
 import DatasetOverview from '../../components/DatasetOverviewTab';
 import DatasetAPI from '../../components/DatasetAPITab';
 import DataDictionary from '../../components/DatasetDataDictionaryTab';
-import { DatasetDictionaryItemType, DatasetPageType, DatasetDictionaryType, DatasetDistributionType, ResourceType } from '../../types/dataset';
+import { DatasetDictionaryItemType, DatasetPageType, DatasetDictionaryType, DistributionType, ResourceType } from '../../types/dataset';
 import TransformedDate from '../../components/TransformedDate';
 import { getFormatType } from '../../utilities/format';
 import './dataset.scss';
@@ -81,21 +81,18 @@ const Dataset = ({
     ...customMetadataMapping,
   };
 
-  let distribution = {} as DatasetDistributionType;
+  let distribution = {} as DistributionType;
   let distributions = dataset.distribution ? dataset.distribution : [];
   if (distributions.length) {
-    distribution = distributions[0].data;
+    distribution = distributions[0];
   }
 
   const resource = useDatastore(
-    '',
+    id,
     rootUrl,
     {
       ...options,
       limit: defaultPageSize,
-    },
-    {
-      datasetID: id // pass datasetID into additional params to enable dataset API option in useDatastore
     }
   ) as ResourceType;
 
@@ -112,7 +109,7 @@ const Dataset = ({
     if (distribution) {
       const localFileFormat = getFormatType(distribution);
       if (localFileFormat === 'csv') {
-        resource.setResource(0);
+        resource.setCSVDistribution(true);
       }
     }
   }, [distribution]);
