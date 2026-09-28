@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import DataTableContext from '../Dataset/DataTableContext';
 import DataTableStateWrapper from '../../components/DatasetTableTab/DataTableStateWrapper';
-import qs from 'qs';
 import '../Dataset/dataset.scss';
 import useMetastoreDataset from '../../services/useMetastoreDataset';
 import useDatastore from '../../services/useDatastore';
 import { getFormatType } from '../../utilities/format';
-import { ColumnType, DatasetDistributionType, ResourceType } from '../../types/dataset';
+import { ColumnType, DistributionType, ResourceType } from '../../types/dataset';
 
 export default function StoredQueryPage({
   id,
@@ -45,15 +44,15 @@ export default function StoredQueryPage({
       : [],
   };
 
-  const { dataset, isPending } = useMetastoreDataset(id, rootUrl);
+  const { dataset } = useMetastoreDataset(id, rootUrl);
 
-  let distribution = {} as DatasetDistributionType;
+  let distribution = {} as DistributionType;
   let distributions = dataset.distribution ? dataset.distribution : [];
   if (distributions.length) {
-    distribution = distributions[distributionIndex].data;
+    distribution = distributions[distributionIndex];
   }
 
-  const resource = useDatastore('', rootUrl, {
+  const resource = useDatastore(dataset.identifier, rootUrl, {
     ...options,
     limit: defaultPageSize,
   }) as ResourceType;
@@ -61,7 +60,7 @@ export default function StoredQueryPage({
   useEffect(() => {
     const localFileFormat = getFormatType(distribution);
     if (localFileFormat === 'csv') {
-      resource.setResource(0);
+      resource.setCSVDistribution(true);
     }
   }, [distribution]);
 

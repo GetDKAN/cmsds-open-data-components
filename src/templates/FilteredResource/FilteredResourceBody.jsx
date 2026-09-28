@@ -42,20 +42,17 @@ const FilteredResourceBody = ({
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
     : { conditions: [] };
   const resource = useDatastore(
-    '',
+    id,
     rootUrl,
     {
       ...options,
       limit: 25,
     },
-    {
-      datasetID: id
-    }
   );
 
   useEffect(() => {
     if (distribution) {
-      resource.setResource(0);
+      resource.setCSVDistribution(true);
     }
   }, [distribution]);
   const downloadUrl = `${

@@ -1,6 +1,6 @@
-import {DatasetDistributionType } from '../../../types/dataset';
+import {DistributionType } from '../../../types/dataset';
 
-export const makeDistribution = (overrides: Partial<DatasetDistributionType> = {}): DatasetDistributionType => ({
+export const makeDistribution = (overrides: Partial<DistributionType> = {}): DistributionType => ({
   '@type': 'dcat:Distribution',
   format: 'csv',
   title: 'Sample Sales Distribution',

@@ -341,7 +341,7 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                         largeFile={showLargeFile}
                         paginationEnabled={enablePagination}
                         dataDictionaryLinks={dataDictionaryLinks}
-                        distribution={"%Ref:distribution" in item && item["%Ref:distribution"] ? item["%Ref:distribution"][0] : {}}
+                        distribution={"%Ref:distribution" in item && item["%Ref:distribution"] ? item["%Ref:distribution"][0].data : undefined}
                         updateDateMonthYearOnly={updateDateMonthYearOnly}
                         {...dateDetailProps}
                         {...topicProps}
