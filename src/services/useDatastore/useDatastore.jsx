@@ -69,7 +69,7 @@ const useDatastore = (
   const paramsString = Object.keys(params).length ? `${qs.stringify(params)}` : '';
   
   let enabled = false;
-  if (csvDistribution) {
+  if (datasetID && csvDistribution) {
     if (!requireConditions)
       enabled = true;
     if (conditions && conditions.length)
