@@ -42,7 +42,7 @@ const useDatastore = (
 
   //const datasetID = additionalParams.datasetID;
   // Allow immediate override for testing or other situations where there isn't a metastore calls
-  if (additionalParams.CSVDistribution && !csvDistribution) {
+  if (options.CSVDistribution && !csvDistribution) {
     setCSVDistribution(true);
   }
   
