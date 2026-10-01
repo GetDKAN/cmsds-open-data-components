@@ -35,7 +35,7 @@ function updateQueryForDatastore(condition) {
 
 const QueryBuilder = ({ resource, id, customColumns, setOffset }) => {
   const { conditions, schema, setConditions } = resource;
-  const fields = Object.keys(schema[id].fields);
+  const fields = Object.keys(schema[Object.keys(schema)[0]].fields);
 
   const [queryConditions, setQueryConditions] = useState([]);
   const [titleConditions, setTitleConditions] = useState([]); // Add use effect to load conditions on first load if needed
@@ -54,7 +54,7 @@ const QueryBuilder = ({ resource, id, customColumns, setOffset }) => {
         {
           property: fields[0],
           value: '',
-          operator: buildOperatorOptions(schema[id].fields[fields[0]].mysql_type)[0].value,
+          operator: buildOperatorOptions(schema[Object.keys(schema)[0]].fields[fields[0]].mysql_type)[0].value,
           key: Date.now(),
         },
       ]);
@@ -67,8 +67,8 @@ const QueryBuilder = ({ resource, id, customColumns, setOffset }) => {
   }, []);
 
   const propertyOptions = fields.map((f) => {
-    if (schema[id].fields[f].description) {
-      return { label: schema[id].fields[f].description, value: f };
+    if (schema[Object.keys(schema)[0]].fields[f].description) {
+      return { label: schema[Object.keys(schema)[0]].fields[f].description, value: f };
     }
     return { label: f, value: f };
   });
@@ -119,7 +119,7 @@ const QueryBuilder = ({ resource, id, customColumns, setOffset }) => {
         <AccordionItem
           heading={
             <QueryTitle
-              schema={schema[id]}
+              schema={schema[Object.keys(schema)[0]]}
               conditions={titleConditions}
               customColumns={customColumns}
             />

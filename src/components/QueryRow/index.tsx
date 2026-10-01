@@ -7,7 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { QueryRowType, ConditionType } from '../../types/dataset';
 
 function getStartDate(condition : ConditionType, schema : any, id : string) {
-  if (schema[id].fields[condition.property].mysql_type === 'date') {
+  if (schema[Object.keys(schema)[0]].fields[condition.property].mysql_type === 'date') {
     const newDate = new Date(condition.value.toString());
     if (newDate instanceof Date && !isNaN(newDate.getTime())) {
       return newDate;
@@ -31,7 +31,7 @@ const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schem
       } else {
         update(index, 'property', '');
       }
-      if (schema[id].fields[condition.property].mysql_type === 'date') {
+      if (schema[Object.keys(schema)[0]].fields[condition.property].mysql_type === 'date') {
         if (!value) {
           setValue(startDate.toJSON().slice(0, 10));
         }
@@ -71,7 +71,7 @@ const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schem
           onChange={(e) => setProperty(e.target.value)}
         />
         <Dropdown
-          options={buildOperatorOptions(schema[id].fields[property].mysql_type)}
+          options={buildOperatorOptions(schema[Object.keys(schema)[0]].fields[property].mysql_type)}
           className="ds-l-col--4 ds-u-padding-x--0"
           value={operator}
           label="Operator"
@@ -80,7 +80,7 @@ const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schem
         />
       </div>
       <div className="ds-l-col--12 ds-l-md-col--4 ds-u-padding-x--0 ds-u-md-padding-left--2 ds-u-display--flex ds-u-justify-content--between">
-        {schema[id].fields[property].mysql_type === 'date' ? (
+        {schema[Object.keys(schema)[0]].fields[property].mysql_type === 'date' ? (
           <div>
             <label
               className="ds-c-label"

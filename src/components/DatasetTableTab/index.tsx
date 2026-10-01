@@ -69,14 +69,14 @@ const DatasetTable = ({
 
   const defaultPageSize = 10;
 
-  const schema = resource?.schema?.[id];
+  const schema = resource?.schema?.[Object.keys(resource.schema)[0]];
   const isFullColumnDef = Array.isArray(customColumns) && customColumns.some((column: ColumnType) => column && 'header' in column);
   
   const columns = isFullColumnDef
     ? customColumns
     : schema && Array.isArray(resource?.columns)
       ? buildCustomColHeaders(customColumns, resource.columns, schema)
-      : prepareColumns(resource.columns, resource.schema[id]);
+      : prepareColumns(resource.columns, schema);
 
   const { limit, setOffset } = resource;
   const pageSize = limit ? limit : defaultPageSize;
