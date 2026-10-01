@@ -6,7 +6,7 @@ import { buildOperatorOptions, convertUTCToLocalDate, cleanText } from './functi
 import 'react-datepicker/dist/react-datepicker.css';
 
 function getStartDate(condition, schema, id) {
-  if (schema[id].fields[condition.property].mysql_type === 'date') {
+  if (schema[Object.keys(schema)[0]].fields[condition.property].mysql_type === 'date') {
     const newDate = new Date(condition.value);
     if (newDate instanceof Date && !isNaN(newDate)) {
       return newDate;
@@ -28,7 +28,7 @@ const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schem
       } else {
         update(index, 'property', '');
       }
-      if (schema[id].fields[condition.property].mysql_type === 'date') {
+      if (schema[Object.keys(schema)[0]].fields[condition.property].mysql_type === 'date') {
         if(!value) {
           setValue(startDate.toJSON().slice(0, 10));
         }
@@ -67,14 +67,14 @@ const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schem
         className={"ds-l-md-col--5 ds-l-lg-col--4 ds-l-sm-col--8 ds-l-col--12 ds-u-padding--0 ds-u-md-padding-right--2 ds-u-margin-bottom--0 ds-u-md-margin-bottom--2"}
       />
       <Dropdown
-        options={buildOperatorOptions(schema[id].fields[property].mysql_type)}
+        options={buildOperatorOptions(schema[Object.keys(schema)[0]].fields[property].mysql_type)}
         value={operator}
         label="Operator"
         name={`${condition.key}_operator`}
         onChange={(e) => setOperator(e.target.value)}
         className={"ds-l-sm-col--3 ds-l-md-col--2 ds-l-col--12 ds-u-padding--0 ds-u-md-padding-right--2 ds-u-margin-bottom--0 ds-u-md-margin-bottom--2"}
       />
-      {schema[id].fields[property].mysql_type === 'date' ? (
+      {schema[Object.keys(schema)[0]].fields[property].mysql_type === 'date' ? (
         <div className="ds-l-md-col--5 ds-l-lg-col--4 ds-l-sm-col--8 ds-l-col--12 ds-u-padding--0 ds-u-sm-padding-right--2 ds-u-md-padding-right--0 ds-u-lg-padding-right--2 ds-u-margin-bottom--2">
           <label
             className="ds-c-label"
