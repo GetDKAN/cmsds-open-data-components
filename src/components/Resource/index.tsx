@@ -23,7 +23,6 @@ const Resource = ({ datasetID, distributions, rootUrl, title } : ResourcePropsTy
           {
             distributions.map((distribution, index) => {
               const dist = distribution;
-              console.log(dist)
               const fileFormat = getFormatType(dist)
               return (
                 <li key={dist.description} className={`ds-u-display--flex ds-u-flex-wrap--wrap ${fileFormat !== "csv" && "ds-u-margin-bottom--2"}`}>
