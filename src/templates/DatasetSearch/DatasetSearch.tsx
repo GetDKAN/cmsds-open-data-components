@@ -328,8 +328,6 @@ const DatasetSearch = (props: DatasetSearchPageProps) => {
                       return { showTopics, theme: item.theme, topicSlugs };
                     })();
 
-                    console.log(item)
-
                     return (
                       <DatasetSearchListItem
                         key={item.identifier}

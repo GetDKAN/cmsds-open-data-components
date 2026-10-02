@@ -40,8 +40,8 @@ const useDatastore = (
     options.properties ? options.properties : undefined
   );
 
-  //const datasetID = additionalParams.datasetID;
-  // Allow immediate override for testing or other situations where there isn't a metastore calls
+  // Allow immediate override through the options object
+  // for testing or other situations where there isn't a metastore call
   if (options.CSVDistribution && !csvDistribution) {
     setCSVDistribution(true);
   }
