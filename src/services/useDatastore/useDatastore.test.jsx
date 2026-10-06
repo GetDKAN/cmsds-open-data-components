@@ -78,6 +78,16 @@ describe('useDatastore', () => {
     expect(url).not.toContain('not_empty');
   });
 
+  it('sets totalRows and totalColumns from the unfiltered schema', async () => {
+    mockFetch(datasetResponse);
+    const { result } = renderHook(
+      () => useDatastore('dataset-abc-123', 'https://example.test/api/1', {CSVDistribution: true}),
+      { wrapper: buildWrapper() },
+    );
+    await waitFor(() => expect(result.current.totalColumns).toBe(2));
+    expect(result.current.totalRows).toBe(1);
+  });
+
   it('queries distribution 0 by default', async () => {
     mockFetch(datasetResponse);
     renderHook(

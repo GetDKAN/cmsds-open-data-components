@@ -132,7 +132,8 @@ const useDatastore = (
   useEffect(() => {
     if (unfiltered) {
       if (unfiltered.count) setTotalRows(unfiltered.count);
-      if (unfiltered.schema && unfiltered.schema[datasetID] && unfiltered.schema[datasetID].fields) setTotalColumns(Object.keys(unfiltered.schema[datasetID].fields).length);
+      const schemaID = unfiltered.schema ? Object.keys(unfiltered.schema)[0] : undefined;
+      if (schemaID && unfiltered.schema[schemaID].fields) setTotalColumns(Object.keys(unfiltered.schema[schemaID].fields).length);
     }
   }, [unfiltered])
 
