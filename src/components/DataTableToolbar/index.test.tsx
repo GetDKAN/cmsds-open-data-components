@@ -90,7 +90,7 @@ describe('DataTableToolbar', () => {
       setOffset: jest.fn(),
       setSort: jest.fn(),
       setConditions: jest.fn(),
-      setResource: jest.fn()
+      setCSVDistribution: jest.fn()
     } as ResourceType,
     id: 'test-dataset',
     columns: [

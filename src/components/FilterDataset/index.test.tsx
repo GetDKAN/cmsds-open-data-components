@@ -50,7 +50,7 @@ const createMockContext = ({ mainOverrides = {}, resourceOverrides = {} } = {}):
     setOffset: jest.fn(),
     setSort: jest.fn(),
     setConditions: jest.fn(),
-    setResource: jest.fn(),
+    setCSVDistribution: jest.fn(),
     schema: {
       'd60b31aa-bfa8-527e-9b50-6c3f972ee9a9': {
         fields: {

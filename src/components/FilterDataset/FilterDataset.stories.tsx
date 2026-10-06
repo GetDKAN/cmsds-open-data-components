@@ -47,7 +47,7 @@ const mockResource: ResourceType = {
   setOffset: () => {},
   setSort: () => {},
   setConditions: () => {},
-  setResource: () => {},
+  setCSVDistribution: () => {},
 };
 
 const mockActionsContext: DataTableActionsContextProps = {

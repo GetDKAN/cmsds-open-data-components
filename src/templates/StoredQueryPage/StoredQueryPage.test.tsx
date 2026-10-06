@@ -15,7 +15,7 @@ jest.mock('../../services/useDatastore', () => (id: any, rootUrl: any, options: 
     columns: [],
     schema: {},
     count: 0,
-    setResource: jest.fn(),
+    setCSVDistribution: jest.fn(),
   };
 });
 

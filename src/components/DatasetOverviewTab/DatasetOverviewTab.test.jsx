@@ -21,7 +21,7 @@ describe('<DatasetOverview />', () => {
   });
 
   test("Renders correctly", async () => {
-    resource.setResource = jest.fn();
+    resource.setCSVDistribution = jest.fn();
     const metadataMapping = {
       ...defaultMetadataMapping,
     }

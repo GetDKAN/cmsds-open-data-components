@@ -248,7 +248,7 @@ const mockResource: ResourceType = {
   setOffset: () => {},
   setSort: () => {},
   setConditions: () => {},
-  setResource: () => {},
+  setCSVDistribution: () => {},
 };
 
 const mockColumns: ColumnType[] = [
