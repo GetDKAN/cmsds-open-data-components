@@ -78,6 +78,34 @@ describe('useDatastore', () => {
     expect(url).not.toContain('not_empty');
   });
 
+  it('queries distribution 0 by default', async () => {
+    mockFetch(datasetResponse);
+    renderHook(
+      () => useDatastore('dataset-abc-123', 'https://example.test/api/1', {CSVDistribution: true}),
+      { wrapper: buildWrapper() },
+    );
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(2));
+    global.fetch.mock.calls.forEach(([url]) => {
+      expect(url).toContain('/datastore/query/dataset-abc-123/0?');
+    });
+  });
+
+  it('queries the distribution given by options.distributionIndex', async () => {
+    mockFetch(datasetResponse);
+    renderHook(
+      () =>
+        useDatastore('dataset-abc-123', 'https://example.test/api/1', {
+          CSVDistribution: true,
+          distributionIndex: 2,
+        }),
+      { wrapper: buildWrapper() },
+    );
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(2));
+    global.fetch.mock.calls.forEach(([url]) => {
+      expect(url).toContain('/datastore/query/dataset-abc-123/2?');
+    });
+  });
+
   it('exposes a structured error when fetch returns a non-OK response', async () => {
     mockFetch({ message: 'Bad request' }, { ok: false, status: 400 });
     const { result } = renderHook(

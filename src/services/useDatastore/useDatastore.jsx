@@ -12,6 +12,7 @@ const useDatastore = (
 ) => {
   const keys = options.keys ? options.keys : true;
   const { prepareColumns } = options;
+  const distributionIndex = options.distributionIndex ?? 0;
 
   const {ACA} = useContext(ACAContext);
 
@@ -90,23 +91,23 @@ const useDatastore = (
   }
 
   const {data, isPending, error} = useQuery({
-    queryKey: ["datastore" + datasetID + '/0' + paramsString],
+    queryKey: ["datastore" + datasetID + '/' + distributionIndex + paramsString],
     queryFn: () => {
       setCount(null);
-      return fetchJson(`${rootUrl}/datastore/query/${datasetID}/0?${paramsString}`);
+      return fetchJson(`${rootUrl}/datastore/query/${datasetID}/${distributionIndex}?${paramsString}`);
     },
     enabled: enabled
   })
 
   const{data: unfiltered} = useQuery({
-    queryKey: ["datastore" + datasetID + "-unfilteredRowsAndCols"],
+    queryKey: ["datastore" + datasetID + '/' + distributionIndex + "-unfilteredRowsAndCols"],
     queryFn: () => {
       const unfilteredParams = {
         results: false,
         count: true,
         schema: true
       };
-      return fetchJson(`${rootUrl}/datastore/query/${datasetID}/0?${qs.stringify(acaToParams(unfilteredParams, ACA))}`);
+      return fetchJson(`${rootUrl}/datastore/query/${datasetID}/${distributionIndex}?${qs.stringify(acaToParams(unfilteredParams, ACA))}`);
     },
     enabled: enabled
   })

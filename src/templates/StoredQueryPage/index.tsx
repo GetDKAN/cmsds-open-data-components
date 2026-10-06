@@ -55,6 +55,7 @@ export default function StoredQueryPage({
   const resource = useDatastore(dataset.identifier, rootUrl, {
     ...options,
     limit: defaultPageSize,
+    distributionIndex,
   }) as ResourceType;
 
   useEffect(() => {

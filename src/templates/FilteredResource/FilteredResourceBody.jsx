@@ -47,6 +47,7 @@ const FilteredResourceBody = ({
     {
       ...options,
       limit: 25,
+      distributionIndex: distIndex,
     },
   );
 
