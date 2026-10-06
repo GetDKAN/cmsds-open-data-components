@@ -8,8 +8,6 @@ import ResourceInformation from './index';
 jest.mock('axios');
 const mockedAxios = axios as unknown as { get: jest.Mock };
 
-const distribution = { identifier: 'dist-001' } as any;
-
 const buildWrapper = () => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false, gcTime: 0 } },
@@ -31,7 +29,7 @@ describe('ResourceInformation', () => {
     const Wrapper = buildWrapper();
     render(
       <Wrapper>
-        <ResourceInformation distribution={distribution} rootUrl="https://example.test" />
+        <ResourceInformation datasetID="dataset-abc-123" distribution={0} rootUrl="https://example.test" />
       </Wrapper>,
     );
     expect(screen.getByText('Rows')).toBeInTheDocument();
@@ -48,10 +46,24 @@ describe('ResourceInformation', () => {
     const Wrapper = buildWrapper();
     render(
       <Wrapper>
-        <ResourceInformation distribution={distribution} rootUrl="https://example.test" />
+        <ResourceInformation datasetID="dataset-abc-123" distribution={0} rootUrl="https://example.test" />
       </Wrapper>,
     );
     await waitFor(() => expect(screen.getByText('1,234')).toBeInTheDocument());
     expect(screen.getByText('3')).toBeInTheDocument();
+  });
+
+  it('queries the datastore by dataset ID and distribution index', async () => {
+    mockedAxios.get.mockResolvedValue({ data: { count: 1, query: { properties: [] } } });
+    const Wrapper = buildWrapper();
+    render(
+      <Wrapper>
+        <ResourceInformation datasetID="dataset-abc-123" distribution={1} rootUrl="https://example.test" />
+      </Wrapper>,
+    );
+    await waitFor(() => expect(mockedAxios.get).toHaveBeenCalled());
+    expect(mockedAxios.get.mock.calls[0][0]).toMatch(
+      /^https:\/\/example\.test\/datastore\/query\/dataset-abc-123\/1\?/,
+    );
   });
 });

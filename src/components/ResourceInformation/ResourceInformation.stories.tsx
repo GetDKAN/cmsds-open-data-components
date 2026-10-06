@@ -30,9 +30,13 @@ The ResourceInformation component displays summary information about a resource,
     },
   },
   argTypes: {
+    datasetID: {
+      control: 'text',
+      description: 'Dataset identifier.',
+    },
     distribution: {
-      control: 'object',
-      description: 'Distribution object containing resource identifier and metadata.',
+      control: 'number',
+      description: 'Distribution index within the dataset.',
     },
     rootUrl: {
       control: 'text',
@@ -47,20 +51,8 @@ type Story = StoryObj<typeof ResourceInformation>;
 
 export const Default: Story = {
   args: {
-    distribution: {
-      identifier: 'sample-resource-123',
-      data: {
-        title: 'Sample CSV Resource',
-        format: 'csv',
-        downloadURL: 'https://example.com/sample.csv',
-        description: 'A sample CSV resource for demonstration.',
-        describedBy: '',
-        describedByType: '',
-        mediaType: 'text/csv',
-        mimeType: 'text/csv',
-        '%Ref:downloadURL': [],
-      },
-    },
+    datasetID: 'wb6u-x2ny',
+    distribution: 0,
     rootUrl: '/api/1',
   },
   parameters: {
