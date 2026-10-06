@@ -22,6 +22,8 @@ describe('<Dataset />', () => {
           return Promise.resolve({data: datasetWithDictionary});
         case 'https://dkan.com/api/1/metastore/schemas/data-dictionary/items/71ec19df-f5ef-5b99-b43b-e566e22670b7?':
           return Promise.resolve({data: {}});
+        case 'http://dkan.com/api/1/metastore/schemas/dataset/items/sitewide-dict-test':
+          return Promise.resolve({data: dataset});
         default:
           return
       }
@@ -70,5 +72,32 @@ describe('<Dataset />', () => {
     await waitFor(() => {
       expect(screen.queryByTestId('dataset-dictionary-tab')).not.toBeInTheDocument();
     });
+  });
+  test("Renders Data Dictionary tab from site-wide dictionary fields matching the datastore schema", async () => {
+    const originalFetch = global.fetch;
+    global.fetch = jest.fn((url) => {
+      const body = url.startsWith(`${rootUrl}/sitewide-dictionary`)
+        ? { data: { fields: [{ name: 'ndc', title: 'NDC', type: 'string', description: 'Drug code' }] } }
+        : {
+            results: [{ ndc: '123' }],
+            count: 1,
+            schema: { 'resource-hash': { fields: { ndc: { type: 'text', mysql_type: 'text', description: 'ndc' } } } },
+          };
+      return Promise.resolve({ ok: true, status: 200, json: () => Promise.resolve(body) });
+    });
+    try {
+      renderWithProviders(
+        <Dataset
+          rootUrl={rootUrl}
+          id={"sitewide-dict-test"}
+          dataDictionaryUrl="/sitewide-dictionary"
+        />,
+      );
+      await waitFor(() => {
+        expect(screen.getByTestId('dataset-dictionary-tab')).toBeInTheDocument();
+      });
+    } finally {
+      global.fetch = originalFetch;
+    }
   });
 });
