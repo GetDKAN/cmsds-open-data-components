@@ -54,7 +54,7 @@ const FilterDataset: React.FC = () => {
   const { conditions, schema, setConditions, setOffset } = resource;
 
   const schemaID = Object.keys(schema)[0];
-  if (!schema[schemaID].fields) return null;
+  if (!schemaID || !schema[schemaID]?.fields) return null;
 
   const customColumnHeaders = buildCustomColHeaders(
     customColumns,

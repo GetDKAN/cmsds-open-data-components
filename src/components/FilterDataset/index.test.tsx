@@ -144,6 +144,18 @@ describe('FilterDataset', () => {
     expect(screen.queryByLabelText('Filter dataset')).not.toBeInTheDocument();
   });
 
+  it('does not render when schema is empty', () => {
+    render(
+      <DataTableContext.Provider value={createMockContext({ resourceOverrides: { schema: {} } })}>
+        <MockDataTableActionsProvider value={createMockActionsContext()}>
+          <FilterDataset />
+        </MockDataTableActionsProvider>
+      </DataTableContext.Provider>
+    );
+
+    expect(screen.queryByText(/Filter Dataset/i)).not.toBeInTheDocument();
+  });
+
   it('opens modal when filter button is clicked', async () => {
     render(
       <DataTableContext.Provider value={createMockContext()}>
