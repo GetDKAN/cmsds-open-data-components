@@ -116,6 +116,30 @@ describe('useDatastore', () => {
     });
   });
 
+  it('requires CSV confirmation again when datasetID changes', async () => {
+    mockFetch(datasetResponse);
+    const { result, rerender } = renderHook(
+      ({ id }) => useDatastore(id, 'https://example.test/api/1', {}),
+      { wrapper: buildWrapper(), initialProps: { id: 'dataset-a' } },
+    );
+    await new Promise((r) => setTimeout(r, 20));
+    expect(global.fetch).not.toHaveBeenCalled();
+
+    act(() => result.current.setCSVDistribution(true));
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(2));
+    global.fetch.mockClear();
+
+    rerender({ id: 'dataset-b' });
+    await new Promise((r) => setTimeout(r, 20));
+    expect(global.fetch).not.toHaveBeenCalled();
+
+    act(() => result.current.setCSVDistribution(true));
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(2));
+    global.fetch.mock.calls.forEach(([url]) => {
+      expect(url).toContain('/datastore/query/dataset-b/0?');
+    });
+  });
+
   it('exposes a structured error when fetch returns a non-OK response', async () => {
     mockFetch({ message: 'Bad request' }, { ok: false, status: 400 });
     const { result } = renderHook(

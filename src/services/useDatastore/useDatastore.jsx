@@ -17,8 +17,10 @@ const useDatastore = (
   const {ACA} = useContext(ACAContext);
 
   const [values, setValues] = useState([]);
-  // confirm a CSV distribution exists from the metastore call before doing a datastore call
-  const [csvDistribution, setCSVDistribution] = useState(false);
+  // Datastore queries stay disabled until the caller confirms this dataset/distribution is CSV
+  const resourceKey = `${datasetID}/${distributionIndex}`;
+  const [csvConfirmedKey, setCSVConfirmedKey] = useState(null);
+  const setCSVDistribution = (isCSV) => setCSVConfirmedKey(isCSV ? resourceKey : null);
   const [rootUrl, setRootUrl] = useState(rootAPIUrl);
   const [limit, setLimit] = useState(options.limit ? options.limit : 20);
   const [count, setCount] = useState(null);
@@ -41,11 +43,8 @@ const useDatastore = (
     options.properties ? options.properties : undefined
   );
 
-  // Allow immediate override through the options object
-  // for testing or other situations where there isn't a metastore call
-  if (options.CSVDistribution && !csvDistribution) {
-    setCSVDistribution(true);
-  }
+  // options.CSVDistribution skips confirmation, for callers without a metastore call
+  const csvDistribution = !!options.CSVDistribution || csvConfirmedKey === resourceKey;
   
   // Remove datasetID from params to avoid sending it to the API
   const { datasetID: _, ...restAdditionalParams } = additionalParams;
