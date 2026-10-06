@@ -25,7 +25,7 @@ const Resource = ({ datasetID, distributions, rootUrl, title } : ResourcePropsTy
               const dist = distribution;
               const fileFormat = getFormatType(dist)
               return (
-                <li key={dist.description} className={`ds-u-display--flex ds-u-flex-wrap--wrap ${fileFormat !== "csv" && "ds-u-margin-bottom--2"}`}>
+                <li key={dist.downloadURL || index} className={`ds-u-display--flex ds-u-flex-wrap--wrap ${fileFormat !== "csv" && "ds-u-margin-bottom--2"}`}>
                   <div className="ds-u-font-weight--bold ds-u-font-size--lg ds-l-col--12 ds-l-md-col--6 ds-u-padding-left--0 ds-u-align-items--center ds-u-display--flex">
                     <i className={'fa ds-u-color--primary ds-u-padding-right--1 ds-u-font-size--3xl ' + 'fa-file-' + (fileFormat == "xlsx" ? "xls" : fileFormat)}></i>
                     <p className="ds-u-margin-top--0">{dist.title ? dist.title : title}{" (" + fileFormat.toUpperCase() + ")"}</p>
