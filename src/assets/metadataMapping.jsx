@@ -19,8 +19,8 @@ export const defaultMetadataMapping = {
     ];
   },
   publisher: (data) => {
-    if (data.data && data.data.name) {
-      return [{ label: 'Publisher', value: data.data.name }];
+    if (data && data.name) {
+      return [{ label: 'Publisher', value: data.name }];
     } else {
       return [];
     }
@@ -59,8 +59,8 @@ export const defaultMetadataMapping = {
         label: 'Category',
         value: data
           .map((theme) => (
-            <Link key={theme.data} to={`/datasets?theme[]=${theme.data}`}>
-              {theme.data}
+            <Link key={theme} to={`/datasets?theme[]=${theme}`}>
+              {theme}
             </Link>
           ))
           .reduce((prev, curr) => [prev, ', ', curr]),
@@ -73,8 +73,8 @@ export const defaultMetadataMapping = {
         label: 'Tags',
         value: data
           .map((keyword) => (
-            <Link key={keyword.data} to={`/datasets?keyword[]=${keyword.data}`}>
-              {keyword.data}
+            <Link key={keyword} to={`/datasets?keyword[]=${keyword}`}>
+              {keyword}
             </Link>
           ))
           .reduce((prev, curr) => [prev, ', ', curr]),

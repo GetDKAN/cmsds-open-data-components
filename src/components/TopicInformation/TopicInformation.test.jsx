@@ -32,4 +32,35 @@ describe('TopicsInformation component.', () => {
       '/archived-data/hospitals',
     );
   });
+
+  it('Matches a flat theme name against topic name', () => {
+    renderWithProviders(
+      <TopicInformation
+        topicDetails={[{ identifier: 'other-id', name: 'Hospitals', url: 'hospitals', topic_icon: '' }]}
+        theme={['Hospitals']}
+      />,
+    );
+    expect(screen.getByText('Hospitals')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Topic Details' })).toHaveAttribute('href', '/topics/hospitals');
+  });
+
+  it('Renders nothing when no topic matches', () => {
+    const { container } = renderWithProviders(
+      <TopicInformation
+        topicDetails={[{ identifier: 'abc', name: 'Hospitals', url: 'hospitals', topic_icon: '' }]}
+        theme={['Nursing homes']}
+      />,
+    );
+    expect(container).toBeEmptyDOMElement();
+  });
+
+  it('Renders nothing when theme is empty', () => {
+    const { container } = renderWithProviders(
+      <TopicInformation
+        topicDetails={[{ identifier: 'abc', name: 'Hospitals', url: 'hospitals', topic_icon: '' }]}
+        theme={[]}
+      />,
+    );
+    expect(container).toBeEmptyDOMElement();
+  });
 });

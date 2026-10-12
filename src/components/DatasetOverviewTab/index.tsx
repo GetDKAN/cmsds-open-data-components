@@ -42,8 +42,8 @@ const DatasetOverview = ({ dataset, distributions, metadataMapping, rootUrl, sho
           <h2 className="ds-text-heading--2xl">Tags</h2>
           <div className="ds-u-display--flex ds-u-flex-direction--row ds-u-justify-content--start ds-u-flex-wrap--wrap">
           {dataset.keyword?.map(tag => (
-            <div key={tag.identifier} className="ds-c-tag ds-u-fill--gray-lighter ds-u-display--inline-block ds-u-padding--1 ds-u-radius ds-u-margin-right--2 ds-u-margin-bottom--2">
-              <Link to={`/search?keyword=${tag.data}`} aria-label={`${tag.data} tag - Opens a new search with this filter`} className="ds-u-color--base"> {tag.data} </Link>
+            <div key={tag} className="ds-c-tag ds-u-fill--gray-lighter ds-u-display--inline-block ds-u-padding--1 ds-u-radius ds-u-margin-right--2 ds-u-margin-bottom--2">
+              <Link to={`/search?keyword=${tag}`} aria-label={`${tag} tag - Opens a new search with this filter`} className="ds-u-color--base"> {tag} </Link>
             </div>
           ))}
           </div>

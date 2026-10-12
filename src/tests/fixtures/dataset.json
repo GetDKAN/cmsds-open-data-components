@@ -8,21 +8,15 @@
   "modified": "2024-01-16T18:50:39+00:00",
   "license": "http://www.usa.gov/publicdomain/label/1.0/",
   "publisher": {
-      "identifier": "4f3cccad-4fcd-5411-9d07-c23ed9e20068",
-      "data": {
-          "@type": "org:Organization",
-          "name": "data.medicaid.gov"
-      }
+      "@type": "org:Organization",
+      "name": "data.medicaid.gov"
   },
   "contactPoint": {
       "fn": "Medicaid.gov",
       "hasEmail": "mailto:Medicaid.gov@cms.hhs.gov"
   },
   "keyword": [
-      {
-          "identifier": "7c583fc5-6456-5bb1-975f-3c7e202fcf5a",
-          "data": "drug rebate program"
-      }
+      "drug rebate program"
   ],
   "distribution": [
       {

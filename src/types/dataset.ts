@@ -26,9 +26,11 @@ export type DistributionType = {
 
 export type Topic = {
   identifier: string,
+  name?: string,
   url: string,
   topic_icon: any,
 }
+// Wrapped reference shape, only returned by the metastore with ?show-reference-ids
 export type Theme = {
   data: string,
   identifier: string,
@@ -45,8 +47,8 @@ export type DatasetType = {
   modified: string,
   released?: string,
   nextUpdateDate?: string,
-  keyword?: Array<Theme>
-  theme?: Array<Theme>
+  keyword?: Array<string>
+  theme?: Array<string>
 }
 
 export type ConditionType = {

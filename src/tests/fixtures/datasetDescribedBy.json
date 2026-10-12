@@ -7,10 +7,7 @@
   ],
   "accessLevel": "public",
   "keyword": [
-      {
-          "identifier": "53edf88c-ba11-5f87-9794-cb14e4eb48aa",
-          "data": "2022"
-      }
+      "2022"
   ],
   "contactPoint": {
       "fn": "Open Payments",
@@ -47,17 +44,11 @@
   "modified": "2024-01-18",
   "temporal": "2022-01-01\/2022-12-31",
   "publisher": {
-      "identifier": "11b41668-9929-5de3-b494-6464ac4f018d",
-      "data": {
-          "name": "openpaymentsdata.cms.gov"
-      }
+      "name": "openpaymentsdata.cms.gov"
   },
   "license": "https:\/\/www.usa.gov\/government-works",
   "theme": [
-      {
-          "identifier": "d2d239e8-05e9-515d-978c-69b34af232da",
-          "data": "General Payments"
-      }
+      "General Payments"
   ],
   "%modified": "2024-04-11T15:28:41+0000"
 }
