@@ -25,7 +25,7 @@ export function getFormatType(dist: DistributionType) {
 function getPathname(url: string) {
   try {
     return new URL(url, 'http://localhost').pathname;
-  } catch {
+  } catch (e) {
     return url.split(/[?#]/)[0];
   }
 }

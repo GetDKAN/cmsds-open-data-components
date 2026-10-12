@@ -1,11 +1,6 @@
 import { Location } from "react-router-dom";
 import { DistributionType } from "./dataset";
 
-export type SearchDistributionType = {
-  identifier: string;
-  downloadURL: string;
-}
-
 export type SearchAPIFacetType = {
   type: string;
   name: string;
@@ -61,10 +56,6 @@ export type DatasetSubmenuListProps = Pick<
   };
   subLinkClasses?: string;
 };
-
-export type DistributionItemType = {
-  distribution: SearchDistributionType[]
-}
 
 export type SearchFacetsPropTypes = {
   facets: SearchAPIFacetType[];
