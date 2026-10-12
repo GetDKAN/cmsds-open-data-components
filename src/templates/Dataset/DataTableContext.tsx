@@ -6,6 +6,7 @@ export type DataTableContextType = {
   id: string | null;
   resource?: ResourceType;
   distribution?:DistributionType;
+  distributionIndex?: number;
   rootUrl?: string;
   customColumns?: Array<ColumnType>;
   dataDictionaryBanner?: boolean;

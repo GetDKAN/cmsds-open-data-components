@@ -71,6 +71,7 @@ export default function StoredQueryPage({
         id: id,
         resource: resource,
         distribution: distribution,
+        distributionIndex: distributionIndex,
         rootUrl: rootUrl,
         customColumns: customColumns,
         datasetTableControls: !disableTableControls,

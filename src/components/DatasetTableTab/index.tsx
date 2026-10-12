@@ -20,6 +20,7 @@ export function prepareColumns(columns: any, schema: any) {
 export type DatasetTableTabProps = {
   id: string;
   distribution: DistributionType;
+  distributionIndex?: number;
   resource: ResourceType;
   rootUrl: string;
   customColumns: Array<ColumnType>;
@@ -59,6 +60,7 @@ const DatasetTable = ({
   const {
     id,
     distribution,
+    distributionIndex = 0,
     resource,
     rootUrl,
     customColumns = [],
@@ -81,7 +83,7 @@ const DatasetTable = ({
   const { limit, setOffset } = resource;
   const pageSize = limit ? limit : defaultPageSize;
 
-  const downloadURL = `${rootUrl}/datastore/query/${id}/0/download?${qs.stringify(
+  const downloadURL = `${rootUrl}/datastore/query/${id}/${distributionIndex}/download?${qs.stringify(
     { conditions: resource.conditions },
     { encode: true }
   )}&format=csv`;
