@@ -74,7 +74,7 @@ export type SearchResultItemType = {
   title: string;
   modified: string;
   description: string;
-  distribution?: DistributionType[];
+  distribution?: Partial<DistributionType>[];
   theme?: string[];
   released?: string;
   nextUpdateDate?: string;
