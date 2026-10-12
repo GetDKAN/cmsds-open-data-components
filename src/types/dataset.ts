@@ -1,14 +1,5 @@
 import { ApiDocsSwaggerUIPluginProps } from '../utilities/ApiDocsSwaggerUIPlugin';
 
-export type DistributionSubDataType = {
-  filePath: string,
-  identifier: string,
-  perspective: string,
-  version: string,
-  checksum: string | null,
-  mimeType: string,
-}
-
 export type DistributionType = {
   downloadURL: string,
   format: string,
@@ -17,10 +8,6 @@ export type DistributionType = {
   describedBy: string,
   describedByType: string,
   mediaType: string,
-  "%Ref:downloadURL"?: {
-    identifier: string,
-    data: DistributionSubDataType,
-  }[],
   "@type": string,
 }
 

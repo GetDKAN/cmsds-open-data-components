@@ -5,17 +5,7 @@
     "title": "Test Custom Title",
     "description": "Test Custom Description",
     "format": "csv",
-    "downloadURL": "https://test.gov/dataset/download.csv",
-    "%Ref:downloadURL": [
-        {
-        "filePath": "https://h-o.st/sites/default/files/uploaded_resources/mdrp-newly-rprt-drug-01-15-2024-to-01-21-2024.csv",
-        "identifier": "b73d59704d7c0a099f717aad69d03063",
-        "mimeType": "text/csv",
-        "perspective": "source",
-        "version": "1705940823",
-        "checksum": null
-        }
-    ]
+    "downloadURL": "https://test.gov/dataset/download.csv"
   }
 ]
 

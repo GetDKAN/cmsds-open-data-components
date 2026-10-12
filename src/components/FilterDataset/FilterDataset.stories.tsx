@@ -8,18 +8,14 @@ import { ResourceType,DistributionType } from '../../types/dataset';
 const DISTRIBUTION_ID = 'story-distribution-id';
 
 const mockDistribution: DistributionType = {
-  identifier: DISTRIBUTION_ID,
-  data: {
-    downloadURL: 'https://example.gov/data.csv',
-    format: 'csv',
-    title: 'Example Dataset',
-    description: 'An example dataset for Storybook',
-    describedBy: '',
-    describedByType: '',
-    mediaType: 'text/csv',
-    mimeType: 'text/csv',
-    '%Ref:downloadURL': [],
-  },
+  '@type': 'dcat:Distribution',
+  downloadURL: 'https://example.gov/data.csv',
+  format: 'csv',
+  title: 'Example Dataset',
+  description: 'An example dataset for Storybook',
+  describedBy: '',
+  describedByType: '',
+  mediaType: 'text/csv',
 };
 
 const mockResource: ResourceType = {

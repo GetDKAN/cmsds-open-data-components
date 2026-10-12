@@ -87,12 +87,9 @@ function filterResultsByConditions(
  */
 
 interface Distribution {
-  identifier: string;
-  data: {
-    downloadURL: string;
-    format: string;
-    title: string;
-  };
+  downloadURL: string;
+  format: string;
+  title: string;
 }
 
 interface DatasetMetadata {

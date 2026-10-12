@@ -59,6 +59,6 @@ describe('getFormatType', () => {
   });
 
   it('returns empty string when distribution has no data', () => {
-    expect(getFormatType({})).toBe('');
+    expect(getFormatType({} as DistributionType)).toBe('');
   });
 });
