@@ -11,14 +11,21 @@ export function getFormatType(dist: DistributionType) {
         return mediaType[1].toLowerCase();
       }
     }
-    if(dist["%Ref:downloadURL"] && dist["%Ref:downloadURL"].length && dist["%Ref:downloadURL"][0].data) {
-      if(dist["%Ref:downloadURL"][0].data.mimeType) {
-        const mimeType = dist["%Ref:downloadURL"][0].data.mimeType.split("/");
-        if (mimeType.length && mimeType[1]) {
-          return mimeType[1].toLowerCase();
-        }
+    // Some distributions have neither format nor mediaType; use the file extension
+    if (dist.downloadURL) {
+      const extension = getPathname(dist.downloadURL).match(/\.([a-z0-9]+)$/i);
+      if (extension) {
+        return extension[1].toLowerCase();
       }
     }
   }
   return '';
+}
+
+function getPathname(url: string) {
+  try {
+    return new URL(url, 'http://localhost').pathname;
+  } catch {
+    return url.split(/[?#]/)[0];
+  }
 }
