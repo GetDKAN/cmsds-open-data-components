@@ -83,13 +83,9 @@ export type SearchResultItemType = {
   title: string;
   modified: string;
   description: string;
-  distribution?: SearchDistributionType[];
+  distribution?: DistributionType[];
   theme?: string[];
   released?: string;
   nextUpdateDate?: string;
-  '%Ref:distribution'?: Array<{
-    identifier: string;
-    data: DistributionType;
-  }>;
   [key: string]: unknown;
 }
