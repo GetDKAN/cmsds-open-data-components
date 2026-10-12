@@ -43,6 +43,18 @@ const useDatastore = (
     options.properties ? options.properties : undefined
   );
 
+  // Clear results from the previous dataset/distribution so they aren't shown for the new one
+  const [stateKey, setStateKey] = useState(resourceKey);
+  if (stateKey !== resourceKey) {
+    setStateKey(resourceKey);
+    setValues([]);
+    setCount(null);
+    setColumns([]);
+    setSchema({});
+    setTotalRows(0);
+    setTotalColumns(0);
+  }
+
   // options.CSVDistribution skips confirmation, for callers without a metastore call
   const csvDistribution = !!options.CSVDistribution || csvConfirmedKey === resourceKey;
   

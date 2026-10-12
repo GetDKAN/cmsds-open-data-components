@@ -140,6 +140,39 @@ describe('useDatastore', () => {
     });
   });
 
+  it('clears results from the previous dataset when datasetID changes', async () => {
+    mockFetch(datasetResponse);
+    const { result, rerender } = renderHook(
+      ({ id }) => useDatastore(id, 'https://example.test/api/1', {}),
+      { wrapper: buildWrapper(), initialProps: { id: 'dataset-a' } },
+    );
+    act(() => result.current.setCSVDistribution(true));
+    await waitFor(() => expect(result.current.count).toBe(1));
+    await waitFor(() => expect(result.current.totalColumns).toBe(2));
+
+    rerender({ id: 'dataset-b' });
+    expect(result.current.values).toEqual([]);
+    expect(result.current.count).toBeNull();
+    expect(result.current.columns).toEqual([]);
+    expect(result.current.schema).toEqual({});
+    expect(result.current.totalRows).toBe(0);
+    expect(result.current.totalColumns).toBe(0);
+  });
+
+  it('clears results when distributionIndex changes', async () => {
+    mockFetch(datasetResponse);
+    const { result, rerender } = renderHook(
+      ({ index }) => useDatastore('dataset-a', 'https://example.test/api/1', { distributionIndex: index }),
+      { wrapper: buildWrapper(), initialProps: { index: 0 } },
+    );
+    act(() => result.current.setCSVDistribution(true));
+    await waitFor(() => expect(result.current.count).toBe(1));
+
+    rerender({ index: 1 });
+    expect(result.current.values).toEqual([]);
+    expect(result.current.count).toBeNull();
+  });
+
   it('exposes a structured error when fetch returns a non-OK response', async () => {
     mockFetch({ message: 'Bad request' }, { ok: false, status: 400 });
     const { result } = renderHook(
