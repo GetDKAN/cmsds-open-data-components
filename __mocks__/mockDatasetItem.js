@@ -9,23 +9,15 @@ export const mockDatasetItem = {
   "modified": "2026-02-10T13:47:00+00:00",
   "license": "https:\/\/www.usa.gov\/publicdomain\/label\/1.0\/",
   "publisher": {
-    "identifier": "22605d3f-165a-5f35-b505-e49afed1b35e",
-    "data": {
-      "@type": "org:Organization",
-      "name": "data.healthcare.gov"
-    }
+    "@type": "org:Organization",
+    "name": "data.healthcare.gov"
   },
   "contactPoint": {
     "fn": "FFMProducer-AssisterHelpDesk",
     "hasEmail": "mailto:FFMProducer-AssisterHelpDesk@cms.hhs.gov"
   },
-  "keyword": [{
-    "identifier": "20adf107-bea9-5565-b3aa-8dacee8066b0",
-    "data": "healthcare"
-  }],
+  "keyword": ["healthcare"],
   "distribution": [{
-      "identifier": "479a03e6-ccf1-5636-9fd3-cad48c11177d",
-      "data": {
         "@type": "dcat:Distribution",
         "title": "Registration Completion List for 2016- Present",
         "description": " ",
@@ -45,11 +37,8 @@ export const mockDatasetItem = {
             "checksum": null
           }
         }]
-      }
     },
     {
-      "identifier": "8219e5c2-8fa6-5024-b5cd-bcd4e3858e7b",
-      "data": {
         "@type": "dcat:Distribution",
         "title": "Registration Completion List for 2014 \u0026 2015",
         "description": "The Registration Completion List has been divided into two separate datasets: one for plan years 2014 \u0026 2015 and another for plan years 2016 to the present. The link above provides access to the 2014-2015 dataset.",
@@ -66,7 +55,6 @@ export const mockDatasetItem = {
             "checksum": null
           }
         }]
-      }
     }
   ],
   "bureauCode": [

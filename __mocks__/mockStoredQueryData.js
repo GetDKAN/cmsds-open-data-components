@@ -7,12 +7,9 @@ export const mockDatasetMetadata = {
   modified: '2024-03-15T14:30:00',
   distribution: [
     {
-      identifier: 'csv-resource-123',
-      data: {
-        downloadURL: 'https://data.cms.gov/data/provider-utilization-2023.csv',
-        format: 'csv',
-        title: 'Medicare Provider Utilization CSV',
-      },
+      downloadURL: 'https://data.cms.gov/data/provider-utilization-2023.csv',
+      format: 'csv',
+      title: 'Medicare Provider Utilization CSV',
     },
   ],
 };

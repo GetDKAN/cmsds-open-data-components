@@ -129,7 +129,7 @@ export const createStoredQueryPageHandlers = (
   }),
 
   // Mock datastore query endpoint (both filtered and unfiltered)
-  http.get('**/datastore/query/:resourceId', async ({ request }) => {
+  http.get('**/datastore/query/:datasetId/:index', async ({ request }) => {
     await delay(500);
     const url = new URL(request.url);
 
@@ -170,7 +170,7 @@ export const createDatasetPageHandlers = () => [
     return HttpResponse.json(mockDatasetItemDocs);
   }),
 
-  // Dataset metadata: /api/1/metastore/schemas/dataset/items/wb6u-x2ny?show-reference-ids
+  // Dataset metadata: /api/1/metastore/schemas/dataset/items/wb6u-x2ny
   http.get('**/metastore/schemas/dataset/items/wb6u-x2ny', async () => {
     await delay(300);
     return HttpResponse.json(mockDatasetItem);
@@ -185,8 +185,8 @@ export const createDatasetPageHandlers = () => [
     }
   ),
 
-  // Datastore query for resource 479a03e6-ccf1-5636-9fd3-cad48c11177d (distribution 1)
-  http.get('**/datastore/query/479a03e6-ccf1-5636-9fd3-cad48c11177d', async ({ request }) => {
+  // Datastore query for distribution 0 (resource 479a03e6-ccf1-5636-9fd3-cad48c11177d)
+  http.get('**/datastore/query/wb6u-x2ny/0', async ({ request }) => {
     await delay(300);
     const url = new URL(request.url);
     const resultsParam = url.searchParams.get('results');
@@ -253,8 +253,8 @@ export const createDatasetPageHandlers = () => [
     });
   }),
 
-  // Datastore query for resource 8219e5c2-8fa6-5024-b5cd-bcd4e3858e7b (distribution 2)
-  http.get('**/datastore/query/8219e5c2-8fa6-5024-b5cd-bcd4e3858e7b', async ({ request }) => {
+  // Datastore query for distribution 1 (resource 8219e5c2-8fa6-5024-b5cd-bcd4e3858e7b)
+  http.get('**/datastore/query/wb6u-x2ny/1', async ({ request }) => {
     await delay(300);
     const url = new URL(request.url);
     const results = url.searchParams.get('results');
