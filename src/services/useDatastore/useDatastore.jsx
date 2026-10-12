@@ -43,7 +43,7 @@ const useDatastore = (
     options.properties ? options.properties : undefined
   );
 
-  // Clear results from the previous dataset/distribution so they aren't shown for the new one
+  // Reset results and schema-specific request state when switching dataset/distribution
   const [stateKey, setStateKey] = useState(resourceKey);
   if (stateKey !== resourceKey) {
     setStateKey(resourceKey);
@@ -53,6 +53,11 @@ const useDatastore = (
     setSchema({});
     setTotalRows(0);
     setTotalColumns(0);
+    setConditions(options.conditions ? options.conditions : undefined);
+    setSort(options.sort ? options.sort : undefined);
+    setGroupings(options.groupings ? options.groupings : undefined);
+    setProperties(options.properties ? options.properties : undefined);
+    setOffset(options.offset ? options.offset : 0);
   }
 
   // options.CSVDistribution skips confirmation, for callers without a metastore call

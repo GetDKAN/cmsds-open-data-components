@@ -173,6 +173,36 @@ describe('useDatastore', () => {
     expect(result.current.count).toBeNull();
   });
 
+  it('resets filters, sort and offset to the new options when datasetID changes', async () => {
+    mockFetch(datasetResponse);
+    const { result, rerender } = renderHook(
+      ({ id, options }) => useDatastore(id, 'https://example.test/api/1', options),
+      { wrapper: buildWrapper(), initialProps: { id: 'dataset-a', options: {} } },
+    );
+    act(() => {
+      result.current.setCSVDistribution(true);
+      result.current.setConditions([{ property: 'product_name', operator: '=', value: 'Alpha' }]);
+      result.current.setSort({ property: 'quantity', order: 'desc' });
+      result.current.setOffset(40);
+    });
+    await waitFor(() => expect(result.current.count).toBe(1));
+    global.fetch.mockClear();
+
+    rerender({ id: 'dataset-b', options: { conditions: [] } });
+    expect(result.current.conditions).toEqual([]);
+    expect(result.current.offset).toBe(0);
+
+    act(() => result.current.setCSVDistribution(true));
+    await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+    const urls = global.fetch.mock.calls.map(([url]) => decodeURIComponent(url));
+    urls.forEach((url) => {
+      expect(url).toContain('/datastore/query/dataset-b/0?');
+      expect(url).not.toContain('product_name');
+      expect(url).not.toContain('quantity');
+      expect(url).not.toContain('offset=40');
+    });
+  });
+
   it('exposes a structured error when fetch returns a non-OK response', async () => {
     mockFetch({ message: 'Bad request' }, { ok: false, status: 400 });
     const { result } = renderHook(
