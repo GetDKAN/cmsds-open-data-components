@@ -10,7 +10,7 @@ export const makeDatasetMetadata = (overrides: Partial<DatasetType> = {}): Datas
   nextUpdateDate: '2026-01-15',
   error: '',
   distribution: [makeDistribution()],
-  theme: [{ data: 'Sales', identifier: 'theme-sales' }],
-  keyword: [{ data: 'inventory', identifier: 'kw-inventory' }],
+  theme: ['Sales'],
+  keyword: ['inventory'],
   ...overrides,
 });

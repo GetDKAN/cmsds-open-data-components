@@ -78,6 +78,131 @@ describe('useDatastore', () => {
     expect(url).not.toContain('not_empty');
   });
 
+  it('sets totalRows and totalColumns from the unfiltered schema', async () => {
+    mockFetch(datasetResponse);
+    const { result } = renderHook(
+      () => useDatastore('dataset-abc-123', 'https://example.test/api/1', {CSVDistribution: true}),
+      { wrapper: buildWrapper() },
+    );
+    await waitFor(() => expect(result.current.totalColumns).toBe(2));
+    expect(result.current.totalRows).toBe(1);
+  });
+
+  it('queries distribution 0 by default', async () => {
+    mockFetch(datasetResponse);
+    renderHook(
+      () => useDatastore('dataset-abc-123', 'https://example.test/api/1', {CSVDistribution: true}),
+      { wrapper: buildWrapper() },
+    );
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(2));
+    global.fetch.mock.calls.forEach(([url]) => {
+      expect(url).toContain('/datastore/query/dataset-abc-123/0?');
+    });
+  });
+
+  it('queries the distribution given by options.distributionIndex', async () => {
+    mockFetch(datasetResponse);
+    renderHook(
+      () =>
+        useDatastore('dataset-abc-123', 'https://example.test/api/1', {
+          CSVDistribution: true,
+          distributionIndex: 2,
+        }),
+      { wrapper: buildWrapper() },
+    );
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(2));
+    global.fetch.mock.calls.forEach(([url]) => {
+      expect(url).toContain('/datastore/query/dataset-abc-123/2?');
+    });
+  });
+
+  it('requires CSV confirmation again when datasetID changes', async () => {
+    mockFetch(datasetResponse);
+    const { result, rerender } = renderHook(
+      ({ id }) => useDatastore(id, 'https://example.test/api/1', {}),
+      { wrapper: buildWrapper(), initialProps: { id: 'dataset-a' } },
+    );
+    await new Promise((r) => setTimeout(r, 20));
+    expect(global.fetch).not.toHaveBeenCalled();
+
+    act(() => result.current.setCSVDistribution(true));
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(2));
+    global.fetch.mockClear();
+
+    rerender({ id: 'dataset-b' });
+    await new Promise((r) => setTimeout(r, 20));
+    expect(global.fetch).not.toHaveBeenCalled();
+
+    act(() => result.current.setCSVDistribution(true));
+    await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(2));
+    global.fetch.mock.calls.forEach(([url]) => {
+      expect(url).toContain('/datastore/query/dataset-b/0?');
+    });
+  });
+
+  it('clears results from the previous dataset when datasetID changes', async () => {
+    mockFetch(datasetResponse);
+    const { result, rerender } = renderHook(
+      ({ id }) => useDatastore(id, 'https://example.test/api/1', {}),
+      { wrapper: buildWrapper(), initialProps: { id: 'dataset-a' } },
+    );
+    act(() => result.current.setCSVDistribution(true));
+    await waitFor(() => expect(result.current.count).toBe(1));
+    await waitFor(() => expect(result.current.totalColumns).toBe(2));
+
+    rerender({ id: 'dataset-b' });
+    expect(result.current.values).toEqual([]);
+    expect(result.current.count).toBeNull();
+    expect(result.current.columns).toEqual([]);
+    expect(result.current.schema).toEqual({});
+    expect(result.current.totalRows).toBe(0);
+    expect(result.current.totalColumns).toBe(0);
+  });
+
+  it('clears results when distributionIndex changes', async () => {
+    mockFetch(datasetResponse);
+    const { result, rerender } = renderHook(
+      ({ index }) => useDatastore('dataset-a', 'https://example.test/api/1', { distributionIndex: index }),
+      { wrapper: buildWrapper(), initialProps: { index: 0 } },
+    );
+    act(() => result.current.setCSVDistribution(true));
+    await waitFor(() => expect(result.current.count).toBe(1));
+
+    rerender({ index: 1 });
+    expect(result.current.values).toEqual([]);
+    expect(result.current.count).toBeNull();
+  });
+
+  it('resets filters, sort and offset to the new options when datasetID changes', async () => {
+    mockFetch(datasetResponse);
+    const { result, rerender } = renderHook(
+      ({ id, options }) => useDatastore(id, 'https://example.test/api/1', options),
+      { wrapper: buildWrapper(), initialProps: { id: 'dataset-a', options: {} } },
+    );
+    act(() => {
+      result.current.setCSVDistribution(true);
+      result.current.setConditions([{ property: 'product_name', operator: '=', value: 'Alpha' }]);
+      result.current.setSort({ property: 'quantity', order: 'desc' });
+      result.current.setOffset(40);
+    });
+    await waitFor(() => expect(result.current.count).toBe(1));
+    global.fetch.mockClear();
+
+    rerender({ id: 'dataset-b', options: { conditions: [] } });
+    expect(result.current.conditions).toEqual([]);
+    expect(result.current.offset).toBe(0);
+
+    act(() => result.current.setCSVDistribution(true));
+    await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+    const urls = global.fetch.mock.calls.map(([url]) => decodeURIComponent(url));
+    urls.forEach((url) => {
+      expect(url).toContain('/datastore/query/dataset-b/0?');
+      expect(url).not.toContain('product_name');
+      expect(url).not.toContain('quantity');
+      expect(url).not.toContain('offset=40');
+    });
+  });
+
   it('exposes a structured error when fetch returns a non-OK response', async () => {
     mockFetch({ message: 'Bad request' }, { ok: false, status: 400 });
     const { result } = renderHook(

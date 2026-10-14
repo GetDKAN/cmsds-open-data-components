@@ -50,7 +50,7 @@ const createMockContext = ({ mainOverrides = {}, resourceOverrides = {} } = {}):
     setOffset: jest.fn(),
     setSort: jest.fn(),
     setConditions: jest.fn(),
-    setResource: jest.fn(),
+    setCSVDistribution: jest.fn(),
     schema: {
       'd60b31aa-bfa8-527e-9b50-6c3f972ee9a9': {
         fields: {
@@ -142,6 +142,18 @@ describe('FilterDataset', () => {
     );
 
     expect(screen.queryByLabelText('Filter dataset')).not.toBeInTheDocument();
+  });
+
+  it('does not render when schema is empty', () => {
+    render(
+      <DataTableContext.Provider value={createMockContext({ resourceOverrides: { schema: {} } })}>
+        <MockDataTableActionsProvider value={createMockActionsContext()}>
+          <FilterDataset />
+        </MockDataTableActionsProvider>
+      </DataTableContext.Provider>
+    );
+
+    expect(screen.queryByText(/Filter Dataset/i)).not.toBeInTheDocument();
   });
 
   it('opens modal when filter button is clicked', async () => {

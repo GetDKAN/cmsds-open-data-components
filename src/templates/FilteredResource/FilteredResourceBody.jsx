@@ -15,6 +15,7 @@ import 'swagger-ui-react/swagger-ui.css';
 import DataTableContext from '../Dataset/DataTableContext';
 import { acaToParams } from '../../utilities/aca';
 import { ACAContext } from '../../utilities/ACAContext';
+import { getFormatType } from '../../utilities/format';
 
 const FilteredResourceBody = ({
   id,
@@ -31,13 +32,8 @@ const FilteredResourceBody = ({
 }) => {
   const [tablePadding, setTablePadding] = React.useState('ds-u-padding-y--1');
   let apiDocs = useRef();
-  let distribution = {};
   let distribution_array = dataset.distribution ? dataset.distribution : [];
-  if (distribution_array.length) {
-    distribution = distribution_array.find(
-      (dist) => dist.identifier === distribution_array[distIndex].identifier
-    );
-  }
+  const distribution = distribution_array[distIndex] ?? {};
   const options = location.search
     ? { ...qs.parse(location.search, { ignoreQueryPrefix: true }) }
     : { conditions: [] };
@@ -47,11 +43,12 @@ const FilteredResourceBody = ({
     {
       ...options,
       limit: 25,
+      distributionIndex: distIndex,
     },
   );
 
   useEffect(() => {
-    if (distribution) {
+    if (getFormatType(distribution) === 'csv') {
       resource.setCSVDistribution(true);
     }
   }, [distribution]);
@@ -112,7 +109,7 @@ const FilteredResourceBody = ({
               customColumns: buildCustomColHeaders(
                 customColumns,
                 resource.columns,
-                resource.schema[distribution_array[distIndex].identifier]
+                resource.schema[Object.keys(resource.schema)[0]]
               ),
             }}>
               <div className={'ds-l-md-col--12'}>

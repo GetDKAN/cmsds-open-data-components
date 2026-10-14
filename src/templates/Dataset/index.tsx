@@ -100,9 +100,10 @@ const Dataset = ({
 
   // compare schema fields with siteWideDataDictionary to display commonalities for now
   // until dataset level data dictionaries are implemented
-  const datasetSitewideDictionary = (siteWideDataDictionary && siteWideDataDictionary.data && siteWideDataDictionary.data.fields && resource && resource.schema[0]) ?
+  const resourceSchema = resource?.schema?.[Object.keys(resource.schema)[0]];
+  const datasetSitewideDictionary = (siteWideDataDictionary && siteWideDataDictionary.data && siteWideDataDictionary.data.fields && resourceSchema) ?
     siteWideDataDictionary.data.fields.filter((field: DatasetDictionaryItemType) => {
-      return Object.keys(resource.schema[0].fields).indexOf(field.name) !== -1;
+      return Object.keys(resourceSchema.fields).indexOf(field.name) !== -1;
     }) : null;
 
   useEffect(() => {

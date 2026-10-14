@@ -21,7 +21,7 @@ describe('<DatasetOverview />', () => {
   });
 
   test("Renders correctly", async () => {
-    resource.setResource = jest.fn();
+    resource.setCSVDistribution = jest.fn();
     const metadataMapping = {
       ...defaultMetadataMapping,
     }
@@ -38,5 +38,21 @@ describe('<DatasetOverview />', () => {
     expect(screen.getByText("About this Resource")).toBeInTheDocument();
     expect(await screen.findByText("69")).toBeInTheDocument();
     expect(await screen.findByText("22")).toBeInTheDocument();
+  });
+
+  test("Renders flat publisher and keyword values", async () => {
+    const Wrapped = withQueryProvider(() => (
+      <DatasetOverview
+        distributions={distribution.distribution}
+        dataset={dataset}
+        metadataMapping={defaultMetadataMapping}
+        rootUrl="/"
+        showTags
+      />
+    ));
+    renderWithProviders(<Wrapped />);
+    expect(screen.getByText("data.medicaid.gov")).toBeInTheDocument();
+    const tagLink = screen.getByRole('link', { name: 'drug rebate program tag - Opens a new search with this filter' });
+    expect(tagLink).toHaveAttribute('href', '/search?keyword=drug rebate program');
   });
 });

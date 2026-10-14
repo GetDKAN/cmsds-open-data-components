@@ -337,8 +337,7 @@ test('Renders data dictionary link from pdf', () => {
   props.identifier = "test"
   props.distribution = {
     "describedBy": "s3://913461122956-pdc-dev-test-minimal-data/attached-dictionary.pdf",
-    "describedByType": "application/pdf",
-    "%Ref:downloadURL": []
+    "describedByType": "application/pdf"
   }
   renderWithProviders(
     <DatasetSearchListItem
@@ -370,8 +369,7 @@ test('Renders data dictionary link from json', () => {
   props.identifier = "test"
   props.distribution = {
       "describedBy": "https://example.com/data-dictionary.json",
-      "describedByType": "application/vnd.tableschema+json",
-      "%Ref:downloadURL": []
+      "describedByType": "application/vnd.tableschema+json"
   }
   renderWithProviders(
     <DatasetSearchListItem

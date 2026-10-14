@@ -8,7 +8,7 @@ import { FilterItemType, ConditionType } from '../../types/dataset';
 
 import './FilterItem.scss';
 
-function getStartDate(condition : ConditionType, schema : any, id : string) {
+function getStartDate(condition : ConditionType, schema : any) {
   const schemaID = Object.keys(schema)[0];
   if (schema[schemaID].fields[condition.property].mysql_type === 'date') {
     const newDate = new Date(condition.value.toString());
@@ -24,7 +24,7 @@ const FilterItem = ({condition, index, update, remove, propertyOptions, schema, 
   const [operator, setOperator] = useState(condition.operator);
   const [property, setProperty] = useState(condition.property);
   const [value, setValue] = useState(condition.value);
-  const [startDate, setStartDate] = React.useState(getStartDate(condition, schema, '0'));
+  const [startDate, setStartDate] = React.useState(getStartDate(condition, schema));
   const [previousType, setPreviousType] = useState(schema[schemaID].fields[property]?.mysql_type);
 
   const xl = useMediaQuery({minWidth: 1280})

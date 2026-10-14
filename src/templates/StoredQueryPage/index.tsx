@@ -52,9 +52,10 @@ export default function StoredQueryPage({
     distribution = distributions[distributionIndex];
   }
 
-  const resource = useDatastore(dataset.identifier, rootUrl, {
+  const resource = useDatastore(id, rootUrl, {
     ...options,
     limit: defaultPageSize,
+    distributionIndex,
   }) as ResourceType;
 
   useEffect(() => {
@@ -70,6 +71,7 @@ export default function StoredQueryPage({
         id: id,
         resource: resource,
         distribution: distribution,
+        distributionIndex: distributionIndex,
         rootUrl: rootUrl,
         customColumns: customColumns,
         datasetTableControls: !disableTableControls,

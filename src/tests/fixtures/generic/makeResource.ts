@@ -43,6 +43,6 @@ export const makeResource = (overrides: Partial<ResourceType> = {}): ResourceTyp
   setOffset: () => {},
   setSort: () => {},
   setConditions: () => {},
-  setResource: () => {},
+  setCSVDistribution: () => {},
   ...overrides,
 });

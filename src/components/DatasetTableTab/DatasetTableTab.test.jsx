@@ -119,6 +119,31 @@ describe('<DatasetTableTab />', () => {
     expect(screen.getByRole("navigation")).toHaveClass("ds-c-pagination");
   });
 
+  test("Builds the stored query download URL for the displayed distribution", async () => {
+    render(
+      <DataTableContext.Provider value={{
+        id: "dataset-abc",
+        resource: { ...resource, conditions: [{ property: 'ndc1', operator: '=', value: '1' }] },
+        distribution: distribution.distribution[0],
+        distributionIndex: 2,
+        rootUrl: "test/api"
+      }} >
+        <DataTableStateWrapper
+          showCopyLinkButton={false}
+          showDownloadFilteredDataButton={false}
+          showDownloadFullDataButton={false}
+          showStoredQueryDownloadButton={true}
+        />
+      </DataTableContext.Provider>
+    )
+
+    await act(async () => {
+      screen.getByRole('button', { name: /Share/ }).click();
+    });
+    const link = screen.getByRole('link', { name: /Download stored query data/ });
+    expect(link.getAttribute('href')).toMatch(/^test\/api\/datastore\/query\/dataset-abc\/2\/download\?/);
+  });
+
   describe("error UI", () => {
     const renderWithError = (errorOverrides = {}, contextOverrides = {}) =>
       render(

@@ -73,7 +73,7 @@ describe('DisplaySettings', () => {
     setOffset: jest.fn(),
     setSort: jest.fn(),
     setConditions: jest.fn(),
-    setResource: jest.fn()
+    setCSVDistribution: jest.fn()
   };
 
   const mockDataTableActions: DataTableActionsContextProps = {

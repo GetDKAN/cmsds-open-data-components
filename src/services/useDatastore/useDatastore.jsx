@@ -12,12 +12,15 @@ const useDatastore = (
 ) => {
   const keys = options.keys ? options.keys : true;
   const { prepareColumns } = options;
+  const distributionIndex = options.distributionIndex ?? 0;
 
   const {ACA} = useContext(ACAContext);
 
   const [values, setValues] = useState([]);
-  // confirm a CSV distribution exists from the metastore call before doing a datastore call
-  const [csvDistribution, setCSVDistribution] = useState(false);
+  // Datastore queries stay disabled until the caller confirms this dataset/distribution is CSV
+  const resourceKey = `${datasetID}/${distributionIndex}`;
+  const [csvConfirmedKey, setCSVConfirmedKey] = useState(null);
+  const setCSVDistribution = (isCSV) => setCSVConfirmedKey(isCSV ? resourceKey : null);
   const [rootUrl, setRootUrl] = useState(rootAPIUrl);
   const [limit, setLimit] = useState(options.limit ? options.limit : 20);
   const [count, setCount] = useState(null);
@@ -40,11 +43,25 @@ const useDatastore = (
     options.properties ? options.properties : undefined
   );
 
-  // Allow immediate override through the options object
-  // for testing or other situations where there isn't a metastore call
-  if (options.CSVDistribution && !csvDistribution) {
-    setCSVDistribution(true);
+  // Reset results and schema-specific request state when switching dataset/distribution
+  const [stateKey, setStateKey] = useState(resourceKey);
+  if (stateKey !== resourceKey) {
+    setStateKey(resourceKey);
+    setValues([]);
+    setCount(null);
+    setColumns([]);
+    setSchema({});
+    setTotalRows(0);
+    setTotalColumns(0);
+    setConditions(options.conditions ? options.conditions : undefined);
+    setSort(options.sort ? options.sort : undefined);
+    setGroupings(options.groupings ? options.groupings : undefined);
+    setProperties(options.properties ? options.properties : undefined);
+    setOffset(options.offset ? options.offset : 0);
   }
+
+  // options.CSVDistribution skips confirmation, for callers without a metastore call
+  const csvDistribution = !!options.CSVDistribution || csvConfirmedKey === resourceKey;
   
   // Remove datasetID from params to avoid sending it to the API
   const { datasetID: _, ...restAdditionalParams } = additionalParams;
@@ -90,23 +107,23 @@ const useDatastore = (
   }
 
   const {data, isPending, error} = useQuery({
-    queryKey: ["datastore" + datasetID + '/0' + paramsString],
+    queryKey: ["datastore" + datasetID + '/' + distributionIndex + paramsString],
     queryFn: () => {
       setCount(null);
-      return fetchJson(`${rootUrl}/datastore/query/${datasetID}/0?${paramsString}`);
+      return fetchJson(`${rootUrl}/datastore/query/${datasetID}/${distributionIndex}?${paramsString}`);
     },
     enabled: enabled
   })
 
   const{data: unfiltered} = useQuery({
-    queryKey: ["datastore" + datasetID + "-unfilteredRowsAndCols"],
+    queryKey: ["datastore" + datasetID + '/' + distributionIndex + "-unfilteredRowsAndCols"],
     queryFn: () => {
       const unfilteredParams = {
         results: false,
         count: true,
         schema: true
       };
-      return fetchJson(`${rootUrl}/datastore/query/${datasetID}/0?${qs.stringify(acaToParams(unfilteredParams, ACA))}`);
+      return fetchJson(`${rootUrl}/datastore/query/${datasetID}/${distributionIndex}?${qs.stringify(acaToParams(unfilteredParams, ACA))}`);
     },
     enabled: enabled
   })
@@ -131,7 +148,8 @@ const useDatastore = (
   useEffect(() => {
     if (unfiltered) {
       if (unfiltered.count) setTotalRows(unfiltered.count);
-      if (unfiltered.schema && unfiltered.schema[datasetID] && unfiltered.schema[datasetID].fields) setTotalColumns(Object.keys(unfiltered.schema[datasetID].fields).length);
+      const schemaID = unfiltered.schema ? Object.keys(unfiltered.schema)[0] : undefined;
+      if (schemaID && unfiltered.schema[schemaID].fields) setTotalColumns(Object.keys(unfiltered.schema[schemaID].fields).length);
     }
   }, [unfiltered])
 

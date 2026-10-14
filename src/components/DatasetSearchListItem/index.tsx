@@ -27,7 +27,7 @@ type SearchItemProps = {
   updateDateMonthYearOnly?: boolean;
   theme?: string[];
   topicSlugs?: { [key: string]: string };
-  distribution?: DistributionType | undefined;
+  distribution?: Partial<DistributionType>;
 }
 
 const DatasetSearchListItem = (props: SearchItemProps) => {
@@ -131,15 +131,12 @@ const DatasetSearchListItem = (props: SearchItemProps) => {
   }
 
   const dataDictionaryExists = (): boolean => {
-    if (distribution) {
-      if ("describedBy" in distribution && "describedByType" in distribution) {
-        const types: string[] = [
-          'application/vnd.tableschema+json',
-          'application/pdf'
-        ]
-        const isValidType: boolean = types.includes(distribution.describedByType)
-        return isValidType;
-      }
+    if (distribution && distribution.describedBy && distribution.describedByType) {
+      const types: string[] = [
+        'application/vnd.tableschema+json',
+        'application/pdf'
+      ]
+      return types.includes(distribution.describedByType);
     }
 
     return false;

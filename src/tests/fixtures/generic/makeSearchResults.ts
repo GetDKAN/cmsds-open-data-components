@@ -5,10 +5,7 @@ type SearchDataset = {
   modified: string;
   theme: string[];
   keyword?: string[];
-  '%Ref:distribution': Array<{
-    identifier: string;
-    data: { title: string; format: string; downloadURL: string };
-  }>;
+  distribution: Array<{ title: string; format: string; downloadURL: string }>;
 };
 
 const buildDataset = (id: string, title: string, theme: string, modified: string): SearchDataset => ({
@@ -18,14 +15,11 @@ const buildDataset = (id: string, title: string, theme: string, modified: string
   modified,
   theme: [theme],
   keyword: ['2025'],
-  '%Ref:distribution': [
+  distribution: [
     {
-      identifier: `${id}-dist`,
-      data: {
-        title: 'CSV Download',
-        format: 'csv',
-        downloadURL: `https://example.test/data/${id}.csv`,
-      },
+      title: 'CSV Download',
+      format: 'csv',
+      downloadURL: `https://example.test/data/${id}.csv`,
     },
   ],
 });

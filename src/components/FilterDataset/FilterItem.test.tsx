@@ -129,7 +129,6 @@ describe('FilterItem', () => {
         }
       }
     },
-    id: 'test_id',
     index: 0,
     update: mockUpdate,
     remove: mockRemove,

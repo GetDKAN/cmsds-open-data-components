@@ -1,14 +1,5 @@
 import { ApiDocsSwaggerUIPluginProps } from '../utilities/ApiDocsSwaggerUIPlugin';
 
-export type DistributionSubDataType = {
-  filePath: string,
-  identifier: string,
-  perspective: string,
-  version: string,
-  checksum: string | null,
-  mimeType: string,
-}
-
 export type DistributionType = {
   downloadURL: string,
   format: string,
@@ -17,18 +8,16 @@ export type DistributionType = {
   describedBy: string,
   describedByType: string,
   mediaType: string,
-  "%Ref:downloadURL"?: {
-    identifier: string,
-    data: DistributionSubDataType,
-  }[],
   "@type": string,
 }
 
 export type Topic = {
   identifier: string,
+  name?: string,
   url: string,
   topic_icon: any,
 }
+// Wrapped reference shape, only returned by the metastore with ?show-reference-ids
 export type Theme = {
   data: string,
   identifier: string,
@@ -45,8 +34,8 @@ export type DatasetType = {
   modified: string,
   released?: string,
   nextUpdateDate?: string,
-  keyword?: Array<Theme>
-  theme?: Array<Theme>
+  keyword?: Array<string>
+  theme?: Array<string>
 }
 
 export type ConditionType = {

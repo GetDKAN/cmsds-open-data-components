@@ -27,13 +27,13 @@ The Resource component displays a list of dataset resources, including download 
     },
   },
   argTypes: {
+    datasetID: {
+      control: 'text',
+      description: 'Dataset identifier used to query resource information per distribution index.',
+    },
     distributions: {
       control: 'object',
       description: 'Array of resource distributions.',
-    },
-    resource: {
-      control: 'object',
-      description: `Resource object containing metadata and controls.`,
     },
     title: {
       control: 'text',
@@ -52,55 +52,31 @@ type Story = StoryObj<typeof Resource>;
 
 export const Default: Story = {
   args: {
+    datasetID: 'wb6u-x2ny',
     title: 'Sample Resource',
-    rootUrl: '/api/1/datastore',
+    rootUrl: '/api/1',
     distributions: [
       {
-        identifier: 'dist-1',
-        data: {
-          title: 'Sample CSV',
-          format: 'csv',
-          downloadURL: 'https://example.com/sample.csv',
-          description: 'A sample CSV resource.',
-          describedBy: '',
-          describedByType: '',
-          mediaType: 'text/csv',
-          mimeType: 'text/csv',
-          '%Ref:downloadURL': [],
-        },
+        '@type': 'dcat:Distribution',
+        title: 'Sample CSV',
+        format: 'csv',
+        downloadURL: 'https://example.com/sample.csv',
+        description: 'A sample CSV resource.',
+        describedBy: '',
+        describedByType: '',
+        mediaType: 'text/csv',
       },
       {
-        identifier: 'dist-2',
-        data: {
-          title: 'Sample XLSX',
-          format: 'xlsx',
-          downloadURL: 'https://example.com/sample.xlsx',
-          description: 'A sample XLSX resource.',
-          describedBy: '',
-          describedByType: '',
-          mediaType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-          mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-          '%Ref:downloadURL': [],
-        },
+        '@type': 'dcat:Distribution',
+        title: 'Sample XLSX',
+        format: 'xlsx',
+        downloadURL: 'https://example.com/sample.xlsx',
+        description: 'A sample XLSX resource.',
+        describedBy: '',
+        describedByType: '',
+        mediaType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       },
     ],
-    resource: {
-      columns: ['id', 'name', 'value'],
-      count: 3,
-      totalRows: 12345,
-      totalColumns: 3,
-      limit: 100,
-      offset: 0,
-      loading: false,
-      conditions: [],
-      schema: {},
-      values: [],
-      setLimit: () => {},
-      setOffset: () => {},
-      setSort: () => {},
-      setConditions: () => {},
-      setResource: () => {},
-    },
   },
   parameters: {
     docs: {

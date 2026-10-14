@@ -7,10 +7,7 @@
   ],
   "accessLevel": "public",
   "keyword": [
-      {
-          "identifier": "53edf88c-ba11-5f87-9794-cb14e4eb48aa",
-          "data": "2022"
-      }
+      "2022"
   ],
   "contactPoint": {
       "fn": "Open Payments",
@@ -25,20 +22,7 @@
         "format": "csv",
         "downloadURL": "https:\/\/download.cms.gov\/openpayments\/PGYR22_P011824\/OP_DTL_GNRL_PGYR2022_P01182024.csv",
         "describedBy": "https:\/\/dkan.com\/api\/1\/metastore\/schemas\/data-dictionary\/items\/71ec19df-f5ef-5b99-b43b-e566e22670b7",
-        "describedByType": "application\/vnd.tableschema+json",
-        "%Ref:downloadURL": [
-            {
-                "identifier": "ea60621641a47f9ce30d01ea50f88c1a__1704497404__source",
-                "data": {
-                    "filePath": "https:\/\/download.cms.gov\/openpayments\/PGYR22_P011824\/OP_DTL_GNRL_PGYR2022_P01182024.csv",
-                    "identifier": "ea60621641a47f9ce30d01ea50f88c1a",
-                    "mimeType": "text\/csv",
-                    "perspective": "source",
-                    "version": "1704497404",
-                    "checksum": null
-                }
-            }
-        ]
+        "describedByType": "application\/vnd.tableschema+json"
       }
   ],
   "identifier": "df01c2f8-dc1f-4e79-96cb-8208beaf143c",
@@ -47,17 +31,11 @@
   "modified": "2024-01-18",
   "temporal": "2022-01-01\/2022-12-31",
   "publisher": {
-      "identifier": "11b41668-9929-5de3-b494-6464ac4f018d",
-      "data": {
-          "name": "openpaymentsdata.cms.gov"
-      }
+      "name": "openpaymentsdata.cms.gov"
   },
   "license": "https:\/\/www.usa.gov\/government-works",
   "theme": [
-      {
-          "identifier": "d2d239e8-05e9-515d-978c-69b34af232da",
-          "data": "General Payments"
-      }
+      "General Payments"
   ],
   "%modified": "2024-04-11T15:28:41+0000"
 }

@@ -15,7 +15,7 @@ jest.mock('../../services/useDatastore', () => (id: any, rootUrl: any, options: 
     columns: [],
     schema: {},
     count: 0,
-    setResource: jest.fn(),
+    setCSVDistribution: jest.fn(),
   };
 });
 
@@ -51,6 +51,7 @@ describe('StoredQueryPage', () => {
   it('passes an empty conditions array when no query prop is provided', () => {
     render(<StoredQueryPage id="dataset-001" rootUrl="https://example.test/api/1" />);
     expect(useDatastoreCalls).toHaveLength(1);
+    expect(useDatastoreCalls[0].id).toBe('dataset-001');
     expect(useDatastoreCalls[0].options.conditions).toEqual([]);
     expect(useDatastoreCalls[0].options.limit).toBe(25);
   });
@@ -99,6 +100,7 @@ describe('StoredQueryPage', () => {
     );
     // DataTableStateWrapper rendered, meaning the DataTableContext.Provider was set up.
     expect(screen.getByTestId('data-table-wrapper')).toBeInTheDocument();
+    expect(useDatastoreCalls[0].options.distributionIndex).toBe(2);
   });
 
   it('renders DataTableStateWrapper with stored-query download flags configured', () => {

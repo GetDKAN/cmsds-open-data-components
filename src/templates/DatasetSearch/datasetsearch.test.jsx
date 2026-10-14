@@ -311,6 +311,40 @@ describe('<DatasetSearch /> Infinite Loop Prevention', () => {
     // Component should render correctly with the total from API
     expect(screen.getByTestId('results-list')).toBeInTheDocument();
   });
+
+  test('Passes the flat distribution to list items for CSV detection', async () => {
+    axios.get.mockImplementation(() => Promise.resolve({
+      data: {
+        total: '2',
+        results: {
+          'dkan_dataset/csv': {
+            title: 'CSV dataset',
+            identifier: 'csv-1',
+            distribution: [{ format: 'csv', downloadURL: 'https://example.test/a.csv' }],
+          },
+          'dkan_dataset/pdf': {
+            title: 'PDF dataset',
+            identifier: 'pdf-1',
+            distribution: [{ downloadURL: 'https://example.test/PY%202014%20report.pdf' }],
+          },
+        },
+        facets: [],
+      },
+    }));
+
+    await act(async () => {
+      renderWithProviders(<DatasetSearch rootUrl={rootUrl} />, {
+        route: '/datasets?fulltext=distribution-shape',
+      });
+    });
+    await act(async () => {
+      jest.advanceTimersByTime(1000);
+    });
+
+    const dataTableLinks = screen.getAllByRole('link', { name: /Data Table/ });
+    expect(dataTableLinks.map((l) => l.getAttribute('href'))).toContain('/dataset/csv-1#data-table');
+    expect(dataTableLinks.map((l) => l.getAttribute('href'))).not.toContain('/dataset/pdf-1#data-table');
+  });
 });
 
 describe('<DatasetSearch /> URL & Edge Cases', () => {
