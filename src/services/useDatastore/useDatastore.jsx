@@ -17,10 +17,9 @@ const useDatastore = (
   const {ACA} = useContext(ACAContext);
 
   const [values, setValues] = useState([]);
-  // Datastore queries stay disabled until the caller confirms this dataset/distribution is CSV
-  const resourceKey = `${datasetID}/${distributionIndex}`;
-  const [csvConfirmedKey, setCSVConfirmedKey] = useState(null);
-  const setCSVDistribution = (isCSV) => setCSVConfirmedKey(isCSV ? resourceKey : null);
+  // confirm a CSV distribution exists from the metastore call before doing a datastore call
+  // options.CSVDistribution skips confirmation, for situations without a metastore call
+  const [csvDistribution, setCSVDistribution] = useState(options.CSVDistribution ? options.CSVDistribution : false);
   const [rootUrl, setRootUrl] = useState(rootAPIUrl);
   const [limit, setLimit] = useState(options.limit ? options.limit : 20);
   const [count, setCount] = useState(null);
@@ -42,26 +41,6 @@ const useDatastore = (
   const [properties, setProperties] = useState(
     options.properties ? options.properties : undefined
   );
-
-  // Reset results and schema-specific request state when switching dataset/distribution
-  const [stateKey, setStateKey] = useState(resourceKey);
-  if (stateKey !== resourceKey) {
-    setStateKey(resourceKey);
-    setValues([]);
-    setCount(null);
-    setColumns([]);
-    setSchema({});
-    setTotalRows(0);
-    setTotalColumns(0);
-    setConditions(options.conditions ? options.conditions : undefined);
-    setSort(options.sort ? options.sort : undefined);
-    setGroupings(options.groupings ? options.groupings : undefined);
-    setProperties(options.properties ? options.properties : undefined);
-    setOffset(options.offset ? options.offset : 0);
-  }
-
-  // options.CSVDistribution skips confirmation, for callers without a metastore call
-  const csvDistribution = !!options.CSVDistribution || csvConfirmedKey === resourceKey;
   
   // Remove datasetID from params to avoid sending it to the API
   const { datasetID: _, ...restAdditionalParams } = additionalParams;

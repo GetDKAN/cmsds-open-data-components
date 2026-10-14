@@ -13,7 +13,7 @@ export type DistributionType = {
 
 export type Topic = {
   identifier: string,
-  name?: string,
+  title?: string,
   url: string,
   topic_icon: any,
 }
@@ -89,7 +89,7 @@ export type DatasetPageType = {
   tabHrefPrepend?: string,
   showDateDetails?: boolean,
   updateDateMonthYearOnly?: boolean,
-  topicDetails?: Array<any>
+  topicDetails?: Array<Topic>
   showTagsOnOverview?: boolean
   swaggerButtonClassNames?: ApiDocsSwaggerUIPluginProps['buttonClassNames'];
 }

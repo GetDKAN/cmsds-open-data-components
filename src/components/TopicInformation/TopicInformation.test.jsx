@@ -36,7 +36,7 @@ describe('TopicsInformation component.', () => {
   it('Matches a flat theme name against topic name', () => {
     renderWithProviders(
       <TopicInformation
-        topicDetails={[{ identifier: 'other-id', name: 'Hospitals', url: 'hospitals', topic_icon: '' }]}
+        topicDetails={[{ identifier: 'other-id', title: 'Hospitals', url: 'hospitals', topic_icon: '' }]}
         theme={['Hospitals']}
       />,
     );
@@ -47,7 +47,7 @@ describe('TopicsInformation component.', () => {
   it('Renders nothing when no topic matches', () => {
     const { container } = renderWithProviders(
       <TopicInformation
-        topicDetails={[{ identifier: 'abc', name: 'Hospitals', url: 'hospitals', topic_icon: '' }]}
+        topicDetails={[{ identifier: 'abc', title: 'Hospitals', url: 'hospitals', topic_icon: '' }]}
         theme={['Nursing homes']}
       />,
     );
@@ -57,7 +57,7 @@ describe('TopicsInformation component.', () => {
   it('Renders nothing when theme is empty', () => {
     const { container } = renderWithProviders(
       <TopicInformation
-        topicDetails={[{ identifier: 'abc', name: 'Hospitals', url: 'hospitals', topic_icon: '' }]}
+        topicDetails={[{ identifier: 'abc', title: 'Hospitals', url: 'hospitals', topic_icon: '' }]}
         theme={[]}
       />,
     );

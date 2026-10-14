@@ -9,7 +9,7 @@ const TopicInformation = ({topicDetails, theme} : {topicDetails: Array<Topic>, t
   const themeID = typeof firstTheme === 'string' ? undefined : firstTheme.identifier;
 
   const topic = topicDetails.find((t) =>
-    (t.name !== undefined && t.name === themeName) || (themeID !== undefined && t.identifier === themeID)
+    (t.title !== undefined && t.title === themeName) || (themeID !== undefined && t.identifier === themeID)
   );
   if (!topic) return null;
 

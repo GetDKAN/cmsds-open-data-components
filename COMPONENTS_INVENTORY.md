@@ -107,6 +107,7 @@ This document provides a comprehensive inventory of all components, services, te
 | Utility | [ApiDocsSwaggerUIPlugin](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/ApiDocsSwaggerUIPlugin) | ❌ Internal | ❌ No Story | ✅ Has Tests |
 | Utility | [datasetSearchReq](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/datasetSearchReq) | ❌ Internal | ❌ No Story | ✅ Has Tests |
 | Utility | [format](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/format.ts) | ❌ Internal | ❌ No Story | ✅ Has Tests |
+| Utility | [getStartDate](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/getStartDate.ts) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Utility | [QueryProvider](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/QueryProvider) | ❌ Internal | ❌ No Story | ✅ Has Tests |
 | Utility | [restoreFullscreenDialogScrollLock](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/utilities/restoreFullscreenDialogScrollLock.ts) | ❌ Internal | ❌ No Story | ✅ Has Tests |
 | | | | | |
@@ -124,16 +125,16 @@ This document provides a comprehensive inventory of all components, services, te
 | Components | 63 | 42 (67%) | 62 (98%) | 42 (67%) | 1 (2%) |
 | Templates | 11 | 10 (91%) | 11 (100%) | 10 (91%) | 0 (0%) |
 | Services/Hooks/Contexts | 9 | 0 (0%) | 6 (67%) | 0 (0%) | 3 (33%) |
-| Utilities/Types/Assets | 11 | 0 (0%) | 6 (55%) | 0 (0%) | 5 (45%) |
-| **Project Total** | **94** | **52 (55%)** | **85 (90%)** | **52 (55%)** | **9 (10%)** |
+| Utilities/Types/Assets | 12 | 0 (0%) | 6 (50%) | 0 (0%) | 6 (50%) |
+| **Project Total** | **95** | **52 (55%)** | **85 (89%)** | **52 (55%)** | **10 (11%)** |
 
 ---
 
 ### Export Summary
 - **Public**: 55 items (32 components, 11 templates, 5 services, 0 hooks, 4 contexts, 2 asset)
-- **Internal**: 39 items (31 components, 0 templates, 0 services, 5 utilities, 3 types, 0 asset)
+- **Internal**: 40 items (31 components, 0 templates, 0 services, 6 utilities, 3 types, 0 asset)
 
 ---
 
-*Last updated: October 12, 2026*  
+*Last updated: October 13, 2026*  
 *Repository: [GetDKAN/cmsds-open-data-components](https://github.com/GetDKAN/cmsds-open-data-components)*

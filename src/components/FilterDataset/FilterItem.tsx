@@ -4,20 +4,9 @@ import { useMediaQuery } from 'react-responsive';
 import { Button, Dropdown, TextField } from '@cmsgov/design-system';
 import { buildOperatorOptions, convertUTCToLocalDate, cleanText } from '../../templates/FilteredResource/functions';
 import 'react-datepicker/dist/react-datepicker.css';
-import { FilterItemType, ConditionType } from '../../types/dataset';
-
+import { FilterItemType } from '../../types/dataset';
+import { getStartDate } from '../../utilities/getStartDate';
 import './FilterItem.scss';
-
-function getStartDate(condition : ConditionType, schema : any) {
-  const schemaID = Object.keys(schema)[0];
-  if (schema[schemaID].fields[condition.property].mysql_type === 'date') {
-    const newDate = new Date(condition.value.toString());
-    if (newDate instanceof Date && !isNaN(newDate.getTime())) {
-      return newDate;
-    }
-  }
-  return new Date();
-}
 
 const FilterItem = ({condition, index, update, remove, propertyOptions, schema, className = '', enableEmptyFilters } : FilterItemType) => {
   const schemaID = Object.keys(schema)[0];

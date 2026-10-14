@@ -4,23 +4,14 @@ import { useMediaQuery } from 'react-responsive';
 import { Button, Dropdown, TextField } from '@cmsgov/design-system';
 import { buildOperatorOptions, convertUTCToLocalDate, cleanText } from '../../templates/FilteredResource/functions';
 import 'react-datepicker/dist/react-datepicker.css';
-import { QueryRowType, ConditionType } from '../../types/dataset';
-
-function getStartDate(condition : ConditionType, schema : any, id : string) {
-  if (schema[Object.keys(schema)[0]].fields[condition.property].mysql_type === 'date') {
-    const newDate = new Date(condition.value.toString());
-    if (newDate instanceof Date && !isNaN(newDate.getTime())) {
-      return newDate;
-    }
-  }
-  return new Date();
-}
+import { QueryRowType } from '../../types/dataset';
+import { getStartDate } from '../../utilities/getStartDate';
 
 const QueryRow = ({ id, condition, index, update, remove, propertyOptions, schema } : QueryRowType) => {
   const [operator, setOperator] = useState(condition.operator);
   const [property, setProperty] = useState(condition.property);
   const [value, setValue] = useState(condition.value);
-  const [startDate, setStartDate] = React.useState(getStartDate(condition, schema, id));
+  const [startDate, setStartDate] = React.useState(getStartDate(condition, schema));
 
   const xl = useMediaQuery({minWidth: 1280})
 
