@@ -45,12 +45,12 @@ const ResourcePreview = ({
   const { tableDensity } = useContext(DataTableActionsContext);
 
   const customColumnHeaders = customColumns
-    ? buildCustomColHeaders(customColumns, resource.columns, resource.schema[id])
+    ? buildCustomColHeaders(customColumns, resource.columns, resource.schema[Object.keys(resource.schema)[0]])
     : null;
 
   const columns = customColumnHeaders
     ? customColumnHeaders
-    : prepareColumns(resource.columns, resource.schema[id]);
+    : prepareColumns(resource.columns, (resource.schema[Object.keys(resource.schema)[0]]));
 
   if (
     Object.keys(resource).length &&
@@ -65,7 +65,7 @@ const ResourcePreview = ({
       <DataTable
         canResize={canResize}
         columns={
-          customColumns ? customColumns : prepareColumns(resource.columns, resource.schema[id])
+          customColumns ? customColumns : prepareColumns(resource.columns, resource.schema[Object.keys(resource.schema)[0]])
         }
         sortTransform={transformTableSortToQuerySort}
         tablePadding={

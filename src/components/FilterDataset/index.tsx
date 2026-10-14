@@ -51,22 +51,22 @@ const FilterDataset: React.FC = () => {
 
   if (!resource) return null;
 
-  const id = distribution.identifier;
   const { conditions, schema, setConditions, setOffset } = resource;
 
-  if (!schema[id]?.fields) return null;
+  const schemaID = Object.keys(schema)[0];
+  if (!schema[schemaID].fields) return null;
 
   const customColumnHeaders = buildCustomColHeaders(
     customColumns,
     resource.columns,
-    resource.schema[distribution.identifier]
+    resource.schema[schemaID]
   );
 
   const columns = customColumnHeaders
     ? customColumnHeaders
-    : prepareColumns(resource.columns, resource.schema[id]);
+    : prepareColumns(resource.columns, resource.schema[schemaID]);
 
-  const fields = Object.keys(schema[id].fields);
+  const fields = Object.keys(schema[schemaID].fields);
 
   const [queryConditions, setQueryConditions] = useState<Array<ConditionType>>([]);
   const [titleConditions, setTitleConditions] = useState<Array<ConditionType>>([]);
@@ -85,7 +85,7 @@ const FilterDataset: React.FC = () => {
         {
           property: fields[0],
           value: '',
-          operator: buildOperatorOptions(schema[id].fields[fields[0]].mysql_type, enableEmptyFilters)[0].value,
+          operator: buildOperatorOptions(schema[schemaID].fields[fields[0]].mysql_type, enableEmptyFilters)[0].value,
           key: Date.now().toString(),
         },
       ])
@@ -105,7 +105,7 @@ const FilterDataset: React.FC = () => {
         {
           property: fields[0],
           value: '',
-          operator: buildOperatorOptions(schema[id].fields[fields[0]].mysql_type, enableEmptyFilters)[0].value,
+          operator: buildOperatorOptions(schema[schemaID].fields[fields[0]].mysql_type, enableEmptyFilters)[0].value,
           key: Date.now().toString(),
         },
       ]);
@@ -119,8 +119,8 @@ const FilterDataset: React.FC = () => {
   }, [conditions]);
 
   const propertyOptions = fields.map((f) => {
-    if (schema[id].fields[f].description) {
-      return { label: schema[id].fields[f].description, value: f };
+    if (schema[schemaID].fields[f].description) {
+      return { label: schema[schemaID].fields[f].description, value: f };
     }
     return { label: f, value: f };
   });
@@ -209,7 +209,6 @@ const FilterDataset: React.FC = () => {
   const disableFilterSubmitButton = () => {
     return !conditionsChanged || queryConditions.length === 0 || conditionsReadyToSubmit(queryConditions).length === 0;
   }
-
   return (
     <>
       {(Object.keys(resource).length && columns.length && resource.schema && Object.keys(distribution).length) ? (
@@ -284,7 +283,6 @@ const FilterDataset: React.FC = () => {
                         {queryConditions.map((qf, index) => (
                           <FilterItem
                             key={qf.key}
-                            id={id}
                             schema={schema}
                             condition={qf}
                             index={index}

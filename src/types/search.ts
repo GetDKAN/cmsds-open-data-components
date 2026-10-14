@@ -1,4 +1,5 @@
 import { Location } from "react-router-dom";
+import { DistributionType } from "./dataset";
 
 export type SearchDistributionType = {
   identifier: string;
@@ -88,13 +89,7 @@ export type SearchResultItemType = {
   nextUpdateDate?: string;
   '%Ref:distribution'?: Array<{
     identifier: string;
-    data: {
-      title: string;
-      format: string;
-      downloadURL: string;
-      describedBy?: string;
-      describedByType?: string;
-    };
+    data: DistributionType;
   }>;
   [key: string]: unknown;
 }

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import DataTableContext from '../Dataset/DataTableContext';
 import DataTableStateWrapper from '../../components/DatasetTableTab/DataTableStateWrapper';
-import qs from 'qs';
 import '../Dataset/dataset.scss';
 import useMetastoreDataset from '../../services/useMetastoreDataset';
 import useDatastore from '../../services/useDatastore';
@@ -45,7 +44,7 @@ export default function StoredQueryPage({
       : [],
   };
 
-  const { dataset, isPending } = useMetastoreDataset(id, rootUrl);
+  const { dataset } = useMetastoreDataset(id, rootUrl);
 
   let distribution = {} as DistributionType;
   let distributions = dataset.distribution ? dataset.distribution : [];
@@ -53,7 +52,7 @@ export default function StoredQueryPage({
     distribution = distributions[distributionIndex];
   }
 
-  const resource = useDatastore('', rootUrl, {
+  const resource = useDatastore(dataset.identifier, rootUrl, {
     ...options,
     limit: defaultPageSize,
   }) as ResourceType;
@@ -61,7 +60,7 @@ export default function StoredQueryPage({
   useEffect(() => {
     const localFileFormat = getFormatType(distribution);
     if (localFileFormat === 'csv') {
-      resource.setResource(distribution.identifier);
+      resource.setCSVDistribution(true);
     }
   }, [distribution]);
 

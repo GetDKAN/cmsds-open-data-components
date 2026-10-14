@@ -46,7 +46,7 @@ describe('useDatastore', () => {
   it('populates values, count, columns, and schema on a successful fetch', async () => {
     mockFetch(datasetResponse);
     const { result } = renderHook(
-      () => useDatastore('dist-001', 'https://example.test/api/1', {}),
+      () => useDatastore('dataset-abc-123', 'https://example.test/api/1', {CSVDistribution: true}),
       { wrapper: buildWrapper() },
     );
     await waitFor(() => expect(result.current.count).toBe(1));
@@ -60,11 +60,12 @@ describe('useDatastore', () => {
     mockFetch(datasetResponse);
     renderHook(
       () =>
-        useDatastore('dist-001', 'https://example.test/api/1', {
+        useDatastore('dataset-abc-123', 'https://example.test/api/1', {
           conditions: [
             { operator: 'is_empty', property: 'product_name', value: 'ignored' },
             { operator: 'not_empty', property: 'quantity', value: 'ignored' },
           ],
+          CSVDistribution: true,
         }),
       { wrapper: buildWrapper() },
     );
@@ -80,7 +81,7 @@ describe('useDatastore', () => {
   it('exposes a structured error when fetch returns a non-OK response', async () => {
     mockFetch({ message: 'Bad request' }, { ok: false, status: 400 });
     const { result } = renderHook(
-      () => useDatastore('dist-001', 'https://example.test/api/1', {}),
+      () => useDatastore('dataset-abc-123', 'https://example.test/api/1', {CSVDistribution: true}),
       { wrapper: buildWrapper() },
     );
     await waitFor(() => expect(result.current.error).not.toBeNull());
@@ -92,8 +93,9 @@ describe('useDatastore', () => {
     mockFetch(datasetResponse);
     const { result } = renderHook(
       () =>
-        useDatastore('dist-001', 'https://example.test/api/1', {
+        useDatastore('dataset-abc-123', 'https://example.test/api/1', {
           requireConditions: true,
+          CSVDistribution: true,
         }),
       { wrapper: buildWrapper() },
     );
@@ -105,17 +107,5 @@ describe('useDatastore', () => {
     );
     expect(conditionalCalls).toHaveLength(0);
     expect(result.current.loading).toBe(false);
-  });
-
-  it('uses {datasetID}/0 in the URL when drupalSettings.datastore_query_api is true', async () => {
-    window.drupalSettings = { datastore_query_api: true };
-    mockFetch(datasetResponse);
-    renderHook(
-      () =>
-        useDatastore('dist-001', 'https://example.test/api/1', {}, { datasetID: 'dataset-abc-123' }),
-      { wrapper: buildWrapper() },
-    );
-    await waitFor(() => expect(global.fetch).toHaveBeenCalled());
-    expect(global.fetch.mock.calls[0][0]).toContain('/datastore/query/dataset-abc-123/0');
   });
 });

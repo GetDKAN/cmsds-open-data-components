@@ -5,7 +5,7 @@ import { transformTableSortToQuerySort } from '../../services/useDatastore/trans
 import { buildCustomColHeaders } from '../../templates/FilteredResource/functions';
 import { Pagination, Spinner, Button } from '@cmsgov/design-system';
 import QueryBuilder from '../QueryBuilder';
-import { DistributionType, ColumnType, ResourceType } from '../../types/dataset';
+import {DistributionType, ColumnType, ResourceType } from '../../types/dataset';
 import DataTableContext from '../../templates/Dataset/DataTableContext';
 import { DataTableActionsContext } from './DataTableActionsContext';
 
@@ -69,14 +69,14 @@ const DatasetTable = ({
 
   const defaultPageSize = 10;
 
-  const schema = resource?.schema?.[distribution?.identifier] ?? resource?.schema?.[id];
+  const schema = resource?.schema?.[Object.keys(resource.schema)[0]];
   const isFullColumnDef = Array.isArray(customColumns) && customColumns.some((column: ColumnType) => column && 'header' in column);
   
   const columns = isFullColumnDef
     ? customColumns
     : schema && Array.isArray(resource?.columns)
       ? buildCustomColHeaders(customColumns, resource.columns, schema)
-      : prepareColumns(resource.columns, resource.schema[id]);
+      : prepareColumns(resource.columns, schema);
 
   const { limit, setOffset } = resource;
   const pageSize = limit ? limit : defaultPageSize;
@@ -129,7 +129,7 @@ const DatasetTable = ({
             loading={resource.loading}
             isModal={isModal}
             downloadURL={downloadURL}
-            unfilteredDownloadURL={distribution.data.downloadURL}
+            unfilteredDownloadURL={distribution.downloadURL}
             setPage={setPage}
             showCopyLinkButton={showCopyLinkButton}
             showDataTableToolbar={showDataTableToolbar}

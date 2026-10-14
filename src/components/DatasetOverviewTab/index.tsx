@@ -6,7 +6,7 @@ import { buildRows } from '../DatasetAdditionalInformation';
 import Resource from '../Resource';
 import { DatasetOverviewPropsType } from '../../types/dataset';
 
-const DatasetOverview = ({ dataset, resource, distributions, metadataMapping, rootUrl, showTags } : DatasetOverviewPropsType) => {
+const DatasetOverview = ({ dataset, distributions, metadataMapping, rootUrl, showTags } : DatasetOverviewPropsType) => {
   const md = useMediaQuery({ minWidth: 0, maxWidth: 768 });
   const rows = buildRows(metadataMapping, dataset);
 
@@ -33,7 +33,7 @@ const DatasetOverview = ({ dataset, resource, distributions, metadataMapping, ro
     <>
       <Resource
         distributions={distributions}
-        resource={resource}
+        datasetID={dataset.identifier}
         title={dataset.title}
         rootUrl={rootUrl}
       />

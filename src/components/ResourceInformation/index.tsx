@@ -1,16 +1,15 @@
 import React, { useContext } from 'react';
-import { DistributionType } from '../../types/dataset';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import qs from 'qs';
 import { acaToParams } from '../../utilities/aca';
 import { ACAContext } from '../../utilities/ACAContext';
 
-const ResourceInformation = ({ distribution, rootUrl } : {distribution: DistributionType, rootUrl: string}) => {
+const ResourceInformation = ({ datasetID, distribution, rootUrl } : {datasetID: string, distribution: number, rootUrl: string}) => {
   const { ACA } = useContext(ACAContext);
   const { data: resource } = useQuery({
-    queryKey: ['resource-information', distribution.identifier],
-    queryFn: () => axios.get(`${rootUrl}/datastore/query/${distribution.identifier}?${qs.stringify(acaToParams({results: false, schema: false}, ACA))}`).then(res => res.data)
+    queryKey: ['resource-information', datasetID, distribution],
+    queryFn: () => axios.get(`${rootUrl}/datastore/query/${datasetID}/${distribution}?${qs.stringify(acaToParams({results: false, schema: false}, ACA))}`).then(res => res.data)
   });
 
   return (

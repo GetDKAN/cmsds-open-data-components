@@ -1,20 +1,5 @@
 import { ApiDocsSwaggerUIPluginProps } from '../utilities/ApiDocsSwaggerUIPlugin';
 
-export type DistributionDataType = {
-  downloadURL: string,
-  format: string,
-  title: string,
-  description: string,
-  describedBy: string,
-  describedByType: string,
-  mediaType: string,
-  "%Ref:downloadURL": {
-    identifier: string,
-    data: DistributionSubDataType,
-  }[],
-  "@type": string,
-}
-
 export type DistributionSubDataType = {
   filePath: string,
   identifier: string,
@@ -25,8 +10,18 @@ export type DistributionSubDataType = {
 }
 
 export type DistributionType = {
-  identifier: string,
-  data: DistributionDataType,
+  downloadURL: string,
+  format: string,
+  title: string,
+  description: string,
+  describedBy: string,
+  describedByType: string,
+  mediaType: string,
+  "%Ref:downloadURL"?: {
+    identifier: string,
+    data: DistributionSubDataType,
+  }[],
+  "@type": string,
 }
 
 export type Topic = {
@@ -101,7 +96,6 @@ export type DatasetPageType = {
   customDescription?: Function,
   updateAriaLive?: Function,
   showRowLimitNotice?: boolean,
-  useDatasetAPI?: boolean,
   enableEmptyFilters?: boolean,
   tabHrefPrepend?: string,
   showDateDetails?: boolean,
@@ -128,7 +122,7 @@ export type ResourceType = {
   setOffset: Function,
   setSort: Function,
   setConditions: Function,
-  setResource: Function,
+  setCSVDistribution: Function,
 }
 
 export type QueryRowType = {
@@ -142,7 +136,6 @@ export type QueryRowType = {
 }
 
 export type FilterItemType = {
-  id: string;
   condition : ConditionType;
   index : number;
   update : Function;

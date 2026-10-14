@@ -5,7 +5,7 @@ import { acaToParams } from "../../utilities/aca";
 import { ACAContext } from "../../utilities/ACAContext";
 
 const useDatastore = (
-  resourceId,
+  datasetID,
   rootAPIUrl,
   options,
   additionalParams = {}
@@ -16,7 +16,8 @@ const useDatastore = (
   const {ACA} = useContext(ACAContext);
 
   const [values, setValues] = useState([]);
-  const [id, setResource] = useState(resourceId);
+  // confirm a CSV distribution exists from the metastore call before doing a datastore call
+  const [csvDistribution, setCSVDistribution] = useState(false);
   const [rootUrl, setRootUrl] = useState(rootAPIUrl);
   const [limit, setLimit] = useState(options.limit ? options.limit : 20);
   const [count, setCount] = useState(null);
@@ -39,9 +40,11 @@ const useDatastore = (
     options.properties ? options.properties : undefined
   );
 
-  // Check drupalSettings for datastore_query_api
-  const useDatasetAPI = typeof window !== 'undefined' && window.drupalSettings?.datastore_query_api === true;
-  const datasetID = additionalParams.datasetID;
+  // Allow immediate override through the options object
+  // for testing or other situations where there isn't a metastore call
+  if (options.CSVDistribution && !csvDistribution) {
+    setCSVDistribution(true);
+  }
   
   // Remove datasetID from params to avoid sending it to the API
   const { datasetID: _, ...restAdditionalParams } = additionalParams;
@@ -66,14 +69,12 @@ const useDatastore = (
   const paramsString = Object.keys(params).length ? `${qs.stringify(params)}` : '';
   
   let enabled = false;
-  if (id) {
+  if (datasetID && csvDistribution) {
     if (!requireConditions)
       enabled = true;
     if (conditions && conditions.length)
       enabled = true;
   }
-  // Change whether distribution API or dataset API is used based on option
-  const queryID = useDatasetAPI && datasetID ? `${datasetID}/0` : id;
 
   async function fetchJson(url) {
     const res = await fetch(url);
@@ -85,38 +86,37 @@ const useDatastore = (
 
       throw err;
     }
-
     return body;
   }
 
   const {data, isPending, error} = useQuery({
-    queryKey: ["datastore" + id + paramsString],
+    queryKey: ["datastore" + datasetID + '/0' + paramsString],
     queryFn: () => {
       setCount(null);
-
-      return fetchJson(`${rootUrl}/datastore/query/${queryID}?${paramsString}`);
+      return fetchJson(`${rootUrl}/datastore/query/${datasetID}/0?${paramsString}`);
     },
     enabled: enabled
   })
 
   const{data: unfiltered} = useQuery({
-    queryKey: ["datastore" + id + "-unfilteredRowsAndCols"],
+    queryKey: ["datastore" + datasetID + "-unfilteredRowsAndCols"],
     queryFn: () => {
       const unfilteredParams = {
         results: false,
         count: true,
         schema: true
       };
-
-      return fetchJson(`${rootUrl}/datastore/query/${queryID}?${qs.stringify(acaToParams(unfilteredParams, ACA))}`);
+      return fetchJson(`${rootUrl}/datastore/query/${datasetID}/0?${qs.stringify(acaToParams(unfilteredParams, ACA))}`);
     },
+    enabled: enabled
   })
 
   useEffect(() => {
     if(data) {
+      const schemaID = Object.keys(data.schema)[0];
       const propertyKeys =
-        data.schema && data.schema[id] && data.schema[id].fields
-          ? Object.keys(data.schema[id].fields)
+        data.schema && data.schema[schemaID] && data.schema[schemaID].fields
+          ? Object.keys(data.schema[schemaID].fields)
           : [];
       setValues(data.results), setCount(data.count);
       if (propertyKeys.length) {
@@ -127,12 +127,14 @@ const useDatastore = (
       }
     }
   }, [data])
+
   useEffect(() => {
     if (unfiltered) {
       if (unfiltered.count) setTotalRows(unfiltered.count);
-      if (unfiltered.schema && unfiltered.schema[id] && unfiltered.schema[id].fields) setTotalColumns(Object.keys(unfiltered.schema[id].fields).length);
+      if (unfiltered.schema && unfiltered.schema[datasetID] && unfiltered.schema[datasetID].fields) setTotalColumns(Object.keys(unfiltered.schema[datasetID].fields).length);
     }
   }, [unfiltered])
+
 
   return {
     loading: enabled ? isPending : false,
@@ -147,9 +149,9 @@ const useDatastore = (
     schema,
     conditions,
     properties,
+    setCSVDistribution,
     setProperties,
     setGroupings,
-    setResource,
     setRootUrl,
     setLimit,
     setOffset,

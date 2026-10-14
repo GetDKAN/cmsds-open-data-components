@@ -11,7 +11,7 @@ describe('<Resource />', () => {
     resource.setResource = jest.fn();
 
     const distributions = JSON.parse(JSON.stringify(distribution.distribution));
-    distributions[0].data.title = undefined;
+    distributions[0].title = undefined;
 
     const Wrapped = withQueryProvider(() => (
       <Resource

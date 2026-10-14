@@ -3,7 +3,7 @@ import React from 'react';
 import FilterDataset from './index';
 import DataTableContext, { DataTableContextType } from '../../templates/Dataset/DataTableContext';
 import { DataTableActionsContext, DataTableActionsContextProps } from '../DatasetTableTab/DataTableActionsContext';
-import { ResourceType, DistributionType } from '../../types/dataset';
+import { ResourceType,DistributionType } from '../../types/dataset';
 
 const DISTRIBUTION_ID = 'story-distribution-id';
 

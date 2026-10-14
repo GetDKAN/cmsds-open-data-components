@@ -45,6 +45,7 @@ const DataTable = ({
   const dataTableWrapperElement = useRef(null)
   const [loadingAnnouncement, setLoadingAnnouncement] = useState("")
 
+
   useEffect(() => {
     if (loading) {
       setLoadingAnnouncement("Dataset loading");
