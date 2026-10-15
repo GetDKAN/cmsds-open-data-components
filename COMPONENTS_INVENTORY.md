@@ -12,6 +12,7 @@ This document provides a comprehensive inventory of all components, services, te
 | Component | [ApiSchemaNotice](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/ApiSchemaNotice) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
 | Component | [Breadcrumb](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/Breadcrumb) | ✅ Public | ✅ Has Story | ✅ Has Tests |
 | Component | [CMSTopNav](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/CMSTopNav) | ✅ Public | ✅ Has Story | ✅ Has Tests |
+| Component | [ClearFiltersButton](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/ClearFiltersButton) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Component | [DataDictionary](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DataDictionary) | ❌ Internal | ❌ No Story | ❌ No Tests |
 | Component | [DataTableControls](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DataTableControls) | ❌ Internal | ❌ No Story | ✅ Has Tests |
 | Component | [DataTableDensity](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/DataTableDensity) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
@@ -54,8 +55,6 @@ This document provides a comprehensive inventory of all components, services, te
 | Component | [NavBar](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/NavBar) | ✅ Public | ❌ No Story | ✅ Has Tests |
 | Component | [NavLink](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/NavLink) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
 | Component | [PageHeader](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/PageHeader) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
-| Component | [QueryBuilder](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/QueryBuilder) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
-| Component | [QueryRow](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/QueryRow) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
 | Component | [Resource](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/Resource) | ❌ Internal | ✅ Has Story | ✅ Has Tests |
 | Component | [ResourceFooter](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/ResourceFooter) | ✅ Public | ✅ Has Story | ✅ Has Tests |
 | Component | [ResourceHeader](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/components/ResourceHeader) | ✅ Public | ✅ Has Story | ✅ Has Tests |
@@ -89,7 +88,6 @@ This document provides a comprehensive inventory of all components, services, te
 | Template | [Dataset](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/Dataset) | ✅ Public | ✅ Has Story | ✅ Has Tests |
 | Template | [DatasetList](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/DatasetList) | ✅ Public | ✅ Has Story | ✅ Has Tests |
 | Template | [DatasetSearch](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/DatasetSearch) | ✅ Public | ✅ Has Story | ✅ Has Tests |
-| Template | [FilteredResource](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/FilteredResource) | ✅ Public | ❌ No Story | ✅ Has Tests |
 | Template | [Footer](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/Footer) | ✅ Public | ✅ Has Story | ✅ Has Tests |
 | Template | [Header](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/Header) | ✅ Public | ✅ Has Story | ✅ Has Tests |
 | Template | [PageNotFound](https://github.com/GetDKAN/cmsds-open-data-components/tree/main/src/templates/PageNotFound) | ✅ Public | ✅ Has Story | ✅ Has Tests |
@@ -122,19 +120,19 @@ This document provides a comprehensive inventory of all components, services, te
 
 | Category | Total | With Stories | With Tests | With Both | With Neither |
 |----------|-------|--------------|------------|-----------|--------------|
-| Components | 63 | 42 (67%) | 62 (98%) | 42 (67%) | 1 (2%) |
-| Templates | 11 | 10 (91%) | 11 (100%) | 10 (91%) | 0 (0%) |
+| Components | 62 | 40 (65%) | 60 (97%) | 40 (65%) | 2 (3%) |
+| Templates | 10 | 10 (100%) | 10 (100%) | 10 (100%) | 0 (0%) |
 | Services/Hooks/Contexts | 9 | 0 (0%) | 6 (67%) | 0 (0%) | 3 (33%) |
 | Utilities/Types/Assets | 12 | 0 (0%) | 6 (50%) | 0 (0%) | 6 (50%) |
-| **Project Total** | **95** | **52 (55%)** | **85 (89%)** | **52 (55%)** | **10 (11%)** |
+| **Project Total** | **93** | **50 (54%)** | **82 (88%)** | **50 (54%)** | **11 (12%)** |
 
 ---
 
 ### Export Summary
-- **Public**: 55 items (32 components, 11 templates, 5 services, 0 hooks, 4 contexts, 2 asset)
-- **Internal**: 40 items (31 components, 0 templates, 0 services, 6 utilities, 3 types, 0 asset)
+- **Public**: 54 items (32 components, 10 templates, 5 services, 0 hooks, 4 contexts, 2 asset)
+- **Internal**: 39 items (30 components, 0 templates, 0 services, 6 utilities, 3 types, 0 asset)
 
 ---
 
-*Last updated: October 13, 2026*  
+*Last updated: October 15, 2026*  
 *Repository: [GetDKAN/cmsds-open-data-components](https://github.com/GetDKAN/cmsds-open-data-components)*
