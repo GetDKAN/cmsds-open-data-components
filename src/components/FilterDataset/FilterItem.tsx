@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import { useMediaQuery } from 'react-responsive';
 import { Button, Dropdown, TextField } from '@cmsgov/design-system';
-import { buildOperatorOptions, convertUTCToLocalDate, cleanText } from '../../templates/FilteredResource/functions';
+import { buildOperatorOptions, convertUTCToLocalDate, cleanText } from '../../utilities/dataViewUtils';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FilterItemType } from '../../types/dataset';
 import { getStartDate } from '../../utilities/getStartDate';

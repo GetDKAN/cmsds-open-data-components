@@ -79,7 +79,7 @@ export { truncateText } from './components/DatasetSearchListItem/truncateText';
     
     it('should handle multiple exports in one line', () => {
       const mockIndexContent = `
-export { buildOperatorOptions, convertUTCToLocalDate, cleanText } from './templates/FilteredResource/functions';
+export { buildOperatorOptions, convertUTCToLocalDate, cleanText } from './utilities/dataViewUtils';
 `;
       
       fs.readFileSync.mockReturnValue(mockIndexContent);

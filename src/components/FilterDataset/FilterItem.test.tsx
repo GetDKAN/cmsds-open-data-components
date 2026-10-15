@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import FilterItem from './FilterItem';
-import { buildOperatorOptions, convertUTCToLocalDate, cleanText } from '../../templates/FilteredResource/functions';
+import { buildOperatorOptions, convertUTCToLocalDate, cleanText } from '../../utilities/dataViewUtils';
 import { FilterItemType, ConditionType, SchemaType, PropertyType } from '../../types/dataset';
 
 jest.mock('react-datepicker', () => {
@@ -84,7 +84,7 @@ jest.mock('@cmsgov/design-system', () => ({
   )
 }));
 
-jest.mock('../../templates/FilteredResource/functions', () => ({
+jest.mock('../../utilities/dataViewUtils', () => ({
   buildOperatorOptions: jest.fn((type: string, enableEmptyFilters: boolean = false) => {
     const base = [
       { label: 'Is', value: '=' },

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import FilterChip from './index';
-import { getOperatorLabel } from '../../templates/FilteredResource/functions';
+import { getOperatorLabel } from '../../utilities/dataViewUtils';
 import { ConditionType } from '../../types/dataset';
 
 import './FilterChip.scss';

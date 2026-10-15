@@ -4,7 +4,7 @@ import {
   cleanText,
   buildCustomColHeaders,
   getOperatorLabel,
-} from './functions';
+} from './dataViewUtils';
 
 describe('buildOperatorOptions', () => {
   it('returns text/string operator set for "text" type', () => {
