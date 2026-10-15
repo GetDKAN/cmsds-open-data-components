@@ -8,7 +8,7 @@ import FullScreenDataTable from "../FullScreenDataTable";
 import FilterDataset from "../FilterDataset";
 import FilterChip from "../FilterChip"
 import DisplaySettings from "../DisplaySettings";
-import { getOperatorLabel } from "../../templates/FilteredResource/functions";
+import { getOperatorLabel } from "../../utilities/dataViewUtils";
 
 import "./DataTableToolbar.scss";
 

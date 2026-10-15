@@ -3,7 +3,7 @@ import React from 'react';
 import { ResourceType, ColumnType } from '../../types/dataset';
 import DataTablePageResults from '../DataTablePageResults';
 import FilterChip from '../FilterChip';
-import { getOperatorLabel } from '../../templates/FilteredResource/functions';
+import { getOperatorLabel } from '../../utilities/dataViewUtils';
 import './DataTableToolbar.scss';
 
 /**

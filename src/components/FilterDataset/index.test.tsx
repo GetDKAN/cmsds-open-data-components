@@ -10,7 +10,7 @@ import { ResourceType, SchemaType } from "../../types/dataset";
 import { DataTableActionsContextProps } from "../DatasetTableTab/DataTableActionsContext";
 import { DataTableContextType } from "../../templates/Dataset/DataTableContext";
 
-jest.mock('../../templates/FilteredResource/functions', () => ({
+jest.mock('../../utilities/dataViewUtils', () => ({
   buildOperatorOptions: jest.fn((type, enableEmptyFilters = false) => {
     const base = [
       { label: 'Is', value: '=' },
