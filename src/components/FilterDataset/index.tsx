@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
 import qs from 'qs';
-import { buildOperatorOptions, buildCustomColHeaders } from "../../templates/FilteredResource/functions";
+import { buildOperatorOptions, buildCustomColHeaders } from "../../utilities/dataViewUtils";
 import { Dialog, Button } from "@cmsgov/design-system";
 import { ConditionType } from "../../types/dataset";
 import DataTableContext from "../../templates/Dataset/DataTableContext";
 import { DataTableActionsContext } from "../DatasetTableTab/DataTableActionsContext";
 import { DatasetTableTabProps, prepareColumns } from "../DatasetTableTab";
 import FilterItem from "./FilterItem";
-import ClearFiltersButton from "../QueryBuilder/ClearFiltersButton";
+import ClearFiltersButton from "../ClearFiltersButton/ClearFiltersButton";
 
 import './FilterDataset.scss'
 import { restoreFullscreenDialogScrollLock } from '../../utilities/restoreFullscreenDialogScrollLock'

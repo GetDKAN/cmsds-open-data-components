@@ -7,7 +7,7 @@ import { TextField, Dropdown, AccordionItem, Button, DropdownChangeObject, Toolt
 import { DatasetDictionaryItemType } from '../../../types/dataset';
 import DataDictionaryTable from '../DataDictionaryTable';
 import "./dataDictionaryJSON.scss"
-import ClearFiltersButton from '../../QueryBuilder/ClearFiltersButton';
+import ClearFiltersButton from '../../ClearFiltersButton/ClearFiltersButton';
 import { acaToParams } from '../../../utilities/aca';
 import { ACAContext } from '../../../utilities/ACAContext';
 

@@ -46,9 +46,6 @@ export { default as Header } from './templates/Header';
 export { default as Footer } from './templates/Footer';
 export { default as SpecsAndLimits } from './templates/SpecsAndLimits';
 export { default as StoredQueryPage } from './templates/StoredQueryPage';
-export { default as FilteredResource } from './templates/FilteredResource';
-export { default as QueryTitle } from './templates/FilteredResource/QueryTitle';
-export { buildOperatorOptions, convertUTCToLocalDate, cleanText, buildCustomColHeaders } from './templates/FilteredResource/functions';
 
 // Context
 export { default as HeaderContext } from './templates/Header/HeaderContext';

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import qs from 'qs';
 import DataTable from '../Datatable/Datatable';
 import { transformTableSortToQuerySort } from '../../services/useDatastore/transformSorts';
-import { buildCustomColHeaders } from '../../templates/FilteredResource/functions';
+import { buildCustomColHeaders } from '../../utilities/dataViewUtils';
 import { Pagination, Spinner, Button } from '@cmsgov/design-system';
 import QueryBuilder from '../QueryBuilder';
 import {DistributionType, ColumnType, ResourceType } from '../../types/dataset';

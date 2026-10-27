@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import { Spinner, TextField } from '@cmsgov/design-system';
 import { transformTableSortToQuerySort} from '../../services/useDatastore/transformSorts';
-import { buildCustomColHeaders } from '../../templates/FilteredResource/functions';
+import { buildCustomColHeaders } from '../../utilities/dataViewUtils';
 import DataTable from '../Datatable';
 import DataTableContext from "../../templates/Dataset/DataTableContext";
 import { DataTableActionsContext } from '../DatasetTableTab/DataTableActionsContext';
