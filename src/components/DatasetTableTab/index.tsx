@@ -4,7 +4,6 @@ import DataTable from '../Datatable/Datatable';
 import { transformTableSortToQuerySort } from '../../services/useDatastore/transformSorts';
 import { buildCustomColHeaders } from '../../utilities/dataViewUtils';
 import { Pagination, Spinner, Button } from '@cmsgov/design-system';
-import QueryBuilder from '../QueryBuilder';
 import {DistributionType, ColumnType, ResourceType } from '../../types/dataset';
 import DataTableContext from '../../templates/Dataset/DataTableContext';
 import { DataTableActionsContext } from './DataTableActionsContext';

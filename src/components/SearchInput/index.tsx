@@ -47,8 +47,9 @@ const SearchInput = ({
         variation="solid"
         className={onDark ? 'on-dark' : undefined}
         onClick={onSubmit}
+        aria-label="Search the Data"
       >
-        <span className="magnifying-glass-icon" aria-label="Search the Data">
+        <span className="magnifying-glass-icon">
           <MagnifyingGlassIcon />
         </span>
         <span className="sm-label">
